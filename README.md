@@ -5,6 +5,8 @@ Yandex.Music API (Unofficial) for .Net Core
 
 This is wrapper for the [Yandex.Music](http://music.yandex.ru/) API
 
+Solution allows you to work with Yandex music based on the client.
+
  Install
 -------
 
