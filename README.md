@@ -5,13 +5,23 @@ Yandex.Music API (Unofficial) for .Net Core
 
 This is wrapper for the [Yandex.Music](http://music.yandex.ru/) API
 
-NuGet
+ Install
 -------
-
-Install-Package Yandex.Music.Api -Version 1.0.0
 
 Link on nuget:
 https://www.nuget.org/packages/Yandex.Music.Api/1.0.0
+
+#### NuGet
+
+Install-Package Yandex.Music.Api -Version 1.0.0
+
+#### .NET CLI
+
+dotnet add package Yandex.Music.Api --version 1.0.0
+
+#### Paket-CLI
+
+paket add Yandex.Music.Api --version 1.0.0
 
 Usage
 -------
