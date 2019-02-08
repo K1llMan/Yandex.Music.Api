@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace Lofty.Modules.BddTests.Traits
+namespace Yandex.Music.Api.Tests.Traits
 {
   public class YandexTraitDiscoverer : ITraitDiscoverer
   {
-    public const string Category = "Lofi.Yandex";
+    public const string Category = "Yandex";
 
     public IEnumerable<KeyValuePair<string, string>> GetTraits(IAttributeInfo traitAttribute)
     {

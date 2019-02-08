@@ -2,21 +2,20 @@
 using Serilog.Events;
 using Xunit;
 using Xunit.Abstractions;
-using Yandex.Music;
 
-namespace Lofty.Modules.BddTests
+namespace Yandex.Music.Api.Tests
 {
-  [CollectionDefinition("Lofi Test Harness")]
-  public class LofiTestCollection : ICollectionFixture<LofiTestHarness>
+  [CollectionDefinition("Yandex Test Harness")]
+  public class YandexTestCollection : ICollectionFixture<YandexTestHarness>
   {
   }
 
-  public class LofiTest 
+  public class YandexTest 
   {
     public YandexApi Api { get; set; }
-    public LofiTestHarness Fixture { get; set; }
+    public YandexTestHarness Fixture { get; set; }
 
-    public LofiTest(LofiTestHarness fixture, ITestOutputHelper output = null)
+    public YandexTest(YandexTestHarness fixture, ITestOutputHelper output = null)
     {
       Fixture = fixture;
 

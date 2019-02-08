@@ -3,23 +3,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Reflection;
 using System.Text;
 using System.Web;
 using System.Xml.Linq;
 using Newtonsoft.Json.Linq;
-using Yandex.Music.Extensions;
+using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Models;
 
-namespace Yandex.Music
+namespace Yandex.Music.Api
 {
   public class YandexMusicApi : YandexApi
   {
-    public static string Name => Assembly.GetEntryAssembly().GetName().Name;
-    public static string Title => Assembly.GetEntryAssembly().GetTitle();
-    public static string Description => Assembly.GetEntryAssembly().GetDescription();
-    public static string Version => Assembly.GetEntryAssembly().GetVersion();
-    public YandexMusicSettings _settings { get; set; }
-
+    private YandexMusicSettings _settings { get; set; }
     private string _login;
     private string _password;
     private CookieContainer _cookies;
@@ -67,6 +62,7 @@ namespace Yandex.Music
       }
       catch (Exception ex)
       {
+        Console.WriteLine(ex);
         result = false;
       }
 

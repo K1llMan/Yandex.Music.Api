@@ -1,4 +1,4 @@
-﻿namespace Yandex.Music
+﻿namespace Yandex.Music.Api.Common
 {
   public enum YandexSearchType
   {

@@ -2,7 +2,7 @@
 using System.Linq;
 using Newtonsoft.Json.Linq;
 
-namespace Yandex.Music.Extensions
+namespace Yandex.Music.Api.Extensions
 {
   public static class JsonExtensions
   {

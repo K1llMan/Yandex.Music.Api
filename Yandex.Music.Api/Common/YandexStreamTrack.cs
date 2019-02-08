@@ -5,7 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Yandex.Music
+namespace Yandex.Music.Api.Common
 {
   public class YandexStreamTrack : MemoryStream
   {

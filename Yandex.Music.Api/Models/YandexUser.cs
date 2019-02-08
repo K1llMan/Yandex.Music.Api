@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
-using Yandex.Music.Extensions;
+using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Extensions;
 
-namespace Yandex.Music
+namespace Yandex.Music.Api.Models
 {
   public class YandexUser : IYandexSearchable
   {

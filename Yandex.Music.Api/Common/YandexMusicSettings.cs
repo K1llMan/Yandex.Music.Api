@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using Yandex.Music.Api.Models;
 
-namespace Yandex.Music
+namespace Yandex.Music.Api.Common
 {
     public class YandexMusicSettings
     {

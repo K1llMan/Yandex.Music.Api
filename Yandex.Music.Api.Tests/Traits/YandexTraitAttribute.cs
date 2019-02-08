@@ -1,9 +1,9 @@
 ﻿using System;
 using Xunit.Sdk;
 
-namespace Lofty.Modules.BddTests.Traits
+namespace Yandex.Music.Api.Tests.Traits
 {
-  [TraitDiscoverer("Lofty.Modules.BddTests.Traits.YandexTraitDiscoverer", "Lofty.Modules.BddTests")]
+  [TraitDiscoverer("Yandex.Music.Api.Tests.Traits.YandexTraitDiscoverer", "Yandex.Music.Api.Tests")]
   [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
   public class YandexTraitAttribute : Attribute, ITraitAttribute
   {

@@ -1,24 +1,23 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Lofty.Modules.BddTests.Traits;
 using Xunit;
 using Xunit.Abstractions;
-using Yandex.Music;
+using Yandex.Music.Api.Models;
+using Yandex.Music.Api.Tests.Traits;
 
-namespace Lofty.Modules.BddTests.Tests.Yandex
+namespace Yandex.Music.Api.Tests.Tests
 {
-  [Collection("Lofi Test Harness")]
-  public class ExtractingTrackTest : LofiTest
+  [Collection("Yandex Test Harness")]
+  public class ExtractingTrackTest : YandexTest
   {
     public const string FolderData = "data";
     public readonly string PathFile;
     public YandexTrack Track { get; set; }
     
-    public ExtractingTrackTest(LofiTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
+    public ExtractingTrackTest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
     {
       if (!Directory.Exists(FolderData))
         Directory.CreateDirectory(FolderData);

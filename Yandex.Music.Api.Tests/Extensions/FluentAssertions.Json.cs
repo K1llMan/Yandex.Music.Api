@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
 
-namespace Lofty.Modules.BddTests.Extensions
+namespace Yandex.Music.Api.Tests.Extensions
 {
   public static class FluentAssertions_Json
   {

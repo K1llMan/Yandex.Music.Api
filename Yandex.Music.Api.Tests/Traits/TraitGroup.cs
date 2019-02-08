@@ -1,4 +1,4 @@
-﻿namespace Lofty.Modules.BddTests.Traits
+﻿namespace Yandex.Music.Api.Tests.Traits
 {
   public enum TraitGroup
   {

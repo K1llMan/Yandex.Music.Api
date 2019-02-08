@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Net;
-using System.Runtime.InteropServices.ComTypes;
+using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Models;
 
-namespace Yandex.Music
+namespace Yandex.Music.Api
 {
   public interface YandexApi
   {

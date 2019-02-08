@@ -1,14 +1,14 @@
 ﻿using FluentAssertions;
-using Lofty.Modules.BddTests.Traits;
 using Xunit;
 using Xunit.Abstractions;
+using Yandex.Music.Api.Tests.Traits;
 
-namespace Lofty.Modules.BddTests.Tests.Yandex
+namespace Yandex.Music.Api.Tests.Tests
 {
-  [Collection("Lofi Test Harness")]
-  public class AuthorizeTest : LofiTest
+  [Collection("Yandex Test Harness")]
+  public class AuthorizeTest : YandexTest
   {
-    public AuthorizeTest(LofiTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
+    public AuthorizeTest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
     {
     }
 

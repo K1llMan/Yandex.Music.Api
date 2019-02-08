@@ -1,18 +1,17 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using FluentAssertions;
-using Lofty.Modules.BddTests.Traits;
 using Serilog;
 using Xunit;
 using Xunit.Abstractions;
+using Yandex.Music.Api.Tests.Traits;
 
-namespace Lofty.Modules.BddTests.Tests.Yandex
+namespace Yandex.Music.Api.Tests.Tests
 {
-  [Collection("Lofi Test Harness")]
-  public class GetTracksTests : LofiTest
+  [Collection("Yandex Test Harness")]
+  public class GetTracksTests : YandexTest
   {
-    public GetTracksTests(LofiTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
+    public GetTracksTests(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
     {
       Api.Authorize("login", "123");
     }
