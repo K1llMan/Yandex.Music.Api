@@ -1,7 +1,7 @@
 Yandex.Music API (Unofficial) for .Net Core
 ====
 
-[![Build Status](https://travis-ci.com/Winster332/Lofi.svg?token=9RFGGw1id2424svMxqyZ&branch=master)](https://travis-ci.com/Winster332/Lofi)
+[![Build Status](https://travis-ci.com/Winster332/Yandex.Music.Api.svg?branch=master)](https://travis-ci.com/Winster332/Yandex.Music.Api)
 
 This is wrapper for the [Yandex.Music](http://music.yandex.ru/) API
 
