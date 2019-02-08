@@ -22,7 +22,7 @@ namespace Yandex.Music.Api.Tests.Tests
       if (!Directory.Exists(FolderData))
         Directory.CreateDirectory(FolderData);
       
-      Api.Authorize("Winster332", "123");
+      Api.Authorize("login", "123");
       Track = Api.GetListFavorites().FirstOrDefault();
       PathFile = $"{FolderData}/{Track.Title}.mp3";
     }
