@@ -49,6 +49,8 @@ Functional
 This library provides following functions:
 
 ```C#
+YandexMusicApi
+│
 ├── Users
 │   ├── Authorize (string username, string password)
 │   ├── SearchUsers (string userName, int pageNumber = 0)
