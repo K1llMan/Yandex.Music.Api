@@ -11,20 +11,12 @@ Solution allows you to work with Yandex music based on the client.
  Install
 -------
 
-Link on nuget:
-https://www.nuget.org/packages/Yandex.Music.Api/1.0.0
-
 #### NuGet
 
+```bash
 Install-Package Yandex.Music.Api -Version 1.0.0
-
-#### .NET CLI
-
-dotnet add package Yandex.Music.Api --version 1.0.0
-
-#### Paket-CLI
-
-paket add Yandex.Music.Api --version 1.0.0
+```
+- [NuGet Package](https://www.nuget.org/packages/Yandex.Music.Api/1.0.0)
 
 Usage
 -------
