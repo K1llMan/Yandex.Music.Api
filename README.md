@@ -51,11 +51,19 @@ Contents
 * [Roadmap](https://github.com/Winster332/Yandex.Music.Api/#roadmap)
 * [Users](https://github.com/Winster332/Yandex.Music.Api#users)
 	* [Authorize](https://github.com/Winster332/Yandex.Music.Api#authorize)
+	* [Search users](https://github.com/Winster332/Yandex.Music.Api#search-users)
 	* [Use proxy](https://github.com/Winster332/Yandex.Music.Api#use-proxy)
-* [Download track](https://github.com/Winster332/Yandex.Music.Api#download-track)
-	* [Download to file](https://github.com/Winster332/Yandex.Music.Api#download-to-file)
-	* [Download to stream](https://github.com/Winster332/Yandex.Music.Api#download-to-stream)
-
+* [Music](https://github.com/Winster332/Yandex.Music.Api#download-track)
+	* [Download track to file](https://github.com/Winster332/Yandex.Music.Api#download-to-file)
+	* [Download track to stream](https://github.com/Winster332/Yandex.Music.Api#download-to-stream)
+	* [Download track to bytes](https://github.com/Winster332/Yandex.Music.Api#download-to-bytes)
+	* [Get favorites playlist](https://github.com/Winster332/Yandex.Music.Api#get-favorites-playlist)
+	* [Search track](https://github.com/Winster332/Yandex.Music.Api#search-track)
+* [Playlist](https://github.com/Winster332/Yandex.Music.Api#playlist)
+	* [Get playlist of day](https://github.com/Winster332/Yandex.Music.Api#get-playlist-of-day)
+	* [Get playlist deja vu](https://github.com/Winster332/Yandex.Music.Api#get-playlist-deja-vu)
+	* [Search playlist](https://github.com/Winster332/Yandex.Music.Api#search-playlist)
+	
 ### Roadmap
 
 This solution is experimental. Therefore, it may have various bugs. To work, the solution uses the https protocol.
@@ -72,23 +80,33 @@ This step is optional. But it is necessary to consider that not authorized users
  yandexApi.Authorize("yourLogin", "yourPassword");
 ```
 
+##### Search users
+
+```C#
+ var yandexApi = new YandexMusicApi();
+ var pageNumber = 0;
+ var users = Api.SearchUsers("a", pageNumber);
+```
+
 ##### Use proxy
 
 Documentation in progress...
 
-### Download track
+### Music
 
-##### Download to file
+##### Download track to file
 
 ```C#
+ var yandexApi = new YandexMusicApi();
  var track = yandexApi.SearchTrack("I Don't Care").First();
  var fileName = $"{track.Title}.mp3";
  yandexApi.ExtractTrackToFile(track, fileName);
 ```
 
-##### Download to stream
+##### Download track to stream
 
 ```C#
+ var yandexApi = new YandexMusicApi();
  var track = yandexApi.SearchTrack("I Don't Care").First();
  var streamTrack = yandexApi.ExtractStreamTrack(track);
  var artistName = track.Artists.FirstOrDefault()?.Name;
@@ -99,6 +117,58 @@ Documentation in progress...
     
     streamTrack.SaveToFile(fileName);
  };
+```
+
+##### Download track to bytes
+
+```C#
+ var yandexApi = new YandexMusicApi();
+ var track = yandexApi.SearchTrack("I Don't Care").First();
+ var byteData = yandexApi.ExtractDataTrack(track);
+```
+
+##### Get favorites playlist
+
+```C#
+ var yandexApi = new YandexMusicApi();
+ yandexApi.Authorize("yourLogin", "yourPassword");
+ var list = yandexApi.GetListFavorites();
+```
+
+##### Search track
+
+```C#
+ var yandexApi = new YandexMusicApi();
+ var pageNumber = 0;
+ var tracks = yandexApi.SearchTrack("I Don't Care", pageNumber);
+```
+
+### Playlist
+
+##### Get playlist of day
+
+```C#
+ var yandexApi = new YandexMusicApi();
+ yandexApi.Authorize("yourLogin", "yourPassword");
+ var playlist = yandexApi.GetPlaylistOfDay();
+```
+
+##### Get playlist deja vu
+
+```C#
+ var yandexApi = new YandexMusicApi();
+ yandexApi.Authorize("yourLogin", "yourPassword");
+ var playlist = yandexApi.GetPlaylistDejaVu();
+```
+var playlist = yandexApi.GetPlaylistDejaVu();
+
+##### Search playlist
+
+```C#
+  var yandexApi = new YandexMusicApi();
+  yandexApi.Authorize("yourLogin", "yourPassword");
+  var pageNumber = 0;
+  var playlists = Api.SearchPlaylist("a", pageNumber);
 ```
 
 LICENCE
