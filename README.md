@@ -66,7 +66,7 @@ This library provides following functions:
 │   ├── SearchPlaylist (string playlistName, int pageNumber = 0)
 │   ├── SearchArtist (string artistName, int pageNumber = 0)
 │   ├── SearchAlbums (string albumName, int pageNumber = 0)
-│   └── GetAlbum string albumId)
+│   └── GetAlbum (string albumId)
 └── Future
 ```
 
