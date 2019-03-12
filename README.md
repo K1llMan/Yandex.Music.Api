@@ -17,32 +17,6 @@ Solution allows you to work with Yandex music based on the client.
 Install-Package Yandex.Music.Api -Version 1.0.0
 ```
 
-Usage
--------
-
-```C#
- var yandexApi = new YandexMusicApi();
- 
- yandexApi.Authorize("login", "password");
- // place code here
- 
- var track = Api.SearchTrack("I Don't Care").First();
- var streamTrack = yandexApi.ExtractStreamTrack(track);
- var artistName = track.Artists.FirstOrDefault()?.Name;
-
- streamTrack.Complated += (o, track1) =>
- {
-    var fileName = $"{artistName} - {track.Title}";
-    
-    streamTrack.SaveToFile(fileName);
- };
- 
- // or
- 
- var fileName = $"{track.Title}.mp3";
- yandexApi.ExtractTrackToFile(track, fileName);
-```
-
 Functional
 -------
 
@@ -70,6 +44,59 @@ YandexMusicApi
 │   ├── SearchAlbums (string albumName, int pageNumber = 0)
 │   └── GetAlbum (string albumId)
 └── Future
+```
+
+Contents
+-------
+* [Roadmap](https://github.com/Winster332/Yandex.Music.Api/#roadmap)
+* [Users](https://github.com/Winster332/Yandex.Music.Api#users)
+	* [Authorize](https://github.com/Winster332/Yandex.Music.Api#authorize)
+	* [Use proxy](https://github.com/Winster332/Yandex.Music.Api#use-proxy)
+* [Download track](https://github.com/Winster332/Yandex.Music.Api#download-track)
+	* [Download to file](https://github.com/Winster332/Yandex.Music.Api#download-to-file)
+	* [Download to stream](https://github.com/Winster332/Yandex.Music.Api#download-to-stream)
+
+### Roadmap
+
+This solution is experimental. Therefore, it may have various bugs. To work, the solution uses the https protocol.
+
+### Users
+
+##### Authorize
+
+```C#
+ var yandexApi = new YandexMusicApi();
+ 
+ yandexApi.Authorize("yourLogin", "yourPassword");
+```
+
+##### Use proxy
+
+Documentation in progress...
+
+### Download track
+
+##### Download to file
+
+```C#
+ var track = yandexApi.SearchTrack("I Don't Care").First();
+ var fileName = $"{track.Title}.mp3";
+ yandexApi.ExtractTrackToFile(track, fileName);
+```
+
+##### Download to stream
+
+```C#
+ var track = yandexApi.SearchTrack("I Don't Care").First();
+ var streamTrack = yandexApi.ExtractStreamTrack(track);
+ var artistName = track.Artists.FirstOrDefault()?.Name;
+
+ streamTrack.Complated += (o, track1) =>
+ {
+    var fileName = $"{artistName} - {track.Title}";
+    
+    streamTrack.SaveToFile(fileName);
+ };
 ```
 
 LICENCE
