@@ -71,3 +71,7 @@ This library provides following functions:
 - SearchArtist
 - SearchAlbums
 - GetAlbum
+
+LICENCE
+-------
+[GNU General Public License v3.0](https://github.com/Winster332/Yandex.Music.Api/blob/master/LICENSE)
