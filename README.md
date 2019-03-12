@@ -30,7 +30,7 @@ Usage
 -------
 
 ```C#
- var yandexApi = new LofiYandexMusicApi();
+ var yandexApi = new YandexMusicApi();
  
  yandexApi.Authorize("login", "password");
  // place code here
@@ -45,33 +45,39 @@ Usage
     
     streamTrack.SaveToFile(fileName);
  };
+ 
+ // or
+ 
+ var fileName = $"{track.Title}.mp3";
+ yandexApi.ExtractTrackToFile(track, fileName);
 ```
+
+Functional
+-------
 
 This library provides following functions:
 
-#### Users
-
-- Authorize
-- SearchUsers
-- UseProxy
-
-#### Music
-
-- GetListFavorites
-- ExtractTrackToFile
-- ExtractStreamTrack
-- ExtractDataTrack
-- SearchTrack
-- GetTrack
-
-#### Playlist
-
-- GetPlaylistOfDay
-- GetPlaylistDejaVu
-- SearchPlaylist
-- SearchArtist
-- SearchAlbums
-- GetAlbum
+```C#
+├── Users
+│   ├── Authorize (string username, string password)
+│   ├── SearchUsers (string userName, int pageNumber = 0)
+│   └── UseProxy (IWebProxy proxy)
+├── Music
+│   ├── GetListFavorites (string userId = null)
+│   ├── ExtractTrackToFile (YandexTrack track, string filder = "data")
+│   ├── ExtractStreamTrack (YandexTrack track)
+│   ├── ExtractDataTrack (YandexTrack track)
+│   ├── SearchTrack (string trackName, int pageNumber = 0)
+│   └── GetTrack (string trackId)
+├── Playlist
+│   ├── GetPlaylistOfDay ()
+│   ├── GetPlaylistDejaVu ()
+│   ├── SearchPlaylist (string playlistName, int pageNumber = 0)
+│   ├── SearchArtist (string artistName, int pageNumber = 0)
+│   ├── SearchAlbums (string albumName, int pageNumber = 0)
+│   └── GetAlbum string albumId)
+└── Future
+```
 
 LICENCE
 -------
