@@ -64,6 +64,8 @@ This solution is experimental. Therefore, it may have various bugs. To work, the
 
 ##### Authorize
 
+This step is optional. But it is necessary to consider that not authorized users get on captcha with which the user needs to cope by own strength. Therefore, it is better to use authorization.
+
 ```C#
  var yandexApi = new YandexMusicApi();
  
