@@ -77,6 +77,7 @@ This step is optional. But it is necessary to consider that not authorized users
 ```C#
  var yandexApi = new YandexMusicApi();
  
+ // Your login and password in Yandex.Music
  yandexApi.Authorize("yourLogin", "yourPassword");
 ```
 
@@ -85,6 +86,8 @@ This step is optional. But it is necessary to consider that not authorized users
 ```C#
  var yandexApi = new YandexMusicApi();
  var pageNumber = 0;
+ 
+ // Yandex search text and page
  var users = Api.SearchUsers("a", pageNumber);
 ```
 
@@ -104,6 +107,8 @@ Documentation in progress...
 ```
 
 ##### Download track to stream
+
+Stream for streaming music
 
 ```C#
  var yandexApi = new YandexMusicApi();
