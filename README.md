@@ -176,6 +176,11 @@ var playlist = yandexApi.GetPlaylistDejaVu();
   var playlists = Api.SearchPlaylist("a", pageNumber);
 ```
 
+##### Examples
+
+- [Yandex.Music.Terminal](https://github.com/Winster332/Yandex.Music.Terminal)
+- [Lofi](https://github.com/Winster332/Lofi)
+
 LICENCE
 -------
 [GNU General Public License v3.0](https://github.com/Winster332/Yandex.Music.Api/blob/master/LICENSE)
