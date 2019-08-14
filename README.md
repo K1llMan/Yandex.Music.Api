@@ -44,6 +44,11 @@ YandexMusicApi
 │   ├── SearchAlbums (string albumName, int pageNumber = 0)
 │   └── GetAlbum (string albumId)
 └── Future
+    ├── AddTrackToPlaylist ()
+    ├── CreatePlaylist ()
+    ├── Remove playlist ()
+    ├── Remove track ()
+    └── Radio-functions ()
 ```
 
 Contents
