@@ -51,7 +51,7 @@ YandexMusicApi
     └── Radio-functions ()
 ```
 
-Contents
+Quick start
 -------
 * [Roadmap](https://github.com/Winster332/Yandex.Music.Api/#roadmap)
 * [Users](https://github.com/Winster332/Yandex.Music.Api#users)
