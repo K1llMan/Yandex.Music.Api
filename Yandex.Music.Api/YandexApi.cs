@@ -125,5 +125,8 @@ namespace Yandex.Music.Api
     /// <param name="proxy">Proxy</param>
     /// <returns></returns>
     YandexApi UseWebProxy(IWebProxy proxy);
+
+    YandexAccountResult GetAccounts();
+    void CreatePlaylist(string name);
   }
 }

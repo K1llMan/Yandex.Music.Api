@@ -27,5 +27,10 @@ namespace Yandex.Music.Api.Tests.Tests
       
       isAuthorized.Should().BeFalse();
     }
+    
+    [Fact, YandexTrait(TraitGroup.Authorize)]
+    public void Authorize_ValidData_GenerateTru()
+    {
+    }
   }
 }

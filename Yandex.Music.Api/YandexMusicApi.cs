@@ -399,5 +399,97 @@ namespace Yandex.Music.Api
 
       return request;
     }
+
+    public YandexAccountResult GetAccounts()
+    {
+      try
+      {
+        var uri = new Uri("https://music.yandex.ru/handlers/accounts.jsx?lang=ru&external-domain=music.yandex.ru&overembed=false&ncrnd=0.7168345644602356");
+        var request = GetRequest(uri);
+        var result = "";
+
+        using (var response = (HttpWebResponse) request.GetResponse())
+        {
+//        var data = GetDataFromResponse(response);
+
+          using (var stream = response.GetResponseStream())
+          {
+            var reader = new StreamReader(stream);
+
+            result = reader.ReadToEnd();
+          }
+
+          _cookies.Add(response.Cookies);
+        }
+
+        var json = JToken.Parse(result);
+        var yandexAccounts = new YandexAccountResult
+        {
+          DefaultUID = json["default_uid"].ToObject<string>(),
+          Accounts = json["accounts"].Select(x => new YandexAccount
+          {
+            Status = x["status"].ToObject<bool>(),
+            UID = x["uid"].ToObject<string>(),
+            Login = x["login"].ToObject<string>(),
+            DisplayName = new YandexAccount.YandexAccountDisplayName
+            {
+              Name = x["displayName"]["name"].ToObject<string>(),
+              DefaultAvatar = x["displayName"]["default_avatar"].ToObject<string>()
+            }
+          }).ToList(),
+          CanAddMore = json["can-add-more"].ToObject<bool>()
+        };
+
+        return yandexAccounts;
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex);
+      }
+
+      return null;
+    }
+    
+    public void CreatePlaylist(string name)
+    {
+      try
+      {
+        var uri = new Uri("https://music.yandex.ru/handlers/change-playlist.jsx");
+        var request = GetRequest(uri, 
+          new KeyValuePair<string, string>("action", "add"), 
+          new KeyValuePair<string, string>("title", "Новый плейлист"),
+          new KeyValuePair<string, string>("lang", "ru"),
+          new KeyValuePair<string, string>("external-domain", "music.yandex.ru"),
+          new KeyValuePair<string, string>("overembed", "false"));
+//        request.Headers[HttpRequestHeader.]
+        request.Headers[HttpRequestHeader.Accept] = "application/json, text/javascript, */*; q=0.01";
+        request.Headers["Accept-Encoding"] = "gzip, deflate, br";
+        request.Headers["Accept-Language"] = "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7";
+        request.Headers["access-control-allow-methods"] = "[POST]";
+        request.Headers["Sec-Fetch-Mode"] = "cors";
+        request.Headers["Content-Type"] = "application/x-www-form-urlencoded; charset=UTF-8";
+        
+
+        using (var response = (HttpWebResponse) request.GetResponse())
+        {
+//        var data = GetDataFromResponse(response);
+          var result = "";
+
+          using (var stream = response.GetResponseStream())
+          {
+            var reader = new StreamReader(stream);
+
+            result = reader.ReadToEnd();
+          }
+
+
+          _cookies.Add(response.Cookies);
+        }
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex);
+      }
+    }
   }
 }
