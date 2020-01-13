@@ -410,8 +410,6 @@ namespace Yandex.Music.Api
 
         using (var response = (HttpWebResponse) request.GetResponse())
         {
-//        var data = GetDataFromResponse(response);
-
           using (var stream = response.GetResponseStream())
           {
             var reader = new StreamReader(stream);
@@ -452,6 +450,7 @@ namespace Yandex.Music.Api
     
     public void CreatePlaylist(string name)
     {
+      GetYandexCookie();
       try
       {
         var uri = new Uri("https://music.yandex.ru/handlers/change-playlist.jsx");
@@ -486,10 +485,64 @@ namespace Yandex.Music.Api
           _cookies.Add(response.Cookies);
         }
       }
+      catch (WebException ex)
+      {
+        using (var stream = ex.Response.GetResponseStream())
+        {
+          var reader = new StreamReader(stream);
+
+          var result = reader.ReadToEnd();
+        }
+
+        Console.WriteLine(ex);
+      }
+    }
+
+    public YandexGetCookieResult GetYandexCookie()
+    {
+      try
+      {
+        var request = GetRequest(new Uri("https://matchid.adfox.yandex.ru/getcookie"), WebRequestMethods.Http.Get);
+        
+//        request.ProtocolVersion = new Version(2, 0);
+//        request.Headers.Add(":method", "GET");
+//        request.Headers.Add(":authority", "matchid.adfox.yandex.ru");
+//        request.Headers.Add(":path", "/getcookie");
+//        request.Headers.Add(":scheme", "https");
+        
+        request.Headers["origin"] = "https://music.yandex.ru";
+        request.Headers["referer"] = "https://music.yandex.ru/users/Winster332/playlists";
+        request.Headers["sec-fetch-mode"] = "cors";
+        request.Headers["sec-fetch-site"] = "same-site";
+
+        var result = "";
+        
+        using (var response = (HttpWebResponse) request.GetResponse())
+        {
+          using (var stream = response.GetResponseStream())
+          {
+            var reader = new StreamReader(stream);
+
+            result = reader.ReadToEnd();
+          }
+
+          _cookies.Add(response.Cookies);
+        }
+
+        var json = JToken.Parse(result);
+
+        return new YandexGetCookieResult
+        {
+          CryptoId = json["cryptouid"].ToObject<string>(),
+          CryptoSign = json["cryptouid_sign"].ToObject<string>()
+        };
+      }
       catch (Exception ex)
       {
         Console.WriteLine(ex);
       }
+
+      return null;
     }
   }
 }

@@ -31,6 +31,11 @@ namespace Yandex.Music.Api.Tests.Tests
     [Fact, YandexTrait(TraitGroup.Authorize)]
     public void Authorize_ValidData_GenerateTru()
     {
+      var isAuthorized = Api.Authorize("Winster332", "Stas32MP3tanki");
+      
+      isAuthorized.Should().BeTrue();
+      Api.CreatePlaylist("Test-1");
+//      Api.GetAccounts();
     }
   }
 }
