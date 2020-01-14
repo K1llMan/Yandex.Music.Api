@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
 using Yandex.Music.Api.Tests.Traits;

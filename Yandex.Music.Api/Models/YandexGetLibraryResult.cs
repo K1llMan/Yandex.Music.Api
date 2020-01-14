@@ -50,6 +50,10 @@ namespace Yandex.Music.Api.Models
             public string Tags { get; set; }
             public string Prerolls { get; set; }
 
+            public class YandexLibraryPlaylistCoverError : YandexLibraryPlaylistCover
+            {
+                public string Error { get; set; }
+            }
             public class YandexLibraryPlaylistCoverMosaic : YandexLibraryPlaylistCover
             {
                 public List<string> ItemsUri { get; set; }

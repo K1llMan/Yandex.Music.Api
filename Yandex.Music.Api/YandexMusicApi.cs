@@ -53,7 +53,7 @@ namespace Yandex.Music.Api
         {
           _cookies.Add(response.Cookies);
           result = true;
-          
+
           if (response.ResponseUri == _passportUri)
           {
             result = false;
@@ -760,37 +760,45 @@ namespace Yandex.Music.Api
       };
     }
 
-    public void CreatePlaylist(string name)
+    public YandexChangePlaylistResult CreatePlaylist(string name)
     {
 //      var getCookiet = GetYandexCookie();
-//      var auth = GetAuthV2();
+//      var auth2 = GetAuthV2();
       var accounts = GetAccounts();
 //      var library = GetLibrary(accounts.DefaultUID);
-      var a = GetAuth(accounts.DefaultUID);
-      
+      var auth = GetAuth(accounts.DefaultUID);
+
       try
       {
         var uri = new Uri("https://music.yandex.ru/handlers/change-playlist.jsx");
-        var request = GetRequest(uri, 
-          new KeyValuePair<string, string>("action", "add"), 
-          new KeyValuePair<string, string>("title", "Новый плейлист"),
+        var request = GetRequest(uri,
+          new KeyValuePair<string, string>("action", "add"),
+          new KeyValuePair<string, string>("title", name),
           new KeyValuePair<string, string>("lang", "ru"),
+          new KeyValuePair<string, string>("sign", auth.User.Sign),
+          new KeyValuePair<string, string>("experiments", auth.Experiments),
           new KeyValuePair<string, string>("external-domain", "music.yandex.ru"),
-          new KeyValuePair<string, string>("overembed", "false"));
-//        request.Headers[HttpRequestHeader.]
+          new KeyValuePair<string, string>("overembed", "false")
+        );
         request.Headers[HttpRequestHeader.Accept] = "application/json, text/javascript, */*; q=0.01";
         request.Headers["Accept-Encoding"] = "gzip, deflate, br";
         request.Headers["Accept-Language"] = "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7";
         request.Headers["access-control-allow-methods"] = "[POST]";
-        request.Headers["Sec-Fetch-Mode"] = "cors";
         request.Headers["Content-Type"] = "application/x-www-form-urlencoded; charset=UTF-8";
-        
+
+        request.Headers["X-Current-UID"] = accounts.DefaultUID;
+        request.Headers["X-Requested-With"] = "XMLHttpRequest";
+        request.Headers["X-Retpath-Y"] = "https%3A%2F%2Fmusic.yandex.ru%2Fusers%2FWinster332%2Fplaylists";
+
+        request.Headers["origin"] = "https://music.yandex.ru";
+        request.Headers["referer"] = "https://music.yandex.ru/users/Winster332/playlists";
+        request.Headers["sec-fetch-mode"] = "cors";
+        request.Headers["sec-fetch-site"] = "same-site";
+
+        var result = "";
 
         using (var response = (HttpWebResponse) request.GetResponse())
         {
-//        var data = GetDataFromResponse(response);
-          var result = "";
-
           using (var stream = response.GetResponseStream())
           {
             var reader = new StreamReader(stream);
@@ -798,9 +806,87 @@ namespace Yandex.Music.Api
             result = reader.ReadToEnd();
           }
 
-
           _cookies.Add(response.Cookies);
         }
+
+        var json = JToken.Parse(result);
+        var x = json["playlist"];
+        
+        var playlistOwner = new YandexOwner
+        {
+          Uid = x["owner"]["uid"].ToObject<string>(),
+          Login = x["owner"]["login"].ToObject<string>(),
+          Name = x["owner"]["name"].ToObject<string>(),
+          Sex = x["owner"]["sex"]?.ToObject<string>(),
+          Verified = x["owner"]["verified"]?.ToObject<bool>()
+        };
+
+        var tracks = x.SelectToken("tracks")?.Select(f =>
+          new YandexGetLibraryResult.YandexLibraryPlaylist.YandexLibraryPlaylistTrack
+          {
+            Id = f["id"]?.ToObject<long?>(),
+            Timestamp = f["timestamp"]?.ToObject<string>(),
+            AlbumId = f["albumId"]?.ToObject<long?>()
+          }).ToList();
+
+        var libraryCover = default(YandexGetLibraryResult.YandexLibraryPlaylist.YandexLibraryPlaylistCover);
+
+        if (x.SelectToken("cover")?.SelectToken("error") != null)
+        {
+          libraryCover = new YandexGetLibraryResult.YandexLibraryPlaylist.YandexLibraryPlaylistCoverError
+          {
+            Error = x["cover"]["error"].ToObject<string>()
+          };
+        } else if (x.SelectToken("cover")?.SelectToken("type").ToObject<string>() == "mosaic")
+        {
+          libraryCover = new YandexGetLibraryResult.YandexLibraryPlaylist.YandexLibraryPlaylistCoverMosaic
+          {
+            Type = x["cover"]["type"].ToObject<string>(),
+            ItemsUri = x["cover"]["itemsUri"].Select(f => f.ToObject<string>()).ToList(),
+            Custom = x["cover"]["custom"].ToObject<bool>()
+          };
+        } else if (x.SelectToken("cover")?.SelectToken("type").ToObject<string>() == "pic")
+        {
+          libraryCover = new YandexGetLibraryResult.YandexLibraryPlaylist.YandexLibraryPlaylistCoverPic
+          {
+            Type = x["cover"]["type"].ToObject<string>(),
+            Dir = x["cover"]["dir"].ToObject<string>(),
+            Version = x["cover"]["version"].ToObject<string>(),
+            Uri = x["cover"]["uri"].ToObject<string>(),
+            Custom = x["cover"]["custom"].ToObject<bool>()
+          };
+        }
+        
+        
+        var playlist = new YandexGetLibraryResult.YandexLibraryPlaylist
+        {
+          Owner = playlistOwner,
+          Available = x["available"]?.ToObject<bool>(),
+          Uid = x["uid"]?.ToObject<long>(),
+          Kind = x["kind"]?.ToObject<long>(),
+          Title = x["title"]?.ToObject<string>(),
+          Revision = x["revision"]?.ToObject<long>(),
+          Snapshot = x["snapshot"]?.ToObject<long>(),
+          TrackCount = x["trackCount"]?.ToObject<long>(),
+          Visibility = x["visibility"]?.ToObject<string>(),
+          Collective = x["collective"]?.ToObject<bool>(),
+          Created = x["created"]?.ToObject<string>(),
+          Modified = x["modified"]?.ToObject<string>(),
+          IsBanner = x["isBanner"]?.ToObject<bool>(),
+          IsPremiere = x["isPremiere"]?.ToObject<bool>(),
+          DurationMs = x["durationMs"]?.ToObject<long>(),
+          Cover = libraryCover,
+          OgImage = x["ogImage"]?.ToObject<string>(),
+          Tracks = tracks,
+          Tags = x["tags"]?.ToString(),
+          Prerolls = x["prerolls"]?.ToString(),
+        };
+
+        return new YandexChangePlaylistResult
+        {
+          Success = json["success"].ToObject<bool>(),
+          Playlist = playlist
+        };
       }
       catch (WebException ex)
       {
@@ -813,6 +899,12 @@ namespace Yandex.Music.Api
 
         Console.WriteLine(ex);
       }
+
+      return new YandexChangePlaylistResult
+      {
+        Success = false,
+        Playlist = null
+      };
     }
 
     public YandexGetCookieResult GetYandexCookie()

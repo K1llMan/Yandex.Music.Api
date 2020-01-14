@@ -127,7 +127,7 @@ namespace Yandex.Music.Api
     YandexApi UseWebProxy(IWebProxy proxy);
 
     YandexAccountResult GetAccounts();
-    void CreatePlaylist(string name);
+    YandexChangePlaylistResult CreatePlaylist(string name);
     YandexGetCookieResult GetYandexCookie();
   }
 }
