@@ -493,7 +493,6 @@ namespace Yandex.Music.Api
 
       var json = JToken.Parse(result);
 
-      /// TODO: Need fix cover
       var playlists = new List<YandexGetLibraryResult.YandexLibraryPlaylist>();
       
       foreach (var x in json["playlists"])
@@ -515,6 +514,28 @@ namespace Yandex.Music.Api
             AlbumId = f["albumId"]?.ToObject<long?>()
           }).ToList();
 
+        var libraryCover = default(YandexGetLibraryResult.YandexLibraryPlaylist.YandexLibraryPlaylistCover);
+        
+        if (x.SelectToken("cover")?.SelectToken("type").ToObject<string>() == "mosaic")
+        {
+          libraryCover = new YandexGetLibraryResult.YandexLibraryPlaylist.YandexLibraryPlaylistCoverMosaic
+          {
+            Type = x["cover"]["type"].ToObject<string>(),
+            ItemsUri = x["cover"]["itemsUri"].Select(f => f.ToObject<string>()).ToList(),
+            Custom = x["cover"]["custom"].ToObject<bool>()
+          };
+        } else if (x.SelectToken("cover")?.SelectToken("type").ToObject<string>() == "pic")
+        {
+          libraryCover = new YandexGetLibraryResult.YandexLibraryPlaylist.YandexLibraryPlaylistCoverPic
+          {
+            Type = x["cover"]["type"].ToObject<string>(),
+            Dir = x["cover"]["dir"].ToObject<string>(),
+            Version = x["cover"]["version"].ToObject<string>(),
+            Uri = x["cover"]["uri"].ToObject<string>(),
+            Custom = x["cover"]["custom"].ToObject<bool>()
+          };
+        }
+
         var playlist = new YandexGetLibraryResult.YandexLibraryPlaylist
         {
           Owner = playlistOwner,
@@ -532,12 +553,7 @@ namespace Yandex.Music.Api
           IsBanner = x["isBanner"]?.ToObject<bool>(),
           IsPremiere = x["isPremiere"]?.ToObject<bool>(),
           DurationMs = x["durationMs"]?.ToObject<long>(),
-//        Cover = new YandexGetLibraryResult.YandexLibraryPlaylist.YandexLibraryPlaylistCover
-//        {
-//          Type = x["cover"]["type"].ToObject<string>(),
-//          ItemsUri = x["cover"]["itemsUri"].Select(f => f.ToObject<string>()).ToList(),
-//          Custom = x["cover"]["custom"].ToObject<bool>()
-//        },
+          Cover = libraryCover,
           OgImage = x["ogImage"]?.ToObject<string>(),
           Tracks = tracks,
           Tags = x["tags"]?.ToString(),
