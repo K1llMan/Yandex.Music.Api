@@ -600,7 +600,7 @@ namespace Yandex.Music.Api
       };
     }
     
-    public YandexAuthResult GetAuth()
+    public YandexAuthV2Result GetAuthV2()
     {
       var request = GetRequest(new Uri($"https://music.yandex.ru/api/v2.1/handlers/auth?external-domain=music.yandex.ru&overembed=no&__t={GetTInterval()}"),
           WebRequestMethods.Http.Get);
@@ -633,7 +633,7 @@ namespace Yandex.Music.Api
 
       var json = JToken.Parse(result);
 
-      return new YandexAuthResult
+      return new YandexAuthV2Result
       {
         Csrf = json["csrf"].ToObject<string>(),
         FreshCsrf = json["freshCsrf"].ToObject<string>(),
@@ -651,12 +651,122 @@ namespace Yandex.Music.Api
       };
     }
 
+    public YandexAuthResult GetAuth(string ownerUid)
+    {
+      var request = GetRequest(
+        new Uri(
+          $"https://music.yandex.ru/handlers/auth.jsx?lang=ru&external-domain=music.yandex.ru&overembed=false&ncrnd=0.1822837925478349"),
+        WebRequestMethods.Http.Get);
+      request.Headers[HttpRequestHeader.Accept] = "application/json, text/javascript, */*; q=0.01";
+      request.Headers["Accept-Encoding"] = "gzip, deflate, br";
+      request.Headers["Accept-Language"] = "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7";
+      request.Headers["access-control-allow-methods"] = "[POST]";
+      request.Headers["Sec-Fetch-Mode"] = "cors";
+      request.Headers["X-Current-UID"] = ownerUid;
+      request.Headers["X-Requested-With"] = "XMLHttpRequest";
+      request.Headers["X-Retpath-Y"] = "https%3A%2F%2Fmusic.yandex.ru%2Fusers%2FWinster332%2Fplaylists";
+
+      request.Headers["origin"] = "https://music.yandex.ru";
+      request.Headers["referer"] = "https://music.yandex.ru/users/Winster332/playlists";
+      request.Headers["sec-fetch-mode"] = "cors";
+      request.Headers["sec-fetch-site"] = "same-site";
+
+      var result = "";
+
+      using (var response = (HttpWebResponse) request.GetResponse())
+      {
+        using (var stream = response.GetResponseStream())
+        {
+          var reader = new StreamReader(stream);
+
+          result = reader.ReadToEnd();
+        }
+
+        _cookies.Add(response.Cookies);
+      }
+
+      var json = JToken.Parse(result);
+
+      var authUserPlus = new YandexAuthResult.YandexAuthUser.YandexAuthPlus
+      {
+        HasPlus = json["user"]["plus"]["hasPlus"].ToObject<bool>(),
+        IsTutorialCompleted = json["user"]["plus"]["isTutorialCompleted"].ToObject<bool>(),
+        Migrated = json["user"]["plus"]["migrated"].ToObject<bool>()
+      };
+      var authUserSubscription = new YandexAuthResult.YandexAuthUser.YandexAuthSubscription
+      {
+        NonAutoRenewable = new YandexAuthResult.YandexAuthUser.YandexAuthSubscriptionNonAutoRenewable
+        {
+          Start = json["user"]["subscription"]["nonAutoRenewable"]["start"].ToObject<string>(),
+          End = json["user"]["subscription"]["nonAutoRenewable"]["end"].ToObject<string>()
+        },
+        CanStartTrial = json["user"]["subscription"]["canStartTrial"].ToObject<bool>(),
+        Mcdonalds = json["user"]["subscription"]["mcdonalds"].ToObject<bool>()
+      };
+      var authUserSettings = new YandexAuthResult.YandexAuthUser.YandexAuthSettings
+      {
+        Uid = json["user"]["settings"]["uid"].ToObject<string>(),
+        LastFmScrobblingEnabled = json["user"]["settings"]["lastFmScrobblingEnabled"].ToObject<bool>(),
+        FacebookScrobblingEnabled = json["user"]["settings"]["facebookScrobblingEnabled"].ToObject<bool>(),
+        ShuffleEnabled = json["user"]["settings"]["shuffleEnabled"].ToObject<bool>(),
+        AddNewTrackOnPlaylistTop = json["user"]["settings"]["addNewTrackOnPlaylistTop"].ToObject<bool>(),
+        VolumePercents = json["user"]["settings"]["volumePercents"].ToObject<int>(),
+        UserMusicVisibility = json["user"]["settings"]["userMusicVisibility"].ToObject<string>(),
+        UserSocialVisibility = json["user"]["settings"]["userSocialVisibility"].ToObject<string>(),
+        AdsDisabled = json["user"]["settings"]["adsDisabled"].ToObject<bool>(),
+        Modified = json["user"]["settings"]["modified"].ToObject<string>(),
+        RbtDisabled = json["user"]["settings"]["rbtDisabled"].ToObject<bool>(),
+        Theme = json["user"]["settings"]["theme"].ToObject<string>(),
+        PromosDisabled = json["user"]["settings"]["promosDisabled"].ToObject<bool>(),
+        AutoPlayRadio = json["user"]["settings"]["autoPlayRadio"].ToObject<bool>(),
+      };
+
+      var authUser = new YandexAuthResult.YandexAuthUser
+      {
+        Sign = json["user"]["sign"].ToObject<string>(),
+        Sk = json["user"]["sk"].ToObject<string>(),
+        Premium = json["user"]["premium"].ToObject<bool>(),
+        Plus = authUserPlus,
+        SubeditorLevel = json["user"]["subeditorLevel"].ToObject<int>(),
+        Subeditor = json["user"]["subeditor"].ToObject<bool>(),
+        IsMobileUser = json["user"]["isMobileUser"].ToObject<bool>(),
+        Subscription = authUserSubscription,
+        AdDisableable = json["user"]["adDisableable"].ToObject<bool>(),
+        IsPremium = json["user"]["isPremium"].ToObject<bool>(),
+        _statusFetched = json["user"]["_statusFetched"].ToObject<bool>(),
+        DeviceId = json["user"]["device_id"].ToObject<string>(),
+        OnlyDeviceId = json["user"]["onlyDeviceId"].ToObject<bool>(),
+        KpOttSubscription = json["user"]["kpOttSubscription"].ToObject<string>(),
+        HavePlus = json["user"]["havePlus"].ToObject<bool>(),
+        HasAvatar = json["user"]["hasAvatar"].ToObject<bool>(),
+        SignUpMethod = json["user"]["signUpMethod"].ToObject<string>(),
+        IsHosted = json["user"]["isHosted"].ToObject<bool>(),
+        IsYandex = json["user"]["isYandex"].ToObject<bool>(),
+        ContactPhone = json["user"]["contactPhone"].ToObject<string>(),
+        LastName = json["user"]["lastName"].ToObject<string>(),
+        FirstName = json["user"]["firstName"].ToObject<string>(),
+        Name = json["user"]["name"].ToObject<string>(),
+        Login = json["user"]["login"].ToObject<string>(),
+        Uid = json["user"]["uid"].ToObject<string>(),
+        Settings = authUserSettings,
+        HasEmail = json["user"]["hasEmail"].ToObject<bool>(),
+
+      };
+
+      return new YandexAuthResult
+      {
+        User = authUser,
+        Experiments = json["experiments"].ToObject<string>()
+      };
+    }
+
     public void CreatePlaylist(string name)
     {
 //      var getCookiet = GetYandexCookie();
-//      var auth = GetAuth();
+//      var auth = GetAuthV2();
       var accounts = GetAccounts();
-      var library = GetLibrary(accounts.DefaultUID);
+//      var library = GetLibrary(accounts.DefaultUID);
+      var a = GetAuth(accounts.DefaultUID);
       
       try
       {
