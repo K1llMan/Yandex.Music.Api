@@ -128,6 +128,7 @@ namespace Yandex.Music.Api
 
     YandexAccountResult GetAccounts();
     YandexChangePlaylistResult CreatePlaylist(string name);
+    bool RemovePlaylist(long kind);
     YandexGetCookieResult GetYandexCookie();
   }
 }

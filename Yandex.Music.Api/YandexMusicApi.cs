@@ -477,7 +477,7 @@ namespace Yandex.Music.Api
       request.Headers["sec-fetch-mode"] = "cors";
       request.Headers["sec-fetch-site"] = "same-site";
 
-      var result = "";
+      var result = string.Empty;
 
       using (var response = (HttpWebResponse) request.GetResponse())
       {
@@ -617,7 +617,7 @@ namespace Yandex.Music.Api
       request.Headers["sec-fetch-mode"] = "cors";
       request.Headers["sec-fetch-site"] = "same-site";
 
-      var result = "";
+      var result = string.Empty;
 
       using (var response = (HttpWebResponse) request.GetResponse())
       {
@@ -671,7 +671,7 @@ namespace Yandex.Music.Api
       request.Headers["sec-fetch-mode"] = "cors";
       request.Headers["sec-fetch-site"] = "same-site";
 
-      var result = "";
+      var result = string.Empty;
 
       using (var response = (HttpWebResponse) request.GetResponse())
       {
@@ -795,7 +795,7 @@ namespace Yandex.Music.Api
         request.Headers["sec-fetch-mode"] = "cors";
         request.Headers["sec-fetch-site"] = "same-site";
 
-        var result = "";
+        var result = string.Empty;
 
         using (var response = (HttpWebResponse) request.GetResponse())
         {
@@ -857,7 +857,6 @@ namespace Yandex.Music.Api
           };
         }
         
-        
         var playlist = new YandexGetLibraryResult.YandexLibraryPlaylist
         {
           Owner = playlistOwner,
@@ -890,13 +889,6 @@ namespace Yandex.Music.Api
       }
       catch (WebException ex)
       {
-        using (var stream = ex.Response.GetResponseStream())
-        {
-          var reader = new StreamReader(stream);
-
-          var result = reader.ReadToEnd();
-        }
-
         Console.WriteLine(ex);
       }
 
