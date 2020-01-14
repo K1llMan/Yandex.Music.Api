@@ -447,10 +447,67 @@ namespace Yandex.Music.Api
 
       return null;
     }
-    
+
+    public YandexAuthResult GetAuth()
+    {
+      DateTime dt = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now);
+      DateTime dt1970 = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+      TimeSpan tsInterval = dt.Subtract(dt1970);
+      Int64 iMilliseconds = Convert.ToInt64(tsInterval.TotalMilliseconds);
+
+      var request = GetRequest(new Uri($"https://music.yandex.ru/api/v2.1/handlers/auth?external-domain=music.yandex.ru&overembed=no&__t={iMilliseconds}"),
+          WebRequestMethods.Http.Get);
+      request.Headers[HttpRequestHeader.Accept] = "application/json; q=1.0, text/*; q=0.8, */*; q=0.1";
+      request.Headers["Accept-Encoding"] = "gzip, deflate, br";
+      request.Headers["Accept-Language"] = "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7";
+      request.Headers["access-control-allow-methods"] = "[POST]";
+      request.Headers["Sec-Fetch-Mode"] = "cors";
+      request.Headers["X-Requested-With"] = "XMLHttpRequest";
+      request.Headers["X-Retpath-Y"] = "https%3A%2F%2Fmusic.yandex.ru%2Fusers%2FWinster332%2Fplaylists";
+
+      request.Headers["origin"] = "https://music.yandex.ru";
+      request.Headers["referer"] = "https://music.yandex.ru/users/Winster332/playlists";
+      request.Headers["sec-fetch-mode"] = "cors";
+      request.Headers["sec-fetch-site"] = "same-site";
+
+      var result = "";
+
+      using (var response = (HttpWebResponse) request.GetResponse())
+      {
+        using (var stream = response.GetResponseStream())
+        {
+          var reader = new StreamReader(stream);
+
+          result = reader.ReadToEnd();
+        }
+
+        _cookies.Add(response.Cookies);
+      }
+
+      var json = JToken.Parse(result);
+
+      return new YandexAuthResult
+      {
+        Csrf = json["csrf"].ToObject<string>(),
+        FreshCsrf = json["freshCsrf"].ToObject<string>(),
+        Uid = json["uid"].ToObject<string>(),
+        Login = json["login"].ToObject<string>(),
+        YandexuId = json["yandexuid"].ToObject<string>(),
+        Logged = json["logged"].ToObject<bool>(),
+        Premium = json["premium"].ToObject<bool>(),
+        Lang = json["lang"].ToObject<string>(),
+        Timestamp = json["timestamp"].ToObject<long>(),
+        Experements = json["experiments"].ToString(),
+        BadRegion = json["badRegion"].ToObject<bool>(),
+        NotFree = json["notFree"].ToObject<bool>(),
+        DeviceId = json["device_id"].ToObject<string>()
+      };
+    }
+
     public void CreatePlaylist(string name)
     {
-      GetYandexCookie();
+//      var getCookiet = GetYandexCookie();
+      var auth = GetAuth();
       try
       {
         var uri = new Uri("https://music.yandex.ru/handlers/change-playlist.jsx");
