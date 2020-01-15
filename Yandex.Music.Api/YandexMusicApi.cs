@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Xml.Linq;
@@ -154,6 +155,151 @@ namespace Yandex.Music.Api
       }
 
       return playlist;
+    }
+
+    public DownloadTrackMainResponse GetMetadataTrackForDownload(string trackKey, string userUid, Int64 time)
+    {
+      var url = $"https://music.yandex.ru/api/v2.1/handlers/track/{trackKey}/web-own_tracks-track-track-main/download/m?hq=0&external-domain=music.yandex.ru&overembed=no&__t={time}";
+      
+      var request = GetRequest(new Uri(url), WebRequestMethods.Http.Get);
+      request.Headers[HttpRequestHeader.Accept] = "application/json; q=1.0, text/*; q=0.8, */*; q=0.1";
+      request.Headers["Accept-Encoding"] = "gzip, deflate, br";
+      request.Headers["Accept-Language"] = "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7";
+//      request.Headers["access-control-allow-methods"] = "[POST]";
+      request.Headers["Sec-Fetch-Mode"] = "cors";
+      request.Headers["X-Current-UID"] = userUid;
+      request.Headers["X-Requested-With"] = "XMLHttpRequest";
+      request.Headers["X-Retpath-Y"] = "https%3A%2F%2Fmusic.yandex.ru%2Fusers%2FWinster332%2Ftracks";
+
+      request.Headers["origin"] = "https://music.yandex.ru";
+      request.Headers["referer"] = "https://music.yandex.ru/users/Winster332/tracks";
+      request.Headers["sec-fetch-mode"] = "cors";
+      request.Headers["sec-fetch-site"] = "same-site";
+
+      var data = default(JToken);
+      
+      using (var response = (HttpWebResponse) request.GetResponse())
+      {
+        data = GetDataFromResponse(response);
+        
+        _cookies.Add(response.Cookies);
+      }
+
+      return new DownloadTrackMainResponse
+      {
+        Codec = data["codec"].ToObject<string>(),
+        Bitrate = data["bitrate"].ToObject<int>(),
+        Src = data["src"].ToObject<string>(),
+        Gain = data["gain"].ToObject<bool>(),
+        Preview = data["preview"].ToObject<bool>(),
+      };
+    }
+    
+    public void DownloadTrackToFile(string trackKey)
+    {
+      var time = GetTInterval();
+      var mainDownloadResponse = GetMetadataTrackForDownload(trackKey, "278753301", time);
+      var storageDownloadResponse = GetDownloadFilInfo(mainDownloadResponse, time);
+      
+      var fileLink = BuildLinkForDownloadTrack(mainDownloadResponse, storageDownloadResponse, trackKey.Split(':').FirstOrDefault());
+      
+      try
+      {
+        using (var client = new WebClient())
+        {
+          client.DownloadFile(fileLink, $"fileMP3.mp3");
+        }
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.ToString());
+      }
+      
+      Console.WriteLine("123");
+    }
+    
+    static string GetMd5Hash(string input)
+    {
+      var md5Hash = MD5.Create();
+      byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+      StringBuilder sBuilder = new StringBuilder();
+
+      for (int i = 0; i < data.Length; i++)
+      {
+        sBuilder.Append(data[i].ToString("x2"));
+      }
+      
+      return sBuilder.ToString();
+    }
+
+    public string BuildLinkForDownloadTrack(DownloadTrackMainResponse mainDownloadResponse, StorageFileDownloadResponse storageDownloadResponse, string trackUid)
+    {
+      return GetDownloadLink(storageDownloadResponse.Host, storageDownloadResponse.Path, storageDownloadResponse.Ts, storageDownloadResponse.S, mainDownloadResponse.Codec);
+    }
+
+    
+    public string GetDownloadLink(string host, string path, string ts, string s, string codec)
+    {
+      var secret = $"XGRlBW9FXlekgbPrRHuSiA{path.Substring(1, path.Length-1)}{s}";
+      var md5 = MD5.Create();
+      var md5Hash = md5.ComputeHash(Encoding.UTF8.GetBytes(secret));
+      var hmacsha1 = new HMACSHA1();
+      var hmasha1Hash = hmacsha1.ComputeHash(md5Hash);
+      var sign = BitConverter.ToString(hmasha1Hash).Replace("-", "").ToLower();
+      
+      var link = $"https://{host}/get-{codec}/{sign}/{ts}/{path}";
+
+      return link;
+    }
+
+    public StorageFileDownloadResponse GetDownloadFilInfo(DownloadTrackMainResponse metadataInfo, Int64 time)
+    {
+//      var time = GetTInterval();
+      var url = $"{metadataInfo.Src}&format=json&external-domain=music.yandex.ru&overembed=no&__t={time}";
+      
+      var request = GetRequest(new Uri(url), WebRequestMethods.Http.Get);
+      request.Headers[HttpRequestHeader.Accept] = "application/json; q=1.0, text/*; q=0.8, */*; q=0.1";
+//      request.Headers["Accept-Encoding"] = "gzip, deflate, br";
+      request.Headers["Accept-Encoding"] = "utf-8";
+      request.Headers["Accept-Language"] = "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7";
+//      request.Headers["access-control-allow-methods"] = "[POST]";
+      request.Headers["overembed"] = time.ToString();
+      request.Headers["Sec-Fetch-Mode"] = "cors";
+//      request.Headers["X-Current-UID"] = userUid;
+      request.Headers["X-Requested-With"] = "XMLHttpRequest";
+      request.Headers["X-Retpath-Y"] = "https%3A%2F%2Fmusic.yandex.ru%2Fusers%2FWinster332%2Ftracks";
+      request.Headers[HttpRequestHeader.AcceptCharset] = Encoding.UTF8.HeaderName;
+
+      request.Headers["origin"] = "https://music.yandex.ru";
+      request.Headers["referer"] = "https://music.yandex.ru/users/Winster332/tracks";
+      request.Headers["sec-fetch-mode"] = "cors";
+      request.Headers["sec-fetch-site"] = "same-site";
+
+      var data = default(JToken);
+
+      using (var response = (HttpWebResponse) request.GetResponse())
+      {
+        var result = "";
+
+        using (var stream = response.GetResponseStream())
+        {
+          var reader = new StreamReader(stream);
+
+          result = reader.ReadToEnd();
+        }
+
+        data = JToken.Parse(result);
+
+        _cookies.Add(response.Cookies);
+      }
+
+      return new StorageFileDownloadResponse
+      {
+        S = data["s"].ToObject<string>(),
+        Ts = data["ts"].ToObject<string>(),
+        Path = data["path"].ToObject<string>(),
+        Host = data["host"].ToObject<string>(),
+      };
     }
 
     public bool ExtractTrackToFile(YandexTrack track, string folder)
@@ -309,7 +455,8 @@ namespace Yandex.Music.Api
 
     protected string GetDownloadTrackInfoFileName(string storageDir)
     {
-      var request = GetRequest(_settings.GetURLDownloadFile(storageDir), WebRequestMethods.Http.Get);
+      var url = _settings.GetURLDownloadFile(storageDir);
+      var request = GetRequest(url, WebRequestMethods.Http.Get);
       var fileName = "";
       var trackLength = 0;
       

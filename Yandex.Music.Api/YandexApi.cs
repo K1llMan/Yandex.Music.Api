@@ -130,5 +130,6 @@ namespace Yandex.Music.Api
     YandexChangePlaylistResult CreatePlaylist(string name);
     bool RemovePlaylist(long kind);
     YandexGetCookieResult GetYandexCookie();
+    void DownloadTrackToFile(string trackDownloadKey);
   }
 }
