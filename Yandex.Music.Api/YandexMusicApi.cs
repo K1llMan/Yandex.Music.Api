@@ -214,32 +214,16 @@ namespace Yandex.Music.Api
       {
         Console.WriteLine(ex.ToString());
       }
-      
-      Console.WriteLine("123");
-    }
-    
-    static string GetMd5Hash(string input)
-    {
-      var md5Hash = MD5.Create();
-      byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
-      StringBuilder sBuilder = new StringBuilder();
-
-      for (int i = 0; i < data.Length; i++)
-      {
-        sBuilder.Append(data[i].ToString("x2"));
-      }
-      
-      return sBuilder.ToString();
     }
 
     public string BuildLinkForDownloadTrack(DownloadTrackMainResponse mainDownloadResponse, StorageFileDownloadResponse storageDownloadResponse, string trackUid)
     {
-      return GetDownloadLink(storageDownloadResponse.Host, storageDownloadResponse.Path, storageDownloadResponse.Ts, storageDownloadResponse.S, mainDownloadResponse.Codec);
-    }
-
-    
-    public string GetDownloadLink(string host, string path, string ts, string s, string codec)
-    {
+      var path = storageDownloadResponse.Path;
+      var host = storageDownloadResponse.Host;
+      var ts = storageDownloadResponse.Ts;
+      var s = storageDownloadResponse.S;
+      var codec = mainDownloadResponse.Codec;
+      
       var secret = $"XGRlBW9FXlekgbPrRHuSiA{path.Substring(1, path.Length-1)}{s}";
       var md5 = MD5.Create();
       var md5Hash = md5.ComputeHash(Encoding.UTF8.GetBytes(secret));
@@ -254,7 +238,6 @@ namespace Yandex.Music.Api
 
     public StorageFileDownloadResponse GetDownloadFilInfo(DownloadTrackMainResponse metadataInfo, Int64 time)
     {
-//      var time = GetTInterval();
       var url = $"{metadataInfo.Src}&format=json&external-domain=music.yandex.ru&overembed=no&__t={time}";
       
       var request = GetRequest(new Uri(url), WebRequestMethods.Http.Get);
