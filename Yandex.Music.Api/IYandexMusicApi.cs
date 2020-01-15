@@ -5,7 +5,7 @@ using Yandex.Music.Api.Models;
 
 namespace Yandex.Music.Api
 {
-  public interface YandexApi
+  public interface IYandexMusicApi
   {
     /// <summary>
     /// Authorize user to yandex
@@ -124,7 +124,7 @@ namespace Yandex.Music.Api
     /// </summary>
     /// <param name="proxy">Proxy</param>
     /// <returns></returns>
-    YandexApi UseWebProxy(IWebProxy proxy);
+    IYandexMusicApi UseWebProxy(IWebProxy proxy);
 
     YandexAccountResult GetAccounts();
     YandexChangePlaylistResult CreatePlaylist(string name);

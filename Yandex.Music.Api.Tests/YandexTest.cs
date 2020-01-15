@@ -15,7 +15,7 @@ namespace Yandex.Music.Api.Tests
   public class YandexTest 
   {
     public AppSettings AppSettings { get; set; }
-    public YandexApi Api { get; set; }
+    public IYandexMusicApi Api { get; set; }
     public YandexTestHarness Fixture { get; set; }
 
     public YandexTest(YandexTestHarness fixture, ITestOutputHelper output = null)

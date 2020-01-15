@@ -24,7 +24,7 @@ namespace Yandex.Music.Api.Tests.Tests
     [Fact, YandexTrait(TraitGroup.Authorize)]
     public void Authorize_InvalidData_GenerateFalse()
     {
-      var isAuthorized = Api.Authorize("login", "123");
+      var isAuthorized = Api.Authorize(AppSettings.Login, AppSettings.Password);
       
       isAuthorized.Should().BeFalse();
     }
@@ -32,6 +32,7 @@ namespace Yandex.Music.Api.Tests.Tests
     [Fact, YandexTrait(TraitGroup.Authorize)]
     public void Authorize_ValidData_GenerateTru()
     {
+      Console.WriteLine("123");
 //      Api.GetAccounts();
     }
   }

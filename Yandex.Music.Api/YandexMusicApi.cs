@@ -13,7 +13,7 @@ using Yandex.Music.Api.Models;
 
 namespace Yandex.Music.Api
 {
-  public class YandexMusicApi : YandexApi
+  public class YandexMusicApi : IYandexMusicApi
   {
     private YandexMusicSettings _settings { get; set; }
     private string _login;
@@ -27,7 +27,7 @@ namespace Yandex.Music.Api
       _settings = new YandexMusicSettings();
     }
 
-    public YandexApi UseWebProxy(IWebProxy proxy)
+    public IYandexMusicApi UseWebProxy(IWebProxy proxy)
     {
       WebProxy = proxy;
 
@@ -41,6 +41,7 @@ namespace Yandex.Music.Api
       
       var result = false;
       var _passportUri = _settings.GetPassportURL();
+
       
       var request = GetRequest(_passportUri,
         new KeyValuePair<string, string>("login", _login),

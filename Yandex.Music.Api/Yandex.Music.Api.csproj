@@ -5,8 +5,4 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Requests" />
-    <Folder Include="Responses" />
-  </ItemGroup>
 </Project>
