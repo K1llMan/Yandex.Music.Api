@@ -15,4 +15,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Yandex.Music.Api\Yandex.Music.Api.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

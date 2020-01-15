@@ -16,7 +16,7 @@ namespace Yandex.Music.Api.Tests.Tests
     [Fact, YandexTrait(TraitGroup.Authorize)]
     public void Authorize_ValidData_GenerateTrue()
     {
-      var isAuthorized = Api.Authorize("login", "123");
+      var isAuthorized = Api.Authorize(AppSettings.Login, AppSettings.Password);
       
       isAuthorized.Should().BeTrue();
     }

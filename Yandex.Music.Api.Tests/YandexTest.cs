@@ -1,4 +1,6 @@
-﻿using Serilog;
+﻿using System.IO;
+using Newtonsoft.Json.Linq;
+using Serilog;
 using Serilog.Events;
 using Xunit;
 using Xunit.Abstractions;
@@ -12,6 +14,7 @@ namespace Yandex.Music.Api.Tests
 
   public class YandexTest 
   {
+    public AppSettings AppSettings { get; set; }
     public YandexApi Api { get; set; }
     public YandexTestHarness Fixture { get; set; }
 
@@ -28,6 +31,29 @@ namespace Yandex.Music.Api.Tests
           .TestOutput(output, LogEventLevel.Verbose)
           .CreateLogger();
       }
+
+      AppSettings = GetAppSettings();
+    }
+
+    private AppSettings GetAppSettings()
+    {
+      var fileSource = string.Empty;
+      
+      using (var stream = new FileStream("appsettings.json", FileMode.Open))
+      {
+        using (var reader = new StreamReader(stream))
+        {
+          fileSource = reader.ReadToEnd();
+        }
+      }
+
+      var json = JToken.Parse(fileSource);
+
+      return new AppSettings
+      {
+        Login = json["login"].ToObject<string>(),
+        Password = json["password"].ToObject<string>()
+      };
     }
   }
 }
