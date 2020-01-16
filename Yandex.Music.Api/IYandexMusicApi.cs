@@ -2,6 +2,7 @@
 using System.Net;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models;
+using Yandex.Music.Api.Responses;
 
 namespace Yandex.Music.Api
 {
@@ -13,7 +14,7 @@ namespace Yandex.Music.Api
     /// <param name="username">User name</param>
     /// <param name="password">User password</param>
     /// <returns></returns>
-    bool Authorize(string username, string password);
+    YAuthorizeResponse Authorize(string username, string password);
     
     /// <summary>
     /// Return list track favorites

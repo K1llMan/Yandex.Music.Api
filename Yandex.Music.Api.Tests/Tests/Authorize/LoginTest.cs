@@ -17,7 +17,7 @@ namespace Yandex.Music.Api.Tests.Tests.Authorize
         {
             var isAuthorized = Api.Authorize(AppSettings.Login, AppSettings.Password);
 
-            isAuthorized.Should().BeTrue();
+            isAuthorized.IsAuthorized.Should().BeTrue();
         }
 
         [Fact, YandexTrait(TraitGroup.Authorize)]
@@ -25,7 +25,7 @@ namespace Yandex.Music.Api.Tests.Tests.Authorize
         {
             var isAuthorized = Api.Authorize("invalid-login", "invalid-password");
 
-            isAuthorized.Should().BeFalse();
+            isAuthorized.IsAuthorized.Should().BeFalse();
         }
     }
 }

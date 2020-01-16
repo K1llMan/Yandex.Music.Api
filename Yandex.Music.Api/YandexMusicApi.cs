@@ -6,68 +6,70 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
-using System.Xml.Linq;
 using Newtonsoft.Json.Linq;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models;
+using Yandex.Music.Api.Requests;
+using Yandex.Music.Api.Requests.Auth;
+using Yandex.Music.Api.Responses;
 
 namespace Yandex.Music.Api
 {
   public class YandexMusicApi : IYandexMusicApi
   {
     private YandexMusicSettings _settings { get; set; }
-    private string _login;
-    private string _password;
-    private CookieContainer _cookies;
     public YUser User { get; set; }
-    
-    public IWebProxy WebProxy { get; set; }
+    private HttpContext _httpContext;
 
     public YandexMusicApi()
     {
       _settings = new YandexMusicSettings();
+      _httpContext = new HttpContext();
     }
 
     public IYandexMusicApi UseWebProxy(IWebProxy proxy)
     {
-      WebProxy = proxy;
+      _httpContext.WebProxy = proxy;
 
       return this;
     }
 
-    public bool Authorize(string login, string password)
+    public YAuthorizeResponse Authorize(string login, string password)
     {
-      _login = login;
-      _password = password;
-      
-      var result = false;
-      var _passportUri = _settings.GetPassportURL();
-
-      
-      var request = GetRequest(_passportUri,
-        new KeyValuePair<string, string>("login", _login),
-        new KeyValuePair<string, string>("passwd", _password),
-        new KeyValuePair<string, string>("twoweeks", "yes"),
-        new KeyValuePair<string, string>("retpath", ""));
+      var request = new YAuthorizeRequest(_httpContext).Create(login, password);
 
       try
       {
         using (var response = (HttpWebResponse) request.GetResponse())
         {
-          _cookies.Add(response.Cookies);
-          result = true;
+          _httpContext.Cookies.Add(response.Cookies);
 
-          if (response.ResponseUri == _passportUri)
+          if (response.ResponseUri == new Uri("https://pda-passport.yandex.ru/passport?mode=auth"))
           {
-            result = false;
+            return new YAuthorizeResponse
+            {
+              IsAuthorized = false,
+              User = null
+            };
           }
         }
       }
       catch (Exception ex)
       {
         Console.WriteLine(ex);
-        result = false;
+        
+        return new YAuthorizeResponse
+        {
+          IsAuthorized = false,
+          User = null
+        };
       }
+
+      User = new YUser
+      {
+        Login = login,
+        Password = password
+      };
 
       var authInfo = GetUserAuth();
       var authUserDetails = GetUserAuthDetails();
@@ -77,6 +79,7 @@ namespace Yandex.Music.Api
       {
         Uid = authUser.Uid,
         Login = authUser.Login,
+        Password = password,
         Name = authUser.Name,
         Sign = authUser.Sign,
         DeviceId = authUser.DeviceId,
@@ -88,7 +91,11 @@ namespace Yandex.Music.Api
         YandexId = authInfo.YandexuId
       };
 
-      return result;
+      return new YAuthorizeResponse
+      {
+        IsAuthorized = true,
+        User = User
+      };
     }
 
     public YandexAlbum GetAlbum(string albumId)
@@ -101,7 +108,7 @@ namespace Yandex.Music.Api
         var data = GetDataFromResponse(response);
         album = YandexAlbum.FromJson(data);
 
-        _cookies.Add(response.Cookies);
+        _httpContext.Cookies.Add(response.Cookies);
       }
 
       return album;
@@ -117,7 +124,7 @@ namespace Yandex.Music.Api
         var data = GetDataFromResponse(response)["track"];
         track = YandexTrack.FromJson(data);
 
-        _cookies.Add(response.Cookies);
+        _httpContext.Cookies.Add(response.Cookies);
       }
 
       return track;
@@ -126,7 +133,7 @@ namespace Yandex.Music.Api
     public List<YandexTrack> GetListFavorites(string login = null)
     {
       if (login == null)
-        login = _login;
+        login = User.Login;
       
       var request = GetRequest(_settings.GetListFavoritesURL(login));
       var tracks = new List<YandexTrack>();
@@ -138,7 +145,7 @@ namespace Yandex.Music.Api
 
         tracks = YandexTrack.FromJsonArray(jTracks);
 
-        _cookies.Add(response.Cookies);
+        _httpContext.Cookies.Add(response.Cookies);
       }
 
       return tracks;
@@ -155,7 +162,7 @@ namespace Yandex.Music.Api
         var jPlaylist = data["playlist"];
         playlist = YandexPlaylist.FromJson(jPlaylist);
 
-        _cookies.Add(response.Cookies);
+        _httpContext.Cookies.Add(response.Cookies);
       }
 
       return playlist;
@@ -172,7 +179,7 @@ namespace Yandex.Music.Api
         var jPlaylist = data["playlist"];
         playlist = YandexPlaylist.FromJson(jPlaylist);
 
-        _cookies.Add(response.Cookies);
+        _httpContext.Cookies.Add(response.Cookies);
       }
 
       return playlist;
@@ -203,7 +210,7 @@ namespace Yandex.Music.Api
       {
         data = GetDataFromResponse(response);
         
-        _cookies.Add(response.Cookies);
+        _httpContext.Cookies.Add(response.Cookies);
       }
 
       return new DownloadTrackMainResponse
@@ -273,7 +280,7 @@ namespace Yandex.Music.Api
 
         data = JToken.Parse(result);
 
-        _cookies.Add(response.Cookies);
+        _httpContext.Cookies.Add(response.Cookies);
       }
 
       return new StorageFileDownloadResponse
@@ -505,18 +512,18 @@ namespace Yandex.Music.Api
     {
       var request = HttpWebRequest.CreateHttp(uri);
       
-      if (WebProxy != null)
+      if (_httpContext.WebProxy != null)
       {
-        request.Proxy = WebProxy;
+        request.Proxy = _httpContext.WebProxy;
       }
 
       request.Method = method;
-      if (_cookies == null)
+      if (_httpContext.Cookies == null)
       {
-        _cookies = new CookieContainer();
+        _httpContext.Cookies = new CookieContainer();
       }
 
-      request.CookieContainer = _cookies;
+      request.CookieContainer = _httpContext.Cookies;
       request.KeepAlive = true;
       request.Headers[HttpRequestHeader.AcceptCharset] = Encoding.UTF8.WebName;
       request.Headers[HttpRequestHeader.AcceptEncoding] = "gzip";
@@ -568,7 +575,7 @@ namespace Yandex.Music.Api
             result = reader.ReadToEnd();
           }
 
-          _cookies.Add(response.Cookies);
+          _httpContext.Cookies.Add(response.Cookies);
         }
 
         var json = JToken.Parse(result);
@@ -639,7 +646,7 @@ namespace Yandex.Music.Api
           result = reader.ReadToEnd();
         }
 
-        _cookies.Add(response.Cookies);
+        _httpContext.Cookies.Add(response.Cookies);
       }
 
       var json = JToken.Parse(result);
@@ -779,7 +786,7 @@ namespace Yandex.Music.Api
           result = reader.ReadToEnd();
         }
 
-        _cookies.Add(response.Cookies);
+        _httpContext.Cookies.Add(response.Cookies);
       }
 
       var json = JToken.Parse(result);
@@ -833,7 +840,7 @@ namespace Yandex.Music.Api
           result = reader.ReadToEnd();
         }
 
-        _cookies.Add(response.Cookies);
+        _httpContext.Cookies.Add(response.Cookies);
       }
 
       var json = JToken.Parse(result);
@@ -957,7 +964,7 @@ namespace Yandex.Music.Api
             result = reader.ReadToEnd();
           }
 
-          _cookies.Add(response.Cookies);
+          _httpContext.Cookies.Add(response.Cookies);
         }
 
         var json = JToken.Parse(result);
@@ -1122,7 +1129,7 @@ namespace Yandex.Music.Api
             result = reader.ReadToEnd();
           }
 
-          _cookies.Add(response.Cookies);
+          _httpContext.Cookies.Add(response.Cookies);
         }
 
         var json = JToken.Parse(result);

@@ -13,5 +13,6 @@ namespace Yandex.Music.Api.Models
         public string Lang { get; set; }
         public long Timestamp { get; set; }
         public string YandexId { get; set; }
+        public string Password { get; set; }
     }
 }

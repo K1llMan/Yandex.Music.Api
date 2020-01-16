@@ -18,7 +18,7 @@ namespace Yandex.Music.Api.Tests.Tests.Account
             var isAuthorized = Api.Authorize(AppSettings.Login, AppSettings.Password);
             var accounts = Api.GetAccounts();
 
-            isAuthorized.Should().BeTrue();
+            isAuthorized.IsAuthorized.Should().BeTrue();
         }
     }
 }
