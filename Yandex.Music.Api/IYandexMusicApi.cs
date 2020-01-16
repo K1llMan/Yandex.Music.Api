@@ -42,14 +42,15 @@ namespace Yandex.Music.Api
     /// <param name="track">Track instance</param>
     /// <returns></returns>
 //    YandexStreamTrack ExtractStreamTrack(YandexTrack track);
-    
-    /// <summary>
-    /// Return bytes from track
-    /// </summary>
-    /// <param name="track">Track instance</param>
-    /// <returns></returns>
+
+      /// <summary>
+      /// Return bytes from track
+      /// </summary>
+      /// <param name="track">Track instance</param>
+      /// <returns></returns>
 //    byte[] ExtractDataTrack(YandexTrack track);
 
+    Task<List<YTrackResponse>> SearchTrackAsync(string trackName, int pageNumber = 0);
     /// <summary>
     /// Search by tracks
     /// </summary>
@@ -58,6 +59,7 @@ namespace Yandex.Music.Api
     /// <returns></returns>
     List<YTrackResponse> SearchTrack(string trackName, int pageNumber = 0);
 
+    Task<List<YArtistResponse>> SearchArtistAsync(string artistName, int pageNumber = 0);
     /// <summary>
     /// Search by artists
     /// </summary>
@@ -66,6 +68,7 @@ namespace Yandex.Music.Api
     /// <returns></returns>
     List<YArtistResponse> SearchArtist(string artistName, int pageNumber = 0);
 
+    Task<List<YPlaylistResponse>> SearchPlaylistAsync(string playlistName, int pageNumber = 0);
     /// <summary>
     /// Search by albums
     /// </summary>
@@ -74,6 +77,7 @@ namespace Yandex.Music.Api
     /// <returns></returns>
     List<YAlbumResponse> SearchAlbums(string albumName, int pageNumber = 0);
 
+    Task<List<YAlbumResponse>> SearchAlbumsAsync(string albumName, int pageNumber = 0);
     /// <summary>
     /// Search by playlists
     /// </summary>
@@ -82,6 +86,7 @@ namespace Yandex.Music.Api
     /// <returns></returns>
     List<YPlaylistResponse> SearchPlaylist(string playlistName, int pageNumber = 0);
 
+    Task<List<YUserResponse>> SearchUsersAsync(string userName, int pageNumber = 0);
     /// <summary>
     /// Search by users
     /// </summary>
@@ -120,6 +125,7 @@ namespace Yandex.Music.Api
     /// <returns></returns>
     YTrackResponse GetTrack(string trackId);
 
+    Task<List<IYandexSearchable>> SearchAsync(string searchText, YandexSearchType searchType, int page = 0);
     /// <summary>
     /// Search by yandex music
     /// </summary>

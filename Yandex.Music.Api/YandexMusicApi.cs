@@ -246,7 +246,7 @@ namespace Yandex.Music.Api
       return GetMetadataTrackForDownloadAsync(trackKey, time).GetAwaiter().GetResult();
     }
 
-    public string BuildLinkForDownloadTrack(YTrackDownloadInfoResponse mainDownloadResponse, YStorageDownloadFileResponse storageDownloadResponse)
+    protected string BuildLinkForDownloadTrack(YTrackDownloadInfoResponse mainDownloadResponse, YStorageDownloadFileResponse storageDownloadResponse)
     {
       var path = storageDownloadResponse.Path;
       var host = storageDownloadResponse.Host;
@@ -297,7 +297,7 @@ namespace Yandex.Music.Api
     
     public void ExtractTrackToFile(string trackKey, string filePath)
     {
-      var time = GetTInterval();
+      var time = _httpContext.GetTimeInterval();
       var mainDownloadResponse = GetMetadataTrackForDownload(trackKey, time);
       var storageDownloadResponse = GetDownloadFilInfo(mainDownloadResponse, time);
       
@@ -339,7 +339,7 @@ namespace Yandex.Music.Api
 
     public byte[] ExtractDataTrack(string trackKey)
     {
-      var time = GetTInterval();
+      var time = _httpContext.GetTimeInterval();
       var mainDownloadResponse = GetMetadataTrackForDownload(trackKey, time);
       var storageDownloadResponse = GetDownloadFilInfo(mainDownloadResponse, time);
       
@@ -364,7 +364,7 @@ namespace Yandex.Music.Api
 
     public YandexStreamTrack ExtractStreamTrack(string trackKey, int fileSize)
     {
-      var time = GetTInterval();
+      var time = _httpContext.GetTimeInterval();
       var mainDownloadResponse = GetMetadataTrackForDownload(trackKey, time);
       var storageDownloadResponse = GetDownloadFilInfo(mainDownloadResponse, time);
       
@@ -419,50 +419,75 @@ namespace Yandex.Music.Api
 //      return bytes;
 //    }
 
+    public async Task<List<YTrackResponse>> SearchTrackAsync(string trackName, int pageNumber = 0)
+    {
+      var tracks = await SearchAsync(trackName, YandexSearchType.Tracks, pageNumber);
+
+      return tracks.Select(x => (YTrackResponse)x).ToList();
+    }
+
     public List<YTrackResponse> SearchTrack(string trackName, int pageNumber = 0)
     {
-      var tracks = Search(trackName, YandexSearchType.Tracks, pageNumber).Select(x => (YTrackResponse)x).ToList();
+      return SearchTrackAsync(trackName, pageNumber).GetAwaiter().GetResult();
+    }
 
-      return tracks;
+    public async Task<List<YArtistResponse>> SearchArtistAsync(string artistName, int pageNumber = 0)
+    {
+      var artists = await SearchAsync(artistName, YandexSearchType.Artists, pageNumber);
+
+      return artists.Select(x => (YArtistResponse)x).ToList();
     }
 
     public List<YArtistResponse> SearchArtist(string artistName, int pageNumber = 0)
     {
-      var artists = Search(artistName, YandexSearchType.Artists, pageNumber).Select(x => (YArtistResponse)x).ToList();
+      return SearchArtistAsync(artistName, pageNumber).GetAwaiter().GetResult();
+    }
 
-      return artists;
+    public async Task<List<YPlaylistResponse>> SearchPlaylistAsync(string playlistName, int pageNumber = 0)
+    {
+      var playlists = await SearchAsync(playlistName, YandexSearchType.Playlists, pageNumber);
+
+      return playlists.Select(x => (YPlaylistResponse)x).ToList();;
     }
 
     public List<YPlaylistResponse> SearchPlaylist(string playlistName, int pageNumber = 0)
     {
-      var playlists = Search(playlistName, YandexSearchType.Playlists, pageNumber).Select(x => (YPlaylistResponse)x).ToList();
+      return SearchPlaylistAsync(playlistName, pageNumber).GetAwaiter().GetResult();
+    }
 
-      return playlists;
+    public async Task<List<YAlbumResponse>> SearchAlbumsAsync(string albumName, int pageNumber = 0)
+    {
+      var albums = await SearchAsync(albumName, YandexSearchType.Albums, pageNumber);
+
+      return albums.Select(x => (YAlbumResponse)x).ToList();
     }
 
     public List<YAlbumResponse> SearchAlbums(string albumName, int pageNumber = 0)
     {
-      var albums = Search(albumName, YandexSearchType.Albums, pageNumber).Select(x => (YAlbumResponse)x).ToList();
-
-      return albums;
+      return SearchAlbumsAsync(albumName, pageNumber).GetAwaiter().GetResult();
     }
-    
+
+    public async Task<List<YUserResponse>> SearchUsersAsync(string userName, int pageNumber = 0)
+    {
+      var users = await SearchAsync(userName, YandexSearchType.Users, pageNumber);
+
+      return users.Select(x => (YUserResponse)x).ToList();
+    }
+
     public List<YUserResponse> SearchUsers(string userName, int pageNumber = 0)
     {
-      var users = Search(userName, YandexSearchType.Users, pageNumber).Select(x => (YUserResponse)x).ToList();
-
-      return users;
+      return SearchUsersAsync(userName, pageNumber).GetAwaiter().GetResult();
     }
 
-    public List<IYandexSearchable> Search(string searchText, YandexSearchType searchType, int page = 0)
+    public async Task<List<IYandexSearchable>> SearchAsync(string searchText, YandexSearchType searchType, int page = 0)
     {
       var listResult = new List<IYandexSearchable>();
 
       var request = new YSearchRequest(_httpContext).Create(searchText, searchType, page);
 
-      using (var response = (HttpWebResponse) request.GetResponse())
+      using (var response = (HttpWebResponse) await request.GetResponseAsync())
       {
-        var json = GetDataFromResponseAsync(response).GetAwaiter().GetResult();
+        var json = await GetDataFromResponseAsync(response);
         var fieldName = searchType.ToString().ToLower();
         var jArray = (JArray) json[fieldName]["items"];
         
@@ -489,6 +514,11 @@ namespace Yandex.Music.Api
       }
 
       return listResult;
+    }
+
+    public List<IYandexSearchable> Search(string searchText, YandexSearchType searchType, int page = 0)
+    {
+      return SearchAsync(searchText, searchType, page).GetAwaiter().GetResult();
     }
 
 //    protected YandexTrackDownloadInfo GetDownloadTrackInfo(string storageDir)
@@ -599,15 +629,6 @@ namespace Yandex.Music.Api
       return null;
     }
 
-    public long GetTInterval()
-    {
-      var dt = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now);
-      var dt1970 = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-      var tsInterval = dt.Subtract(dt1970);
-      var iMilliseconds = Convert.ToInt64(tsInterval.TotalMilliseconds);
-
-      return iMilliseconds;
-    }
 
     public YLibraryResponse GetLibrary(string ownerUid)
     {
@@ -635,7 +656,7 @@ namespace Yandex.Music.Api
 
     public async Task<YAuthInfoResponse> GetUserAuthAsync()
     {
-      var request = new YGetAuthInfoRequest(_httpContext).Create(User.Login, GetTInterval());
+      var request = new YGetAuthInfoRequest(_httpContext).Create(User.Login, _httpContext.GetTimeInterval());
 
       var result = string.Empty;
 
@@ -790,7 +811,7 @@ namespace Yandex.Music.Api
     #region AddLike
     public YSetLikedTrackResponse SetLikedTrack(string trackKey, bool value)
     {
-      var request = new YSetLikedTrackRequest(_httpContext).Create(value, trackKey, GetTInterval(), User.Sign, User.Uid, User.Login);
+      var request = new YSetLikedTrackRequest(_httpContext).Create(value, trackKey, _httpContext.GetTimeInterval(), User.Sign, User.Uid, User.Login);
       var setLikedResponse = default(YSetLikedTrackResponse);
       
       try
@@ -826,7 +847,7 @@ namespace Yandex.Music.Api
 
     public YAddLikedTrackResponse ChangeLikedTrack(string trackKey, bool value)
     {
-      var request = new YAddLikedTrackRequest(_httpContext).Create(value, trackKey, GetTInterval(), User.Sign, User.Uid, User.Login);
+      var request = new YAddLikedTrackRequest(_httpContext).Create(value, trackKey, _httpContext.GetTimeInterval(), User.Sign, User.Uid, User.Login);
       
       try
       {
