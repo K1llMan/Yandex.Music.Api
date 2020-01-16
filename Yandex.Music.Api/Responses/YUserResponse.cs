@@ -1,34 +1,34 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
-using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Extensions;
+using Yandex.Music.Api.Models;
 
-namespace Yandex.Music.Api.Models
+namespace Yandex.Music.Api.Responses
 {
-  public class YandexUser : IYandexSearchable
+  public class YUserResponse
   {
     public string Uid { get; set; }
     public string Login { get; set; }
     public string Name { get; set; }
     public List<string> Regions { get; set; }
 
-    public static YandexUser FromJson(JToken jUser)
+    public static YUserResponse FromJson(JToken jUser)
     {
-      var user = new YandexUser
+      var user = new YUserResponse
       {
         Uid = jUser.GetString("uid"),
         Login = jUser.GetString("login"),
         Name = jUser.GetString("name"),
-        Regions = jUser.ContainField("regions") ? 
-          jUser["regions"].ToObject<JArray>().Select(x => x.ToString()).ToList()
+        Regions = jUser.ContainField("regions")
+          ? jUser["regions"].ToObject<JArray>().Select(x => x.ToString()).ToList()
           : null
       };
-      
+
       return user;
     }
 
-    public static List<YandexUser> FromJsonArray(JToken jUsers)
+    public static List<YUserResponse> FromJsonArray(JToken jUsers)
     {
       return jUsers.Select(FromJson).ToList();
     }

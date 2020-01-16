@@ -7,6 +7,7 @@ using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
 using Yandex.Music.Api.Models;
+using Yandex.Music.Api.Responses;
 using Yandex.Music.Api.Tests.Traits;
 
 namespace Yandex.Music.Api.Tests.Tests
@@ -16,7 +17,7 @@ namespace Yandex.Music.Api.Tests.Tests
   {
     public const string FolderData = "data";
     public readonly string PathFile;
-    public YandexTrack Track { get; set; }
+    public YTrackResponse Track { get; set; }
     
     public ExtractingTrackTest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
     {

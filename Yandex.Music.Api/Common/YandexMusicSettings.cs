@@ -2,6 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using Yandex.Music.Api.Models;
+using Yandex.Music.Api.Responses;
 
 namespace Yandex.Music.Api.Common
 {
@@ -68,7 +69,7 @@ namespace Yandex.Music.Api.Common
             return new Uri($"http://storage.music.yandex.ru/get/{storageDir}/2.xml");
         }
         
-        public Uri GetURLDownloadTrack(YandexTrack track, YandexTrackDownloadInfo downloadInfo)
+        public Uri GetURLDownloadTrack(YTrackResponse track, YandexTrackDownloadInfo downloadInfo)
         {
             var key = ""; //downloadInfo.Path.Substring(1, downloadInfo.Path.Length - 1) + downloadInfo.S;
 

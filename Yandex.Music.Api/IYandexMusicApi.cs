@@ -21,7 +21,7 @@ namespace Yandex.Music.Api
     /// </summary>
     /// <param name="userId">User id</param>
     /// <returns></returns>
-    List<YandexTrack> GetListFavorites(string userId = null);
+    List<YTrackResponse> GetListFavorites(string userId = null);
     
     /// <summary>
     /// Save track to file
@@ -51,7 +51,7 @@ namespace Yandex.Music.Api
     /// <param name="trackName">Track name</param>
     /// <param name="pageNumber">Page number</param>
     /// <returns></returns>
-    List<YandexTrack> SearchTrack(string trackName, int pageNumber = 0);
+    List<YTrackResponse> SearchTrack(string trackName, int pageNumber = 0);
 
     /// <summary>
     /// Search by artists
@@ -59,7 +59,7 @@ namespace Yandex.Music.Api
     /// <param name="artistName">Artist name</param>
     /// <param name="pageNumber">Page number</param>
     /// <returns></returns>
-    List<YandexArtist> SearchArtist(string artistName, int pageNumber = 0);
+    List<YArtistResponse> SearchArtist(string artistName, int pageNumber = 0);
 
     /// <summary>
     /// Search by albums
@@ -67,7 +67,7 @@ namespace Yandex.Music.Api
     /// <param name="albumName">Album name</param>
     /// <param name="pageNumber">Page number</param>
     /// <returns></returns>
-    List<YandexAlbum> SearchAlbums(string albumName, int pageNumber = 0);
+    List<YAlbumResponse> SearchAlbums(string albumName, int pageNumber = 0);
 
     /// <summary>
     /// Search by playlists
@@ -75,7 +75,7 @@ namespace Yandex.Music.Api
     /// <param name="playlistName">Playlist name</param>
     /// <param name="pageNumber">Page number</param>
     /// <returns></returns>
-    List<YandexPlaylist> SearchPlaylist(string playlistName, int pageNumber = 0);
+    List<YPlaylistResponse> SearchPlaylist(string playlistName, int pageNumber = 0);
 
     /// <summary>
     /// Search by users
@@ -83,33 +83,33 @@ namespace Yandex.Music.Api
     /// <param name="userName">User name</param>
     /// <param name="pageNumber">Page number</param>
     /// <returns></returns>
-    List<YandexUser> SearchUsers(string userName, int pageNumber = 0);
+    List<YUserResponse> SearchUsers(string userName, int pageNumber = 0);
 
     /// <summary>
     /// Return best playlist of day
     /// </summary>
     /// <returns></returns>
-    YandexPlaylist GetPlaylistOfDay();
+    YPlaylistResponse GetPlaylistOfDay();
 
     /// <summary>
     /// Return play list deja vu
     /// </summary>
     /// <returns></returns>
-    YandexPlaylist GetPlaylistDejaVu();
+    YPlaylistResponse GetPlaylistDejaVu();
 
     /// <summary>
     /// Return album from albumId
     /// </summary>
     /// <param name="albumId">Id album</param>
     /// <returns></returns>
-    YandexAlbum GetAlbum(string albumId);
+    YAlbumResponse GetAlbum(string albumId);
 
     /// <summary>
     /// Return track from trackId
     /// </summary>
     /// <param name="trackId">Id track</param>
     /// <returns></returns>
-    YandexTrack GetTrack(string trackId);
+    YTrackResponse GetTrack(string trackId);
 
     /// <summary>
     /// Search by yandex music
@@ -127,12 +127,13 @@ namespace Yandex.Music.Api
     /// <returns></returns>
     IYandexMusicApi UseWebProxy(IWebProxy proxy);
 
-    YandexAccountResult GetAccounts();
-    YandexChangePlaylistResult CreatePlaylist(string name);
+    YAccountResponse GetAccounts();
+    YPlaylistChangeResponse CreatePlaylist(string name);
     bool RemovePlaylist(long kind);
-    YandexGetCookieResult GetYandexCookie();
+    YGetCookieResponse GetYandexCookie();
     void DownloadTrackToFile(string trackDownloadKey, string filePath);
-    YandexAuthResult GetUserAuthDetails();
-    YandexAuthV2Result GetUserAuth();
+    YAuthInfoUserResponse GetUserAuthDetails();
+    YAuthInfoResponse GetUserAuth();
+    YLibraryResponse GetLibrary(string ownerUid);
   }
 }

@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Extensions;
+using Yandex.Music.Api.Models;
 
-namespace Yandex.Music.Api.Models
+namespace Yandex.Music.Api.Responses
 {
-  public class YandexArtist : IYandexSearchable
-  {
+    public class YArtistResponse : IYandexSearchable
+    {
     public string Id { get;set; }
     public string Name { get; set; }
     public bool? Various { get; set; }
@@ -15,9 +16,9 @@ namespace Yandex.Music.Api.Models
     public YandexCover Cover { get; set; }
     public string[] Genres { get; set; }
 
-    public static YandexArtist FromJson(JToken jArtist)
+    public static YArtistResponse FromJson(JToken jArtist)
     {
-      var artist = new YandexArtist
+      var artist = new YArtistResponse
       {
         Id = jArtist.GetString("id"),
         Name = jArtist.GetString("name"),
@@ -30,10 +31,9 @@ namespace Yandex.Music.Api.Models
       return artist;
     }
 
-    public static List<YandexArtist> FromJsonArray(JArray jArtists)
+    public static List<YArtistResponse> FromJsonArray(JArray jArtists)
     {
       return jArtists.Select(FromJson).ToList();
     }
-  }
-
+    }
 }

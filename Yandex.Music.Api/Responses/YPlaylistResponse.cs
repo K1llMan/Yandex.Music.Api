@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Extensions;
+using Yandex.Music.Api.Models;
 
-namespace Yandex.Music.Api.Models
+namespace Yandex.Music.Api.Responses
 {
-  public class YandexPlaylist : IYandexSearchable
+  public class YPlaylistResponse : IYandexSearchable
   {
     public bool? Collective { get; set; }
     public YandexCover Cover { get; set; }
@@ -24,16 +25,15 @@ namespace Yandex.Music.Api.Models
     public string Title { get; set; }
     public int? TrackCount { get; set; }
     public List<int> TrackIds { get; set; }
-    public List<YandexTrack> Tracks { get; set; }
+    public List<YTrackResponse> Tracks { get; set; }
     public string Visibility { get; set; }
 
-    public static YandexPlaylist FromJson(JToken jList)
+    public static YPlaylistResponse FromJson(JToken jList)
     {
-      var playlist = new YandexPlaylist
+      var playlist = new YPlaylistResponse
       {
         Collective = jList.GetBool("collective"),
-        Cover = jList.ContainField("cover") ? 
-          YandexCover.FromJson(jList["cover"]) : null,
+        Cover = jList.ContainField("cover") ? YandexCover.FromJson(jList["cover"]) : null,
         Description = jList.GetString("description"),
         DescriptionFormatted = jList.GetString("descriptionFormatted"),
         Duration = jList.GetInt("Duration"),
@@ -43,23 +43,23 @@ namespace Yandex.Music.Api.Models
         LikesCount = jList.GetInt("likesCount"),
         Modified = jList.GetString("modified"),
         OgImage = jList.GetString("ogImage"),
-        Owner = jList.ContainField("owner") ? 
-          YandexOwner.FromJson(jList["owner"]) : null,
+        Owner = jList.ContainField("owner") ? YandexOwner.FromJson(jList["owner"]) : null,
         Revision = jList.GetInt("revision"),
         Title = jList.GetString("title"),
         TrackCount = jList.GetInt("trackCount"),
         Visibility = jList.GetString("visibility"),
-        TrackIds = jList.ContainField("trackIds") 
-          ? jList["trackIds"].Select(x => int.Parse(x.ToString())).ToList() : null,
-        Tracks = jList.ContainField("tracks") 
-          ? YandexTrack.FromJsonArray(jList["tracks"].ToObject<JArray>()) 
+        TrackIds = jList.ContainField("trackIds")
+          ? jList["trackIds"].Select(x => int.Parse(x.ToString())).ToList()
+          : null,
+        Tracks = jList.ContainField("tracks")
+          ? YTrackResponse.FromJsonArray(jList["tracks"].ToObject<JArray>())
           : null
       };
-      
+
       return playlist;
     }
 
-    public static List<YandexPlaylist> FromJsonArray(JArray array)
+    public static List<YPlaylistResponse> FromJsonArray(JArray array)
     {
       return array.Select(FromJson).ToList();
     }

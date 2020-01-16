@@ -1,15 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Extensions;
+using Yandex.Music.Api.Models;
 
-namespace Yandex.Music.Api.Models
+namespace Yandex.Music.Api.Responses
 {
-  public class YandexAlbum : IYandexSearchable
+  public class YAlbumResponse : IYandexSearchable
   {
-    public List<YandexArtist> Artists { get; set; }
+    public List<YArtistResponse> Artists { get; set; }
     public bool? Available { get; set; }
     public bool? AvailableForPremiumUsers { get; set; }
     public string CoverUri { get; set; }
@@ -23,13 +24,13 @@ namespace Yandex.Music.Api.Models
     public string Year { get; set; }
     public List<string> Bests { get; set; }
     public string Type { get; set; }
-    public List<List<YandexTrack>> Volumes { get; set; }
+    public List<List<YTrackResponse>> Volumes { get; set; }
 
-    public static YandexAlbum FromJson(JToken jAlbum)
+    public static YAlbumResponse FromJson(JToken jAlbum)
     {
-      var album = new YandexAlbum
+      var album = new YAlbumResponse
       {
-        Artists = YandexArtist.FromJsonArray(jAlbum["artists"].ToObject<JArray>()),
+        Artists = YArtistResponse.FromJsonArray(jAlbum["artists"].ToObject<JArray>()),
         Available = jAlbum.GetBool("available"),
         AvailableForPremiumUsers = jAlbum.GetBool("availableForPremiumUsers"),
         CoverUri = jAlbum.GetString("coverUri"),
@@ -57,8 +58,8 @@ namespace Yandex.Music.Api.Models
           if (fieldVolumes != null)
           {
             var jVolumes = fieldVolumes.ToObject<JArray>();
-            var tracks = YandexTrack.FromJsonArray(jVolumes);
-            album.Volumes = new List<List<YandexTrack>> {tracks};
+            var tracks = YTrackResponse.FromJsonArray(jVolumes);
+            album.Volumes = new List<List<YTrackResponse>> {tracks};
           }
           else
           {
@@ -76,7 +77,7 @@ namespace Yandex.Music.Api.Models
       return album;
     }
 
-    public static List<YandexAlbum> FromJsonArray(JArray jAlbums)
+    public static List<YAlbumResponse> FromJsonArray(JArray jAlbums)
     {
       return jAlbums.Select(FromJson).ToList();
     }

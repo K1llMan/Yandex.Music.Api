@@ -1,16 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Extensions;
+using Yandex.Music.Api.Models;
 
-namespace Yandex.Music.Api.Models
+namespace Yandex.Music.Api.Responses
 {
-  public class YandexTrack : IYandexSearchable
+  public class YTrackResponse : IYandexSearchable
   {
     public string Id { get; set; }
-    public List<YandexAlbum> Albums { get; set; }
+    public List<YAlbumResponse> Albums { get; set; }
     public string RealId { get; set; }
     public string Title { get; set; }
     public YandexMajor Major { get; set; }
@@ -19,14 +20,14 @@ namespace Yandex.Music.Api.Models
     public int? DurationMS { get; set; }
     public string StorageDir { get; set; }
     public int? FileSize { get; set; }
-    public List<YandexArtist> Artists { get; set; }
+    public List<YArtistResponse> Artists { get; set; }
     public string OgImage { get; set; }
 
-    public static YandexTrack FromJson(JToken jTrack)
+    public static YTrackResponse FromJson(JToken jTrack)
     {
       try
       {
-        var track = new YandexTrack
+        var track = new YTrackResponse
         {
           Id = jTrack.GetString("id"),
           RealId = jTrack.GetString("realId"),
@@ -34,11 +35,13 @@ namespace Yandex.Music.Api.Models
           Major = YandexMajor.FromJson(jTrack.Contains("major")),
           Available = jTrack.GetBool("available"),
           AvailableForPremiumUsers = jTrack.GetBool("availableForPremiumUsers"),
-          Albums = jTrack.ContainField("albums") ? YandexAlbum.FromJsonArray(jTrack["albums"].ToObject<JArray>()) : null,
+          Albums = jTrack.ContainField("albums")
+            ? YAlbumResponse.FromJsonArray(jTrack["albums"].ToObject<JArray>())
+            : null,
           DurationMS = jTrack["durationMs"].ToObject<int>(),
           StorageDir = jTrack.GetString("storageDir"),
           FileSize = jTrack.GetInt("fileSize"),
-          Artists = YandexArtist.FromJsonArray(jTrack["artists"].ToObject<JArray>()),
+          Artists = YArtistResponse.FromJsonArray(jTrack["artists"].ToObject<JArray>()),
           OgImage = jTrack.GetString("ogImage")
         };
         return track;
@@ -51,9 +54,9 @@ namespace Yandex.Music.Api.Models
       return null;
     }
 
-    public static List<YandexTrack> FromJsonArray(JArray jTracks)
+    public static List<YTrackResponse> FromJsonArray(JArray jTracks)
     {
-      var list = new List<YandexTrack>();
+      var list = new List<YTrackResponse>();
 
       for (var i = 0; i < jTracks.Count; i++)
       {
