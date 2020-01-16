@@ -47,6 +47,7 @@ YandexMusicApi
 │   ├── ChangeLikedTrack / Async (string trackKey, bool value)
 │   ├── SetLikedTrack / Async (string trackKey, bool value)
 │   ├── InsertTrackToPlaylist / Async (string trackId, string albumId, string playListKind)
+│   ├── DeleteTrackFromPlaylist / Async (int indexFrom, int indexTo, int playlistRevision, string playListKind)
 │   └── GetTrack / Async (string trackId)
 ├── Playlist
 │   ├── GetPlaylistOfDay / Async ()
@@ -58,7 +59,6 @@ YandexMusicApi
 │   ├── SearchAlbums / Async (string albumName, int pageNumber = 0)
 │   └── GetAlbum / Async (string albumId)
 └── Future
-    ├── RemoveTrackFromPlaylist ()
     ├── SaveAuthorizeInStorage ()
     ├── Remove track ()
     └── Radio-functions ()

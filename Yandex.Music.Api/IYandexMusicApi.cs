@@ -388,5 +388,25 @@ namespace Yandex.Music.Api
     /// <param name="playlistKind">Playlist kind</param>
     /// <returns></returns>
     Task<YInsertTrackToPlaylistResponse> InsertTrackToPlaylistAsync(string trackId, string albumId, string playlistKind);
+
+
+    /// <summary>
+    /// Delete track from playlist
+    /// </summary>
+    /// <param name="from">Begin track index</param>
+    /// <param name="to">End track index</param>
+    /// <param name="revision">Current revision playlist</param>
+    /// <param name="playlistKind">Kind playlist</param>
+    /// <returns></returns>
+    Task<YDeleteTrackFromPlaylistResponse> DeleteTrackFromPlaylistAsync(int from, int to, int revision, string playlistKind);
+    /// <summary>
+    /// Delete track from playlist
+    /// </summary>
+    /// <param name="from">Begin track index</param>
+    /// <param name="to">End track index</param>
+    /// <param name="revision">Current revision playlist</param>
+    /// <param name="playlistKind">Kind playlist</param>
+    /// <returns></returns>
+    YDeleteTrackFromPlaylistResponse DeleteTrackFromPlaylist(int from, int to, int revision, string playlistKind);
   }
 }

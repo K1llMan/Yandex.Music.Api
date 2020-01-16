@@ -949,5 +949,47 @@ namespace Yandex.Music.Api
     {
       return InsertTrackToPlaylistAsync(trackId, albumId, playlistKind).GetAwaiter().GetResult();
     }
+
+    public async Task<YDeleteTrackFromPlaylistResponse> DeleteTrackFromPlaylistAsync(int from, int to, int revision, string playlistKind)
+    {
+      var request = new YDeleteTrackFromPlaylistRequest(_httpContext).Create(User.Uid, from, to, revision, playlistKind,
+        User.Lang, User.Sign, User.Uid, User.Login, User.Experiments);
+      var setLikedResponse = default(YDeleteTrackFromPlaylistResponse);
+      
+      try
+      {
+        var result = string.Empty;
+
+        using (var response = (HttpWebResponse) await request.GetResponseAsync())
+        {
+          using (var stream = response.GetResponseStream())
+          {
+            var reader = new StreamReader(stream);
+
+            result = await reader.ReadToEndAsync();
+          }
+
+          _httpContext.Cookies.Add(response.Cookies);
+        }
+
+        var json = JToken.Parse(result);
+        setLikedResponse = YDeleteTrackFromPlaylistResponse.FromJson(json);
+//        return YPlaylistChangeResponse.FromJson(json);
+        Console.WriteLine("123");
+      }
+      catch (WebException ex)
+      {
+        Console.WriteLine(ex);
+      }
+
+//      var changeLikeResponse = ChangeLikedTrack(trackKey, value);
+
+      return setLikedResponse;
+    }
+
+    public YDeleteTrackFromPlaylistResponse DeleteTrackFromPlaylist(int from, int to, int revision, string playlistKind)
+    {
+      return DeleteTrackFromPlaylistAsync(from, to, revision, playlistKind).GetAwaiter().GetResult();
+    }
   }
 }
