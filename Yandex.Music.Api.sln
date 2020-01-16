@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yandex.Music.Api", "Yandex.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yandex.Music.Api.Tests", "Yandex.Music.Api.Tests\Yandex.Music.Api.Tests.csproj", "{2508C0DA-86D2-4D61-8F15-EE69D4085682}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yandex.Music.Client", "Yandex.Music.Client\Yandex.Music.Client.csproj", "{EF3C7144-F783-43CE-BDBE-1879B978CE93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{2508C0DA-86D2-4D61-8F15-EE69D4085682}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2508C0DA-86D2-4D61-8F15-EE69D4085682}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2508C0DA-86D2-4D61-8F15-EE69D4085682}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF3C7144-F783-43CE-BDBE-1879B978CE93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF3C7144-F783-43CE-BDBE-1879B978CE93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF3C7144-F783-43CE-BDBE-1879B978CE93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF3C7144-F783-43CE-BDBE-1879B978CE93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

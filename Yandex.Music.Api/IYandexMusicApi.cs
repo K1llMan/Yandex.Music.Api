@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models;
 using Yandex.Music.Api.Responses;
@@ -16,6 +17,8 @@ namespace Yandex.Music.Api
     /// <param name="password">User password</param>
     /// <returns></returns>
     YAuthorizeResponse Authorize(string username, string password);
+
+    Task<YAuthorizeResponse> AuthorizeAsync(string login, string password);
     
     /// <summary>
     /// Return list track favorites
@@ -138,7 +141,9 @@ namespace Yandex.Music.Api
     void ExtractTrackToFile(string trackDownloadKey, string filePath);
     byte[] ExtractDataTrack(string trackKey);
     YAuthInfoUserResponse GetUserAuthDetails();
+    Task<YAuthInfoUserResponse> GetUserAuthDetailsAsync();
     YAuthInfoResponse GetUserAuth();
+    Task<YAuthInfoResponse> GetUserAuthAsync();
     YLibraryResponse GetLibrary(string ownerUid);
     YSetLikedTrackResponse SetLikedTrack(string trackKey, bool value);
   }

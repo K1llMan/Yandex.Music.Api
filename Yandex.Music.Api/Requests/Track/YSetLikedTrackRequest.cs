@@ -12,14 +12,21 @@ namespace Yandex.Music.Api.Requests.Track
         {
         }
 
-        public HttpWebRequest Create(string trackKey, long time, string sign, string userUid, string userLogin)
+        public HttpWebRequest Create(bool status, string trackKey, long time, string sign, string userUid,
+            string userLogin)
         {
             var trackPair = trackKey.Split(':');
             var trackId = trackPair.FirstOrDefault();
             var albumId = trackPair.LastOrDefault();
-            
+
+            var take = "liked";
+            if (!status)
+            {
+                take = "unlike";
+            }
+
             var url =
-                $"https://music.yandex.ru/api/v2.1/handlers/radio/radio/history/feedback/like/{trackKey}?__t={time}";
+                $"https://music.yandex.ru/api/v2.1/handlers/radio/radio/history/feedback/{take}/{trackKey}?__t={time}";
             var request = GetRequest(url, 
                 new KeyValuePair<string, string>("timestamp", time.ToString()),
                 new KeyValuePair<string, string>("from", "web-radio-user-saved"),

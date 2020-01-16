@@ -11,14 +11,20 @@ namespace Yandex.Music.Api.Requests.Track
         {
         }
 
-        public HttpWebRequest Create(string trackKey, long time, string sign, string userUid, string userLogin)
+        public HttpWebRequest Create(bool status, string trackKey, long time, string sign, string userUid, string userLogin)
         {
             var trackPair = trackKey.Split(':');
             var trackId = trackPair.FirstOrDefault();
             var albumId = trackPair.LastOrDefault();
-            
+
+            var take = "add";
+            if (!status)
+            {
+                take = "remove";
+            }
+
             var url =
-                $"https://music.yandex.ru/api/v2.1/handlers/track/{trackKey}/web-own_tracks-track-track-main/like/add?__t={time}";
+                $"https://music.yandex.ru/api/v2.1/handlers/track/{trackKey}/web-own_tracks-track-track-main/like/?__t={time}";
             var request = GetRequest(url, 
                 new KeyValuePair<string, string>("from", "web-own_tracks-track-track-main"),
                 new KeyValuePair<string, string>("sign", sign),

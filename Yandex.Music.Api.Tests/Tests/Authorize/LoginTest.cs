@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
@@ -13,9 +14,9 @@ namespace Yandex.Music.Api.Tests.Tests.Authorize
         }
 
         [Fact, YandexTrait(TraitGroup.Authorize)]
-        public void Authorize_ValidData_GenerateTrue()
+        public async Task Authorize_ValidData_GenerateTrue()
         {
-            var isAuthorized = Api.Authorize(AppSettings.Login, AppSettings.Password);
+            var isAuthorized = await Api.AuthorizeAsync(AppSettings.Login, AppSettings.Password);
 
             isAuthorized.IsAuthorized.Should().BeTrue();
         }
