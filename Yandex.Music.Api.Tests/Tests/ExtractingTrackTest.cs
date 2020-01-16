@@ -33,8 +33,19 @@ namespace Yandex.Music.Api.Tests.Tests
     [Fact, YandexTrait(TraitGroup.ExtractTrack)]
     public void DownloadTrack_DownloadFile_OneTrack()
     {
-      var trackIdAndAlbumsId = "34703886:4288331";//$"{Track.Id}:{Track.Albums.FirstOrDefault().Id}";
 //      Api.DownloadTrackToFile(trackIdAndAlbumsId);
+        Api.Authorize(AppSettings.Login, AppSettings.Password);
+
+        Track = Api.GetPlaylistFavorites().FirstOrDefault();
+        var streamTrack = Api.ExtractStreamTrack(Track.GetKey(), Track.FileSize.Value);
+
+        streamTrack.Complated += (sender, track) =>
+        {
+            var fileName = $"{Track.Artists.FirstOrDefault().Name} - {Track.Title}";
+
+            streamTrack.SaveToFile(fileName);
+        };
+        Thread.Sleep(30000);
 //      Console.WriteLine("123");
 
 //      isDownloaded.Should().BeTrue();
@@ -52,7 +63,7 @@ namespace Yandex.Music.Api.Tests.Tests
 //      }
 
 //      fileSize.Should().BeGreaterOrEqualTo(Track.FileSize.Value);
-      
+
 //      File.Delete(PathFile);
     }
     

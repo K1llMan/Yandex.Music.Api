@@ -293,6 +293,14 @@ namespace Yandex.Music.Api
     /// <param name="trackKey"></param>
     /// <returns></returns>
     byte[] ExtractDataTrack(string trackKey);
+
+    /// <summary>
+    /// Stream extract track
+    /// </summary>
+    /// <param name="trackKey"></param>
+    /// <param name="fileSize"></param>
+    /// <returns></returns>
+    YandexStreamTrack ExtractStreamTrack(string trackKey, int fileSize);
     
     
     /// <summary>

@@ -23,6 +23,11 @@ namespace Yandex.Music.Api.Responses
     public List<YArtistResponse> Artists { get; set; }
     public string OgImage { get; set; }
 
+    public string GetKey()
+    {
+      return $"{Id}:{Albums.FirstOrDefault().Id}";
+    }
+
     public static YTrackResponse FromJson(JToken jTrack)
     {
       try
