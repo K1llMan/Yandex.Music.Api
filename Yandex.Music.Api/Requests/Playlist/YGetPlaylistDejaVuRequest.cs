@@ -2,7 +2,7 @@ using System.Net;
 
 namespace Yandex.Music.Api.Requests.Playlist
 {
-    public class YGetPlaylistDejaVuRequest : YRequest
+    internal class YGetPlaylistDejaVuRequest : YRequest
     {
         public YGetPlaylistDejaVuRequest(HttpContext context) : base(context)
         {

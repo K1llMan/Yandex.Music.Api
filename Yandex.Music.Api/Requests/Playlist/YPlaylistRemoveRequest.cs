@@ -3,7 +3,7 @@ using System.Net;
 
 namespace Yandex.Music.Api.Requests.Playlist
 {
-    public class YPlaylistRemoveRequest : YRequest
+    internal class YPlaylistRemoveRequest : YRequest
     {
         public YPlaylistRemoveRequest(HttpContext context) : base(context)
         {

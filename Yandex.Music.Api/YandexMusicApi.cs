@@ -24,13 +24,11 @@ namespace Yandex.Music.Api
 {
   public class YandexMusicApi : IYandexMusicApi
   {
-    private YandexMusicSettings _settings { get; set; }
     public YUser User { get; set; }
     private HttpContext _httpContext;
 
     public YandexMusicApi()
     {
-      _settings = new YandexMusicSettings();
       _httpContext = new HttpContext();
     }
 
@@ -154,7 +152,7 @@ namespace Yandex.Music.Api
       return GetTrackAsync(trackId).GetAwaiter().GetResult();
     }
 
-    public async Task<List<YTrackResponse>> GetListFavoritesAsync(string login = null)
+    public async Task<List<YTrackResponse>> GetPlaylistFavoritesAsync(string login = null)
     {
       if (login == null)
         login = User.Login;
@@ -175,9 +173,9 @@ namespace Yandex.Music.Api
       return tracks;
     }
 
-    public List<YTrackResponse> GetListFavorites(string login = null)
+    public List<YTrackResponse> GetPlaylistFavorites(string login = null)
     {
-      return GetListFavoritesAsync(login).GetAwaiter().GetResult();
+      return GetPlaylistFavoritesAsync(login).GetAwaiter().GetResult();
     }
 
     public async Task<YPlaylistResponse> GetPlaylistDejaVuAsync()

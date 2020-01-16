@@ -1,9 +1,8 @@
-using System;
 using System.Net;
 
 namespace Yandex.Music.Api.Requests.Track
 {
-    public class YTrackDownloadInfoRequest : YRequest
+    internal class YTrackDownloadInfoRequest : YRequest
     {
         public YTrackDownloadInfoRequest(HttpContext context) : base(context)
         {

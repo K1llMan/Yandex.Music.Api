@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace Yandex.Music.Api.Requests.Track
 {
-    public class YSetLikedTrackRequest : YRequest
+    internal class YSetLikedTrackRequest : YRequest
     {
         public YSetLikedTrackRequest(HttpContext context) : base(context)
         {

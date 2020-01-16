@@ -1,11 +1,10 @@
-using System;
 using System.Net;
 using System.Text;
 using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Search
 {
-    public class YSearchRequest : YRequest
+    internal class YSearchRequest : YRequest
     {
         public YSearchRequest(HttpContext context) : base(context)
         {

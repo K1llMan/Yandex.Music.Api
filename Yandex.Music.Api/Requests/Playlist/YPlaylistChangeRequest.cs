@@ -1,10 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Net;
 
 namespace Yandex.Music.Api.Requests.Playlist
 {
-    public class YPlaylistChangeRequest : YRequest
+    internal class YPlaylistChangeRequest : YRequest
     {
         public YPlaylistChangeRequest(HttpContext context) : base(context)
         {

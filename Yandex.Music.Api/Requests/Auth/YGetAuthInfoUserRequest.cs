@@ -2,7 +2,7 @@ using System.Net;
 
 namespace Yandex.Music.Api.Requests.Auth
 {
-    public class YGetAuthInfoUserRequest : YRequest
+    internal class YGetAuthInfoUserRequest : YRequest
     {
         public YGetAuthInfoUserRequest(HttpContext context) : base(context)
         {

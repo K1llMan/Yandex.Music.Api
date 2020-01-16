@@ -2,7 +2,7 @@ using System.Net;
 
 namespace Yandex.Music.Api.Requests.Album
 {
-    public class YGetAlbumRequest : YRequest
+    internal class YGetAlbumRequest : YRequest
     {
         public YGetAlbumRequest(HttpContext context) : base(context)
         {

@@ -1,10 +1,9 @@
-using System;
 using System.Net;
 using System.Text;
 
 namespace Yandex.Music.Api.Requests.Track
 {
-    public class YStorageDownloadFileRequest : YRequest
+    internal class YStorageDownloadFileRequest : YRequest
     {
           public YStorageDownloadFileRequest(HttpContext context) : base(context)
           {

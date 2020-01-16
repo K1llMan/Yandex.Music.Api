@@ -1,9 +1,8 @@
-using System;
 using System.Net;
 
 namespace Yandex.Music.Api.Requests.Library
 {
-    public class YGetLibraryRequest : YRequest
+    internal class YGetLibraryRequest : YRequest
     {
         public YGetLibraryRequest(HttpContext context) : base(context)
         {

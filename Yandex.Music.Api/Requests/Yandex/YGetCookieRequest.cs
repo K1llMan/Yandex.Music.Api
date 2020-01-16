@@ -2,7 +2,7 @@ using System.Net;
 
 namespace Yandex.Music.Api.Requests.Yandex
 {
-    public class YGetCookieRequest : YRequest
+    internal class YGetCookieRequest : YRequest
     {
         public YGetCookieRequest(HttpContext context) : base(context)
         {

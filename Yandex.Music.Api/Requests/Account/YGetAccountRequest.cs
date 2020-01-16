@@ -1,9 +1,8 @@
-using System;
 using System.Net;
 
 namespace Yandex.Music.Api.Requests.Account
 {
-    public class YGetAccountRequest : YRequest
+    internal class YGetAccountRequest : YRequest
     {
         public YGetAccountRequest(HttpContext context) : base(context)
         {

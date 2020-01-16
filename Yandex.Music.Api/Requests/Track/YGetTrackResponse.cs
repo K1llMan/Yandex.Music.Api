@@ -2,7 +2,7 @@ using System.Net;
 
 namespace Yandex.Music.Api.Requests.Track
 {
-    public class YGetTrackResponse : YRequest
+    internal class YGetTrackResponse : YRequest
     {
         public YGetTrackResponse(HttpContext context) : base(context)
         {

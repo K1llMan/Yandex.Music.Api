@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Yandex.Music.Api.Requests
 {
-  public class YRequest
+  internal class YRequest
   {
     protected HttpContext HttpContext;
     

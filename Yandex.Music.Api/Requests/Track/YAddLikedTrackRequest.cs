@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Yandex.Music.Api.Requests.Track
 {
-    public class YAddLikedTrackRequest : YRequest
+    internal class YAddLikedTrackRequest : YRequest
     {
         public YAddLikedTrackRequest(HttpContext context) : base(context)
         {
