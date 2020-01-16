@@ -19,7 +19,8 @@ namespace Yandex.Music.Api
     YAuthorizeResponse Authorize(string username, string password);
 
     Task<YAuthorizeResponse> AuthorizeAsync(string login, string password);
-    
+
+    Task<List<YTrackResponse>> GetListFavoritesAsync(string login = null);
     /// <summary>
     /// Return list track favorites
     /// </summary>
@@ -89,18 +90,21 @@ namespace Yandex.Music.Api
     /// <returns></returns>
     List<YUserResponse> SearchUsers(string userName, int pageNumber = 0);
 
+    Task<YPlaylistResponse> GetPlaylistOfDayAsync();
     /// <summary>
     /// Return best playlist of day
     /// </summary>
     /// <returns></returns>
     YPlaylistResponse GetPlaylistOfDay();
 
+    Task<YPlaylistResponse> GetPlaylistDejaVuAsync();
     /// <summary>
     /// Return play list deja vu
     /// </summary>
     /// <returns></returns>
     YPlaylistResponse GetPlaylistDejaVu();
 
+    Task<YAlbumResponse> GetAlbumAsync(string albumId);
     /// <summary>
     /// Return album from albumId
     /// </summary>
@@ -108,6 +112,7 @@ namespace Yandex.Music.Api
     /// <returns></returns>
     YAlbumResponse GetAlbum(string albumId);
 
+    Task<YTrackResponse> GetTrackAsync(string trackId);
     /// <summary>
     /// Return track from trackId
     /// </summary>
@@ -131,8 +136,11 @@ namespace Yandex.Music.Api
     /// <returns></returns>
     IYandexMusicApi UseWebProxy(IWebProxy proxy);
 
-    YTrackDownloadInfoResponse GetMetadataTrackForDownload(string trackKey, Int64 time);
-    YStorageDownloadFileResponse GetDownloadFilInfo(YTrackDownloadInfoResponse metadataInfo, Int64 time);
+    Task<YTrackDownloadInfoResponse> GetMetadataTrackForDownloadAsync(string trackKey, long time);
+    YTrackDownloadInfoResponse GetMetadataTrackForDownload(string trackKey, long time);
+
+    Task<YStorageDownloadFileResponse> GetDownloadFilInfoAsync(YTrackDownloadInfoResponse metadataInfo, long time);
+    YStorageDownloadFileResponse GetDownloadFilInfo(YTrackDownloadInfoResponse metadataInfo, long time);
 
     YAccountResponse GetAccounts();
     YPlaylistChangeResponse CreatePlaylist(string name);

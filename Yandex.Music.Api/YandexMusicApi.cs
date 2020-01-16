@@ -110,14 +110,14 @@ namespace Yandex.Music.Api
       return AuthorizeAsync(login, password).GetAwaiter().GetResult();
     }
 
-    public YAlbumResponse GetAlbum(string albumId)
+    public async Task<YAlbumResponse> GetAlbumAsync(string albumId)
     {
       var request = new YGetAlbumRequest(_httpContext).Create(albumId, User.Lang);
       var album = default(YAlbumResponse);
       
-      using (var response = (HttpWebResponse) request.GetResponse())
+      using (var response = (HttpWebResponse) await request.GetResponseAsync())
       {
-        var data = GetDataFromResponse(response);
+        var data = await GetDataFromResponseAsync(response);
         album = YAlbumResponse.FromJson(data);
 
         _httpContext.Cookies.Add(response.Cookies);
@@ -125,24 +125,36 @@ namespace Yandex.Music.Api
 
       return album;
     }
-    
-    public YTrackResponse GetTrack(string trackId)
+
+    public YAlbumResponse GetAlbum(string albumId)
+    {
+      return GetAlbumAsync(albumId).GetAwaiter().GetResult();
+    }
+
+    public async Task<YTrackResponse> GetTrackAsync(string trackId)
     {
       var request = new YGetTrackResponse(_httpContext).Create(trackId, User.Lang);
       var track = default(YTrackResponse);
       
-      using (var response = (HttpWebResponse) request.GetResponse())
+      using (var response = (HttpWebResponse) await request.GetResponseAsync())
       {
-        var data = GetDataFromResponse(response)["track"];
-        track = YTrackResponse.FromJson(data);
+        var data = await GetDataFromResponseAsync(response);
+        var jsonTrack = data["track"];
+        
+        track = YTrackResponse.FromJson(jsonTrack);
 
         _httpContext.Cookies.Add(response.Cookies);
       }
 
       return track;
     }
-    
-    public List<YTrackResponse> GetListFavorites(string login = null)
+
+    public YTrackResponse GetTrack(string trackId)
+    {
+      return GetTrackAsync(trackId).GetAwaiter().GetResult();
+    }
+
+    public async Task<List<YTrackResponse>> GetListFavoritesAsync(string login = null)
     {
       if (login == null)
         login = User.Login;
@@ -150,9 +162,9 @@ namespace Yandex.Music.Api
       var request = new YGetPlaylistFavoritesRequest(_httpContext).Create(login, User.Lang);
       var tracks = new List<YTrackResponse>();
       
-      using (var response = (HttpWebResponse) request.GetResponse())
+      using (var response = (HttpWebResponse) await request.GetResponseAsync())
       {
-        var data = GetDataFromResponse(response);
+        var data = await GetDataFromResponseAsync(response);
         var jTracks = (JArray) data["tracks"];
 
         tracks = YTrackResponse.FromJsonArray(jTracks);
@@ -163,14 +175,19 @@ namespace Yandex.Music.Api
       return tracks;
     }
 
-    public YPlaylistResponse GetPlaylistDejaVu()
+    public List<YTrackResponse> GetListFavorites(string login = null)
+    {
+      return GetListFavoritesAsync(login).GetAwaiter().GetResult();
+    }
+
+    public async Task<YPlaylistResponse> GetPlaylistDejaVuAsync()
     {
       var request = new YGetPlaylistDejaVuRequest(_httpContext).Create(User.Lang);
       var playlist = default(YPlaylistResponse);
       
-      using (var response = (HttpWebResponse) request.GetResponse())
+      using (var response = (HttpWebResponse) await request.GetResponseAsync())
       {
-        var data = GetDataFromResponse(response);
+        var data = await GetDataFromResponseAsync(response);
         var jPlaylist = data["playlist"];
         playlist = YPlaylistResponse.FromJson(jPlaylist);
 
@@ -179,15 +196,20 @@ namespace Yandex.Music.Api
 
       return playlist;
     }
-    
-    public YPlaylistResponse GetPlaylistOfDay()
+
+    public YPlaylistResponse GetPlaylistDejaVu()
+    {
+      return GetPlaylistDejaVuAsync().GetAwaiter().GetResult();
+    }
+
+    public async Task<YPlaylistResponse> GetPlaylistOfDayAsync()
     {
       var request = new YGetPlaylistOfDayRequest(_httpContext).Create(User.Lang);
       var playlist = default(YPlaylistResponse);
       
-      using (var response = (HttpWebResponse) request.GetResponse())
+      using (var response = (HttpWebResponse) await request.GetResponseAsync())
       {
-        var data = GetDataFromResponse(response);
+        var data = await GetDataFromResponseAsync(response);
         var jPlaylist = data["playlist"];
         playlist = YPlaylistResponse.FromJson(jPlaylist);
 
@@ -197,14 +219,19 @@ namespace Yandex.Music.Api
       return playlist;
     }
 
-    public YTrackDownloadInfoResponse GetMetadataTrackForDownload(string trackKey, Int64 time)
+    public YPlaylistResponse GetPlaylistOfDay()
+    {
+      return GetPlaylistOfDayAsync().GetAwaiter().GetResult();
+    }
+
+    public async Task<YTrackDownloadInfoResponse> GetMetadataTrackForDownloadAsync(string trackKey, long time)
     {
       var request = new YTrackDownloadInfoRequest(_httpContext).Create(trackKey, time, User.Uid, User.Login);
       var data = default(JToken);
       
-      using (var response = (HttpWebResponse) request.GetResponse())
+      using (var response = (HttpWebResponse) await request.GetResponseAsync())
       {
-        data = GetDataFromResponse(response);
+        data = await GetDataFromResponseAsync(response);
         
         _httpContext.Cookies.Add(response.Cookies);
       }
@@ -212,6 +239,11 @@ namespace Yandex.Music.Api
       var trackInfo = YTrackDownloadInfoResponse.FromJson(data);
 
       return trackInfo;
+    }
+    
+    public YTrackDownloadInfoResponse GetMetadataTrackForDownload(string trackKey, long time)
+    {
+      return GetMetadataTrackForDownloadAsync(trackKey, time).GetAwaiter().GetResult();
     }
 
     public string BuildLinkForDownloadTrack(YTrackDownloadInfoResponse mainDownloadResponse, YStorageDownloadFileResponse storageDownloadResponse)
@@ -234,12 +266,12 @@ namespace Yandex.Music.Api
       return link;
     }
 
-    public YStorageDownloadFileResponse GetDownloadFilInfo(YTrackDownloadInfoResponse metadataInfo, Int64 time)
+    public async Task<YStorageDownloadFileResponse> GetDownloadFilInfoAsync(YTrackDownloadInfoResponse metadataInfo, long time)
     {
       var request = new YStorageDownloadFileRequest(_httpContext).Create(metadataInfo.Src, time, User.Login);
       var data = default(JToken);
 
-      using (var response = (HttpWebResponse) request.GetResponse())
+      using (var response = (HttpWebResponse) await request.GetResponseAsync())
       {
         var result = "";
 
@@ -247,7 +279,7 @@ namespace Yandex.Music.Api
         {
           var reader = new StreamReader(stream);
 
-          result = reader.ReadToEnd();
+          result = await reader.ReadToEndAsync();
         }
 
         data = JToken.Parse(result);
@@ -256,6 +288,11 @@ namespace Yandex.Music.Api
       }
 
       return YStorageDownloadFileResponse.FromJson(data);
+    }
+
+    public YStorageDownloadFileResponse GetDownloadFilInfo(YTrackDownloadInfoResponse metadataInfo, long time)
+    {
+      return GetDownloadFilInfoAsync(metadataInfo, time).GetAwaiter().GetResult();
     }
     
     public void ExtractTrackToFile(string trackKey, string filePath)
@@ -425,7 +462,7 @@ namespace Yandex.Music.Api
 
       using (var response = (HttpWebResponse) request.GetResponse())
       {
-        var json = GetDataFromResponse(response);
+        var json = GetDataFromResponseAsync(response).GetAwaiter().GetResult();
         var fieldName = searchType.ToString().ToLower();
         var jArray = (JArray) json[fieldName]["items"];
         
@@ -516,15 +553,15 @@ namespace Yandex.Music.Api
 //      return fileName;
 //    }
 
-    protected JToken GetDataFromResponse(HttpWebResponse response)
+    protected async Task<JToken> GetDataFromResponseAsync(HttpWebResponse response)
     {
-      var result = "";
+      var result = string.Empty;
 
       using (var stream = response.GetResponseStream())
       {
         var reader = new StreamReader(stream);
 
-        result = reader.ReadToEnd();
+        result = await reader.ReadToEndAsync();
       }
       
       return JToken.Parse(result);
@@ -562,12 +599,12 @@ namespace Yandex.Music.Api
       return null;
     }
 
-    public Int64 GetTInterval()
+    public long GetTInterval()
     {
-      DateTime dt = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now);
-      DateTime dt1970 = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-      TimeSpan tsInterval = dt.Subtract(dt1970);
-      Int64 iMilliseconds = Convert.ToInt64(tsInterval.TotalMilliseconds);
+      var dt = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now);
+      var dt1970 = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+      var tsInterval = dt.Subtract(dt1970);
+      var iMilliseconds = Convert.ToInt64(tsInterval.TotalMilliseconds);
 
       return iMilliseconds;
     }
