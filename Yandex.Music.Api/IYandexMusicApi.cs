@@ -28,21 +28,21 @@ namespace Yandex.Music.Api
     /// <param name="track">Track instance</param>
     /// <param name="filder">Folder for save file</param>
     /// <returns></returns>
-    bool ExtractTrackToFile(YandexTrack track, string filder = "data");
+//    bool ExtractTrackToFile(YandexTrack track, string filder = "data");
     
     /// <summary>
     /// Return track stram
     /// </summary>
     /// <param name="track">Track instance</param>
     /// <returns></returns>
-    YandexStreamTrack ExtractStreamTrack(YandexTrack track);
+//    YandexStreamTrack ExtractStreamTrack(YandexTrack track);
     
     /// <summary>
     /// Return bytes from track
     /// </summary>
     /// <param name="track">Track instance</param>
     /// <returns></returns>
-    byte[] ExtractDataTrack(YandexTrack track);
+//    byte[] ExtractDataTrack(YandexTrack track);
 
     /// <summary>
     /// Search by tracks
@@ -130,6 +130,8 @@ namespace Yandex.Music.Api
     YandexChangePlaylistResult CreatePlaylist(string name);
     bool RemovePlaylist(long kind);
     YandexGetCookieResult GetYandexCookie();
-    void DownloadTrackToFile(string trackDownloadKey);
+    void DownloadTrackToFile(string trackDownloadKey, string filePath);
+    YandexAuthResult GetUserAuthDetails();
+    YandexAuthV2Result GetUserAuth();
   }
 }
