@@ -928,6 +928,43 @@ namespace Yandex.Music.Api
     }
     #endregion
 
+    public async Task<YNotRecommendTrackResponse> NotRecommendTrackAsync(string trackKey)
+    {
+      var request = new YNotRecommendTrackRequest(_httpContext).Create(trackKey, _httpContext.GetTimeInterval(), User.Sign, User.Uid, User.Login);
+      var setLikedResponse = default(YNotRecommendTrackResponse);
+      
+      try
+      {
+        var result = string.Empty;
+
+        using (var response = (HttpWebResponse) await request.GetResponseAsync())
+        {
+          using (var stream = response.GetResponseStream())
+          {
+            var reader = new StreamReader(stream);
+
+            result = await reader.ReadToEndAsync();
+          }
+
+          _httpContext.Cookies.Add(response.Cookies);
+        }
+
+        var json = JToken.Parse(result);
+        setLikedResponse = YNotRecommendTrackResponse.FromJson(json);
+      }
+      catch (WebException ex)
+      {
+        Console.WriteLine(ex);
+      }
+
+      return setLikedResponse;
+    }
+
+    public YNotRecommendTrackResponse NotRecommendTrack(string trackKey)
+    {
+      return NotRecommendTrackAsync(trackKey).GetAwaiter().GetResult();
+    }
+
     public async Task<YInsertTrackToPlaylistResponse> InsertTrackToPlaylistAsync(string trackId, string albumId, string playlistKind)
     {
       var request = new YInsertTrackToPlaylistRequest(_httpContext).Create(User.Uid, trackId, albumId, playlistKind, User.Lang, User.Sign, User.Uid, User.Login, User.Experiments);

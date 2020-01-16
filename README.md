@@ -44,6 +44,7 @@ YandexMusicApi
 │   ├── GetDownloadFilInfo / Async ()
 │   ├── ChangeLikedTrack / Async (string trackKey, bool value)
 │   ├── SetLikedTrack / Async (string trackKey, bool value)
+│   ├── NotRecommendTrack / Async (string trackKey)
 │   ├── InsertTrackToPlaylist / Async (string trackId, string albumId, string playListKind)
 │   ├── DeleteTrackFromPlaylist / Async (int indexFrom, int indexTo, int playlistRevision, string playListKind)
 │   └── GetTrack / Async (string trackId)

@@ -419,5 +419,19 @@ namespace Yandex.Music.Api
     /// <param name="playlistKind">Kind playlist</param>
     /// <returns></returns>
     YDeleteTrackFromPlaylistResponse DeleteTrackFromPlaylist(int from, int to, int revision, string playlistKind);
+
+
+    /// <summary>
+    /// Dislike on track
+    /// </summary>
+    /// <param name="trackKey">Track key</param>
+    /// <returns></returns>
+    Task<YNotRecommendTrackResponse> NotRecommendTrackAsync(string trackKey);
+    /// <summary>
+    /// Dislike on track
+    /// </summary>
+    /// <param name="trackKey">Track key</param>
+    /// <returns></returns>
+    YNotRecommendTrackResponse NotRecommendTrack(string trackKey);
   }
 }
