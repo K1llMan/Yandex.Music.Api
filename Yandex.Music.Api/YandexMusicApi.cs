@@ -597,20 +597,20 @@ namespace Yandex.Music.Api
       return JToken.Parse(result);
     }
 
-    public YAccountResponse GetAccounts()
+    public async Task<YAccountResponse> GetAccountsAsync()
     {
       try
       {
-        var result = "";
+        var result = string.Empty;
         var request = new YGetAccountRequest(_httpContext).Create(User.Lang);
 
-        using (var response = (HttpWebResponse) request.GetResponse())
+        using (var response = (HttpWebResponse) await request.GetResponseAsync())
         {
           using (var stream = response.GetResponseStream())
           {
             var reader = new StreamReader(stream);
 
-            result = reader.ReadToEnd();
+            result = await reader.ReadToEndAsync();
           }
 
           _httpContext.Cookies.Add(response.Cookies);
@@ -629,20 +629,25 @@ namespace Yandex.Music.Api
       return null;
     }
 
+    public YAccountResponse GetAccounts()
+    {
+      return GetAccountsAsync().GetAwaiter().GetResult();
+    }
 
-    public YLibraryResponse GetLibrary(string ownerUid)
+
+    public async Task<YLibraryResponse> GetLibraryAsync()
     {
       var request = new YGetLibraryRequest(_httpContext).Create(User.Login, User.Lang, User.Uid);
 
       var result = string.Empty;
 
-      using (var response = (HttpWebResponse) request.GetResponse())
+      using (var response = (HttpWebResponse) await request.GetResponseAsync())
       {
         using (var stream = response.GetResponseStream())
         {
           var reader = new StreamReader(stream);
 
-          result = reader.ReadToEnd();
+          result = await reader.ReadToEndAsync();
         }
 
         _httpContext.Cookies.Add(response.Cookies);
@@ -652,6 +657,11 @@ namespace Yandex.Music.Api
       var library = YLibraryResponse.FromJson(json);
 
       return library;
+    }
+
+    public YLibraryResponse GetLibrary()
+    {
+      return GetLibraryAsync().GetAwaiter().GetResult();
     }
 
     public async Task<YAuthInfoResponse> GetUserAuthAsync()
@@ -711,26 +721,20 @@ namespace Yandex.Music.Api
       return GetUserAuthDetailsAsync().GetAwaiter().GetResult();
     }
 
-    public YPlaylistChangeResponse CreatePlaylist(string name)
+    public async Task<YPlaylistChangeResponse> CreatePlaylistAsync(string name)
     {
-//      var getCookiet = GetYandexCookie();
-//      var auth2 = GetAuthV2();
-//      var accounts = GetAccounts();
-//      var library = GetLibrary(accounts.DefaultUID);
-//      var auth = GetUserAuthDetails(accounts.DefaultUID);
-
       try
       {
         var request = new YPlaylistChangeRequest(_httpContext).Create(name, User.Sign, User.Experiments, User.Uid, User.Login);
         var result = string.Empty;
 
-        using (var response = (HttpWebResponse) request.GetResponse())
+        using (var response = (HttpWebResponse) await request.GetResponseAsync())
         {
           using (var stream = response.GetResponseStream())
           {
             var reader = new StreamReader(stream);
 
-            result = reader.ReadToEnd();
+            result = await reader.ReadToEndAsync();
           }
 
           _httpContext.Cookies.Add(response.Cookies);
@@ -751,7 +755,12 @@ namespace Yandex.Music.Api
       };
     }
 
-    public bool RemovePlaylist(long kind)
+    public YPlaylistChangeResponse CreatePlaylist(string name)
+    {
+      return CreatePlaylistAsync(name).GetAwaiter().GetResult();
+    }
+
+    public async Task<bool> RemovePlaylistAsync(long kind)
     {
       try
       {
@@ -759,7 +768,7 @@ namespace Yandex.Music.Api
 //        var auth = GetUserAuthDetails(accounts.DefaultUID);
 
         var request = new YPlaylistRemoveRequest(_httpContext).Create(kind, User.Sign, User.Experiments, User.Uid, User.Login);
-        request.GetResponse();
+        await request.GetResponseAsync();
         
         return true;
       }
@@ -771,7 +780,12 @@ namespace Yandex.Music.Api
       return false;
     }
 
-    public YGetCookieResponse GetYandexCookie()
+    public bool RemovePlaylist(long kind)
+    {
+      return RemovePlaylistAsync(kind).GetAwaiter().GetResult();
+    }
+
+    public async Task<YGetCookieResponse> GetYandexCookieAsync()
     {
       try
       {
@@ -785,13 +799,13 @@ namespace Yandex.Music.Api
 
         var result = "";
         
-        using (var response = (HttpWebResponse) request.GetResponse())
+        using (var response = (HttpWebResponse) await request.GetResponseAsync())
         {
           using (var stream = response.GetResponseStream())
           {
             var reader = new StreamReader(stream);
 
-            result = reader.ReadToEnd();
+            result = await reader.ReadToEndAsync();
           }
 
           _httpContext.Cookies.Add(response.Cookies);
@@ -808,8 +822,14 @@ namespace Yandex.Music.Api
       return null;
     }
 
+    public YGetCookieResponse GetYandexCookie()
+    {
+      return GetYandexCookieAsync().GetAwaiter().GetResult();
+    }
+
     #region AddLike
-    public YSetLikedTrackResponse SetLikedTrack(string trackKey, bool value)
+
+    public async Task<YSetLikedTrackResponse> SetLikedTrackAsync(string trackKey, bool value)
     {
       var request = new YSetLikedTrackRequest(_httpContext).Create(value, trackKey, _httpContext.GetTimeInterval(), User.Sign, User.Uid, User.Login);
       var setLikedResponse = default(YSetLikedTrackResponse);
@@ -818,13 +838,13 @@ namespace Yandex.Music.Api
       {
         var result = string.Empty;
 
-        using (var response = (HttpWebResponse) request.GetResponse())
+        using (var response = (HttpWebResponse) await request.GetResponseAsync())
         {
           using (var stream = response.GetResponseStream())
           {
             var reader = new StreamReader(stream);
 
-            result = reader.ReadToEnd();
+            result = await reader.ReadToEndAsync();
           }
 
           _httpContext.Cookies.Add(response.Cookies);
@@ -845,7 +865,12 @@ namespace Yandex.Music.Api
       return setLikedResponse;
     }
 
-    public YAddLikedTrackResponse ChangeLikedTrack(string trackKey, bool value)
+    public YSetLikedTrackResponse SetLikedTrack(string trackKey, bool value)
+    {
+      return SetLikedTrackAsync(trackKey, value).GetAwaiter().GetResult();
+    }
+
+    public async Task<YAddLikedTrackResponse> ChangeLikedTrackAsync(string trackKey, bool value)
     {
       var request = new YAddLikedTrackRequest(_httpContext).Create(value, trackKey, _httpContext.GetTimeInterval(), User.Sign, User.Uid, User.Login);
       
@@ -853,13 +878,13 @@ namespace Yandex.Music.Api
       {
         var result = string.Empty;
 
-        using (var response = (HttpWebResponse) request.GetResponse())
+        using (var response = (HttpWebResponse) await request.GetResponseAsync())
         {
           using (var stream = response.GetResponseStream())
           {
             var reader = new StreamReader(stream);
 
-            result = reader.ReadToEnd();
+            result = await reader.ReadToEndAsync();
           }
 
           _httpContext.Cookies.Add(response.Cookies);
@@ -878,6 +903,11 @@ namespace Yandex.Music.Api
         Success = false,
         Act = null
       };
+    }
+
+    public YAddLikedTrackResponse ChangeLikedTrack(string trackKey, bool value)
+    {
+      return ChangeLikedTrackAsync(trackKey, value).GetAwaiter().GetResult();
     }
     #endregion
   }

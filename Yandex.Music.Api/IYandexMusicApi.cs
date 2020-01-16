@@ -148,17 +148,34 @@ namespace Yandex.Music.Api
     Task<YStorageDownloadFileResponse> GetDownloadFilInfoAsync(YTrackDownloadInfoResponse metadataInfo, long time);
     YStorageDownloadFileResponse GetDownloadFilInfo(YTrackDownloadInfoResponse metadataInfo, long time);
 
+    Task<YAccountResponse> GetAccountsAsync();
     YAccountResponse GetAccounts();
+
+    Task<YPlaylistChangeResponse> CreatePlaylistAsync(string name);
     YPlaylistChangeResponse CreatePlaylist(string name);
+
+    Task<bool> RemovePlaylistAsync(long kind);
     bool RemovePlaylist(long kind);
+
+    Task<YGetCookieResponse> GetYandexCookieAsync();
     YGetCookieResponse GetYandexCookie();
+    
     void ExtractTrackToFile(string trackDownloadKey, string filePath);
     byte[] ExtractDataTrack(string trackKey);
-    YAuthInfoUserResponse GetUserAuthDetails();
+    
     Task<YAuthInfoUserResponse> GetUserAuthDetailsAsync();
-    YAuthInfoResponse GetUserAuth();
+    YAuthInfoUserResponse GetUserAuthDetails();
+    
     Task<YAuthInfoResponse> GetUserAuthAsync();
-    YLibraryResponse GetLibrary(string ownerUid);
+    YAuthInfoResponse GetUserAuth();
+
+    Task<YLibraryResponse> GetLibraryAsync();
+    YLibraryResponse GetLibrary();
+
+    Task<YSetLikedTrackResponse> SetLikedTrackAsync(string trackKey, bool value);
     YSetLikedTrackResponse SetLikedTrack(string trackKey, bool value);
+
+    Task<YAddLikedTrackResponse> ChangeLikedTrackAsync(string trackKey, bool value);
+    YAddLikedTrackResponse ChangeLikedTrack(string trackKey, bool value);
   }
 }
