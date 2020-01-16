@@ -8,8 +8,4 @@
       <ProjectReference Include="..\Yandex.Music.Api\Yandex.Music.Api.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Models" />
-    </ItemGroup>
-
 </Project>
