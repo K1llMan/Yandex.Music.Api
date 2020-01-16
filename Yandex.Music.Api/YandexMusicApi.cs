@@ -253,7 +253,7 @@ namespace Yandex.Music.Api
       return YStorageDownloadFileResponse.FromJson(data);
     }
     
-    public void DownloadTrackToFile(string trackKey, string filePath)
+    public void ExtractTrackToFile(string trackKey, string filePath)
     {
       var time = GetTInterval();
       var mainDownloadResponse = GetMetadataTrackForDownload(trackKey, time);
@@ -272,6 +272,52 @@ namespace Yandex.Music.Api
       {
         Console.WriteLine(ex.ToString());
       }
+    }
+    
+//    public void ExtractStreamTrack(string trackKey)
+//    {
+//      var time = GetTInterval();
+//      var mainDownloadResponse = GetMetadataTrackForDownload(trackKey, time);
+//      var storageDownloadResponse = GetDownloadFilInfo(mainDownloadResponse, time);
+      
+//      var fileLink = BuildLinkForDownloadTrack(mainDownloadResponse, storageDownloadResponse);
+      
+//      try
+//      {
+//        using (var client = new WebClient())
+//        {
+//          client.DownloadFile(fileLink, filePath);
+//        }
+//      }
+//      catch (Exception ex)
+//      {
+//        Console.WriteLine(ex.ToString());
+//      }
+//    }
+
+    public byte[] ExtractDataTrack(string trackKey)
+    {
+      var time = GetTInterval();
+      var mainDownloadResponse = GetMetadataTrackForDownload(trackKey, time);
+      var storageDownloadResponse = GetDownloadFilInfo(mainDownloadResponse, time);
+      
+      var fileLink = BuildLinkForDownloadTrack(mainDownloadResponse, storageDownloadResponse);
+
+      byte[] bytes = default(byte[]);
+      
+      try
+      {
+        using (var client = new WebClient())
+        {
+          bytes = client.DownloadData(fileLink);
+        }
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.ToString());
+      }
+
+      return bytes;
     }
 
 //    public bool ExtractTrackToFile(YandexTrack track, string folder)

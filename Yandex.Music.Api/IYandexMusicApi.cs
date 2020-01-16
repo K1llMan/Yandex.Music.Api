@@ -135,7 +135,8 @@ namespace Yandex.Music.Api
     YPlaylistChangeResponse CreatePlaylist(string name);
     bool RemovePlaylist(long kind);
     YGetCookieResponse GetYandexCookie();
-    void DownloadTrackToFile(string trackDownloadKey, string filePath);
+    void ExtractTrackToFile(string trackDownloadKey, string filePath);
+    byte[] ExtractDataTrack(string trackKey);
     YAuthInfoUserResponse GetUserAuthDetails();
     YAuthInfoResponse GetUserAuth();
     YLibraryResponse GetLibrary(string ownerUid);
