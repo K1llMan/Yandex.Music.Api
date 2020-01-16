@@ -329,6 +329,7 @@ namespace Yandex.Music.Api
       var fileLink = BuildLinkForDownloadTrack(mainDownloadResponse, storageDownloadResponse);
       return YandexStreamTrack.Open(new Uri(fileLink), fileSize);
     }
+    
 //    public bool ExtractTrackToFile(YandexTrack track, string folder)
 //    {
 //      try
@@ -732,6 +733,77 @@ namespace Yandex.Music.Api
       }
 
       return null;
+    }
+
+    public YSetLikedTrackResponse SetLikedTrack(string trackKey, bool value)
+    {
+      var request = new YSetLikedTrackRequest(_httpContext).Create(trackKey, GetTInterval(), User.Sign, User.Uid, User.Login);
+      var setLikedResponse = default(YSetLikedTrackResponse);
+      
+      try
+      {
+        var result = string.Empty;
+
+        using (var response = (HttpWebResponse) request.GetResponse())
+        {
+          using (var stream = response.GetResponseStream())
+          {
+            var reader = new StreamReader(stream);
+
+            result = reader.ReadToEnd();
+          }
+
+          _httpContext.Cookies.Add(response.Cookies);
+        }
+
+        var json = JToken.Parse(result);
+        setLikedResponse = YSetLikedTrackResponse.FromJson(json);
+//        return YPlaylistChangeResponse.FromJson(json);
+        Console.WriteLine("123");
+      }
+      catch (WebException ex)
+      {
+        Console.WriteLine(ex);
+      }
+      
+      // AddLikedTrack
+
+      return setLikedResponse;
+    }
+
+    public YAddLikedTrackResponse AddLikedTrack(string trackKey)
+    {
+      var request = new YAddLikedTrackRequest(_httpContext).Create(trackKey, GetTInterval(), User.Sign, User.Uid, User.Login);
+      
+      try
+      {
+        var result = string.Empty;
+
+        using (var response = (HttpWebResponse) request.GetResponse())
+        {
+          using (var stream = response.GetResponseStream())
+          {
+            var reader = new StreamReader(stream);
+
+            result = reader.ReadToEnd();
+          }
+
+          _httpContext.Cookies.Add(response.Cookies);
+        }
+
+        var json = JToken.Parse(result);
+        return YAddLikedTrackResponse.FromJson(json);
+      }
+      catch (WebException ex)
+      {
+        Console.WriteLine(ex);
+      }
+
+      return new YAddLikedTrackResponse
+      {
+        Success = false,
+        Act = null
+      };
     }
   }
 }

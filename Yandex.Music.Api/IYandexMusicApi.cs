@@ -140,5 +140,6 @@ namespace Yandex.Music.Api
     YAuthInfoUserResponse GetUserAuthDetails();
     YAuthInfoResponse GetUserAuth();
     YLibraryResponse GetLibrary(string ownerUid);
+    YSetLikedTrackResponse SetLikedTrack(string trackKey, bool value);
   }
 }
