@@ -11,8 +11,8 @@ Solution allows you to work with Yandex music based on the client.
 
 The project is divided into 2 parts, Yandex.Music.Client and Yandex.Music.Api.
 
-[Yandex.Music.Api]("https://github.com/Winster332/Yandex.Music.Api/Yandex.Music.Api") - contains pure api Yandex \
-[Yandex.Music.Client]("https://github.com/Winster332/Yandex.Music.Api/Yandex.Music.Client) - ready client for working with Yandex Api
+[Yandex.Music.Api](https://github.com/Winster332/Yandex.Music.Api/tree/master/Yandex.Music.Api) - contains pure api Yandex \
+[Yandex.Music.Client](https://github.com/Winster332/Yandex.Music.Api/tree/master/Yandex.Music.Client) - ready client for working with Yandex Api
 
 The difference between Yandex.Music.Api and Yandex.Music.Client is 
 that Yandex.Music.Api contains pure api, but when we 
@@ -34,8 +34,8 @@ functionality of Yandex music. Client works on top of Yandex.Music.Api.
  How use
 -------
 
-[Yandex.Music.Api]("https://github.com/Winster332/Yandex.Music.Api/Yandex.Music.Api") \
-[Yandex.Music.Client]("https://github.com/Winster332/Yandex.Music.Api/Yandex.Music.Client)
+[Yandex.Music.Api](https://github.com/Winster332/Yandex.Music.Api/tree/master/Yandex.Music.Api) \
+[Yandex.Music.Client](https://github.com/Winster332/Yandex.Music.Api/tree/master/Yandex.Music.Client)
 
 ##### Examples
 
