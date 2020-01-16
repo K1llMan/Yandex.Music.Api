@@ -4,7 +4,6 @@ using System.Linq;
 using Newtonsoft.Json.Linq;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Extensions;
-using Yandex.Music.Api.Models;
 
 namespace Yandex.Music.Api.Responses
 {

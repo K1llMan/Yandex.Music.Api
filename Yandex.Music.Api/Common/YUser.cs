@@ -1,4 +1,4 @@
-namespace Yandex.Music.Api.Models
+namespace Yandex.Music.Api.Common
 {
     public class YUser
     {

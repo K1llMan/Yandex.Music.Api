@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Linq;
 using Yandex.Music.Api.Extensions;
 
-namespace Yandex.Music.Api.Models
+namespace Yandex.Music.Api.Common
 {
   public class YandexMajor
   {

@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Yandex.Music.Api.Common;
-using Yandex.Music.Api.Models;
 using Yandex.Music.Api.Requests;
 using Yandex.Music.Api.Requests.Account;
 using Yandex.Music.Api.Requests.Album;
