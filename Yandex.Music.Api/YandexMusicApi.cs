@@ -908,5 +908,46 @@ namespace Yandex.Music.Api
       return ChangeLikedTrackAsync(trackKey, value).GetAwaiter().GetResult();
     }
     #endregion
+
+    public async Task<YInsertTrackToPlaylistResponse> InsertTrackToPlaylistAsync(string trackId, string albumId, string playlistKind)
+    {
+      var request = new YInsertTrackToPlaylistRequest(_httpContext).Create(User.Uid, trackId, albumId, playlistKind, User.Lang, User.Sign, User.Uid, User.Login, User.Experiments);
+      var setLikedResponse = default(YInsertTrackToPlaylistResponse);
+      
+      try
+      {
+        var result = string.Empty;
+
+        using (var response = (HttpWebResponse) await request.GetResponseAsync())
+        {
+          using (var stream = response.GetResponseStream())
+          {
+            var reader = new StreamReader(stream);
+
+            result = await reader.ReadToEndAsync();
+          }
+
+          _httpContext.Cookies.Add(response.Cookies);
+        }
+
+        var json = JToken.Parse(result);
+        setLikedResponse = YInsertTrackToPlaylistResponse.FromJson(json);
+//        return YPlaylistChangeResponse.FromJson(json);
+        Console.WriteLine("123");
+      }
+      catch (WebException ex)
+      {
+        Console.WriteLine(ex);
+      }
+
+//      var changeLikeResponse = ChangeLikedTrack(trackKey, value);
+
+      return setLikedResponse;
+    }
+
+    public YInsertTrackToPlaylistResponse InsertTrackToPlaylist(string trackId, string albumId, string playlistKind)
+    {
+      return InsertTrackToPlaylistAsync(trackId, albumId, playlistKind).GetAwaiter().GetResult();
+    }
   }
 }

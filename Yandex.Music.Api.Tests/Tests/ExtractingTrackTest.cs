@@ -2,11 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
-using Yandex.Music.Api.Models;
 using Yandex.Music.Api.Responses;
 using Yandex.Music.Api.Tests.Traits;
 

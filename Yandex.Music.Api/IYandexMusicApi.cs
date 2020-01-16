@@ -369,5 +369,24 @@ namespace Yandex.Music.Api
     /// <param name="value"></param>
     /// <returns></returns>
     YAddLikedTrackResponse ChangeLikedTrack(string trackKey, bool value);
+
+
+    /// <summary>
+    /// Insert track to playlist
+    /// </summary>
+    /// <param name="trackId">Track id</param>
+    /// <param name="albumId">Album in track id</param>
+    /// <param name="playlistKind">Playlist kind</param>
+    /// <returns></returns>
+    YInsertTrackToPlaylistResponse InsertTrackToPlaylist(string trackId, string albumId, string playlistKind);
+
+    /// <summary>
+    /// Insert track to playlist
+    /// </summary>
+    /// <param name="trackId">Track id</param>
+    /// <param name="albumId">Album in track id</param>
+    /// <param name="playlistKind">Playlist kind</param>
+    /// <returns></returns>
+    Task<YInsertTrackToPlaylistResponse> InsertTrackToPlaylistAsync(string trackId, string albumId, string playlistKind);
   }
 }
