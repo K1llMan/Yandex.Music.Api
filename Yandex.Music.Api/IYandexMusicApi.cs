@@ -14,14 +14,14 @@ namespace Yandex.Music.Api
     /// <param name="username">User name</param>
     /// <param name="password">User password</param>
     /// <returns></returns>
-    YAuthorizeResponse Authorize(string username, string password);
+    YAuthorizeResponse Authorize(string usernam, string password, bool saveCache = false);
     /// <summary>
     /// Authorize user to yandex
     /// </summary>
     /// <param name="login"></param>
     /// <param name="password"></param>
     /// <returns></returns>
-    Task<YAuthorizeResponse> AuthorizeAsync(string login, string password);
+    Task<YAuthorizeResponse> AuthorizeAsync(string login, string password, bool saveCache = false);
 
     
     /// <summary>

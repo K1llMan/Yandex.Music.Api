@@ -29,7 +29,7 @@ This library provides following functions:
 YandexMusicApi
 │
 ├── Users
-│   ├── Authorize / Async (string username, string password)
+│   ├── Authorize / Async (string username, string password, bool saveCache)
 │   ├── GetAccounts / Async ()
 │   ├── GetYandexCookie / Async ()
 │   ├── GetUserAuthDetails / Async ()

@@ -25,10 +25,12 @@ namespace Yandex.Music.Api
   {
     public YUser User { get; set; }
     private HttpContext _httpContext;
+    private YAuthStorage _storage;
 
-    public YandexMusicApi()
+    public YandexMusicApi(YAuthStorage storage = null)
     {
       _httpContext = new HttpContext();
+      _storage = storage;
     }
 
     public IYandexMusicApi UseWebProxy(IWebProxy proxy)
@@ -38,8 +40,18 @@ namespace Yandex.Music.Api
       return this;
     }
 
-    public async Task<YAuthorizeResponse> AuthorizeAsync(string login, string password)
+    public async Task<YAuthorizeResponse> AuthorizeAsync(string login = null, string password = null, bool saveCache = false)
     {
+      if (saveCache)
+      {
+        if (_storage != null)
+        {
+          var user = await _storage.LoadAsync();
+          login = user.Login;
+          password = user.Password;
+        }
+      }
+
       var request = new YAuthorizeRequest(_httpContext).Create(login, password);
 
       try
@@ -95,6 +107,14 @@ namespace Yandex.Music.Api
         YandexId = authInfo.YandexuId
       };
 
+      if (saveCache)
+      {
+        if (_storage != null)
+        {
+          await _storage.SaveAsync(User);
+        }
+      }
+
       return new YAuthorizeResponse
       {
         IsAuthorized = true,
@@ -102,7 +122,7 @@ namespace Yandex.Music.Api
       };
     }
 
-    public YAuthorizeResponse Authorize(string login, string password)
+    public YAuthorizeResponse Authorize(string login = null, string password = null, bool saveCache = false)
     {
       return AuthorizeAsync(login, password).GetAwaiter().GetResult();
     }
