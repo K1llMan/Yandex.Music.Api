@@ -652,9 +652,9 @@ namespace Yandex.Music.Api
     }
 
 
-    public async Task<YLibraryResponse> GetLibraryAsync()
+    public async Task<YLibraryPlaylistResponse> GetLibraryPlaylistAsync()
     {
-      var request = new YGetLibraryRequest(_httpContext).Create(User.Login, User.Lang, User.Uid);
+      var request = new YGetLibraryPlaylistRequest(_httpContext).Create(User.Login, User.Lang, User.Uid);
 
       var result = string.Empty;
 
@@ -671,14 +671,14 @@ namespace Yandex.Music.Api
       }
 
       var json = JToken.Parse(result);
-      var library = YLibraryResponse.FromJson(json);
+      var library = YLibraryPlaylistResponse.FromJson(json);
 
       return library;
     }
 
-    public YLibraryResponse GetLibrary()
+    public YLibraryPlaylistResponse GetLibraryPlaylist()
     {
-      return GetLibraryAsync().GetAwaiter().GetResult();
+      return GetLibraryPlaylistAsync().GetAwaiter().GetResult();
     }
 
     public async Task<YAuthInfoResponse> GetUserAuthAsync()
@@ -1009,6 +1009,35 @@ namespace Yandex.Music.Api
     public YDeleteTrackFromPlaylistResponse DeleteTrackFromPlaylist(int from, int to, int revision, string playlistKind)
     {
       return DeleteTrackFromPlaylistAsync(from, to, revision, playlistKind).GetAwaiter().GetResult();
+    }
+
+    public async Task<YLibraryHistoryResponse> GetLibraryHistoryAsync()
+    {
+      var request = new YGetLibraryHistoryRequest(_httpContext).Create(User.Login, User.Lang, User.Uid);
+
+      var result = string.Empty;
+
+      using (var response = (HttpWebResponse) await request.GetResponseAsync())
+      {
+        using (var stream = response.GetResponseStream())
+        {
+          var reader = new StreamReader(stream);
+
+          result = await reader.ReadToEndAsync();
+        }
+
+        _httpContext.Cookies.Add(response.Cookies);
+      }
+
+      var json = JToken.Parse(result);
+      var library = YLibraryHistoryResponse.FromJson(json);
+
+      return library;
+    }
+
+    public YLibraryHistoryResponse GetLibraryHistory()
+    {
+      return GetLibraryHistoryAsync().GetAwaiter().GetResult();
     }
   }
 }

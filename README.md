@@ -37,13 +37,11 @@ YandexMusicApi
 │   ├── SearchUsers / Async (string userName, int pageNumber = 0)
 │   └── UseProxy (IWebProxy proxy)
 ├── Music
-│   ├── GetListFavorites / Async (string userId = null)
 │   ├── ExtractTrackToFile (YandexTrack track, string filder = "data")
 │   ├── ExtractStreamTrack (YandexTrack track, fileSize)
 │   ├── ExtractDataTrack (YandexTrack track)
 │   ├── SearchTrack / Async (string trackName, int pageNumber = 0)
 │   ├── GetDownloadFilInfo / Async ()
-│   ├── GetLibrary / Async ()
 │   ├── ChangeLikedTrack / Async (string trackKey, bool value)
 │   ├── SetLikedTrack / Async (string trackKey, bool value)
 │   ├── InsertTrackToPlaylist / Async (string trackId, string albumId, string playListKind)
@@ -52,6 +50,9 @@ YandexMusicApi
 ├── Playlist
 │   ├── GetPlaylistOfDay / Async ()
 │   ├── GetPlaylistDejaVu / Async ()
+│   ├── GetPlaylistFavorites / Async (string userId = null)
+│   ├── GetLibraryPlaylist / Async ()
+│   ├── GetLibraryHistory / Async ()
 │   ├── CreatePlaylist / Async (name)
 │   ├── RemovePlaylist / Async (kind)
 │   ├── SearchPlaylist / Async (string playlistName, int pageNumber = 0)
@@ -59,7 +60,6 @@ YandexMusicApi
 │   ├── SearchAlbums / Async (string albumName, int pageNumber = 0)
 │   └── GetAlbum / Async (string albumId)
 └── Future
-    ├── SaveAuthorizeInStorage ()
     ├── Remove track ()
     └── Radio-functions ()
 ```

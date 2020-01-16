@@ -331,13 +331,24 @@ namespace Yandex.Music.Api
     /// Return library
     /// </summary>
     /// <returns></returns>
-    Task<YLibraryResponse> GetLibraryAsync();
+    Task<YLibraryPlaylistResponse> GetLibraryPlaylistAsync();
     /// <summary>
     /// Return library
     /// </summary>
     /// <returns></returns>
-    YLibraryResponse GetLibrary();
+    YLibraryPlaylistResponse GetLibraryPlaylist();
 
+    
+    /// <summary>
+    /// Return library history
+    /// </summary>
+    /// <returns></returns>
+    Task<YLibraryHistoryResponse> GetLibraryHistoryAsync();
+    /// <summary>
+    /// Return library history
+    /// </summary>
+    /// <returns></returns>
+    YLibraryHistoryResponse GetLibraryHistory();
     
     /// <summary>
     /// Set track as liked. Before ChangeLikedTrackAsync

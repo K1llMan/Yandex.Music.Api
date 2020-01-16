@@ -2,16 +2,16 @@ using System.Net;
 
 namespace Yandex.Music.Api.Requests.Library
 {
-    internal class YGetLibraryRequest : YRequest
+    internal class YGetLibraryHistoryRequest : YRequest
     {
-        public YGetLibraryRequest(HttpContext context) : base(context)
+        public YGetLibraryHistoryRequest(HttpContext context) : base(context)
         {
         }
-
+        
         public HttpWebRequest Create(string userLogin, string userLang, string userUid)
         {
             var url =
-                $"https://music.yandex.ru/handlers/library.jsx?owner={userLogin}&filter=playlists&likeFilter=all&lang={userLang}&external-domain=music.yandex.ru&overembed=false&ncrnd=0.17447934315877878";
+                $"https://music.yandex.ru/handlers/library.jsx?owner={userLogin}&filter=history&likeFilter=all&lang={userLang}&external-domain=music.yandex.ru&overembed=false&ncrnd=0.671046085811837";
 
             var request = GetRequest(url, WebRequestMethods.Http.Get);
             request.Headers[HttpRequestHeader.Accept] = "application/json, text/javascript, */*; q=0.01";

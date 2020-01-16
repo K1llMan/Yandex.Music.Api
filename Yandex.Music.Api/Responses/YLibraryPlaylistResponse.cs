@@ -5,7 +5,7 @@ using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Responses
 {
-    public class YLibraryResponse
+    public class YLibraryPlaylistResponse
     {
         public bool Success { get; set; }
         public string BookmarksPlaylistsIds { get; set; }
@@ -20,9 +20,9 @@ namespace Yandex.Music.Api.Responses
         public bool HasTracks { get; set; }
         public bool IsRadioAvailable { get; set; }
 
-        public static YLibraryResponse FromJson(JToken json)
+        public static YLibraryPlaylistResponse FromJson(JToken json)
         {
-            var playlists = new List<YLibraryResponse.YandexLibraryPlaylist>();
+            var playlists = new List<YLibraryPlaylistResponse.YandexLibraryPlaylist>();
 
             foreach (var x in json["playlists"])
             {
@@ -36,18 +36,18 @@ namespace Yandex.Music.Api.Responses
                 };
 
                 var tracks = x.SelectToken("tracks")?.Select(f =>
-                    new YLibraryResponse.YandexLibraryPlaylist.YandexLibraryPlaylistTrack
+                    new YandexLibraryPlaylist.YandexLibraryPlaylistTrack
                     {
                         Id = f["id"]?.ToObject<long?>(),
                         Timestamp = f["timestamp"]?.ToObject<string>(),
                         AlbumId = f["albumId"]?.ToObject<long?>()
                     }).ToList();
 
-                var libraryCover = default(YLibraryResponse.YandexLibraryPlaylist.YandexLibraryPlaylistCover);
+                var libraryCover = default(YandexLibraryPlaylist.YandexLibraryPlaylistCover);
 
                 if (x.SelectToken("cover")?.SelectToken("type").ToObject<string>() == "mosaic")
                 {
-                    libraryCover = new YLibraryResponse.YandexLibraryPlaylist.YandexLibraryPlaylistCoverMosaic
+                    libraryCover = new YandexLibraryPlaylist.YandexLibraryPlaylistCoverMosaic
                     {
                         Type = x["cover"]["type"].ToObject<string>(),
                         ItemsUri = x["cover"]["itemsUri"].Select(f => f.ToObject<string>()).ToList(),
@@ -56,7 +56,7 @@ namespace Yandex.Music.Api.Responses
                 }
                 else if (x.SelectToken("cover")?.SelectToken("type").ToObject<string>() == "pic")
                 {
-                    libraryCover = new YLibraryResponse.YandexLibraryPlaylist.YandexLibraryPlaylistCoverPic
+                    libraryCover = new YandexLibraryPlaylist.YandexLibraryPlaylistCoverPic
                     {
                         Type = x["cover"]["type"].ToObject<string>(),
                         Dir = x["cover"]["dir"].ToObject<string>(),
@@ -66,7 +66,7 @@ namespace Yandex.Music.Api.Responses
                     };
                 }
 
-                var playlist = new YLibraryResponse.YandexLibraryPlaylist
+                var playlist = new YandexLibraryPlaylist
                 {
                     Owner = playlistOwner,
                     Available = x["available"]?.ToObject<bool>(),
@@ -101,19 +101,19 @@ namespace Yandex.Music.Api.Responses
                 Verified = null
             };
 
-            var profiles = json["profiles"].Select(x => new YLibraryResponse.YandexLibraryProfile
+            var profiles = json["profiles"].Select(x => new YandexLibraryProfile
             {
                 Provider = x["provider"].ToObject<string>(),
                 Addresses = x["addresses"].Select(f => f.ToObject<string>()).ToList()
             }).ToList();
 
-            var counts = new YLibraryResponse.YandexLibraryCounter
+            var counts = new YandexLibraryCounter
             {
                 LikedArtists = json["counts"]["likedArtists"].ToObject<long>(),
                 LikedAlbums = json["counts"]["likedAlbums"].ToObject<long>(),
             };
 
-            return new YLibraryResponse
+            return new YLibraryPlaylistResponse
             {
                 Success = json["success"].ToObject<bool>(),
                 BookmarksPlaylistsIds = json["bookmarksPlaylistsIds"].ToString(),
