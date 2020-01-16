@@ -30,26 +30,32 @@ YandexMusicApi
 │
 ├── Users
 │   ├── Authorize (string username, string password)
+│   ├── GetAccounts ()
+│   ├── GetYandexCookie ()
+│   ├── GetUserAuthDetails ()
+│   ├── GetUserAuth ()
 │   ├── SearchUsers (string userName, int pageNumber = 0)
 │   └── UseProxy (IWebProxy proxy)
 ├── Music
 │   ├── GetListFavorites (string userId = null)
 │   ├── ExtractTrackToFile (YandexTrack track, string filder = "data")
-│   ├── ExtractStreamTrack (YandexTrack track)
+│   ├── ExtractStreamTrack (YandexTrack track, fileSize)
 │   ├── ExtractDataTrack (YandexTrack track)
 │   ├── SearchTrack (string trackName, int pageNumber = 0)
+│   ├── GetDownloadFilInfo ()
+│   ├── GetLibrary ()
 │   └── GetTrack (string trackId)
 ├── Playlist
 │   ├── GetPlaylistOfDay ()
 │   ├── GetPlaylistDejaVu ()
+│   ├── CreatePlaylist (name)
+│   ├── RemovePlaylist (kind)
 │   ├── SearchPlaylist (string playlistName, int pageNumber = 0)
 │   ├── SearchArtist (string artistName, int pageNumber = 0)
 │   ├── SearchAlbums (string albumName, int pageNumber = 0)
 │   └── GetAlbum (string albumId)
 └── Future
     ├── AddTrackToPlaylist ()
-    ├── CreatePlaylist ()
-    ├── Remove playlist ()
     ├── Remove track ()
     └── Radio-functions ()
 ```
@@ -111,7 +117,7 @@ Documentation in progress...
  var yandexApi = new YandexMusicApi();
  var track = yandexApi.SearchTrack("I Don't Care").First();
  var fileName = $"{track.Title}.mp3";
- yandexApi.ExtractTrackToFile(track, fileName);
+ yandexApi.ExtractTrackToFile($"{track.Id}:{track.Albums.FirstOrDefault().Id}, fileName);
 ```
 
 ##### Download track to stream
@@ -121,7 +127,7 @@ Stream for streaming music
 ```C#
  var yandexApi = new YandexMusicApi();
  var track = yandexApi.SearchTrack("I Don't Care").First();
- var streamTrack = yandexApi.ExtractStreamTrack(track);
+ var streamTrack = yandexApi.ExtractStreamTrack($"{track.Id}:{track.Albums.FirstOrDefault().Id}, track.FileSize);
  var artistName = track.Artists.FirstOrDefault()?.Name;
 
  streamTrack.Complated += (o, track1) =>
@@ -137,7 +143,7 @@ Stream for streaming music
 ```C#
  var yandexApi = new YandexMusicApi();
  var track = yandexApi.SearchTrack("I Don't Care").First();
- var byteData = yandexApi.ExtractDataTrack(track);
+ var byteData = yandexApi.ExtractDataTrack($"{track.Id}:{track.Albums.FirstOrDefault().Id});
 ```
 
 ##### Get favorites playlist
