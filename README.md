@@ -121,7 +121,7 @@ Documentation in progress...
  var yandexApi = new YandexMusicApi();
  var track = yandexApi.SearchTrack("I Don't Care").First();
  var fileName = $"{track.Title}.mp3";
- yandexApi.ExtractTrackToFile($"{track.Id}:{track.Albums.FirstOrDefault().Id}", fileName);
+ yandexApi.ExtractTrackToFile(track.GetKey(), fileName);
 ```
 
 ##### Download track to stream
@@ -131,7 +131,7 @@ Stream for streaming music
 ```C#
  var yandexApi = new YandexMusicApi();
  var track = yandexApi.SearchTrack("I Don't Care").First();
- var streamTrack = yandexApi.ExtractStreamTrack($"{track.Id}:{track.Albums.FirstOrDefault().Id}", track.FileSize);
+ var streamTrack = yandexApi.ExtractStreamTrack(track.GetKey(), track.FileSize);
  var artistName = track.Artists.FirstOrDefault()?.Name;
 
  streamTrack.Complated += (o, track1) =>
@@ -147,7 +147,7 @@ Stream for streaming music
 ```C#
  var yandexApi = new YandexMusicApi();
  var track = yandexApi.SearchTrack("I Don't Care").First();
- var byteData = yandexApi.ExtractDataTrack($"{track.Id}:{track.Albums.FirstOrDefault().Id}");
+ var byteData = yandexApi.ExtractDataTrack(track.GetKey());
 ```
 
 ##### Get favorites playlist
@@ -155,7 +155,7 @@ Stream for streaming music
 ```C#
  var yandexApi = new YandexMusicApi();
  yandexApi.Authorize("yourLogin", "yourPassword");
- var list = yandexApi.GetListFavorites();
+ var list = yandexApi.GetPlaylistFavorites();
 ```
 
 ##### Search track
