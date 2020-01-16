@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models;
@@ -126,6 +127,9 @@ namespace Yandex.Music.Api
     /// <param name="proxy">Proxy</param>
     /// <returns></returns>
     IYandexMusicApi UseWebProxy(IWebProxy proxy);
+
+    YTrackDownloadInfoResponse GetMetadataTrackForDownload(string trackKey, Int64 time);
+    YStorageDownloadFileResponse GetDownloadFilInfo(YTrackDownloadInfoResponse metadataInfo, Int64 time);
 
     YAccountResponse GetAccounts();
     YPlaylistChangeResponse CreatePlaylist(string name);

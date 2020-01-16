@@ -10,7 +10,14 @@ using Newtonsoft.Json.Linq;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models;
 using Yandex.Music.Api.Requests;
+using Yandex.Music.Api.Requests.Account;
+using Yandex.Music.Api.Requests.Album;
 using Yandex.Music.Api.Requests.Auth;
+using Yandex.Music.Api.Requests.Library;
+using Yandex.Music.Api.Requests.Playlist;
+using Yandex.Music.Api.Requests.Search;
+using Yandex.Music.Api.Requests.Track;
+using Yandex.Music.Api.Requests.Yandex;
 using Yandex.Music.Api.Responses;
 
 namespace Yandex.Music.Api
@@ -100,7 +107,7 @@ namespace Yandex.Music.Api
 
     public YAlbumResponse GetAlbum(string albumId)
     {
-      var request = GetRequest(_settings.GetAlbumURL(albumId),  WebRequestMethods.Http.Get);
+      var request = new YGetAlbumRequest(_httpContext).Create(albumId, User.Lang);
       var album = default(YAlbumResponse);
       
       using (var response = (HttpWebResponse) request.GetResponse())
@@ -116,7 +123,7 @@ namespace Yandex.Music.Api
     
     public YTrackResponse GetTrack(string trackId)
     {
-      var request = GetRequest(_settings.GetTrackURL(trackId),  WebRequestMethods.Http.Get);
+      var request = new YGetTrackResponse(_httpContext).Create(trackId, User.Lang);
       var track = default(YTrackResponse);
       
       using (var response = (HttpWebResponse) request.GetResponse())
@@ -134,8 +141,8 @@ namespace Yandex.Music.Api
     {
       if (login == null)
         login = User.Login;
-      
-      var request = GetRequest(_settings.GetListFavoritesURL(login));
+
+      var request = new YGetPlaylistFavoritesRequest(_httpContext).Create(login, User.Lang);
       var tracks = new List<YTrackResponse>();
       
       using (var response = (HttpWebResponse) request.GetResponse())
@@ -153,7 +160,7 @@ namespace Yandex.Music.Api
 
     public YPlaylistResponse GetPlaylistDejaVu()
     {
-      var request = GetRequest(_settings.GetPlaylistDejaVuURL());
+      var request = new YGetPlaylistDejaVuRequest(_httpContext).Create(User.Lang);
       var playlist = default(YPlaylistResponse);
       
       using (var response = (HttpWebResponse) request.GetResponse())
@@ -170,7 +177,7 @@ namespace Yandex.Music.Api
     
     public YPlaylistResponse GetPlaylistOfDay()
     {
-      var request = GetRequest(_settings.GetPlaylistOfDay());
+      var request = new YGetPlaylistOfDayRequest(_httpContext).Create(User.Lang);
       var playlist = default(YPlaylistResponse);
       
       using (var response = (HttpWebResponse) request.GetResponse())
@@ -185,25 +192,9 @@ namespace Yandex.Music.Api
       return playlist;
     }
 
-    public DownloadTrackMainResponse GetMetadataTrackForDownload(string trackKey, Int64 time)
+    public YTrackDownloadInfoResponse GetMetadataTrackForDownload(string trackKey, Int64 time)
     {
-      var url = $"https://music.yandex.ru/api/v2.1/handlers/track/{trackKey}/web-own_tracks-track-track-main/download/m?hq=0&external-domain=music.yandex.ru&overembed=no&__t={time}";
-      
-      var request = GetRequest(new Uri(url), WebRequestMethods.Http.Get);
-      request.Headers[HttpRequestHeader.Accept] = "application/json; q=1.0, text/*; q=0.8, */*; q=0.1";
-      request.Headers["Accept-Encoding"] = "gzip, deflate, br";
-      request.Headers["Accept-Language"] = "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7";
-//      request.Headers["access-control-allow-methods"] = "[POST]";
-      request.Headers["Sec-Fetch-Mode"] = "cors";
-      request.Headers["X-Current-UID"] = User.Uid;
-      request.Headers["X-Requested-With"] = "XMLHttpRequest";
-      request.Headers["X-Retpath-Y"] = $"https%3A%2F%2Fmusic.yandex.ru%2Fusers%2F{User.Login}%2Ftracks";
-
-      request.Headers["origin"] = "https://music.yandex.ru";
-      request.Headers["referer"] = $"https://music.yandex.ru/users/{User.Login}/tracks";
-      request.Headers["sec-fetch-mode"] = "cors";
-      request.Headers["sec-fetch-site"] = "same-site";
-
+      var request = new YTrackDownloadInfoRequest(_httpContext).Create(trackKey, time, User.Uid, User.Login);
       var data = default(JToken);
       
       using (var response = (HttpWebResponse) request.GetResponse())
@@ -213,17 +204,12 @@ namespace Yandex.Music.Api
         _httpContext.Cookies.Add(response.Cookies);
       }
 
-      return new DownloadTrackMainResponse
-      {
-        Codec = data["codec"].ToObject<string>(),
-        Bitrate = data["bitrate"].ToObject<int>(),
-        Src = data["src"].ToObject<string>(),
-        Gain = data["gain"].ToObject<bool>(),
-        Preview = data["preview"].ToObject<bool>(),
-      };
+      var trackInfo = YTrackDownloadInfoResponse.FromJson(data);
+
+      return trackInfo;
     }
 
-    public string BuildLinkForDownloadTrack(DownloadTrackMainResponse mainDownloadResponse, StorageFileDownloadResponse storageDownloadResponse)
+    public string BuildLinkForDownloadTrack(YTrackDownloadInfoResponse mainDownloadResponse, YStorageDownloadFileResponse storageDownloadResponse)
     {
       var path = storageDownloadResponse.Path;
       var host = storageDownloadResponse.Host;
@@ -243,28 +229,9 @@ namespace Yandex.Music.Api
       return link;
     }
 
-    public StorageFileDownloadResponse GetDownloadFilInfo(DownloadTrackMainResponse metadataInfo, Int64 time)
+    public YStorageDownloadFileResponse GetDownloadFilInfo(YTrackDownloadInfoResponse metadataInfo, Int64 time)
     {
-      var url = $"{metadataInfo.Src}&format=json&external-domain=music.yandex.ru&overembed=no&__t={time}";
-      
-      var request = GetRequest(new Uri(url), WebRequestMethods.Http.Get);
-      request.Headers[HttpRequestHeader.Accept] = "application/json; q=1.0, text/*; q=0.8, */*; q=0.1";
-//      request.Headers["Accept-Encoding"] = "gzip, deflate, br";
-      request.Headers["Accept-Encoding"] = "utf-8";
-      request.Headers["Accept-Language"] = "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7";
-//      request.Headers["access-control-allow-methods"] = "[POST]";
-      request.Headers["overembed"] = time.ToString();
-      request.Headers["Sec-Fetch-Mode"] = "cors";
-//      request.Headers["X-Current-UID"] = userUid;
-      request.Headers["X-Requested-With"] = "XMLHttpRequest";
-      request.Headers["X-Retpath-Y"] = $"https%3A%2F%2Fmusic.yandex.ru%2Fusers%2F{User.Login}%2Ftracks";
-      request.Headers[HttpRequestHeader.AcceptCharset] = Encoding.UTF8.HeaderName;
-
-      request.Headers["origin"] = "https://music.yandex.ru";
-      request.Headers["referer"] = $"https://music.yandex.ru/users/{User.Login}/tracks";
-      request.Headers["sec-fetch-mode"] = "cors";
-      request.Headers["sec-fetch-site"] = "same-site";
-
+      var request = new YStorageDownloadFileRequest(_httpContext).Create(metadataInfo.Src, time, User.Login);
       var data = default(JToken);
 
       using (var response = (HttpWebResponse) request.GetResponse())
@@ -283,13 +250,7 @@ namespace Yandex.Music.Api
         _httpContext.Cookies.Add(response.Cookies);
       }
 
-      return new StorageFileDownloadResponse
-      {
-        S = data["s"].ToObject<string>(),
-        Ts = data["ts"].ToObject<string>(),
-        Path = data["path"].ToObject<string>(),
-        Host = data["host"].ToObject<string>(),
-      };
+      return YStorageDownloadFileResponse.FromJson(data);
     }
     
     public void DownloadTrackToFile(string trackKey, string filePath)
@@ -399,7 +360,7 @@ namespace Yandex.Music.Api
     {
       var listResult = new List<IYandexSearchable>();
 
-      var request = GetRequest(_settings.GetSearchURL(searchText, searchType, page), WebRequestMethods.Http.Get);
+      var request = new YSearchRequest(_httpContext).Create(searchText, searchType, page);
 
       using (var response = (HttpWebResponse) request.GetResponse())
       {
@@ -562,9 +523,8 @@ namespace Yandex.Music.Api
     {
       try
       {
-        var uri = new Uri($"https://music.yandex.ru/handlers/accounts.jsx?lang={User.Lang}&external-domain=music.yandex.ru&overembed=false&ncrnd=0.7168345644602356");
-        var request = GetRequest(uri);
         var result = "";
+        var request = new YGetAccountRequest(_httpContext).Create(User.Lang);
 
         using (var response = (HttpWebResponse) request.GetResponse())
         {
@@ -603,22 +563,7 @@ namespace Yandex.Music.Api
 
     public YLibraryResponse GetLibrary(string ownerUid)
     {
-      var url = $"https://music.yandex.ru/handlers/library.jsx?owner={User.Login}&filter=playlists&likeFilter=all&lang={User.Lang}&external-domain=music.yandex.ru&overembed=false&ncrnd=0.17447934315877878";
-      
-      var request = GetRequest(new Uri(url),WebRequestMethods.Http.Get);
-      request.Headers[HttpRequestHeader.Accept] = "application/json, text/javascript, */*; q=0.01";
-      request.Headers["Accept-Encoding"] = "gzip, deflate, br";
-      request.Headers["Accept-Language"] = "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7";
-      request.Headers["access-control-allow-methods"] = "[POST]";
-      request.Headers["Sec-Fetch-Mode"] = "cors";
-      request.Headers["X-Current-UID"] = ownerUid;
-      request.Headers["X-Requested-With"] = "XMLHttpRequest";
-      request.Headers["X-Retpath-Y"] = $"https%3A%2F%2Fmusic.yandex.ru%2Fusers%2F{User.Login}%2Fplaylists";
-
-      request.Headers["origin"] = "https://music.yandex.ru";
-      request.Headers["referer"] = $"https://music.yandex.ru/users/{User.Login}/playlists";
-      request.Headers["sec-fetch-mode"] = "cors";
-      request.Headers["sec-fetch-site"] = "same-site";
+      var request = new YGetLibraryRequest(_httpContext).Create(User.Login, User.Lang, User.Uid);
 
       var result = string.Empty;
 
@@ -642,20 +587,7 @@ namespace Yandex.Music.Api
     
     public YAuthInfoResponse GetUserAuth()
     {
-      var request = GetRequest(new Uri($"https://music.yandex.ru/api/v2.1/handlers/auth?external-domain=music.yandex.ru&overembed=no&__t={GetTInterval()}"),
-          WebRequestMethods.Http.Get);
-      request.Headers[HttpRequestHeader.Accept] = "application/json; q=1.0, text/*; q=0.8, */*; q=0.1";
-      request.Headers["Accept-Encoding"] = "gzip, deflate, br";
-      request.Headers["Accept-Language"] = "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7";
-      request.Headers["access-control-allow-methods"] = "[POST]";
-      request.Headers["Sec-Fetch-Mode"] = "cors";
-      request.Headers["X-Requested-With"] = "XMLHttpRequest";
-      request.Headers["X-Retpath-Y"] = $"https%3A%2F%2Fmusic.yandex.ru%2Fusers%2F{User.Login}%2Fplaylists";
-
-      request.Headers["origin"] = "https://music.yandex.ru";
-      request.Headers["referer"] = $"https://music.yandex.ru/users/{User.Login}/playlists";
-      request.Headers["sec-fetch-mode"] = "cors";
-      request.Headers["sec-fetch-site"] = "same-site";
+      var request = new YGetAuthInfoRequest(_httpContext).Create(User.Login, GetTInterval());
 
       var result = string.Empty;
 
@@ -679,24 +611,7 @@ namespace Yandex.Music.Api
 
     public YAuthInfoUserResponse GetUserAuthDetails()
     {
-      var request = GetRequest(
-        new Uri(
-          $"https://music.yandex.ru/handlers/auth.jsx?lang={User.Lang}&external-domain=music.yandex.ru&overembed=false&ncrnd=0.1822837925478349"),
-        WebRequestMethods.Http.Get);
-      request.Headers[HttpRequestHeader.Accept] = "application/json, text/javascript, */*; q=0.01";
-      request.Headers["Accept-Encoding"] = "gzip, deflate, br";
-      request.Headers["Accept-Language"] = "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7";
-      request.Headers["access-control-allow-methods"] = "[POST]";
-      request.Headers["Sec-Fetch-Mode"] = "cors";
-      request.Headers["X-Current-UID"] = User.Uid;
-      request.Headers["X-Requested-With"] = "XMLHttpRequest";
-      request.Headers["X-Retpath-Y"] = $"https%3A%2F%2Fmusic.yandex.ru%2Fusers%2F{User.Login}%2Fplaylists";
-
-      request.Headers["origin"] = "https://music.yandex.ru";
-      request.Headers["referer"] = $"https://music.yandex.ru/users/{User.Login}/playlists";
-      request.Headers["sec-fetch-mode"] = "cors";
-      request.Headers["sec-fetch-site"] = "same-site";
-
+      var request = new YGetAuthInfoUserRequest(_httpContext).Create(User.Uid, User.Login, User.Lang);
       var result = string.Empty;
 
       using (var response = (HttpWebResponse) request.GetResponse())
@@ -727,31 +642,7 @@ namespace Yandex.Music.Api
 
       try
       {
-        var uri = new Uri("https://music.yandex.ru/handlers/change-playlist.jsx");
-        var request = GetRequest(uri,
-          new KeyValuePair<string, string>("action", "add"),
-          new KeyValuePair<string, string>("title", name),
-          new KeyValuePair<string, string>("lang", "ru"),
-          new KeyValuePair<string, string>("sign", User.Sign),
-          new KeyValuePair<string, string>("experiments", User.Experiments),
-          new KeyValuePair<string, string>("external-domain", "music.yandex.ru"),
-          new KeyValuePair<string, string>("overembed", "false")
-        );
-        request.Headers[HttpRequestHeader.Accept] = "application/json, text/javascript, */*; q=0.01";
-        request.Headers["Accept-Encoding"] = "gzip, deflate, br";
-        request.Headers["Accept-Language"] = "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7";
-        request.Headers["access-control-allow-methods"] = "[POST]";
-        request.Headers["Content-Type"] = "application/x-www-form-urlencoded; charset=UTF-8";
-
-        request.Headers["X-Current-UID"] = User.Uid;
-        request.Headers["X-Requested-With"] = "XMLHttpRequest";
-        request.Headers["X-Retpath-Y"] = $"https%3A%2F%2Fmusic.yandex.ru%2Fusers%2F{User.Login}%2Fplaylists";
-
-        request.Headers["origin"] = "https://music.yandex.ru";
-        request.Headers["referer"] = $"https://music.yandex.ru/users/{User.Login}/playlists";
-        request.Headers["sec-fetch-mode"] = "cors";
-        request.Headers["sec-fetch-site"] = "same-site";
-
+        var request = new YPlaylistChangeRequest(_httpContext).Create(name, User.Sign, User.Experiments, User.Uid, User.Login);
         var result = string.Empty;
 
         using (var response = (HttpWebResponse) request.GetResponse())
@@ -788,31 +679,7 @@ namespace Yandex.Music.Api
 //        var accounts = GetAccounts();
 //        var auth = GetUserAuthDetails(accounts.DefaultUID);
 
-        var uri = new Uri("https://music.yandex.ru/handlers/change-playlist.jsx");
-        var request = GetRequest(uri,
-          new KeyValuePair<string, string>("action", "delete"),
-          new KeyValuePair<string, string>("kind", kind.ToString()),
-          new KeyValuePair<string, string>("lang", "ru"),
-          new KeyValuePair<string, string>("sign", User.Sign),
-          new KeyValuePair<string, string>("experiments", User.Experiments),
-          new KeyValuePair<string, string>("external-domain", "music.yandex.ru"),
-          new KeyValuePair<string, string>("overembed", "false")
-        );
-        request.Headers[HttpRequestHeader.Accept] = "application/json, text/javascript, */*; q=0.01";
-        request.Headers["Accept-Encoding"] = "gzip, deflate, br";
-        request.Headers["Accept-Language"] = "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7";
-        request.Headers["access-control-allow-methods"] = "[POST]";
-        request.Headers["Content-Type"] = "application/x-www-form-urlencoded; charset=UTF-8";
-
-        request.Headers["X-Current-UID"] = User.Uid;
-        request.Headers["X-Requested-With"] = "XMLHttpRequest";
-        request.Headers["X-Retpath-Y"] = $"https%3A%2F%2Fmusic.yandex.ru%2Fusers%2F{User.Login}%2Fplaylists";
-
-        request.Headers["origin"] = "https://music.yandex.ru";
-        request.Headers["referer"] = $"https://music.yandex.ru/users/{User.Login}/playlists";
-        request.Headers["sec-fetch-mode"] = "cors";
-        request.Headers["sec-fetch-site"] = "same-site";
-        
+        var request = new YPlaylistRemoveRequest(_httpContext).Create(kind, User.Sign, User.Experiments, User.Uid, User.Login);
         request.GetResponse();
         
         return true;
@@ -829,18 +696,13 @@ namespace Yandex.Music.Api
     {
       try
       {
-        var request = GetRequest(new Uri("https://matchid.adfox.yandex.ru/getcookie"), WebRequestMethods.Http.Get);
-        
+        var request = new YGetCookieRequest(_httpContext).Create(User.Login);
 //        request.ProtocolVersion = new Version(2, 0);
 //        request.Headers.Add(":method", "GET");
 //        request.Headers.Add(":authority", "matchid.adfox.yandex.ru");
 //        request.Headers.Add(":path", "/getcookie");
 //        request.Headers.Add(":scheme", "https");
         
-        request.Headers["origin"] = "https://music.yandex.ru";
-        request.Headers["referer"] = $"https://music.yandex.ru/users/{User.Login}/playlists";
-        request.Headers["sec-fetch-mode"] = "cors";
-        request.Headers["sec-fetch-site"] = "same-site";
 
         var result = "";
         

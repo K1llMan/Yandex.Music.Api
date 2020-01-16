@@ -14,8 +14,9 @@ namespace Yandex.Music.Api.Requests
     {
       HttpContext = context;
     }
-    protected virtual HttpWebRequest GetRequest(Uri uri, string method)
+    protected virtual HttpWebRequest GetRequest(string url, string method)
     {
+      var uri = new Uri(url);
       var request = HttpWebRequest.CreateHttp(uri);
 
       if (HttpContext.WebProxy != null)
@@ -40,8 +41,7 @@ namespace Yandex.Music.Api.Requests
 
     protected virtual HttpWebRequest GetRequest(string url, params KeyValuePair<string, string>[] headers)
     {
-      var uri = new Uri(url);
-      var request = GetRequest(uri, WebRequestMethods.Http.Post);
+      var request = GetRequest(url, WebRequestMethods.Http.Post);
       var data = new StringBuilder(1024);
 
       for (var i = 0; i < headers.Length - 1; i++)
