@@ -514,56 +514,6 @@ namespace Yandex.Music.Api
       
       return JToken.Parse(result);
     }
-    
-    protected virtual HttpWebRequest GetRequest(Uri uri, string method)
-    {
-      var request = HttpWebRequest.CreateHttp(uri);
-      
-      if (_httpContext.WebProxy != null)
-      {
-        request.Proxy = _httpContext.WebProxy;
-      }
-
-      request.Method = method;
-      if (_httpContext.Cookies == null)
-      {
-        _httpContext.Cookies = new CookieContainer();
-      }
-
-      request.CookieContainer = _httpContext.Cookies;
-      request.KeepAlive = true;
-      request.Headers[HttpRequestHeader.AcceptCharset] = Encoding.UTF8.WebName;
-      request.Headers[HttpRequestHeader.AcceptEncoding] = "gzip";
-      request.AutomaticDecompression = DecompressionMethods.GZip;
-
-      return request;
-    }
-
-    protected virtual HttpWebRequest GetRequest(Uri uri, params KeyValuePair<string, string>[] headers)
-    {
-      var request = GetRequest(uri, WebRequestMethods.Http.Post);
-      var data = new StringBuilder(1024);
-      
-      for (var i = 0; i < headers.Length - 1; i++)
-      {
-        data.AppendFormat("{0}={1}&",
-          HttpUtility.HtmlEncode(headers[i].Key),
-          HttpUtility.HtmlEncode(headers[i].Value));
-      }
-
-      if (headers.Length > 0)
-      {
-        data.AppendFormat("{0}={1}",
-          HttpUtility.HtmlEncode(headers[headers.Length - 1].Key),
-          HttpUtility.HtmlEncode(headers[headers.Length - 1].Value));
-      }
-
-      var rawData = Encoding.UTF8.GetBytes(data.ToString());
-      request.ContentLength = rawData.Length;
-      request.GetRequestStream().Write(rawData, 0, rawData.Length);
-
-      return request;
-    }
 
     public YAccountResponse GetAccounts()
     {
