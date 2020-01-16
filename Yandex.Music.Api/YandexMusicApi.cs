@@ -320,6 +320,15 @@ namespace Yandex.Music.Api
       return bytes;
     }
 
+    public YandexStreamTrack ExtractStreamTrack(string trackKey, int fileSize)
+    {
+      var time = GetTInterval();
+      var mainDownloadResponse = GetMetadataTrackForDownload(trackKey, time);
+      var storageDownloadResponse = GetDownloadFilInfo(mainDownloadResponse, time);
+      
+      var fileLink = BuildLinkForDownloadTrack(mainDownloadResponse, storageDownloadResponse);
+      return YandexStreamTrack.Open(new Uri(fileLink), fileSize);
+    }
 //    public bool ExtractTrackToFile(YandexTrack track, string folder)
 //    {
 //      try
