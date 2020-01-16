@@ -29,31 +29,33 @@ This library provides following functions:
 YandexMusicApi
 │
 ├── Users
-│   ├── Authorize (string username, string password)
-│   ├── GetAccounts ()
-│   ├── GetYandexCookie ()
-│   ├── GetUserAuthDetails ()
-│   ├── GetUserAuth ()
-│   ├── SearchUsers (string userName, int pageNumber = 0)
+│   ├── Authorize / Async (string username, string password)
+│   ├── GetAccounts / Async ()
+│   ├── GetYandexCookie / Async ()
+│   ├── GetUserAuthDetails / Async ()
+│   ├── GetUserAuth / Async ()
+│   ├── SearchUsers / Async (string userName, int pageNumber = 0)
 │   └── UseProxy (IWebProxy proxy)
 ├── Music
-│   ├── GetListFavorites (string userId = null)
+│   ├── GetListFavorites / Async (string userId = null)
 │   ├── ExtractTrackToFile (YandexTrack track, string filder = "data")
 │   ├── ExtractStreamTrack (YandexTrack track, fileSize)
 │   ├── ExtractDataTrack (YandexTrack track)
-│   ├── SearchTrack (string trackName, int pageNumber = 0)
-│   ├── GetDownloadFilInfo ()
-│   ├── GetLibrary ()
-│   └── GetTrack (string trackId)
+│   ├── SearchTrack / Async (string trackName, int pageNumber = 0)
+│   ├── GetDownloadFilInfo / Async ()
+│   ├── GetLibrary / Async ()
+│   ├── ChangeLikedTrack / Async (string trackKey, bool value)
+│   ├── SetLikedTrack / Async (string trackKey, bool value)
+│   └── GetTrack / Async (string trackId)
 ├── Playlist
-│   ├── GetPlaylistOfDay ()
-│   ├── GetPlaylistDejaVu ()
-│   ├── CreatePlaylist (name)
-│   ├── RemovePlaylist (kind)
-│   ├── SearchPlaylist (string playlistName, int pageNumber = 0)
-│   ├── SearchArtist (string artistName, int pageNumber = 0)
-│   ├── SearchAlbums (string albumName, int pageNumber = 0)
-│   └── GetAlbum (string albumId)
+│   ├── GetPlaylistOfDay / Async ()
+│   ├── GetPlaylistDejaVu / Async ()
+│   ├── CreatePlaylist / Async (name)
+│   ├── RemovePlaylist / Async (kind)
+│   ├── SearchPlaylist / Async (string playlistName, int pageNumber = 0)
+│   ├── SearchArtist / Async (string artistName, int pageNumber = 0)
+│   ├── SearchAlbums / Async (string albumName, int pageNumber = 0)
+│   └── GetAlbum / Async (string albumId)
 └── Future
     ├── AddTrackToPlaylist ()
     ├── Remove track ()
@@ -117,7 +119,7 @@ Documentation in progress...
  var yandexApi = new YandexMusicApi();
  var track = yandexApi.SearchTrack("I Don't Care").First();
  var fileName = $"{track.Title}.mp3";
- yandexApi.ExtractTrackToFile($"{track.Id}:{track.Albums.FirstOrDefault().Id}, fileName);
+ yandexApi.ExtractTrackToFile($"{track.Id}:{track.Albums.FirstOrDefault().Id}", fileName);
 ```
 
 ##### Download track to stream
@@ -127,7 +129,7 @@ Stream for streaming music
 ```C#
  var yandexApi = new YandexMusicApi();
  var track = yandexApi.SearchTrack("I Don't Care").First();
- var streamTrack = yandexApi.ExtractStreamTrack($"{track.Id}:{track.Albums.FirstOrDefault().Id}, track.FileSize);
+ var streamTrack = yandexApi.ExtractStreamTrack($"{track.Id}:{track.Albums.FirstOrDefault().Id}", track.FileSize);
  var artistName = track.Artists.FirstOrDefault()?.Name;
 
  streamTrack.Complated += (o, track1) =>
@@ -143,7 +145,7 @@ Stream for streaming music
 ```C#
  var yandexApi = new YandexMusicApi();
  var track = yandexApi.SearchTrack("I Don't Care").First();
- var byteData = yandexApi.ExtractDataTrack($"{track.Id}:{track.Albums.FirstOrDefault().Id});
+ var byteData = yandexApi.ExtractDataTrack($"{track.Id}:{track.Albums.FirstOrDefault().Id}");
 ```
 
 ##### Get favorites playlist
