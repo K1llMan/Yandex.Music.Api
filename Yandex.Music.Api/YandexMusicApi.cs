@@ -1076,5 +1076,42 @@ namespace Yandex.Music.Api
     {
       return GetLibraryHistoryAsync().GetAwaiter().GetResult();
     }
+    
+    public async Task<YUnDislikeTrackResponse> UnderNotRecommendTrackAsync(string trackKey)
+    {
+      var request = new YUnDislikeTrackRequest(_httpContext).Create(trackKey, _httpContext.GetTimeInterval(), User.Sign, User.Uid, User.Login);
+      var setLikedResponse = default(YUnDislikeTrackResponse);
+      
+      try
+      {
+        var result = string.Empty;
+
+        using (var response = (HttpWebResponse) await request.GetResponseAsync())
+        {
+          using (var stream = response.GetResponseStream())
+          {
+            var reader = new StreamReader(stream);
+
+            result = await reader.ReadToEndAsync();
+          }
+
+          _httpContext.Cookies.Add(response.Cookies);
+        }
+
+        var json = JToken.Parse(result);
+        setLikedResponse = YUnDislikeTrackResponse.FromJson(json);
+      }
+      catch (WebException ex)
+      {
+        Console.WriteLine(ex);
+      }
+
+      return setLikedResponse;
+    }
+
+    public YUnDislikeTrackResponse UnderNotRecommendTrack(string trackKey)
+    {
+      return UnderNotRecommendTrackAsync(trackKey).GetAwaiter().GetResult();
+    }
   }
 }

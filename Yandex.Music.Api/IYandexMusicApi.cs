@@ -433,5 +433,19 @@ namespace Yandex.Music.Api
     /// <param name="trackKey">Track key</param>
     /// <returns></returns>
     YNotRecommendTrackResponse NotRecommendTrack(string trackKey);
+
+    
+    /// <summary>
+    /// Under not recommend
+    /// </summary>
+    /// <param name="trackKey"></param>
+    /// <returns></returns>
+    Task<YUnDislikeTrackResponse> UnderNotRecommendTrackAsync(string trackKey);
+    /// <summary>
+    /// Under not recommend
+    /// </summary>
+    /// <param name="trackKey"></param>
+    /// <returns></returns>
+    YUnDislikeTrackResponse UnderNotRecommendTrack(string trackKey);
   }
 }
