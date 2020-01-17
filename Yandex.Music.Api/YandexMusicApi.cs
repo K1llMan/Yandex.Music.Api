@@ -509,15 +509,21 @@ namespace Yandex.Music.Api
         
         if (searchType == YandexSearchType.Tracks)
         {
-          listResult = YTrackResponse.FromJsonArray(jArray).Select(x => (IYandexSearchable) x).ToList();
+//          listResult = YTrackResponse.FromJsonArray(jArray).Select(x => (IYandexSearchable) x).ToList();
+          var xxx = YSearchResponse.FromJson(json);
+          Console.WriteLine("123");
         } 
         else if (searchType == YandexSearchType.Artists)
         {
-          listResult = YArtistResponse.FromJsonArray(jArray).Select(x => (IYandexSearchable) x).ToList();
+//          listResult = YArtistResponse.FromJsonArray(jArray).Select(x => (IYandexSearchable) x).ToList();
+          var aaa = YSearchResponse.FromJson(json);
+          Console.WriteLine("123");
         }
         else if (searchType == YandexSearchType.Albums)
         {
-          listResult = YAlbumResponse.FromJsonArray(jArray).Select(x => (IYandexSearchable) x).ToList();
+//          listResult = YAlbumResponse.FromJsonArray(jArray).Select(x => (IYandexSearchable) x).ToList();
+          var aaa = YSearchResponse.FromJson(json);
+          Console.WriteLine("123");
         }
         else if (searchType == YandexSearchType.Playlists)
         {

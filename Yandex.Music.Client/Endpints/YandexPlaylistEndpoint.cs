@@ -31,5 +31,11 @@ namespace Yandex.Music.Client.Endpints
             
             Console.WriteLine("123");
         }
+
+        public async Task Search(string text, int page = 0)
+        {
+            var response = await _api.SearchPlaylistAsync(text, page);
+            Console.WriteLine("123");
+        }
     }
 }

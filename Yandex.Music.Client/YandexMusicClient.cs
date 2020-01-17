@@ -9,13 +9,18 @@ namespace Yandex.Music.Client
     {
         public YandexTrackEndpoint Track { get; set; }
         public YandexPlaylistEndpoint Playlist { get; set; }
+        public YandexArtistEndpoint Artist { get; set; }
+        public YandexAlbumEndpoint Album { get; set; }
         public IYandexMusicApi Api { get; set; }
         public YandexAuthUser AuthUser { get; set; }
+        
         public YandexMusicClient()
         {
             Api = new YandexMusicApi();
             Track = new YandexTrackEndpoint(Api);
             Playlist = new YandexPlaylistEndpoint(Api);
+            Artist = new YandexArtistEndpoint(Api);
+            Album = new YandexAlbumEndpoint(Api);
         }
 
         public async Task<bool> AuthorizeAsync(string login, string password)
