@@ -31,5 +31,14 @@ namespace Yandex.Music.Client.Tests.Tests.Playlist
 //            var playlistFavorites = 
                 await Client.Playlist.GetDejaVuAsync();
         }
+        
+        [Fact]
+        public async Task PlaylistSearch_GetAllTrecks_ReturnSuccess()
+        {
+            await Client.AuthorizeAsync(AppSettings.Login, AppSettings.Password);
+
+//            var playlistFavorites = 
+                await Client.Playlist.Search("1");
+        }
     }
 }

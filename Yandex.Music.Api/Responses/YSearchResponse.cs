@@ -61,8 +61,14 @@ namespace Yandex.Music.Api.Responses
                     PerPage = json.SelectToken("artists")?.SelectToken("perPage")?.ToObject<int>(),
                     Total = json.SelectToken("artists")?.SelectToken("total")?.ToObject<int>()
                 },
+                Playlists = new YSearchResult<YSearchPlaylistModel>
+                {
+                    Items = json.SelectToken("playlists")?.SelectToken("items")?.Select(YSearchPlaylistModel.FromJson).ToList(),
+                    Order = json.SelectToken("playlists")?.SelectToken("order")?.ToObject<int>(),
+                    PerPage = json.SelectToken("playlists")?.SelectToken("perPage")?.ToObject<int>(),
+                    Total = json.SelectToken("playlists")?.SelectToken("total")?.ToObject<int>()
+                },
                 // videos
-                // playlists
                 // users
                 RequestId = json.SelectToken("request_id")?.ToObject<string>(),
                 SearchRequestId = json.SelectToken("searchRequestId")?.ToObject<string>(),

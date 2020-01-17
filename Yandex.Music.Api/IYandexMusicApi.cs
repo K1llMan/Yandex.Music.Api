@@ -44,14 +44,14 @@ namespace Yandex.Music.Api
     /// <param name="trackName"></param>
     /// <param name="pageNumber"></param>
     /// <returns></returns>
-    Task<List<YTrackResponse>> SearchTrackAsync(string trackName, int pageNumber = 0);
+    Task<YSearchResponse> SearchTrackAsync(string trackName, int pageNumber = 0);
     /// <summary>
     /// Search by tracks
     /// </summary>
     /// <param name="trackName">Track name</param>
     /// <param name="pageNumber">Page number</param>
     /// <returns></returns>
-    List<YTrackResponse> SearchTrack(string trackName, int pageNumber = 0);
+    YSearchResponse SearchTrack(string trackName, int pageNumber = 0);
 
     
     /// <summary>
@@ -60,14 +60,14 @@ namespace Yandex.Music.Api
     /// <param name="artistName">Artist name</param>
     /// <param name="pageNumber">Page number</param>
     /// <returns></returns>
-    Task<List<YArtistResponse>> SearchArtistAsync(string artistName, int pageNumber = 0);
+    Task<YSearchResponse> SearchArtistAsync(string artistName, int pageNumber = 0);
     /// <summary>
     /// Search by artists
     /// </summary>
     /// <param name="artistName">Artist name</param>
     /// <param name="pageNumber">Page number</param>
     /// <returns></returns>
-    List<YArtistResponse> SearchArtist(string artistName, int pageNumber = 0);
+    YSearchResponse SearchArtist(string artistName, int pageNumber = 0);
 
     
     /// <summary>
@@ -76,14 +76,14 @@ namespace Yandex.Music.Api
     /// <param name="albumName">Album name</param>
     /// <param name="pageNumber">Page number</param>
     /// <returns></returns>
-    Task<List<YPlaylistResponse>> SearchPlaylistAsync(string playlistName, int pageNumber = 0);
+    Task<YSearchResponse> SearchPlaylistAsync(string playlistName, int pageNumber = 0);
     /// <summary>
     /// Search by albums
     /// </summary>
     /// <param name="albumName">Album name</param>
     /// <param name="pageNumber">Page number</param>
     /// <returns></returns>
-    List<YAlbumResponse> SearchAlbums(string albumName, int pageNumber = 0);
+    YSearchResponse SearchAlbums(string albumName, int pageNumber = 0);
 
     
     /// <summary>
@@ -92,14 +92,14 @@ namespace Yandex.Music.Api
     /// <param name="playlistName">Playlist name</param>
     /// <param name="pageNumber">Page number</param>
     /// <returns></returns>
-    Task<List<YAlbumResponse>> SearchAlbumsAsync(string albumName, int pageNumber = 0);
+    Task<YSearchResponse> SearchAlbumsAsync(string albumName, int pageNumber = 0);
     /// <summary>
     /// Search by playlists
     /// </summary>
     /// <param name="playlistName">Playlist name</param>
     /// <param name="pageNumber">Page number</param>
     /// <returns></returns>
-    List<YPlaylistResponse> SearchPlaylist(string playlistName, int pageNumber = 0);
+    YSearchResponse SearchPlaylist(string playlistName, int pageNumber = 0);
 
     
     /// <summary>
@@ -108,14 +108,14 @@ namespace Yandex.Music.Api
     /// <param name="userName">User name</param>
     /// <param name="pageNumber">Page number</param>
     /// <returns></returns>
-    Task<List<YUserResponse>> SearchUsersAsync(string userName, int pageNumber = 0);
+    Task<YSearchResponse> SearchUsersAsync(string userName, int pageNumber = 0);
     /// <summary>
     /// Search by users
     /// </summary>
     /// <param name="userName">User name</param>
     /// <param name="pageNumber">Page number</param>
     /// <returns></returns>
-    List<YUserResponse> SearchUsers(string userName, int pageNumber = 0);
+    YSearchResponse SearchUsers(string userName, int pageNumber = 0);
 
     
     /// <summary>
@@ -177,7 +177,7 @@ namespace Yandex.Music.Api
     /// <param name="searchType">Search type</param>
     /// <param name="page">Page number</param>
     /// <returns></returns>
-    Task<List<IYandexSearchable>> SearchAsync(string searchText, YandexSearchType searchType, int page = 0);
+    Task<YSearchResponse> SearchAsync(string searchText, YandexSearchType searchType, int page = 0);
     /// <summary>
     /// Search by yandex music
     /// </summary>
@@ -185,7 +185,7 @@ namespace Yandex.Music.Api
     /// <param name="searchType">Search type</param>
     /// <param name="page">Page number</param>
     /// <returns></returns>
-    List<IYandexSearchable> Search(string searchText, YandexSearchType searchType, int page = 0);
+    YSearchResponse Search(string searchText, YandexSearchType searchType, int page = 0);
 
     
     /// <summary>
