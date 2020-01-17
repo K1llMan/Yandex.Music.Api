@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
 using Yandex.Music.Api.Extensions;
 
-namespace Yandex.Music.Api.Common
+namespace Yandex.Music.Api.Models.Playlist
 {
-  public class YandexCover
+  public class YPlaylistCover
   {
     public string Type { get; set; }
     public string Prefix { get; set; }
@@ -12,9 +12,9 @@ namespace Yandex.Music.Api.Common
     public string Dir { get; set; }
     public string Version { get; set; }
 
-    public static YandexCover FromJson(JToken jCover)
+    public static YPlaylistCover FromJson(JToken jCover)
     {
-      var cover = new YandexCover
+      var cover = new YPlaylistCover
       {
         Type = jCover.GetString("type"),
         Prefix = jCover.GetString("prefix"),

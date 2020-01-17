@@ -13,7 +13,7 @@ namespace Yandex.Music.Api.Responses
     public List<YAlbumResponse> Albums { get; set; }
     public string RealId { get; set; }
     public string Title { get; set; }
-    public YandexMajor Major { get; set; }
+    public YMajor Major { get; set; }
     public bool? Available { get; set; }
     public bool? AvailableForPremiumUsers { get; set; }
     public int? DurationMS { get; set; }
@@ -21,6 +21,8 @@ namespace Yandex.Music.Api.Responses
     public int? FileSize { get; set; }
     public List<YArtistResponse> Artists { get; set; }
     public string OgImage { get; set; }
+    
+    
 
     public string GetKey()
     {
@@ -36,7 +38,7 @@ namespace Yandex.Music.Api.Responses
           Id = jTrack.GetString("id"),
           RealId = jTrack.GetString("realId"),
           Title = jTrack.GetString("title"),
-          Major = YandexMajor.FromJson(jTrack.Contains("major")),
+          Major = YMajor.FromJson(jTrack.Contains("major")),
           Available = jTrack.GetBool("available"),
           AvailableForPremiumUsers = jTrack.GetBool("availableForPremiumUsers"),
           Albums = jTrack.ContainField("albums")

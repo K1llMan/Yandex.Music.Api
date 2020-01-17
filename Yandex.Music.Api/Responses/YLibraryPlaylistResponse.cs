@@ -15,8 +15,8 @@ namespace Yandex.Music.Api.Responses
         public bool Verified { get; set; }
         public YandexOwner Owner { get; set; }
         public bool Visibility { get; set; }
-        public List<YandexLibraryProfile> Profiles { get; set; }
-        public YandexLibraryCounter Counts { get; set; }
+        public List<YProfile> Profiles { get; set; }
+        public YLikedCounts Counts { get; set; }
         public bool HasTracks { get; set; }
         public bool IsRadioAvailable { get; set; }
 
@@ -101,13 +101,13 @@ namespace Yandex.Music.Api.Responses
                 Verified = null
             };
 
-            var profiles = json["profiles"].Select(x => new YandexLibraryProfile
+            var profiles = json["profiles"].Select(x => new YProfile
             {
                 Provider = x["provider"].ToObject<string>(),
                 Addresses = x["addresses"].Select(f => f.ToObject<string>()).ToList()
             }).ToList();
 
-            var counts = new YandexLibraryCounter
+            var counts = new YLikedCounts
             {
                 LikedArtists = json["counts"]["likedArtists"].ToObject<long>(),
                 LikedAlbums = json["counts"]["likedAlbums"].ToObject<long>(),
@@ -130,17 +130,8 @@ namespace Yandex.Music.Api.Responses
             };
         }
 
-        public class YandexLibraryCounter
-        {
-            public long LikedArtists { get; set; }
-            public long LikedAlbums { get; set; }
-        }
 
-        public class YandexLibraryProfile
-        {
-            public string Provider { get; set; }
-            public List<string> Addresses { get; set; }
-        }
+
 
         public class YandexLibraryPlaylist
         {

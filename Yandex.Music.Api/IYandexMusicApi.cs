@@ -29,13 +29,13 @@ namespace Yandex.Music.Api
     /// </summary>
     /// <param name="userId">User id</param>
     /// <returns></returns>
-    Task<List<YTrackResponse>> GetPlaylistFavoritesAsync(string login = null);
+    Task<YPlaylistFavoritesResponse> GetPlaylistFavoritesAsync(string login = null);
     /// <summary>
     /// Return playlist track favorites
     /// </summary>
     /// <param name="userId">User id</param>
     /// <returns></returns>
-    List<YTrackResponse> GetPlaylistFavorites(string userId = null);
+    YPlaylistFavoritesResponse GetPlaylistFavorites(string userId = null);
     
     
     /// <summary>

@@ -14,8 +14,8 @@ namespace Yandex.Music.Api.Responses
         public bool Verified { get; set; }
         public YandexOwner Owner { get; set; }
         public bool Visibility { get; set; }
-        public List<YLibraryPlaylistResponse.YandexLibraryProfile> Profiles { get; set; }
-        public YLibraryPlaylistResponse.YandexLibraryCounter Counts { get; set; }
+        public List<YProfile> Profiles { get; set; }
+        public YLikedCounts Counts { get; set; }
         public bool HasTracks { get; set; }
         public bool IsRadioAvailable { get; set; }
 

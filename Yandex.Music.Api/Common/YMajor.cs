@@ -4,25 +4,23 @@ using Yandex.Music.Api.Extensions;
 
 namespace Yandex.Music.Api.Common
 {
-  public class YandexMajor
+  public class YMajor
   {
     public string Id { get; set; }
     public string Name { get; set; }
 
-    public static YandexMajor FromJson(JToken jMajor)
+    public static YMajor FromJson(JToken json)
     {
-      if (!jMajor.Contains("major"))
+      if (json == null)
       {
         return null;
       }
 
-      var majot = new YandexMajor
+      return new YMajor
       {
-        Id = jMajor.GetString("id"),
-        Name = jMajor.GetString("name")
+        Id = json["id"].ToObject<string>(),
+        Name = json["name"].ToObject<string>()
       };
-      
-      return majot;
     }
   }
 }

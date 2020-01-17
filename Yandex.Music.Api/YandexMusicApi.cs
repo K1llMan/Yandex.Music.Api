@@ -171,20 +171,19 @@ namespace Yandex.Music.Api
       return GetTrackAsync(trackId).GetAwaiter().GetResult();
     }
 
-    public async Task<List<YTrackResponse>> GetPlaylistFavoritesAsync(string login = null)
+    public async Task<YPlaylistFavoritesResponse> GetPlaylistFavoritesAsync(string login = null)
     {
       if (login == null)
         login = User.Login;
 
       var request = new YGetPlaylistFavoritesRequest(_httpContext).Create(login, User.Lang);
-      var tracks = new List<YTrackResponse>();
+      var tracks = new YPlaylistFavoritesResponse();
       
       using (var response = (HttpWebResponse) await request.GetResponseAsync())
       {
         var data = await GetDataFromResponseAsync(response);
-        var jTracks = (JArray) data["tracks"];
 
-        tracks = YTrackResponse.FromJsonArray(jTracks);
+        tracks = YPlaylistFavoritesResponse.FromJson(data);
 
         _httpContext.Cookies.Add(response.Cookies);
       }
@@ -192,7 +191,7 @@ namespace Yandex.Music.Api
       return tracks;
     }
 
-    public List<YTrackResponse> GetPlaylistFavorites(string login = null)
+    public YPlaylistFavoritesResponse GetPlaylistFavorites(string login = null)
     {
       return GetPlaylistFavoritesAsync(login).GetAwaiter().GetResult();
     }

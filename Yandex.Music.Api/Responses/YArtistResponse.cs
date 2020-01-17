@@ -12,7 +12,7 @@ namespace Yandex.Music.Api.Responses
     public string Name { get; set; }
     public bool? Various { get; set; }
     public bool? Composer { get; set; }
-    public YandexCover Cover { get; set; }
+    public YCover Cover { get; set; }
     public string[] Genres { get; set; }
 
     public static YArtistResponse FromJson(JToken jArtist)
@@ -23,7 +23,7 @@ namespace Yandex.Music.Api.Responses
         Name = jArtist.GetString("name"),
         Various = jArtist.GetBool("various"),
         Composer = jArtist.GetBool("composer"),
-        Cover = jArtist.ContainField("cover") ? YandexCover.FromJson(jArtist["cover"]) : null,
+        Cover = jArtist.ContainField("cover") ? YCover.FromJson(jArtist["cover"]) : null,
         Genres = new string[] { }
       };
 
