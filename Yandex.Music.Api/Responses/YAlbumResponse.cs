@@ -2,12 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
-using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Extensions;
 
 namespace Yandex.Music.Api.Responses
 {
-  public class YAlbumResponse : IYandexSearchable
+  public class YAlbumResponse
   {
     public List<YArtistResponse> Artists { get; set; }
     public bool? Available { get; set; }

@@ -6,7 +6,7 @@ using Yandex.Music.Api.Models.Playlist;
 
 namespace Yandex.Music.Api.Responses
 {
-  public class YPlaylistResponse : IYandexSearchable
+  public class YPlaylistResponse
   {
     public int? Revision { get; set; }
     public string Kind { get; set; }

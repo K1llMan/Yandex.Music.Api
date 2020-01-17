@@ -13,7 +13,7 @@ namespace Yandex.Music.Api.Responses
         public List<long> PlaylistIds { get; set; }
         public List<YandexLibraryPlaylist> Playlists { get; set; }
         public bool Verified { get; set; }
-        public YandexOwner Owner { get; set; }
+        public YOwner Owner { get; set; }
         public bool Visibility { get; set; }
         public List<YProfile> Profiles { get; set; }
         public YLikedCounts Counts { get; set; }
@@ -26,7 +26,7 @@ namespace Yandex.Music.Api.Responses
 
             foreach (var x in json["playlists"])
             {
-                var playlistOwner = new YandexOwner
+                var playlistOwner = new YOwner
                 {
                     Uid = x["owner"]["uid"].ToObject<string>(),
                     Login = x["owner"]["login"].ToObject<string>(),
@@ -43,28 +43,7 @@ namespace Yandex.Music.Api.Responses
                         AlbumId = f["albumId"]?.ToObject<long?>()
                     }).ToList();
 
-                var libraryCover = default(YandexLibraryPlaylist.YandexLibraryPlaylistCover);
-
-                if (x.SelectToken("cover")?.SelectToken("type").ToObject<string>() == "mosaic")
-                {
-                    libraryCover = new YandexLibraryPlaylist.YandexLibraryPlaylistCoverMosaic
-                    {
-                        Type = x["cover"]["type"].ToObject<string>(),
-                        ItemsUri = x["cover"]["itemsUri"].Select(f => f.ToObject<string>()).ToList(),
-                        Custom = x["cover"]["custom"].ToObject<bool>()
-                    };
-                }
-                else if (x.SelectToken("cover")?.SelectToken("type").ToObject<string>() == "pic")
-                {
-                    libraryCover = new YandexLibraryPlaylist.YandexLibraryPlaylistCoverPic
-                    {
-                        Type = x["cover"]["type"].ToObject<string>(),
-                        Dir = x["cover"]["dir"].ToObject<string>(),
-                        Version = x["cover"]["version"].ToObject<string>(),
-                        Uri = x["cover"]["uri"].ToObject<string>(),
-                        Custom = x["cover"]["custom"].ToObject<bool>()
-                    };
-                }
+                var libraryCover = YCover.FromJson(x.SelectToken("cover"));
 
                 var playlist = new YandexLibraryPlaylist
                 {
@@ -92,7 +71,7 @@ namespace Yandex.Music.Api.Responses
                 playlists.Add(playlist);
             }
 
-            var libraryOwner = new YandexOwner
+            var libraryOwner = new YOwner
             {
                 Uid = json["owner"]["uid"].ToObject<string>(),
                 Login = json["owner"]["login"].ToObject<string>(),
@@ -135,7 +114,7 @@ namespace Yandex.Music.Api.Responses
 
         public class YandexLibraryPlaylist
         {
-            public YandexOwner Owner { get; set; }
+            public YOwner Owner { get; set; }
             public long? Revision { get; set; }
             public long? Kind { get; set; }
             public bool? Available { get; set; }
@@ -150,34 +129,11 @@ namespace Yandex.Music.Api.Responses
             public bool? IsBanner { get; set; }
             public bool? IsPremiere { get; set; }
             public long? DurationMs { get; set; }
-            public YandexLibraryPlaylistCover Cover { get; set; }
+            public YCover Cover { get; set; }
             public string OgImage { get; set; }
             public List<YandexLibraryPlaylistTrack> Tracks { get; set; }
             public string Tags { get; set; }
             public string Prerolls { get; set; }
-
-            public class YandexLibraryPlaylistCoverError : YandexLibraryPlaylistCover
-            {
-                public string Error { get; set; }
-            }
-
-            public class YandexLibraryPlaylistCoverMosaic : YandexLibraryPlaylistCover
-            {
-                public List<string> ItemsUri { get; set; }
-            }
-
-            public class YandexLibraryPlaylistCoverPic : YandexLibraryPlaylistCover
-            {
-                public string Dir { get; set; }
-                public string Version { get; set; }
-                public string Uri { get; set; }
-            }
-
-            public class YandexLibraryPlaylistCover
-            {
-                public string Type { get; set; }
-                public bool? Custom { get; set; }
-            }
 
             public class YandexLibraryPlaylistTrack
             {

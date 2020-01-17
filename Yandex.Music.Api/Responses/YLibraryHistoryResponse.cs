@@ -12,7 +12,7 @@ namespace Yandex.Music.Api.Responses
         public List<long> PlaylistIds { get; set; }
         public List<YLibraryPlaylistResponse.YandexLibraryPlaylist> Playlists { get; set; }
         public bool Verified { get; set; }
-        public YandexOwner Owner { get; set; }
+        public YOwner Owner { get; set; }
         public bool Visibility { get; set; }
         public List<YProfile> Profiles { get; set; }
         public YLikedCounts Counts { get; set; }

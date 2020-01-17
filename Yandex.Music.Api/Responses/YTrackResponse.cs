@@ -7,7 +7,7 @@ using Yandex.Music.Api.Extensions;
 
 namespace Yandex.Music.Api.Responses
 {
-  public class YTrackResponse : IYandexSearchable
+  public class YTrackResponse
   {
     public string Id { get; set; }
     public List<YAlbumResponse> Albums { get; set; }

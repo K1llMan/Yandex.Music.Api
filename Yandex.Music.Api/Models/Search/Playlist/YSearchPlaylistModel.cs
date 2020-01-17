@@ -14,7 +14,7 @@ namespace Yandex.Music.Api.Models.Search.Playlist
         public string DescriptionFormatted { get; set; }
         public int? TrackCount { get; set; }
         public YCover Cover { get; set; }
-        public YandexOwner Owner { get; set; }
+        public YOwner Owner { get; set; }
         public List<string> Tags { get; set; }
         public long? LikesCount { get; set; }
 
@@ -34,7 +34,7 @@ namespace Yandex.Music.Api.Models.Search.Playlist
                 DescriptionFormatted = json.SelectToken("descriptionFormatted")?.ToObject<string>(),
                 TrackCount = json.SelectToken("trackCount")?.ToObject<int>(),
                 Cover = YCover.FromJson(json.SelectToken("cover")),
-                Owner = YandexOwner.FromJson(json["owner"]),
+                Owner = YOwner.FromJson(json["owner"]),
                 Tags = json.SelectToken("tags")?.Select(x => x.ToObject<string>()).ToList(),
                 LikesCount = json.SelectToken("likesCount")?.ToObject<long>(),
             };

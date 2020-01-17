@@ -13,7 +13,7 @@ namespace Yandex.Music.Api.Responses
     {
       var x = json["playlist"];
 
-      var playlistOwner = new YandexOwner
+      var playlistOwner = new YOwner
       {
         Uid = x["owner"]["uid"].ToObject<string>(),
         Login = x["owner"]["login"].ToObject<string>(),
@@ -30,35 +30,7 @@ namespace Yandex.Music.Api.Responses
           AlbumId = f["albumId"]?.ToObject<long?>()
         }).ToList();
 
-      var libraryCover = default(YLibraryPlaylistResponse.YandexLibraryPlaylist.YandexLibraryPlaylistCover);
-
-      if (x.SelectToken("cover")?.SelectToken("error") != null)
-      {
-        libraryCover = new YLibraryPlaylistResponse.YandexLibraryPlaylist.YandexLibraryPlaylistCoverError
-        {
-          Error = x["cover"]["error"].ToObject<string>()
-        };
-      }
-      else if (x.SelectToken("cover")?.SelectToken("type").ToObject<string>() == "mosaic")
-      {
-        libraryCover = new YLibraryPlaylistResponse.YandexLibraryPlaylist.YandexLibraryPlaylistCoverMosaic
-        {
-          Type = x["cover"]["type"].ToObject<string>(),
-          ItemsUri = x["cover"]["itemsUri"].Select(f => f.ToObject<string>()).ToList(),
-          Custom = x["cover"]["custom"].ToObject<bool>()
-        };
-      }
-      else if (x.SelectToken("cover")?.SelectToken("type").ToObject<string>() == "pic")
-      {
-        libraryCover = new YLibraryPlaylistResponse.YandexLibraryPlaylist.YandexLibraryPlaylistCoverPic
-        {
-          Type = x["cover"]["type"].ToObject<string>(),
-          Dir = x["cover"]["dir"].ToObject<string>(),
-          Version = x["cover"]["version"].ToObject<string>(),
-          Uri = x["cover"]["uri"].ToObject<string>(),
-          Custom = x["cover"]["custom"].ToObject<bool>()
-        };
-      }
+      var libraryCover = YCover.FromJson(x.SelectToken("cover"));
 
       var playlist = new YLibraryPlaylistResponse.YandexLibraryPlaylist
       {

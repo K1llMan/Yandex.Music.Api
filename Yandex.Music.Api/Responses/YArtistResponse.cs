@@ -6,7 +6,7 @@ using Yandex.Music.Api.Extensions;
 
 namespace Yandex.Music.Api.Responses
 {
-    public class YArtistResponse : IYandexSearchable
+    public class YArtistResponse
     {
     public string Id { get;set; }
     public string Name { get; set; }
