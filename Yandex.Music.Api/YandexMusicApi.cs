@@ -1,12 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Yandex.Music.Api.API;
 using Yandex.Music.Api.Common;
-using Yandex.Music.Api.Requests;
 using Yandex.Music.Api.Requests.Yandex;
 using Yandex.Music.Api.Responses;
 
@@ -59,52 +54,13 @@ namespace Yandex.Music.Api
 
         #endregion Ветки API
 
-        #region Вспомогательные функции
-
-        protected internal T Deserialize<T>(JToken token, string jsonPath = "")
-        {
-            JToken obj = token.SelectToken(jsonPath).ToString();
-            return JsonConvert.DeserializeObject<T>(obj.ToString());
-        }
-
-        protected internal T Deserialize<T>(string json, string jsonPath = "")
-        {
-            return Deserialize<T>(JToken.Parse(json), jsonPath);
-        }
-
-        protected internal async Task<T> GetDataFromResponseAsync<T>(HttpContext context, HttpWebResponse response, string jsonPath = "")
-        {
-            try {
-                string result;
-                using (var stream = response.GetResponseStream()) {
-                    var reader = new StreamReader(stream);
-                    result = await reader.ReadToEndAsync();
-                }
-
-                context.Cookies.Add(response.Cookies);
-                return Deserialize<T>(result, jsonPath);
-            }
-            catch (Exception ex) {
-                Console.WriteLine(ex);
-                throw;
-            }
-        }
-
-        #endregion Вспомогательные функции
-
         #region Основные функции
 
         public async Task<YGetCookieResponse> GetYandexCookieAsync(YAuthStorage storage)
         {
-            var request = new YGetCookieRequest(storage.Context).Create(storage.User.Login);
-            //        request.ProtocolVersion = new Version(2, 0);
-            //        request.Headers.Add(":method", "GET");
-            //        request.Headers.Add(":authority", "matchid.adfox.yandex.ru");
-            //        request.Headers.Add(":path", "/getcookie");
-            //        request.Headers.Add(":scheme", "https");
-            using (var response = (HttpWebResponse) await request.GetResponseAsync()) {
-                return await GetDataFromResponseAsync<YGetCookieResponse>(storage.Context, response);
-            }
+            return await new YGetCookieRequest(storage)
+                .Create(storage.User.Login)
+                .GetResponseAsync<YGetCookieResponse>();
         }
 
         public YGetCookieResponse GetYandexCookie(YAuthStorage storage)
@@ -112,9 +68,9 @@ namespace Yandex.Music.Api
             return GetYandexCookieAsync(storage).GetAwaiter().GetResult();
         }
 
-        public YandexMusicApi UseWebProxy(IWebProxy proxy)
+        public YandexMusicApi UseWebProxy(IWebProxy usingProxy)
         {
-            this.proxy = proxy;
+            proxy = usingProxy;
 
             return this;
         }

@@ -1,22 +1,25 @@
 using System.Collections.Generic;
 using System.Net;
+using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Playlist
 {
     internal class YGetPlaylistRequest : YRequest
     {
-        public YGetPlaylistRequest(HttpContext context) : base(context)
+        public YGetPlaylistRequest(YAuthStorage storage) : base(storage)
         {
         }
 
-        public HttpWebRequest Create(string kinds)
+        public YRequest Create(string kinds)
         {
             Dictionary<string, string> query = new Dictionary<string, string> {
                 {"owner", "music.partners"},
                 {"kinds", kinds}
             };
 
-            return GetRequest(YEndpoints.Playlist, WebRequestMethods.Http.Post, query);
+            FormRequest(YEndpoints.Playlist, WebRequestMethods.Http.Post, query);
+
+            return this;
         }
     }
 }

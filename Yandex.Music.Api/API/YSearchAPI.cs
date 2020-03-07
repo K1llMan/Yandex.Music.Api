@@ -1,5 +1,4 @@
-﻿using System.Net;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Requests.Search;
 using Yandex.Music.Api.Responses;
@@ -68,11 +67,15 @@ namespace Yandex.Music.Api.API
 
         public async Task<YSearchResponse> SearchAsync(YAuthStorage storage, string searchText, YandexSearchType searchType, int page = 0)
         {
-            var request = new YSearchRequest(storage.Context).Create(searchText, searchType, page);
+            return await new YSearchRequest(storage)
+                .Create(searchText, searchType, page)
+                .GetResponseAsync<YSearchResponse>();
 
+            /*
             using (var response = (HttpWebResponse) await request.GetResponseAsync()) {
                 return await api.GetDataFromResponseAsync<YSearchResponse>(storage.Context, response);
             }
+            */
         }
 
         public YSearchResponse Search(YAuthStorage storage, string searchText, YandexSearchType searchType, int page = 0)
@@ -83,7 +86,7 @@ namespace Yandex.Music.Api.API
         //    protected YandexTrackDownloadInfo GetDownloadTrackInfo(string storageDir)
         //    {
         //      var fileName = GetDownloadTrackInfoFileName(storageDir);
-        //      var request = GetRequest(_settings.GetDownloadTrackInfoURL(storageDir, fileName));
+        //      var request = FormRequest(_settings.GetDownloadTrackInfoURL(storageDir, fileName));
         //      var trackDownloadInfo = new YandexTrackDownloadInfo();
 
         //      using (var response = (HttpWebResponse) request.GetResponse())
@@ -115,7 +118,7 @@ namespace Yandex.Music.Api.API
         //    protected string GetDownloadTrackInfoFileName(string storageDir)
         //    {
         //      var url = _settings.GetURLDownloadFile(storageDir);
-        //      var request = GetRequest(url, WebRequestMethods.Http.Get);
+        //      var request = FormRequest(url, WebRequestMethods.Http.Get);
         //      var fileName = "";
         //      var trackLength = 0;
 

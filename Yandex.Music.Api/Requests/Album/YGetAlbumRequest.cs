@@ -1,24 +1,26 @@
 using System.Collections.Generic;
-using System.Net;
+using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Album
 {
     internal class YGetAlbumRequest : YRequest
     {
-        public YGetAlbumRequest(HttpContext context) : base(context)
+        public YGetAlbumRequest(YAuthStorage storage) : base(storage)
         {
         }
 
-        public HttpWebRequest Create(string albumId, string lang)
+        public YRequest Create(string albumId)
         {
             Dictionary<string, string> query = new Dictionary<string, string> {
                 { "album", albumId },
-                { "lang", lang },
+                { "lang", storage.User.Lang },
                 { "external-domain", "music.yandex.ru" },
                 { "overembed", "false" }
             };
 
-            return GetRequest(YEndpoints.Album, query: query);
+            FormRequest(YEndpoints.Album, query: query);
+
+            return this;
         }
     }
 }

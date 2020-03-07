@@ -46,11 +46,9 @@ namespace Yandex.Music.Api.API
 
         public async Task<YTrack> GetAsync(YAuthStorage storage, string trackId)
         {
-            var request = new YGetTrackResponse(storage.Context).Create(trackId);
-
-            using (var response = (HttpWebResponse) await request.GetResponseAsync()) {
-                return await api.GetDataFromResponseAsync<YTrack>(storage.Context, response, "track");
-            }
+            return await new YGetTrackResponse(storage)
+                .Create(trackId)
+                .GetResponseAsync<YTrack>("track");
         }
 
         public YTrack Get(YAuthStorage storage, string trackId)
@@ -60,13 +58,9 @@ namespace Yandex.Music.Api.API
 
         public async Task<YTrackDownloadInfoResponse> GetMetadataForDownloadAsync(YAuthStorage storage, string trackKey)
         {
-            long time = storage.Context.GetTimeInterval();
-            var request =
-                new YTrackDownloadInfoRequest(storage.Context).Create(trackKey, time, storage.User.Uid, storage.User.Login);
-
-            using (var response = (HttpWebResponse) await request.GetResponseAsync()) {
-                return await api.GetDataFromResponseAsync<YTrackDownloadInfoResponse>(storage.Context, response);
-            }
+            return await new YTrackDownloadInfoRequest(storage)
+                .Create(trackKey)
+                .GetResponseAsync<YTrackDownloadInfoResponse>();
         }
 
         public YTrackDownloadInfoResponse GetMetadataForDownload(YAuthStorage storage, string trackKey)
@@ -77,12 +71,9 @@ namespace Yandex.Music.Api.API
         public async Task<YStorageDownloadFileResponse> GetDownloadFileInfoAsync(YAuthStorage storage,
             YTrackDownloadInfoResponse metadataInfo)
         {
-            long time = storage.Context.GetTimeInterval();
-            var request = new YStorageDownloadFileRequest(storage.Context).Create(metadataInfo.Src, time, storage.User.Login);
-
-            using (var response = (HttpWebResponse) await request.GetResponseAsync()) {
-                return await api.GetDataFromResponseAsync<YStorageDownloadFileResponse>(storage.Context, response);
-            }
+            return await new YStorageDownloadFileRequest(storage)
+                .Create(metadataInfo.Src)
+                .GetResponseAsync<YStorageDownloadFileResponse>();
         }
 
         public YStorageDownloadFileResponse GetDownloadFileInfo(YAuthStorage storage, YTrackDownloadInfoResponse metadataInfo)
@@ -138,11 +129,9 @@ namespace Yandex.Music.Api.API
 
         public async Task<YNotRecommendTrackResponse> NotRecommendAsync(YAuthStorage storage, string trackKey)
         {
-            var request = new YNotRecommendTrackRequest(storage.Context).Create(trackKey, storage.Context.GetTimeInterval(),
-                storage.User.Sign, storage.User.Uid, storage.User.Login);
-            using (var response = (HttpWebResponse) await request.GetResponseAsync()) {
-                return await api.GetDataFromResponseAsync<YNotRecommendTrackResponse>(storage.Context, response);
-            }
+            return await new YNotRecommendTrackRequest(storage)
+                .Create(trackKey)
+                .GetResponseAsync<YNotRecommendTrackResponse>();
         }
 
         public YNotRecommendTrackResponse NotRecommend(YAuthStorage storage, string trackKey)
@@ -152,12 +141,9 @@ namespace Yandex.Music.Api.API
 
         public async Task<YUnDislikeTrackResponse> UnderNotRecommendAsync(YAuthStorage storage, string trackKey)
         {
-            var request = new YUnDislikeTrackRequest(storage.Context).Create(trackKey, storage.Context.GetTimeInterval(),
-                storage.User.Sign, storage.User.Uid, storage.User.Login);
-
-            using (var response = (HttpWebResponse) await request.GetResponseAsync()) {
-                return await api.GetDataFromResponseAsync<YUnDislikeTrackResponse>(storage.Context, response);
-            }
+            return await new YUnDislikeTrackRequest(storage)
+                .Create(trackKey)
+                .GetResponseAsync<YUnDislikeTrackResponse>();
         }
 
         public YUnDislikeTrackResponse UnderNotRecommend(YAuthStorage storage, string trackKey)
@@ -167,12 +153,9 @@ namespace Yandex.Music.Api.API
 
         public async Task<YSetLikedTrackResponse> SetLikedAsync(YAuthStorage storage, string trackKey, bool value)
         {
-            var request = new YSetLikedTrackRequest(storage.Context).Create(value, trackKey, storage.Context.GetTimeInterval(),
-                storage.User.Sign, storage.User.Uid, storage.User.Login);
-
-            using (var response = (HttpWebResponse) await request.GetResponseAsync()) {
-                return await api.GetDataFromResponseAsync<YSetLikedTrackResponse>(storage.Context, response);
-            }
+            return await new YSetLikedTrackRequest(storage)
+                .Create(value, trackKey)
+                .GetResponseAsync<YSetLikedTrackResponse>();
         }
 
         public YSetLikedTrackResponse SetLiked(YAuthStorage storage, string trackKey, bool value)
@@ -182,12 +165,9 @@ namespace Yandex.Music.Api.API
 
         public async Task<YAddLikedTrackResponse> ChangeLikedAsync(YAuthStorage storage, string trackKey, bool value)
         {
-            var request = new YAddLikedTrackRequest(storage.Context).Create(value, trackKey, storage.Context.GetTimeInterval(),
-                storage.User.Sign, storage.User.Uid, storage.User.Login);
-
-            using (var response = (HttpWebResponse) await request.GetResponseAsync()) {
-                return await api.GetDataFromResponseAsync<YAddLikedTrackResponse>(storage.Context, response);
-            }
+            return await new YAddLikedTrackRequest(storage)
+                .Create(value, trackKey)
+                .GetResponseAsync<YAddLikedTrackResponse>();
         }
 
         public YAddLikedTrackResponse ChangeLiked(YAuthStorage storage, string trackKey, bool value)

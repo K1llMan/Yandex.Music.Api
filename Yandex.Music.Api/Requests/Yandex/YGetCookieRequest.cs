@@ -1,22 +1,22 @@
-using System.Net;
+using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Yandex
 {
     internal class YGetCookieRequest : YRequest
     {
-        public YGetCookieRequest(HttpContext context) : base(context)
+        public YGetCookieRequest(YAuthStorage storage) : base(storage)
         {
         }
 
-        public HttpWebRequest Create(string userLogin)
+        public YRequest Create(string userLogin)
         {
-            var request = GetRequest("https://matchid.adfox.yandex.ru/getcookie");
+            var request = FormRequest("https://matchid.adfox.yandex.ru/getcookie");
             request.Headers["origin"] = "https://music.yandex.ru";
             request.Headers["referer"] = $"https://music.yandex.ru/users/{userLogin}/playlists";
             request.Headers["sec-fetch-mode"] = "cors";
             request.Headers["sec-fetch-site"] = "same-site";
 
-            return request;
+            return this;
         }
     }
 }

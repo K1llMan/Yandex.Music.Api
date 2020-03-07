@@ -1,5 +1,4 @@
-﻿using System.Net;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Requests.Library;
 using Yandex.Music.Api.Responses;
@@ -18,12 +17,9 @@ namespace Yandex.Music.Api.API
 
         public async Task<YLibraryHistoryResponse> GetHistoryAsync(YAuthStorage storage)
         {
-            var request =
-                new YGetLibraryHistoryRequest(storage.Context).Create(storage.User.Login, storage.User.Lang, storage.User.Uid);
-
-            using (var response = (HttpWebResponse) await request.GetResponseAsync()) {
-                return await api.GetDataFromResponseAsync<YLibraryHistoryResponse>(storage.Context, response);
-            }
+            return await new YGetLibraryHistoryRequest(storage)
+                .Create()
+                .GetResponseAsync<YLibraryHistoryResponse>();
         }
 
         public YLibraryHistoryResponse GetHistory(YAuthStorage storage)
@@ -33,12 +29,9 @@ namespace Yandex.Music.Api.API
 
         public async Task<YLibraryPlaylistResponse> GetAsync(YAuthStorage storage)
         {
-            var request =
-                new YGetLibraryPlaylistRequest(storage.Context).Create(storage.User.Login, storage.User.Lang, storage.User.Uid);
-
-            using (var response = (HttpWebResponse) await request.GetResponseAsync()) {
-                return await api.GetDataFromResponseAsync<YLibraryPlaylistResponse>(storage.Context, response);
-            }
+            return await new YGetLibraryPlaylistRequest(storage)
+                .Create()
+                .GetResponseAsync<YLibraryPlaylistResponse>();
         }
 
         public YLibraryPlaylistResponse Get(YAuthStorage storage)

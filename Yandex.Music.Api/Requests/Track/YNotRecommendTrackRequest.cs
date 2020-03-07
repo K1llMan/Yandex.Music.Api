@@ -1,28 +1,29 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
+using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Track
 {
     internal class YNotRecommendTrackRequest : YRequest
     {
-        public YNotRecommendTrackRequest(HttpContext context) : base(context)
+        public YNotRecommendTrackRequest(YAuthStorage storage) : base(storage)
         {
         }
 
-        public HttpWebRequest Create(string trackKey, long time, string sign, string userUid,
-            string userLogin)
+        public YRequest Create(string trackKey)
         {
+            string time = storage.Context.GetTimeInterval().ToString();
             var query = new Dictionary<string, string> {
                 {"from", "web-own_tracks-track-track-main"},
-                {"sign", sign},
+                {"sign", storage.User.Sign},
                 {"external-domain", "music.yandex.ru"},
                 {"overembed", "no"}
             };
 
             var url =
                 $"https://music.yandex.ru/api/v2.1/handlers/track/{trackKey}/web-own_tracks-track-track-main/dislike/add?__t={time}";
-            var request = GetRequest(url, body: GetQueryString(query));
+            var request = FormRequest(url, body: GetQueryString(query));
 
             request.Headers[HttpRequestHeader.Accept] = "application/json; q=1.0, text/*; q=0.8, */*; q=0.1";
 //      request.Headers["Accept-Encoding"] = "gzip, deflate, br";
@@ -32,17 +33,17 @@ namespace Yandex.Music.Api.Requests.Track
             request.Headers["access-control-allow-methods"] = "[POST]";
             request.Headers["overembed"] = time.ToString();
             request.Headers["Sec-Fetch-Mode"] = "cors";
-            request.Headers["X-Current-UID"] = userUid;
+            request.Headers["X-Current-UID"] = storage.User.Uid;
             request.Headers["X-Requested-With"] = "XMLHttpRequest";
-            request.Headers["X-Retpath-Y"] = $"https%3A%2F%2Fmusic.yandex.ru%2Fusers%2F{userLogin}%2Ftracks";
+            request.Headers["X-Retpath-Y"] = $"https%3A%2F%2Fmusic.yandex.ru%2Fusers%2F{storage.User.Login}%2Ftracks";
             request.Headers[HttpRequestHeader.AcceptCharset] = Encoding.UTF8.HeaderName;
 
             request.Headers["origin"] = "https://music.yandex.ru";
-            request.Headers["referer"] = $"https://music.yandex.ru/users/{userLogin}/tracks";
+            request.Headers["referer"] = $"https://music.yandex.ru/users/{storage.User.Login}/tracks";
             request.Headers["sec-fetch-mode"] = "cors";
             request.Headers["sec-fetch-site"] = "same-site";
 
-            return request;
+            return this;
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Net;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Requests.Album;
 using Yandex.Music.Api.Responses;
@@ -18,11 +17,9 @@ namespace Yandex.Music.Api.API
 
         public async Task<YAlbumResponse> GetAsync(YAuthStorage storage, string albumId)
         {
-            var request = new YGetAlbumRequest(storage.Context).Create(albumId, storage.User.Lang);
-
-            using (var response = (HttpWebResponse) await request.GetResponseAsync()) {
-                return await api.GetDataFromResponseAsync<YAlbumResponse>(storage.Context, response);
-            }
+            return await new YGetAlbumRequest(storage)
+                .Create(albumId)
+                .GetResponseAsync<YAlbumResponse>();
         }
 
         public YAlbumResponse Get(YAuthStorage storage, string albumId)

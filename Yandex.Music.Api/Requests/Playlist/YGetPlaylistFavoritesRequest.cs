@@ -1,19 +1,19 @@
 using System.Collections.Generic;
-using System.Net;
+using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Playlist
 {
     internal class YGetPlaylistFavoritesRequest : YRequest
     {
-        public YGetPlaylistFavoritesRequest(HttpContext context) : base(context)
+        public YGetPlaylistFavoritesRequest(YAuthStorage storage) : base(storage)
         {
         }
 
-        public HttpWebRequest Create(string login, string lang)
+        public YRequest Create()
         {
             Dictionary<string, string> query = new Dictionary<string, string> {
-                { "owner", login },
-                { "lang", lang },
+                { "owner", storage.User.Login },
+                { "lang", storage.User.Lang },
                 { "filter", "tracks" },
                 { "likeFilter", "favorite" },
                 { "external-domain", "music.yandex.ru" },
@@ -21,7 +21,9 @@ namespace Yandex.Music.Api.Requests.Playlist
                 { "ncrnd", "0.7506943983987266" }
             };
 
-            return GetRequest(YEndpoints.Library, query: query);
+            FormRequest(YEndpoints.Library, query: query);
+
+            return this;
         }
     }
 }

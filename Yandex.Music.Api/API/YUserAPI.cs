@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using System.Threading.Tasks;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Requests;
@@ -20,11 +19,11 @@ namespace Yandex.Music.Api.API
 
         private async Task<YAuthorizeResponse> AuthPassport(YAuthStorage storage)
         {
-            var request = new YAuthorizeRequest(storage.Context).Create(storage.User.Login, storage.User.Password);
+            var request = new YAuthorizeRequest(storage).Create();
 
             try
             {
-                using (var response = (HttpWebResponse)await request.GetResponseAsync())
+                using (var response = await request.GetResponseAsync())
                 {
                     storage.Context.Cookies.Add(response.Cookies);
 
@@ -101,11 +100,9 @@ namespace Yandex.Music.Api.API
 
         public async Task<YAuthInfoResponse> GetUserAuthAsync(YAuthStorage storage)
         {
-            var request = new YGetAuthInfoRequest(storage.Context).Create(storage.User.Login, storage.Context.GetTimeInterval());
-
-            using (var response = (HttpWebResponse) await request.GetResponseAsync()) {
-                return await api.GetDataFromResponseAsync<YAuthInfoResponse>(storage.Context, response);
-            }
+            return await new YGetAuthInfoRequest(storage)
+                .Create()
+                .GetResponseAsync<YAuthInfoResponse>();
         }
 
         public YAuthInfoResponse GetUserAuth(YAuthStorage storage)
@@ -115,11 +112,9 @@ namespace Yandex.Music.Api.API
 
         public async Task<YAuthInfoUserResponse> GetUserAuthDetailsAsync(YAuthStorage storage)
         {
-            var request = new YGetAuthInfoUserRequest(storage.Context).Create(storage.User.Uid, storage.User.Login, storage.User.Lang);
-
-            using (var response = (HttpWebResponse) await request.GetResponseAsync()) {
-                return await api.GetDataFromResponseAsync<YAuthInfoUserResponse>(storage.Context, response);
-            }
+            return await new YGetAuthInfoUserRequest(storage)
+                .Create()
+                .GetResponseAsync<YAuthInfoUserResponse>();
         }
 
         public YAuthInfoUserResponse GetUserAuthDetails(YAuthStorage storage)

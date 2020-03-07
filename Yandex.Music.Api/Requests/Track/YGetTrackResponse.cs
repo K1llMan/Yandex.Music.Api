@@ -1,21 +1,23 @@
 using System.Collections.Generic;
-using System.Net;
+using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Track
 {
     internal class YGetTrackResponse : YRequest
     {
-        public YGetTrackResponse(HttpContext context) : base(context)
+        public YGetTrackResponse(YAuthStorage storage) : base(storage)
         {
         }
 
-        public HttpWebRequest Create(string trackId)
+        public YRequest Create(string trackId)
         {
             Dictionary<string, string> query = new Dictionary<string, string> {
                 {"track", trackId}
             };
 
-            return GetRequest(YEndpoints.Track, query: query);
+            FormRequest(YEndpoints.Track, query: query);
+
+            return this;
         }
     }
 }
