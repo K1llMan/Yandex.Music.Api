@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using System.Net;
-using System.Text;
 using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Search
@@ -12,17 +12,17 @@ namespace Yandex.Music.Api.Requests.Search
 
         public HttpWebRequest Create(string searchText, YandexSearchType searchType, int page = 0)
         {
-            var searchTypeAsString = searchType.ToString();
-            var urlSearch = new StringBuilder();
-            urlSearch.Append($"https://music.yandex.ru/handlers/music-search.jsx?text={searchText}");
-            urlSearch.Append($"&type={searchTypeAsString}");
-            urlSearch.Append(
-                $"&page={page}&ncrnd=0.7060701951464323&lang=ru&external-domain=music.yandex.ru&overembed=false");
+            Dictionary<string, string> query = new Dictionary<string, string> {
+                { "text", searchText },
+                { "type", searchType.ToString() },
+                { "page", page.ToString() },
+                { "lang", "ru" },
+                { "external-domain", "music.yandex.ru" },
+                { "overembed", "false" },
+                { "ncrnd", "0.7060701951464323" }
+            };
 
-            var url = urlSearch.ToString();
-            var request = GetRequest(url, WebRequestMethods.Http.Get);
-
-            return request;
+            return GetRequest(YEndpoints.Search, query: query);
         }
     }
 }

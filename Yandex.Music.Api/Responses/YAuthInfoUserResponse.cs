@@ -1,86 +1,9 @@
-using Newtonsoft.Json.Linq;
-
 namespace Yandex.Music.Api.Responses
 {
     public class YAuthInfoUserResponse
     {
         public YandexAuthUser User { get; set; }
         public string Experiments { get; set; }
-
-        public static YAuthInfoUserResponse FromJson(JToken json)
-        {
-            var authUserPlus = new YandexAuthUser.YandexAuthPlus
-            {
-                HasPlus = json["user"]["plus"]["hasPlus"].ToObject<bool>(),
-                IsTutorialCompleted = json["user"]["plus"]["isTutorialCompleted"].ToObject<bool>(),
-                Migrated = json["user"]["plus"]["migrated"].ToObject<bool>()
-            };
-            var authUserSubscription = new YandexAuthUser.YandexAuthSubscription
-            {
-                NonAutoRenewable = new YandexAuthUser.YandexAuthSubscriptionNonAutoRenewable
-                {
-                    Start = json["user"]["subscription"]["nonAutoRenewable"]["start"].ToObject<string>(),
-                    End = json["user"]["subscription"]["nonAutoRenewable"]["end"].ToObject<string>()
-                },
-                CanStartTrial = json["user"]["subscription"]["canStartTrial"].ToObject<bool>(),
-                Mcdonalds = json["user"]["subscription"]["mcdonalds"].ToObject<bool>()
-            };
-            var authUserSettings = new YandexAuthUser.YandexAuthSettings
-            {
-                Uid = json["user"]["settings"]["uid"].ToObject<string>(),
-                LastFmScrobblingEnabled = json["user"]["settings"]["lastFmScrobblingEnabled"].ToObject<bool>(),
-                FacebookScrobblingEnabled = json["user"]["settings"]["facebookScrobblingEnabled"].ToObject<bool>(),
-                ShuffleEnabled = json["user"]["settings"]["shuffleEnabled"].ToObject<bool>(),
-                AddNewTrackOnPlaylistTop = json["user"]["settings"]["addNewTrackOnPlaylistTop"].ToObject<bool>(),
-                VolumePercents = json["user"]["settings"]["volumePercents"].ToObject<int>(),
-                UserMusicVisibility = json["user"]["settings"]["userMusicVisibility"].ToObject<string>(),
-                UserSocialVisibility = json["user"]["settings"]["userSocialVisibility"].ToObject<string>(),
-                AdsDisabled = json["user"]["settings"]["adsDisabled"].ToObject<bool>(),
-                Modified = json["user"]["settings"]["modified"].ToObject<string>(),
-                RbtDisabled = json["user"]["settings"]["rbtDisabled"].ToObject<bool>(),
-                Theme = json["user"]["settings"]["theme"].ToObject<string>(),
-                PromosDisabled = json["user"]["settings"]["promosDisabled"].ToObject<bool>(),
-                AutoPlayRadio = json["user"]["settings"]["autoPlayRadio"].ToObject<bool>(),
-            };
-
-            var authUser = new YandexAuthUser
-            {
-                Sign = json["user"]["sign"].ToObject<string>(),
-                Sk = json["user"]["sk"].ToObject<string>(),
-                Premium = json["user"]["premium"].ToObject<bool>(),
-                Plus = authUserPlus,
-                SubeditorLevel = json["user"]["subeditorLevel"].ToObject<int>(),
-                Subeditor = json["user"]["subeditor"].ToObject<bool>(),
-                IsMobileUser = json["user"]["isMobileUser"].ToObject<bool>(),
-                Subscription = authUserSubscription,
-                AdDisableable = json["user"]["adDisableable"].ToObject<bool>(),
-                IsPremium = json["user"]["isPremium"].ToObject<bool>(),
-                _statusFetched = json["user"]["_statusFetched"].ToObject<bool>(),
-                DeviceId = json["user"]["device_id"].ToObject<string>(),
-                OnlyDeviceId = json["user"]["onlyDeviceId"].ToObject<bool>(),
-                KpOttSubscription = json["user"]["kpOttSubscription"].ToObject<string>(),
-                HavePlus = json["user"]["havePlus"].ToObject<bool>(),
-                HasAvatar = json["user"]["hasAvatar"].ToObject<bool>(),
-                SignUpMethod = json["user"]["signUpMethod"].ToObject<string>(),
-                IsHosted = json["user"]["isHosted"].ToObject<bool>(),
-                IsYandex = json["user"]["isYandex"].ToObject<bool>(),
-                ContactPhone = json["user"]["contactPhone"].ToObject<string>(),
-                LastName = json["user"]["lastName"].ToObject<string>(),
-                FirstName = json["user"]["firstName"].ToObject<string>(),
-                Name = json["user"]["name"].ToObject<string>(),
-                Login = json["user"]["login"].ToObject<string>(),
-                Uid = json["user"]["uid"].ToObject<string>(),
-                Settings = authUserSettings,
-                HasEmail = json["user"]["hasEmail"].ToObject<bool>(),
-
-            };
-
-            return new YAuthInfoUserResponse
-            {
-                User = authUser,
-                Experiments = json["experiments"].ToObject<string>()
-            };
-        }
 
         public class YandexAuthUser
         {

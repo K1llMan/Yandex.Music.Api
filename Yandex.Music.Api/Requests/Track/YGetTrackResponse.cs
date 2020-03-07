@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net;
 
 namespace Yandex.Music.Api.Requests.Track
@@ -8,11 +9,13 @@ namespace Yandex.Music.Api.Requests.Track
         {
         }
 
-        public HttpWebRequest Create(string trackId, string lang)
+        public HttpWebRequest Create(string trackId)
         {
-            var request = GetRequest($"https://music.yandex.ru/handlers/track.jsx?track={trackId}&lang={lang}&external-domain=music.yandex.ru&overembed=false", WebRequestMethods.Http.Get);
+            Dictionary<string, string> query = new Dictionary<string, string> {
+                {"track", trackId}
+            };
 
-            return request;
+            return GetRequest(YEndpoints.Track, query: query);
         }
     }
 }

@@ -11,12 +11,11 @@ namespace Yandex.Music.Api.Responses
 
         public static YStorageDownloadFileResponse FromJson(JToken data)
         {
-            return new YStorageDownloadFileResponse
-            {
+            return new YStorageDownloadFileResponse {
                 S = data["s"].ToObject<string>(),
                 Ts = data["ts"].ToObject<string>(),
                 Path = data["path"].ToObject<string>(),
-                Host = data["host"].ToObject<string>(),
+                Host = data["host"].ToObject<string>()
             };
         }
     }

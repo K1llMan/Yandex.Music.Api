@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace Yandex.Music.Api.Requests.Track
 {
@@ -9,23 +10,32 @@ namespace Yandex.Music.Api.Requests.Track
         public YDeleteTrackFromPlaylistRequest(HttpContext context) : base(context)
         {
         }
-        
-        public HttpWebRequest Create(string ownerId, int from, int to, int revision, string kind, string lang, string sign, string userUid, string userLogin, string experements)
+
+        public HttpWebRequest Create(string ownerId, int from, int to, int revision, string kind, string lang,
+            string sign, string userUid, string userLogin, string experements)
         {
-            var diff = "[{\"op\":\"delete\",\"from\":" + from + ",\"to\":" + to + "}]";
-            var url = "https://music.yandex.ru/handlers/playlist-patch.jsx";
-            
-            var request = GetRequest(url, 
-                new KeyValuePair<string, string>("owner", ownerId),
-                new KeyValuePair<string, string>("kind", kind),
-                new KeyValuePair<string, string>("revision", revision.ToString()), // ?
-                new KeyValuePair<string, string>("diff", diff),
-                new KeyValuePair<string, string>("lang", lang),
-                new KeyValuePair<string, string>("sign", sign),
-                new KeyValuePair<string, string>("experiments", experements),
-                new KeyValuePair<string, string>("external-domain", "music.yandex.ru"),
-                new KeyValuePair<string, string>("overembed", "false"));
-            
+            string diff = JsonConvert.SerializeObject(new[] {
+                new Dictionary<string, object> {
+                    {"op", "delete"},
+                    {"from", from},
+                    {"to", to}
+                }
+            });
+
+            Dictionary<string, string> query = new Dictionary<string, string> {
+                {"owner", ownerId},
+                {"kind", kind},
+                {"revision", revision.ToString()}, // ?
+                {"diff", diff},
+                {"lang", lang},
+                {"sign", sign},
+                {"experiments", experements},
+                {"external-domain", "music.yandex.ru"},
+                {"overembed", "false"}
+            };
+
+            var request = GetRequest(YEndpoints.PlaylistPatch, body: GetQueryString(query));
+
             request.Headers[HttpRequestHeader.Accept] = "application/json, text/javascript, */*; q=0.01";
             request.Headers["Accept-Encoding"] = "gzip, deflate, br";
             request.Headers["Accept-Language"] = "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7";

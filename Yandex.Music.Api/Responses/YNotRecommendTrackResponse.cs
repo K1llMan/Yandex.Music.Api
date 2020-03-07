@@ -9,8 +9,7 @@ namespace Yandex.Music.Api.Responses
 
         public static YNotRecommendTrackResponse FromJson(JToken json)
         {
-            return new YNotRecommendTrackResponse
-            {
+            return new YNotRecommendTrackResponse {
                 Success = json["success"].ToObject<bool>(),
                 Act = json["act"].ToObject<string>()
             };

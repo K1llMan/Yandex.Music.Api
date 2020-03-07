@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Text;
 
@@ -10,18 +9,21 @@ namespace Yandex.Music.Api.Requests.Track
         public YNotRecommendTrackRequest(HttpContext context) : base(context)
         {
         }
-        
+
         public HttpWebRequest Create(string trackKey, long time, string sign, string userUid,
             string userLogin)
         {
+            var query = new Dictionary<string, string> {
+                {"from", "web-own_tracks-track-track-main"},
+                {"sign", sign},
+                {"external-domain", "music.yandex.ru"},
+                {"overembed", "no"}
+            };
+
             var url =
                 $"https://music.yandex.ru/api/v2.1/handlers/track/{trackKey}/web-own_tracks-track-track-main/dislike/add?__t={time}";
-            var request = GetRequest(url, 
-                new KeyValuePair<string, string>("from", "web-own_tracks-track-track-main"),
-                new KeyValuePair<string, string>("sign", sign),
-                new KeyValuePair<string, string>("external-domain", "music.yandex.ru"),
-                new KeyValuePair<string, string>("overembed", "no"));
-            
+            var request = GetRequest(url, body: GetQueryString(query));
+
             request.Headers[HttpRequestHeader.Accept] = "application/json; q=1.0, text/*; q=0.8, */*; q=0.1";
 //      request.Headers["Accept-Encoding"] = "gzip, deflate, br";
             request.Headers["Content-Type"] = "application/x-www-form-urlencoded";

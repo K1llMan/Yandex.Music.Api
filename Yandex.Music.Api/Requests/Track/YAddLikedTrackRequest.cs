@@ -11,26 +11,27 @@ namespace Yandex.Music.Api.Requests.Track
         {
         }
 
-        public HttpWebRequest Create(bool status, string trackKey, long time, string sign, string userUid, string userLogin)
+        public HttpWebRequest Create(bool status, string trackKey, long time, string sign, string userUid,
+            string userLogin)
         {
             var trackPair = trackKey.Split(':');
             var trackId = trackPair.FirstOrDefault();
             var albumId = trackPair.LastOrDefault();
 
             var take = "add";
-            if (!status)
-            {
-                take = "remove";
-            }
+            if (!status) take = "remove";
+
+            var query = new Dictionary<string, string> {
+                {"from", "web-own_tracks-track-track-main"},
+                {"sign", sign},
+                {"external-domain", "music.yandex.ru"},
+                {"overembed", "no"}
+            };
 
             var url =
                 $"https://music.yandex.ru/api/v2.1/handlers/track/{trackKey}/web-own_tracks-track-track-main/like/?__t={time}";
-            var request = GetRequest(url, 
-                new KeyValuePair<string, string>("from", "web-own_tracks-track-track-main"),
-                new KeyValuePair<string, string>("sign", sign),
-                new KeyValuePair<string, string>("external-domain", "music.yandex.ru"),
-                new KeyValuePair<string, string>("overembed", "no"));
-            
+            var request = GetRequest(url, body: GetQueryString(query));
+
             request.Headers[HttpRequestHeader.Accept] = "application/json; q=1.0, text/*; q=0.8, */*; q=0.1";
 //      request.Headers["Accept-Encoding"] = "gzip, deflate, br";
             request.Headers["Content-Type"] = "application/x-www-form-urlencoded";

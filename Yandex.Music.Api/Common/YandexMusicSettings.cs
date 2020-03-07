@@ -7,10 +7,6 @@ namespace Yandex.Music.Api.Common
 {
     public class YandexMusicSettings
     {
-        public YandexMusicSettings()
-        {
-        }
-
         public Uri GetPassportURL()
         {
             return new Uri("https://pda-passport.yandex.ru/passport?mode=auth");
@@ -21,7 +17,7 @@ namespace Yandex.Music.Api.Common
             return new Uri(
                 $"https://music.yandex.ru/handlers/album.jsx?album={albumId}&lang=ru&external-domain=music.yandex.ru&overembed=false");
         }
-      
+
         public Uri GetTrackURL(string trackId)
         {
             return new Uri(
@@ -37,13 +33,13 @@ namespace Yandex.Music.Api.Common
         public Uri GetPlaylistDejaVuURL()
         {
             return new Uri(
-                $"https://music.yandex.ru/handlers/playlist.jsx?owner=yamusic-dejavu&kinds=57704235&light=true&madeFor=&lang=ru&external-domain=music.yandex.ru&overembed=false&ncrnd=0.13048851242872916");
+                "https://music.yandex.ru/handlers/playlist.jsx?owner=yamusic-dejavu&kinds=57704235&light=true&madeFor=&lang=ru&external-domain=music.yandex.ru&overembed=false&ncrnd=0.13048851242872916");
         }
 
         public Uri GetPlaylistOfDay()
         {
             return new Uri(
-                $"https://music.yandex.ru/handlers/playlist.jsx?owner=yamusic-daily&kinds=57151881&light=true&madeFor=&lang=ru&external-domain=music.yandex.ru&overembed=false&ncrnd=0.9083773647705418");
+                "https://music.yandex.ru/handlers/playlist.jsx?owner=yamusic-daily&kinds=57151881&light=true&madeFor=&lang=ru&external-domain=music.yandex.ru&overembed=false&ncrnd=0.9083773647705418");
         }
 
         public Uri GetSearchURL(string searchText, YandexSearchType searchType, int page)
@@ -67,19 +63,18 @@ namespace Yandex.Music.Api.Common
         {
             return new Uri($"http://storage.music.yandex.ru/get/{storageDir}/2.xml");
         }
-        
+
         public Uri GetURLDownloadTrack(YTrackResponse track, YandexTrackDownloadInfo downloadInfo)
         {
             var key = ""; //downloadInfo.Path.Substring(1, downloadInfo.Path.Length - 1) + downloadInfo.S;
 
-            using (var md5 = MD5.Create())
-            {
+            using (var md5 = MD5.Create()) {
                 key = GetMdHesh(md5,
                     $"XGRlBW9FXlekgbPrRHuSiA{downloadInfo.Path.Substring(1, downloadInfo.Path.Length - 1)}{downloadInfo.S}");
             }
 
             var trackDownloadUrl =
-                String.Format("http://{0}/get-mp3/{1}/{2}{3}?track-id={4}&region=225&from=service-search",
+                string.Format("http://{0}/get-mp3/{1}/{2}{3}?track-id={4}&region=225&from=service-search",
                     downloadInfo.Host,
                     key,
                     downloadInfo.Ts,
@@ -94,10 +89,7 @@ namespace Yandex.Music.Api.Common
             var data = md5.ComputeHash(Encoding.UTF8.GetBytes(str));
             var sBuilder = new StringBuilder();
 
-            for (var i = 0; i < data.Length; i++)
-            {
-                sBuilder.Append(data[i].ToString("x2"));
-            }
+            for (var i = 0; i < data.Length; i++) sBuilder.Append(data[i].ToString("x2"));
 
             return sBuilder.ToString();
         }

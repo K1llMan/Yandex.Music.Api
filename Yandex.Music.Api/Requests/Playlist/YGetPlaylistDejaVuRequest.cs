@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net;
 
 namespace Yandex.Music.Api.Requests.Playlist
@@ -8,11 +9,20 @@ namespace Yandex.Music.Api.Requests.Playlist
         {
         }
 
-        public HttpWebRequest Create(string lang)
+        public HttpWebRequest Create(string uid, string lang)
         {
-            var request = GetRequest($"https://music.yandex.ru/handlers/playlist.jsx?owner=yamusic-dejavu&kinds=57704235&light=true&madeFor=&lang={lang}&external-domain=music.yandex.ru&overembed=false&ncrnd=0.13048851242872916");
+            Dictionary<string, string> query = new Dictionary<string, string> {
+                { "kinds", uid },
+                { "lang", lang },
+                { "owner", "yamusic-dejavu" },
+                { "light", "true" },
+                { "likeFilter", "all" },
+                { "external-domain", "music.yandex.ru" },
+                { "overembed", "false" },
+                { "ncrnd", "0.13048851242872916" }
+            };
 
-            return request;
+            return GetRequest(YEndpoints.Playlist, query: query);
         }
     }
 }

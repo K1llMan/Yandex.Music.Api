@@ -11,16 +11,18 @@ namespace Yandex.Music.Api.Requests.Playlist
 
         public HttpWebRequest Create(string name, string sign, string experements, string userUid, string userLogin)
         {
-            var uri = "https://music.yandex.ru/handlers/change-playlist.jsx";
-            var request = GetRequest(uri,
-                new KeyValuePair<string, string>("action", "add"),
-                new KeyValuePair<string, string>("title", name),
-                new KeyValuePair<string, string>("lang", "ru"),
-                new KeyValuePair<string, string>("sign", sign),
-                new KeyValuePair<string, string>("experiments", experements),
-                new KeyValuePair<string, string>("external-domain", "music.yandex.ru"),
-                new KeyValuePair<string, string>("overembed", "false")
-            );
+            Dictionary<string, string> query = new Dictionary<string, string> {
+                {"action", "add"},
+                {"title", name},
+                {"lang", "ru"},
+                {"sign", sign},
+                {"experiments", experements},
+                {"external-domain", "music.yandex.ru"},
+                {"overembed", "false"}
+            };
+
+            var request = GetRequest(YEndpoints.ChangePlaylist, body: GetQueryString(query));
+
             request.Headers[HttpRequestHeader.Accept] = "application/json, text/javascript, */*; q=0.01";
             request.Headers["Accept-Encoding"] = "gzip, deflate, br";
             request.Headers["Accept-Language"] = "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7";

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net;
 
 namespace Yandex.Music.Api.Requests.Library
@@ -7,13 +8,21 @@ namespace Yandex.Music.Api.Requests.Library
         public YGetLibraryHistoryRequest(HttpContext context) : base(context)
         {
         }
-        
+
         public HttpWebRequest Create(string userLogin, string userLang, string userUid)
         {
-            var url =
-                $"https://music.yandex.ru/handlers/library.jsx?owner={userLogin}&filter=history&likeFilter=all&lang={userLang}&external-domain=music.yandex.ru&overembed=false&ncrnd=0.671046085811837";
+            Dictionary<string, string> query = new Dictionary<string, string> {
+                { "owner", userLogin },
+                { "lang", userLang },
+                { "filter", "history" },
+                { "likeFilter", "all" },
+                { "external-domain", "music.yandex.ru" },
+                { "overembed", "false" },
+                { "ncrnd", "0.671046085811837" }
+            };
 
-            var request = GetRequest(url, WebRequestMethods.Http.Get);
+            var request = GetRequest(YEndpoints.Library, query: query);
+
             request.Headers[HttpRequestHeader.Accept] = "application/json, text/javascript, */*; q=0.01";
             request.Headers["Accept-Encoding"] = "gzip, deflate, br";
             request.Headers["Accept-Language"] = "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7";

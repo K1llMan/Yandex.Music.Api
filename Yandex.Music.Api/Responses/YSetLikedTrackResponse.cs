@@ -8,8 +8,7 @@ namespace Yandex.Music.Api.Responses
 
         public static YSetLikedTrackResponse FromJson(JToken json)
         {
-            return new YSetLikedTrackResponse
-            {
+            return new YSetLikedTrackResponse {
                 Result = json["result"].ToObject<string>()
             };
         }

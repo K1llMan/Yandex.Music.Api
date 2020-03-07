@@ -10,7 +10,7 @@ namespace Yandex.Music.Api.Requests.Yandex
 
         public HttpWebRequest Create(string userLogin)
         {
-            var request = GetRequest("https://matchid.adfox.yandex.ru/getcookie", WebRequestMethods.Http.Get);
+            var request = GetRequest("https://matchid.adfox.yandex.ru/getcookie");
             request.Headers["origin"] = "https://music.yandex.ru";
             request.Headers["referer"] = $"https://music.yandex.ru/users/{userLogin}/playlists";
             request.Headers["sec-fetch-mode"] = "cors";

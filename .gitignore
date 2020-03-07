@@ -3,3 +3,9 @@
 ################################################################################
 
 /Yandex.Music.Client.Tests/obj
+/Yandex.Music.Client/obj
+/Yandex.Music.Api.Tests/obj
+/Yandex.Music.Api.sln.DotSettings.user
+/.vs
+/Yandex.Music.Api/bin
+/Yandex.Music.Api/obj

@@ -8,8 +8,7 @@ namespace Yandex.Music.Api.Responses
 
         public static YUnDislikeTrackResponse FromJson(JToken json)
         {
-            return new YUnDislikeTrackResponse
-            {
+            return new YUnDislikeTrackResponse {
                 Result = json["result"].ToObject<string>()
             };
         }

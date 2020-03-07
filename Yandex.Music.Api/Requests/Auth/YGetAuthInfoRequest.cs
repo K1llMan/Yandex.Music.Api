@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net;
 
 namespace Yandex.Music.Api.Requests.Auth
@@ -10,9 +11,14 @@ namespace Yandex.Music.Api.Requests.Auth
 
         public HttpWebRequest Create(string userLogin, long time)
         {
-            var request = GetRequest(
-                    $"https://music.yandex.ru/api/v2.1/handlers/auth?external-domain=music.yandex.ru&overembed=no&__t={time}",
-                WebRequestMethods.Http.Get);
+            Dictionary<string, string> query = new Dictionary<string, string> {
+                { "external-domain", "music.yandex.ru" },
+                { "overembed", "no" },
+                { "__t", time.ToString() }
+            };
+
+            var request = GetRequest("https://music.yandex.ru/api/v2.1/handlers/auth", query: query);
+
             request.Headers[HttpRequestHeader.Accept] = "application/json; q=1.0, text/*; q=0.8, */*; q=0.1";
             request.Headers["Accept-Encoding"] = "gzip, deflate, br";
             request.Headers["Accept-Language"] = "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7";

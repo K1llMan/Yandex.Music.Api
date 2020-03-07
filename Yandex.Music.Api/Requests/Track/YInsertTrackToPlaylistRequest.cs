@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace Yandex.Music.Api.Requests.Track
 {
@@ -10,22 +11,39 @@ namespace Yandex.Music.Api.Requests.Track
         {
         }
 
-        public HttpWebRequest Create(string ownerId, string trackId, string trackAlbumId, string kind, string lang, string sign, string userUid, string userLogin, string experements)
+        public HttpWebRequest Create(string ownerId, int at, string trackId, string trackAlbumId, string kind,
+            string lang,
+            string sign, string userUid, string userLogin, string experements)
         {
-            var diff = "[{\"op\":\"insert\",\"at\":6,\"tracks\":[{\"id\":\"" + trackId + "\",\"albumId\":" + trackAlbumId + "}]}]";
-            var url = "https://music.yandex.ru/handlers/playlist-patch.jsx";
-            var request = GetRequest(url, 
-                new KeyValuePair<string, string>("owner", ownerId),
-                new KeyValuePair<string, string>("kind", kind),
-                new KeyValuePair<string, string>("revision", "7"), // ?
-                new KeyValuePair<string, string>("diff", diff),
-                new KeyValuePair<string, string>("from", "web-own_tracks-track-track-main"),
-                new KeyValuePair<string, string>("lang", lang),
-                new KeyValuePair<string, string>("sign", sign),
-                new KeyValuePair<string, string>("experiments", experements),
-                new KeyValuePair<string, string>("external-domain", "music.yandex.ru"),
-                new KeyValuePair<string, string>("overembed", "false"));
-            
+            var diff = JsonConvert.SerializeObject(new[] {
+                new Dictionary<string, object> {
+                    {"op", "insert"},
+                    {"at", at}, {
+                        "tracks", new[] {
+                            new Dictionary<string, object> {
+                                {"id", trackId},
+                                {"albumId", trackAlbumId}
+                            }
+                        }
+                    }
+                }
+            });
+
+            var query = new Dictionary<string, string> {
+                {"owner", ownerId},
+                {"kind", kind},
+                {"revision", "7"}, // ?
+                {"diff", diff},
+                {"from", "web-own_tracks-track-track-main"},
+                {"lang", lang},
+                {"sign", sign},
+                {"experiments", experements},
+                {"external-domain", "music.yandex.ru"},
+                {"overembed", "false"}
+            };
+
+            var request = GetRequest(YEndpoints.PlaylistPatch, body: GetQueryString(query));
+
             request.Headers[HttpRequestHeader.Accept] = "application/json; q=1.0, text/*; q=0.8, */*; q=0.1";
             request.Headers["Accept-Encoding"] = "gzip, deflate, br";
             request.Headers["Accept-Language"] = "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7";

@@ -8,14 +8,21 @@ namespace Yandex.Music.Api.Requests.Auth
         public YAuthorizeRequest(HttpContext context) : base(context)
         {
         }
-        
+
         public HttpWebRequest Create(string login, string password)
         {
-            return GetRequest("https://pda-passport.yandex.ru/passport?mode=auth",
-                new KeyValuePair<string, string>("login", login),
-                new KeyValuePair<string, string>("passwd", password),
-                new KeyValuePair<string, string>("twoweeks", "yes"),
-                new KeyValuePair<string, string>("retpath", ""));
+            Dictionary<string, string> query = new Dictionary<string, string> {
+                { "mode", "auth" }
+            };
+
+            Dictionary<string, string> body = new Dictionary<string, string> {
+                {"login", login},
+                {"passwd", password},
+                {"twoweeks", "yes"},
+                {"retpath", ""}
+            };
+
+            return GetRequest(YEndpoints.Passport, WebRequestMethods.Http.Post, query, GetQueryString(body));
         }
     }
 }

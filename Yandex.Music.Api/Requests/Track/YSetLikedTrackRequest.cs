@@ -19,24 +19,24 @@ namespace Yandex.Music.Api.Requests.Track
             var albumId = trackPair.LastOrDefault();
 
             var take = "liked";
-            if (!status)
-            {
-                take = "unlike";
-            }
+            if (!status) take = "unlike";
+
+            var query = new Dictionary<string, string> {
+                {"timestamp", time.ToString()},
+                {"from", "web-radio-user-saved"},
+                {"batchId", "undefined"},
+                {"trackId", trackId},
+                {"albumId", albumId},
+                {"totalPlayed", "0.1"},
+                {"sign", sign},
+                {"external-domain", "music.yandex.ru"},
+                {"overembed", "no"}
+            };
 
             var url =
                 $"https://music.yandex.ru/api/v2.1/handlers/radio/radio/history/feedback/{take}/{trackKey}?__t={time}";
-            var request = GetRequest(url, 
-                new KeyValuePair<string, string>("timestamp", time.ToString()),
-                new KeyValuePair<string, string>("from", "web-radio-user-saved"),
-                new KeyValuePair<string, string>("batchId", "undefined"),
-                new KeyValuePair<string, string>("trackId", trackId),
-                new KeyValuePair<string, string>("albumId", albumId),
-                new KeyValuePair<string, string>("totalPlayed", "0.1"),
-                new KeyValuePair<string, string>("sign", sign),
-                new KeyValuePair<string, string>("external-domain", "music.yandex.ru"),
-                new KeyValuePair<string, string>("overembed", "no"));
-            
+            var request = GetRequest(url, body: GetQueryString(query));
+
             request.Headers[HttpRequestHeader.Accept] = "application/json; q=1.0, text/*; q=0.8, */*; q=0.1";
 //      request.Headers["Accept-Encoding"] = "gzip, deflate, br";
             request.Headers["Content-Type"] = "application/x-www-form-urlencoded";

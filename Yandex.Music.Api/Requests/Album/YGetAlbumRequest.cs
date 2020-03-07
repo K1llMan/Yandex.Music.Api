@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net;
 
 namespace Yandex.Music.Api.Requests.Album
@@ -10,12 +11,14 @@ namespace Yandex.Music.Api.Requests.Album
 
         public HttpWebRequest Create(string albumId, string lang)
         {
-            var request =
-                GetRequest(
-                    $"https://music.yandex.ru/handlers/album.jsx?album={albumId}&lang={lang}&external-domain=music.yandex.ru&overembed=false",
-                    WebRequestMethods.Http.Get);
-            
-            return request;
+            Dictionary<string, string> query = new Dictionary<string, string> {
+                { "album", albumId },
+                { "lang", lang },
+                { "external-domain", "music.yandex.ru" },
+                { "overembed", "false" }
+            };
+
+            return GetRequest(YEndpoints.Album, query: query);
         }
     }
 }

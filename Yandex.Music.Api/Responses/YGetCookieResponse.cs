@@ -9,8 +9,7 @@ namespace Yandex.Music.Api.Responses
 
         public static YGetCookieResponse FromJson(JToken json)
         {
-            return new YGetCookieResponse
-            {
+            return new YGetCookieResponse {
                 CryptoId = json["cryptouid"].ToObject<string>(),
                 CryptoSign = json["cryptouid_sign"].ToObject<string>()
             };
