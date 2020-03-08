@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -5,11 +6,24 @@ using Yandex.Music.Api.Requests;
 
 namespace Yandex.Music.Api.Common
 {
+    public enum YAuthStorageEncryption
+    {
+        None,
+        Rijndael
+    }
+
     /// <summary>
     /// Хранилище данных пользователя
     /// </summary>
     public class YAuthStorage
     {
+        #region Поля
+
+        private YAuthStorageEncryption encryption;
+        private Encryptor encryptor;
+
+        #endregion Поля
+
         #region Свойства
 
         public bool IsAuthorized { get; internal set; }
@@ -20,7 +34,13 @@ namespace Yandex.Music.Api.Common
 
         #endregion Свойства
 
-        public YAuthStorage(string login, string password)
+        #region Вспомогательные функции
+
+        #endregion Вспомогательные функции
+
+        #region Основные функции
+
+        public YAuthStorage(string login, string password, YAuthStorageEncryption usedEncryption = YAuthStorageEncryption.None)
         {
             User = new YUser {
                 Login = login,
@@ -28,55 +48,78 @@ namespace Yandex.Music.Api.Common
             };
 
             Context = new HttpContext();
+
+            // Шифрование
+            encryptor = new Encryptor($"{User.Login}|{User.Password}");
+            encryption = usedEncryption;
         }
 
         public bool Save(string fileName)
         {
-            File.Delete(fileName);
+            try {
+                File.Delete(fileName);
 
-            BinaryFormatter bf = new BinaryFormatter();
+                byte[] bytes;
+                using (MemoryStream ms = new MemoryStream()) {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    bf.Serialize(ms, Context.Cookies);
 
-            using (FileStream fs = new FileStream(fileName, FileMode.Create))
-                bf.Serialize(fs, Context.Cookies);
-
-            return true;
-
-            /*
-            var jsonUser = JsonConvert.SerializeObject(user);
-
-            using (var stream = new FileStream(path, FileMode.OpenOrCreate)) {
-                using (var writer = new StreamWriter(stream)) {
-                    await writer.WriteAsync(jsonUser);
+                    bytes = ms.ToArray();
                 }
+
+                switch (encryption) {
+                    case YAuthStorageEncryption.Rijndael:
+                    {
+                        bytes = encryptor.Encrypt(bytes);
+                        break;
+                    }
+                }
+
+                using (FileStream fs = new FileStream(fileName, FileMode.Create))
+                    fs.Write(bytes, 0, bytes.Length);
+
+                return true;
             }
-            */
+            catch (Exception ex) {
+                Console.WriteLine(ex);
+                return false;
+            }
         }
 
         public bool Load(string fileName)
         {
-            if (!File.Exists(fileName))
-                return false;
+            try {
+                if (!File.Exists(fileName))
+                    return false;
 
-            BinaryFormatter bf = new BinaryFormatter();
+                byte[] bytes;
 
-            using (FileStream fs = new FileStream(fileName, FileMode.Open))
-                Context.Cookies = (CookieContainer) bf.Deserialize(fs);
-
-            return true;
-
-            /*
-            var userSource = string.Empty;
-
-            using (var stream = new FileStream(path, FileMode.Open)) {
-                using (var reader = new StreamReader(stream)) {
-                    userSource = await reader.ReadToEndAsync();
+                using (FileStream fs = new FileStream(fileName, FileMode.Open)) {
+                    bytes = new byte[fs.Length];
+                    fs.Read(bytes, 0, bytes.Length);
                 }
+
+                switch (encryption) {
+                    case YAuthStorageEncryption.Rijndael:
+                    {
+                        bytes = encryptor.Decrypt(bytes);
+                        break;
+                    }
+                }
+
+                using (MemoryStream ms = new MemoryStream(bytes)) {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    Context.Cookies = (CookieContainer)bf.Deserialize(ms);
+                }
+
+                return true;
             }
-
-            user = JsonConvert.DeserializeObject<YUser>(userSource);
-
-            return user;
-            */
+            catch (Exception ex) {
+                Console.WriteLine(ex);
+                return false;
+            }
         }
+
+        #endregion Основные функции
     }
 }

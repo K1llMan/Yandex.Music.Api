@@ -18,5 +18,10 @@ namespace Yandex.Music.Api.Requests
 
             return iMilliseconds;
         }
+
+        public HttpContext()
+        {
+            Cookies = new CookieContainer();
+        }
     }
 }
