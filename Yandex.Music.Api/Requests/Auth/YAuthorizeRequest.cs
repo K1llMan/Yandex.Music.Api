@@ -23,7 +23,7 @@ namespace Yandex.Music.Api.Requests.Auth
                 {"retpath", ""}
             };
 
-            FormRequest(YEndpoints.Passport, WebRequestMethods.Http.Post, query, GetQueryString(body));
+            FormRequest(YEndpoints.Passport, WebRequestMethods.Http.Post, query, body: GetQueryString(body));
 
             return this;
         }

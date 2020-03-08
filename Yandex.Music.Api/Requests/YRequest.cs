@@ -32,8 +32,8 @@ namespace Yandex.Music.Api.Requests
             return string.Join("&", query.Select(p => $"{p.Key}={p.Value}"));
         }
 
-        protected virtual HttpWebRequest FormRequest(string url, string method = WebRequestMethods.Http.Get,
-            Dictionary<string, string> query = null, string body = null)
+        protected virtual void FormRequest(string url, string method = WebRequestMethods.Http.Get, 
+            Dictionary<string, string> query = null, List<KeyValuePair<string, string>> headers = null, string body = null)
         {
             var queryStr = string.Empty;
             if (query != null && query.Count > 0)
@@ -49,6 +49,10 @@ namespace Yandex.Music.Api.Requests
             if (storage.Context.Cookies == null)
                 storage.Context.Cookies = new CookieContainer();
 
+            if (headers != null && headers.Count > 0)
+                foreach (KeyValuePair<string, string> header in headers)
+                    request.Headers.Add(header.Key, header.Value);
+
             if (!string.IsNullOrEmpty(body))
                 using (var sw = new StreamWriter(request.GetRequestStream(), Encoding.UTF8))
                     sw.Write(body);
@@ -60,8 +64,6 @@ namespace Yandex.Music.Api.Requests
             request.AutomaticDecompression = DecompressionMethods.GZip;
 
             fullRequest = request;
-
-            return request;
         }
 
         protected T Deserialize<T>(JToken token, string jsonPath = "")

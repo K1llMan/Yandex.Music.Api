@@ -18,20 +18,19 @@ namespace Yandex.Music.Api.Requests.Auth
                 { "__t", storage.Context.GetTimeInterval().ToString() }
             };
 
-            var request = FormRequest("https://music.yandex.ru/api/v2.1/handlers/auth", query: query);
+            List<KeyValuePair<string, string>> headers = new List<KeyValuePair<string, string>> {
+                YRequestHeaders.Get(YHeader.Accept, storage),
+                YRequestHeaders.Get(YHeader.AcceptEncoding, storage),
+                YRequestHeaders.Get(YHeader.AcceptLanguage, storage),
+                YRequestHeaders.Get(YHeader.AccessControlAllowMethods, storage),
+                YRequestHeaders.Get(YHeader.Origin, storage),
+                YRequestHeaders.Get(YHeader.Referer, storage),
+                YRequestHeaders.Get(YHeader.SecFetchSite, storage),
+                YRequestHeaders.Get(YHeader.XRequestedWith, storage),
+                YRequestHeaders.Get(YHeader.XRetpathY, storage),
+            };
 
-            request.Headers[HttpRequestHeader.Accept] = "application/json; q=1.0, text/*; q=0.8, */*; q=0.1";
-            request.Headers["Accept-Encoding"] = "gzip, deflate, br";
-            request.Headers["Accept-Language"] = "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7";
-            request.Headers["access-control-allow-methods"] = "[POST]";
-            request.Headers["Sec-Fetch-Mode"] = "cors";
-            request.Headers["X-Requested-With"] = "XMLHttpRequest";
-            request.Headers["X-Retpath-Y"] = $"https%3A%2F%2Fmusic.yandex.ru%2Fusers%2F{storage.User.Login}%2Fplaylists";
-
-            request.Headers["origin"] = "https://music.yandex.ru";
-            request.Headers["referer"] = $"https://music.yandex.ru/users/{storage.User.Login}/playlists";
-            request.Headers["sec-fetch-mode"] = "cors";
-            request.Headers["sec-fetch-site"] = "same-site";
+            FormRequest("https://music.yandex.ru/api/v2.1/handlers/auth", query: query, headers: headers);
 
             return this;
         }

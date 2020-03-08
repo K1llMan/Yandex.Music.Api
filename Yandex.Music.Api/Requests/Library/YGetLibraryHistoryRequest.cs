@@ -22,21 +22,21 @@ namespace Yandex.Music.Api.Requests.Library
                 { "ncrnd", "0.671046085811837" }
             };
 
-            var request = FormRequest(YEndpoints.Library, query: query);
+            List<KeyValuePair<string, string>> headers = new List<KeyValuePair<string, string>> {
+                YRequestHeaders.Get(YHeader.Accept, storage),
+                YRequestHeaders.Get(YHeader.AcceptEncoding, storage),
+                YRequestHeaders.Get(YHeader.AcceptLanguage, storage),
+                YRequestHeaders.Get(YHeader.AccessControlAllowMethods, storage),
+                YRequestHeaders.Get(YHeader.Origin, storage),
+                YRequestHeaders.Get(YHeader.Referer, storage),
+                YRequestHeaders.Get(YHeader.SecFetchMode, storage),
+                YRequestHeaders.Get(YHeader.SecFetchSite, storage),
+                YRequestHeaders.Get(YHeader.XCurrentUID, storage),
+                YRequestHeaders.Get(YHeader.XRequestedWith, storage),
+                YRequestHeaders.Get(YHeader.XRetpathY, storage),
+            };
 
-            request.Headers[HttpRequestHeader.Accept] = "application/json, text/javascript, */*; q=0.01";
-            request.Headers["Accept-Encoding"] = "gzip, deflate, br";
-            request.Headers["Accept-Language"] = "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7";
-            request.Headers["access-control-allow-methods"] = "[POST]";
-            request.Headers["Sec-Fetch-Mode"] = "cors";
-            request.Headers["X-Current-UID"] = storage.User.Uid;
-            request.Headers["X-Requested-With"] = "XMLHttpRequest";
-            request.Headers["X-Retpath-Y"] = $"https%3A%2F%2Fmusic.yandex.ru%2Fusers%2F{storage.User.Uid}%2Fplaylists";
-
-            request.Headers["origin"] = "https://music.yandex.ru";
-            request.Headers["referer"] = $"https://music.yandex.ru/users/{storage.User.Uid}/playlists";
-            request.Headers["sec-fetch-mode"] = "cors";
-            request.Headers["sec-fetch-site"] = "same-site";
+            FormRequest(YEndpoints.Library, query: query, headers: headers);
 
             return this;
         }

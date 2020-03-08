@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Yandex
@@ -10,11 +11,14 @@ namespace Yandex.Music.Api.Requests.Yandex
 
         public YRequest Create(string userLogin)
         {
-            var request = FormRequest("https://matchid.adfox.yandex.ru/getcookie");
-            request.Headers["origin"] = "https://music.yandex.ru";
-            request.Headers["referer"] = $"https://music.yandex.ru/users/{userLogin}/playlists";
-            request.Headers["sec-fetch-mode"] = "cors";
-            request.Headers["sec-fetch-site"] = "same-site";
+            List<KeyValuePair<string, string>> headers = new List<KeyValuePair<string, string>> {
+                YRequestHeaders.Get(YHeader.Origin, storage),
+                YRequestHeaders.Get(YHeader.Referer, storage),
+                YRequestHeaders.Get(YHeader.SecFetchMode, storage),
+                YRequestHeaders.Get(YHeader.SecFetchSite, storage),
+            };
+
+            FormRequest("https://matchid.adfox.yandex.ru/getcookie", headers: headers);
 
             return this;
         }
