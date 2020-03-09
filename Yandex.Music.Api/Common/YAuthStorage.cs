@@ -7,9 +7,18 @@ using Yandex.Music.Api.Requests;
 
 namespace Yandex.Music.Api.Common
 {
+    /// <summary>
+    /// Типы шифрования
+    /// </summary>
     public enum YAuthStorageEncryption
     {
+        /// <summary>
+        /// Без шифрования
+        /// </summary>
         None,
+        /// <summary>
+        /// Rijndael
+        /// </summary>
         Rijndael
     }
 
@@ -27,10 +36,19 @@ namespace Yandex.Music.Api.Common
 
         #region Свойства
 
+        /// <summary>
+        /// Флаг авторизации
+        /// </summary>
         public bool IsAuthorized { get; internal set; }
 
+        /// <summary>
+        /// Http-контекст
+        /// </summary>
         public HttpContext Context { get; }
 
+        /// <summary>
+        /// Пользователь
+        /// </summary>
         public YUser User { get; set; }
 
         #endregion Свойства
@@ -41,6 +59,12 @@ namespace Yandex.Music.Api.Common
 
         #region Основные функции
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="login">Логин</param>
+        /// <param name="password">Пароль</param>
+        /// <param name="usedEncryption">Тип шифрования куков</param>
         public YAuthStorage(string login, string password, YAuthStorageEncryption usedEncryption = YAuthStorageEncryption.None)
         {
             User = new YUser {
@@ -55,6 +79,20 @@ namespace Yandex.Music.Api.Common
             encryption = usedEncryption;
         }
 
+        /// <summary>
+        /// Установка прокси для пользователия
+        /// </summary>
+        /// <param name="proxy">Прокси</param>
+        public void SetProxy(IWebProxy proxy)
+        {
+            Context.WebProxy = proxy;
+        }
+
+        /// <summary>
+        /// Сохранение куков
+        /// </summary>
+        /// <param name="fileName">Имя файла</param>
+        /// <returns></returns>
         public bool Save(string fileName)
         {
             try {
@@ -88,6 +126,11 @@ namespace Yandex.Music.Api.Common
             }
         }
 
+        /// <summary>
+        /// Загрузка куков
+        /// </summary>
+        /// <param name="fileName">Имя файла</param>
+        /// <returns></returns>
         public bool Load(string fileName)
         {
             try {

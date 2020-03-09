@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-using Yandex.Music.Api.API;
+﻿using Yandex.Music.Api.API;
 
 namespace Yandex.Music.Api
 {
@@ -9,12 +7,6 @@ namespace Yandex.Music.Api
     /// </summary>
     public class YandexMusicApi
     {
-        #region Поля
-
-        private IWebProxy proxy;
-
-        #endregion Поля
-
         #region Ветки API
 
         /// <summary>
@@ -55,18 +47,6 @@ namespace Yandex.Music.Api
         #endregion Ветки API
 
         #region Основные функции
-
-        /// <summary>
-        /// Прокси
-        /// </summary>
-        /// <param name="usingProxy">Объект прокси</param>
-        /// <returns></returns>
-        public YandexMusicApi UseWebProxy(IWebProxy usingProxy)
-        {
-            proxy = usingProxy;
-
-            return this;
-        }
 
         /// <summary>
         /// Конструктор по умолчанию
