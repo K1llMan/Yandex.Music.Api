@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Net;
+
 using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Playlist
@@ -12,7 +13,7 @@ namespace Yandex.Music.Api.Requests.Playlist
 
         public YRequest Create(string kinds)
         {
-            Dictionary<string, string> query = new Dictionary<string, string> {
+            var query = new Dictionary<string, string> {
                 {"owner", "music.partners"},
                 {"kinds", kinds}
             };

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
+
 using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Track
@@ -14,30 +13,22 @@ namespace Yandex.Music.Api.Requests.Track
 
         public YRequest Create(bool status, string trackKey)
         {
-            string time = storage.Context.GetTimeInterval().ToString();
+            var time = storage.Context.GetTimeInterval().ToString();
 
-            var trackPair = trackKey.Split(':');
-            var trackId = trackPair.FirstOrDefault();
-            var albumId = trackPair.LastOrDefault();
-
-            var take = "liked";
-            if (!status) take = "unlike";
+            var take = "add";
+            if (!status)
+                take = "remove";
 
             var query = new Dictionary<string, string> {
-                {"timestamp", time },
-                {"from", "web-radio-user-saved"},
-                {"batchId", "undefined"},
-                {"trackId", trackId},
-                {"albumId", albumId},
-                {"totalPlayed", "0.1"},
+                {"from", "web-own_tracks-track-track-main"},
                 {"sign", storage.User.Sign},
                 {"external-domain", "music.yandex.ru"},
                 {"overembed", "no"}
             };
 
-            var url = $"https://music.yandex.ru/api/v2.1/handlers/radio/radio/history/feedback/{take}/{trackKey}?__t={time}";
+            var url = $"https://music.yandex.ru/api/v2.1/handlers/track/{trackKey}/web-own_tracks-track-track-main/like/{take}?__t={time}";
 
-            List<KeyValuePair<string, string>> headers = new List<KeyValuePair<string, string>> {
+            var headers = new List<KeyValuePair<string, string>> {
                 YRequestHeaders.Get(YHeader.Accept, storage),
                 YRequestHeaders.Get(YHeader.AcceptCharset, storage),
                 YRequestHeaders.Get(YHeader.AcceptEncoding, "utf-8"),
@@ -50,10 +41,10 @@ namespace Yandex.Music.Api.Requests.Track
                 YRequestHeaders.Get(YHeader.SecFetchSite, storage),
                 YRequestHeaders.Get(YHeader.XCurrentUID, storage),
                 YRequestHeaders.Get(YHeader.XRequestedWith, storage),
-                YRequestHeaders.Get(YHeader.XRetpathY, storage),
+                YRequestHeaders.Get(YHeader.XRetpathY, storage)
             };
 
-            FormRequest(url, body: GetQueryString(query), headers: headers);
+            FormRequest(url, body: GetQueryString(query), headers: headers, method: WebRequestMethods.Http.Post);
 
             return this;
         }

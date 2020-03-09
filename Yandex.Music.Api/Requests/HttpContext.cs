@@ -7,6 +7,11 @@ namespace Yandex.Music.Api.Requests
     {
         public CookieContainer Cookies;
 
+        public HttpContext()
+        {
+            Cookies = new CookieContainer();
+        }
+
         public IWebProxy WebProxy { get; set; }
 
         public long GetTimeInterval()
@@ -17,11 +22,6 @@ namespace Yandex.Music.Api.Requests
             var iMilliseconds = Convert.ToInt64(tsInterval.TotalMilliseconds);
 
             return iMilliseconds;
-        }
-
-        public HttpContext()
-        {
-            Cookies = new CookieContainer();
         }
     }
 }

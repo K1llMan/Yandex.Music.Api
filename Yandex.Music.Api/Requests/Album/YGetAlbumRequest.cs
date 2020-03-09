@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Album
@@ -11,11 +12,11 @@ namespace Yandex.Music.Api.Requests.Album
 
         public YRequest Create(string albumId)
         {
-            Dictionary<string, string> query = new Dictionary<string, string> {
-                { "album", albumId },
-                { "lang", storage.User.Lang },
-                { "external-domain", "music.yandex.ru" },
-                { "overembed", "false" }
+            var query = new Dictionary<string, string> {
+                {"album", albumId},
+                {"lang", storage.User.Lang},
+                {"external-domain", "music.yandex.ru"},
+                {"overembed", "false"}
             };
 
             FormRequest(YEndpoints.Album, query: query);

@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
+
 using Yandex.Music.Api.API;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Requests.Yandex;
@@ -16,7 +17,7 @@ namespace Yandex.Music.Api
         #endregion Поля
 
         #region Ветки API
-        
+
         /// <summary>
         ///     AccountsApi
         /// </summary>
@@ -46,7 +47,7 @@ namespace Yandex.Music.Api
         ///     TrackAPI
         /// </summary>
         public YTrackAPI TrackAPI { get; set; }
-        
+
         /// <summary>
         ///     UserAPI
         /// </summary>
@@ -77,13 +78,13 @@ namespace Yandex.Music.Api
 
         public YandexMusicApi()
         {
-            AccountsApi = new YAccountsAPI(this);
-            AlbumAPI = new YAlbumAPI(this);
-            LibraryAPI = new YLibraryAPI(this);
-            PlaylistAPI = new YPlaylistAPI(this);
-            SearchAPI = new YSearchAPI(this);
-            TrackAPI = new YTrackAPI(this);
-            UserAPI = new YUserAPI(this);
+            AccountsApi = new YAccountsAPI();
+            AlbumAPI = new YAlbumAPI();
+            LibraryAPI = new YLibraryAPI();
+            PlaylistAPI = new YPlaylistAPI();
+            SearchAPI = new YSearchAPI();
+            TrackAPI = new YTrackAPI();
+            UserAPI = new YUserAPI();
         }
 
         #endregion Основные функции

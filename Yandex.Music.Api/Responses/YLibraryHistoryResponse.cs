@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Responses
@@ -9,7 +10,7 @@ namespace Yandex.Music.Api.Responses
         public string BookmarksPlaylistsIds { get; set; }
         public string Bookmarks { get; set; }
         public List<long> PlaylistIds { get; set; }
-        public List<YLibraryPlaylistResponse.YandexLibraryPlaylist> Playlists { get; set; }
+        public List<YPlaylist> Playlists { get; set; }
         public bool Verified { get; set; }
         public YOwner Owner { get; set; }
         public bool Visibility { get; set; }

@@ -4,23 +4,23 @@ using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Playlist
 {
-    internal class YGetPlaylistDejaVuRequest : YRequest
+    internal class YGetPlaylistPremiereRequest : YRequest
     {
-        public YGetPlaylistDejaVuRequest(YAuthStorage storage) : base(storage)
+        public YGetPlaylistPremiereRequest(YAuthStorage storage) : base(storage)
         {
         }
 
         public YRequest Create(string kinds)
         {
-            var query = new Dictionary<string, string> {
+            Dictionary<string, string> query = new Dictionary<string, string> {
                 {"kinds", kinds},
                 {"lang", storage.User.Lang},
-                {"owner", "yamusic-dejavu"},
+                {"owner", "yamusic-premiere"},
                 {"light", "true"},
                 {"likeFilter", "all"},
                 {"external-domain", "music.yandex.ru"},
                 {"overembed", "false"},
-                {"ncrnd", "0.13048851242872916"}
+                {"ncrnd", "0.6490843100006838"}
             };
 
             FormRequest(YEndpoints.Playlist, query: query);

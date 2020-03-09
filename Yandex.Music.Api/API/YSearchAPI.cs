@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Requests.Search;
 using Yandex.Music.Api.Responses;
@@ -7,13 +8,7 @@ namespace Yandex.Music.Api.API
 {
     public class YSearchAPI
     {
-        #region Fields
-
-        private readonly YandexMusicApi api;
-
-        #endregion Fields
-
-        #region Main function
+        #region Основные функции
 
         public async Task<YSearchResponse> TrackAsync(YAuthStorage storage, string trackName, int pageNumber = 0)
         {
@@ -145,11 +140,6 @@ namespace Yandex.Music.Api.API
         //      return fileName;
         //    }
 
-        public YSearchAPI(YandexMusicApi yandexApi)
-        {
-            api = yandexApi;
-        }
-
-        #endregion Main function
+        #endregion Основные функции
     }
 }

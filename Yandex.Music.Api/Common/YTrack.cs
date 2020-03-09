@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+
 using Yandex.Music.Api.Models.Artist;
 
 namespace Yandex.Music.Api.Common
@@ -27,6 +28,9 @@ namespace Yandex.Music.Api.Common
         public bool? RememberPosition { get; set; }
         public bool? EmbedPlayback { get; set; }
         public string Prefix { get; set; }
+
+        public long? AlbumId { get; set; }
+        public string Timestamp { get; set; }
 
         public string GetKey()
         {

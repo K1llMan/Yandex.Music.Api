@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Requests.Playlist;
 using Yandex.Music.Api.Requests.Track;
@@ -9,31 +11,29 @@ namespace Yandex.Music.Api.API
 {
     public class YPlaylistAPI
     {
-        #region Поля
-
-        private readonly YandexMusicApi api;
-
-        #endregion Поля
-
         #region Вспомогательные функции
 
         #endregion Вспомогательные функции
 
         #region Основные функции
 
-        #region Стандартные плейлисты
+        #region Список с главной
 
-        public async Task<YPlaylist> OfDayAsync(YAuthStorage storage)
+        public async Task<List<YPlaylist>> MainPagePersonalAsync(YAuthStorage storage)
         {
-            return await new YGetPlaylistOfDayRequest(storage)
+            return await new YGetPlaylistMainPageRequest(storage)
                 .Create()
-                .GetResponseAsync<YPlaylist>("playlist");
+                .GetResponseAsyncList<YPlaylist>("$..[?(@.type == 'personal-playlist')].data.data");
         }
 
-        public YPlaylist OfDay(YAuthStorage storage)
+        public List<YPlaylist> MainPagePersonal(YAuthStorage storage)
         {
-            return OfDayAsync(storage).GetAwaiter().GetResult();
+            return MainPagePersonalAsync(storage).GetAwaiter().GetResult();
         }
+
+        #endregion Список с главной
+
+        #region Стандартные плейлисты
 
         public async Task<YPlaylistFavoritesResponse> FavoritesAsync(YAuthStorage storage)
         {
@@ -47,16 +47,52 @@ namespace Yandex.Music.Api.API
             return FavoritesAsync(storage).GetAwaiter().GetResult();
         }
 
-        public async Task<YPlaylist> DejaVuAsync(YAuthStorage storage)
+        public async Task<YPlaylist> OfTheDayAsync(YAuthStorage storage, string kinds)
         {
-            return await new YGetPlaylistDejaVuRequest(storage)
-                .Create()
+            return await new YGetPlaylistOfDayRequest(storage)
+                .Create(kinds)
                 .GetResponseAsync<YPlaylist>("playlist");
         }
 
-        public YPlaylist DejaVu(YAuthStorage storage)
+        public YPlaylist OfTheDay(YAuthStorage storage, string kinds)
         {
-            return DejaVuAsync(storage).GetAwaiter().GetResult();
+            return OfTheDayAsync(storage, kinds).GetAwaiter().GetResult();
+        }
+
+        public async Task<YPlaylist> DejaVuAsync(YAuthStorage storage, string kinds)
+        {
+            return await new YGetPlaylistDejaVuRequest(storage)
+                .Create(kinds)
+                .GetResponseAsync<YPlaylist>("playlist");
+        }
+
+        public YPlaylist DejaVu(YAuthStorage storage, string kinds)
+        {
+            return DejaVuAsync(storage, kinds).GetAwaiter().GetResult();
+        }
+
+        public async Task<YPlaylist> PremiereAsync(YAuthStorage storage, string kinds)
+        {
+            return await new YGetPlaylistPremiereRequest(storage)
+                .Create(kinds)
+                .GetResponseAsync<YPlaylist>("playlist");
+        }
+
+        public YPlaylist Premiere(YAuthStorage storage, string kinds)
+        {
+            return PremiereAsync(storage, kinds).GetAwaiter().GetResult();
+        }
+
+        public async Task<YPlaylist> MissedAsync(YAuthStorage storage, string kinds)
+        {
+            return await new YGetPlaylistMissedRequest(storage)
+                .Create(kinds)
+                .GetResponseAsync<YPlaylist>("playlist");
+        }
+
+        public YPlaylist Missed(YAuthStorage storage, string kinds)
+        {
+            return MissedAsync(storage, kinds).GetAwaiter().GetResult();
         }
 
         #endregion Стандартные плейлисты
@@ -87,7 +123,7 @@ namespace Yandex.Music.Api.API
             return CreateAsync(storage, name).GetAwaiter().GetResult();
         }
 
-        public async Task<bool> RemoveAsync(YAuthStorage storage, long kind)
+        public async Task<bool> RemoveAsync(YAuthStorage storage, string kind)
         {
             try {
                 await new YPlaylistRemoveRequest(storage)
@@ -103,7 +139,7 @@ namespace Yandex.Music.Api.API
             return false;
         }
 
-        public bool Remove(YAuthStorage storage, long kind)
+        public bool Remove(YAuthStorage storage, string kind)
         {
             return RemoveAsync(storage, kind).GetAwaiter().GetResult();
         }
@@ -135,11 +171,6 @@ namespace Yandex.Music.Api.API
         }
 
         #endregion Операции над плейлистами
-
-        public YPlaylistAPI(YandexMusicApi yandexApi)
-        {
-            api = yandexApi;
-        }
 
         #endregion Main function
     }

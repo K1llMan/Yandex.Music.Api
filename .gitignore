@@ -9,3 +9,5 @@
 /.vs
 /Yandex.Music.Api/bin
 /Yandex.Music.Api/obj
+/Yandex.Music.Api.Tests/bin/Debug/netcoreapp2.1
+/Yandex.Music.Api/Yandex.Music.Api.csproj.user

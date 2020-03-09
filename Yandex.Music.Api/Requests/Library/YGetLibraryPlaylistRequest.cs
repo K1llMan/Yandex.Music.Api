@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Net;
+
 using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Library
@@ -12,17 +12,17 @@ namespace Yandex.Music.Api.Requests.Library
 
         public YRequest Create()
         {
-            Dictionary<string, string> query = new Dictionary<string, string> {
-                { "owner", storage.User.Login },
-                { "lang", storage.User.Lang },
-                { "filter", "playlists" },
-                { "likeFilter", "all" },
-                { "external-domain", "music.yandex.ru" },
-                { "overembed", "false" },
-                { "ncrnd", "0.17447934315877878" }
+            var query = new Dictionary<string, string> {
+                {"owner", storage.User.Login},
+                {"lang", storage.User.Lang},
+                {"filter", "playlists"},
+                {"likeFilter", "all"},
+                {"external-domain", "music.yandex.ru"},
+                {"overembed", "false"},
+                {"ncrnd", "0.17447934315877878"}
             };
 
-            List<KeyValuePair<string, string>> headers = new List<KeyValuePair<string, string>> {
+            var headers = new List<KeyValuePair<string, string>> {
                 YRequestHeaders.Get(YHeader.Accept, storage),
                 YRequestHeaders.Get(YHeader.AcceptEncoding, storage),
                 YRequestHeaders.Get(YHeader.AcceptLanguage, storage),
@@ -33,7 +33,7 @@ namespace Yandex.Music.Api.Requests.Library
                 YRequestHeaders.Get(YHeader.SecFetchSite, storage),
                 YRequestHeaders.Get(YHeader.XCurrentUID, storage),
                 YRequestHeaders.Get(YHeader.XRequestedWith, storage),
-                YRequestHeaders.Get(YHeader.XRetpathY, storage),
+                YRequestHeaders.Get(YHeader.XRetpathY, storage)
             };
 
             FormRequest(YEndpoints.Library, query: query, headers: headers);

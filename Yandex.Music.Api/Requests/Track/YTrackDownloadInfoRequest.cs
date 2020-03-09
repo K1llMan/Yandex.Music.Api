@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Net;
+
 using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Track
@@ -12,11 +12,11 @@ namespace Yandex.Music.Api.Requests.Track
 
         public YRequest Create(string trackKey)
         {
-            string time = storage.Context.GetTimeInterval().ToString();
+            var time = storage.Context.GetTimeInterval().ToString();
             var url =
                 $"https://music.yandex.ru/api/v2.1/handlers/track/{trackKey}/web-own_tracks-track-track-main/download/m?hq=0&external-domain=music.yandex.ru&overembed=no&__t={time}";
 
-            List<KeyValuePair<string, string>> headers = new List<KeyValuePair<string, string>> {
+            var headers = new List<KeyValuePair<string, string>> {
                 YRequestHeaders.Get(YHeader.Accept, storage),
                 YRequestHeaders.Get(YHeader.AcceptLanguage, storage),
                 YRequestHeaders.Get(YHeader.Origin, storage),
@@ -25,7 +25,7 @@ namespace Yandex.Music.Api.Requests.Track
                 YRequestHeaders.Get(YHeader.SecFetchSite, storage),
                 YRequestHeaders.Get(YHeader.XCurrentUID, storage),
                 YRequestHeaders.Get(YHeader.XRequestedWith, storage),
-                YRequestHeaders.Get(YHeader.XRetpathY, storage),
+                YRequestHeaders.Get(YHeader.XRetpathY, storage)
             };
 
             FormRequest(url, headers: headers);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Requests;
 using Yandex.Music.Api.Requests.Auth;
@@ -9,44 +10,32 @@ namespace Yandex.Music.Api.API
 {
     public class YUserAPI
     {
-        #region Поля
-
-        private readonly YandexMusicApi api;
-
-        #endregion Поля
-
         #region Вспомогательные функции
 
         private async Task<YAuthorizeResponse> AuthPassport(YAuthStorage storage)
         {
             var request = new YAuthorizeRequest(storage).Create();
 
-            try
-            {
-                using (var response = await request.GetResponseAsync())
-                {
+            try {
+                using (var response = await request.GetResponseAsync()) {
                     storage.Context.Cookies.Add(response.Cookies);
 
                     if (response.ResponseUri.AbsoluteUri.Contains(YEndpoints.Passport))
-                        return new YAuthorizeResponse
-                        {
+                        return new YAuthorizeResponse {
                             IsAuthorized = false,
                             User = null
                         };
 
-                    return new YAuthorizeResponse
-                    {
+                    return new YAuthorizeResponse {
                         IsAuthorized = true,
                         User = null
                     };
                 }
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 Console.WriteLine(ex);
 
-                return new YAuthorizeResponse
-                {
+                return new YAuthorizeResponse {
                     IsAuthorized = false,
                     User = null
                 };
@@ -60,11 +49,11 @@ namespace Yandex.Music.Api.API
         public async Task AuthorizeAsync(YAuthStorage storage)
         {
             // Пытаемся получить информацию о пользователе
-            YAuthInfoResponse authInfo = await GetUserAuthAsync(storage);
+            var authInfo = await GetUserAuthAsync(storage);
 
             // Если не авторизован, то авторизуем
             if (!authInfo.Logged) {
-                YAuthorizeResponse result = await AuthPassport(storage);
+                var result = await AuthPassport(storage);
                 if (!result.IsAuthorized)
                     return;
 
@@ -120,11 +109,6 @@ namespace Yandex.Music.Api.API
         public YAuthInfoUserResponse GetUserAuthDetails(YAuthStorage storage)
         {
             return GetUserAuthDetailsAsync(storage).GetAwaiter().GetResult();
-        }
-
-        public YUserAPI(YandexMusicApi yandexApi)
-        {
-            api = yandexApi;
         }
 
         #endregion Основные функции

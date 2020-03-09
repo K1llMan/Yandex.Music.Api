@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Models.Search.Artist

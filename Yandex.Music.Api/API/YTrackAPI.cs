@@ -3,6 +3,7 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Requests.Track;
 using Yandex.Music.Api.Responses;
@@ -11,12 +12,6 @@ namespace Yandex.Music.Api.API
 {
     public class YTrackAPI
     {
-        #region Поля
-
-        private readonly YandexMusicApi api;
-
-        #endregion Поля
-
         #region Вспомогательные функции
 
         private string BuildLinkForDownload(YTrackDownloadInfoResponse mainDownloadResponse,
@@ -83,15 +78,15 @@ namespace Yandex.Music.Api.API
 
         public string GetFileLink(YAuthStorage storage, string trackKey)
         {
-            YTrackDownloadInfoResponse mainDownloadResponse = GetMetadataForDownload(storage, trackKey);
-            YStorageDownloadFileResponse storageDownloadResponse = GetDownloadFileInfo(storage, mainDownloadResponse);
+            var mainDownloadResponse = GetMetadataForDownload(storage, trackKey);
+            var storageDownloadResponse = GetDownloadFileInfo(storage, mainDownloadResponse);
 
             return BuildLinkForDownload(mainDownloadResponse, storageDownloadResponse);
         }
 
         public void ExtractToFile(YAuthStorage storage, string trackKey, string filePath)
         {
-            string fileLink = GetFileLink(storage, trackKey);
+            var fileLink = GetFileLink(storage, trackKey);
 
             try {
                 using (var client = new WebClient()) {
@@ -105,7 +100,7 @@ namespace Yandex.Music.Api.API
 
         public byte[] ExtractData(YAuthStorage storage, string trackKey)
         {
-            string fileLink = GetFileLink(storage, trackKey);
+            var fileLink = GetFileLink(storage, trackKey);
 
             var bytes = default(byte[]);
 
@@ -123,32 +118,20 @@ namespace Yandex.Music.Api.API
 
         public YandexStreamTrack ExtractStream(YAuthStorage storage, string trackKey, int fileSize)
         {
-            string fileLink = GetFileLink(storage, trackKey);
+            var fileLink = GetFileLink(storage, trackKey);
             return YandexStreamTrack.Open(new Uri(fileLink), fileSize);
         }
 
-        public async Task<YNotRecommendTrackResponse> NotRecommendAsync(YAuthStorage storage, string trackKey)
+        public async Task<YSetNotRecommendTrackResponse> SetNotRecommendAsync(YAuthStorage storage, string trackKey, bool value)
         {
             return await new YNotRecommendTrackRequest(storage)
-                .Create(trackKey)
-                .GetResponseAsync<YNotRecommendTrackResponse>();
+                .Create(value, trackKey)
+                .GetResponseAsync<YSetNotRecommendTrackResponse>();
         }
 
-        public YNotRecommendTrackResponse NotRecommend(YAuthStorage storage, string trackKey)
+        public YSetNotRecommendTrackResponse SetNotRecommend(YAuthStorage storage, string trackKey, bool value)
         {
-            return NotRecommendAsync(storage, trackKey).GetAwaiter().GetResult();
-        }
-
-        public async Task<YUnDislikeTrackResponse> UnderNotRecommendAsync(YAuthStorage storage, string trackKey)
-        {
-            return await new YUnDislikeTrackRequest(storage)
-                .Create(trackKey)
-                .GetResponseAsync<YUnDislikeTrackResponse>();
-        }
-
-        public YUnDislikeTrackResponse UnderNotRecommend(YAuthStorage storage, string trackKey)
-        {
-            return UnderNotRecommendAsync(storage, trackKey).GetAwaiter().GetResult();
+            return SetNotRecommendAsync(storage, trackKey, value).GetAwaiter().GetResult();
         }
 
         public async Task<YSetLikedTrackResponse> SetLikedAsync(YAuthStorage storage, string trackKey, bool value)
@@ -161,23 +144,6 @@ namespace Yandex.Music.Api.API
         public YSetLikedTrackResponse SetLiked(YAuthStorage storage, string trackKey, bool value)
         {
             return SetLikedAsync(storage, trackKey, value).GetAwaiter().GetResult();
-        }
-
-        public async Task<YAddLikedTrackResponse> ChangeLikedAsync(YAuthStorage storage, string trackKey, bool value)
-        {
-            return await new YAddLikedTrackRequest(storage)
-                .Create(value, trackKey)
-                .GetResponseAsync<YAddLikedTrackResponse>();
-        }
-
-        public YAddLikedTrackResponse ChangeLiked(YAuthStorage storage, string trackKey, bool value)
-        {
-            return ChangeLikedAsync(storage, trackKey, value).GetAwaiter().GetResult();
-        }
-
-        public YTrackAPI(YandexMusicApi yandexApi)
-        {
-            api = yandexApi;
         }
 
         #endregion Основные функции

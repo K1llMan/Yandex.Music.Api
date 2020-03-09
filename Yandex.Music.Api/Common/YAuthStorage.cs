@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Formatters.Binary;
+
 using Yandex.Music.Api.Requests;
 
 namespace Yandex.Music.Api.Common
@@ -13,14 +14,14 @@ namespace Yandex.Music.Api.Common
     }
 
     /// <summary>
-    /// Хранилище данных пользователя
+    ///     Хранилище данных пользователя
     /// </summary>
     public class YAuthStorage
     {
         #region Поля
 
-        private YAuthStorageEncryption encryption;
-        private Encryptor encryptor;
+        private readonly YAuthStorageEncryption encryption;
+        private readonly Encryptor encryptor;
 
         #endregion Поля
 
@@ -60,8 +61,8 @@ namespace Yandex.Music.Api.Common
                 File.Delete(fileName);
 
                 byte[] bytes;
-                using (MemoryStream ms = new MemoryStream()) {
-                    BinaryFormatter bf = new BinaryFormatter();
+                using (var ms = new MemoryStream()) {
+                    var bf = new BinaryFormatter();
                     bf.Serialize(ms, Context.Cookies);
 
                     bytes = ms.ToArray();
@@ -75,8 +76,9 @@ namespace Yandex.Music.Api.Common
                     }
                 }
 
-                using (FileStream fs = new FileStream(fileName, FileMode.Create))
+                using (var fs = new FileStream(fileName, FileMode.Create)) {
                     fs.Write(bytes, 0, bytes.Length);
+                }
 
                 return true;
             }
@@ -94,7 +96,7 @@ namespace Yandex.Music.Api.Common
 
                 byte[] bytes;
 
-                using (FileStream fs = new FileStream(fileName, FileMode.Open)) {
+                using (var fs = new FileStream(fileName, FileMode.Open)) {
                     bytes = new byte[fs.Length];
                     fs.Read(bytes, 0, bytes.Length);
                 }
@@ -107,9 +109,9 @@ namespace Yandex.Music.Api.Common
                     }
                 }
 
-                using (MemoryStream ms = new MemoryStream(bytes)) {
-                    BinaryFormatter bf = new BinaryFormatter();
-                    Context.Cookies = (CookieContainer)bf.Deserialize(ms);
+                using (var ms = new MemoryStream(bytes)) {
+                    var bf = new BinaryFormatter();
+                    Context.Cookies = (CookieContainer) bf.Deserialize(ms);
                 }
 
                 return true;

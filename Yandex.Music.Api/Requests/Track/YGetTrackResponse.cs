@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Track
@@ -11,7 +12,7 @@ namespace Yandex.Music.Api.Requests.Track
 
         public YRequest Create(string trackId)
         {
-            Dictionary<string, string> query = new Dictionary<string, string> {
+            var query = new Dictionary<string, string> {
                 {"track", trackId}
             };
 

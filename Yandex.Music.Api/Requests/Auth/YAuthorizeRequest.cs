@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Net;
+
 using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Auth
@@ -12,13 +13,13 @@ namespace Yandex.Music.Api.Requests.Auth
 
         public YRequest Create()
         {
-            Dictionary<string, string> query = new Dictionary<string, string> {
-                { "mode", "auth" }
+            var query = new Dictionary<string, string> {
+                {"mode", "auth"}
             };
 
-            Dictionary<string, string> body = new Dictionary<string, string> {
-                {"login", storage.User.Login },
-                {"passwd", storage.User.Password },
+            var body = new Dictionary<string, string> {
+                {"login", storage.User.Login},
+                {"passwd", storage.User.Password},
                 {"twoweeks", "yes"},
                 {"retpath", ""}
             };

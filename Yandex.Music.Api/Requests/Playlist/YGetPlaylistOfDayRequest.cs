@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Playlist
@@ -9,16 +10,16 @@ namespace Yandex.Music.Api.Requests.Playlist
         {
         }
 
-        public YRequest Create()
+        public YRequest Create(string kinds)
         {
-            Dictionary<string, string> query = new Dictionary<string, string> {
-                { "kinds", storage.User.Uid },
-                { "lang", storage.User.Lang },
-                { "owner", "yamusic-daily" },
-                { "light", "true" },
-                { "external-domain", "music.yandex.ru" },
-                { "overembed", "false" },
-                { "ncrnd", "ncrnd=0.9083773647705418" }
+            var query = new Dictionary<string, string> {
+                {"kinds", kinds},
+                {"lang", storage.User.Lang},
+                {"owner", "yamusic-daily"},
+                {"light", "true"},
+                {"external-domain", "music.yandex.ru"},
+                {"overembed", "false"},
+                {"ncrnd", "ncrnd=0.9083773647705418"}
             };
 
             FormRequest(YEndpoints.Playlist, query: query);

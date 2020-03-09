@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Extensions;
 
@@ -12,14 +13,15 @@ namespace Yandex.Music.Api.Requests
         AcceptLanguage,
         AccessControlAllowMethods,
         ContentType,
+        ContentLength,
+        SecFetchDest,
         SecFetchMode,
         SecFetchSite,
         XCurrentUID,
         XRequestedWith,
         XRetpathY,
         Origin,
-        Referer,
-
+        Referer
     }
 
     public static class YRequestHeaders
@@ -37,7 +39,7 @@ namespace Yandex.Music.Api.Requests
 
         public static KeyValuePair<string, string> Get(YHeader header, YAuthStorage storage)
         {
-            string value = string.Empty;
+            var value = string.Empty;
             switch (header) {
                 case YHeader.Accept:
                     value = "application/json; q=1.0, text/*; q=0.8, */*; q=0.1";
@@ -62,6 +64,9 @@ namespace Yandex.Music.Api.Requests
                     break;
                 case YHeader.Referer:
                     value = $"https://music.yandex.ru/users/{storage.User.Login}/playlists";
+                    break;
+                case YHeader.SecFetchDest:
+                    value = "empty";
                     break;
                 case YHeader.SecFetchMode:
                     value = "cors";

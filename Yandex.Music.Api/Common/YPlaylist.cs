@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Playlist;
 
@@ -26,7 +27,7 @@ namespace Yandex.Music.Api.Common
         public List<YPlaylistPrerolls> Prerolls { get; set; }
         public YPlaylistPlayCounter PlayCounter { get; set; }
         public string IdForFrom { get; set; }
-        public string GeneratedPlaylistType { get; set; }
+        public YGeneratedPlaylistType GeneratedPlaylistType { get; set; }
         public string UrlPart { get; set; }
         public YPlaylistMadeFor MadeFor { get; set; }
         public string OgTitle { get; set; }

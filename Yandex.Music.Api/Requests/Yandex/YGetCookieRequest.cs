@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Yandex
@@ -11,11 +12,11 @@ namespace Yandex.Music.Api.Requests.Yandex
 
         public YRequest Create(string userLogin)
         {
-            List<KeyValuePair<string, string>> headers = new List<KeyValuePair<string, string>> {
+            var headers = new List<KeyValuePair<string, string>> {
                 YRequestHeaders.Get(YHeader.Origin, storage),
                 YRequestHeaders.Get(YHeader.Referer, storage),
                 YRequestHeaders.Get(YHeader.SecFetchMode, storage),
-                YRequestHeaders.Get(YHeader.SecFetchSite, storage),
+                YRequestHeaders.Get(YHeader.SecFetchSite, storage)
             };
 
             FormRequest("https://matchid.adfox.yandex.ru/getcookie", headers: headers);

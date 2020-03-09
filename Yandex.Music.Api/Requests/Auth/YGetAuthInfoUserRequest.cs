@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Net;
+
 using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Auth
@@ -12,14 +12,14 @@ namespace Yandex.Music.Api.Requests.Auth
 
         public YRequest Create()
         {
-            Dictionary<string, string> query = new Dictionary<string, string> {
-                { "lang", storage.User.Lang },
-                { "external-domain", "music.yandex.ru" },
-                { "overembed", "no" },
-                { "ncrnd", "0.1822837925478349" }
+            var query = new Dictionary<string, string> {
+                {"lang", storage.User.Lang},
+                {"external-domain", "music.yandex.ru"},
+                {"overembed", "no"},
+                {"ncrnd", "0.1822837925478349"}
             };
 
-            List<KeyValuePair<string, string>> headers = new List<KeyValuePair<string, string>> {
+            var headers = new List<KeyValuePair<string, string>> {
                 YRequestHeaders.Get(YHeader.Accept, storage),
                 YRequestHeaders.Get(YHeader.AcceptEncoding, storage),
                 YRequestHeaders.Get(YHeader.AcceptLanguage, storage),
@@ -30,7 +30,7 @@ namespace Yandex.Music.Api.Requests.Auth
                 YRequestHeaders.Get(YHeader.SecFetchSite, storage),
                 YRequestHeaders.Get(YHeader.XCurrentUID, storage),
                 YRequestHeaders.Get(YHeader.XRequestedWith, storage),
-                YRequestHeaders.Get(YHeader.XRetpathY, storage),
+                YRequestHeaders.Get(YHeader.XRetpathY, storage)
             };
 
             FormRequest(YEndpoints.Auth, query: query, headers: headers);

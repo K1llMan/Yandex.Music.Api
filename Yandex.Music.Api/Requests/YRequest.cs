@@ -5,25 +5,27 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
 using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests
 {
     internal class YRequest
     {
-        #region Поля
-
-        private HttpWebRequest fullRequest;
-        protected YAuthStorage storage;        
-
-        #endregion Поля
-
         public YRequest(YAuthStorage userStorage)
         {
             storage = userStorage;
         }
+
+        #region Поля
+
+        private HttpWebRequest fullRequest;
+        protected YAuthStorage storage;
+
+        #endregion Поля
 
         #region Вспомогательные функции
 
@@ -32,7 +34,7 @@ namespace Yandex.Music.Api.Requests
             return string.Join("&", query.Select(p => $"{p.Key}={p.Value}"));
         }
 
-        protected virtual void FormRequest(string url, string method = WebRequestMethods.Http.Get, 
+        protected virtual void FormRequest(string url, string method = WebRequestMethods.Http.Get,
             Dictionary<string, string> query = null, List<KeyValuePair<string, string>> headers = null, string body = null)
         {
             var queryStr = string.Empty;
@@ -50,12 +52,13 @@ namespace Yandex.Music.Api.Requests
                 storage.Context.Cookies = new CookieContainer();
 
             if (headers != null && headers.Count > 0)
-                foreach (KeyValuePair<string, string> header in headers)
+                foreach (var header in headers)
                     request.Headers.Add(header.Key, header.Value);
 
             if (!string.IsNullOrEmpty(body))
-                using (var sw = new StreamWriter(request.GetRequestStream(), Encoding.UTF8))
+                using (var sw = new StreamWriter(request.GetRequestStream(), Encoding.UTF8)) {
                     sw.Write(body);
+                }
 
             request.CookieContainer = storage.Context.Cookies;
             request.KeepAlive = true;
@@ -68,8 +71,7 @@ namespace Yandex.Music.Api.Requests
 
         protected T Deserialize<T>(JToken token, string jsonPath = "")
         {
-            JToken obj = token.SelectToken(jsonPath).ToString();
-            return JsonConvert.DeserializeObject<T>(obj.ToString());
+            return JsonConvert.DeserializeObject<T>(token.SelectToken(jsonPath).ToString());
         }
 
         protected T Deserialize<T>(string json, string jsonPath = "")
@@ -77,13 +79,23 @@ namespace Yandex.Music.Api.Requests
             return Deserialize<T>(JToken.Parse(json), jsonPath);
         }
 
+        protected List<T> DeserializeList<T>(JToken token, string jsonPath = "")
+        {
+            return token.SelectTokens(jsonPath)
+                .Select(t => JsonConvert.DeserializeObject<T>(t.ToString()))
+                .ToList();
+        }
+
+        protected List<T> DeserializeList<T>(string json, string jsonPath = "")
+        {
+            return DeserializeList<T>(JToken.Parse(json), jsonPath);
+        }
+
         protected async Task<T> GetDataFromResponseAsync<T>(HttpWebResponse response, string jsonPath = "")
         {
-            try
-            {
+            try {
                 string result;
-                using (var stream = response.GetResponseStream())
-                {
+                using (var stream = response.GetResponseStream()) {
                     var reader = new StreamReader(stream);
                     result = await reader.ReadToEndAsync();
                 }
@@ -91,10 +103,27 @@ namespace Yandex.Music.Api.Requests
                 storage.Context.Cookies.Add(response.Cookies);
                 return Deserialize<T>(result, jsonPath);
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 Console.WriteLine(ex);
                 return default(T);
+            }
+        }
+
+        protected async Task<List<T>> GetDataFromResponseAsyncList<T>(HttpWebResponse response, string jsonPath = "")
+        {
+            try {
+                string result;
+                using (var stream = response.GetResponseStream()) {
+                    var reader = new StreamReader(stream);
+                    result = await reader.ReadToEndAsync();
+                }
+
+                storage.Context.Cookies.Add(response.Cookies);
+                return DeserializeList<T>(result, jsonPath);
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex);
+                return new List<T>();
             }
         }
 
@@ -107,16 +136,26 @@ namespace Yandex.Music.Api.Requests
             return (HttpWebResponse) await fullRequest.GetResponseAsync();
         }
 
-        public async Task<T> GetResponseAsync<T>(string jsonPath = "")
+        public async Task<T> GetResponseAsync<T>(string jsonPath = "", bool multiple = false)
         {
             if (fullRequest == null)
                 return default(T);
 
-            using (var response = await GetResponseAsync())
+            using (var response = await GetResponseAsync()) {
                 return await GetDataFromResponseAsync<T>(response, jsonPath);
+            }
+        }
+
+        public async Task<List<T>> GetResponseAsyncList<T>(string jsonPath = "")
+        {
+            if (fullRequest == null)
+                return new List<T>();
+
+            using (var response = await GetResponseAsync()) {
+                return await GetDataFromResponseAsyncList<T>(response, jsonPath);
+            }
         }
 
         #endregion Основные функции
-
     }
 }

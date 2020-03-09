@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace Yandex.Music.Api.Extensions
 {
-    public static  class StringExtensions
+    public static class StringExtensions
     {
         public static string ReplaceRegex(this string str, string regExpr, string replStr, RegexOptions options = RegexOptions.IgnoreCase)
         {

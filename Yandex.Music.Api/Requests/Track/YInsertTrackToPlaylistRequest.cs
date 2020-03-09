@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Net;
-using System.Text;
+
 using Newtonsoft.Json;
+
 using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Track
@@ -29,19 +30,19 @@ namespace Yandex.Music.Api.Requests.Track
             });
 
             var query = new Dictionary<string, string> {
-                {"owner", storage.User.Uid },
+                {"owner", storage.User.Uid},
                 {"kind", kind},
                 {"revision", "7"}, // ?
                 {"diff", diff},
                 {"from", "web-own_tracks-track-track-main"},
                 {"lang", storage.User.Lang},
                 {"sign", storage.User.Sign},
-                {"experiments", storage.User.Experiments },
+                {"experiments", storage.User.Experiments},
                 {"external-domain", "music.yandex.ru"},
                 {"overembed", "false"}
             };
 
-            List<KeyValuePair<string, string>> headers = new List<KeyValuePair<string, string>> {
+            var headers = new List<KeyValuePair<string, string>> {
                 YRequestHeaders.Get(YHeader.Accept, storage),
                 YRequestHeaders.Get(YHeader.AcceptCharset, storage),
                 YRequestHeaders.Get(YHeader.AcceptEncoding, "utf-8"),
@@ -54,10 +55,10 @@ namespace Yandex.Music.Api.Requests.Track
                 YRequestHeaders.Get(YHeader.SecFetchSite, storage),
                 YRequestHeaders.Get(YHeader.XCurrentUID, storage),
                 YRequestHeaders.Get(YHeader.XRequestedWith, storage),
-                YRequestHeaders.Get(YHeader.XRetpathY, storage),
+                YRequestHeaders.Get(YHeader.XRetpathY, storage)
             };
 
-            FormRequest(YEndpoints.PlaylistPatch, body: GetQueryString(query), headers: headers);
+            FormRequest(YEndpoints.PlaylistPatch, body: GetQueryString(query), headers: headers, method: WebRequestMethods.Http.Post);
 
             return this;
         }
