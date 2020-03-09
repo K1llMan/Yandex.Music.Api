@@ -505,10 +505,68 @@
                 Класс для шифровки потом
             </summary>
         </member>
+        <member name="T:Yandex.Music.Api.Common.YAuthStorageEncryption">
+            <summary>
+            Типы шифрования
+            </summary>
+        </member>
+        <member name="F:Yandex.Music.Api.Common.YAuthStorageEncryption.None">
+            <summary>
+            Без шифрования
+            </summary>
+        </member>
+        <member name="F:Yandex.Music.Api.Common.YAuthStorageEncryption.Rijndael">
+            <summary>
+            Rijndael
+            </summary>
+        </member>
         <member name="T:Yandex.Music.Api.Common.YAuthStorage">
             <summary>
                 Хранилище данных пользователя
             </summary>
+        </member>
+        <member name="P:Yandex.Music.Api.Common.YAuthStorage.IsAuthorized">
+            <summary>
+            Флаг авторизации
+            </summary>
+        </member>
+        <member name="P:Yandex.Music.Api.Common.YAuthStorage.Context">
+            <summary>
+            Http-контекст
+            </summary>
+        </member>
+        <member name="P:Yandex.Music.Api.Common.YAuthStorage.User">
+            <summary>
+            Пользователь
+            </summary>
+        </member>
+        <member name="M:Yandex.Music.Api.Common.YAuthStorage.#ctor(System.String,System.String,Yandex.Music.Api.Common.YAuthStorageEncryption)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="login">Логин</param>
+            <param name="password">Пароль</param>
+            <param name="usedEncryption">Тип шифрования куков</param>
+        </member>
+        <member name="M:Yandex.Music.Api.Common.YAuthStorage.SetProxy(System.Net.IWebProxy)">
+            <summary>
+            Установка прокси для пользователия
+            </summary>
+            <param name="proxy">Прокси</param>
+        </member>
+        <member name="M:Yandex.Music.Api.Common.YAuthStorage.Save(System.String)">
+            <summary>
+            Сохранение куков
+            </summary>
+            <param name="fileName">Имя файла</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.Common.YAuthStorage.Load(System.String)">
+            <summary>
+            Загрузка куков
+            </summary>
+            <param name="fileName">Имя файла</param>
+            <returns></returns>
         </member>
         <member name="T:Yandex.Music.Api.Common.YSearchType">
             <summary>
@@ -584,13 +642,6 @@
             <summary>
             User API
             </summary>
-        </member>
-        <member name="M:Yandex.Music.Api.YandexMusicApi.UseWebProxy(System.Net.IWebProxy)">
-            <summary>
-            Прокси
-            </summary>
-            <param name="usingProxy">Объект прокси</param>
-            <returns></returns>
         </member>
         <member name="M:Yandex.Music.Api.YandexMusicApi.#ctor">
             <summary>

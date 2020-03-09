@@ -136,7 +136,7 @@ namespace Yandex.Music.Api.Requests
             return (HttpWebResponse) await fullRequest.GetResponseAsync();
         }
 
-        public async Task<T> GetResponseAsync<T>(string jsonPath = "", bool multiple = false)
+        public async Task<T> GetResponseAsync<T>(string jsonPath = "")
         {
             if (fullRequest == null)
                 return default(T);
