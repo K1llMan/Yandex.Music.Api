@@ -10,7 +10,7 @@ namespace Yandex.Music.Api.Requests.Yandex
         {
         }
 
-        public YRequest Create(string userLogin)
+        public YRequest Create()
         {
             var headers = new List<KeyValuePair<string, string>> {
                 YRequestHeaders.Get(YHeader.Origin, storage),

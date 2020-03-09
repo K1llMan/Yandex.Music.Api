@@ -10,6 +10,9 @@ using Yandex.Music.Api.Responses;
 
 namespace Yandex.Music.Api.API
 {
+    /// <summary>
+    /// API для взаимодействия с треками
+    /// </summary>
     public class YTrackAPI
     {
         #region Вспомогательные функции
@@ -39,6 +42,12 @@ namespace Yandex.Music.Api.API
 
         #region Основные функции
 
+        /// <summary>
+        /// Получение трека
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="trackId">Идентификатор трека</param>
+        /// <returns></returns>
         public async Task<YTrack> GetAsync(YAuthStorage storage, string trackId)
         {
             return await new YGetTrackResponse(storage)
@@ -46,11 +55,23 @@ namespace Yandex.Music.Api.API
                 .GetResponseAsync<YTrack>("track");
         }
 
+        /// <summary>
+        /// Получение трека
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="trackId">Идентификатор трека</param>
+        /// <returns></returns>
         public YTrack Get(YAuthStorage storage, string trackId)
         {
             return GetAsync(storage, trackId).GetAwaiter().GetResult();
         }
 
+        /// <summary>
+        /// Получение метаданных для загрузки
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="trackKey">Ключ трека в формате {идентифактор трека:идентификатор альбома}</param>
+        /// <returns></returns>
         public async Task<YTrackDownloadInfoResponse> GetMetadataForDownloadAsync(YAuthStorage storage, string trackKey)
         {
             return await new YTrackDownloadInfoRequest(storage)
@@ -58,11 +79,23 @@ namespace Yandex.Music.Api.API
                 .GetResponseAsync<YTrackDownloadInfoResponse>();
         }
 
+        /// <summary>
+        /// Получение метаданных для загрузки
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="trackKey">Ключ трека в формате {идентифактор трека:идентификатор альбома}</param>
+        /// <returns></returns>
         public YTrackDownloadInfoResponse GetMetadataForDownload(YAuthStorage storage, string trackKey)
         {
             return GetMetadataForDownloadAsync(storage, trackKey).GetAwaiter().GetResult();
         }
 
+        /// <summary>
+        /// Получение информации для формирования ссылки для загрузки
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="metadataInfo">Метаданные для загрузки</param>
+        /// <returns></returns>
         public async Task<YStorageDownloadFileResponse> GetDownloadFileInfoAsync(YAuthStorage storage,
             YTrackDownloadInfoResponse metadataInfo)
         {
@@ -71,11 +104,23 @@ namespace Yandex.Music.Api.API
                 .GetResponseAsync<YStorageDownloadFileResponse>();
         }
 
+        /// <summary>
+        /// Получение информации для формирования ссылки для загрузки
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="metadataInfo">Метаданные для загрузки</param>
+        /// <returns></returns>
         public YStorageDownloadFileResponse GetDownloadFileInfo(YAuthStorage storage, YTrackDownloadInfoResponse metadataInfo)
         {
             return GetDownloadFileInfoAsync(storage, metadataInfo).GetAwaiter().GetResult();
         }
 
+        /// <summary>
+        /// Получение ссылки для загрузки
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="trackKey">Ключ трека в формате {идентифактор трека:идентификатор альбома}</param>
+        /// <returns></returns>
         public string GetFileLink(YAuthStorage storage, string trackKey)
         {
             var mainDownloadResponse = GetMetadataForDownload(storage, trackKey);
@@ -84,6 +129,12 @@ namespace Yandex.Music.Api.API
             return BuildLinkForDownload(mainDownloadResponse, storageDownloadResponse);
         }
 
+        /// <summary>
+        /// Выгрузка в файл
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="trackKey">Ключ трека в формате {идентифактор трека:идентификатор альбома}</param>
+        /// <param name="filePath">Путь для файла</param>
         public void ExtractToFile(YAuthStorage storage, string trackKey, string filePath)
         {
             var fileLink = GetFileLink(storage, trackKey);
@@ -98,6 +149,12 @@ namespace Yandex.Music.Api.API
             }
         }
 
+        /// <summary>
+        /// Получение двоичного массива данных
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="trackKey">Ключ трека в формате {идентифактор трека:идентификатор альбома}</param>
+        /// <returns></returns>
         public byte[] ExtractData(YAuthStorage storage, string trackKey)
         {
             var fileLink = GetFileLink(storage, trackKey);
@@ -116,12 +173,26 @@ namespace Yandex.Music.Api.API
             return bytes;
         }
 
+        /// <summary>
+        /// Получение потока выгрузки
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="trackKey">Ключ трека в формате {идентифактор трека:идентификатор альбома}</param>
+        /// <param name="fileSize">Размер данных</param>
+        /// <returns></returns>
         public YandexStreamTrack ExtractStream(YAuthStorage storage, string trackKey, int fileSize)
         {
             var fileLink = GetFileLink(storage, trackKey);
             return YandexStreamTrack.Open(new Uri(fileLink), fileSize);
         }
 
+        /// <summary>
+        /// Установка флага удаления из рекомендованных
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="trackKey">Ключ трека в формате {идентифактор трека:идентификатор альбома}</param>
+        /// <param name="value">Значение</param>
+        /// <returns></returns>
         public async Task<YSetNotRecommendTrackResponse> SetNotRecommendAsync(YAuthStorage storage, string trackKey, bool value)
         {
             return await new YNotRecommendTrackRequest(storage)
@@ -129,11 +200,25 @@ namespace Yandex.Music.Api.API
                 .GetResponseAsync<YSetNotRecommendTrackResponse>();
         }
 
+        /// <summary>
+        /// Установка флага удаления из рекомендованных
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="trackKey">Ключ трека в формате {идентифактор трека:идентификатор альбома}</param>
+        /// <param name="value">Значение</param>
+        /// <returns></returns>
         public YSetNotRecommendTrackResponse SetNotRecommend(YAuthStorage storage, string trackKey, bool value)
         {
             return SetNotRecommendAsync(storage, trackKey, value).GetAwaiter().GetResult();
         }
 
+        /// <summary>
+        /// Установка флага "Нравится"
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="trackKey">Ключ трека в формате {идентифактор трека:идентификатор альбома}</param>
+        /// <param name="value">Значение</param>
+        /// <returns></returns>
         public async Task<YSetLikedTrackResponse> SetLikedAsync(YAuthStorage storage, string trackKey, bool value)
         {
             return await new YSetLikedTrackRequest(storage)
@@ -141,6 +226,13 @@ namespace Yandex.Music.Api.API
                 .GetResponseAsync<YSetLikedTrackResponse>();
         }
 
+        /// <summary>
+        /// Установка флага "Нравится"
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="trackKey">Ключ трека в формате {идентифактор трека:идентификатор альбома}</param>
+        /// <param name="value">Значение</param>
+        /// <returns></returns>
         public YSetLikedTrackResponse SetLiked(YAuthStorage storage, string trackKey, bool value)
         {
             return SetLikedAsync(storage, trackKey, value).GetAwaiter().GetResult();

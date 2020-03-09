@@ -42,5 +42,14 @@ namespace Yandex.Music.Api.Tests.Tests.API
             var response = Fixture.API.UserAPI.GetUserAuthDetails(Fixture.StorageEncrypted);
             response.User.Login.Should().Be(Fixture.StorageEncrypted.User.Login);
         }
+
+        [Fact]
+        [YandexTrait(TraitGroup.UserAPI)]
+        [Order(3)]
+        public void GetYandexCookie_ValidData_True()
+        {
+            var response = Fixture.API.UserAPI.GetYandexCookie(Fixture.StorageEncrypted);
+            response.Should().NotBe(null);
+        }
     }
 }

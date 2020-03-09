@@ -1,13 +1,12 @@
 ﻿using System.Net;
-using System.Threading.Tasks;
 
 using Yandex.Music.Api.API;
-using Yandex.Music.Api.Common;
-using Yandex.Music.Api.Requests.Yandex;
-using Yandex.Music.Api.Responses;
 
 namespace Yandex.Music.Api
 {
+    /// <summary>
+    /// Yandex Music API
+    /// </summary>
     public class YandexMusicApi
     {
         #region Поля
@@ -19,37 +18,37 @@ namespace Yandex.Music.Api
         #region Ветки API
 
         /// <summary>
-        ///     AccountsApi
+        /// Accounts API
         /// </summary>
         public YAccountsAPI AccountsApi { get; set; }
 
         /// <summary>
-        ///     AlbumAPI
+        /// Album API
         /// </summary>
         public YAlbumAPI AlbumAPI { get; set; }
 
         /// <summary>
-        ///     LibraryAPI
+        /// Library API
         /// </summary>
         public YLibraryAPI LibraryAPI { get; set; }
 
         /// <summary>
-        ///     PlaylistAPI
+        /// Playlist API
         /// </summary>
         public YPlaylistAPI PlaylistAPI { get; set; }
 
         /// <summary>
-        ///     SearchAPI
+        /// Search API
         /// </summary>
         public YSearchAPI SearchAPI { get; set; }
 
         /// <summary>
-        ///     TrackAPI
+        /// Track API
         /// </summary>
         public YTrackAPI TrackAPI { get; set; }
 
         /// <summary>
-        ///     UserAPI
+        /// User API
         /// </summary>
         public YUserAPI UserAPI { get; set; }
 
@@ -57,18 +56,11 @@ namespace Yandex.Music.Api
 
         #region Основные функции
 
-        public async Task<YGetCookieResponse> GetYandexCookieAsync(YAuthStorage storage)
-        {
-            return await new YGetCookieRequest(storage)
-                .Create(storage.User.Login)
-                .GetResponseAsync<YGetCookieResponse>();
-        }
-
-        public YGetCookieResponse GetYandexCookie(YAuthStorage storage)
-        {
-            return GetYandexCookieAsync(storage).GetAwaiter().GetResult();
-        }
-
+        /// <summary>
+        /// Прокси
+        /// </summary>
+        /// <param name="usingProxy">Объект прокси</param>
+        /// <returns></returns>
         public YandexMusicApi UseWebProxy(IWebProxy usingProxy)
         {
             proxy = usingProxy;
@@ -76,6 +68,9 @@ namespace Yandex.Music.Api
             return this;
         }
 
+        /// <summary>
+        /// Конструктор по умолчанию
+        /// </summary>
         public YandexMusicApi()
         {
             AccountsApi = new YAccountsAPI();
