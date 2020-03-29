@@ -1,47 +1,87 @@
 Yandex.Music API (Unofficial) for .Net Core
 ====
 
-[![Build Status](https://travis-ci.com/Winster332/Yandex.Music.Api.svg?branch=master)](https://travis-ci.com/Winster332/Yandex.Music.Api)
-![NuGet version (Yandex.Music.Api)](https://img.shields.io/nuget/v/Yandex.Music.Api.svg?style=flat-square)
-[![Documentation Status](https://readthedocs.org/projects/yandexmusicapi/badge/?version=latest)](https://yandexmusicapi.readthedocs.io/en/latest/?badge=latest)
+Форк [Yandex.Music API (Unofficial) for .Net Core](https://github.com/Winster332/Yandex.Music.Api)
+API переделано под работу с API официального приложения, подобно [[Alpha] Неофициальная Python библиотека для API Yandex Music](https://github.com/MarshalX/yandex-music-api) 
 
-This is wrapper for the [Yandex.Music](http://music.yandex.ru/) API
-
-Solution allows you to work with Yandex music based on the client.
-
-The project is divided into 2 parts, Yandex.Music.Client and Yandex.Music.Api.
-
-[Yandex.Music.Api](https://github.com/Winster332/Yandex.Music.Api/tree/master/Yandex.Music.Api) - contains pure api Yandex \
-[Yandex.Music.Client](https://github.com/Winster332/Yandex.Music.Api/tree/master/Yandex.Music.Client) - ready client for working with Yandex Api
-
-The difference between Yandex.Music.Api and Yandex.Music.Client is 
-that Yandex.Music.Api contains pure api, but when we 
-add a song to your favorites in the web version 
-of yandex music, for example, several queries may 
-be performed (adding a song to a playlist, adding a radio to 
-recommendations, like / dislike, updating the list songs). 
-Using Yandex.Music.Api, you take this moment under your control. 
-Yandex.Music.Client takes it upon himself and repeats the 
-functionality of Yandex music. Client works on top of Yandex.Music.Api.
-
-[Here is the documentation](https://readthedocs.org/projects/yandexmusicapi/)
-
- Install
+Функционал
 -------
 
-- [NuGet Package](https://www.nuget.org/packages/Yandex.Music.Api/1.0.0)
+Работа с API осуществляется через хранилище YAuthStorage, являющееся по сути сущностью для пользователя, поэтому его необходимо передавать в вызов каждой функции.
 
- How use
--------
+API для удобства разделено на следующие ветки:
 
-[Yandex.Music.Api](https://github.com/Winster332/Yandex.Music.Api/tree/master/Yandex.Music.Api) \
-[Yandex.Music.Client](https://github.com/Winster332/Yandex.Music.Api/tree/master/Yandex.Music.Client)
+```C#
+YandexMusicApi
+│
+├── Users
+│   ├── Authorize / Async (YAuthStorage storage, string username, string password)
+│   ├── Authorize / Async (YAuthStorage storage, string token)
+│   └──GetUserAuth / Async (YAuthStorage storage)
+├── Track
+│   ├── Get / Async (YAuthStorage storage, string trackId)
+│   ├── GetMetadataForDownload / Async (YAuthStorage storage, string trackKey, bool direct)
+│   ├── GetMetadataForDownload / Async (YAuthStorage storage, YTrack track, bool direct)
+│   ├── GetDownloadFileInfo / Async (YAuthStorage storage, YTrackDownloadInfoResponse metadataInfo)
+│   ├── GetFileLink (YAuthStorage storage, string trackKey)
+│   ├── GetFileLink (YAuthStorage storage, YTrack track)
+│   ├── ExtractToFile (YAuthStorage storage, string trackKey, string filePath)
+│   ├── ExtractToFile (YAuthStorage storage, YTrack track, string filePath)
+│   ├── ExtractData (YAuthStorage storage, string trackKey)
+│   └── ExtractData (YAuthStorage storage, YTrack track)
+├── Album
+│   └── Get / Async (YAuthStorage storage, string albumId)
+├── Artist
+│   └── Get / Async (YAuthStorage storage, string artistId)
+├── Playlist
+│   ├── Get / Async (YAuthStorage storage, string user, string kinds)
+│   ├── Get / Async (YAuthStorage storage, YPlaylist playlist)
+│   ├── Favorites / Async (YAuthStorage storage)
+│   ├── OfTheDay / Async (YAuthStorage storage)
+│   ├── DejaVu / Async (YAuthStorage storage)
+│   ├── Premiere / Async (YAuthStorage storage)
+│   ├── Missed / Async (YAuthStorage storage)
+│   ├── Alice / Async (YAuthStorage storage)
+│   ├── Podcasts / Async (YAuthStorage storage)
+│   ├── Create / Async (YAuthStorage storage, string name)
+│   ├── Rename / Async (YAuthStorage storage, string kinds, string name)
+│   ├── Rename / Async (YAuthStorage storage, YPlaylist playlist, string name)
+│   ├── Delete / Async (YAuthStorage storage, string kinds)
+│   ├── Delete / Async (YAuthStorage storage, YPlaylist playlist)
+│   ├── InsertTracks / Async (YAuthStorage storage, YPlaylist playlist, List<YTrack> tracks)
+│   └── DeleteTrack / Async (YAuthStorage storage, YPlaylist playlist, List<YTrack> tracks)
+├── Library
+│   ├── GetLikedTracks / Async (YAuthStorage storage)
+│   ├── GetLikedAlbums / Async (YAuthStorage storage)
+│   ├── GetLikedArtists / Async (YAuthStorage storage)
+│   ├── GetLikedPlaylists / Async (YAuthStorage storage)
+│   ├── GetDislikedTracks / Async (YAuthStorage storage)
+│   ├── AddTrackLike / Async (YAuthStorage storage, YTrack track)
+│   ├── RemoveTrackLike / Async (YAuthStorage storage, YTrack track)
+│   ├── AddTrackDislike / Async (YAuthStorage storage, YTrack track)
+│   ├── RemoveTrackDislike / Async (YAuthStorage storage, YTrack track)
+│   ├── AddAlbumLike / Async (YAuthStorage storage, YAlbum album)
+│   ├── RemoveAlbumLike / Async (YAuthStorage storage, YAlbum album)
+│   ├── AddArtistLike / Async (YAuthStorage storage, YArtist artist)
+│   ├── RemoveArtistLike / Async (YAuthStorage storage, YArtist artist)
+│   ├── AddPlaylistLike / Async(YAuthStorage storage, YPlaylist playlist)
+│   └── RemovePlaylistLike / Async(YAuthStorage storage, YPlaylist playlist)
+├── Search
+│   ├── Track / Async (YAuthStorage storage, string trackName, int pageNumber = 0)
+│   ├── Albums / Async (YAuthStorage storage, string albumName, int pageNumber = 0)
+│   ├── Artist / Async (YAuthStorage storage, string artistName, int pageNumber = 0)
+│   ├── Playlist / Async (YAuthStorage storage, string playlistName, int pageNumber = 0)
+│   ├── Videos / Async (YAuthStorage storage, string videoName, int pageNumber = 0) *
+│   ├── Users / Async (YAuthStorage storage, string videoName, int pageNumber = 0) *
+│   ├── Search / Async (YAuthStorage storage, string searchText, YSearchType searchType, int page = 0)
+└── Future
+    ...
+```
 
-##### Examples
+Функции, помеченные звёздочкой, вероятно, не работают или передают неверные параметры.
 
-- [Yandex.Music.Terminal](https://github.com/Winster332/Yandex.Music.Terminal)
-- [Lofi](https://github.com/Winster332/Lofi)
+Библиотека требует рефакторинга и переработки иерархии классов моделей. Также отсутствует функционал радио и подсказок для поиска.
 
 LICENCE
 -------
-[GNU General Public License v3.0](https://github.com/Winster332/Yandex.Music.Api/blob/master/LICENSE)
+[GNU General Public License v3.0](https://github.com/K1llMan/Yandex.Music.Api/blob/master/LICENSE)
