@@ -51,6 +51,11 @@ namespace Yandex.Music.Api.Common
         /// </summary>
         public YUser User { get; set; }
 
+        /// <summary>
+        /// Токен авторизации
+        /// </summary>
+        public string Token { get; internal set; }
+
         #endregion Свойства
 
         #region Вспомогательные функции
@@ -59,23 +64,23 @@ namespace Yandex.Music.Api.Common
 
         #region Основные функции
 
+        public void SetHeaders(HttpWebRequest request)
+        {
+            request.Headers.Add("Authorization", $"OAuth {Token}");
+        }
+
         /// <summary>
         /// Конструктор
         /// </summary>
-        /// <param name="login">Логин</param>
-        /// <param name="password">Пароль</param>
         /// <param name="usedEncryption">Тип шифрования куков</param>
-        public YAuthStorage(string login, string password, YAuthStorageEncryption usedEncryption = YAuthStorageEncryption.None)
+        public YAuthStorage(YAuthStorageEncryption usedEncryption = YAuthStorageEncryption.None)
         {
-            User = new YUser {
-                Login = login,
-                Password = password
-            };
+            User = new YUser();
 
             Context = new HttpContext();
 
             // Шифрование
-            encryptor = new Encryptor($"{User.Login}|{User.Password}");
+            encryptor = new Encryptor($"");
             encryption = usedEncryption;
         }
 

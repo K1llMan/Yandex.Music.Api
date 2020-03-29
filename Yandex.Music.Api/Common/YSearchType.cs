@@ -8,22 +8,30 @@
         /// <summary>
         /// Артисты
         /// </summary>
-        Artists,
+        Artist,
         /// <summary>
         /// Альбомы
         /// </summary>
-        Albums,
+        Album,
+        /// <summary>
+        /// Все
+        /// </summary>
+        All,
         /// <summary>
         /// Плейлисты
         /// </summary>
-        Playlists,
+        Playlist,
+        /// <summary>
+        /// Видео
+        /// </summary>
+        Video,
         /// <summary>
         /// Треки
         /// </summary>
-        Tracks,
+        Track,
         /// <summary>
         /// Пользователи
         /// </summary>
-        Users
+        User
     }
 }

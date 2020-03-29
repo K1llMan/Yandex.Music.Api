@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using FluentAssertions;
 
@@ -7,17 +6,20 @@ using Xunit;
 using Xunit.Abstractions;
 using Xunit.Extensions.Ordering;
 
-using Yandex.Music.Api.Common;
-using Yandex.Music.Api.Responses;
+using Yandex.Music.Api.Common.YPlaylist;
+using Yandex.Music.Api.Common.YTrack;
 using Yandex.Music.Api.Tests.Traits;
 
 namespace Yandex.Music.Api.Tests.Tests.API
 {
-    [Collection("Yandex Test Harness")]
-    [Order(6)]
+    [Collection("Yandex Test Harness"), Order(5)]
+    [TestBeforeAfter]
     public class PlaylistAPITest : YandexTest
     {
         #region Поля
+
+        // Яндекс
+        private static string userId = "139954184";
 
         // Лучшие песни русского рока
         private static string kinds = "2050";
@@ -27,35 +29,33 @@ namespace Yandex.Music.Api.Tests.Tests.API
         private static string trackId = "14318563";
         private static string albumId = "4256391";
 
-        private static List<YPlaylist> mainPage;
-        private static YPlaylist createdPlaylist;
-
         #endregion Поля
 
         [Fact, YandexTrait(TraitGroup.PlaylistAPI)]
         [Order(0)]
         public void Get_ValidData_True()
         {
-            YPlaylist response = Fixture.API.PlaylistAPI.Get(Fixture.StorageEncrypted, kinds);
-            response.Title.Should().Be(title);
+            Fixture.Playlist = Fixture.API.PlaylistAPI.Get(Fixture.Storage, userId, kinds);
+            Fixture.Playlist.Title.Should().Be(title);
         }
 
         [Fact, YandexTrait(TraitGroup.PlaylistAPI)]
         [Order(1)]
         public void MainPagePersonal_ValidData_True()
         {
-            mainPage = Fixture.API.PlaylistAPI.MainPagePersonal(Fixture.StorageEncrypted);
+            List<YPlaylist> mainPage = Fixture.API.PlaylistAPI.MainPagePersonal(Fixture.Storage);
+
+            Output.WriteLine(mainPage.Count.ToString());
+
             mainPage.Should().NotBeNull();
+            mainPage.Count.Should().BePositive();
         }
 
         [Fact, YandexTrait(TraitGroup.PlaylistAPI)]
         [Order(2)]
         public void OfTheDay_ValidData_True()
         {
-            mainPage.Should().NotBeNull();
-
-            string kind = mainPage.First(p => p.GeneratedPlaylistType == YGeneratedPlaylistType.PlaylistOfTheDay).Kind;
-            YPlaylist response = Fixture.API.PlaylistAPI.OfTheDay(Fixture.StorageEncrypted, kind);
+            YPlaylist response = Fixture.API.PlaylistAPI.OfTheDay(Fixture.Storage);
 
             response.Should().NotBeNull();
         }
@@ -64,10 +64,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(3)]
         public void Premiere_ValidData_True()
         {
-            mainPage.Should().NotBeNull();
-
-            string kind = mainPage.First(p => p.GeneratedPlaylistType == YGeneratedPlaylistType.RecentTracks).Kind;
-            YPlaylist response = Fixture.API.PlaylistAPI.Premiere(Fixture.StorageEncrypted, kind);
+            YPlaylist response = Fixture.API.PlaylistAPI.Premiere(Fixture.Storage);
 
             response.Should().NotBeNull();
         }
@@ -76,10 +73,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(4)]
         public void DejaVu_ValidData_True()
         {
-            mainPage.Should().NotBeNull();
-
-            string kind = mainPage.First(p => p.GeneratedPlaylistType == YGeneratedPlaylistType.NeverHeard).Kind;
-            YPlaylist response = Fixture.API.PlaylistAPI.DejaVu(Fixture.StorageEncrypted, kind);
+            YPlaylist response = Fixture.API.PlaylistAPI.DejaVu(Fixture.Storage);
 
             response.Should().NotBeNull();
         }
@@ -88,53 +82,84 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(5)]
         public void Missed_ValidData_True()
         {
-            mainPage.Should().NotBeNull();
-
-            string kind = mainPage.First(p => p.GeneratedPlaylistType == YGeneratedPlaylistType.MissedLikes).Kind;
-            YPlaylist response = Fixture.API.PlaylistAPI.Missed(Fixture.StorageEncrypted, kind);
+            YPlaylist response = Fixture.API.PlaylistAPI.Missed(Fixture.Storage);
 
             response.Should().NotBeNull();
         }
 
         [Fact, YandexTrait(TraitGroup.PlaylistAPI)]
         [Order(6)]
-        public void Create_ValidData_True()
+        public void Alice_ValidData_True()
         {
-            YPlaylistChangeResponse response = Fixture.API.PlaylistAPI.Create(Fixture.StorageEncrypted, "Test Playlist");
+            YPlaylist response = Fixture.API.PlaylistAPI.Alice(Fixture.Storage);
 
-            response.Success.Should().BeTrue();
-            createdPlaylist = response.Playlist;
+            response.Should().NotBeNull();
         }
 
         [Fact, YandexTrait(TraitGroup.PlaylistAPI)]
         [Order(7)]
-        public void InsertTrack_ValidData_True()
+        public void Podcasts_ValidData_True()
         {
-            createdPlaylist.Should().NotBe(null);
+            YPlaylist response = Fixture.API.PlaylistAPI.Podcasts(Fixture.Storage);
 
-            YInsertTrackToPlaylistResponse response = Fixture.API.PlaylistAPI.InsertTrack(Fixture.StorageEncrypted, trackId, albumId, createdPlaylist.Kind);
-
-            response.Success.Should().BeTrue();
+            response.Should().NotBeNull();
         }
 
         [Fact, YandexTrait(TraitGroup.PlaylistAPI)]
         [Order(8)]
-        public void DeleteTrack_ValidData_True()
+        public void Create_ValidData_True()
         {
-            createdPlaylist.Should().NotBe(null);
+            Fixture.CreatedPlaylist = Fixture.API.PlaylistAPI.Create(Fixture.Storage, "Test Playlist");
 
-            YDeleteTrackFromPlaylistResponse response = Fixture.API.PlaylistAPI.DeleteTrack(Fixture.StorageEncrypted, 0, 0, 0, createdPlaylist.Kind);
-
-            response.Success.Should().BeTrue();
+            Fixture.CreatedPlaylist.Should().NotBeNull();
         }
 
         [Fact, YandexTrait(TraitGroup.PlaylistAPI)]
         [Order(9)]
+        public void InsertTrack_ValidData_True()
+        {
+            Fixture.CreatedPlaylist.Should().NotBeNull();
+            Fixture.Track.Should().NotBeNull();
+
+            Fixture.CreatedPlaylist = Fixture.API.PlaylistAPI.InsertTracks(Fixture.Storage, Fixture.CreatedPlaylist, new List<YTrack> {
+                Fixture.Track
+            });
+
+            Fixture.CreatedPlaylist.Should().NotBeNull();
+        }
+
+        [Fact, YandexTrait(TraitGroup.PlaylistAPI)]
+        [Order(10)]
+        public void DeleteTrack_ValidData_True()
+        {
+            Fixture.CreatedPlaylist.Should().NotBeNull();
+            Fixture.Track.Should().NotBeNull();
+
+            Fixture.CreatedPlaylist = Fixture.API.PlaylistAPI.DeleteTrack(Fixture.Storage, Fixture.CreatedPlaylist, new List<YTrack> {
+                Fixture.Track
+            });
+
+            Fixture.CreatedPlaylist.Should().NotBeNull();
+        }
+
+        [Fact, YandexTrait(TraitGroup.PlaylistAPI)]
+        [Order(11)]
+        public void Rename_ValidData_True()
+        {
+            Fixture.CreatedPlaylist.Should().NotBeNull();
+
+            Fixture.CreatedPlaylist = Fixture.API.PlaylistAPI.Rename(Fixture.Storage, Fixture.CreatedPlaylist, "New Playlist");
+
+            Fixture.CreatedPlaylist.Should().NotBeNull();
+        }
+
+        [Fact, YandexTrait(TraitGroup.PlaylistAPI)]
+        [Order(12)]
         public void Remove_ValidData_True()
         {
-            createdPlaylist.Should().NotBe(null);
+            Fixture.CreatedPlaylist.Should().NotBeNull();
 
-            bool response = Fixture.API.PlaylistAPI.Remove(Fixture.StorageEncrypted, createdPlaylist.Kind);
+            bool response = Fixture.API.PlaylistAPI.Delete(Fixture.Storage, Fixture.CreatedPlaylist);
 
             response.Should().BeTrue();
         }

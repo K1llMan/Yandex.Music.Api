@@ -7,99 +7,88 @@ using Yandex.Music.Api.Requests.Auth;
 using Yandex.Music.Api.Requests.Yandex;
 using Yandex.Music.Api.Responses;
 
+using YAccount = Yandex.Music.Api.Common.YAccount;
+
 namespace Yandex.Music.Api.API
 {
     public class YUserAPI
     {
         #region Вспомогательные функции
 
-        private async Task<YAuthorizeResponse> AuthPassport(YAuthStorage storage)
+        private async Task<YAuthResponse> AuthPassport(YAuthStorage storage, string login, string password)
         {
-            var request = new YAuthorizeRequest(storage).Create();
-
-            try {
-                using (var response = await request.GetResponseAsync()) {
-                    storage.Context.Cookies.Add(response.Cookies);
-
-                    if (response.ResponseUri.AbsoluteUri.Contains(YEndpoints.Passport))
-                        return new YAuthorizeResponse {
-                            IsAuthorized = false,
-                            User = null
-                        };
-
-                    return new YAuthorizeResponse {
-                        IsAuthorized = true,
-                        User = null
-                    };
-                }
-            }
-            catch (Exception ex) {
-                Console.WriteLine(ex);
-
-                return new YAuthorizeResponse {
-                    IsAuthorized = false,
-                    User = null
-                };
-            }
+            return await new YAuthorizeRequest(storage)
+                .Create(login, password)
+                .GetResponseAsync<YAuthResponse>();
         }
 
         #endregion Вспомогательные функции
 
         #region Основные функции
 
-        public async Task AuthorizeAsync(YAuthStorage storage)
+        public async Task AuthorizeAsync(YAuthStorage storage, string token)
         {
+            if (string.IsNullOrEmpty(token))
+                throw new Exception("Задан пустой токен авторизации.");
+
+            storage.Token = token;
             // Пытаемся получить информацию о пользователе
-            var authInfo = await GetUserAuthAsync(storage);
+            YAccount authInfo = await GetUserAuthAsync(storage);
 
             // Если не авторизован, то авторизуем
-            if (!authInfo.Logged) {
-                var result = await AuthPassport(storage);
-                if (!result.IsAuthorized)
-                    return;
-
-                authInfo = await GetUserAuthAsync(storage);
-            }
+            if (string.IsNullOrEmpty(authInfo.Uid))
+                throw new Exception("Пользователь незалогинен.");
 
             // Флаг авторизации
-            storage.IsAuthorized = authInfo.Logged;
+            storage.IsAuthorized = true;
 
-            var authUserDetails = await GetUserAuthDetailsAsync(storage);
-            var authUser = authUserDetails.User;
+            //var authUserDetails = await GetUserAuthDetailsAsync(storage);
+            //var authUser = authUserDetails.User;
 
             storage.User = new YUser {
-                Uid = authUser.Uid,
-                Login = authUser.Login,
-                Password = storage.User.Password,
-                Name = authUser.Name,
-                Sign = authUser.Sign,
-                DeviceId = authUser.DeviceId,
-                FirstName = authUser.FirstName,
-                LastName = authUser.LastName,
-                Experiments = authUserDetails.Experiments,
-                Lang = authInfo.Lang,
-                Timestamp = authInfo.Timestamp,
-                YandexId = authInfo.YandexuId
+                Uid = authInfo.Uid,
+                Login = authInfo.Login,
+                Name = authInfo.FullName,
+                //DeviceId = authUser.DeviceId,
+                FirstName = authInfo.FirstName,
+                SecondName = authInfo.SecondName,
+                //Experiments = authUserDetails.Experiments,
+                //Lang = authInfo.Lang,
+                //Timestamp = authInfo.Timestamp,
+                //YandexId = authInfo.YandexuId
             };
         }
 
-        public void Authorize(YAuthStorage storage)
+        public async Task AuthorizeAsync(YAuthStorage storage, string login, string password)
         {
-            AuthorizeAsync(storage).GetAwaiter().GetResult();
+            YAuthResponse result = await AuthPassport(storage, login, password);
+
+            await AuthorizeAsync(storage, result.AccessToken);
         }
 
-        public async Task<YAuthInfoResponse> GetUserAuthAsync(YAuthStorage storage)
+        public void Authorize(YAuthStorage storage, string token)
+        {
+            AuthorizeAsync(storage, token).GetAwaiter().GetResult();
+        }
+
+        public void Authorize(YAuthStorage storage, string login, string password)
+        {
+            AuthorizeAsync(storage, login, password).GetAwaiter().GetResult();
+        }
+
+        public async Task<YAccount> GetUserAuthAsync(YAuthStorage storage)
         {
             return await new YGetAuthInfoRequest(storage)
                 .Create()
-                .GetResponseAsync<YAuthInfoResponse>();
+                .GetResponseAsync<YAccount>("account");
         }
 
-        public YAuthInfoResponse GetUserAuth(YAuthStorage storage)
+        public YAccount GetUserAuth(YAuthStorage storage)
         {
             return GetUserAuthAsync(storage).GetAwaiter().GetResult();
         }
 
+        /*
         public async Task<YAuthInfoUserResponse> GetUserAuthDetailsAsync(YAuthStorage storage)
         {
             return await new YGetAuthInfoUserRequest(storage)
@@ -123,6 +112,7 @@ namespace Yandex.Music.Api.API
         {
             return GetYandexCookieAsync(storage).GetAwaiter().GetResult();
         }
+        */
 
         #endregion Основные функции
     }

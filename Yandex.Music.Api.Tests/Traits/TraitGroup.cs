@@ -2,16 +2,9 @@
 {
     public enum TraitGroup
     {
-        All,
-        Authorize,
-        ExtractTrack,
-        GetTracks,
-        SendTracks,
-        RemoveTrack,
-        SearchTracks,
-
         AccountAPI,
         AlbumAPI,
+        ArtistAPI,
         LibraryAPI,
         PlaylistAPI,
         SearchAPI,

@@ -7,26 +7,34 @@ namespace Yandex.Music.Api.Requests.Auth
 {
     internal class YAuthorizeRequest : YRequest
     {
-        public YAuthorizeRequest(YAuthStorage storage) : base(storage)
-        {
-        }
+        #region Поля
 
-        public YRequest Create()
+        private static string CLIENT_ID = "23cabbbdc6cd418abb4b39c32c41195d";
+        private static string CLIENT_SECRET = "53bc75238f0c4d08a118e51fe9203300";
+
+        #endregion Поля
+
+        public YRequest Create(string login, string password)
         {
-            var query = new Dictionary<string, string> {
-                {"mode", "auth"}
+            var headers = new List<KeyValuePair<string, string>> {
+                YRequestHeaders.Get(YHeader.ContentType, "application/x-www-form-urlencoded")
             };
 
             var body = new Dictionary<string, string> {
-                {"login", storage.User.Login},
-                {"passwd", storage.User.Password},
-                {"twoweeks", "yes"},
-                {"retpath", ""}
+                { "grant_type", "password" },
+                { "client_id", CLIENT_ID },
+                { "client_secret", CLIENT_SECRET },
+                { "username", login },
+                { "password", password },
             };
 
-            FormRequest(YEndpoints.Passport, WebRequestMethods.Http.Post, query, body: GetQueryString(body));
+            FormRequest($"{YEndpoints.OAuth}/token", WebRequestMethods.Http.Post, headers: headers, body: GetQueryString(body));
 
             return this;
+        }
+
+        public YAuthorizeRequest(YAuthStorage storage) : base(storage)
+        {
         }
     }
 }

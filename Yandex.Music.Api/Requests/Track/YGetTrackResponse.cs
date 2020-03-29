@@ -12,11 +12,7 @@ namespace Yandex.Music.Api.Requests.Track
 
         public YRequest Create(string trackId)
         {
-            var query = new Dictionary<string, string> {
-                {"track", trackId}
-            };
-
-            FormRequest(YEndpoints.Track, query: query);
+            FormRequest($"{YEndpoints.API}/tracks/{trackId}");
 
             return this;
         }

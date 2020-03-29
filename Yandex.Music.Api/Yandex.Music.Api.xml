@@ -205,23 +205,23 @@
             <param name="name">Заголовок</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.RemoveAsync(Yandex.Music.Api.Common.YAuthStorage,System.String)">
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.DeleteAsync(Yandex.Music.Api.Common.YAuthStorage,System.String)">
             <summary>
             Удаление
             </summary>
             <param name="storage">Хранилище</param>
-            <param name="kind">Тип</param>
+            <param name="kinds">Тип</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.Remove(Yandex.Music.Api.Common.YAuthStorage,System.String)">
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.Delete(Yandex.Music.Api.Common.YAuthStorage,System.String)">
             <summary>
             Удаление
             </summary>
             <param name="storage">Хранилище</param>
-            <param name="kind">Тип</param>
+            <param name="kinds">Тип</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.InsertTrackAsync(Yandex.Music.Api.Common.YAuthStorage,System.String,System.String,System.String)">
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.InsertTracksAsync(Yandex.Music.Api.Common.YAuthStorage,System.String,System.String,System.String)">
             <summary>
             Добавление трека
             </summary>
@@ -231,7 +231,7 @@
             <param name="playlistKind">Тип</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.InsertTrack(Yandex.Music.Api.Common.YAuthStorage,System.String,System.String,System.String)">
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.InsertTracks(Yandex.Music.Api.Common.YAuthStorage,System.String,System.String,System.String)">
             <summary>
             Добавление трека
             </summary>
@@ -340,6 +340,24 @@
             <param name="pageNumber">Номер страницы</param>
             <returns></returns>
         </member>
+        <member name="M:Yandex.Music.Api.API.YSearchAPI.VideosAsync(Yandex.Music.Api.Common.YAuthStorage,System.String,System.Int32)">
+            <summary>
+            Поиск по видео
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="videoName">Имя видео</param>
+            <param name="pageNumber">Номер страницы</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YSearchAPI.Videos(Yandex.Music.Api.Common.YAuthStorage,System.String,System.Int32)">
+            <summary>
+            Поиск по видео
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="videoName">Имя пользователя</param>
+            <param name="pageNumber">Номер страницы</param>
+            <returns></returns>
+        </member>
         <member name="M:Yandex.Music.Api.API.YSearchAPI.UsersAsync(Yandex.Music.Api.Common.YAuthStorage,System.String,System.Int32)">
             <summary>
             Поиск по пользователям
@@ -399,20 +417,22 @@
             <param name="trackId">Идентификатор трека</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YTrackAPI.GetMetadataForDownloadAsync(Yandex.Music.Api.Common.YAuthStorage,System.String)">
+        <member name="M:Yandex.Music.Api.API.YTrackAPI.GetMetadataForDownloadAsync(Yandex.Music.Api.Common.YAuthStorage,System.String,System.Boolean)">
             <summary>
             Получение метаданных для загрузки
             </summary>
             <param name="storage">Хранилище</param>
             <param name="trackKey">Ключ трека в формате {идентифактор трека:идентификатор альбома}</param>
+            <param name="direct">Должен ли ответ содержать прямую ссылку на загрузку</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YTrackAPI.GetMetadataForDownload(Yandex.Music.Api.Common.YAuthStorage,System.String)">
+        <member name="M:Yandex.Music.Api.API.YTrackAPI.GetMetadataForDownload(Yandex.Music.Api.Common.YAuthStorage,System.String,System.Boolean)">
             <summary>
             Получение метаданных для загрузки
             </summary>
             <param name="storage">Хранилище</param>
             <param name="trackKey">Ключ трека в формате {идентифактор трека:идентификатор альбома}</param>
+            <param name="direct">Должен ли ответ содержать прямую ссылку на загрузку</param>
             <returns></returns>
         </member>
         <member name="M:Yandex.Music.Api.API.YTrackAPI.GetDownloadFileInfoAsync(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Responses.YTrackDownloadInfoResponse)">
@@ -573,27 +593,37 @@
             Тип объекта поиска
             </summary>
         </member>
-        <member name="F:Yandex.Music.Api.Common.YSearchType.Artists">
+        <member name="F:Yandex.Music.Api.Common.YSearchType.Artist">
             <summary>
             Артисты
             </summary>
         </member>
-        <member name="F:Yandex.Music.Api.Common.YSearchType.Albums">
+        <member name="F:Yandex.Music.Api.Common.YSearchType.Album">
             <summary>
             Альбомы
             </summary>
         </member>
-        <member name="F:Yandex.Music.Api.Common.YSearchType.Playlists">
+        <member name="F:Yandex.Music.Api.Common.YSearchType.All">
+            <summary>
+            Все
+            </summary>
+        </member>
+        <member name="F:Yandex.Music.Api.Common.YSearchType.Playlist">
             <summary>
             Плейлисты
             </summary>
         </member>
-        <member name="F:Yandex.Music.Api.Common.YSearchType.Tracks">
+        <member name="F:Yandex.Music.Api.Common.YSearchType.Video">
+            <summary>
+            Видео
+            </summary>
+        </member>
+        <member name="F:Yandex.Music.Api.Common.YSearchType.Track">
             <summary>
             Треки
             </summary>
         </member>
-        <member name="F:Yandex.Music.Api.Common.YSearchType.Users">
+        <member name="F:Yandex.Music.Api.Common.YSearchType.User">
             <summary>
             Пользователи
             </summary>

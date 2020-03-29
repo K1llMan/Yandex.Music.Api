@@ -1,4 +1,4 @@
-namespace Yandex.Music.Api.Common
+namespace Yandex.Music.Api.Common.YTrack
 {
     public class YTrackPosition
     {

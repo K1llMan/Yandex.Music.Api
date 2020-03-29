@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -31,7 +32,7 @@ namespace Yandex.Music.Api.Requests
 
         protected string GetQueryString(Dictionary<string, string> query)
         {
-            return string.Join("&", query.Select(p => $"{p.Key}={p.Value}"));
+            return string.Join("&", query.Select(p => $"{p.Key}={HttpUtility.UrlEncode(p.Value)}"));
         }
 
         protected virtual void FormRequest(string url, string method = WebRequestMethods.Http.Get,
@@ -51,14 +52,19 @@ namespace Yandex.Music.Api.Requests
             if (storage.Context.Cookies == null)
                 storage.Context.Cookies = new CookieContainer();
 
+            storage.SetHeaders(request);
+
             if (headers != null && headers.Count > 0)
                 foreach (var header in headers)
                     request.Headers.Add(header.Key, header.Value);
 
-            if (!string.IsNullOrEmpty(body))
-                using (var sw = new StreamWriter(request.GetRequestStream(), Encoding.UTF8)) {
-                    sw.Write(body);
-                }
+            if (!string.IsNullOrEmpty(body)) {
+                byte[] bytes = Encoding.UTF8.GetBytes(body);
+                Stream s = request.GetRequestStream();
+                s.Write(bytes, 0, bytes.Length);
+
+                request.ContentLength = bytes.Length;
+            }
 
             request.CookieContainer = storage.Context.Cookies;
             request.KeepAlive = true;
@@ -69,9 +75,21 @@ namespace Yandex.Music.Api.Requests
             fullRequest = request;
         }
 
+        private JToken GetResultNode(JToken token)
+        {
+            return token["result"] ?? token;
+        }
+
         protected T Deserialize<T>(JToken token, string jsonPath = "")
         {
-            return JsonConvert.DeserializeObject<T>(token.SelectToken(jsonPath).ToString());
+            JToken result = GetResultNode(token).SelectToken(jsonPath);
+
+            switch (result.Type) {
+                case JTokenType.String:
+                    return (T) Convert.ChangeType(result.ToString(), typeof(T));
+                default:
+                    return JsonConvert.DeserializeObject<T>(GetResultNode(token).SelectToken(jsonPath).ToString());
+            }
         }
 
         protected T Deserialize<T>(string json, string jsonPath = "")
@@ -81,7 +99,7 @@ namespace Yandex.Music.Api.Requests
 
         protected List<T> DeserializeList<T>(JToken token, string jsonPath = "")
         {
-            return token.SelectTokens(jsonPath)
+            return GetResultNode(token).SelectTokens(jsonPath)
                 .Select(t => JsonConvert.DeserializeObject<T>(t.ToString()))
                 .ToList();
         }
@@ -133,7 +151,17 @@ namespace Yandex.Music.Api.Requests
 
         public async Task<HttpWebResponse> GetResponseAsync()
         {
-            return (HttpWebResponse) await fullRequest.GetResponseAsync();
+            try {
+                return (HttpWebResponse) await fullRequest.GetResponseAsync();
+            }
+            catch (Exception ex) {
+                using (StreamReader sr = new StreamReader(((WebException)ex).Response.GetResponseStream())) {
+                    string result = await sr.ReadToEndAsync();
+                    Console.WriteLine(result);
+                }
+
+                throw;
+            }
         }
 
         public async Task<T> GetResponseAsync<T>(string jsonPath = "")

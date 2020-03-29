@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 using FluentAssertions;
 
@@ -6,14 +8,13 @@ using Xunit;
 using Xunit.Abstractions;
 using Xunit.Extensions.Ordering;
 
-using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Responses;
 using Yandex.Music.Api.Tests.Traits;
 
 namespace Yandex.Music.Api.Tests.Tests.API
 {
-    [Collection("Yandex Test Harness")]
-    [Order(2)]
+    [Collection("Yandex Test Harness"), Order(2)]
+    [TestBeforeAfter]
     public class TrackAPITest : YandexTest
     {
         #region Поля
@@ -23,8 +24,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         // Кино - "Группа крови"
         private string trackId = "106259";
 
-        private static YTrack track;
-        private static YTrackDownloadInfoResponse downloadInfo;
+        private static List<YTrackDownloadInfoResponse> downloadInfo;
         private static YStorageDownloadFileResponse downloadFile;
 
         #endregion Поля
@@ -33,28 +33,28 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(0)]
         public void Get_ValidData_True()
         {
-            track = Fixture.API.TrackAPI.Get(Fixture.StorageEncrypted, trackId);
-            track.Title.Should().Be("Группа крови");
+            Fixture.Track = Fixture.API.TrackAPI.Get(Fixture.Storage, trackId);
+            Fixture.Track.Title.Should().Be("Группа крови");
         }
 
         [Fact, YandexTrait(TraitGroup.TrackAPI)]
         [Order(1)]
         public void GetMetadataForDownload_ValidData_True()
         {
-            track.Should().NotBe(null);
+            Fixture.Track.Should().NotBe(null);
 
-            downloadInfo = Fixture.API.TrackAPI.GetMetadataForDownload(Fixture.StorageEncrypted, track.GetKey());
+            downloadInfo = Fixture.API.TrackAPI.GetMetadataForDownload(Fixture.Storage, Fixture.Track.GetKey().ToString());
 
-            downloadInfo.Src.Should().NotBeNullOrEmpty();
+            downloadInfo.Count.Should().BePositive();
         }
 
         [Fact, YandexTrait(TraitGroup.TrackAPI)]
         [Order(2)]
         public void GetDownloadFileInfo_ValidData_True()
         {
-            downloadInfo.Should().NotBe(null);
+            downloadInfo.Count.Should().BePositive();
 
-            downloadFile = Fixture.API.TrackAPI.GetDownloadFileInfo(Fixture.StorageEncrypted, downloadInfo);
+            downloadFile = Fixture.API.TrackAPI.GetDownloadFileInfo(Fixture.Storage, downloadInfo.First(m => m.Codec == "mp3"));
 
             downloadFile.Path.Should().NotBeNullOrEmpty();
         }
@@ -63,9 +63,9 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(3)]
         public void GetFileLink_ValidData_True()
         {
-            track.Should().NotBe(null);
+            Fixture.Track.Should().NotBe(null);
 
-            string link = Fixture.API.TrackAPI.GetFileLink(Fixture.StorageEncrypted, track.GetKey());
+            string link = Fixture.API.TrackAPI.GetFileLink(Fixture.Storage, Fixture.Track);
 
             link.Should().NotBeNullOrEmpty();
         }
@@ -76,59 +76,11 @@ namespace Yandex.Music.Api.Tests.Tests.API
         {
             File.Delete(extractedFileName);
 
-            track.Should().NotBe(null);
+            Fixture.Track.Should().NotBe(null);
 
-            Fixture.API.TrackAPI.ExtractToFile(Fixture.StorageEncrypted, track.GetKey(), extractedFileName);
+            Fixture.API.TrackAPI.ExtractToFile(Fixture.Storage, Fixture.Track, extractedFileName);
 
             File.Exists(extractedFileName).Should().BeTrue();
-        }
-
-        [Fact, YandexTrait(TraitGroup.TrackAPI)]
-        [Order(5)]
-        public void ChangeLikedTrue_ValidData_True()
-        {
-
-            track.Should().NotBe(null);
-
-            YSetLikedTrackResponse response = Fixture.API.TrackAPI.SetLiked(Fixture.StorageEncrypted, track.GetKey(), true);
-
-            response.Success.Should().BeTrue();
-        }
-
-        [Fact, YandexTrait(TraitGroup.TrackAPI)]
-        [Order(6)]
-        public void ChangeLikedFalse_ValidData_True()
-        {
-
-            track.Should().NotBe(null);
-
-            YSetLikedTrackResponse response = Fixture.API.TrackAPI.SetLiked(Fixture.StorageEncrypted, track.GetKey(), false);
-
-            response.Success.Should().BeTrue();
-        }
-
-        [Fact, YandexTrait(TraitGroup.TrackAPI)]
-        [Order(7)]
-        public void SetNotRecommend_ValidData_True()
-        {
-
-            track.Should().NotBe(null);
-
-            YSetNotRecommendTrackResponse response = Fixture.API.TrackAPI.SetNotRecommend(Fixture.StorageEncrypted, track.GetKey(), true);
-
-            response.Success.Should().BeTrue();
-        }
-
-        [Fact, YandexTrait(TraitGroup.TrackAPI)]
-        [Order(8)]
-        public void ChangeLiked_ValidData_True()
-        {
-
-            track.Should().NotBe(null);
-
-            YSetNotRecommendTrackResponse response = Fixture.API.TrackAPI.SetNotRecommend(Fixture.StorageEncrypted, track.GetKey(), false);
-
-            response.Success.Should().BeTrue();
         }
 
         public TrackAPITest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)

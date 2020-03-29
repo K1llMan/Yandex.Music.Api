@@ -1,45 +1,49 @@
 using System.Collections.Generic;
 using System.Net;
 
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
+
 using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Common.YPlaylist;
 
 namespace Yandex.Music.Api.Requests.Playlist
 {
     internal class YPlaylistChangeRequest : YRequest
     {
+        #region Поля
+
+        private JsonSerializerSettings settings = new JsonSerializerSettings {
+            Converters = new List<JsonConverter> {
+                new StringEnumConverter() {
+                    NamingStrategy = new CamelCaseNamingStrategy()
+                }
+            },
+            NullValueHandling = NullValueHandling.Ignore,
+            ContractResolver = new CamelCasePropertyNamesContractResolver()
+        };
+
+        #endregion Поля
+
         public YPlaylistChangeRequest(YAuthStorage storage) : base(storage)
         {
         }
 
-        public YRequest Create(string name)
+        public YRequest Create(YPlaylist playlist, List<YPlaylistChange> changes)
         {
-            var query = new Dictionary<string, string> {
-                {"action", "add"},
-                {"title", name},
-                {"lang", storage.User.Lang},
-                {"sign", storage.User.Sign},
-                {"experiments", storage.User.Experiments},
-                {"external-domain", "music.yandex.ru"},
-                {"overembed", "false"}
+            Dictionary<string, string> query = new Dictionary<string, string> {
+                { "kind", playlist.Kind },
+                { "revision", playlist.Revision.ToString() },
+                { "diff", JsonConvert.SerializeObject(changes, settings) }
             };
 
             var headers = new List<KeyValuePair<string, string>> {
-                YRequestHeaders.Get(YHeader.Accept, storage),
-                YRequestHeaders.Get(YHeader.AcceptEncoding, storage),
-                YRequestHeaders.Get(YHeader.AcceptLanguage, storage),
-                YRequestHeaders.Get(YHeader.AccessControlAllowMethods, storage),
-                YRequestHeaders.Get(YHeader.ContentType, "application/x-www-form-urlencoded"),
-                YRequestHeaders.Get(YHeader.Origin, storage),
-                YRequestHeaders.Get(YHeader.Referer, storage),
-                YRequestHeaders.Get(YHeader.SecFetchDest, storage),
-                YRequestHeaders.Get(YHeader.SecFetchMode, storage),
-                YRequestHeaders.Get(YHeader.SecFetchSite, storage),
-                YRequestHeaders.Get(YHeader.XCurrentUID, storage),
-                YRequestHeaders.Get(YHeader.XRequestedWith, storage),
-                YRequestHeaders.Get(YHeader.XRetpathY, storage)
+                YRequestHeaders.Get(YHeader.ContentType, "application/x-www-form-urlencoded")
             };
 
-            FormRequest(YEndpoints.ChangePlaylist, body: GetQueryString(query), headers: headers, method: WebRequestMethods.Http.Post);
+            FormRequest($"{YEndpoints.API}/users/{storage.User.Uid}/playlists/{playlist.Kind}/change", 
+                body: GetQueryString(query), headers: headers, method: WebRequestMethods.Http.Post);
 
             return this;
         }

@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 
-using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Common.YTrack;
+using Yandex.Music.Api.Models.Artist;
 
 namespace Yandex.Music.Api.Responses
 {
     public class YAlbumResponse
     {
-        public List<YArtistResponse> Artists { get; set; }
+        public List<YArtist> Artists { get; set; }
         public bool? Available { get; set; }
         public bool? AvailableForPremiumUsers { get; set; }
         public string CoverUri { get; set; }

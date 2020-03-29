@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Net;
 
 using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Common.YPlaylist;
 
 namespace Yandex.Music.Api.Requests.Playlist
 {
@@ -11,14 +12,16 @@ namespace Yandex.Music.Api.Requests.Playlist
         {
         }
 
-        public YRequest Create(string kinds)
+        public YRequest Create(string user, string kind)
         {
-            var query = new Dictionary<string, string> {
-                {"owner", "music.partners"},
-                {"kinds", kinds}
-            };
+            FormRequest($"{YEndpoints.API}/users/{user}/playlists/{kind}");
 
-            FormRequest(YEndpoints.Playlist, WebRequestMethods.Http.Post, query);
+            return this;
+        }
+
+        public YRequest Create(YPlaylist playlist)
+        {
+            FormRequest($"{YEndpoints.API}/users/{playlist.Owner.Uid}/playlists/{playlist.Kind}");
 
             return this;
         }

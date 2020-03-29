@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
 using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Common.YTrack;
 
 namespace Yandex.Music.Api.Responses
 {

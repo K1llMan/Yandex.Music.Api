@@ -10,14 +10,14 @@ namespace Yandex.Music.Api
         #region Ветки API
 
         /// <summary>
-        /// Accounts API
-        /// </summary>
-        public YAccountsAPI AccountsApi { get; set; }
-
-        /// <summary>
         /// Album API
         /// </summary>
         public YAlbumAPI AlbumAPI { get; set; }
+
+        /// <summary>
+        /// Artist API
+        /// </summary>
+        public YArtistAPI ArtistAPI { get; set; }
 
         /// <summary>
         /// Library API
@@ -53,8 +53,8 @@ namespace Yandex.Music.Api
         /// </summary>
         public YandexMusicApi()
         {
-            AccountsApi = new YAccountsAPI();
             AlbumAPI = new YAlbumAPI();
+            ArtistAPI = new YArtistAPI();
             LibraryAPI = new YLibraryAPI();
             PlaylistAPI = new YPlaylistAPI();
             SearchAPI = new YSearchAPI();

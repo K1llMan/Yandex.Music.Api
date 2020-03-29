@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 
+using Yandex.Music.Api.Common.YTrack;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Playlist;
 
-namespace Yandex.Music.Api.Common
+namespace Yandex.Music.Api.Common.YPlaylist
 {
     public class YPlaylist
     {
@@ -16,7 +17,7 @@ namespace Yandex.Music.Api.Common
         public string Visibility { get; set; }
         public YPlaylistCover Cover { get; set; }
         public YOwner Owner { get; set; }
-        public List<YTrack> Tracks { get; set; }
+        public List<YTrackContainer> Tracks { get; set; }
         public string Modified { get; set; }
         public List<int> TrackIds { get; set; }
         public string OgImage { get; set; }
@@ -32,5 +33,13 @@ namespace Yandex.Music.Api.Common
         public YPlaylistMadeFor MadeFor { get; set; }
         public string OgTitle { get; set; }
         public bool? DoNotIndex { get; set; }
+
+        public YPlaylistUidPair GetKey()
+        {
+            return new YPlaylistUidPair {
+                Uid = Owner.Uid,
+                Kind = Kind
+            };
+        }
     }
 }

@@ -4,6 +4,10 @@ using System.IO;
 using Newtonsoft.Json;
 
 using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Common.YPlaylist;
+using Yandex.Music.Api.Common.YTrack;
+using Yandex.Music.Api.Models.Artist;
+using Yandex.Music.Api.Responses;
 
 namespace Yandex.Music.Api.Tests
 {
@@ -11,11 +15,9 @@ namespace Yandex.Music.Api.Tests
     {
         public YandexTestHarness()
         {
-            Console.WriteLine("Created");
             AppSettings = GetAppSettings();
 
-            Storage = new YAuthStorage(AppSettings.Login, AppSettings.Password);
-            StorageEncrypted = new YAuthStorage(AppSettings.Login, AppSettings.Password, YAuthStorageEncryption.Rijndael);
+            Storage = new YAuthStorage();
 
             API = new YandexMusicApi();
         }
@@ -47,9 +49,21 @@ namespace Yandex.Music.Api.Tests
 
         public YAuthStorage Storage { get; set; }
 
-        public YAuthStorage StorageEncrypted { get; set; }
-
         public YandexMusicApi API { get; set; }
+
+        #region Поля для сохранения тестовых данных
+
+        public YAlbumResponse Album { get; set; }
+
+        public YArtistResponse Artist { get; set; }
+
+        public YPlaylist Playlist { get; set; }
+
+        public YTrack Track { get; set; }
+
+        public YPlaylist CreatedPlaylist { get; set; }
+
+        #endregion Поля для сохранения тестовых данных
 
         #endregion Свойства
     }

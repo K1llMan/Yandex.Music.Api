@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Common.YPlaylist;
+using Yandex.Music.Api.Common.YTrack;
 using Yandex.Music.Api.Requests.Playlist;
-using Yandex.Music.Api.Requests.Track;
-using Yandex.Music.Api.Responses;
 
 namespace Yandex.Music.Api.API
 {
@@ -15,6 +16,42 @@ namespace Yandex.Music.Api.API
     public class YPlaylistAPI
     {
         #region Вспомогательные функции
+
+        /// <summary>
+        /// Получение персональных плейлистов
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="type">Тип</param>
+        /// <returns>Плейлист</returns>
+        private async Task<YPlaylist> GetPersonalPlaylist(YAuthStorage storage, YGeneratedPlaylistType type)
+        {
+            return await MainPagePersonalAsync(storage)
+                .ContinueWith(list => {
+                    YPlaylist playlist = list.Result.FirstOrDefault(p => p.GeneratedPlaylistType == type);
+                    return playlist == null
+                        ? null
+                        : Get(storage, playlist);
+                });
+        }
+
+        /// <summary>
+        /// Изменение плейлиста
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="playlist">Плейлист</param>
+        /// <param name="changes">Список изменений</param>
+        /// <returns>Плейлист после изменений</returns>
+        private async Task<YPlaylist> ChangePlaylist(YAuthStorage storage, YPlaylist playlist, List<YPlaylistChange> changes)
+        {
+            return await new YPlaylistChangeRequest(storage)
+                .Create(playlist, changes)
+                .GetResponseAsync<YPlaylist>();
+        }
+
+        private List<YTrack> RemoveIdentical(List<YTrack> tracks)
+        {
+            return tracks.Distinct().ToList();
+        }
 
         #endregion Вспомогательные функции
 
@@ -53,11 +90,11 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public async Task<YPlaylistFavoritesResponse> FavoritesAsync(YAuthStorage storage)
+        public async Task<List<YPlaylist>> FavoritesAsync(YAuthStorage storage)
         {
             return await new YGetPlaylistFavoritesRequest(storage)
                 .Create()
-                .GetResponseAsync<YPlaylistFavoritesResponse>();
+                .GetResponseAsyncList<YPlaylist>("[*]");
         }
 
         /// <summary>
@@ -65,7 +102,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public YPlaylistFavoritesResponse Favorites(YAuthStorage storage)
+        public List<YPlaylist> Favorites(YAuthStorage storage)
         {
             return FavoritesAsync(storage).GetAwaiter().GetResult();
         }
@@ -74,137 +111,191 @@ namespace Yandex.Music.Api.API
         /// Плейлист дня
         /// </summary>
         /// <param name="storage">Хранилище</param>
-        /// <param name="kinds">Тип</param>
         /// <returns></returns>
-        public async Task<YPlaylist> OfTheDayAsync(YAuthStorage storage, string kinds)
+        public async Task<YPlaylist> OfTheDayAsync(YAuthStorage storage)
         {
-            return await new YGetPlaylistOfDayRequest(storage)
-                .Create(kinds)
-                .GetResponseAsync<YPlaylist>("playlist");
+            return await GetPersonalPlaylist(storage, YGeneratedPlaylistType.PlaylistOfTheDay);
         }
 
         /// <summary>
         /// Плейлист дня
         /// </summary>
         /// <param name="storage">Хранилище</param>
-        /// <param name="kinds">Тип</param>
         /// <returns></returns>
-        public YPlaylist OfTheDay(YAuthStorage storage, string kinds)
+        public YPlaylist OfTheDay(YAuthStorage storage)
         {
-            return OfTheDayAsync(storage, kinds).GetAwaiter().GetResult();
+            return OfTheDayAsync(storage).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Дежавю
         /// </summary>
         /// <param name="storage">Хранилище</param>
-        /// <param name="kinds">Тип</param>
         /// <returns></returns>
-        public async Task<YPlaylist> DejaVuAsync(YAuthStorage storage, string kinds)
+        public async Task<YPlaylist> DejaVuAsync(YAuthStorage storage)
         {
-            return await new YGetPlaylistDejaVuRequest(storage)
-                .Create(kinds)
-                .GetResponseAsync<YPlaylist>("playlist");
+            return await GetPersonalPlaylist(storage, YGeneratedPlaylistType.NeverHeard);
         }
 
         /// <summary>
         /// Дежавю
         /// </summary>
         /// <param name="storage">Хранилище</param>
-        /// <param name="kinds">Тип</param>
         /// <returns></returns>
-        public YPlaylist DejaVu(YAuthStorage storage, string kinds)
+        public YPlaylist DejaVu(YAuthStorage storage)
         {
-            return DejaVuAsync(storage, kinds).GetAwaiter().GetResult();
+            return DejaVuAsync(storage).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Премьера
         /// </summary>
         /// <param name="storage">Хранилище</param>
-        /// <param name="kinds">Тип</param>
         /// <returns></returns>
-        public async Task<YPlaylist> PremiereAsync(YAuthStorage storage, string kinds)
+        public async Task<YPlaylist> PremiereAsync(YAuthStorage storage)
         {
-            return await new YGetPlaylistPremiereRequest(storage)
-                .Create(kinds)
-                .GetResponseAsync<YPlaylist>("playlist");
+            return await GetPersonalPlaylist(storage, YGeneratedPlaylistType.RecentTracks);
         }
 
         /// <summary>
         /// Премьера
         /// </summary>
         /// <param name="storage">Хранилище</param>
-        /// <param name="kinds">Тип</param>
         /// <returns></returns>
-        public YPlaylist Premiere(YAuthStorage storage, string kinds)
+        public YPlaylist Premiere(YAuthStorage storage)
         {
-            return PremiereAsync(storage, kinds).GetAwaiter().GetResult();
+            return PremiereAsync(storage).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Тайник
         /// </summary>
         /// <param name="storage">Хранилище</param>
-        /// <param name="kinds">Тип</param>
         /// <returns></returns>
-        public async Task<YPlaylist> MissedAsync(YAuthStorage storage, string kinds)
+        public async Task<YPlaylist> MissedAsync(YAuthStorage storage)
         {
-            return await new YGetPlaylistMissedRequest(storage)
-                .Create(kinds)
-                .GetResponseAsync<YPlaylist>("playlist");
+            return await GetPersonalPlaylist(storage, YGeneratedPlaylistType.MissedLikes);
         }
 
         /// <summary>
         /// Тайник
         /// </summary>
         /// <param name="storage">Хранилище</param>
-        /// <param name="kinds">Тип</param>
         /// <returns></returns>
-        public YPlaylist Missed(YAuthStorage storage, string kinds)
+        public YPlaylist Missed(YAuthStorage storage)
         {
-            return MissedAsync(storage, kinds).GetAwaiter().GetResult();
+            return MissedAsync(storage).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Алиса
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <returns></returns>
+        public async Task<YPlaylist> AliceAsync(YAuthStorage storage)
+        {
+            return await GetPersonalPlaylist(storage, YGeneratedPlaylistType.Origin);
+        }
+
+        /// <summary>
+        /// Алиса
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <returns></returns>
+        public YPlaylist Alice(YAuthStorage storage)
+        {
+            return MissedAsync(storage).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Подкасты
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <returns></returns>
+        public async Task<YPlaylist> PodcastsAsync(YAuthStorage storage)
+        {
+            return await GetPersonalPlaylist(storage, YGeneratedPlaylistType.Podcasts);
+        }
+
+        /// <summary>
+        /// Подкасты
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <returns></returns>
+        public YPlaylist Podcasts(YAuthStorage storage)
+        {
+            return PodcastsAsync(storage).GetAwaiter().GetResult();
         }
 
         #endregion Стандартные плейлисты
 
+        #region Получение плейлиста
+
+        /// <summary>
+        /// Получение плейлиста
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="user">Uid пользователя-владельца плейлиста</param>
+        /// <param name="kinds">Тип</param>
+        /// <returns></returns>
+        public async Task<YPlaylist> GetAsync(YAuthStorage storage, string user, string kinds)
+        {
+            return await new YGetPlaylistRequest(storage)
+                .Create(user, kinds)
+                .GetResponseAsync<YPlaylist>();
+        }
+
+        /// <summary>
+        /// Получение плейлиста
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="user">Uid пользователя-владельца плейлиста</param> 
+        /// <param name="kinds">Тип</param>
+        /// <returns></returns>
+        public YPlaylist Get(YAuthStorage storage, string user, string kinds)
+        {
+            return GetAsync(storage, user, kinds).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Получение плейлиста
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="playlist">Описание плейлиста, для которого будут запрошены треки</param>
+        /// <returns></returns>
+        public async Task<YPlaylist> GetAsync(YAuthStorage storage, YPlaylist playlist)
+        {
+            return await new YGetPlaylistRequest(storage)
+                .Create(playlist)
+                .GetResponseAsync<YPlaylist>();
+        }
+
+        /// <summary>
+        /// Получение плейлиста
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="playlist">Описание плейлиста, для которого будут запрошены треки</param>
+        /// <returns></returns>
+        public YPlaylist Get(YAuthStorage storage, YPlaylist playlist)
+        {
+            return GetAsync(storage, playlist).GetAwaiter().GetResult();
+        }
+
+        #endregion Получение плейлиста
+
         #region Операции над плейлистами
 
         /// <summary>
-        /// Получение плейлиста
-        /// </summary>
-        /// <param name="storage">Хранилище</param>
-        /// <param name="kinds">Тип</param>
-        /// <returns></returns>
-        public async Task<YPlaylist> GetAsync(YAuthStorage storage, string kinds)
-        {
-            return await new YGetPlaylistRequest(storage)
-                .Create(kinds)
-                .GetResponseAsync<YPlaylist>("playlist");
-        }
-
-        /// <summary>
-        /// Получение плейлиста
-        /// </summary>
-        /// <param name="storage">Хранилище</param>
-        /// <param name="kinds">Тип</param>
-        /// <returns></returns>
-        public YPlaylist Get(YAuthStorage storage, string kinds)
-        {
-            return GetAsync(storage, kinds).GetAwaiter().GetResult();
-        }
-
-        /// <summary>
         /// Создание
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <param name="name">Заголовок</param>
         /// <returns></returns>
-        public async Task<YPlaylistChangeResponse> CreateAsync(YAuthStorage storage, string name)
+        public async Task<YPlaylist> CreateAsync(YAuthStorage storage, string name)
         {
-            return await new YPlaylistChangeRequest(storage)
+            return await new YPlaylistCreateRequest(storage)
                 .Create(name)
-                .GetResponseAsync<YPlaylistChangeResponse>();
+                .GetResponseAsync<YPlaylist>();
         }
 
         /// <summary>
@@ -213,22 +304,72 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="name">Заголовок</param>
         /// <returns></returns>
-        public YPlaylistChangeResponse Create(YAuthStorage storage, string name)
+        public YPlaylist Create(YAuthStorage storage, string name)
         {
             return CreateAsync(storage, name).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Переименование
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="kinds">Идентификатор плейлиста</param>
+        /// <param name="name">Заголовок</param>
+        /// <returns></returns>
+        public async Task<YPlaylist> RenameAsync(YAuthStorage storage, string kinds, string name)
+        {
+            return await new YPlaylistRenameRequest(storage)
+                .Create(kinds, name)
+                .GetResponseAsync<YPlaylist>();
+        }
+
+        /// <summary>
+        /// Переименование
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="kinds">Идентификатор плейлиста</param>
+        /// <param name="name">Заголовок</param>
+        /// <returns></returns>
+        public YPlaylist Rename(YAuthStorage storage, string kinds, string name)
+        {
+            return RenameAsync(storage, kinds, name).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Переименование
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="playlist">Плейлист</param>
+        /// <param name="name">Заголовок</param>
+        /// <returns></returns>
+        public Task<YPlaylist> RenameAsync(YAuthStorage storage, YPlaylist playlist, string name)
+        {
+            return RenameAsync(storage, playlist.Kind, name);
+        }
+
+        /// <summary>
+        /// Переименование
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="playlist">Плейлист</param>
+        /// <param name="name">Заголовок</param>
+        /// <returns></returns>
+        public YPlaylist Rename(YAuthStorage storage, YPlaylist playlist, string name)
+        {
+            return RenameAsync(storage, playlist.Kind, name).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Удаление
         /// </summary>
         /// <param name="storage">Хранилище</param>
-        /// <param name="kind">Тип</param>
+        /// <param name="kinds">Тип</param>
         /// <returns></returns>
-        public async Task<bool> RemoveAsync(YAuthStorage storage, string kind)
+        public async Task<bool> DeleteAsync(YAuthStorage storage, string kinds)
         {
             try {
                 await new YPlaylistRemoveRequest(storage)
-                    .Create(kind)
+                    .Create(kinds)
                     .GetResponseAsync();
 
                 return true;
@@ -244,71 +385,104 @@ namespace Yandex.Music.Api.API
         /// Удаление
         /// </summary>
         /// <param name="storage">Хранилище</param>
-        /// <param name="kind">Тип</param>
+        /// <param name="kinds">Тип</param>
         /// <returns></returns>
-        public bool Remove(YAuthStorage storage, string kind)
+        public bool Delete(YAuthStorage storage, string kinds)
         {
-            return RemoveAsync(storage, kind).GetAwaiter().GetResult();
+            return DeleteAsync(storage, kinds).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Удаление
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="playlist">Плейлист</param>
+        /// <returns></returns>
+        public Task<bool> DeleteAsync(YAuthStorage storage, YPlaylist playlist)
+        {
+            return DeleteAsync(storage, playlist.Kind);
+        }
+
+        /// <summary>
+        /// Удаление
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="playlist">Плейлист</param>
+        /// <returns></returns>
+        public bool Delete(YAuthStorage storage, YPlaylist playlist)
+        {
+            return DeleteAsync(storage, playlist.Kind).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Добавление трека
         /// </summary>
         /// <param name="storage">Хранилище</param>
-        /// <param name="trackId">Идентификатор трека</param>
-        /// <param name="albumId">Идентификатор альбома</param>
-        /// <param name="playlistKind">Тип</param>
+        /// <param name="playlist">Плейлист</param>
+        /// <param name="tracks">Треки для добавления</param>
         /// <returns></returns>
-        public async Task<YInsertTrackToPlaylistResponse> InsertTrackAsync(YAuthStorage storage, string trackId, string albumId,
-            string playlistKind)
+        public async Task<YPlaylist> InsertTracksAsync(YAuthStorage storage, YPlaylist playlist, List<YTrack> tracks)
         {
-            return await new YInsertTrackToPlaylistRequest(storage)
-                .Create(0, trackId, albumId, playlistKind)
-                .GetResponseAsync<YInsertTrackToPlaylistResponse>();
+            return await ChangePlaylist(storage, playlist, new List<YPlaylistChange> {
+                    new YPlaylistChange {
+                        Operation = YPlaylistChangeType.Insert,
+                        At = 0,
+                        Tracks = tracks.Select(t => t.GetKey()).ToList()
+                    }
+                })
+                .ContinueWith(p => Get(storage, p.Result));
         }
 
         /// <summary>
         /// Добавление трека
         /// </summary>
         /// <param name="storage">Хранилище</param>
-        /// <param name="trackId">Идентификатор трека</param>
-        /// <param name="albumId">Идентификатор альбома</param>
-        /// <param name="playlistKind">Тип</param>
+        /// <param name="playlist">Плейлист</param>
+        /// <param name="tracks">Треки для добавления</param>
         /// <returns></returns>
-        public YInsertTrackToPlaylistResponse InsertTrack(YAuthStorage storage, string trackId, string albumId, string playlistKind)
+        public YPlaylist InsertTracks(YAuthStorage storage, YPlaylist playlist, List<YTrack> tracks)
         {
-            return InsertTrackAsync(storage, trackId, albumId, playlistKind).GetAwaiter().GetResult();
+            return InsertTracksAsync(storage, playlist, tracks).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Удаление треков
         /// </summary>
         /// <param name="storage">Хранилище</param>
-        /// <param name="from">Начало интервала</param>
-        /// <param name="to">Конец интервала</param>
-        /// <param name="revision">Ревизия</param>
-        /// <param name="playlistKind">Тип</param>
+        /// <param name="playlist">Плейлист</param>
+        /// <param name="tracks">Треки для удаления</param>
         /// <returns></returns>
-        public async Task<YDeleteTrackFromPlaylistResponse> DeleteTrackAsync(YAuthStorage storage, int from, int to, int revision,
-            string playlistKind)
+        public async Task<YPlaylist> DeleteTrackAsync(YAuthStorage storage, YPlaylist playlist, List<YTrack> tracks)
         {
-            return await new YDeleteTrackFromPlaylistRequest(storage)
-                .Create(from, to, revision, playlistKind)
-                .GetResponseAsync<YDeleteTrackFromPlaylistResponse>();
+            List<YPlaylistChange> changes = RemoveIdentical(tracks)
+                .Select(t => playlist.Tracks.Select(c => c.Track).ToList().IndexOf(t))
+                .Where(i => i != -1)
+                .Select(i => {
+                    YTrackContainer t = playlist.Tracks[i];
+                    return new YPlaylistChange {
+                        Operation = YPlaylistChangeType.Delete,
+                        From = i,
+                        To = i + 1,
+                        Tracks = new List<YTrackAlbumPair> {
+                            t.Track.GetKey()
+                        }
+                    };
+                })
+                .ToList();
+
+            return await ChangePlaylist(storage, playlist, changes);
         }
 
         /// <summary>
         /// Удаление треков
         /// </summary>
         /// <param name="storage">Хранилище</param>
-        /// <param name="from">Начало интервала</param>
-        /// <param name="to">Конец интервала</param>
-        /// <param name="revision">Ревизия</param>
-        /// <param name="playlistKind">Тип</param>
+        /// <param name="playlist">Плейлист</param>
+        /// <param name="tracks">Треки для удаления</param>
         /// <returns></returns>
-        public YDeleteTrackFromPlaylistResponse DeleteTrack(YAuthStorage storage, int from, int to, int revision, string playlistKind)
+        public YPlaylist DeleteTrack(YAuthStorage storage, YPlaylist playlist, List<YTrack> tracks)
         {
-            return DeleteTrackAsync(storage, from, to, revision, playlistKind).GetAwaiter().GetResult();
+            return DeleteTrackAsync(storage, playlist, tracks).GetAwaiter().GetResult();
         }
 
         #endregion Операции над плейлистами

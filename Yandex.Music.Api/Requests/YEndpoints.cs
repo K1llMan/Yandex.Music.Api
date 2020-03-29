@@ -5,6 +5,10 @@
     /// </summary>
     internal static class YEndpoints
     {
+        public static string API = "https://api.music.yandex.net";
+        public static string OAuth = "https://oauth.yandex.ru";
+
+        
         public static string Accounts = "https://music.yandex.ru/handlers/accounts.jsx";
         public static string Album = "https://music.yandex.ru/handlers/album.jsx";
         public static string Auth = "https://music.yandex.ru/handlers/auth.jsx";
@@ -16,5 +20,6 @@
         public static string PlaylistPatch = "https://music.yandex.ru/handlers/playlist-patch.jsx";
         public static string Search = "https://music.yandex.ru/handlers/music-search.jsx";
         public static string Track = "https://music.yandex.ru/handlers/track.jsx";
+        
     }
 }

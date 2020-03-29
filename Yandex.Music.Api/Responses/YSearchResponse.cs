@@ -14,7 +14,6 @@ namespace Yandex.Music.Api.Responses
         public YSearchResult<YSearchAlbumModel> Albums { get; set; }
         public YSearchResult<YSearchTrackModel> Tracks { get; set; }
         public YSearchResult<YSearchArtistModel> Artists { get; set; }
-
         public YSearchResult<YSearchVideoModel> Videos { get; set; }
         public YSearchResult<YSearchPlaylistModel> Playlists { get; set; }
         public YSearchResult<YSearchUserModel> Users { get; set; }

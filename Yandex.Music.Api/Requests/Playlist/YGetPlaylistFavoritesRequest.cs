@@ -12,17 +12,7 @@ namespace Yandex.Music.Api.Requests.Playlist
 
         public YRequest Create()
         {
-            var query = new Dictionary<string, string> {
-                {"owner", storage.User.Login},
-                {"lang", storage.User.Lang},
-                {"filter", "tracks"},
-                {"likeFilter", "favorite"},
-                {"external-domain", "music.yandex.ru"},
-                {"overembed", "false"},
-                {"ncrnd", "0.7506943983987266"}
-            };
-
-            FormRequest(YEndpoints.Library, query: query);
+            FormRequest($"{YEndpoints.API}/users/{storage.User.Uid}/playlists/list");
 
             return this;
         }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Models.Artist;
 
 namespace Yandex.Music.Api.Responses
 {
@@ -17,7 +18,7 @@ namespace Yandex.Music.Api.Responses
         public int? DurationMS { get; set; }
         public string StorageDir { get; set; }
         public int? FileSize { get; set; }
-        public List<YArtistResponse> Artists { get; set; }
+        public List<YArtist> Artists { get; set; }
         public string OgImage { get; set; }
 
 

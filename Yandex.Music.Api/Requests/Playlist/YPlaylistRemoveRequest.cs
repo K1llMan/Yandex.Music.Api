@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Net;
 
 using Yandex.Music.Api.Common;
@@ -13,32 +12,7 @@ namespace Yandex.Music.Api.Requests.Playlist
 
         public YRequest Create(string kinds)
         {
-            var query = new Dictionary<string, string> {
-                {"action", "delete"},
-                {"kind", kinds},
-                {"lang", "ru"},
-                {"sign", storage.User.Sign},
-                {"experiments", storage.User.Experiments},
-                {"external-domain", "music.yandex.ru"},
-                {"overembed", "false"}
-            };
-
-            var headers = new List<KeyValuePair<string, string>> {
-                YRequestHeaders.Get(YHeader.Accept, storage),
-                YRequestHeaders.Get(YHeader.AcceptEncoding, storage),
-                YRequestHeaders.Get(YHeader.AcceptLanguage, storage),
-                YRequestHeaders.Get(YHeader.AccessControlAllowMethods, storage),
-                YRequestHeaders.Get(YHeader.ContentType, "application/x-www-form-urlencoded; charset=UTF-8"),
-                YRequestHeaders.Get(YHeader.Origin, storage),
-                YRequestHeaders.Get(YHeader.Referer, storage),
-                YRequestHeaders.Get(YHeader.SecFetchMode, storage),
-                YRequestHeaders.Get(YHeader.SecFetchSite, storage),
-                YRequestHeaders.Get(YHeader.XCurrentUID, storage),
-                YRequestHeaders.Get(YHeader.XRequestedWith, storage),
-                YRequestHeaders.Get(YHeader.XRetpathY, storage)
-            };
-
-            FormRequest(YEndpoints.ChangePlaylist, body: GetQueryString(query), headers: headers, method: WebRequestMethods.Http.Post);
+            FormRequest($"{YEndpoints.API}/users/{storage.User.Uid}/playlists/{kinds}/delete", method: WebRequestMethods.Http.Post);
 
             return this;
         }

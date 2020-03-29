@@ -13,29 +13,19 @@ namespace Yandex.Music.Api.Requests.Track
 
         public YRequest Create(string src)
         {
+            
             var query = new Dictionary<string, string> {
-                {"format", "json"},
-                {"external-domain", "music.yandex.ru"},
-                {"overembed", "no"},
-                {"__t", storage.Context.GetTimeInterval().ToString()}
+                {"format", "json"}
             };
 
+            
             var parts = src.Split('?');
-            parts[1].Split('&').ToList().ForEach(p =>
-            {
+            parts[1].Split('&').ToList().ForEach(p => {
                 var param = p.Split('=');
                 query.Add(param[0], param[1]);
             });
 
-            var headers = new List<KeyValuePair<string, string>> {
-                YRequestHeaders.Get(YHeader.Accept, storage),
-                YRequestHeaders.Get(YHeader.Origin, storage),
-                YRequestHeaders.Get(YHeader.Referer, storage),
-                YRequestHeaders.Get(YHeader.SecFetchMode, storage),
-                YRequestHeaders.Get(YHeader.SecFetchSite, storage)
-            };
-
-            FormRequest(parts[0], query: query, headers: headers);
+            FormRequest(parts[0], query: query);
 
             return this;
         }

@@ -1,4 +1,5 @@
 using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Common.YPlaylist;
 
 namespace Yandex.Music.Api.Responses
 {

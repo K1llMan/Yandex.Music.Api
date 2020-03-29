@@ -16,13 +16,9 @@ namespace Yandex.Music.Api.Requests.Search
                 {"text", searchText},
                 {"type", searchType.ToString()},
                 {"page", page.ToString()},
-                {"lang", "ru"},
-                {"external-domain", "music.yandex.ru"},
-                {"overembed", "false"},
-                {"ncrnd", "0.7060701951464323"}
             };
 
-            FormRequest(YEndpoints.Search, query: query);
+            FormRequest($"{YEndpoints.API}/search", query: query);
 
             return this;
         }

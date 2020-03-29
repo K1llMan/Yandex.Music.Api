@@ -8,8 +8,8 @@ using Yandex.Music.Api.Tests.Traits;
 
 namespace Yandex.Music.Api.Tests.Tests
 {
-    [Collection("Yandex Test Harness")]
-    [Order(0)]
+    [Collection("Yandex Test Harness"), Order(0)]
+    [TestBeforeAfter]
     public class YAuthStorageTest : YandexTest
     {
         public YAuthStorageTest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
@@ -32,7 +32,7 @@ namespace Yandex.Music.Api.Tests.Tests
         [Order(1)]
         public void LoadCrypto_ValidData_True()
         {
-            Fixture.StorageEncrypted.Load(fileNameCrypto).Should().BeTrue();
+            Fixture.Storage.Load(fileNameCrypto).Should().BeTrue();
         }
 
         [Fact]
@@ -48,7 +48,7 @@ namespace Yandex.Music.Api.Tests.Tests
         [Order(0)]
         public void SaveCrypto_ValidData_True()
         {
-            Fixture.StorageEncrypted.Save(fileNameCrypto).Should().BeTrue();
+            Fixture.Storage.Save(fileNameCrypto).Should().BeTrue();
         }
     }
 }
