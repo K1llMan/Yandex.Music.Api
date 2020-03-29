@@ -1,7 +1,4 @@
-﻿using Serilog;
-using Serilog.Events;
-
-using Xunit;
+﻿using Xunit;
 using Xunit.Abstractions;
 
 //Optional

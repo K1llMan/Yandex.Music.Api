@@ -2,9 +2,7 @@
 using System.Threading.Tasks;
 
 using Yandex.Music.Api.Common;
-using Yandex.Music.Api.Requests;
 using Yandex.Music.Api.Requests.Auth;
-using Yandex.Music.Api.Requests.Yandex;
 using Yandex.Music.Api.Responses;
 
 using YAccount = Yandex.Music.Api.Common.YAccount;
@@ -87,32 +85,6 @@ namespace Yandex.Music.Api.API
         {
             return GetUserAuthAsync(storage).GetAwaiter().GetResult();
         }
-
-        /*
-        public async Task<YAuthInfoUserResponse> GetUserAuthDetailsAsync(YAuthStorage storage)
-        {
-            return await new YGetAuthInfoUserRequest(storage)
-                .Create()
-                .GetResponseAsync<YAuthInfoUserResponse>();
-        }
-
-        public YAuthInfoUserResponse GetUserAuthDetails(YAuthStorage storage)
-        {
-            return GetUserAuthDetailsAsync(storage).GetAwaiter().GetResult();
-        }
-
-        public async Task<YGetCookieResponse> GetYandexCookieAsync(YAuthStorage storage)
-        {
-            return await new YGetCookieRequest(storage)
-                .Create()
-                .GetResponseAsync<YGetCookieResponse>();
-        }
-
-        public YGetCookieResponse GetYandexCookie(YAuthStorage storage)
-        {
-            return GetYandexCookieAsync(storage).GetAwaiter().GetResult();
-        }
-        */
 
         #endregion Основные функции
     }

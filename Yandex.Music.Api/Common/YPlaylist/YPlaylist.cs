@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 
 using Yandex.Music.Api.Common.YTrack;
-using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Playlist;
 
 namespace Yandex.Music.Api.Common.YPlaylist

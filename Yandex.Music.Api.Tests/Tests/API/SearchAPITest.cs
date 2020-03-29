@@ -54,14 +54,6 @@ namespace Yandex.Music.Api.Tests.Tests.API
             response.Tracks.Total.Should().BeGreaterThan(0);
         }
 
-        [Fact, YandexTrait(TraitGroup.SearchAPI)]
-        [Order(4)]
-        public void Users_ValidData_True()
-        {
-            YSearchResponse response = Fixture.API.SearchAPI.Users(Fixture.Storage, Fixture.Storage.User.FirstName);
-            response.Users.Total.Should().BeGreaterThan(0);
-        }
-
         public SearchAPITest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
         {
         }

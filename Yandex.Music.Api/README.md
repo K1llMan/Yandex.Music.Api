@@ -4,187 +4,84 @@ Yandex.Music API (Unofficial) for .Net Core
 Форк [Yandex.Music API (Unofficial) for .Net Core](https://github.com/Winster332/Yandex.Music.Api)
 API переделано под работу с API официального приложения, подобно [[Alpha] Неофициальная Python библиотека для API Yandex Music](https://github.com/MarshalX/yandex-music-api) 
 
-Доступные функции
+Функционал
 -------
 
-This library provides following functions:
+Работа с API осуществляется через хранилище YAuthStorage, являющееся по сути сущностью для пользователя, поэтому его необходимо передавать в вызов каждой функции.
+
+API для удобства разделено на следующие ветки:
 
 ```C#
 YandexMusicApi
 │
 ├── Users
-│   ├── Authorize / Async (string username, string password, bool saveCache)
-│   ├── GetAccounts / Async ()
-│   ├── GetYandexCookie / Async ()
-│   ├── GetUserAuthDetails / Async ()
-│   ├── GetUserAuth / Async ()
-│   ├── SearchUsers / Async (string userName, int pageNumber = 0)
-│   └── UseProxy (IWebProxy proxy)
-├── Music
-│   ├── ExtractTrackToFile (YandexTrack track, string filder = "data")
-│   ├── ExtractStreamTrack (YandexTrack track, fileSize)
-│   ├── ExtractDataTrack (YandexTrack track)
-│   ├── SearchTrack / Async (string trackName, int pageNumber = 0)
-│   ├── GetDownloadFilInfo / Async ()
-│   ├── ChangeLikedTrack / Async (string trackKey, bool value)
-│   ├── SetLikedTrack / Async (string trackKey, bool value)
-│   ├── NotRecommendTrack / Async (string trackKey)
-│   ├── UnderNotRecommendTrack / Async (string trackKey)
-│   ├── InsertTrackToPlaylist / Async (string trackId, string albumId, string playListKind)
-│   ├── DeleteTrackFromPlaylist / Async (int indexFrom, int indexTo, int playlistRevision, string playListKind)
-│   └── GetTrack / Async (string trackId)
+│   ├── Authorize / Async (YAuthStorage storage, string username, string password)
+│   ├── Authorize / Async (YAuthStorage storage, string token)
+│   └──GetUserAuth / Async (YAuthStorage storage)
+├── Track
+│   ├── Get / Async (YAuthStorage storage, string trackId)
+│   ├── GetMetadataForDownload / Async (YAuthStorage storage, string trackKey, bool direct)
+│   ├── GetMetadataForDownload / Async (YAuthStorage storage, YTrack track, bool direct)
+│   ├── GetDownloadFileInfo / Async (YAuthStorage storage, YTrackDownloadInfoResponse metadataInfo)
+│   ├── GetFileLink (YAuthStorage storage, string trackKey)
+│   ├── GetFileLink (YAuthStorage storage, YTrack track)
+│   ├── ExtractToFile (YAuthStorage storage, string trackKey, string filePath)
+│   ├── ExtractToFile (YAuthStorage storage, YTrack track, string filePath)
+│   ├── ExtractData (YAuthStorage storage, string trackKey)
+│   └── ExtractData (YAuthStorage storage, YTrack track)
+├── Album
+│   └── Get / Async (YAuthStorage storage, string albumId)
+├── Artist
+│   └── Get / Async (YAuthStorage storage, string artistId)
 ├── Playlist
-│   ├── GetPlaylistOfDay / Async ()
-│   ├── GetPlaylistDejaVu / Async ()
-│   ├── GetPlaylistFavorites / Async (string userId = null)
-│   ├── GetLibraryPlaylist / Async ()
-│   ├── GetLibraryHistory / Async ()
-│   ├── CreatePlaylist / Async (name)
-│   ├── RemovePlaylist / Async (kind)
-│   ├── SearchPlaylist / Async (string playlistName, int pageNumber = 0)
-│   ├── SearchArtist / Async (string artistName, int pageNumber = 0)
-│   ├── SearchAlbums / Async (string albumName, int pageNumber = 0)
-│   └── GetAlbum / Async (string albumId)
+│   ├── Get / Async (YAuthStorage storage, string user, string kinds)
+│   ├── Get / Async (YAuthStorage storage, YPlaylist playlist)
+│   ├── Favorites / Async (YAuthStorage storage)
+│   ├── OfTheDay / Async (YAuthStorage storage)
+│   ├── DejaVu / Async (YAuthStorage storage)
+│   ├── Premiere / Async (YAuthStorage storage)
+│   ├── Missed / Async (YAuthStorage storage)
+│   ├── Alice / Async (YAuthStorage storage)
+│   ├── Podcasts / Async (YAuthStorage storage)
+│   ├── Create / Async (YAuthStorage storage, string name)
+│   ├── Rename / Async (YAuthStorage storage, string kinds, string name)
+│   ├── Rename / Async (YAuthStorage storage, YPlaylist playlist, string name)
+│   ├── Delete / Async (YAuthStorage storage, string kinds)
+│   ├── Delete / Async (YAuthStorage storage, YPlaylist playlist)
+│   ├── InsertTracks / Async (YAuthStorage storage, YPlaylist playlist, List<YTrack> tracks)
+│   └── DeleteTrack / Async (YAuthStorage storage, YPlaylist playlist, List<YTrack> tracks)
+├── Library
+│   ├── GetLikedTracks / Async (YAuthStorage storage)
+│   ├── GetLikedAlbums / Async (YAuthStorage storage)
+│   ├── GetLikedArtists / Async (YAuthStorage storage)
+│   ├── GetLikedPlaylists / Async (YAuthStorage storage)
+│   ├── GetDislikedTracks / Async (YAuthStorage storage)
+│   ├── AddTrackLike / Async (YAuthStorage storage, YTrack track)
+│   ├── RemoveTrackLike / Async (YAuthStorage storage, YTrack track)
+│   ├── AddTrackDislike / Async (YAuthStorage storage, YTrack track)
+│   ├── RemoveTrackDislike / Async (YAuthStorage storage, YTrack track)
+│   ├── AddAlbumLike / Async (YAuthStorage storage, YAlbum album)
+│   ├── RemoveAlbumLike / Async (YAuthStorage storage, YAlbum album)
+│   ├── AddArtistLike / Async (YAuthStorage storage, YArtist artist)
+│   ├── RemoveArtistLike / Async (YAuthStorage storage, YArtist artist)
+│   ├── AddPlaylistLike / Async(YAuthStorage storage, YPlaylist playlist)
+│   └── RemovePlaylistLike / Async(YAuthStorage storage, YPlaylist playlist)
+├── Search
+│   ├── Track / Async (YAuthStorage storage, string trackName, int pageNumber = 0)
+│   ├── Albums / Async (YAuthStorage storage, string albumName, int pageNumber = 0)
+│   ├── Artist / Async (YAuthStorage storage, string artistName, int pageNumber = 0)
+│   ├── Playlist / Async (YAuthStorage storage, string playlistName, int pageNumber = 0)
+│   ├── Videos / Async (YAuthStorage storage, string videoName, int pageNumber = 0) *
+│   ├── Users / Async (YAuthStorage storage, string videoName, int pageNumber = 0) *
+│   ├── Search / Async (YAuthStorage storage, string searchText, YSearchType searchType, int page = 0)
 └── Future
-    ├── Remove track ()
-    └── Radio-functions ()
+    ...
 ```
 
-Quick start
--------
-* [Roadmap](https://github.com/Winster332/Yandex.Music.Api/#roadmap)
-* [Users](https://github.com/Winster332/Yandex.Music.Api#users)
-	* [Authorize](https://github.com/Winster332/Yandex.Music.Api#authorize)
-	* [Search users](https://github.com/Winster332/Yandex.Music.Api#search-users)
-	* [Use proxy](https://github.com/Winster332/Yandex.Music.Api#use-proxy)
-* [Music](https://github.com/Winster332/Yandex.Music.Api#download-track)
-	* [Download track to file](https://github.com/Winster332/Yandex.Music.Api#download-to-file)
-	* [Download track to stream](https://github.com/Winster332/Yandex.Music.Api#download-to-stream)
-	* [Download track to bytes](https://github.com/Winster332/Yandex.Music.Api#download-to-bytes)
-	* [Get favorites playlist](https://github.com/Winster332/Yandex.Music.Api#get-favorites-playlist)
-	* [Search track](https://github.com/Winster332/Yandex.Music.Api#search-track)
-* [Playlist](https://github.com/Winster332/Yandex.Music.Api#playlist)
-	* [Get playlist of day](https://github.com/Winster332/Yandex.Music.Api#get-playlist-of-day)
-	* [Get playlist deja vu](https://github.com/Winster332/Yandex.Music.Api#get-playlist-deja-vu)
-	* [Search playlist](https://github.com/Winster332/Yandex.Music.Api#search-playlist)
-	
-### Roadmap
+Функции, помеченные звёздочкой, вероятно, не работают или передают неверные параметры.
 
-This solution is experimental. Therefore, it may have various bugs. To work, the solution uses the https protocol.
-
-### Users
-
-##### Authorize
-
-This step is optional. But it is necessary to consider that not authorized users get on captcha with which the user needs to cope by own strength. Therefore, it is better to use authorization.
-
-```C#
- var yandexApi = new YandexMusicApi();
- 
- // Your login and password in Yandex.Music
- yandexApi.Authorize("yourLogin", "yourPassword");
-```
-
-##### Search users
-
-```C#
- var yandexApi = new YandexMusicApi();
- var pageNumber = 0;
- 
- // Yandex search text and page
- var users = Api.SearchUsers("a", pageNumber);
-```
-
-##### Use proxy
-
-Documentation in progress...
-
-### Music
-
-##### Download track to file
-
-```C#
- var yandexApi = new YandexMusicApi();
- var track = yandexApi.SearchTrack("I Don't Care").First();
- var fileName = $"{track.Title}.mp3";
- yandexApi.ExtractTrackToFile(track.GetKey(), fileName);
-```
-
-##### Download track to stream
-
-Stream for streaming music
-
-```C#
- var yandexApi = new YandexMusicApi();
- var track = yandexApi.SearchTrack("I Don't Care").First();
- var streamTrack = yandexApi.ExtractStreamTrack(track.GetKey(), track.FileSize);
- var artistName = track.Artists.FirstOrDefault()?.Name;
-
- streamTrack.Complated += (o, track1) =>
- {
-    var fileName = $"{artistName} - {track.Title}";
-    
-    streamTrack.SaveToFile(fileName);
- };
-```
-
-##### Download track to bytes
-
-```C#
- var yandexApi = new YandexMusicApi();
- var track = yandexApi.SearchTrack("I Don't Care").First();
- var byteData = yandexApi.ExtractDataTrack(track.GetKey());
-```
-
-##### Get favorites playlist
-
-```C#
- var yandexApi = new YandexMusicApi();
- yandexApi.Authorize("yourLogin", "yourPassword");
- var list = yandexApi.GetPlaylistFavorites();
-```
-
-##### Search track
-
-```C#
- var yandexApi = new YandexMusicApi();
- var pageNumber = 0;
- var tracks = yandexApi.SearchTrack("I Don't Care", pageNumber);
-```
-
-### Playlist
-
-##### Get playlist of day
-
-```C#
- var yandexApi = new YandexMusicApi();
- yandexApi.Authorize("yourLogin", "yourPassword");
- var playlist = yandexApi.GetPlaylistOfDay();
-```
-
-##### Get playlist deja vu
-
-```C#
- var yandexApi = new YandexMusicApi();
- yandexApi.Authorize("yourLogin", "yourPassword");
- var playlist = yandexApi.GetPlaylistDejaVu();
-```
-var playlist = yandexApi.GetPlaylistDejaVu();
-
-##### Search playlist
-
-```C#
-  var yandexApi = new YandexMusicApi();
-  yandexApi.Authorize("yourLogin", "yourPassword");
-  var pageNumber = 0;
-  var playlists = Api.SearchPlaylist("a", pageNumber);
-```
-
-##### Examples
-
-- [Yandex.Music.Terminal](https://github.com/Winster332/Yandex.Music.Terminal)
-- [Lofi](https://github.com/Winster332/Lofi)
+Библиотека требует рефакторинга и переработки иерархии классов моделей. Также отсутствует функционал радио и подсказок для поиска.
 
 LICENCE
 -------
-[GNU General Public License v3.0](https://github.com/Winster332/Yandex.Music.Api/blob/master/LICENSE)
+[GNU General Public License v3.0](https://github.com/K1llMan/Yandex.Music.Api/blob/master/LICENSE)

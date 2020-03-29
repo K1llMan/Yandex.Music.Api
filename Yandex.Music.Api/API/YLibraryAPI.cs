@@ -7,7 +7,6 @@ using Yandex.Music.Api.Common.YPlaylist;
 using Yandex.Music.Api.Common.YTrack;
 using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Requests.Library;
-using Yandex.Music.Api.Responses;
 
 namespace Yandex.Music.Api.API
 {

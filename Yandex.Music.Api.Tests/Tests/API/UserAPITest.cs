@@ -21,7 +21,11 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(0)]
         public void Authorize_ValidData_True()
         {
-            Fixture.API.UserAPI.Authorize(Fixture.Storage, Fixture.AppSettings.Token);
+            if (!string.IsNullOrEmpty(Fixture.AppSettings.Token))
+                Fixture.API.UserAPI.Authorize(Fixture.Storage, Fixture.AppSettings.Token);
+            else
+                Fixture.API.UserAPI.Authorize(Fixture.Storage, Fixture.AppSettings.Login, Fixture.AppSettings.Password);
+
             Fixture.Storage.IsAuthorized.Should().BeTrue();
         }
 

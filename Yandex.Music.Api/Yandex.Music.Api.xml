@@ -4,25 +4,6 @@
         <name>Yandex.Music.Api</name>
     </assembly>
     <members>
-        <member name="T:Yandex.Music.Api.API.YAccountsAPI">
-            <summary>
-            API для взаимодействия с аккаунтами
-            </summary>
-        </member>
-        <member name="M:Yandex.Music.Api.API.YAccountsAPI.GetAsync(Yandex.Music.Api.Common.YAuthStorage)">
-            <summary>
-            Получение списка аккаунтов
-            </summary>
-            <param name="storage">Хранилище</param>
-            <returns></returns>
-        </member>
-        <member name="M:Yandex.Music.Api.API.YAccountsAPI.Get(Yandex.Music.Api.Common.YAuthStorage)">
-            <summary>
-            Получение списка аккаунтов
-            </summary>
-            <param name="storage">Хранилище</param>
-            <returns></returns>
-        </member>
         <member name="T:Yandex.Music.Api.API.YAlbumAPI">
             <summary>
             API для взаимодействия с альбомами
@@ -43,43 +24,292 @@
             <param name="storage">Хранилище</param>
             <param name="albumId">Идентификатор</param>
         </member>
+        <member name="T:Yandex.Music.Api.API.YArtistAPI">
+            <summary>
+            API для взаимодействия с исполнителями
+            </summary>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YArtistAPI.GetAsync(Yandex.Music.Api.Common.YAuthStorage,System.String)">
+            <summary>
+            Получение исполнителя
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="artistId">Идентификатор</param> 
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YArtistAPI.Get(Yandex.Music.Api.Common.YAuthStorage,System.String)">
+            <summary>
+            Получение исполнителя
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="artistId">Идентификатор</param>
+        </member>
         <member name="T:Yandex.Music.Api.API.YLibraryAPI">
             <summary>
             API для взаимодействия с библиотекой
             </summary>
         </member>
-        <member name="M:Yandex.Music.Api.API.YLibraryAPI.GetHistoryAsync(Yandex.Music.Api.Common.YAuthStorage)">
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.GetLibrarySection``1(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YLibrary.YLibrarySection,Yandex.Music.Api.Common.YLibrary.YLibrarySectionType,System.String)">
             <summary>
-            Получение истории
+            Получение секции библиотеки
+            </summary>
+            <typeparam name="T">Тип объекта библиотеки</typeparam>
+            <param name="storage">Хранилище</param>
+            <param name="section">Секция</param>
+            <param name="type">Тип</param>
+            <returns>Список объектов из секции</returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.GetLikedTracksAsync(Yandex.Music.Api.Common.YAuthStorage)">
+            <summary>
+            Получение лайкнутых треков
             </summary>
             <param name="storage">Хранилище</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YLibraryAPI.GetHistory(Yandex.Music.Api.Common.YAuthStorage)">
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.GetLikedTracks(Yandex.Music.Api.Common.YAuthStorage)">
             <summary>
-            Получение истории
+            Получение лайкнутых треков
             </summary>
             <param name="storage">Хранилище</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YLibraryAPI.GetAsync(Yandex.Music.Api.Common.YAuthStorage)">
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.GetLikedAlbumsAsync(Yandex.Music.Api.Common.YAuthStorage)">
             <summary>
-            Получение библиотеки
+            Получение лайкнутых альбомов
             </summary>
             <param name="storage">Хранилище</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YLibraryAPI.Get(Yandex.Music.Api.Common.YAuthStorage)">
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.GetLikedAlbums(Yandex.Music.Api.Common.YAuthStorage)">
             <summary>
-            Получение библиотеки
+            Получение лайкнутых альбомов
             </summary>
             <param name="storage">Хранилище</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.GetLikedArtistsAsync(Yandex.Music.Api.Common.YAuthStorage)">
+            <summary>
+            Получение лайкнутых исполнителей
+            </summary>
+            <param name="storage">Хранилище</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.GetLikedArtists(Yandex.Music.Api.Common.YAuthStorage)">
+            <summary>
+            Получение лайкнутых исполнителей
+            </summary>
+            <param name="storage">Хранилище</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.GetLikedPlaylistsAsync(Yandex.Music.Api.Common.YAuthStorage)">
+            <summary>
+            Получение лайкнутых плейлистов
+            </summary>
+            <param name="storage">Хранилище</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.GetLikedPlaylists(Yandex.Music.Api.Common.YAuthStorage)">
+            <summary>
+            Получение лайкнутых плейлистов
+            </summary>
+            <param name="storage">Хранилище</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.GetDislikedTracksAsync(Yandex.Music.Api.Common.YAuthStorage)">
+            <summary>
+            Получение дизлайкнутых треков
+            </summary>
+            <param name="storage">Хранилище</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.GetDislikedTracks(Yandex.Music.Api.Common.YAuthStorage)">
+            <summary>
+            Получение дизлайкнутых треков
+            </summary>
+            <param name="storage">Хранилище</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.AddTrackLikeAsync(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YTrack.YTrack)">
+            <summary>
+            Добавить трек в список лайкнутых
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="track">Трек</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.AddTrackLike(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YTrack.YTrack)">
+            <summary>
+            Добавить трек в список лайкнутых
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="track">Трек</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.RemoveTrackLikeAsync(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YTrack.YTrack)">
+            <summary>
+            Удалить трек из списка лайкнутых
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="track">Трек</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.RemoveTrackLike(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YTrack.YTrack)">
+            <summary>
+            Удалить трек из списка лайкнутых
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="track">Трек</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.AddTrackDislikeAsync(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YTrack.YTrack)">
+            <summary>
+            Добавить трек в список дизлайкнутых
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="track">Трек</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.AddTrackDislike(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YTrack.YTrack)">
+            <summary>
+            Добавить трек в список дизлайкнутых
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="track">Трек</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.RemoveTrackDislikeAsync(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YTrack.YTrack)">
+            <summary>
+            Удалить трек из списка дизлайкнутых
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="track">Трек</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.RemoveTrackDislike(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YTrack.YTrack)">
+            <summary>
+            Удалить трек из списка лайкнутых
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="track">Трек</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.AddAlbumLikeAsync(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YAlbum)">
+            <summary>
+            Добавить альбом в список лайкнутых
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="album">Альбом</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.AddAlbumLike(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YAlbum)">
+            <summary>
+            Добавить альбом в список лайкнутых
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="album">Альбом</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.RemoveAlbumLikeAsync(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YAlbum)">
+            <summary>
+            Удалить альбом из списка лайкнутых
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="album">Альбом</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.RemoveAlbumLike(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YAlbum)">
+            <summary>
+            Удалить альбом из списка лайкнутых
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="album">Альбом</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.AddArtistLikeAsync(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Models.Artist.YArtist)">
+            <summary>
+            Добавить исполнителя в список лайкнутых
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="artist">Исполнитель</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.AddArtistLike(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Models.Artist.YArtist)">
+            <summary>
+            Добавить исполнителя в список лайкнутых
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="artist">Исполнитель</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.RemoveArtistLikeAsync(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Models.Artist.YArtist)">
+            <summary>
+            Удалить исполнителя из списка лайкнутых
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="artist">Исполнитель</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.RemoveArtistLike(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Models.Artist.YArtist)">
+            <summary>
+            Удалить исполнителя из списка лайкнутых
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="artist">Исполнитель</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.AddPlaylistLikeAsync(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YPlaylist.YPlaylist)">
+            <summary>
+            Добавить плейлист в список лайкнутых
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="playlist">Плейлист</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.AddPlaylistLike(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YPlaylist.YPlaylist)">
+            <summary>
+            Добавить плейлист в список лайкнутых
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="playlist">Плейлист</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.RemovePlaylistLikeAsync(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YPlaylist.YPlaylist)">
+            <summary>
+            Удалить плейлист из списка лайкнутых
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="playlist">Плейлист</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YLibraryAPI.RemovePlaylistLike(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YPlaylist.YPlaylist)">
+            <summary>
+            Удалить плейлист из списка лайкнутых
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="playlist">Плейлист</param>
             <returns></returns>
         </member>
         <member name="T:Yandex.Music.Api.API.YPlaylistAPI">
             <summary>
             API для взамодействия с плейлистами
             </summary>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.GetPersonalPlaylist(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YPlaylist.YGeneratedPlaylistType)">
+            <summary>
+            Получение персональных плейлистов
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="type">Тип</param>
+            <returns>Плейлист</returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.ChangePlaylist(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YPlaylist.YPlaylist,System.Collections.Generic.List{Yandex.Music.Api.Common.YPlaylist.YPlaylistChange})">
+            <summary>
+            Изменение плейлиста
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="playlist">Плейлист</param>
+            <param name="changes">Список изменений</param>
+            <returns>Плейлист после изменений</returns>
         </member>
         <member name="M:Yandex.Music.Api.API.YPlaylistAPI.MainPagePersonalAsync(Yandex.Music.Api.Common.YAuthStorage)">
             <summary>
@@ -109,84 +339,122 @@
             <param name="storage">Хранилище</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.OfTheDayAsync(Yandex.Music.Api.Common.YAuthStorage,System.String)">
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.OfTheDayAsync(Yandex.Music.Api.Common.YAuthStorage)">
             <summary>
             Плейлист дня
             </summary>
             <param name="storage">Хранилище</param>
-            <param name="kinds">Тип</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.OfTheDay(Yandex.Music.Api.Common.YAuthStorage,System.String)">
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.OfTheDay(Yandex.Music.Api.Common.YAuthStorage)">
             <summary>
             Плейлист дня
             </summary>
             <param name="storage">Хранилище</param>
-            <param name="kinds">Тип</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.DejaVuAsync(Yandex.Music.Api.Common.YAuthStorage,System.String)">
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.DejaVuAsync(Yandex.Music.Api.Common.YAuthStorage)">
             <summary>
             Дежавю
             </summary>
             <param name="storage">Хранилище</param>
-            <param name="kinds">Тип</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.DejaVu(Yandex.Music.Api.Common.YAuthStorage,System.String)">
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.DejaVu(Yandex.Music.Api.Common.YAuthStorage)">
             <summary>
             Дежавю
             </summary>
             <param name="storage">Хранилище</param>
-            <param name="kinds">Тип</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.PremiereAsync(Yandex.Music.Api.Common.YAuthStorage,System.String)">
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.PremiereAsync(Yandex.Music.Api.Common.YAuthStorage)">
             <summary>
             Премьера
             </summary>
             <param name="storage">Хранилище</param>
-            <param name="kinds">Тип</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.Premiere(Yandex.Music.Api.Common.YAuthStorage,System.String)">
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.Premiere(Yandex.Music.Api.Common.YAuthStorage)">
             <summary>
             Премьера
             </summary>
             <param name="storage">Хранилище</param>
-            <param name="kinds">Тип</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.MissedAsync(Yandex.Music.Api.Common.YAuthStorage,System.String)">
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.MissedAsync(Yandex.Music.Api.Common.YAuthStorage)">
             <summary>
             Тайник
             </summary>
             <param name="storage">Хранилище</param>
-            <param name="kinds">Тип</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.Missed(Yandex.Music.Api.Common.YAuthStorage,System.String)">
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.Missed(Yandex.Music.Api.Common.YAuthStorage)">
             <summary>
             Тайник
             </summary>
             <param name="storage">Хранилище</param>
-            <param name="kinds">Тип</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.GetAsync(Yandex.Music.Api.Common.YAuthStorage,System.String)">
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.AliceAsync(Yandex.Music.Api.Common.YAuthStorage)">
+            <summary>
+            Алиса
+            </summary>
+            <param name="storage">Хранилище</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.Alice(Yandex.Music.Api.Common.YAuthStorage)">
+            <summary>
+            Алиса
+            </summary>
+            <param name="storage">Хранилище</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.PodcastsAsync(Yandex.Music.Api.Common.YAuthStorage)">
+            <summary>
+            Подкасты
+            </summary>
+            <param name="storage">Хранилище</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.Podcasts(Yandex.Music.Api.Common.YAuthStorage)">
+            <summary>
+            Подкасты
+            </summary>
+            <param name="storage">Хранилище</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.GetAsync(Yandex.Music.Api.Common.YAuthStorage,System.String,System.String)">
             <summary>
             Получение плейлиста
             </summary>
             <param name="storage">Хранилище</param>
+            <param name="user">Uid пользователя-владельца плейлиста</param>
             <param name="kinds">Тип</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.Get(Yandex.Music.Api.Common.YAuthStorage,System.String)">
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.Get(Yandex.Music.Api.Common.YAuthStorage,System.String,System.String)">
             <summary>
             Получение плейлиста
             </summary>
             <param name="storage">Хранилище</param>
+            <param name="user">Uid пользователя-владельца плейлиста</param> 
             <param name="kinds">Тип</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.GetAsync(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YPlaylist.YPlaylist)">
+            <summary>
+            Получение плейлиста
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="playlist">Описание плейлиста, для которого будут запрошены треки</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.Get(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YPlaylist.YPlaylist)">
+            <summary>
+            Получение плейлиста
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="playlist">Описание плейлиста, для которого будут запрошены треки</param>
             <returns></returns>
         </member>
         <member name="M:Yandex.Music.Api.API.YPlaylistAPI.CreateAsync(Yandex.Music.Api.Common.YAuthStorage,System.String)">
@@ -202,6 +470,42 @@
             Создание
             </summary>
             <param name="storage">Хранилище</param>
+            <param name="name">Заголовок</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.RenameAsync(Yandex.Music.Api.Common.YAuthStorage,System.String,System.String)">
+            <summary>
+            Переименование
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="kinds">Идентификатор плейлиста</param>
+            <param name="name">Заголовок</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.Rename(Yandex.Music.Api.Common.YAuthStorage,System.String,System.String)">
+            <summary>
+            Переименование
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="kinds">Идентификатор плейлиста</param>
+            <param name="name">Заголовок</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.RenameAsync(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YPlaylist.YPlaylist,System.String)">
+            <summary>
+            Переименование
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="playlist">Плейлист</param>
+            <param name="name">Заголовок</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.Rename(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YPlaylist.YPlaylist,System.String)">
+            <summary>
+            Переименование
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="playlist">Плейлист</param>
             <param name="name">Заголовок</param>
             <returns></returns>
         </member>
@@ -221,46 +525,56 @@
             <param name="kinds">Тип</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.InsertTracksAsync(Yandex.Music.Api.Common.YAuthStorage,System.String,System.String,System.String)">
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.DeleteAsync(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YPlaylist.YPlaylist)">
+            <summary>
+            Удаление
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="playlist">Плейлист</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.Delete(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YPlaylist.YPlaylist)">
+            <summary>
+            Удаление
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="playlist">Плейлист</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.InsertTracksAsync(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YPlaylist.YPlaylist,System.Collections.Generic.List{Yandex.Music.Api.Common.YTrack.YTrack})">
             <summary>
             Добавление трека
             </summary>
             <param name="storage">Хранилище</param>
-            <param name="trackId">Идентификатор трека</param>
-            <param name="albumId">Идентификатор альбома</param>
-            <param name="playlistKind">Тип</param>
+            <param name="playlist">Плейлист</param>
+            <param name="tracks">Треки для добавления</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.InsertTracks(Yandex.Music.Api.Common.YAuthStorage,System.String,System.String,System.String)">
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.InsertTracks(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YPlaylist.YPlaylist,System.Collections.Generic.List{Yandex.Music.Api.Common.YTrack.YTrack})">
             <summary>
             Добавление трека
             </summary>
             <param name="storage">Хранилище</param>
-            <param name="trackId">Идентификатор трека</param>
-            <param name="albumId">Идентификатор альбома</param>
-            <param name="playlistKind">Тип</param>
+            <param name="playlist">Плейлист</param>
+            <param name="tracks">Треки для добавления</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.DeleteTrackAsync(Yandex.Music.Api.Common.YAuthStorage,System.Int32,System.Int32,System.Int32,System.String)">
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.DeleteTrackAsync(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YPlaylist.YPlaylist,System.Collections.Generic.List{Yandex.Music.Api.Common.YTrack.YTrack})">
             <summary>
             Удаление треков
             </summary>
             <param name="storage">Хранилище</param>
-            <param name="from">Начало интервала</param>
-            <param name="to">Конец интервала</param>
-            <param name="revision">Ревизия</param>
-            <param name="playlistKind">Тип</param>
+            <param name="playlist">Плейлист</param>
+            <param name="tracks">Треки для удаления</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.DeleteTrack(Yandex.Music.Api.Common.YAuthStorage,System.Int32,System.Int32,System.Int32,System.String)">
+        <member name="M:Yandex.Music.Api.API.YPlaylistAPI.DeleteTrack(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YPlaylist.YPlaylist,System.Collections.Generic.List{Yandex.Music.Api.Common.YTrack.YTrack})">
             <summary>
             Удаление треков
             </summary>
             <param name="storage">Хранилище</param>
-            <param name="from">Начало интервала</param>
-            <param name="to">Конец интервала</param>
-            <param name="revision">Ревизия</param>
-            <param name="playlistKind">Тип</param>
+            <param name="playlist">Плейлист</param>
+            <param name="tracks">Треки для удаления</param>
             <returns></returns>
         </member>
         <member name="T:Yandex.Music.Api.API.YSearchAPI">
@@ -435,6 +749,24 @@
             <param name="direct">Должен ли ответ содержать прямую ссылку на загрузку</param>
             <returns></returns>
         </member>
+        <member name="M:Yandex.Music.Api.API.YTrackAPI.GetMetadataForDownloadAsync(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YTrack.YTrack,System.Boolean)">
+            <summary>
+            Получение метаданных для загрузки
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="track">Трек</param>
+            <param name="direct">Должен ли ответ содержать прямую ссылку на загрузку</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YTrackAPI.GetMetadataForDownload(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YTrack.YTrack,System.Boolean)">
+            <summary>
+            Получение метаданных для загрузки
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="track">Трек</param>
+            <param name="direct">Должен ли ответ содержать прямую ссылку на загрузку</param>
+            <returns></returns>
+        </member>
         <member name="M:Yandex.Music.Api.API.YTrackAPI.GetDownloadFileInfoAsync(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Responses.YTrackDownloadInfoResponse)">
             <summary>
             Получение информации для формирования ссылки для загрузки
@@ -459,12 +791,28 @@
             <param name="trackKey">Ключ трека в формате {идентифактор трека:идентификатор альбома}</param>
             <returns></returns>
         </member>
+        <member name="M:Yandex.Music.Api.API.YTrackAPI.GetFileLink(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YTrack.YTrack)">
+            <summary>
+            Получение ссылки для загрузки
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="track">Трек</param>
+            <returns></returns>
+        </member>
         <member name="M:Yandex.Music.Api.API.YTrackAPI.ExtractToFile(Yandex.Music.Api.Common.YAuthStorage,System.String,System.String)">
             <summary>
             Выгрузка в файл
             </summary>
             <param name="storage">Хранилище</param>
-            <param name="trackKey">Ключ трека в формате {идентифактор трека:идентификатор альбома}</param>
+            <param name="trackKey">Ключ трека в формате {идентификатор трека:идентификатор альбома}</param>
+            <param name="filePath">Путь для файла</param>
+        </member>
+        <member name="M:Yandex.Music.Api.API.YTrackAPI.ExtractToFile(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YTrack.YTrack,System.String)">
+            <summary>
+            Выгрузка в файл
+            </summary>
+            <param name="storage">Хранилище</param>
+            <param name="track">Трек</param>
             <param name="filePath">Путь для файла</param>
         </member>
         <member name="M:Yandex.Music.Api.API.YTrackAPI.ExtractData(Yandex.Music.Api.Common.YAuthStorage,System.String)">
@@ -472,52 +820,15 @@
             Получение двоичного массива данных
             </summary>
             <param name="storage">Хранилище</param>
-            <param name="trackKey">Ключ трека в формате {идентифактор трека:идентификатор альбома}</param>
+            <param name="trackKey">Ключ трека в формате {идентификатор трека:идентификатор альбома}</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YTrackAPI.ExtractStream(Yandex.Music.Api.Common.YAuthStorage,System.String,System.Int32)">
+        <member name="M:Yandex.Music.Api.API.YTrackAPI.ExtractData(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YTrack.YTrack)">
             <summary>
-            Получение потока выгрузки
+            Получение двоичного массива данных
             </summary>
             <param name="storage">Хранилище</param>
-            <param name="trackKey">Ключ трека в формате {идентифактор трека:идентификатор альбома}</param>
-            <param name="fileSize">Размер данных</param>
-            <returns></returns>
-        </member>
-        <member name="M:Yandex.Music.Api.API.YTrackAPI.SetNotRecommendAsync(Yandex.Music.Api.Common.YAuthStorage,System.String,System.Boolean)">
-            <summary>
-            Установка флага удаления из рекомендованных
-            </summary>
-            <param name="storage">Хранилище</param>
-            <param name="trackKey">Ключ трека в формате {идентифактор трека:идентификатор альбома}</param>
-            <param name="value">Значение</param>
-            <returns></returns>
-        </member>
-        <member name="M:Yandex.Music.Api.API.YTrackAPI.SetNotRecommend(Yandex.Music.Api.Common.YAuthStorage,System.String,System.Boolean)">
-            <summary>
-            Установка флага удаления из рекомендованных
-            </summary>
-            <param name="storage">Хранилище</param>
-            <param name="trackKey">Ключ трека в формате {идентифактор трека:идентификатор альбома}</param>
-            <param name="value">Значение</param>
-            <returns></returns>
-        </member>
-        <member name="M:Yandex.Music.Api.API.YTrackAPI.SetLikedAsync(Yandex.Music.Api.Common.YAuthStorage,System.String,System.Boolean)">
-            <summary>
-            Установка флага "Нравится"
-            </summary>
-            <param name="storage">Хранилище</param>
-            <param name="trackKey">Ключ трека в формате {идентифактор трека:идентификатор альбома}</param>
-            <param name="value">Значение</param>
-            <returns></returns>
-        </member>
-        <member name="M:Yandex.Music.Api.API.YTrackAPI.SetLiked(Yandex.Music.Api.Common.YAuthStorage,System.String,System.Boolean)">
-            <summary>
-            Установка флага "Нравится"
-            </summary>
-            <param name="storage">Хранилище</param>
-            <param name="trackKey">Ключ трека в формате {идентифактор трека:идентификатор альбома}</param>
-            <param name="value">Значение</param>
+            <param name="track">Трек</param>
             <returns></returns>
         </member>
         <member name="T:Yandex.Music.Api.Common.Encryptor">
@@ -560,12 +871,15 @@
             Пользователь
             </summary>
         </member>
-        <member name="M:Yandex.Music.Api.Common.YAuthStorage.#ctor(System.String,System.String,Yandex.Music.Api.Common.YAuthStorageEncryption)">
+        <member name="P:Yandex.Music.Api.Common.YAuthStorage.Token">
+            <summary>
+            Токен авторизации
+            </summary>
+        </member>
+        <member name="M:Yandex.Music.Api.Common.YAuthStorage.#ctor(Yandex.Music.Api.Common.YAuthStorageEncryption)">
             <summary>
             Конструктор
             </summary>
-            <param name="login">Логин</param>
-            <param name="password">Пароль</param>
             <param name="usedEncryption">Тип шифрования куков</param>
         </member>
         <member name="M:Yandex.Music.Api.Common.YAuthStorage.SetProxy(System.Net.IWebProxy)">
@@ -587,6 +901,86 @@
             </summary>
             <param name="fileName">Имя файла</param>
             <returns></returns>
+        </member>
+        <member name="T:Yandex.Music.Api.Common.YLibrary.YLibrarySection">
+            <summary>
+            Раздел библиотеки
+            </summary>
+        </member>
+        <member name="F:Yandex.Music.Api.Common.YLibrary.YLibrarySection.Albums">
+            <summary>
+            Альбомы
+            </summary>
+        </member>
+        <member name="F:Yandex.Music.Api.Common.YLibrary.YLibrarySection.Artists">
+            <summary>
+            Исполнители
+            </summary>
+        </member>
+        <member name="F:Yandex.Music.Api.Common.YLibrary.YLibrarySection.Playlists">
+            <summary>
+            Плейлисты
+            </summary>
+        </member>
+        <member name="F:Yandex.Music.Api.Common.YLibrary.YLibrarySection.Tracks">
+            <summary>
+            Треки
+            </summary>
+        </member>
+        <member name="T:Yandex.Music.Api.Common.YLibrary.YLibrarySectionType">
+            <summary>
+            Раздел библиотеки
+            </summary>
+        </member>
+        <member name="F:Yandex.Music.Api.Common.YLibrary.YLibrarySectionType.Likes">
+            <summary>
+            Лайки
+            </summary>
+        </member>
+        <member name="F:Yandex.Music.Api.Common.YLibrary.YLibrarySectionType.Dislikes">
+            <summary>
+            Дизлайки
+            </summary>
+        </member>
+        <member name="F:Yandex.Music.Api.Common.YLinkType.Official">
+            <summary>
+            Официальный сайт
+            </summary>
+        </member>
+        <member name="F:Yandex.Music.Api.Common.YLinkType.Social">
+            <summary>
+            Социальная сеть
+            </summary>
+        </member>
+        <member name="F:Yandex.Music.Api.Common.YPlaylist.YGeneratedPlaylistType.PlaylistOfTheDay">
+            <summary>
+            Плейлист дня
+            </summary>
+        </member>
+        <member name="F:Yandex.Music.Api.Common.YPlaylist.YGeneratedPlaylistType.RecentTracks">
+            <summary>
+            Премьера
+            </summary>
+        </member>
+        <member name="F:Yandex.Music.Api.Common.YPlaylist.YGeneratedPlaylistType.NeverHeard">
+            <summary>
+            Дежавю
+            </summary>
+        </member>
+        <member name="F:Yandex.Music.Api.Common.YPlaylist.YGeneratedPlaylistType.MissedLikes">
+            <summary>
+            Тайник
+            </summary>
+        </member>
+        <member name="F:Yandex.Music.Api.Common.YPlaylist.YGeneratedPlaylistType.Origin">
+            <summary>
+            Алиса
+            </summary>
+        </member>
+        <member name="F:Yandex.Music.Api.Common.YPlaylist.YGeneratedPlaylistType.Podcasts">
+            <summary>
+            Подкасты
+            </summary>
         </member>
         <member name="T:Yandex.Music.Api.Common.YSearchType">
             <summary>
@@ -638,14 +1032,14 @@
             Yandex Music API
             </summary>
         </member>
-        <member name="P:Yandex.Music.Api.YandexMusicApi.AccountsApi">
-            <summary>
-            Accounts API
-            </summary>
-        </member>
         <member name="P:Yandex.Music.Api.YandexMusicApi.AlbumAPI">
             <summary>
             Album API
+            </summary>
+        </member>
+        <member name="P:Yandex.Music.Api.YandexMusicApi.ArtistAPI">
+            <summary>
+            Artist API
             </summary>
         </member>
         <member name="P:Yandex.Music.Api.YandexMusicApi.LibraryAPI">

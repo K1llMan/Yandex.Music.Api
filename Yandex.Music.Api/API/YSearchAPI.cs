@@ -38,6 +38,30 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
+        /// Поиск по альбомам
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="albumName">Имя альбома</param>
+        /// <param name="pageNumber">Номер страницы</param>
+        /// <returns></returns>
+        public async Task<YSearchResponse> AlbumsAsync(YAuthStorage storage, string albumName, int pageNumber = 0)
+        {
+            return await SearchAsync(storage, albumName, YSearchType.Album, pageNumber);
+        }
+
+        /// <summary>
+        /// Поиск по альбомам
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="albumName">Имя альбома</param>
+        /// <param name="pageNumber">Номер страницы</param>
+        /// <returns></returns>
+        public YSearchResponse Albums(YAuthStorage storage, string albumName, int pageNumber = 0)
+        {
+            return AlbumsAsync(storage, albumName, pageNumber).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
         /// Поиск по артисту
         /// </summary>
         /// <param name="storage">Хранилище</param>
@@ -83,30 +107,6 @@ namespace Yandex.Music.Api.API
         public YSearchResponse Playlist(YAuthStorage storage, string playlistName, int pageNumber = 0)
         {
             return PlaylistAsync(storage, playlistName, pageNumber).GetAwaiter().GetResult();
-        }
-
-        /// <summary>
-        /// Поиск по альбомам
-        /// </summary>
-        /// <param name="storage">Хранилище</param>
-        /// <param name="albumName">Имя альбома</param>
-        /// <param name="pageNumber">Номер страницы</param>
-        /// <returns></returns>
-        public async Task<YSearchResponse> AlbumsAsync(YAuthStorage storage, string albumName, int pageNumber = 0)
-        {
-            return await SearchAsync(storage, albumName, YSearchType.Album, pageNumber);
-        }
-
-        /// <summary>
-        /// Поиск по альбомам
-        /// </summary>
-        /// <param name="storage">Хранилище</param>
-        /// <param name="albumName">Имя альбома</param>
-        /// <param name="pageNumber">Номер страницы</param>
-        /// <returns></returns>
-        public YSearchResponse Albums(YAuthStorage storage, string albumName, int pageNumber = 0)
-        {
-            return AlbumsAsync(storage, albumName, pageNumber).GetAwaiter().GetResult();
         }
 
         /// <summary>
