@@ -71,16 +71,17 @@ YandexMusicApi
 │   ├── Albums / Async (YAuthStorage storage, string albumName, int pageNumber = 0)
 │   ├── Artist / Async (YAuthStorage storage, string artistName, int pageNumber = 0)
 │   ├── Playlist / Async (YAuthStorage storage, string playlistName, int pageNumber = 0)
-│   ├── Videos / Async (YAuthStorage storage, string videoName, int pageNumber = 0) *
+│   ├── Videos / Async (YAuthStorage storage, string videoName, int pageNumber = 0)
 │   ├── Users / Async (YAuthStorage storage, string videoName, int pageNumber = 0) *
 │   ├── Search / Async (YAuthStorage storage, string searchText, YSearchType searchType, int page = 0)
+│   └── Suggest / Async (YAuthStorage storage, string searchText)
 └── Future
     ...
 ```
 
 Функции, помеченные звёздочкой, вероятно, не работают или передают неверные параметры.
 
-Библиотека требует рефакторинга и переработки иерархии классов моделей. Также отсутствует функционал радио и подсказок для поиска.
+Библиотека требует рефакторинга и переработки иерархии классов моделей. Отсутствует функционал радио.
 
 LICENCE
 -------

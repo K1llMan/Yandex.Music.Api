@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 
 using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Models.Search;
 using Yandex.Music.Api.Requests.Search;
 using Yandex.Music.Api.Responses;
 
@@ -183,6 +184,30 @@ namespace Yandex.Music.Api.API
         public YSearchResponse Search(YAuthStorage storage, string searchText, YSearchType searchType, int page = 0)
         {
             return SearchAsync(storage, searchText, searchType, page).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Подсказка
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="searchText">Поисковый запрос</param>
+        /// <returns></returns>
+        public async Task<YSearchSuggest> SuggestAsync(YAuthStorage storage, string searchText)
+        {
+            return await new YSearchSuggestRequest(storage)
+                .Create(searchText)
+                .GetResponseAsync<YSearchSuggest>();
+        }
+
+        /// <summary>
+        /// Подсказка
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="searchText">Поисковый запрос</param>
+        /// <returns></returns>
+        public YSearchSuggest Suggest(YAuthStorage storage, string searchText)
+        {
+            return SuggestAsync(storage, searchText).GetAwaiter().GetResult();
         }
 
         #endregion Основные функции

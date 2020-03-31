@@ -6,6 +6,10 @@
     public enum YSearchType
     {
         /// <summary>
+        /// Отсутствует значение
+        /// </summary>
+        None,
+        /// <summary>
         /// Артисты
         /// </summary>
         Artist,

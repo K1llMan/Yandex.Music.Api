@@ -4,6 +4,7 @@ using Xunit;
 using Xunit.Abstractions;
 using Xunit.Extensions.Ordering;
 
+using Yandex.Music.Api.Models.Search;
 using Yandex.Music.Api.Responses;
 using Yandex.Music.Api.Tests.Traits;
 
@@ -52,6 +53,22 @@ namespace Yandex.Music.Api.Tests.Tests.API
         {
             YSearchResponse response = Fixture.API.SearchAPI.Track(Fixture.Storage, track);
             response.Tracks.Total.Should().BeGreaterThan(0);
+        }
+
+        [Fact, YandexTrait(TraitGroup.SearchAPI)]
+        [Order(4)]
+        public void Video_ValidData_True()
+        {
+            YSearchResponse response = Fixture.API.SearchAPI.Videos(Fixture.Storage, track);
+            response.Videos.Total.Should().BeGreaterThan(0);
+        }
+
+        [Fact, YandexTrait(TraitGroup.SearchAPI)]
+        [Order(5)]
+        public void Suggest_ValidData_True()
+        {
+            YSearchSuggest suggest = Fixture.API.SearchAPI.Suggest(Fixture.Storage, artist);
+            suggest.Suggestions.Count.Should().BeGreaterThan(0);
         }
 
         public SearchAPITest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
