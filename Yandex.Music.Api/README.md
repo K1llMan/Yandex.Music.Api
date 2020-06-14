@@ -17,7 +17,7 @@ YandexMusicApi
 ├── Users
 │   ├── Authorize / Async (YAuthStorage storage, string username, string password)
 │   ├── Authorize / Async (YAuthStorage storage, string token)
-│   └──GetUserAuth / Async (YAuthStorage storage)
+│   └── GetUserAuth / Async (YAuthStorage storage)
 ├── Track
 │   ├── Get / Async (YAuthStorage storage, string trackId)
 │   ├── GetMetadataForDownload / Async (YAuthStorage storage, string trackKey, bool direct)
