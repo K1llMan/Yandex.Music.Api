@@ -5,7 +5,7 @@ using System.Text;
 namespace Yandex.Music.Api.Common
 {
     /// <summary>
-    ///     Класс для шифровки потом
+    /// Класс для шифровки потом
     /// </summary>
     public class Encryptor
     {
@@ -46,8 +46,10 @@ namespace Yandex.Music.Api.Common
 
         public byte[] Encrypt(byte[] data)
         {
-            using (var ms = new MemoryStream()) {
-                using (var csEncrypt = new CryptoStream(ms, rijAlg.CreateEncryptor(keyHash, IVHash), CryptoStreamMode.Write)) {
+            using (var ms = new MemoryStream())
+            {
+                using (var csEncrypt = new CryptoStream(ms, rijAlg.CreateEncryptor(keyHash, IVHash), CryptoStreamMode.Write))
+                {
                     csEncrypt.Write(data, 0, data.Length);
 
                     if (!csEncrypt.HasFlushedFinalBlock)
@@ -60,8 +62,10 @@ namespace Yandex.Music.Api.Common
 
         public byte[] Decrypt(byte[] data)
         {
-            using (var ms = new MemoryStream()) {
-                using (var csDecrypt = new CryptoStream(ms, rijAlg.CreateDecryptor(keyHash, IVHash), CryptoStreamMode.Write)) {
+            using (var ms = new MemoryStream())
+            {
+                using (var csDecrypt = new CryptoStream(ms, rijAlg.CreateDecryptor(keyHash, IVHash), CryptoStreamMode.Write))
+                {
                     csDecrypt.Write(data, 0, data.Length);
 
                     if (!csDecrypt.HasFlushedFinalBlock)

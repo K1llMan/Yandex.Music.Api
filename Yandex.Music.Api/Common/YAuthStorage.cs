@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -8,12 +8,12 @@ using Yandex.Music.Api.Requests;
 namespace Yandex.Music.Api.Common
 {
     /// <summary>
-    /// Типы шифрования
+    /// РўРёРїС‹ С€РёС„СЂРѕРІР°РЅРёСЏ
     /// </summary>
     public enum YAuthStorageEncryption
     {
         /// <summary>
-        /// Без шифрования
+        /// Р‘РµР· С€РёС„СЂРѕРІР°РЅРёСЏ
         /// </summary>
         None,
         /// <summary>
@@ -23,46 +23,46 @@ namespace Yandex.Music.Api.Common
     }
 
     /// <summary>
-    ///     Хранилище данных пользователя
+    /// РҐСЂР°РЅРёР»РёС‰Рµ РґР°РЅРЅС‹С… РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
     /// </summary>
     public class YAuthStorage
     {
-        #region Поля
+        #region РџРѕР»СЏ
 
         private readonly YAuthStorageEncryption encryption;
         private readonly Encryptor encryptor;
 
-        #endregion Поля
+        #endregion РџРѕР»СЏ
 
-        #region Свойства
+        #region РЎРІРѕР№СЃС‚РІР°
 
         /// <summary>
-        /// Флаг авторизации
+        /// Р¤Р»Р°Рі Р°РІС‚РѕСЂРёР·Р°С†РёРё
         /// </summary>
         public bool IsAuthorized { get; internal set; }
 
         /// <summary>
-        /// Http-контекст
+        /// Http-РєРѕРЅС‚РµРєСЃС‚
         /// </summary>
         public HttpContext Context { get; }
 
         /// <summary>
-        /// Пользователь
+        /// РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ
         /// </summary>
         public YUser User { get; set; }
 
         /// <summary>
-        /// Токен авторизации
+        /// РўРѕРєРµРЅ Р°РІС‚РѕСЂРёР·Р°С†РёРё
         /// </summary>
         public string Token { get; internal set; }
 
-        #endregion Свойства
+        #endregion РЎРІРѕР№СЃС‚РІР°
 
-        #region Вспомогательные функции
+        #region Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Рµ С„СѓРЅРєС†РёРё
 
-        #endregion Вспомогательные функции
+        #endregion Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Рµ С„СѓРЅРєС†РёРё
 
-        #region Основные функции
+        #region РћСЃРЅРѕРІРЅС‹Рµ С„СѓРЅРєС†РёРё
 
         public void SetHeaders(HttpWebRequest request)
         {
@@ -70,33 +70,33 @@ namespace Yandex.Music.Api.Common
         }
 
         /// <summary>
-        /// Конструктор
+        /// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
         /// </summary>
-        /// <param name="usedEncryption">Тип шифрования куков</param>
+        /// <param name="usedEncryption">РўРёРї С€РёС„СЂРѕРІР°РЅРёСЏ РєСѓРєРѕРІ</param>
         public YAuthStorage(YAuthStorageEncryption usedEncryption = YAuthStorageEncryption.None)
         {
             User = new YUser();
 
             Context = new HttpContext();
 
-            // Шифрование
+            // РЁРёС„СЂРѕРІР°РЅРёРµ
             encryptor = new Encryptor($"");
             encryption = usedEncryption;
         }
 
         /// <summary>
-        /// Установка прокси для пользователия
+        /// РЈСЃС‚Р°РЅРѕРІРєР° РїСЂРѕРєСЃРё РґР»СЏ РїРѕР»СЊР·РѕРІР°С‚РµР»РёСЏ
         /// </summary>
-        /// <param name="proxy">Прокси</param>
+        /// <param name="proxy">РџСЂРѕРєСЃРё</param>
         public void SetProxy(IWebProxy proxy)
         {
             Context.WebProxy = proxy;
         }
 
         /// <summary>
-        /// Сохранение куков
+        /// РЎРѕС…СЂР°РЅРµРЅРёРµ РєСѓРєРѕРІ
         /// </summary>
-        /// <param name="fileName">Имя файла</param>
+        /// <param name="fileName">РРјСЏ С„Р°Р№Р»Р°</param>
         /// <returns></returns>
         public bool Save(string fileName)
         {
@@ -132,9 +132,9 @@ namespace Yandex.Music.Api.Common
         }
 
         /// <summary>
-        /// Загрузка куков
+        /// Р—Р°РіСЂСѓР·РєР° РєСѓРєРѕРІ
         /// </summary>
-        /// <param name="fileName">Имя файла</param>
+        /// <param name="fileName">РРјСЏ С„Р°Р№Р»Р°</param>
         /// <returns></returns>
         public bool Load(string fileName)
         {
@@ -170,6 +170,6 @@ namespace Yandex.Music.Api.Common
             }
         }
 
-        #endregion Основные функции
+        #endregion РћСЃРЅРѕРІРЅС‹Рµ С„СѓРЅРєС†РёРё
     }
 }
