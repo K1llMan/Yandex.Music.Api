@@ -1,4 +1,4 @@
-﻿namespace Yandex.Music.Api.Common.YLibrary
+namespace Yandex.Music.Api.Common.YLibrary
 {
     /// <summary>
     /// Раздел библиотеки

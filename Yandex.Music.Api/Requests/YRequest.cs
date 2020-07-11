@@ -21,14 +21,14 @@ namespace Yandex.Music.Api.Requests
             storage = userStorage;
         }
 
-        #region Поля
+        #region РџРѕР»СЏ
 
         private HttpWebRequest fullRequest;
         protected YAuthStorage storage;
 
-        #endregion Поля
+        #endregion РџРѕР»СЏ
 
-        #region Вспомогательные функции
+        #region Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Рµ С„СѓРЅРєС†РёРё
 
         protected string GetQueryString(Dictionary<string, string> query)
         {
@@ -145,9 +145,9 @@ namespace Yandex.Music.Api.Requests
             }
         }
 
-        #endregion Вспомогательные функции
+        #endregion Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Рµ С„СѓРЅРєС†РёРё
 
-        #region Основные функции
+        #region РћСЃРЅРѕРІРЅС‹Рµ С„СѓРЅРєС†РёРё
 
         public async Task<HttpWebResponse> GetResponseAsync()
         {
@@ -184,6 +184,6 @@ namespace Yandex.Music.Api.Requests
             }
         }
 
-        #endregion Основные функции
+        #endregion РћСЃРЅРѕРІРЅС‹Рµ С„СѓРЅРєС†РёРё
     }
 }

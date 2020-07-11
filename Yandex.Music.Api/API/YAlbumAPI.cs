@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Requests.Album;

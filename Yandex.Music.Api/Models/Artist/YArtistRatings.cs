@@ -1,4 +1,4 @@
-﻿namespace Yandex.Music.Api.Models.Artist
+namespace Yandex.Music.Api.Models.Artist
 {
     public class YArtistRatings
     {

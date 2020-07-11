@@ -1,4 +1,4 @@
-﻿namespace Yandex.Music.Api.Common.YPlaylist
+namespace Yandex.Music.Api.Common.YPlaylist
 {
     public enum YPlaylistChangeType
     {

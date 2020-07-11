@@ -1,4 +1,4 @@
-﻿using Yandex.Music.Api.API;
+using Yandex.Music.Api.API;
 
 namespace Yandex.Music.Api
 {
