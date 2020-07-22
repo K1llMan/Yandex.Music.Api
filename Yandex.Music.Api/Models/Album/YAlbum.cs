@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 
 using Yandex.Music.Api.Models.Artist;
+using Yandex.Music.Api.Models.Common;
+using Yandex.Music.Api.Models.Playlist;
 using Yandex.Music.Api.Models.Track;
 
-namespace Yandex.Music.Api.Models.Common
+namespace Yandex.Music.Api.Models.Album
 {
     public class YAlbum
     {
@@ -24,6 +26,7 @@ namespace Yandex.Music.Api.Models.Common
         public List<YLabel> Labels { get; set; }
         public string MetaType { get; set; }
         public string OgImage { get; set; }
+        public List<YPrerolls> Prerolls { get; set; }
         public bool Recent { get; set; }
         public string ReleaseDate { get; set; }
         public string Title { get; set; }

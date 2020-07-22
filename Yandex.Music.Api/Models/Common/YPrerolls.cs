@@ -1,6 +1,6 @@
-namespace Yandex.Music.Api.Models.Playlist
+namespace Yandex.Music.Api.Models.Common
 {
-    public class YPlaylistPrerolls
+    public class YPrerolls
     {
         #region Свойства
 

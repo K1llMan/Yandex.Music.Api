@@ -18,6 +18,8 @@ namespace Yandex.Music.Api.Common
 
         #region Свойства
 
+        public bool ClearDirectory { get; set; }
+
         public string LogFileName { get; }
 
         public string OutputDir { get; }
@@ -71,6 +73,12 @@ namespace Yandex.Music.Api.Common
             }
 
             return obj;
+        }
+
+        public void Clear()
+        {
+            foreach (string file in Directory.GetFiles(debugDir))
+                File.Delete(file);
         }
 
         public DebugSettings(string outputDir, string logFile)

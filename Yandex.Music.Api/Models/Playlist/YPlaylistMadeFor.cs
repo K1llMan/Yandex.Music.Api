@@ -6,7 +6,7 @@ namespace Yandex.Music.Api.Models.Playlist
     {
         #region Свойства
 
-        public YMadeForCaseForms MadeFor { get; set; }
+        public YMadeForCaseForms CaseForms { get; set; }
         public YOwner UserInfo { get; set; }
 
         #endregion

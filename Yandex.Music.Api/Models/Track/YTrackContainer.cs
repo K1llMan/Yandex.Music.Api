@@ -9,7 +9,7 @@ namespace Yandex.Music.Api.Models.Track
         public string Id { get; set; }
         public bool Recent { get; set; }
         public DateTime Timestamp { get; set; }
-        public Models.Track.YTrack Track { get; set; }
+        public YTrack Track { get; set; }
 
         #endregion
 

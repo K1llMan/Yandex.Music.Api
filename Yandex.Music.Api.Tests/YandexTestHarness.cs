@@ -4,6 +4,7 @@ using System.IO;
 using Newtonsoft.Json;
 
 using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Models.Album;
 using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Playlist;
@@ -17,7 +18,9 @@ namespace Yandex.Music.Api.Tests
         {
             AppSettings = GetAppSettings();
 
-            Storage = new AuthStorage(new DebugSettings("responses", "log.txt"));
+            Storage = new AuthStorage(new DebugSettings("responses", "log.txt") {
+                ClearDirectory = true
+            });
 
             API = new YandexMusicApi();
         }

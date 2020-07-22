@@ -56,6 +56,9 @@ namespace Yandex.Music.Api.Common
             User = new YAccount();
             Context = new HttpContext();
             Debug = settings;
+
+            if (Debug.ClearDirectory)
+                Debug.Clear();
         }
 
         /// <summary>

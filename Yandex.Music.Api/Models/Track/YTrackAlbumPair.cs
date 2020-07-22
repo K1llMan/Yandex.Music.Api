@@ -4,21 +4,17 @@ namespace Yandex.Music.Api.Models.Track
 {
     public class YTrackAlbumPair : IEquatable<YTrackAlbumPair>
     {
-        #region Поля
-
-        public override string ToString()
-        {
-            return $"{Id}:{AlbumId}";
-        }
-
-        #endregion
-
         #region Свойства
 
         public string AlbumId { get; set; }
         public string Id { get; set; }
 
         #endregion
+
+        public override string ToString()
+        {
+            return $"{Id}:{AlbumId}";
+        }
 
         #region IEquatable
 
