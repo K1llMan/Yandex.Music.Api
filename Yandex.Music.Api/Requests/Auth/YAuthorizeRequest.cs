@@ -33,7 +33,7 @@ namespace Yandex.Music.Api.Requests.Auth
             return this;
         }
 
-        public YAuthorizeRequest(YAuthStorage storage) : base(storage)
+        public YAuthorizeRequest(AuthStorage storage) : base(storage)
         {
         }
     }

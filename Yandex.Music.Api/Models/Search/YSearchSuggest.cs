@@ -4,7 +4,11 @@ namespace Yandex.Music.Api.Models.Search
 {
     public class YSearchSuggest
     {
+        #region Свойства
+
         public YSearchBest Best { get; set; }
         public List<string> Suggestions { get; set; }
+
+        #endregion
     }
 }

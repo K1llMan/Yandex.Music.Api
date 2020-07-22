@@ -37,7 +37,7 @@ namespace Yandex.Music.Api.Requests
 
         #region Основные функции
 
-        public static KeyValuePair<string, string> Get(YHeader header, YAuthStorage storage)
+        public static KeyValuePair<string, string> Get(YHeader header, AuthStorage storage)
         {
             var value = string.Empty;
             switch (header) {

@@ -9,6 +9,16 @@ namespace Yandex.Music.Api.Common
     /// </summary>
     public class Encryptor
     {
+        #region Поля
+
+        private readonly string IV = "encryption";
+        private readonly byte[] IVHash;
+
+        private readonly byte[] keyHash;
+
+        private readonly MD5 md5;
+        private readonly Rijndael rijAlg;
+
         #region Вспомогательные функции
 
         private byte[] GetHash(string value)
@@ -18,17 +28,7 @@ namespace Yandex.Music.Api.Common
 
         #endregion Вспомогательные функции
 
-        #region Поля
-
-        private readonly MD5 md5;
-
-        private readonly string IV = "encryption";
-        private readonly Rijndael rijAlg;
-
-        private readonly byte[] keyHash;
-        private readonly byte[] IVHash;
-
-        #endregion Поля
+        #endregion
 
         #region Основные функции
 
@@ -46,10 +46,8 @@ namespace Yandex.Music.Api.Common
 
         public byte[] Encrypt(byte[] data)
         {
-            using (var ms = new MemoryStream())
-            {
-                using (var csEncrypt = new CryptoStream(ms, rijAlg.CreateEncryptor(keyHash, IVHash), CryptoStreamMode.Write))
-                {
+            using (var ms = new MemoryStream()) {
+                using (var csEncrypt = new CryptoStream(ms, rijAlg.CreateEncryptor(keyHash, IVHash), CryptoStreamMode.Write)) {
                     csEncrypt.Write(data, 0, data.Length);
 
                     if (!csEncrypt.HasFlushedFinalBlock)
@@ -62,10 +60,8 @@ namespace Yandex.Music.Api.Common
 
         public byte[] Decrypt(byte[] data)
         {
-            using (var ms = new MemoryStream())
-            {
-                using (var csDecrypt = new CryptoStream(ms, rijAlg.CreateDecryptor(keyHash, IVHash), CryptoStreamMode.Write))
-                {
+            using (var ms = new MemoryStream()) {
+                using (var csDecrypt = new CryptoStream(ms, rijAlg.CreateDecryptor(keyHash, IVHash), CryptoStreamMode.Write)) {
                     csDecrypt.Write(data, 0, data.Length);
 
                     if (!csDecrypt.HasFlushedFinalBlock)

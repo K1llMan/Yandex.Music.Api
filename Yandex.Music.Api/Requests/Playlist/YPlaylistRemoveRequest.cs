@@ -6,7 +6,7 @@ namespace Yandex.Music.Api.Requests.Playlist
 {
     internal class YPlaylistRemoveRequest : YRequest
     {
-        public YPlaylistRemoveRequest(YAuthStorage storage) : base(storage)
+        public YPlaylistRemoveRequest(AuthStorage storage) : base(storage)
         {
         }
 

@@ -6,8 +6,10 @@ using Xunit;
 using Xunit.Abstractions;
 using Xunit.Extensions.Ordering;
 
-using Yandex.Music.Api.Common.YPlaylist;
-using Yandex.Music.Api.Common.YTrack;
+using Yandex.Music.Api.Models.Common;
+using Yandex.Music.Api.Models.Landing;
+using Yandex.Music.Api.Models.Playlist;
+using Yandex.Music.Api.Models.Track;
 using Yandex.Music.Api.Tests.Traits;
 
 namespace Yandex.Music.Api.Tests.Tests.API
@@ -35,7 +37,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(0)]
         public void Get_ValidData_True()
         {
-            Fixture.Playlist = Fixture.API.PlaylistAPI.Get(Fixture.Storage, userId, kinds);
+            Fixture.Playlist = Fixture.API.PlaylistAPI.Get(Fixture.Storage, userId, kinds).Result;
             Fixture.Playlist.Title.Should().Be(title);
         }
 
@@ -43,19 +45,19 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(1)]
         public void MainPagePersonal_ValidData_True()
         {
-            List<YPlaylist> mainPage = Fixture.API.PlaylistAPI.MainPagePersonal(Fixture.Storage);
+            YLanding mainPage = Fixture.API.PlaylistAPI.MainPagePersonal(Fixture.Storage).Result;
 
-            Output.WriteLine(mainPage.Count.ToString());
+            Output.WriteLine(mainPage.Blocks.Count.ToString());
 
             mainPage.Should().NotBeNull();
-            mainPage.Count.Should().BePositive();
+            mainPage.Blocks.Count.Should().BePositive();
         }
 
         [Fact, YandexTrait(TraitGroup.PlaylistAPI)]
         [Order(2)]
         public void OfTheDay_ValidData_True()
         {
-            YPlaylist response = Fixture.API.PlaylistAPI.OfTheDay(Fixture.Storage);
+            YResponse<YPlaylist> response = Fixture.API.PlaylistAPI.OfTheDay(Fixture.Storage);
 
             response.Should().NotBeNull();
         }
@@ -64,7 +66,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(3)]
         public void Premiere_ValidData_True()
         {
-            YPlaylist response = Fixture.API.PlaylistAPI.Premiere(Fixture.Storage);
+            YResponse<YPlaylist> response = Fixture.API.PlaylistAPI.Premiere(Fixture.Storage);
 
             response.Should().NotBeNull();
         }
@@ -73,7 +75,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(4)]
         public void DejaVu_ValidData_True()
         {
-            YPlaylist response = Fixture.API.PlaylistAPI.DejaVu(Fixture.Storage);
+            YResponse<YPlaylist> response = Fixture.API.PlaylistAPI.DejaVu(Fixture.Storage);
 
             response.Should().NotBeNull();
         }
@@ -82,7 +84,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(5)]
         public void Missed_ValidData_True()
         {
-            YPlaylist response = Fixture.API.PlaylistAPI.Missed(Fixture.Storage);
+            YResponse<YPlaylist> response = Fixture.API.PlaylistAPI.Missed(Fixture.Storage);
 
             response.Should().NotBeNull();
         }
@@ -91,7 +93,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(6)]
         public void Alice_ValidData_True()
         {
-            YPlaylist response = Fixture.API.PlaylistAPI.Alice(Fixture.Storage);
+            YResponse<YPlaylist> response = Fixture.API.PlaylistAPI.Alice(Fixture.Storage);
 
             response.Should().NotBeNull();
         }
@@ -100,7 +102,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(7)]
         public void Podcasts_ValidData_True()
         {
-            YPlaylist response = Fixture.API.PlaylistAPI.Podcasts(Fixture.Storage);
+            YResponse<YPlaylist> response = Fixture.API.PlaylistAPI.Podcasts(Fixture.Storage);
 
             response.Should().NotBeNull();
         }
@@ -109,7 +111,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(8)]
         public void Create_ValidData_True()
         {
-            Fixture.CreatedPlaylist = Fixture.API.PlaylistAPI.Create(Fixture.Storage, "Test Playlist");
+            Fixture.CreatedPlaylist = Fixture.API.PlaylistAPI.Create(Fixture.Storage, "Test Playlist").Result;
 
             Fixture.CreatedPlaylist.Should().NotBeNull();
         }
@@ -123,7 +125,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
 
             Fixture.CreatedPlaylist = Fixture.API.PlaylistAPI.InsertTracks(Fixture.Storage, Fixture.CreatedPlaylist, new List<YTrack> {
                 Fixture.Track
-            });
+            }).Result;
 
             Fixture.CreatedPlaylist.Should().NotBeNull();
         }
@@ -137,7 +139,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
 
             Fixture.CreatedPlaylist = Fixture.API.PlaylistAPI.DeleteTrack(Fixture.Storage, Fixture.CreatedPlaylist, new List<YTrack> {
                 Fixture.Track
-            });
+            }).Result;
 
             Fixture.CreatedPlaylist.Should().NotBeNull();
         }
@@ -148,7 +150,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         {
             Fixture.CreatedPlaylist.Should().NotBeNull();
 
-            Fixture.CreatedPlaylist = Fixture.API.PlaylistAPI.Rename(Fixture.Storage, Fixture.CreatedPlaylist, "New Playlist");
+            Fixture.CreatedPlaylist = Fixture.API.PlaylistAPI.Rename(Fixture.Storage, Fixture.CreatedPlaylist, "New Playlist").Result;
 
             Fixture.CreatedPlaylist.Should().NotBeNull();
         }

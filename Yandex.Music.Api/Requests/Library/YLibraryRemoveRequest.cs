@@ -2,13 +2,13 @@ using System.Collections.Generic;
 using System.Net;
 
 using Yandex.Music.Api.Common;
-using Yandex.Music.Api.Common.YLibrary;
+using Yandex.Music.Api.Models.Library;
 
 namespace Yandex.Music.Api.Requests.Library
 {
     internal class YLibraryRemoveRequest : YRequest
     {
-        public YLibraryRemoveRequest(YAuthStorage storage) : base(storage)
+        public YLibraryRemoveRequest(AuthStorage storage) : base(storage)
         {
         }
 

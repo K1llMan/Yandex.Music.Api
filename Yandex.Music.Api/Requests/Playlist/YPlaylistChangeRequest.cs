@@ -6,7 +6,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
 using Yandex.Music.Api.Common;
-using Yandex.Music.Api.Common.YPlaylist;
+using Yandex.Music.Api.Models.Playlist;
 
 namespace Yandex.Music.Api.Requests.Playlist
 {
@@ -26,7 +26,7 @@ namespace Yandex.Music.Api.Requests.Playlist
 
         #endregion Поля
 
-        public YPlaylistChangeRequest(YAuthStorage storage) : base(storage)
+        public YPlaylistChangeRequest(AuthStorage storage) : base(storage)
         {
         }
 

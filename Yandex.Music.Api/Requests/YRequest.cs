@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Web;
 
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 using Yandex.Music.Api.Common;
 
@@ -16,7 +15,7 @@ namespace Yandex.Music.Api.Requests
 {
     internal class YRequest
     {
-        public YRequest(YAuthStorage userStorage)
+        public YRequest(AuthStorage userStorage)
         {
             storage = userStorage;
         }
@@ -24,7 +23,7 @@ namespace Yandex.Music.Api.Requests
         #region Поля
 
         private HttpWebRequest fullRequest;
-        protected YAuthStorage storage;
+        protected AuthStorage storage;
 
         #endregion Поля
 
@@ -75,41 +74,7 @@ namespace Yandex.Music.Api.Requests
             fullRequest = request;
         }
 
-        private JToken GetResultNode(JToken token)
-        {
-            return token["result"] ?? token;
-        }
-
-        protected T Deserialize<T>(JToken token, string jsonPath = "")
-        {
-            JToken result = GetResultNode(token).SelectToken(jsonPath);
-
-            switch (result.Type) {
-                case JTokenType.String:
-                    return (T) Convert.ChangeType(result.ToString(), typeof(T));
-                default:
-                    return JsonConvert.DeserializeObject<T>(GetResultNode(token).SelectToken(jsonPath).ToString());
-            }
-        }
-
-        protected T Deserialize<T>(string json, string jsonPath = "")
-        {
-            return Deserialize<T>(JToken.Parse(json), jsonPath);
-        }
-
-        protected List<T> DeserializeList<T>(JToken token, string jsonPath = "")
-        {
-            return GetResultNode(token).SelectTokens(jsonPath)
-                .Select(t => JsonConvert.DeserializeObject<T>(t.ToString()))
-                .ToList();
-        }
-
-        protected List<T> DeserializeList<T>(string json, string jsonPath = "")
-        {
-            return DeserializeList<T>(JToken.Parse(json), jsonPath);
-        }
-
-        protected async Task<T> GetDataFromResponseAsync<T>(HttpWebResponse response, string jsonPath = "")
+        protected async Task<T> GetDataFromResponseAsync<T>(HttpWebResponse response)
         {
             try {
                 string result;
@@ -119,29 +84,15 @@ namespace Yandex.Music.Api.Requests
                 }
 
                 storage.Context.Cookies.Add(response.Cookies);
-                return Deserialize<T>(result, jsonPath);
+
+                if (storage.Debug != null)
+                    return storage.Debug.Deserialize<T>(response.ResponseUri.AbsolutePath, result);
+
+                return JsonConvert.DeserializeObject<T>(result);
             }
             catch (Exception ex) {
                 Console.WriteLine(ex);
                 return default(T);
-            }
-        }
-
-        protected async Task<List<T>> GetDataFromResponseAsyncList<T>(HttpWebResponse response, string jsonPath = "")
-        {
-            try {
-                string result;
-                using (var stream = response.GetResponseStream()) {
-                    var reader = new StreamReader(stream);
-                    result = await reader.ReadToEndAsync();
-                }
-
-                storage.Context.Cookies.Add(response.Cookies);
-                return DeserializeList<T>(result, jsonPath);
-            }
-            catch (Exception ex) {
-                Console.WriteLine(ex);
-                return new List<T>();
             }
         }
 
@@ -164,23 +115,13 @@ namespace Yandex.Music.Api.Requests
             }
         }
 
-        public async Task<T> GetResponseAsync<T>(string jsonPath = "")
+        public async Task<T> GetResponseAsync<T>()
         {
             if (fullRequest == null)
                 return default(T);
 
             using (var response = await GetResponseAsync()) {
-                return await GetDataFromResponseAsync<T>(response, jsonPath);
-            }
-        }
-
-        public async Task<List<T>> GetResponseAsyncList<T>(string jsonPath = "")
-        {
-            if (fullRequest == null)
-                return new List<T>();
-
-            using (var response = await GetResponseAsync()) {
-                return await GetDataFromResponseAsyncList<T>(response, jsonPath);
+                return await GetDataFromResponseAsync<T>(response);
             }
         }
 

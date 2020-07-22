@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
-using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Search.Album;
 using Yandex.Music.Api.Models.Search.Artist;
 using Yandex.Music.Api.Models.Search.Playlist;
@@ -16,8 +16,10 @@ namespace Yandex.Music.Api.Models.Search
     /// <summary>
     /// Конвертер для поля Result
     /// </summary>
-    class YSearchBestConverter : JsonConverter
+    internal class YSearchBestConverter : JsonConverter
     {
+        #region Поля
+
         public override bool CanConvert(Type objectType)
         {
             throw new NotImplementedException();
@@ -29,10 +31,10 @@ namespace Yandex.Music.Api.Models.Search
                 return null;
 
             var obj = JObject.Load(reader);
-            var contract = (JsonObjectContract)serializer.ContractResolver.ResolveContract(objectType);
-            var best = existingValue as YSearchBest ?? (YSearchBest)contract.DefaultCreator();
+            var contract = (JsonObjectContract) serializer.ContractResolver.ResolveContract(objectType);
+            var best = existingValue as YSearchBest ?? (YSearchBest) contract.DefaultCreator();
 
-            best.Type = (YSearchType)Enum.Parse(typeof(YSearchType), obj["type"].ToString(), true);
+            best.Type = (YSearchType) Enum.Parse(typeof(YSearchType), obj["type"].ToString(), true);
 
             switch (best.Type) {
                 case YSearchType.Track:
@@ -55,18 +57,28 @@ namespace Yandex.Music.Api.Models.Search
             return best;
         }
 
-        public override bool CanWrite { get { return false; } }
-
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             throw new NotImplementedException();
         }
+
+        #endregion
+
+        #region Свойства
+
+        public override bool CanWrite => false;
+
+        #endregion
     }
 
     [JsonConverter(typeof(YSearchBestConverter))]
     public class YSearchBest
     {
-        public YSearchType Type { get; set; }
+        #region Свойства
+
         public dynamic Result { get; set; }
+        public YSearchType Type { get; set; }
+
+        #endregion
     }
 }

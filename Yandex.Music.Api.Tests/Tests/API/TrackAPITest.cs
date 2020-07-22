@@ -8,7 +8,7 @@ using Xunit;
 using Xunit.Abstractions;
 using Xunit.Extensions.Ordering;
 
-using Yandex.Music.Api.Responses;
+using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Tests.Traits;
 
 namespace Yandex.Music.Api.Tests.Tests.API
@@ -24,8 +24,8 @@ namespace Yandex.Music.Api.Tests.Tests.API
         // Кино - "Группа крови"
         private string trackId = "106259";
 
-        private static List<YTrackDownloadInfoResponse> downloadInfo;
-        private static YStorageDownloadFileResponse downloadFile;
+        private static YResponse<List<YTrackDownloadInfo>> downloadInfo;
+        private static YStorageDownloadFile downloadFile;
 
         #endregion Поля
 
@@ -33,7 +33,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(0)]
         public void Get_ValidData_True()
         {
-            Fixture.Track = Fixture.API.TrackAPI.Get(Fixture.Storage, trackId);
+            Fixture.Track = Fixture.API.TrackAPI.Get(Fixture.Storage, trackId).Result.FirstOrDefault();
             Fixture.Track.Title.Should().Be("Группа крови");
         }
 
@@ -45,16 +45,16 @@ namespace Yandex.Music.Api.Tests.Tests.API
 
             downloadInfo = Fixture.API.TrackAPI.GetMetadataForDownload(Fixture.Storage, Fixture.Track.GetKey().ToString());
 
-            downloadInfo.Count.Should().BePositive();
+            downloadInfo.Result.Count.Should().BePositive();
         }
 
         [Fact, YandexTrait(TraitGroup.TrackAPI)]
         [Order(2)]
         public void GetDownloadFileInfo_ValidData_True()
         {
-            downloadInfo.Count.Should().BePositive();
+            downloadInfo.Result.Count.Should().BePositive();
 
-            downloadFile = Fixture.API.TrackAPI.GetDownloadFileInfo(Fixture.Storage, downloadInfo.First(m => m.Codec == "mp3"));
+            downloadFile = Fixture.API.TrackAPI.GetDownloadFileInfo(Fixture.Storage, downloadInfo.Result.First(m => m.Codec == "mp3"));
 
             downloadFile.Path.Should().NotBeNullOrEmpty();
         }

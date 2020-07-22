@@ -1,11 +1,11 @@
 using Yandex.Music.Api.Common;
-using Yandex.Music.Api.Common.YLibrary;
+using Yandex.Music.Api.Models.Library;
 
 namespace Yandex.Music.Api.Requests.Library
 {
     internal class YGetLibrarySectionRequest : YRequest
     {
-        public YGetLibrarySectionRequest(YAuthStorage storage) : base(storage)
+        public YGetLibrarySectionRequest(AuthStorage storage) : base(storage)
         {
         }
 

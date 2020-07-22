@@ -4,7 +4,7 @@ namespace Yandex.Music.Api.Requests.Track
 {
     internal class YGetTrackResponse : YRequest
     {
-        public YGetTrackResponse(YAuthStorage storage) : base(storage)
+        public YGetTrackResponse(AuthStorage storage) : base(storage)
         {
         }
 

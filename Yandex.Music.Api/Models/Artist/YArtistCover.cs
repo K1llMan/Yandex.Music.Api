@@ -2,8 +2,12 @@ namespace Yandex.Music.Api.Models.Artist
 {
     public class YArtistCover
     {
-        public string Type { get; set; }
+        #region Свойства
+
         public string Prefix { get; set; }
+        public string Type { get; set; }
         public string Uri { get; set; }
+
+        #endregion
     }
 }

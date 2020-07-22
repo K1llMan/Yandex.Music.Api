@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 
 using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Models.Common;
 
 namespace Yandex.Music.Api.Requests.Search
 {
     internal class YSearchRequest : YRequest
     {
-        public YSearchRequest(YAuthStorage storage) : base(storage)
+        public YSearchRequest(AuthStorage storage) : base(storage)
         {
         }
 

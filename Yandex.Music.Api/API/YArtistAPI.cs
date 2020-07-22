@@ -1,8 +1,9 @@
 using System.Threading.Tasks;
 
 using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Models.Artist;
+using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Requests.Album;
-using Yandex.Music.Api.Responses;
 
 namespace Yandex.Music.Api.API
 {
@@ -19,11 +20,11 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="artistId">Идентификатор</param> 
         /// <returns></returns>
-        public async Task<YArtistResponse> GetAsync(YAuthStorage storage, string artistId)
+        public async Task<YResponse<YArtist>> GetAsync(AuthStorage storage, string artistId)
         {
             return await new YGetArtistRequest(storage)
                 .Create(artistId)
-                .GetResponseAsync<YArtistResponse>();
+                .GetResponseAsync<YResponse<YArtist>>();
         }
 
         /// <summary>
@@ -31,7 +32,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <param name="artistId">Идентификатор</param>
-        public YArtistResponse Get(YAuthStorage storage, string artistId)
+        public YResponse<YArtist> Get(AuthStorage storage, string artistId)
         {
             return GetAsync(storage, artistId).GetAwaiter().GetResult();
         }

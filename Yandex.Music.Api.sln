@@ -1,12 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yandex.Music.Api", "Yandex.Music.Api\Yandex.Music.Api.csproj", "{1D367F66-175A-46D8-80E5-DA1272ACA1B4}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29911.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yandex.Music.Api", "Yandex.Music.Api\Yandex.Music.Api.csproj", "{1D367F66-175A-46D8-80E5-DA1272ACA1B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yandex.Music.Api.Tests", "Yandex.Music.Api.Tests\Yandex.Music.Api.Tests.csproj", "{2508C0DA-86D2-4D61-8F15-EE69D4085682}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yandex.Music.Client", "Yandex.Music.Client\Yandex.Music.Client.csproj", "{EF3C7144-F783-43CE-BDBE-1879B978CE93}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yandex.Music.Client.Tests", "Yandex.Music.Client.Tests\Yandex.Music.Client.Tests.csproj", "{AD83562A-6BE6-46A6-9D62-FC089BB5516F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yandex.Music.Api.Tests", "Yandex.Music.Api.Tests\Yandex.Music.Api.Tests.csproj", "{2508C0DA-86D2-4D61-8F15-EE69D4085682}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,13 +21,11 @@ Global
 		{2508C0DA-86D2-4D61-8F15-EE69D4085682}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2508C0DA-86D2-4D61-8F15-EE69D4085682}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2508C0DA-86D2-4D61-8F15-EE69D4085682}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EF3C7144-F783-43CE-BDBE-1879B978CE93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EF3C7144-F783-43CE-BDBE-1879B978CE93}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EF3C7144-F783-43CE-BDBE-1879B978CE93}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EF3C7144-F783-43CE-BDBE-1879B978CE93}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AD83562A-6BE6-46A6-9D62-FC089BB5516F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AD83562A-6BE6-46A6-9D62-FC089BB5516F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AD83562A-6BE6-46A6-9D62-FC089BB5516F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AD83562A-6BE6-46A6-9D62-FC089BB5516F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {90B3F36D-812F-49E8-BC5D-87BE9B875EE4}
 	EndGlobalSection
 EndGlobal

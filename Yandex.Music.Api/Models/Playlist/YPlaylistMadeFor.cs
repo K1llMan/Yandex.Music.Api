@@ -1,20 +1,28 @@
-using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Models.Common;
 
 namespace Yandex.Music.Api.Models.Playlist
 {
     public class YPlaylistMadeFor
     {
-        public YOwner UserInfo { get; set; }
+        #region Свойства
+
         public YMadeForCaseForms MadeFor { get; set; }
+        public YOwner UserInfo { get; set; }
+
+        #endregion
 
         public class YMadeForCaseForms
         {
-            public string Nominative { get; set; }
-            public string Genitive { get; set; }
-            public string Dative { get; set; }
+            #region Свойства
+
             public string Accusative { get; set; }
+            public string Dative { get; set; }
+            public string Genitive { get; set; }
             public string Instrumental { get; set; }
+            public string Nominative { get; set; }
             public string Prepositional { get; set; }
+
+            #endregion
         }
     }
 }

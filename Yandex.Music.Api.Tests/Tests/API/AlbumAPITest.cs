@@ -24,7 +24,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         public void Get_ValidData_True()
         {
             Fixture.Album = Fixture.API.AlbumAPI.Get(Fixture.Storage, albumId);
-            Fixture.Album.Title.Should().Be("The Power Within");
+            Fixture.Album.Result.Title.Should().Be("The Power Within");
         }
 
         public AlbumAPITest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)

@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Yandex.Music.Api.Common;
-using Yandex.Music.Api.Common.YPlaylist;
-using Yandex.Music.Api.Common.YTrack;
+using Yandex.Music.Api.Models.Common;
+using Yandex.Music.Api.Models.Landing;
+using Yandex.Music.Api.Models.Playlist;
+using Yandex.Music.Api.Models.Track;
 using Yandex.Music.Api.Requests.Playlist;
 
 namespace Yandex.Music.Api.API
@@ -23,14 +25,22 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="type">Тип</param>
         /// <returns>Плейлист</returns>
-        private async Task<YPlaylist> GetPersonalPlaylist(YAuthStorage storage, YGeneratedPlaylistType type)
+        private async Task<YResponse<YPlaylist>> GetPersonalPlaylist(AuthStorage storage, YGeneratedPlaylistType type)
         {
             return await MainPagePersonalAsync(storage)
-                .ContinueWith(list => {
-                    YPlaylist playlist = list.Result.FirstOrDefault(p => p.GeneratedPlaylistType == type);
+                .ContinueWith(list =>
+                {
+                    YPlaylist playlist = list.GetAwaiter().GetResult().Result.Blocks
+                        .FirstOrDefault(b => b.Type == "personal-playlists")
+                        .Entities
+                        .FirstOrDefault(e => e.Data.Type == type)
+                        .Data
+                        .Data;
+
                     return playlist == null
                         ? null
                         : Get(storage, playlist);
+                    
                 });
         }
 
@@ -41,11 +51,11 @@ namespace Yandex.Music.Api.API
         /// <param name="playlist">Плейлист</param>
         /// <param name="changes">Список изменений</param>
         /// <returns>Плейлист после изменений</returns>
-        private async Task<YPlaylist> ChangePlaylist(YAuthStorage storage, YPlaylist playlist, List<YPlaylistChange> changes)
+        private async Task<YResponse<YPlaylist>> ChangePlaylist(AuthStorage storage, YPlaylist playlist, List<YPlaylistChange> changes)
         {
             return await new YPlaylistChangeRequest(storage)
                 .Create(playlist, changes)
-                .GetResponseAsync<YPlaylist>();
+                .GetResponseAsync<YResponse<YPlaylist>>();
         }
 
         private List<YTrack> RemoveIdentical(List<YTrack> tracks)
@@ -64,11 +74,11 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public async Task<List<YPlaylist>> MainPagePersonalAsync(YAuthStorage storage)
+        public async Task<YResponse<YLanding>> MainPagePersonalAsync(AuthStorage storage)
         {
             return await new YGetPlaylistMainPageRequest(storage)
                 .Create()
-                .GetResponseAsyncList<YPlaylist>("$..[?(@.type == 'personal-playlist')].data.data");
+                .GetResponseAsync<YResponse<YLanding>>();
         }
 
         /// <summary>
@@ -76,7 +86,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public List<YPlaylist> MainPagePersonal(YAuthStorage storage)
+        public YResponse<YLanding> MainPagePersonal(AuthStorage storage)
         {
             return MainPagePersonalAsync(storage).GetAwaiter().GetResult();
         }
@@ -90,11 +100,11 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public async Task<List<YPlaylist>> FavoritesAsync(YAuthStorage storage)
+        public async Task<YResponse<List<YPlaylist>>> FavoritesAsync(AuthStorage storage)
         {
             return await new YGetPlaylistFavoritesRequest(storage)
                 .Create()
-                .GetResponseAsyncList<YPlaylist>("[*]");
+                .GetResponseAsync<YResponse<List<YPlaylist>>>();
         }
 
         /// <summary>
@@ -102,7 +112,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public List<YPlaylist> Favorites(YAuthStorage storage)
+        public YResponse<List<YPlaylist>> Favorites(AuthStorage storage)
         {
             return FavoritesAsync(storage).GetAwaiter().GetResult();
         }
@@ -112,7 +122,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public async Task<YPlaylist> OfTheDayAsync(YAuthStorage storage)
+        public async Task<YResponse<YPlaylist>> OfTheDayAsync(AuthStorage storage)
         {
             return await GetPersonalPlaylist(storage, YGeneratedPlaylistType.PlaylistOfTheDay);
         }
@@ -122,7 +132,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public YPlaylist OfTheDay(YAuthStorage storage)
+        public YResponse<YPlaylist> OfTheDay(AuthStorage storage)
         {
             return OfTheDayAsync(storage).GetAwaiter().GetResult();
         }
@@ -132,7 +142,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public async Task<YPlaylist> DejaVuAsync(YAuthStorage storage)
+        public async Task<YResponse<YPlaylist>> DejaVuAsync(AuthStorage storage)
         {
             return await GetPersonalPlaylist(storage, YGeneratedPlaylistType.NeverHeard);
         }
@@ -142,7 +152,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public YPlaylist DejaVu(YAuthStorage storage)
+        public YResponse<YPlaylist> DejaVu(AuthStorage storage)
         {
             return DejaVuAsync(storage).GetAwaiter().GetResult();
         }
@@ -152,7 +162,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public async Task<YPlaylist> PremiereAsync(YAuthStorage storage)
+        public async Task<YResponse<YPlaylist>> PremiereAsync(AuthStorage storage)
         {
             return await GetPersonalPlaylist(storage, YGeneratedPlaylistType.RecentTracks);
         }
@@ -162,7 +172,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public YPlaylist Premiere(YAuthStorage storage)
+        public YResponse<YPlaylist> Premiere(AuthStorage storage)
         {
             return PremiereAsync(storage).GetAwaiter().GetResult();
         }
@@ -172,7 +182,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public async Task<YPlaylist> MissedAsync(YAuthStorage storage)
+        public async Task<YResponse<YPlaylist>> MissedAsync(AuthStorage storage)
         {
             return await GetPersonalPlaylist(storage, YGeneratedPlaylistType.MissedLikes);
         }
@@ -182,7 +192,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public YPlaylist Missed(YAuthStorage storage)
+        public YResponse<YPlaylist> Missed(AuthStorage storage)
         {
             return MissedAsync(storage).GetAwaiter().GetResult();
         }
@@ -192,7 +202,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public async Task<YPlaylist> AliceAsync(YAuthStorage storage)
+        public async Task<YResponse<YPlaylist>> AliceAsync(AuthStorage storage)
         {
             return await GetPersonalPlaylist(storage, YGeneratedPlaylistType.Origin);
         }
@@ -202,7 +212,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public YPlaylist Alice(YAuthStorage storage)
+        public YResponse<YPlaylist> Alice(AuthStorage storage)
         {
             return MissedAsync(storage).GetAwaiter().GetResult();
         }
@@ -212,7 +222,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public async Task<YPlaylist> PodcastsAsync(YAuthStorage storage)
+        public async Task<YResponse<YPlaylist>> PodcastsAsync(AuthStorage storage)
         {
             return await GetPersonalPlaylist(storage, YGeneratedPlaylistType.Podcasts);
         }
@@ -222,7 +232,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public YPlaylist Podcasts(YAuthStorage storage)
+        public YResponse<YPlaylist> Podcasts(AuthStorage storage)
         {
             return PodcastsAsync(storage).GetAwaiter().GetResult();
         }
@@ -238,11 +248,11 @@ namespace Yandex.Music.Api.API
         /// <param name="user">Uid пользователя-владельца плейлиста</param>
         /// <param name="kinds">Тип</param>
         /// <returns></returns>
-        public async Task<YPlaylist> GetAsync(YAuthStorage storage, string user, string kinds)
+        public async Task<YResponse<YPlaylist>> GetAsync(AuthStorage storage, string user, string kinds)
         {
             return await new YGetPlaylistRequest(storage)
                 .Create(user, kinds)
-                .GetResponseAsync<YPlaylist>();
+                .GetResponseAsync<YResponse<YPlaylist>>();
         }
 
         /// <summary>
@@ -252,7 +262,7 @@ namespace Yandex.Music.Api.API
         /// <param name="user">Uid пользователя-владельца плейлиста</param> 
         /// <param name="kinds">Тип</param>
         /// <returns></returns>
-        public YPlaylist Get(YAuthStorage storage, string user, string kinds)
+        public YResponse<YPlaylist> Get(AuthStorage storage, string user, string kinds)
         {
             return GetAsync(storage, user, kinds).GetAwaiter().GetResult();
         }
@@ -263,11 +273,11 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="playlist">Описание плейлиста, для которого будут запрошены треки</param>
         /// <returns></returns>
-        public async Task<YPlaylist> GetAsync(YAuthStorage storage, YPlaylist playlist)
+        public async Task<YResponse<YPlaylist>> GetAsync(AuthStorage storage, YPlaylist playlist)
         {
             return await new YGetPlaylistRequest(storage)
                 .Create(playlist)
-                .GetResponseAsync<YPlaylist>();
+                .GetResponseAsync<YResponse<YPlaylist>>();
         }
 
         /// <summary>
@@ -276,7 +286,7 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="playlist">Описание плейлиста, для которого будут запрошены треки</param>
         /// <returns></returns>
-        public YPlaylist Get(YAuthStorage storage, YPlaylist playlist)
+        public YResponse<YPlaylist> Get(AuthStorage storage, YPlaylist playlist)
         {
             return GetAsync(storage, playlist).GetAwaiter().GetResult();
         }
@@ -291,11 +301,11 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="name">Заголовок</param>
         /// <returns></returns>
-        public async Task<YPlaylist> CreateAsync(YAuthStorage storage, string name)
+        public async Task<YResponse<YPlaylist>> CreateAsync(AuthStorage storage, string name)
         {
             return await new YPlaylistCreateRequest(storage)
                 .Create(name)
-                .GetResponseAsync<YPlaylist>();
+                .GetResponseAsync<YResponse<YPlaylist>>();
         }
 
         /// <summary>
@@ -304,7 +314,7 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="name">Заголовок</param>
         /// <returns></returns>
-        public YPlaylist Create(YAuthStorage storage, string name)
+        public YResponse<YPlaylist> Create(AuthStorage storage, string name)
         {
             return CreateAsync(storage, name).GetAwaiter().GetResult();
         }
@@ -316,11 +326,11 @@ namespace Yandex.Music.Api.API
         /// <param name="kinds">Идентификатор плейлиста</param>
         /// <param name="name">Заголовок</param>
         /// <returns></returns>
-        public async Task<YPlaylist> RenameAsync(YAuthStorage storage, string kinds, string name)
+        public async Task<YResponse<YPlaylist>> RenameAsync(AuthStorage storage, string kinds, string name)
         {
             return await new YPlaylistRenameRequest(storage)
                 .Create(kinds, name)
-                .GetResponseAsync<YPlaylist>();
+                .GetResponseAsync<YResponse<YPlaylist>>();
         }
 
         /// <summary>
@@ -330,7 +340,7 @@ namespace Yandex.Music.Api.API
         /// <param name="kinds">Идентификатор плейлиста</param>
         /// <param name="name">Заголовок</param>
         /// <returns></returns>
-        public YPlaylist Rename(YAuthStorage storage, string kinds, string name)
+        public YResponse<YPlaylist> Rename(AuthStorage storage, string kinds, string name)
         {
             return RenameAsync(storage, kinds, name).GetAwaiter().GetResult();
         }
@@ -342,7 +352,7 @@ namespace Yandex.Music.Api.API
         /// <param name="playlist">Плейлист</param>
         /// <param name="name">Заголовок</param>
         /// <returns></returns>
-        public Task<YPlaylist> RenameAsync(YAuthStorage storage, YPlaylist playlist, string name)
+        public Task<YResponse<YPlaylist>> RenameAsync(AuthStorage storage, YPlaylist playlist, string name)
         {
             return RenameAsync(storage, playlist.Kind, name);
         }
@@ -354,7 +364,7 @@ namespace Yandex.Music.Api.API
         /// <param name="playlist">Плейлист</param>
         /// <param name="name">Заголовок</param>
         /// <returns></returns>
-        public YPlaylist Rename(YAuthStorage storage, YPlaylist playlist, string name)
+        public YResponse<YPlaylist> Rename(AuthStorage storage, YPlaylist playlist, string name)
         {
             return RenameAsync(storage, playlist.Kind, name).GetAwaiter().GetResult();
         }
@@ -365,7 +375,7 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="kinds">Тип</param>
         /// <returns></returns>
-        public async Task<bool> DeleteAsync(YAuthStorage storage, string kinds)
+        public async Task<bool> DeleteAsync(AuthStorage storage, string kinds)
         {
             try {
                 await new YPlaylistRemoveRequest(storage)
@@ -387,7 +397,7 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="kinds">Тип</param>
         /// <returns></returns>
-        public bool Delete(YAuthStorage storage, string kinds)
+        public bool Delete(AuthStorage storage, string kinds)
         {
             return DeleteAsync(storage, kinds).GetAwaiter().GetResult();
         }
@@ -398,7 +408,7 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="playlist">Плейлист</param>
         /// <returns></returns>
-        public Task<bool> DeleteAsync(YAuthStorage storage, YPlaylist playlist)
+        public Task<bool> DeleteAsync(AuthStorage storage, YPlaylist playlist)
         {
             return DeleteAsync(storage, playlist.Kind);
         }
@@ -409,7 +419,7 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="playlist">Плейлист</param>
         /// <returns></returns>
-        public bool Delete(YAuthStorage storage, YPlaylist playlist)
+        public bool Delete(AuthStorage storage, YPlaylist playlist)
         {
             return DeleteAsync(storage, playlist.Kind).GetAwaiter().GetResult();
         }
@@ -421,7 +431,7 @@ namespace Yandex.Music.Api.API
         /// <param name="playlist">Плейлист</param>
         /// <param name="tracks">Треки для добавления</param>
         /// <returns></returns>
-        public async Task<YPlaylist> InsertTracksAsync(YAuthStorage storage, YPlaylist playlist, List<YTrack> tracks)
+        public async Task<YResponse<YPlaylist>> InsertTracksAsync(AuthStorage storage, YPlaylist playlist, List<YTrack> tracks)
         {
             return await ChangePlaylist(storage, playlist, new List<YPlaylistChange> {
                     new YPlaylistChange {
@@ -430,7 +440,7 @@ namespace Yandex.Music.Api.API
                         Tracks = tracks.Select(t => t.GetKey()).ToList()
                     }
                 })
-                .ContinueWith(p => Get(storage, p.Result));
+                .ContinueWith(p => Get(storage, p.Result.Result));
         }
 
         /// <summary>
@@ -440,7 +450,7 @@ namespace Yandex.Music.Api.API
         /// <param name="playlist">Плейлист</param>
         /// <param name="tracks">Треки для добавления</param>
         /// <returns></returns>
-        public YPlaylist InsertTracks(YAuthStorage storage, YPlaylist playlist, List<YTrack> tracks)
+        public YResponse<YPlaylist> InsertTracks(AuthStorage storage, YPlaylist playlist, List<YTrack> tracks)
         {
             return InsertTracksAsync(storage, playlist, tracks).GetAwaiter().GetResult();
         }
@@ -452,7 +462,7 @@ namespace Yandex.Music.Api.API
         /// <param name="playlist">Плейлист</param>
         /// <param name="tracks">Треки для удаления</param>
         /// <returns></returns>
-        public async Task<YPlaylist> DeleteTrackAsync(YAuthStorage storage, YPlaylist playlist, List<YTrack> tracks)
+        public async Task<YResponse<YPlaylist>> DeleteTrackAsync(AuthStorage storage, YPlaylist playlist, List<YTrack> tracks)
         {
             List<YPlaylistChange> changes = RemoveIdentical(tracks)
                 .Select(t => playlist.Tracks.Select(c => c.Track).ToList().IndexOf(t))
@@ -480,7 +490,7 @@ namespace Yandex.Music.Api.API
         /// <param name="playlist">Плейлист</param>
         /// <param name="tracks">Треки для удаления</param>
         /// <returns></returns>
-        public YPlaylist DeleteTrack(YAuthStorage storage, YPlaylist playlist, List<YTrack> tracks)
+        public YResponse<YPlaylist> DeleteTrack(AuthStorage storage, YPlaylist playlist, List<YTrack> tracks)
         {
             return DeleteTrackAsync(storage, playlist, tracks).GetAwaiter().GetResult();
         }

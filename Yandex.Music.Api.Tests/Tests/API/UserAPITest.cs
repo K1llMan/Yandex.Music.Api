@@ -35,7 +35,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         public void GetUserAuth_ValidData_True()
         {
             var response = Fixture.API.UserAPI.GetUserAuth(Fixture.Storage);
-            response.Login.Should().Be(Fixture.Storage.User.Login);
+            response.Result.Account.Login.Should().Be(Fixture.Storage.User.Login);
         }
 
         /*

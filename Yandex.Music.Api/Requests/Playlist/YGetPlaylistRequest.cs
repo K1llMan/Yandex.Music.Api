@@ -1,11 +1,11 @@
 using Yandex.Music.Api.Common;
-using Yandex.Music.Api.Common.YPlaylist;
+using Yandex.Music.Api.Models.Playlist;
 
 namespace Yandex.Music.Api.Requests.Playlist
 {
     internal class YGetPlaylistRequest : YRequest
     {
-        public YGetPlaylistRequest(YAuthStorage storage) : base(storage)
+        public YGetPlaylistRequest(AuthStorage storage) : base(storage)
         {
         }
 
