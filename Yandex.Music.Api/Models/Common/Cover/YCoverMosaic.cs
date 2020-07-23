@@ -1,13 +1,10 @@
 using System.Collections.Generic;
 
-namespace Yandex.Music.Api.Models.Common
+namespace Yandex.Music.Api.Models.Common.Cover
 {
     public class YCoverMosaic : YCover
     {
-        #region Свойства
-
+        public bool Custom { get; set; }
         public List<string> ItemsUri { get; set; }
-
-        #endregion
     }
 }

@@ -4,13 +4,6 @@ namespace Yandex.Music.Api.Models.Playlist
 {
     public class YPlaylistMadeFor
     {
-        #region Свойства
-
-        public YMadeForCaseForms CaseForms { get; set; }
-        public YOwner UserInfo { get; set; }
-
-        #endregion
-
         public class YMadeForCaseForms
         {
             #region Свойства
@@ -24,5 +17,12 @@ namespace Yandex.Music.Api.Models.Playlist
 
             #endregion
         }
+
+        #region Свойства
+
+        public YMadeForCaseForms CaseForms { get; set; }
+        public YOwner UserInfo { get; set; }
+
+        #endregion
     }
 }

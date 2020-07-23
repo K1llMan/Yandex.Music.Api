@@ -1,11 +1,7 @@
-namespace Yandex.Music.Api.Models.Common
+namespace Yandex.Music.Api.Models.Common.Cover
 {
     public class YCoverError : YCover
     {
-        #region Свойства
-
         public string Error { get; set; }
-
-        #endregion
     }
 }

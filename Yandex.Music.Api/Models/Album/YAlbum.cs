@@ -2,15 +2,12 @@ using System.Collections.Generic;
 
 using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
-using Yandex.Music.Api.Models.Playlist;
 using Yandex.Music.Api.Models.Track;
 
 namespace Yandex.Music.Api.Models.Album
 {
     public class YAlbum
     {
-        #region Свойства
-
         public List<YArtist> Artists { get; set; }
         public bool Available { get; set; }
         public bool AvailableForMobile { get; set; }
@@ -37,7 +34,5 @@ namespace Yandex.Music.Api.Models.Album
         public bool VeryImportant { get; set; }
         public List<List<YTrack>> Volumes { get; set; }
         public int Year { get; set; }
-
-        #endregion
     }
 }

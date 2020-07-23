@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 
+using Newtonsoft.Json;
+
 using Yandex.Music.Api.Models.Common;
+using Yandex.Music.Api.Models.Common.Cover;
 using Yandex.Music.Api.Models.Track;
 
 namespace Yandex.Music.Api.Models.Playlist
@@ -26,8 +29,14 @@ namespace Yandex.Music.Api.Models.Playlist
         public bool Available { get; set; }
         public string BackgroundColor { get; set; }
         public bool Collective { get; set; }
-        public YPlaylistCover Cover { get; set; }
-        public YPlaylistCover CoverWithoutText { get; set; }
+
+        [JsonConverter(typeof(YCoverConverter))]
+        public YCover Cover { get; set; }
+
+        [JsonConverter(typeof(YCoverConverter))]
+        public YCover CoverWithoutText { get; set; }
+
+        public List<YId> RecentTracks { get; set; }
         public DateTime Created { get; set; }
         public string Description { get; set; }
         public string DescriptionFormatted { get; set; }
@@ -43,6 +52,7 @@ namespace Yandex.Music.Api.Models.Playlist
         public List<YPlaylist> LastOwnerPlaylists { get; set; }
         public int LikesCount { get; set; }
         public YPlaylistMadeFor MadeFor { get; set; }
+        public string MetrikaId { get; set; }
         public string Modified { get; set; }
         public string OgImage { get; set; }
         public string OgTitle { get; set; }
@@ -51,6 +61,7 @@ namespace Yandex.Music.Api.Models.Playlist
         public YPlaylistPlayCounter PlayCounter { get; set; }
         public List<YPrerolls> Prerolls { get; set; }
         public int Revision { get; set; }
+        public List<YPlaylist> SimilarPlaylists { get; set; }
         public int Snapshot { get; set; }
         public List<YTag> Tags { get; set; }
         public string TextColor { get; set; }

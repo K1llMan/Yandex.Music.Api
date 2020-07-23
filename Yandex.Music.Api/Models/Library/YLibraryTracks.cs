@@ -2,10 +2,6 @@
 {
     public class YLibraryTracks
     {
-        #region Свойства
-
         public YLibrary Library { get; set; }
-
-        #endregion
     }
 }

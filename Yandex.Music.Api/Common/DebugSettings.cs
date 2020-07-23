@@ -55,16 +55,17 @@ namespace Yandex.Music.Api.Common
                 if (!Directory.Exists(OutputDir))
                     Directory.CreateDirectory(OutputDir);
 
-                var fileName = Path.Combine(debugDir, $"{url.Trim('/').Replace("/", "-").Replace(":", "-")}.json");
+                string fileName = Path.Combine(debugDir, $"{DateTime.Now:yyyy-MM-dd hh-mm-ss.fff} " +
+                    $"{url.Trim('/').Replace("/", "-").Replace(":", "-")}.json");
 
-                using (var fs = new FileStream(fileName, FileMode.Create)) {
-                    using (var sr = new StreamWriter(fs)) {
+                using (FileStream fs = new FileStream(fileName, FileMode.Create)) {
+                    using (StreamWriter sr = new StreamWriter(fs)) {
                         sr.Write(JsonConvert.SerializeObject(JsonConvert.DeserializeObject(json), Formatting.Indented));
                     }
                 }
 
-                using (var fs = new FileStream(logFileName, FileMode.Append)) {
-                    using (var sr = new StreamWriter(fs)) {
+                using (FileStream fs = new FileStream(logFileName, FileMode.Append)) {
+                    using (StreamWriter sr = new StreamWriter(fs)) {
                         sr.WriteLine($"{fileName}:");
                         sr.WriteLine(string.Join("\r\n", errors.Select(p =>
                             $"\t{p.Key}\r\n: {string.Join("\r\n", p.Value.Select(s => $"\t\t{s}"))}")));

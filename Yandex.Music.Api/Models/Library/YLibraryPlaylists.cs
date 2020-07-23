@@ -1,13 +1,12 @@
-﻿using Yandex.Music.Api.Models.Playlist;
+﻿using System;
+
+using Yandex.Music.Api.Models.Playlist;
 
 namespace Yandex.Music.Api.Models.Library
 {
     public class YLibraryPlaylists
     {
-        #region Свойства
-
         public YPlaylist Playlist { get; set; }
-
-        #endregion
+        public DateTime Timestamp { get; set; }
     }
 }

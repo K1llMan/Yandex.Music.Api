@@ -1,15 +1,17 @@
 using System.Collections.Generic;
 
+using Newtonsoft.Json;
+
 using Yandex.Music.Api.Models.Common;
-using Yandex.Music.Api.Models.Playlist;
+using Yandex.Music.Api.Models.Common.Cover;
 
 namespace Yandex.Music.Api.Models.Search.Playlist
 {
     public class YSearchPlaylistModel
     {
-        #region Свойства
+        [JsonConverter(typeof(YCoverConverter))]
+        public YCover Cover { get; set; }
 
-        public YPlaylistCover Cover { get; set; }
         public string Description { get; set; }
         public string DescriptionFormatted { get; set; }
         public string Kind { get; set; }
@@ -21,7 +23,5 @@ namespace Yandex.Music.Api.Models.Search.Playlist
         public string Title { get; set; }
         public int TrackCount { get; set; }
         public string Uid { get; set; }
-
-        #endregion
     }
 }

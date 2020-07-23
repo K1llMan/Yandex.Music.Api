@@ -2,10 +2,6 @@
 {
     public class YRevision
     {
-        #region Свойства
-
         public int Revision { get; set; }
-
-        #endregion
     }
 }

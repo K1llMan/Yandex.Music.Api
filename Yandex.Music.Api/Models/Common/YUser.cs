@@ -2,8 +2,6 @@ namespace Yandex.Music.Api.Models.Common
 {
     public class YUser
     {
-        #region Свойства
-
         public string DeviceId { get; set; }
         public string Experiments { get; set; }
         public string FirstName { get; set; }
@@ -15,7 +13,5 @@ namespace Yandex.Music.Api.Models.Common
         public long Timestamp { get; set; }
         public string Uid { get; set; }
         public string YandexId { get; set; }
-
-        #endregion
     }
 }

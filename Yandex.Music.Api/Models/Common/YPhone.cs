@@ -2,10 +2,6 @@
 {
     public class YPhone
     {
-        #region Свойства
-
         public string Phone { get; set; }
-
-        #endregion
     }
 }
