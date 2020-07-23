@@ -1,4 +1,6 @@
-﻿Yandex.Music API (Unofficial) for .Net Core
+[![Build Status](https://travis-ci.com/K1llMan/Yandex.Music.Api.svg?branch=master)](https://travis-ci.com/K1llMan/Yandex.Music.Api)
+ 
+ Yandex.Music API (Unofficial) for .Net Core
 ====
 
 Форк [Yandex.Music API (Unofficial) for .Net Core](https://github.com/Winster332/Yandex.Music.Api)
