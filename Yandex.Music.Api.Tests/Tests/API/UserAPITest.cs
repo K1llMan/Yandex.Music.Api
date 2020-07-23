@@ -22,9 +22,9 @@ namespace Yandex.Music.Api.Tests.Tests.API
         public void Authorize_ValidData_True()
         {
             if (!string.IsNullOrEmpty(Fixture.AppSettings.Token))
-                Fixture.API.UserAPI.Authorize(Fixture.Storage, Fixture.AppSettings.Token);
+                Fixture.API.User.Authorize(Fixture.Storage, Fixture.AppSettings.Token);
             else
-                Fixture.API.UserAPI.Authorize(Fixture.Storage, Fixture.AppSettings.Login, Fixture.AppSettings.Password);
+                Fixture.API.User.Authorize(Fixture.Storage, Fixture.AppSettings.Login, Fixture.AppSettings.Password);
 
             Fixture.Storage.IsAuthorized.Should().BeTrue();
         }
@@ -34,26 +34,26 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(1)]
         public void GetUserAuth_ValidData_True()
         {
-            var response = Fixture.API.UserAPI.GetUserAuth(Fixture.Storage);
+            var response = Fixture.API.User.GetUserAuth(Fixture.Storage);
             response.Result.Account.Login.Should().Be(Fixture.Storage.User.Login);
         }
 
         /*
         [Fact]
-        [YandexTrait(TraitGroup.UserAPI)]
+        [YandexTrait(TraitGroup.User)]
         [Order(2)]
         public void GetUserAuthDetails_ValidData_True()
         {
-            var response = Fixture.API.UserAPI.GetUserAuthDetails(Fixture.Storage);
+            var response = Fixture.API.User.GetUserAuthDetails(Fixture.Storage);
             response.User.Login.Should().Be(Fixture.Storage.User.Login);
         }
 
         [Fact]
-        [YandexTrait(TraitGroup.UserAPI)]
+        [YandexTrait(TraitGroup.User)]
         [Order(3)]
         public void GetYandexCookie_ValidData_True()
         {
-            var response = Fixture.API.UserAPI.GetYandexCookie(Fixture.Storage);
+            var response = Fixture.API.User.GetYandexCookie(Fixture.Storage);
             response.Should().NotBe(null);
         }
         */

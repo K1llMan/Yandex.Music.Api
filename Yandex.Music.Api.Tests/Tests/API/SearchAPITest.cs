@@ -27,7 +27,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(0)]
         public void Albums_ValidData_True()
         {
-            YResponse<YSearch> response = Fixture.API.SearchAPI.Albums(Fixture.Storage, album);
+            YResponse<YSearch> response = Fixture.API.Search.Albums(Fixture.Storage, album);
             response.Result.Albums.Total.Should().BeGreaterThan(0);
         }
 
@@ -35,7 +35,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(1)]
         public void Artist_ValidData_True()
         {
-            YResponse<YSearch> response = Fixture.API.SearchAPI.Artist(Fixture.Storage, artist);
+            YResponse<YSearch> response = Fixture.API.Search.Artist(Fixture.Storage, artist);
             response.Result.Artists.Total.Should().BeGreaterThan(0);
         }
 
@@ -43,7 +43,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(2)]
         public void Playlist_ValidData_True()
         {
-            YResponse<YSearch> response = Fixture.API.SearchAPI.Playlist(Fixture.Storage, playlist);
+            YResponse<YSearch> response = Fixture.API.Search.Playlist(Fixture.Storage, playlist);
             response.Result.Playlists.Total.Should().BeGreaterThan(0);
         }
 
@@ -51,7 +51,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(3)]
         public void Track_ValidData_True()
         {
-            YResponse<YSearch> response = Fixture.API.SearchAPI.Track(Fixture.Storage, track);
+            YResponse<YSearch> response = Fixture.API.Search.Track(Fixture.Storage, track);
             response.Result.Tracks.Total.Should().BeGreaterThan(0);
         }
 
@@ -59,7 +59,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(4)]
         public void Video_ValidData_True()
         {
-            YResponse<YSearch> response = Fixture.API.SearchAPI.Videos(Fixture.Storage, track);
+            YResponse<YSearch> response = Fixture.API.Search.Videos(Fixture.Storage, track);
             response.Result.Videos.Total.Should().BeGreaterThan(0);
         }
 
@@ -67,7 +67,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(5)]
         public void Suggest_ValidData_True()
         {
-            YResponse<YSearchSuggest> suggest = Fixture.API.SearchAPI.Suggest(Fixture.Storage, artist);
+            YResponse<YSearchSuggest> suggest = Fixture.API.Search.Suggest(Fixture.Storage, artist);
             suggest.Result.Suggestions.Count.Should().BeGreaterThan(0);
         }
 

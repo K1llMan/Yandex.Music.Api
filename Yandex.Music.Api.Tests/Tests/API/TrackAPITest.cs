@@ -33,7 +33,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(0)]
         public void Get_ValidData_True()
         {
-            Fixture.Track = Fixture.API.TrackAPI.Get(Fixture.Storage, trackId).Result.FirstOrDefault();
+            Fixture.Track = Fixture.API.Track.Get(Fixture.Storage, trackId).Result.FirstOrDefault();
             Fixture.Track.Title.Should().Be("Группа крови");
         }
 
@@ -43,7 +43,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         {
             Fixture.Track.Should().NotBe(null);
 
-            downloadInfo = Fixture.API.TrackAPI.GetMetadataForDownload(Fixture.Storage, Fixture.Track.GetKey().ToString());
+            downloadInfo = Fixture.API.Track.GetMetadataForDownload(Fixture.Storage, Fixture.Track.GetKey().ToString());
 
             downloadInfo.Result.Count.Should().BePositive();
         }
@@ -54,7 +54,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         {
             downloadInfo.Result.Count.Should().BePositive();
 
-            downloadFile = Fixture.API.TrackAPI.GetDownloadFileInfo(Fixture.Storage, downloadInfo.Result.First(m => m.Codec == "mp3"));
+            downloadFile = Fixture.API.Track.GetDownloadFileInfo(Fixture.Storage, downloadInfo.Result.First(m => m.Codec == "mp3"));
 
             downloadFile.Path.Should().NotBeNullOrEmpty();
         }
@@ -65,7 +65,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         {
             Fixture.Track.Should().NotBe(null);
 
-            string link = Fixture.API.TrackAPI.GetFileLink(Fixture.Storage, Fixture.Track);
+            string link = Fixture.API.Track.GetFileLink(Fixture.Storage, Fixture.Track);
 
             link.Should().NotBeNullOrEmpty();
         }
@@ -78,7 +78,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
 
             Fixture.Track.Should().NotBe(null);
 
-            Fixture.API.TrackAPI.ExtractToFile(Fixture.Storage, Fixture.Track, extractedFileName);
+            Fixture.API.Track.ExtractToFile(Fixture.Storage, Fixture.Track, extractedFileName);
 
             File.Exists(extractedFileName).Should().BeTrue();
         }

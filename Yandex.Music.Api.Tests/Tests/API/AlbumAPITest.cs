@@ -23,7 +23,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(0)]
         public void Get_ValidData_True()
         {
-            Fixture.Album = Fixture.API.AlbumAPI.Get(Fixture.Storage, albumId);
+            Fixture.Album = Fixture.API.Album.Get(Fixture.Storage, albumId);
             Fixture.Album.Result.Title.Should().Be("The Power Within");
         }
 

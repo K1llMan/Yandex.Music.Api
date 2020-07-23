@@ -24,7 +24,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         {
             Fixture.Track.Should().NotBeNull();
 
-            int revision = Fixture.API.LibraryAPI.AddTrackLike(Fixture.Storage, Fixture.Track).Result.Revision;
+            int revision = Fixture.API.Library.AddTrackLike(Fixture.Storage, Fixture.Track).Result.Revision;
 
             revision.Should().BePositive();
         }
@@ -35,7 +35,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         {
             Fixture.Album.Should().NotBeNull();
 
-            bool added = Fixture.API.LibraryAPI.AddAlbumLike(Fixture.Storage, new YAlbum {
+            bool added = Fixture.API.Library.AddAlbumLike(Fixture.Storage, new YAlbum {
                 Id = Fixture.Album.Result.Id
             }).Result == "ok";
 
@@ -48,7 +48,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         {
             Fixture.Artist.Should().NotBeNull();
 
-            bool added = Fixture.API.LibraryAPI.AddArtistLike(Fixture.Storage, new YArtist {
+            bool added = Fixture.API.Library.AddArtistLike(Fixture.Storage, new YArtist {
                 Id = Fixture.Artist.Result.Artist.Id
             }).Result == "ok";
 
@@ -61,7 +61,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         {
             Fixture.Playlist.Should().NotBeNull();
 
-            bool added = Fixture.API.LibraryAPI.AddPlaylistLike(Fixture.Storage, Fixture.Playlist).Result == "ok";
+            bool added = Fixture.API.Library.AddPlaylistLike(Fixture.Storage, Fixture.Playlist).Result == "ok";
 
             added.Should().BeTrue();
         }
@@ -70,7 +70,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(4)]
         public void GetLikedTracks_ValidData_True()
         {
-            YLibraryTracks tracks = Fixture.API.LibraryAPI.GetLikedTracks(Fixture.Storage).Result;
+            YLibraryTracks tracks = Fixture.API.Library.GetLikedTracks(Fixture.Storage).Result;
 
             tracks.Library.Tracks.Count.Should().BePositive();
         }
@@ -79,7 +79,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(5)]
         public void GetLikedAlbums_ValidData_True()
         {
-            List<YLibraryAlbum> albums = Fixture.API.LibraryAPI.GetLikedAlbums(Fixture.Storage).Result;
+            List<YLibraryAlbum> albums = Fixture.API.Library.GetLikedAlbums(Fixture.Storage).Result;
 
             albums.Count.Should().BePositive();
         }
@@ -88,7 +88,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(6)]
         public void GetLikedArtists_ValidData_True()
         {
-            List<YArtist> artists = Fixture.API.LibraryAPI.GetLikedArtists(Fixture.Storage).Result;
+            List<YArtist> artists = Fixture.API.Library.GetLikedArtists(Fixture.Storage).Result;
 
             artists.Count.Should().BePositive();
         }
@@ -97,7 +97,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(7)]
         public void GetLikedPlaylists_ValidData_True()
         {
-            List<YLibraryPlaylists> playlists = Fixture.API.LibraryAPI.GetLikedPlaylists(Fixture.Storage).Result;
+            List<YLibraryPlaylists> playlists = Fixture.API.Library.GetLikedPlaylists(Fixture.Storage).Result;
 
             playlists.Count.Should().BePositive();
         }
@@ -108,7 +108,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         {
             Fixture.Track.Should().NotBeNull();
 
-            YRevision revision = Fixture.API.LibraryAPI.RemoveTrackLike(Fixture.Storage, Fixture.Track).Result;
+            YRevision revision = Fixture.API.Library.RemoveTrackLike(Fixture.Storage, Fixture.Track).Result;
 
             revision.Revision.Should().BePositive();
         }
@@ -119,7 +119,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         {
             Fixture.Album.Should().NotBeNull();
 
-            bool removed = Fixture.API.LibraryAPI.RemoveAlbumLike(Fixture.Storage, new YAlbum {
+            bool removed = Fixture.API.Library.RemoveAlbumLike(Fixture.Storage, new YAlbum {
                 Id = Fixture.Album.Result.Id
             }).Result == "ok";
 
@@ -132,7 +132,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         {
             Fixture.Artist.Should().NotBeNull();
 
-            bool removed = Fixture.API.LibraryAPI.RemoveArtistLike(Fixture.Storage, new YArtist {
+            bool removed = Fixture.API.Library.RemoveArtistLike(Fixture.Storage, new YArtist {
                 Id = Fixture.Artist.Result.Artist.Id
             }).Result == "ok";
 
@@ -145,7 +145,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         {
             Fixture.Playlist.Should().NotBeNull();
 
-            bool removed = Fixture.API.LibraryAPI.RemovePlaylistLike(Fixture.Storage, Fixture.Playlist).Result == "ok";
+            bool removed = Fixture.API.Library.RemovePlaylistLike(Fixture.Storage, Fixture.Playlist).Result == "ok";
 
             removed.Should().BeTrue();
         }

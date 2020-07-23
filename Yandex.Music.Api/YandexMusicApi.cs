@@ -12,37 +12,37 @@ namespace Yandex.Music.Api
         /// <summary>
         /// Album API
         /// </summary>
-        public YAlbumAPI AlbumAPI { get; set; }
+        public YAlbumAPI Album { get; set; }
 
         /// <summary>
         /// Artist API
         /// </summary>
-        public YArtistAPI ArtistAPI { get; set; }
+        public YArtistAPI Artist { get; set; }
 
         /// <summary>
         /// Library API
         /// </summary>
-        public YLibraryAPI LibraryAPI { get; set; }
+        public YLibraryAPI Library { get; set; }
 
         /// <summary>
         /// Playlist API
         /// </summary>
-        public YPlaylistAPI PlaylistAPI { get; set; }
+        public YPlaylistAPI Playlist { get; set; }
 
         /// <summary>
         /// Search API
         /// </summary>
-        public YSearchAPI SearchAPI { get; set; }
+        public YSearchAPI Search { get; set; }
 
         /// <summary>
         /// Track API
         /// </summary>
-        public YTrackAPI TrackAPI { get; set; }
+        public YTrackAPI Track { get; set; }
 
         /// <summary>
         /// User API
         /// </summary>
-        public YUserAPI UserAPI { get; set; }
+        public YUserAPI User { get; set; }
 
         #endregion Ветки API
 
@@ -53,13 +53,13 @@ namespace Yandex.Music.Api
         /// </summary>
         public YandexMusicApi()
         {
-            AlbumAPI = new YAlbumAPI();
-            ArtistAPI = new YArtistAPI();
-            LibraryAPI = new YLibraryAPI();
-            PlaylistAPI = new YPlaylistAPI();
-            SearchAPI = new YSearchAPI();
-            TrackAPI = new YTrackAPI();
-            UserAPI = new YUserAPI();
+            Album = new YAlbumAPI();
+            Artist = new YArtistAPI();
+            Library = new YLibraryAPI();
+            Playlist = new YPlaylistAPI();
+            Search = new YSearchAPI();
+            Track = new YTrackAPI();
+            User = new YUserAPI();
         }
 
         #endregion Основные функции

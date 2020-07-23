@@ -22,7 +22,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(0)]
         public void Get_ValidData_True()
         {
-            Fixture.Artist = Fixture.API.ArtistAPI.Get(Fixture.Storage, artistId);
+            Fixture.Artist = Fixture.API.Artist.Get(Fixture.Storage, artistId);
             Fixture.Artist.Result.Artist.Name.Should().Be("Metallica");
         }
 
