@@ -33,7 +33,7 @@ namespace Yandex.Music.Api.API
         /// <returns>Плейлист</returns>
         private async Task<YResponse<YPlaylist>> GetPersonalPlaylist(AuthStorage storage, YGeneratedPlaylistType type)
         {
-            return await MainPagePersonalAsync(storage)
+            return await LandingAsync(storage)
                 .ContinueWith(list =>
                 {
                     YPlaylist playlist = list.GetAwaiter().GetResult().Result.Blocks
@@ -86,7 +86,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public async Task<YResponse<YLanding>> MainPagePersonalAsync(AuthStorage storage)
+        public async Task<YResponse<YLanding>> LandingAsync(AuthStorage storage)
         {
             return await new YGetPlaylistMainPageRequest(api, storage)
                 .Create()
@@ -98,9 +98,9 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public YResponse<YLanding> MainPagePersonal(AuthStorage storage)
+        public YResponse<YLanding> Landing(AuthStorage storage)
         {
-            return MainPagePersonalAsync(storage).GetAwaiter().GetResult();
+            return LandingAsync(storage).GetAwaiter().GetResult();
         }
 
         #endregion Список с главной

@@ -311,14 +311,14 @@
             <param name="changes">Список изменений</param>
             <returns>Плейлист после изменений</returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YPlaylist.MainPagePersonalAsync(Yandex.Music.Api.Common.YAuthStorage)">
+        <member name="M:Yandex.Music.Api.API.YPlaylist.LandingAsync(Yandex.Music.Api.Common.YAuthStorage)">
             <summary>
             Получение персональных списков
             </summary>
             <param name="storage">Хранилище</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YPlaylist.MainPagePersonal(Yandex.Music.Api.Common.YAuthStorage)">
+        <member name="M:Yandex.Music.Api.API.YPlaylist.Landing(Yandex.Music.Api.Common.YAuthStorage)">
             <summary>
             Получение персональных списков
             </summary>

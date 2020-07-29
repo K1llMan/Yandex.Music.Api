@@ -43,11 +43,9 @@ namespace Yandex.Music.Api.Tests.Tests.API
 
         [Fact, YandexTrait(TraitGroup.PlaylistAPI)]
         [Order(1)]
-        public void MainPagePersonal_ValidData_True()
+        public void Landing_ValidData_True()
         {
-            YLanding mainPage = Fixture.API.Playlist.MainPagePersonal(Fixture.Storage).Result;
-
-            Output.WriteLine(mainPage.Blocks.Count.ToString());
+            YLanding mainPage = Fixture.API.Playlist.Landing(Fixture.Storage).Result;
 
             mainPage.Should().NotBeNull();
             mainPage.Blocks.Count.Should().BePositive();
