@@ -5,7 +5,7 @@ namespace Yandex.Music.Api.Requests.Playlist
 {
     internal class YGetPlaylistRequest : YRequest
     {
-        public YGetPlaylistRequest(AuthStorage storage) : base(storage)
+        public YGetPlaylistRequest(YandexMusicApi yandex, AuthStorage storage) : base(yandex, storage)
         {
         }
 

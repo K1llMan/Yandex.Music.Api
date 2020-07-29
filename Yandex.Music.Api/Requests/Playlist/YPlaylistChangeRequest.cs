@@ -26,7 +26,7 @@ namespace Yandex.Music.Api.Requests.Playlist
 
         #endregion Поля
 
-        public YPlaylistChangeRequest(AuthStorage storage) : base(storage)
+        public YPlaylistChangeRequest(YandexMusicApi yandex, AuthStorage storage) : base(yandex, storage)
         {
         }
 

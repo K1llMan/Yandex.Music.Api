@@ -9,8 +9,6 @@ namespace Yandex.Music.Api.Models.Account
 {
     public class YAccount
     {
-        #region Свойства
-
         public string DisplayName { get; set; }
         public string FirstName { get; set; }
         public string FullName { get; set; }
@@ -18,14 +16,13 @@ namespace Yandex.Music.Api.Models.Account
         public string Login { get; set; }
         public DateTime Now { get; set; }
 
-        [JsonProperty("passport-phones")] public List<YPhone> PassportPhones { get; set; }
+        [JsonProperty("passport-phones")] 
+        public List<YPhone> PassportPhones { get; set; }
 
         public int Region { get; set; }
         public DateTime RegisteredAt { get; set; }
         public string SecondName { get; set; }
         public bool ServiceAvailable { get; set; }
         public string Uid { get; set; }
-
-        #endregion
     }
 }

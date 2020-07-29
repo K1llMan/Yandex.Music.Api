@@ -12,7 +12,18 @@ namespace Yandex.Music.Api.API
     /// </summary>
     public class YAlbumAPI
     {
+        #region Поля
+
+        private YandexMusicApi api;
+
+        #endregion Поля
+
         #region Основные функции
+
+        public YAlbumAPI(YandexMusicApi yandex)
+        {
+            api = yandex;
+        }
 
         /// <summary>
         /// Получение альбома
@@ -22,7 +33,7 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public async Task<YResponse<YAlbum>> GetAsync(AuthStorage storage, string albumId)
         {
-            return await new YGetAlbumRequest(storage)
+            return await new YGetAlbumRequest(api, storage)
                 .Create(albumId)
                 .GetResponseAsync<YResponse<YAlbum>>();
         }

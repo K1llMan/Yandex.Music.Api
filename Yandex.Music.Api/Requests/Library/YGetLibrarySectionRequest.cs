@@ -5,7 +5,7 @@ namespace Yandex.Music.Api.Requests.Library
 {
     internal class YGetLibrarySectionRequest : YRequest
     {
-        public YGetLibrarySectionRequest(AuthStorage storage) : base(storage)
+        public YGetLibrarySectionRequest(YandexMusicApi yandex, AuthStorage storage) : base(yandex, storage)
         {
         }
 

@@ -12,7 +12,18 @@ namespace Yandex.Music.Api.API
     /// </summary>
     public class YArtistAPI
     {
+        #region Поля
+
+        private YandexMusicApi api;
+
+        #endregion Поля
+
         #region Основные функции
+
+        public YArtistAPI(YandexMusicApi yandex)
+        {
+            api = yandex;
+        }
 
         /// <summary>
         /// Получение исполнителя
@@ -22,7 +33,7 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public async Task<YResponse<YArtist>> GetAsync(AuthStorage storage, string artistId)
         {
-            return await new YGetArtistRequest(storage)
+            return await new YGetArtistRequest(api, storage)
                 .Create(artistId)
                 .GetResponseAsync<YResponse<YArtist>>();
         }

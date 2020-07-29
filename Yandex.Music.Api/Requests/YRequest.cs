@@ -10,19 +10,22 @@ using System.Web;
 using Newtonsoft.Json;
 
 using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Models.Common;
 
 namespace Yandex.Music.Api.Requests
 {
     internal class YRequest
     {
-        public YRequest(AuthStorage userStorage)
+        public YRequest(YandexMusicApi yandex, AuthStorage auth)
         {
-            storage = userStorage;
+            api = yandex;
+            storage = auth;
         }
 
         #region Поля
 
         private HttpWebRequest fullRequest;
+        protected YandexMusicApi api;
         protected AuthStorage storage;
 
         #endregion Поля
@@ -85,10 +88,16 @@ namespace Yandex.Music.Api.Requests
 
                 storage.Context.Cookies.Add(response.Cookies);
 
-                if (storage.Debug != null)
-                    return storage.Debug.Deserialize<T>(response.ResponseUri.AbsolutePath, result);
+                JsonSerializerSettings settings = new JsonSerializerSettings {
+                    Converters = new List<JsonConverter> {
+                        new YExecutionContextConverter(api, storage)
+                    }
+                };
 
-                return JsonConvert.DeserializeObject<T>(result);
+                if (storage.Debug != null)
+                    return storage.Debug.Deserialize<T>(response.ResponseUri.AbsolutePath, result, settings);
+
+                return JsonConvert.DeserializeObject<T>(result, settings);
             }
             catch (Exception ex) {
                 Console.WriteLine(ex);

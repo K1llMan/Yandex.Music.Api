@@ -18,6 +18,12 @@ namespace Yandex.Music.Api.API
     /// </summary>
     public class YTrackAPI
     {
+        #region Поля
+
+        private YandexMusicApi api;
+
+        #endregion Поля
+
         #region Вспомогательные функции
 
         private string BuildLinkForDownload(YTrackDownloadInfo mainDownloadResponse,
@@ -45,6 +51,11 @@ namespace Yandex.Music.Api.API
 
         #region Основные функции
 
+        public YTrackAPI(YandexMusicApi yandex)
+        {
+            api = yandex;
+        }
+
         /// <summary>
         /// Получение трека
         /// </summary>
@@ -53,7 +64,7 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public async Task<YResponse<List<YTrack>>> GetAsync(AuthStorage storage, string trackId)
         {
-            return await new YGetTrackResponse(storage)
+            return await new YGetTrackResponse(api, storage)
                 .Create(trackId)
                 .GetResponseAsync<YResponse<List<YTrack>>>();
         }
@@ -78,7 +89,7 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public async Task<YResponse<List<YTrackDownloadInfo>>> GetMetadataForDownloadAsync(AuthStorage storage, string trackKey, bool direct)
         {
-            return await new YTrackDownloadInfoRequest(storage)
+            return await new YTrackDownloadInfoRequest(api, storage)
                 .Create(trackKey, direct)
                 .GetResponseAsync<YResponse<List<YTrackDownloadInfo>>>();
         }
@@ -127,7 +138,7 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public async Task<YStorageDownloadFile> GetDownloadFileInfoAsync(AuthStorage storage, YTrackDownloadInfo metadataInfo)
         {
-            return await new YStorageDownloadFileRequest(storage)
+            return await new YStorageDownloadFileRequest(api, storage)
                 .Create(metadataInfo.DownloadInfoUrl)
                 .GetResponseAsync<YStorageDownloadFile>();
         }

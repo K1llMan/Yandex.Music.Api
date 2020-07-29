@@ -7,7 +7,7 @@ namespace Yandex.Music.Api.Requests.Search
 {
     internal class YSearchRequest : YRequest
     {
-        public YSearchRequest(AuthStorage storage) : base(storage)
+        public YSearchRequest(YandexMusicApi yandex, AuthStorage storage) : base(yandex, storage)
         {
         }
 

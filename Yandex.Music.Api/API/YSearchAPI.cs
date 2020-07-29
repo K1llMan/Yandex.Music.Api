@@ -12,7 +12,18 @@ namespace Yandex.Music.Api.API
     /// </summary>
     public class YSearchAPI
     {
+        #region Поля
+
+        private YandexMusicApi api;
+
+        #endregion Поля
+
         #region Основные функции
+
+        public YSearchAPI(YandexMusicApi yandex)
+        {
+            api = yandex;
+        }
 
         /// <summary>
         /// Поиск по трекам
@@ -168,7 +179,7 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public async Task<YResponse<YSearch>> SearchAsync(AuthStorage storage, string searchText, YSearchType searchType, int page = 0)
         {
-            return await new YSearchRequest(storage)
+            return await new YSearchRequest(api, storage)
                 .Create(searchText, searchType, page)
                 .GetResponseAsync<YResponse<YSearch>>();
         }
@@ -194,7 +205,7 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public async Task<YResponse<YSearchSuggest>> SuggestAsync(AuthStorage storage, string searchText)
         {
-            return await new YSearchSuggestRequest(storage)
+            return await new YSearchSuggestRequest(api, storage)
                 .Create(searchText)
                 .GetResponseAsync<YResponse<YSearchSuggest>>();
         }

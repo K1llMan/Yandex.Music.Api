@@ -7,7 +7,7 @@ namespace Yandex.Music.Api.Requests.Playlist
 {
     internal class YPlaylistCreateRequest : YRequest
     {
-        public YPlaylistCreateRequest(AuthStorage storage) : base(storage)
+        public YPlaylistCreateRequest(YandexMusicApi yandex, AuthStorage storage) : base(yandex, storage)
         {
         }
 

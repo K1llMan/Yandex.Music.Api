@@ -53,13 +53,13 @@ namespace Yandex.Music.Api
         /// </summary>
         public YandexMusicApi()
         {
-            Album = new YAlbumAPI();
-            Artist = new YArtistAPI();
-            Library = new YLibraryAPI();
-            Playlist = new YPlaylistAPI();
-            Search = new YSearchAPI();
-            Track = new YTrackAPI();
-            User = new YUserAPI();
+            Album = new YAlbumAPI(this);
+            Artist = new YArtistAPI(this);
+            Library = new YLibraryAPI(this);
+            Playlist = new YPlaylistAPI(this);
+            Search = new YSearchAPI(this);
+            Track = new YTrackAPI(this);
+            User = new YUserAPI(this);
         }
 
         #endregion Основные функции

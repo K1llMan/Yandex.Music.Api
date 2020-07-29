@@ -28,25 +28,23 @@ namespace Yandex.Music.Api.Common
 
         #region Основные функции
 
-        public T Deserialize<T>(string url, string json)
+        public T Deserialize<T>(string url, string json, JsonSerializerSettings settings)
         {
             var errors = new Dictionary<string, List<string>>();
 
-            var settings = new JsonSerializerSettings {
-                Error = (sender, args) =>
-                {
-                    var pos = args.ErrorContext.Error.Message.IndexOf("Path");
-                    var error = args.ErrorContext.Error.Message.Substring(0, pos);
-                    var path = args.ErrorContext.Error.Message.Substring(pos);
+            settings.Error = (sender, args) =>  {
+                var pos = args.ErrorContext.Error.Message.IndexOf("Path");
+                var error = args.ErrorContext.Error.Message.Substring(0, pos);
+                var path = args.ErrorContext.Error.Message.Substring(pos);
 
-                    if (!errors.ContainsKey(error))
-                        errors[error] = new List<string>();
+                if (!errors.ContainsKey(error))
+                    errors[error] = new List<string>();
 
-                    errors[error].Add(path);
-                    args.ErrorContext.Handled = true;
-                },
-                MissingMemberHandling = MissingMemberHandling.Error
+                errors[error].Add(path);
+                args.ErrorContext.Handled = true;
             };
+
+            settings.MissingMemberHandling = MissingMemberHandling.Error;
 
             var obj = JsonConvert.DeserializeObject<T>(json, settings);
 

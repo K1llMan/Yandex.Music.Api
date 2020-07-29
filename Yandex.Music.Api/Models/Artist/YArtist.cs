@@ -10,7 +10,7 @@ using Yandex.Music.Api.Models.Track;
 
 namespace Yandex.Music.Api.Models.Artist
 {
-    public class YArtist
+    public class YArtist : YBaseModel
     {
         public List<YAlbum> Albums { get; set; }
 

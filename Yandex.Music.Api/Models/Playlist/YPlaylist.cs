@@ -9,7 +9,7 @@ using Yandex.Music.Api.Models.Track;
 
 namespace Yandex.Music.Api.Models.Playlist
 {
-    public class YPlaylist
+    public class YPlaylist : YBaseModel
     {
         #region Поля
 

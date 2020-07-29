@@ -4,7 +4,7 @@ namespace Yandex.Music.Api.Requests.Auth
 {
     internal class YGetAuthInfoRequest : YRequest
     {
-        public YGetAuthInfoRequest(AuthStorage storage) : base(storage)
+        public YGetAuthInfoRequest(YandexMusicApi yandex, AuthStorage storage) : base(yandex, storage)
         {
         }
 

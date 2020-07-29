@@ -6,7 +6,7 @@ namespace Yandex.Music.Api.Requests.Track
 {
     internal class YTrackDownloadInfoRequest : YRequest
     {
-        public YTrackDownloadInfoRequest(AuthStorage storage) : base(storage)
+        public YTrackDownloadInfoRequest(YandexMusicApi yandex, AuthStorage storage) : base(yandex, storage)
         {
         }
 

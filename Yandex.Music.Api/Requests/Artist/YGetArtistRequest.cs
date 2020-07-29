@@ -4,7 +4,7 @@ namespace Yandex.Music.Api.Requests.Album
 {
     internal class YGetArtistRequest : YRequest
     {
-        public YGetArtistRequest(AuthStorage storage) : base(storage)
+        public YGetArtistRequest(YandexMusicApi yandex, AuthStorage storage) : base(yandex, storage)
         {
         }
 

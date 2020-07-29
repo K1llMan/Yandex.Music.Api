@@ -8,7 +8,7 @@ namespace Yandex.Music.Api.Requests.Library
 {
     internal class YLibraryAddRequest : YRequest
     {
-        public YLibraryAddRequest(AuthStorage storage) : base(storage)
+        public YLibraryAddRequest(YandexMusicApi yandex, AuthStorage storage) : base(yandex, storage)
         {
         }
 

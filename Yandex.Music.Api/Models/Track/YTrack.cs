@@ -8,7 +8,7 @@ using Yandex.Music.Api.Models.Common;
 
 namespace Yandex.Music.Api.Models.Track
 {
-    public class YTrack : IEquatable<YTrack>
+    public class YTrack : YBaseModel, IEquatable<YTrack>
     {
         #region Поля
 

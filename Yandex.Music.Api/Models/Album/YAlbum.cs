@@ -6,7 +6,7 @@ using Yandex.Music.Api.Models.Track;
 
 namespace Yandex.Music.Api.Models.Album
 {
-    public class YAlbum
+    public class YAlbum : YBaseModel
     {
         public List<YArtist> Artists { get; set; }
         public bool Available { get; set; }

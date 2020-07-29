@@ -10,11 +10,17 @@ namespace Yandex.Music.Api.API
 {
     public class YUserAPI
     {
+        #region Поля
+
+        private YandexMusicApi api;
+
+        #endregion Поля
+
         #region Вспомогательные функции
 
         private async Task<YAuth> AuthPassport(AuthStorage storage, string login, string password)
         {
-            return await new YAuthorizeRequest(storage)
+            return await new YAuthorizeRequest(api, storage)
                 .Create(login, password)
                 .GetResponseAsync<YAuth>();
         }
@@ -22,6 +28,11 @@ namespace Yandex.Music.Api.API
         #endregion Вспомогательные функции
 
         #region Основные функции
+
+        public YUserAPI(YandexMusicApi yandex)
+        {
+            api = yandex;
+        }
 
         public async Task AuthorizeAsync(AuthStorage storage, string token)
         {
@@ -65,7 +76,7 @@ namespace Yandex.Music.Api.API
 
         public async Task<YResponse<YAccountResult>> GetUserAuthAsync(AuthStorage storage)
         {
-            return await new YGetAuthInfoRequest(storage)
+            return await new YGetAuthInfoRequest(api, storage)
                 .Create()
                 .GetResponseAsync<YResponse<YAccountResult>>();
         }
