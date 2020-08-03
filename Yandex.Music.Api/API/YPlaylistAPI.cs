@@ -43,8 +43,6 @@ namespace Yandex.Music.Api.API
                         ?.Data
                         .Data;
 
-                    var a = list.GetAwaiter().GetResult();
-
                     return playlist == null
                         ? null
                         : Get(storage, playlist);

@@ -7,6 +7,7 @@ using Yandex.Music.Api.Models.Account;
 using Yandex.Music.Api.Models.Album;
 using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
+using Yandex.Music.Api.Models.Landing;
 using Yandex.Music.Api.Models.Playlist;
 using Yandex.Music.Api.Models.Search;
 using Yandex.Music.Api.Models.Track;
@@ -100,6 +101,17 @@ namespace Yandex.Music.Client
         public YPlaylist GetPlaylist(string user, string id)
         {
             return api.Playlist.Get(storage, user,id).Result;
+        }
+
+        public List<YPlaylist> GetPersonalPlaylists()
+        {
+            YLanding landing = api.Playlist.Landing(storage).Result;
+
+            return landing.Blocks
+                .FirstOrDefault(b => b.Type == "personal-playlists")
+                ?.Entities
+                .Select(e => api.Playlist.Get(storage, e.Data?.Data).Result)
+                .ToList();
         }
 
         public List<YPlaylist> GetFavorites()
