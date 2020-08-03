@@ -23,15 +23,20 @@ namespace Yandex.Music.Api.Models.Common
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            YBaseModel obj = (YBaseModel)Activator.CreateInstance(objectType);
-            serializer.Populate(reader, obj);
+            try {
+                YBaseModel obj = (YBaseModel)Activator.CreateInstance(objectType);
+                serializer.Populate(reader, obj);
 
-            obj.Context = new YExecutionContext {
-                API = api,
-                Storage = storage
-            };
+                obj.Context = new YExecutionContext {
+                    API = api,
+                    Storage = storage
+                };
 
-            return obj;
+                return obj;
+            }
+            catch (Exception ex) {
+                throw new Exception($"Ошибка десериализации типа \"{objectType.Name}\".", ex);
+            }
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

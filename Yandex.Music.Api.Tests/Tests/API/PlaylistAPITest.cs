@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 using FluentAssertions;
 
 using Xunit;
@@ -9,7 +7,6 @@ using Xunit.Extensions.Ordering;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Landing;
 using Yandex.Music.Api.Models.Playlist;
-using Yandex.Music.Api.Models.Track;
 using Yandex.Music.Api.Tests.Traits;
 
 namespace Yandex.Music.Api.Tests.Tests.API
@@ -121,9 +118,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
             Fixture.CreatedPlaylist.Should().NotBeNull();
             Fixture.Track.Should().NotBeNull();
 
-            Fixture.CreatedPlaylist = Fixture.API.Playlist.InsertTracks(Fixture.Storage, Fixture.CreatedPlaylist, new List<YTrack> {
-                Fixture.Track
-            }).Result;
+            Fixture.CreatedPlaylist = Fixture.API.Playlist.InsertTracks(Fixture.Storage, Fixture.CreatedPlaylist, Fixture.Track).Result;
 
             Fixture.CreatedPlaylist.Should().NotBeNull();
         }
@@ -135,9 +130,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
             Fixture.CreatedPlaylist.Should().NotBeNull();
             Fixture.Track.Should().NotBeNull();
 
-            Fixture.CreatedPlaylist = Fixture.API.Playlist.DeleteTrack(Fixture.Storage, Fixture.CreatedPlaylist, new List<YTrack> {
-                Fixture.Track
-            }).Result;
+            Fixture.CreatedPlaylist = Fixture.API.Playlist.DeleteTracks(Fixture.Storage, Fixture.CreatedPlaylist, Fixture.Track).Result;
 
             Fixture.CreatedPlaylist.Should().NotBeNull();
         }

@@ -76,6 +76,9 @@ namespace Yandex.Music.Api.Common
 
         public void Clear()
         {
+            if (!Directory.Exists(debugDir))
+                return;
+
             foreach (string file in Directory.GetFiles(debugDir))
                 File.Delete(file);
         }

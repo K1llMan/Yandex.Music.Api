@@ -213,11 +213,11 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="track">Трек</param>
         /// <returns></returns>
-        public async Task<YResponse<int>> AddTrackDislikeAsync(AuthStorage storage, YTrack track)
+        public async Task<YResponse<YRevision>> AddTrackDislikeAsync(AuthStorage storage, YTrack track)
         {
             return await new YLibraryAddRequest(api, storage)
                 .Create(track.GetKey().ToString(), YLibrarySection.Tracks, YLibrarySectionType.Dislikes)
-                .GetResponseAsync<YResponse<int>>();
+                .GetResponseAsync<YResponse<YRevision>>();
         }
 
         /// <summary>
@@ -226,7 +226,7 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="track">Трек</param>
         /// <returns></returns>
-        public YResponse<int> AddTrackDislike(AuthStorage storage, YTrack track)
+        public YResponse<YRevision> AddTrackDislike(AuthStorage storage, YTrack track)
         {
             return AddTrackDislikeAsync(storage, track).GetAwaiter().GetResult();
         }

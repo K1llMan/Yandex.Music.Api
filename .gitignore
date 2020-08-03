@@ -12,3 +12,5 @@
 /Yandex.Music.Api.Tests/bin/Debug/netcoreapp2.1
 /Yandex.Music.Api/Yandex.Music.Api.csproj.user
 /Yandex.Music.Api.Tests/bin
+/Yandex.Music.Client.Tests/bin/Debug
+/Yandex.Music.Client/bin/Debug

@@ -559,7 +559,7 @@
             <param name="tracks">Треки для добавления</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YPlaylist.DeleteTrackAsync(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YPlaylist.YPlaylist,System.Collections.Generic.List{Yandex.Music.Api.Common.YTrack.YTrack})">
+        <member name="M:Yandex.Music.Api.API.YPlaylist.DeleteTracksAsync(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YPlaylist.YPlaylist,System.Collections.Generic.List{Yandex.Music.Api.Common.YTrack.YTrack})">
             <summary>
             Удаление треков
             </summary>
@@ -568,7 +568,7 @@
             <param name="tracks">Треки для удаления</param>
             <returns></returns>
         </member>
-        <member name="M:Yandex.Music.Api.API.YPlaylist.DeleteTrack(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YPlaylist.YPlaylist,System.Collections.Generic.List{Yandex.Music.Api.Common.YTrack.YTrack})">
+        <member name="M:Yandex.Music.Api.API.YPlaylist.DeleteTracks(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YPlaylist.YPlaylist,System.Collections.Generic.List{Yandex.Music.Api.Common.YTrack.YTrack})">
             <summary>
             Удаление треков
             </summary>

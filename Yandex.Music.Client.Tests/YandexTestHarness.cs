@@ -10,7 +10,7 @@ using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Playlist;
 using Yandex.Music.Api.Models.Track;
 
-namespace Yandex.Music.Api.Tests
+namespace Yandex.Music.Client.Tests
 {
     public class YandexTestHarness : IDisposable
     {
@@ -18,11 +18,9 @@ namespace Yandex.Music.Api.Tests
         {
             AppSettings = GetAppSettings();
 
-            Storage = new AuthStorage(new DebugSettings("responses", "log.txt") {
+            Client = new YandexMusicClient(new DebugSettings("responses", "log.txt") {
                 ClearDirectory = true
             });
-
-            API = new YandexMusicApi();
         }
 
         public void Dispose()
@@ -50,15 +48,13 @@ namespace Yandex.Music.Api.Tests
 
         public AppSettings AppSettings { get; set; }
 
-        public AuthStorage Storage { get; set; }
-
-        public YandexMusicApi API { get; set; }
+        public YandexMusicClient Client { get; set; }
 
         #region Поля для сохранения тестовых данных
 
-        public YResponse<YAlbum> Album { get; set; }
+        public YAlbum Album { get; set; }
 
-        public YResponse<YArtistBriefInfo> Artist { get; set; }
+        public YArtistBriefInfo Artist { get; set; }
 
         public YPlaylist Playlist { get; set; }
 
