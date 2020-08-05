@@ -7,9 +7,9 @@ namespace Yandex.Music.Api.Tests.Traits
         ArtistAPI,
         LibraryAPI,
         PlaylistAPI,
+        RadioAPI,
         SearchAPI,
         TrackAPI,
-        UserAPI,
-        Storage
+        UserAPI
     }
 }

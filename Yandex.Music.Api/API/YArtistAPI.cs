@@ -10,19 +10,12 @@ namespace Yandex.Music.Api.API
     /// <summary>
     /// API для взаимодействия с исполнителями
     /// </summary>
-    public class YArtistAPI
+    public class YArtistAPI : YCommonAPI
     {
-        #region Поля
-
-        private YandexMusicApi api;
-
-        #endregion Поля
-
         #region Основные функции
 
-        public YArtistAPI(YandexMusicApi yandex)
+        public YArtistAPI(YandexMusicApi yandex): base(yandex)
         {
-            api = yandex;
         }
 
         /// <summary>

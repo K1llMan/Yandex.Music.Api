@@ -9,6 +9,7 @@ using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Landing;
 using Yandex.Music.Api.Models.Playlist;
+using Yandex.Music.Api.Models.Radio;
 using Yandex.Music.Api.Models.Search;
 using Yandex.Music.Api.Models.Track;
 
@@ -169,6 +170,25 @@ namespace Yandex.Music.Client
         }
 
         #endregion Поиск
+
+        #region Радио
+
+        public List<YStation> GetRadioDashboard()
+        {
+            return api.Radio.GetStationsDashboard(storage).Result.Stations;
+        }
+
+        public List<YStation> GetRadioStations()
+        {
+            return api.Radio.GetStations(storage).Result;
+        }
+
+        public YStation GetRadioStation(YStationId id)
+        {
+            return api.Radio.GetStation(storage, id).Result.FirstOrDefault();
+        }
+
+        #endregion Радио
 
         #endregion Основные функции
     }

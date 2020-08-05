@@ -29,6 +29,7 @@ namespace Yandex.Music.Api.Models.Artist
         public int LikesCount { get; set; }
         public List<YLink> Links { get; set; }
         public string Name { get; set; }
+        public bool NoPicturesFromSearch { get; set; }
         public string OgImage { get; set; }
         public YArtistRatings Ratings { get; set; }
         public bool TicketsAvailable { get; set; }

@@ -8,14 +8,8 @@ using Yandex.Music.Api.Requests.Auth;
 
 namespace Yandex.Music.Api.API
 {
-    public class YUserAPI
+    public class YUserAPI : YCommonAPI
     {
-        #region Поля
-
-        private YandexMusicApi api;
-
-        #endregion Поля
-
         #region Вспомогательные функции
 
         private async Task<YAuth> AuthPassport(AuthStorage storage, string login, string password)
@@ -29,9 +23,8 @@ namespace Yandex.Music.Api.API
 
         #region Основные функции
 
-        public YUserAPI(YandexMusicApi yandex)
+        public YUserAPI(YandexMusicApi yandex): base(yandex)
         {
-            api = yandex;
         }
 
         public async Task AuthorizeAsync(AuthStorage storage, string token)

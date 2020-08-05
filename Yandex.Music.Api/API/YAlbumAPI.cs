@@ -10,19 +10,12 @@ namespace Yandex.Music.Api.API
     /// <summary>
     /// API для взаимодействия с альбомами
     /// </summary>
-    public class YAlbumAPI
+    public class YAlbumAPI : YCommonAPI
     {
-        #region Поля
-
-        private YandexMusicApi api;
-
-        #endregion Поля
-
         #region Основные функции
 
-        public YAlbumAPI(YandexMusicApi yandex)
+        public YAlbumAPI(YandexMusicApi yandex): base(yandex)
         {
-            api = yandex;
         }
 
         /// <summary>

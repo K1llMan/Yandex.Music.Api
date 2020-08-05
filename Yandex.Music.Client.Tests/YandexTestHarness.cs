@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 using Newtonsoft.Json;
@@ -8,6 +9,7 @@ using Yandex.Music.Api.Models.Album;
 using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Playlist;
+using Yandex.Music.Api.Models.Radio;
 using Yandex.Music.Api.Models.Track;
 
 namespace Yandex.Music.Client.Tests
@@ -61,6 +63,8 @@ namespace Yandex.Music.Client.Tests
         public YTrack Track { get; set; }
 
         public YPlaylist CreatedPlaylist { get; set; }
+
+        public YStation Station { get; set; }
 
         #endregion Поля для сохранения тестовых данных
 

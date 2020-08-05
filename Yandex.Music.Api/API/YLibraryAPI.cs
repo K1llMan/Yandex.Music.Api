@@ -15,14 +15,8 @@ namespace Yandex.Music.Api.API
     /// <summary>
     /// API для взаимодействия с библиотекой
     /// </summary>
-    public class YLibraryAPI
+    public class YLibraryAPI : YCommonAPI
     {
-        #region Поля
-
-        private YandexMusicApi api;
-
-        #endregion Поля
-
         #region Вспомогательные функции
 
         /// <summary>
@@ -44,9 +38,8 @@ namespace Yandex.Music.Api.API
 
         #region Основные функции
 
-        public YLibraryAPI(YandexMusicApi yandex)
+        public YLibraryAPI(YandexMusicApi yandex): base(yandex)
         {
-            api = yandex;
         }
 
         #region Лайки

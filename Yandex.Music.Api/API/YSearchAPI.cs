@@ -10,19 +10,12 @@ namespace Yandex.Music.Api.API
     /// <summary>
     /// API для поиска
     /// </summary>
-    public class YSearchAPI
+    public class YSearchAPI : YCommonAPI
     {
-        #region Поля
-
-        private YandexMusicApi api;
-
-        #endregion Поля
-
         #region Основные функции
 
-        public YSearchAPI(YandexMusicApi yandex)
+        public YSearchAPI(YandexMusicApi yandex): base(yandex)
         {
-            api = yandex;
         }
 
         /// <summary>

@@ -2,9 +2,9 @@ using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Track
 {
-    internal class YGetTrackResponse : YRequest
+    internal class YGetTrackRequest : YRequest
     {
-        public YGetTrackResponse(YandexMusicApi yandex, AuthStorage storage) : base(yandex, storage)
+        public YGetTrackRequest(YandexMusicApi yandex, AuthStorage storage) : base(yandex, storage)
         {
         }
 

@@ -16,14 +16,8 @@ namespace Yandex.Music.Api.API
     /// <summary>
     /// API для взаимодействия с треками
     /// </summary>
-    public class YTrackAPI
+    public class YTrackAPI : YCommonAPI
     {
-        #region Поля
-
-        private YandexMusicApi api;
-
-        #endregion Поля
-
         #region Вспомогательные функции
 
         private string BuildLinkForDownload(YTrackDownloadInfo mainDownloadResponse,
@@ -51,9 +45,8 @@ namespace Yandex.Music.Api.API
 
         #region Основные функции
 
-        public YTrackAPI(YandexMusicApi yandex)
+        public YTrackAPI(YandexMusicApi yandex): base(yandex)
         {
-            api = yandex;
         }
 
         /// <summary>
@@ -64,7 +57,7 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public async Task<YResponse<List<YTrack>>> GetAsync(AuthStorage storage, string trackId)
         {
-            return await new YGetTrackResponse(api, storage)
+            return await new YGetTrackRequest(api, storage)
                 .Create(trackId)
                 .GetResponseAsync<YResponse<List<YTrack>>>();
         }

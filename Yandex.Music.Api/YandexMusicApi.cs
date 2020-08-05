@@ -30,6 +30,11 @@ namespace Yandex.Music.Api
         public YPlaylistAPI Playlist { get; set; }
 
         /// <summary>
+        /// Radio API
+        /// </summary>
+        public YRadioAPI Radio { get; set; }
+
+        /// <summary>
         /// Search API
         /// </summary>
         public YSearchAPI Search { get; set; }
@@ -57,6 +62,7 @@ namespace Yandex.Music.Api
             Artist = new YArtistAPI(this);
             Library = new YLibraryAPI(this);
             Playlist = new YPlaylistAPI(this);
+            Radio = new YRadioAPI(this);
             Search = new YSearchAPI(this);
             Track = new YTrackAPI(this);
             User = new YUserAPI(this);

@@ -15,14 +15,8 @@ namespace Yandex.Music.Api.API
     /// <summary>
     /// API для взамодействия с плейлистами
     /// </summary>
-    public class YPlaylistAPI
+    public class YPlaylistAPI : YCommonAPI
     {
-        #region Поля
-
-        private YandexMusicApi api;
-
-        #endregion Поля
-
         #region Вспомогательные функции
 
         /// <summary>
@@ -72,9 +66,8 @@ namespace Yandex.Music.Api.API
 
         #region Основные функции
 
-        public YPlaylistAPI(YandexMusicApi yandex)
+        public YPlaylistAPI(YandexMusicApi yandex): base(yandex)
         {
-            api = yandex;
         }
 
         #region Список с главной

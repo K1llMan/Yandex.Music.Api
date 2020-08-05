@@ -16,7 +16,7 @@ namespace Yandex.Music.Api.Requests.Playlist
 
         private JsonSerializerSettings settings = new JsonSerializerSettings {
             Converters = new List<JsonConverter> {
-                new StringEnumConverter() {
+                new StringEnumConverter {
                     NamingStrategy = new CamelCaseNamingStrategy()
                 }
             },

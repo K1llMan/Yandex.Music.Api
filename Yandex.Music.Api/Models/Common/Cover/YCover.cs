@@ -7,8 +7,6 @@ namespace Yandex.Music.Api.Models.Common.Cover
 {
     public sealed class YCoverConverter : JsonConverter
     {
-        #region Поля
-
         public override bool CanConvert(Type objectType)
         {
             return typeof(YCover).IsAssignableFrom(objectType);
@@ -57,8 +55,6 @@ namespace Yandex.Music.Api.Models.Common.Cover
         {
             throw new NotImplementedException();
         }
-
-        #endregion
     }
 
     public class YCover
