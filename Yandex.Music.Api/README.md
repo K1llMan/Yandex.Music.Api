@@ -81,7 +81,7 @@ YandexMusicApi
 │   ├── GetStation / Async (AuthStorage storage, string type, string tag)
 │   ├── GetStation / Async (AuthStorage storage, YStationId id)
 │   ├── GetStationTracks / Async (AuthStorage storage, YStation station, string prevTrackId = "")
-│   └── SetStationSettings2Async / Async (AuthStorage storage, YStation station, YStationSettings2 settings)
+│   └── SetStationSettings2 / Async (AuthStorage storage, YStation station, YStationSettings2 settings)
 └── Future
     ...
 ```
