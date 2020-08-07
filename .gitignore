@@ -14,3 +14,5 @@
 /Yandex.Music.Api.Tests/bin
 /Yandex.Music.Client.Tests/bin/Debug
 /Yandex.Music.Client/bin/Debug
+/docs/build
+/.vscode

@@ -19,8 +19,8 @@ master_doc = 'index'
 # -- Project information -----------------------------------------------------
 
 project = 'Yandex Music API'
-copyright = '2019, Winster332'
-author = 'Stanislav Vladimirovich Martynov'
+copyright = '2020, K1llM@n'
+author = 'K1llM@n, based on Winster332 project'
 
 language = 'ru'
 
