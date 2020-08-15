@@ -26,14 +26,19 @@ namespace Yandex.Music.Api.API
         public YUserAPI(YandexMusicApi yandex): base(yandex)
         {
         }
-
+        
+        /// <summary>
+        /// Авторизация
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="token">Токен авторизации</param>
+        /// <returns></returns>
         public async Task AuthorizeAsync(AuthStorage storage, string token)
         {
             if (string.IsNullOrEmpty(token))
                 throw new Exception("Задан пустой токен авторизации.");
 
             storage.Token = token;
-
 
             // Пытаемся получить информацию о пользователе
             YResponse<YAccountResult> authInfo = await GetUserAuthAsync(storage);
@@ -50,6 +55,24 @@ namespace Yandex.Music.Api.API
             storage.User = authInfo.Result.Account;
         }
 
+        /// <summary>
+        /// Авторизация
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="token">Токен авторизации</param>
+        /// <returns></returns>
+        public void Authorize(AuthStorage storage, string token)
+        {
+            AuthorizeAsync(storage, token).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Авторизация
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="login">Логин</param>
+        /// <param name="password">Пароль</param>
+        /// <returns></returns>
         public async Task AuthorizeAsync(AuthStorage storage, string login, string password)
         {
             YAuth result = await AuthPassport(storage, login, password);
@@ -57,16 +80,23 @@ namespace Yandex.Music.Api.API
             await AuthorizeAsync(storage, result.AccessToken);
         }
 
-        public void Authorize(AuthStorage storage, string token)
-        {
-            AuthorizeAsync(storage, token).GetAwaiter().GetResult();
-        }
-
+        /// <summary>
+        /// Авторизация
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="login">Логин</param>
+        /// <param name="password">Пароль</param>
+        /// <returns></returns>
         public void Authorize(AuthStorage storage, string login, string password)
         {
             AuthorizeAsync(storage, login, password).GetAwaiter().GetResult();
         }
 
+        /// <summary>
+        /// Получение информации об авторизации
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <returns></returns>
         public async Task<YResponse<YAccountResult>> GetUserAuthAsync(AuthStorage storage)
         {
             return await new YGetAuthInfoRequest(api, storage)
@@ -74,6 +104,11 @@ namespace Yandex.Music.Api.API
                 .GetResponseAsync<YResponse<YAccountResult>>();
         }
 
+        /// <summary>
+        /// Получение информации об авторизации
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <returns></returns>
         public YResponse<YAccountResult> GetUserAuth(AuthStorage storage)
         {
             return GetUserAuthAsync(storage).GetAwaiter().GetResult();

@@ -12,42 +12,42 @@ namespace Yandex.Music.Api
         /// <summary>
         /// Album API
         /// </summary>
-        public YAlbumAPI Album { get; set; }
+        public YAlbumAPI Album { get; private set; }
 
         /// <summary>
         /// Artist API
         /// </summary>
-        public YArtistAPI Artist { get; set; }
+        public YArtistAPI Artist { get; private set; }
 
         /// <summary>
         /// Library API
         /// </summary>
-        public YLibraryAPI Library { get; set; }
+        public YLibraryAPI Library { get; private set; }
 
         /// <summary>
         /// Playlist API
         /// </summary>
-        public YPlaylistAPI Playlist { get; set; }
+        public YPlaylistAPI Playlist { get; private set; }
 
         /// <summary>
         /// Radio API
         /// </summary>
-        public YRadioAPI Radio { get; set; }
+        public YRadioAPI Radio { get; private set; }
 
         /// <summary>
         /// Search API
         /// </summary>
-        public YSearchAPI Search { get; set; }
+        public YSearchAPI Search { get; private set; }
 
         /// <summary>
         /// Track API
         /// </summary>
-        public YTrackAPI Track { get; set; }
+        public YTrackAPI Track { get; private set; }
 
         /// <summary>
         /// User API
         /// </summary>
-        public YUserAPI User { get; set; }
+        public YUserAPI User { get; private set; }
 
         #endregion Ветки API
 

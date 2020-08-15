@@ -37,25 +37,5 @@ namespace Yandex.Music.Api.Tests.Tests.API
             var response = Fixture.API.User.GetUserAuth(Fixture.Storage);
             response.Result.Account.Login.Should().Be(Fixture.Storage.User.Login);
         }
-
-        /*
-        [Fact]
-        [YandexTrait(TraitGroup.User)]
-        [Order(2)]
-        public void GetUserAuthDetails_ValidData_True()
-        {
-            var response = Fixture.API.User.GetUserAuthDetails(Fixture.Storage);
-            response.User.Login.Should().Be(Fixture.Storage.User.Login);
-        }
-
-        [Fact]
-        [YandexTrait(TraitGroup.User)]
-        [Order(3)]
-        public void GetYandexCookie_ValidData_True()
-        {
-            var response = Fixture.API.User.GetYandexCookie(Fixture.Storage);
-            response.Should().NotBe(null);
-        }
-        */
     }
 }
