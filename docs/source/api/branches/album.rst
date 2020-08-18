@@ -1,6 +1,18 @@
-Album API
+YAlbumAPI
 ==================================================================
+
+------------------------------------------------------------------
+Методы
+------------------------------------------------------------------
 
 .. code-block:: csharp
 
-   public async Task AuthorizeAsync(AuthStorage storage, string token)
+   public async Task<YResponse<YAlbum>> GetAsync(AuthStorage storage, string albumId)
+
+Получение альбома в асинхронном режиме.
+
+.. code-block:: csharp
+
+   public YResponse<YAlbum> Get(AuthStorage storage, string albumId)
+
+Получение альбома.

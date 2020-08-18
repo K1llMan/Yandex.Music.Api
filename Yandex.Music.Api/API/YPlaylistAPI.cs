@@ -500,6 +500,6 @@ namespace Yandex.Music.Api.API
 
         #endregion Операции над плейлистами
 
-        #endregion Main function
+        #endregion Основные функции
     }
 }
