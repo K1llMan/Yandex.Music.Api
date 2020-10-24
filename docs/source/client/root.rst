@@ -109,6 +109,12 @@ YandexMusicClient
 
 .. code-block:: csharp
 
+   public YPlaylist GetRewind()
+
+Получение плейлиста Большая перемотка.
+
+.. code-block:: csharp
+
    public YPlaylist GetPremiere()
 
 Получение плейлиста Премьера.

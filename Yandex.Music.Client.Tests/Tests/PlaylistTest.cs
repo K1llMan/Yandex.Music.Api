@@ -103,6 +103,15 @@ namespace Yandex.Music.Client.Tests.Tests
 
         [Fact]
         [Order(8)]
+        public void Rewind_ValidData_True()
+        {
+            YPlaylist response = Fixture.Client.GetRewind();
+
+            response.Should().NotBeNull();
+        }
+
+        [Fact]
+        [Order(9)]
         public void Create_ValidData_True()
         {
             Fixture.CreatedPlaylist = Fixture.Client.CreatePlaylist("Test Playlist");
@@ -111,7 +120,7 @@ namespace Yandex.Music.Client.Tests.Tests
         }
 
         [Fact]
-        [Order(9)]
+        [Order(10)]
         public void InsertTrack_ValidData_True()
         {
             Fixture.CreatedPlaylist.Should().NotBeNull();
@@ -123,7 +132,7 @@ namespace Yandex.Music.Client.Tests.Tests
         }
 
         [Fact]
-        [Order(10)]
+        [Order(11)]
         public void DeleteTrack_ValidData_True()
         {
             Fixture.CreatedPlaylist.Should().NotBeNull();
@@ -135,7 +144,7 @@ namespace Yandex.Music.Client.Tests.Tests
         }
 
         [Fact]
-        [Order(11)]
+        [Order(12)]
         public void Rename_ValidData_True()
         {
             Fixture.CreatedPlaylist.Should().NotBeNull();
@@ -146,7 +155,7 @@ namespace Yandex.Music.Client.Tests.Tests
         }
 
         [Fact]
-        [Order(12)]
+        [Order(13)]
         public void Remove_ValidData_True()
         {
             Fixture.CreatedPlaylist.Should().NotBeNull();

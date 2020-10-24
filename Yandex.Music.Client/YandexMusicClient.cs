@@ -145,6 +145,11 @@ namespace Yandex.Music.Client
             return api.Playlist.Podcasts(storage).Result;
         }
 
+        public YPlaylist GetRewind()
+        {
+            return api.Playlist.Rewind(storage).Result;
+        }
+
         public YPlaylist GetPremiere()
         {
             return api.Playlist.Premiere(storage).Result;
