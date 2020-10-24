@@ -9,9 +9,10 @@ namespace Yandex.Music.Api.Models.Search.Playlist
 {
     public class YSearchPlaylistModel
     {
+        public bool Available { get; set; }
         [JsonConverter(typeof(YCoverConverter))]
         public YCover Cover { get; set; }
-
+        public string CoverUri { get; set; }
         public string Description { get; set; }
         public string DescriptionFormatted { get; set; }
         public string Kind { get; set; }

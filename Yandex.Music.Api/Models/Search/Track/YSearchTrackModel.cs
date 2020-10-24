@@ -15,6 +15,7 @@ namespace Yandex.Music.Api.Models.Search.Track
         public bool AvailableAsRbt { get; set; }
         public bool AvailableForPremiumUsers { get; set; }
         public string ContentWarning { get; set; }
+        public string CoverUri { get; set; }
         public long DurationMs { get; set; }
         public bool Explicit { get; set; }
         public string Id { get; set; }

@@ -32,6 +32,11 @@ namespace Yandex.Music.Api.Models.Playlist
         /// <summary>
         /// Подкасты
         /// </summary>
-        Podcasts
+        Podcasts,
+
+        /// <summary>
+        /// Большая перемотка
+        /// </summary>
+        Rewind10
     }
 }

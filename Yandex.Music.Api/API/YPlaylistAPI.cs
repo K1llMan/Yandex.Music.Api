@@ -240,6 +240,26 @@ namespace Yandex.Music.Api.API
             return PodcastsAsync(storage).GetAwaiter().GetResult();
         }
 
+        /// <summary>
+        /// Большая перемотка
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <returns></returns>
+        public async Task<YResponse<YPlaylist>> RewindAsync(AuthStorage storage)
+        {
+            return await GetPersonalPlaylist(storage, YGeneratedPlaylistType.Rewind10);
+        }
+
+        /// <summary>
+        /// Большая перемотка
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <returns></returns>
+        public YResponse<YPlaylist> Rewind(AuthStorage storage)
+        {
+            return RewindAsync(storage).GetAwaiter().GetResult();
+        }
+
         #endregion Стандартные плейлисты
 
         #region Получение плейлиста
