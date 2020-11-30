@@ -18,6 +18,7 @@ namespace Yandex.Music.Api.Models.Search.Playlist
         public string Kind { get; set; }
         public long LikesCount { get; set; }
         public YOwner Owner { get; set; }
+        public string PlaylistUuid { get; set; }
         public List<string> Regions { get; set; }
         public int Revision { get; set; }
         public List<YTag> Tags { get; set; }

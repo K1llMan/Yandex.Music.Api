@@ -12,10 +12,12 @@ namespace Yandex.Music.Api.Models.Search.Album
         public List<YSearchArtist> Artists { get; set; }
         public bool Available { get; set; }
         public bool AvailableForPremiumUsers { get; set; }
+        public List<string> AvailableRegions { get; set; }
         public string ContentWarning { get; set; }
         public string CoverUri { get; set; }
         public string Genre { get; set; }
         public string Id { get; set; }
+        public List<string> Labels { get; set; }
         public int OriginalReleaseYear { get; set; }
         public List<string> Regions { get; set; }
         public string StorageDir { get; set; }
