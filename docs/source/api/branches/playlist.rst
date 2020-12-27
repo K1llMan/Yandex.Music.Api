@@ -105,13 +105,13 @@ Playlist API
 
    public async Task<YResponse<YPlaylist>> RewindAsync(AuthStorage storage)
 
-Получение плейлиста Большая перемотка в асинхронном режиме.
+Получение плейлиста Мой 2020 в асинхронном режиме.
 
 .. code-block:: csharp
 
    public YResponse<YPlaylist> Rewind(AuthStorage storage)
 
-Получение плейлиста Большая перемотка.
+Получение плейлиста Мой 2020.
 
 .. code-block:: csharp
 

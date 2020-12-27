@@ -111,7 +111,7 @@ YandexMusicClient
 
    public YPlaylist GetRewind()
 
-Получение плейлиста Большая перемотка.
+Получение плейлиста Мой 2020.
 
 .. code-block:: csharp
 

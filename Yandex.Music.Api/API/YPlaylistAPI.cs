@@ -241,13 +241,13 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
-        /// Большая перемотка
+        /// Мой 2020
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
         public async Task<YResponse<YPlaylist>> RewindAsync(AuthStorage storage)
         {
-            return await GetPersonalPlaylist(storage, YGeneratedPlaylistType.Rewind10);
+            return await GetPersonalPlaylist(storage, YGeneratedPlaylistType.Rewind20);
         }
 
         /// <summary>

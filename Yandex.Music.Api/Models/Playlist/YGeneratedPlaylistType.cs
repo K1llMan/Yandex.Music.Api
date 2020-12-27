@@ -37,6 +37,6 @@ namespace Yandex.Music.Api.Models.Playlist
         /// <summary>
         /// Большая перемотка
         /// </summary>
-        Rewind10
+        Rewind20,
     }
 }
