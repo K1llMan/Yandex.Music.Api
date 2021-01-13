@@ -4,5 +4,6 @@
     {
         public bool CanStartTrial { get; set; }
         public bool McDonalds { get; set; }
+        public YPeriod NonAutoRenewable { get; set; }
     }
 }
