@@ -21,6 +21,7 @@ namespace Yandex.Music.Api.Models.Album
         public string Genre { get; set; }
         public string Id { get; set; }
         public List<YLabel> Labels { get; set; }
+        public int LikesCount { get; set; }
         public string MetaType { get; set; }
         public string OgImage { get; set; }
         public List<YPrerolls> Prerolls { get; set; }
