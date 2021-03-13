@@ -29,6 +29,7 @@ namespace Yandex.Music.Api.Models.Track
         public bool Available { get; set; }
         public bool AvailableForPremiumUsers { get; set; }
         public bool AvailableFullWithoutPermission { get; set; }
+        public string BackgroundVideoUri { get; set; }
         public bool Best { get; set; }
         public string ContentWarning { get; set; }
         public string CoverUri { get; set; }

@@ -12,6 +12,7 @@ namespace Yandex.Music.Api.Models.Account
         public string DefaultEmail { get; set; }
         public YPermissions Permissions { get; set; }
         public YPlus Plus { get; set; }
+        public bool PretrialActive { get; set; }
         public bool SubEditor { get; set; }
         public int SubEditorLevel { get; set; }
         public YSubscription Subscription { get; set; }
