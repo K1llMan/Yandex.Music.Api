@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 
+using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Search.Album;
 using Yandex.Music.Api.Models.Search.Artist;
 
@@ -24,6 +25,7 @@ namespace Yandex.Music.Api.Models.Search.Track
         public bool RememberPosition { get; set; }
         public string StorageDir { get; set; }
         public string Title { get; set; }
+        public YTrackSharingFlag TrackSharingFlag { get; set; }
         public YSearchTrackType Type { get; set; }
         public string Version { get; set; }
 

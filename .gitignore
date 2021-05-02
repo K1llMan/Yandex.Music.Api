@@ -2,17 +2,24 @@
 # Данный GITIGNORE-файл был автоматически создан Microsoft(R) Visual Studio.
 ################################################################################
 
-/Yandex.Music.Client.Tests/obj
-/Yandex.Music.Client/obj
-/Yandex.Music.Api.Tests/obj
-/Yandex.Music.Api.sln.DotSettings.user
 /.vs
+/.vscode
+/docs/build
 /Yandex.Music.Api/bin
 /Yandex.Music.Api/obj
-/Yandex.Music.Api.Tests/bin/Debug/netcoreapp2.1
-/Yandex.Music.Api/Yandex.Music.Api.csproj.user
 /Yandex.Music.Api.Tests/bin
-/Yandex.Music.Client.Tests/bin/Debug
-/Yandex.Music.Client/bin/Debug
-/docs/build
-/.vscode
+/Yandex.Music.Api.Tests/obj
+/Yandex.Music.Client/bin
+/Yandex.Music.Client/obj
+/Yandex.Music.Client.Tests/bin
+/Yandex.Music.Client.Tests/obj
+
+/Yandex.Music.Api.sln.DotSettings.user
+/Yandex.Music.Api/Yandex.Music.Api.csproj.user
+
+
+
+
+
+
+

@@ -22,6 +22,7 @@ namespace Yandex.Music.Api.Models.Account
         private YBar BarBelow2 {
             set => BarBelow = value;
         }
+        public string Userhash { get; set; }
 
         #endregion
     }

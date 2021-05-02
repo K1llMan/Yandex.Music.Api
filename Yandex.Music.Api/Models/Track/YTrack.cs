@@ -49,6 +49,7 @@ namespace Yandex.Music.Api.Models.Track
         public string StorageDir { get; set; }
         public YTrack Substituted { get; set; }
         public string Title { get; set; }
+        public YTrackSharingFlag TrackSharingFlag { get; set; }
         public string Type { get; set; }
         public string Version { get; set; }
 
