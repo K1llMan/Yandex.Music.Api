@@ -6,10 +6,10 @@ namespace Yandex.Music.Api.Models.Search
     {
         #region Свойства
 
-        public int? Order { get; set; }
-        public int? PerPage { get; set; }
+        public int Order { get; set; }
+        public int PerPage { get; set; }
         public List<T> Results { get; set; }
-        public int? Total { get; set; }
+        public int Total { get; set; }
 
         #endregion
     }

@@ -41,8 +41,10 @@ namespace Yandex.Music.Api.Models.Track
         public bool LyricsAvailable { get; set; }
         public YMajor Major { get; set; }
         public YTrackNormalization Normalization { get; set; }
+        public YTrackNormalizationR128 R128 { get; set; }
         public string OgImage { get; set; }
-        public long? PreviewDurationMs { get; set; }
+        public long PreviewDurationMs { get; set; }
+        public YPodcastEpisodeType PodcastEpisodeType { get; set; }
         public string RealId { get; set; }
         public bool RememberPosition { get; set; }
         public string ShortDescription { get; set; }

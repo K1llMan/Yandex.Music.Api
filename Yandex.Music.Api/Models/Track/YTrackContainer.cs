@@ -7,6 +7,7 @@ namespace Yandex.Music.Api.Models.Track
         #region Свойства
 
         public string Id { get; set; }
+        public decimal OriginalIndex { get; set; }
         public bool Recent { get; set; }
         public DateTime Timestamp { get; set; }
         public YTrack Track { get; set; }

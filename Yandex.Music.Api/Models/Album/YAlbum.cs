@@ -15,6 +15,7 @@ namespace Yandex.Music.Api.Models.Album
         public bool AvailablePartially { get; set; }
         public List<string> Bests { get; set; }
         public List<string> Buy { get; set; }
+        public bool ChildContent { get; set; }
         public string ContentWarning { get; set; }
         public string CoverUri { get; set; }
         public List<YAlbum> Duplicates { get; set; }

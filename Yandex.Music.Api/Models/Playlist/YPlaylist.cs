@@ -58,6 +58,7 @@ namespace Yandex.Music.Api.Models.Playlist
         public string OgTitle { get; set; }
         public string OgDescription { get; set; }
         public YOwner Owner { get; set; }
+        public YPager Pager { get; set; }
         public YPlaylistPlayCounter PlayCounter { get; set; }
         public string PlaylistUuid { get; set; }
         public List<YPrerolls> Prerolls { get; set; }
