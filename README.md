@@ -6,7 +6,7 @@
 ====
 
 Форк [Yandex.Music API (Unofficial) for .Net Core](https://github.com/Winster332/Yandex.Music.Api)
-API переделано под работу с API официального приложения, подобно [[Alpha] Неофициальная Python библиотека для API Yandex Music](https://github.com/MarshalX/yandex-music-api) 
+API переделано под работу с API официального приложения, подобно [API Yandex Music - неофициальная Python библиотека](https://github.com/MarshalX/yandex-music-api) 
 
 Проекты для API и клиента. Примеры использования можно посмотреть в тестах. Тесты для API и клиента запускаются одинаково.
 
