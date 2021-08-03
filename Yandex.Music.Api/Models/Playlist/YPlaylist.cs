@@ -28,6 +28,8 @@ namespace Yandex.Music.Api.Models.Playlist
         public string AnimatedCoverUri { get; set; }
         public bool Available { get; set; }
         public string BackgroundColor { get; set; }
+        public string BackgroundImageUrl { get; set; }
+        public string BackgroundVideoUrl { get; set; }
         public bool Collective { get; set; }
 
         [JsonConverter(typeof(YCoverConverter))]

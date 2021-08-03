@@ -25,6 +25,7 @@ namespace Yandex.Music.Api.Models.Album
         public int LikesCount { get; set; }
         public string MetaType { get; set; }
         public string OgImage { get; set; }
+        public YPager Pager { get; set; }
         public List<YPrerolls> Prerolls { get; set; }
         public bool Recent { get; set; }
         public string ReleaseDate { get; set; }
