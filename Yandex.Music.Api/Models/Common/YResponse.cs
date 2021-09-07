@@ -10,5 +10,7 @@ namespace Yandex.Music.Api.Models.Common
         public YInvocationInfo InvocationInfo { get; set; }
 
         public T Result { get; set; }
+
+        public YPager Pager { get; set; }
     }
 }
