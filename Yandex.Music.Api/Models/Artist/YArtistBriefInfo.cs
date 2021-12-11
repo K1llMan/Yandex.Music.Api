@@ -12,6 +12,7 @@ namespace Yandex.Music.Api.Models.Artist
 {
     public class YArtistBriefInfo
     {
+        public YButton ActionButton { get; set; }
         public List<YAlbum> Albums { get; set; }
         [JsonProperty(ItemConverterType = typeof(YCoverConverter))]
         public List<YCover> AllCovers { get; set; }

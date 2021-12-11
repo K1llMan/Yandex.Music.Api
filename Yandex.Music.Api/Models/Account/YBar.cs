@@ -1,4 +1,6 @@
-﻿namespace Yandex.Music.Api.Models.Account
+﻿using Yandex.Music.Api.Models.Common;
+
+namespace Yandex.Music.Api.Models.Account
 {
     public class YBar
     {

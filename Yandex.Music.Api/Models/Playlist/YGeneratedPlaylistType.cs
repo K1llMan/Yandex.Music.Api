@@ -5,6 +5,11 @@ namespace Yandex.Music.Api.Models.Playlist
         None,
 
         /// <summary>
+        /// Редакторский список
+        /// </summary>
+        Editorial,
+
+        /// <summary>
         /// Плейлист дня
         /// </summary>
         PlaylistOfTheDay,
@@ -37,6 +42,6 @@ namespace Yandex.Music.Api.Models.Playlist
         /// <summary>
         /// Большая перемотка
         /// </summary>
-        Rewind20,
+        Rewind21,
     }
 }

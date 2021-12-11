@@ -8,6 +8,7 @@ namespace Yandex.Music.Api.Models.Album
 {
     public class YAlbum : YBaseModel
     {
+        public YButton ActionButton { get; set; }
         public List<YArtist> Artists { get; set; }
         public bool Available { get; set; }
         public bool AvailableForMobile { get; set; }

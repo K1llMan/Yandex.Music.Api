@@ -31,8 +31,8 @@ namespace Yandex.Music.Api.API
                 .ContinueWith(list =>
                 {
                     YPlaylist playlist = list.GetAwaiter().GetResult().Result.Blocks
-                        .FirstOrDefault(b => b.Type == "personal-playlists")
-                        ?.Entities
+                        .Where(b => b.Type == "personal-playlists")
+                        .SelectMany(b => b.Entities)
                         .FirstOrDefault(e => e.Data.Type == type)
                         ?.Data
                         .Data;
@@ -247,7 +247,7 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public async Task<YResponse<YPlaylist>> RewindAsync(AuthStorage storage)
         {
-            return await GetPersonalPlaylist(storage, YGeneratedPlaylistType.Rewind20);
+            return await GetPersonalPlaylist(storage, YGeneratedPlaylistType.Rewind21);
         }
 
         /// <summary>

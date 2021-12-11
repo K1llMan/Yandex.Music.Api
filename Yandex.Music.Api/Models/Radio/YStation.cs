@@ -7,6 +7,7 @@ namespace Yandex.Music.Api.Models.Radio
     public class YStation : YBaseModel
     {
         public YAdParams AdParams { get; set; }
+        public string CustomName { get; set; }
         public YStationData Data { get; set; }
         public string Explanation { get; set; }
         public List<YPrerolls> Prerolls { get; set; }

@@ -9,6 +9,7 @@ namespace Yandex.Music.Api.Models.Artist
 {
     public class YArtist : YBaseModel
     {
+        public YButton ActionButton { get; set; }
         public bool Available { get; set; }
         public bool Composer { get; set; }
         public List<string> Countries { get; set; }
