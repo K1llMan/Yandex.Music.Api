@@ -30,6 +30,7 @@ namespace Yandex.Music.Api.Models.Album
         public List<YPrerolls> Prerolls { get; set; }
         public bool Recent { get; set; }
         public string ReleaseDate { get; set; }
+        public YSortOrder SortOrder { get; set; }
         public string Title { get; set; }
         public int TrackCount { get; set; }
         public YTrackPosition TrackPosition { get; set; }
