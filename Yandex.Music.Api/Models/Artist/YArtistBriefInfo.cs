@@ -18,6 +18,7 @@ namespace Yandex.Music.Api.Models.Artist
         public List<YCover> AllCovers { get; set; }
         public List<YAlbum> AlsoAlbums { get; set; }
         public YArtist Artist { get; set; }
+        public string BackgroundVideoUrl { get; set; }
         public List<YConcert> Concerts { get; set; }
         public bool HasPromotions { get; set; }
         public List<string> LastReleaseIds { get; set; }
