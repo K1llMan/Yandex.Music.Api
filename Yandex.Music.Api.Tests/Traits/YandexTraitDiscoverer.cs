@@ -15,7 +15,8 @@ namespace Yandex.Music.Api.Tests.Traits
             var args = (List<object>) traitAttribute.GetConstructorArguments();
             var groups = (Array) args[0];
 
-            foreach (var nameGroup in groups) yield return new KeyValuePair<string, string>(Category, nameGroup.ToString());
+            foreach (var nameGroup in groups) 
+                yield return new KeyValuePair<string, string>(Category, nameGroup.ToString());
         }
     }
 }

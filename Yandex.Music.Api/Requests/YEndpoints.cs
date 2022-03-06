@@ -20,6 +20,5 @@
         public static string PlaylistPatch = "https://music.yandex.ru/handlers/playlist-patch.jsx";
         public static string Search = "https://music.yandex.ru/handlers/music-search.jsx";
         public static string Track = "https://music.yandex.ru/handlers/track.jsx";
-
     }
 }

@@ -12,7 +12,7 @@ namespace Yandex.Music.Api.Requests.Playlist
 {
     internal class YPlaylistChangeRequest : YRequest
     {
-        #region Поля
+        #region РџРѕР»СЏ
 
         private JsonSerializerSettings settings = new JsonSerializerSettings {
             Converters = new List<JsonConverter> {
@@ -24,7 +24,7 @@ namespace Yandex.Music.Api.Requests.Playlist
             ContractResolver = new CamelCasePropertyNamesContractResolver()
         };
 
-        #endregion Поля
+        #endregion РџРѕР»СЏ
 
         public YPlaylistChangeRequest(YandexMusicApi yandex, AuthStorage storage) : base(yandex, storage)
         {

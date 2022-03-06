@@ -6,7 +6,7 @@ namespace Yandex.Music.Api.Models.Playlist
     {
         public class YMadeForCaseForms
         {
-            #region ��������
+            #region Свойства
 
             public string Accusative { get; set; }
             public string Dative { get; set; }
@@ -15,14 +15,14 @@ namespace Yandex.Music.Api.Models.Playlist
             public string Nominative { get; set; }
             public string Prepositional { get; set; }
 
-            #endregion
+            #endregion Свойства
         }
 
-        #region ��������
+        #region Свойства
 
         public YMadeForCaseForms CaseForms { get; set; }
         public YOwner UserInfo { get; set; }
 
-        #endregion
+        #endregion Свойства
     }
 }

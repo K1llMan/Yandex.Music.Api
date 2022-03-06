@@ -13,15 +13,13 @@ namespace Yandex.Music.Api.Requests.Track
 
         public YRequest Create(string src)
         {
-            
-            var query = new Dictionary<string, string> {
+            Dictionary<string, string> query = new Dictionary<string, string> {
                 {"format", "json"}
             };
 
-            
-            var parts = src.Split('?');
+            string[] parts = src.Split('?');
             parts[1].Split('&').ToList().ForEach(p => {
-                var param = p.Split('=');
+                string[] param = p.Split('=');
                 query.Add(param[0], param[1]);
             });
 

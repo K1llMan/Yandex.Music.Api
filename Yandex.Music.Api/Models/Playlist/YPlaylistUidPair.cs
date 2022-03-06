@@ -2,20 +2,20 @@ namespace Yandex.Music.Api.Models.Playlist
 {
     public class YPlaylistUidPair
     {
-        #region ����
+        #region Поля
 
         public override string ToString()
         {
             return $"{Uid}:{Kind}";
         }
 
-        #endregion
+        #endregion Поля
 
-        #region ��������
+        #region Свойства
 
         public string Kind { get; set; }
         public string Uid { get; set; }
 
-        #endregion
+        #endregion Свойства
     }
 }

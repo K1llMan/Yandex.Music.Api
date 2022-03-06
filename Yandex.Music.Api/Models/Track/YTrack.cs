@@ -38,11 +38,14 @@ namespace Yandex.Music.Api.Models.Track
         public long FileSize { get; set; }
         public string Id { get; set; }
         public bool IsSuitableForChildren { get; set; }
-        public bool LyricsAvailable { get; set; }
+        public bool HasLyrics { get; set; }
+        public bool HasSyncLyrics { get; set; }
         public YMajor Major { get; set; }
         public YTrackNormalization Normalization { get; set; }
         public YTrackNormalizationR128 R128 { get; set; }
         public string OgImage { get; set; }
+        public bool LyricsAvailable { get; set; }
+        public YLyricsInfo LyricsInfo { get; set; }
         public string PlayerId { get; set; }
         public long PreviewDurationMs { get; set; }
         public YPodcastEpisodeType PodcastEpisodeType { get; set; }

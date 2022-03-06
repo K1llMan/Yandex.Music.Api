@@ -8,7 +8,7 @@ namespace Yandex.Music.Api.Models.Playlist
 {
     public class YPlaylistChange
     {
-        #region ��������
+        #region Свойства
 
         public int? At { get; set; }
 
@@ -20,6 +20,6 @@ namespace Yandex.Music.Api.Models.Playlist
 
         public List<YTrackAlbumPair> Tracks { get; set; }
 
-        #endregion
+        #endregion Свойства
     }
 }

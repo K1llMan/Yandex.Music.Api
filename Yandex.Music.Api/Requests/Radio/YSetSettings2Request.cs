@@ -12,7 +12,7 @@ namespace Yandex.Music.Api.Requests.Track
 {
     internal class YSetSettings2Request : YRequest
     {
-        #region Поля
+        #region РџРѕР»СЏ
 
         private JsonSerializerSettings settings = new JsonSerializerSettings
         {
@@ -25,7 +25,7 @@ namespace Yandex.Music.Api.Requests.Track
             ContractResolver = new CamelCasePropertyNamesContractResolver()
         };
 
-        #endregion Поля
+        #endregion РџРѕР»СЏ
 
         public YSetSettings2Request(YandexMusicApi yandex, AuthStorage storage) : base(yandex, storage)
         {

@@ -45,7 +45,7 @@ namespace Yandex.Music.Api.Models.Common.Cover
                 }
             }
             catch (Exception ex) {
-                throw new Exception($"Ошибка десериализации типа \"{objectType.Name}\".", ex);
+                throw new Exception($"РћС€РёР±РєР° РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё С‚РёРїР° \"{objectType.Name}\".", ex);
             }
 
             return cover;

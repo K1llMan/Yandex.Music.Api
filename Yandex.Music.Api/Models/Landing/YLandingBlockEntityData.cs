@@ -15,6 +15,6 @@ namespace Yandex.Music.Api.Models.Landing
         public bool Ready { get; set; }
         public YGeneratedPlaylistType Type { get; set; }
 
-        #endregion
+        #endregion Свойства
     }
 }

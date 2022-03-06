@@ -11,7 +11,7 @@ namespace Yandex.Music.Api.Models.Playlist
 {
     public class YPlaylist : YBaseModel
     {
-        #region ����
+        #region Поля
 
         public YPlaylistUidPair GetKey()
         {
@@ -21,9 +21,9 @@ namespace Yandex.Music.Api.Models.Playlist
             };
         }
 
-        #endregion
+        #endregion Поля
 
-        #region ��������
+        #region Свойства
 
         public YButton ActionButton { get; set; }
         public string AnimatedCoverUri { get; set; }
@@ -78,6 +78,6 @@ namespace Yandex.Music.Api.Models.Playlist
         public string UrlPart { get; set; }
         public string Visibility { get; set; }
 
-        #endregion
+        #endregion Свойства
     }
 }

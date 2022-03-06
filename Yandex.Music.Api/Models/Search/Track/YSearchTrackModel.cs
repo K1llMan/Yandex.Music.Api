@@ -21,6 +21,7 @@ namespace Yandex.Music.Api.Models.Search.Track
         public bool Explicit { get; set; }
         public string Id { get; set; }
         public bool LyricsAvailable { get; set; }
+        public YLyricsInfo LyricsInfo { get; set; }
         public List<string> Regions { get; set; }
         public bool RememberPosition { get; set; }
         public string StorageDir { get; set; }
