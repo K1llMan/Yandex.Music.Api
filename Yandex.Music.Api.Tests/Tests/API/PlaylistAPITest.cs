@@ -106,7 +106,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(8)]
         public void Rewind_ValidData_True()
         {
-            YResponse<YPlaylist> response = Fixture.API.Playlist.Rewind(Fixture.Storage);
+            YResponse<YPlaylist> response = Fixture.API.Playlist.Kinopoisk(Fixture.Storage);
 
             response.Should().NotBeNull();
         }

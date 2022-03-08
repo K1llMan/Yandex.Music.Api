@@ -1,11 +1,5 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <IsPackable>false</IsPackable>
-  </PropertyGroup>
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="$(SolutionDir)\Configs\Tests.xml" />
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />

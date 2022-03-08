@@ -245,9 +245,9 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public async Task<YResponse<YPlaylist>> RewindAsync(AuthStorage storage)
+        public async Task<YResponse<YPlaylist>> KinopoiskAsync(AuthStorage storage)
         {
-            return await GetPersonalPlaylist(storage, YGeneratedPlaylistType.Rewind21);
+            return await GetPersonalPlaylist(storage, YGeneratedPlaylistType.Kinopoisk);
         }
 
         /// <summary>
@@ -255,9 +255,9 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public YResponse<YPlaylist> Rewind(AuthStorage storage)
+        public YResponse<YPlaylist> Kinopoisk(AuthStorage storage)
         {
-            return RewindAsync(storage).GetAwaiter().GetResult();
+            return KinopoiskAsync(storage).GetAwaiter().GetResult();
         }
 
         #endregion Стандартные плейлисты

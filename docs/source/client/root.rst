@@ -109,9 +109,9 @@ YandexMusicClient
 
 .. code-block:: csharp
 
-   public YPlaylist GetRewind()
+   public YPlaylist GetKinopoisk()
 
-Получение плейлиста Мой 2020.
+Получение плейлиста Кинопоиск.
 
 .. code-block:: csharp
 

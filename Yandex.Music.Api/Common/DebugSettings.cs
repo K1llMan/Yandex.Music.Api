@@ -30,12 +30,12 @@ namespace Yandex.Music.Api.Common
 
         public T Deserialize<T>(string url, string json, JsonSerializerSettings settings)
         {
-            var errors = new Dictionary<string, List<string>>();
+            Dictionary<string, List<string>> errors = new Dictionary<string, List<string>>();
 
             settings.Error = (sender, args) =>  {
-                var pos = args.ErrorContext.Error.Message.IndexOf("Path");
-                var error = args.ErrorContext.Error.Message.Substring(0, pos);
-                var path = args.ErrorContext.Error.Message.Substring(pos);
+                int pos = args.ErrorContext.Error.Message.IndexOf("Path");
+                string error = args.ErrorContext.Error.Message.Substring(0, pos);
+                string path = args.ErrorContext.Error.Message.Substring(pos);
 
                 if (!errors.ContainsKey(error))
                     errors[error] = new List<string>();
@@ -46,7 +46,7 @@ namespace Yandex.Music.Api.Common
 
             settings.MissingMemberHandling = MissingMemberHandling.Error;
 
-            var obj = JsonConvert.DeserializeObject<T>(json, settings);
+            T obj = JsonConvert.DeserializeObject<T>(json, settings);
 
             // Запись ответа от API с ошибкой
             if (errors.Count > 0) {

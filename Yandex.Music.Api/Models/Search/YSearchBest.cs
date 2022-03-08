@@ -30,9 +30,9 @@ namespace Yandex.Music.Api.Models.Search
             if (reader.TokenType == JsonToken.Null)
                 return null;
 
-            var obj = JObject.Load(reader);
-            var contract = (JsonObjectContract) serializer.ContractResolver.ResolveContract(objectType);
-            var best = existingValue as YSearchBest ?? (YSearchBest) contract.DefaultCreator();
+            JObject obj = JObject.Load(reader);
+            JsonObjectContract contract = (JsonObjectContract) serializer.ContractResolver.ResolveContract(objectType);
+            YSearchBest best = existingValue as YSearchBest ?? (YSearchBest) contract.DefaultCreator();
 
             best.Type = (YSearchType) Enum.Parse(typeof(YSearchType), obj["type"].ToString(), true);
 

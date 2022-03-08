@@ -16,11 +16,11 @@ namespace Yandex.Music.Api.Requests.Auth
 
         public YRequest Create(string login, string password)
         {
-            var headers = new List<KeyValuePair<string, string>> {
+            List<KeyValuePair<string, string>> headers = new List<KeyValuePair<string, string>> {
                 YRequestHeaders.Get(YHeader.ContentType, "application/x-www-form-urlencoded")
             };
 
-            var body = new Dictionary<string, string> {
+            Dictionary<string, string> body = new Dictionary<string, string> {
                 { "grant_type", "password" },
                 { "client_id", CLIENT_ID },
                 { "client_secret", CLIENT_SECRET },

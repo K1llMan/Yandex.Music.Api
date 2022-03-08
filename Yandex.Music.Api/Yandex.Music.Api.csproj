@@ -1,10 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="$(SolutionDir)\Configs\Common.xml" />
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile></DocumentationFile>
+    <PackageId>KM.Yandex.Music.Api</PackageId>
+    <Description>Unofficial Yandex.Music API library</Description>
+    <PackageTags>yandex;music;api</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />

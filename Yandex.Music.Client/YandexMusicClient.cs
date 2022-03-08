@@ -147,7 +147,7 @@ namespace Yandex.Music.Client
 
         public YPlaylist GetRewind()
         {
-            return api.Playlist.Rewind(storage).Result;
+            return api.Playlist.Kinopoisk(storage).Result;
         }
 
         public YPlaylist GetPremiere()

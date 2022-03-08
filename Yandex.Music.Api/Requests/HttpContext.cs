@@ -16,10 +16,10 @@ namespace Yandex.Music.Api.Requests
 
         public long GetTimeInterval()
         {
-            var dt = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now);
-            var dt1970 = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            var tsInterval = dt.Subtract(dt1970);
-            var iMilliseconds = Convert.ToInt64(tsInterval.TotalMilliseconds);
+            DateTime dt = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now);
+            DateTime dt1970 = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            TimeSpan tsInterval = dt.Subtract(dt1970);
+            long iMilliseconds = Convert.ToInt64(tsInterval.TotalMilliseconds);
 
             return iMilliseconds;
         }

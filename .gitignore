@@ -5,14 +5,9 @@
 /.vs
 /.vscode
 /docs/build
-/Yandex.Music.Api/bin
-/Yandex.Music.Api/obj
-/Yandex.Music.Api.Tests/bin
-/Yandex.Music.Api.Tests/obj
-/Yandex.Music.Client/bin
-/Yandex.Music.Client/obj
-/Yandex.Music.Client.Tests/bin
-/Yandex.Music.Client.Tests/obj
+*/bin
+*/obj
+/output
 
 /Yandex.Music.Api.sln.DotSettings.user
 /Yandex.Music.Api/Yandex.Music.Api.csproj.user

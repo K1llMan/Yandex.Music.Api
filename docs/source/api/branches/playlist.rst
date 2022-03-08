@@ -103,15 +103,15 @@ Playlist API
 
 .. code-block:: csharp
 
-   public async Task<YResponse<YPlaylist>> RewindAsync(AuthStorage storage)
+   public async Task<YResponse<YPlaylist>> KinopoiskAsync(AuthStorage storage)
 
-Получение плейлиста Мой 2020 в асинхронном режиме.
+Получение плейлиста Кинопоиск в асинхронном режиме.
 
 .. code-block:: csharp
 
-   public YResponse<YPlaylist> Rewind(AuthStorage storage)
+   public YResponse<YPlaylist> Kinopoisk(AuthStorage storage)
 
-Получение плейлиста Мой 2020.
+Получение плейлиста Кинопоиск.
 
 .. code-block:: csharp
 

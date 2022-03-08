@@ -33,7 +33,7 @@ namespace Yandex.Music.Api.Requests.Track
 
         public YRequest Create(YStationDescription station, YStationSettings2 settings2)
         {
-            var headers = new List<KeyValuePair<string, string>> {
+            List<KeyValuePair<string, string>> headers = new List<KeyValuePair<string, string>> {
                 YRequestHeaders.Get(YHeader.ContentType, storage)
             };
 

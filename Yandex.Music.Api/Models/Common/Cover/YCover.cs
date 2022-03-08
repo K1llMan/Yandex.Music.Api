@@ -17,11 +17,11 @@ namespace Yandex.Music.Api.Models.Common.Cover
             if (reader.TokenType == JsonToken.Null)
                 return null;
 
-            var jObject = JObject.Load(reader);
+            JObject jObject = JObject.Load(reader);
             YCover cover;
 
             try {
-                var type = jObject["error"] != null
+                YCoverType type = jObject["error"] != null
                     ? YCoverType.Error
                     : jObject["type"].ToObject<YCoverType>();
 

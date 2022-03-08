@@ -40,8 +40,8 @@ namespace Yandex.Music.Api.Models.Playlist
         Podcasts,
 
         /// <summary>
-        /// Большая перемотка
+        /// Кинопоиск
         /// </summary>
-        Rewind21,
+        Kinopoisk,
     }
 }

@@ -12,7 +12,7 @@ namespace Yandex.Music.Api.Requests.Search
 
         public YRequest Create(string searchText)
         {
-            var query = new Dictionary<string, string> {
+            Dictionary<string, string> query = new Dictionary<string, string> {
                 { "part", searchText }
             };
 

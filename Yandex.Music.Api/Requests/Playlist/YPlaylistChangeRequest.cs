@@ -38,7 +38,7 @@ namespace Yandex.Music.Api.Requests.Playlist
                 { "diff", JsonConvert.SerializeObject(changes, settings) }
             };
 
-            var headers = new List<KeyValuePair<string, string>> {
+            List<KeyValuePair<string, string>> headers = new List<KeyValuePair<string, string>> {
                 YRequestHeaders.Get(YHeader.ContentType, "application/x-www-form-urlencoded")
             };
 

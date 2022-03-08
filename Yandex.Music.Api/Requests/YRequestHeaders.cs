@@ -39,7 +39,7 @@ namespace Yandex.Music.Api.Requests
 
         public static KeyValuePair<string, string> Get(YHeader header, AuthStorage storage)
         {
-            var value = string.Empty;
+            string value = string.Empty;
             switch (header) {
                 case YHeader.Accept:
                     value = "application/json; q=1.0, text/*; q=0.8, */*; q=0.1";

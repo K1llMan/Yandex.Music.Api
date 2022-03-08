@@ -40,12 +40,12 @@ namespace Yandex.Music.Api.Requests
         protected virtual void FormRequest(string url, string method = WebRequestMethods.Http.Get,
             Dictionary<string, string> query = null, List<KeyValuePair<string, string>> headers = null, string body = null)
         {
-            var queryStr = string.Empty;
+            string queryStr = string.Empty;
             if (query != null && query.Count > 0)
                 queryStr = "?" + GetQueryString(query);
 
-            var uri = new Uri($"{url}{queryStr}");
-            var request = WebRequest.CreateHttp(uri);
+            Uri uri = new Uri($"{url}{queryStr}");
+            HttpWebRequest request = WebRequest.CreateHttp(uri);
 
             if (storage.Context.WebProxy != null)
                 request.Proxy = storage.Context.WebProxy;
@@ -57,7 +57,7 @@ namespace Yandex.Music.Api.Requests
             storage.SetHeaders(request);
 
             if (headers != null && headers.Count > 0)
-                foreach (var header in headers)
+                foreach (KeyValuePair<string, string> header in headers)
                     request.Headers.Add(header.Key, header.Value);
 
             if (!string.IsNullOrEmpty(body)) {
@@ -81,8 +81,8 @@ namespace Yandex.Music.Api.Requests
         {
             try {
                 string result;
-                using (var stream = response.GetResponseStream()) {
-                    var reader = new StreamReader(stream);
+                using (Stream stream = response.GetResponseStream()) {
+                    StreamReader reader = new StreamReader(stream);
                     result = await reader.ReadToEndAsync();
                 }
 
@@ -129,7 +129,7 @@ namespace Yandex.Music.Api.Requests
             if (fullRequest == null)
                 return default(T);
 
-            using (var response = await GetResponseAsync()) {
+            using (HttpWebResponse response = await GetResponseAsync()) {
                 return await GetDataFromResponseAsync<T>(response);
             }
         }
