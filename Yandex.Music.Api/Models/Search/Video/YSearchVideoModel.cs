@@ -4,8 +4,6 @@ namespace Yandex.Music.Api.Models.Search.Video
 {
     public class YSearchVideoModel
     {
-        #region Свойства
-
         public int Duration { get; set; }
         public string HtmlAutoPlayVideoPlayer { get; set; }
         public List<string> Regions { get; set; }
@@ -13,7 +11,5 @@ namespace Yandex.Music.Api.Models.Search.Video
         public string ThumbnailUrl { get; set; }
         public string Title { get; set; }
         public string YoutubeUrl { get; set; }
-
-        #endregion
     }
 }

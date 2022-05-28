@@ -4,15 +4,11 @@ namespace Yandex.Music.Api.Models.Track
 {
     public class YTrackContainer : IEquatable<YTrackContainer>
     {
-        #region Свойства
-
         public string Id { get; set; }
         public decimal OriginalIndex { get; set; }
         public bool Recent { get; set; }
         public DateTime Timestamp { get; set; }
         public YTrack Track { get; set; }
-
-        #endregion
 
         #region IEquatable
 

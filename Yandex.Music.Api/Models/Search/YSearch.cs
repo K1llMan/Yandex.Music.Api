@@ -10,8 +10,6 @@ namespace Yandex.Music.Api.Models.Search
 {
     public class YSearch
     {
-        #region Свойства
-
         public YSearchResult<YSearchAlbumModel> Albums { get; set; }
         public YSearchResult<YSearchArtistModel> Artists { get; set; }
 
@@ -31,7 +29,5 @@ namespace Yandex.Music.Api.Models.Search
         public YSearchType Type { get; set; }
         public YSearchResult<YSearchUserModel> Users { get; set; }
         public YSearchResult<YSearchVideoModel> Videos { get; set; }
-
-        #endregion
     }
 }

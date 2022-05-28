@@ -7,8 +7,6 @@ namespace Yandex.Music.Api.Models.Search.Album
 {
     public class YSearchAlbumModel
     {
-        #region Свойства
-
         public List<YSearchArtist> Artists { get; set; }
         public bool Available { get; set; }
         public bool AvailableForPremiumUsers { get; set; }
@@ -28,7 +26,5 @@ namespace Yandex.Music.Api.Models.Search.Album
         public string Type { get; set; }
         public string Version { get; set; }
         public int Year { get; set; }
-
-        #endregion
     }
 }

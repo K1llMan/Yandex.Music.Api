@@ -7,8 +7,6 @@ namespace Yandex.Music.Api.Models.Artist
 {
     public class YConcert
     {
-        #region Свойства
-
         public string Address { get; set; }
         public string AfishaUrl { get; set; }
         public YArtist Artist { get; set; }
@@ -27,7 +25,5 @@ namespace Yandex.Music.Api.Models.Artist
         [JsonProperty("metro-stations")]
         public List<YMetroStation> MetroStations { get; set; }
         public string Place { get; set; }
-
-        #endregion Свойства
     }
 }

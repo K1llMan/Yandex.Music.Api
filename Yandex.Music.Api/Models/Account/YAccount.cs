@@ -15,10 +15,8 @@ namespace Yandex.Music.Api.Models.Account
         public bool HostedUser { get; set; }
         public string Login { get; set; }
         public DateTime Now { get; set; }
-
         [JsonProperty("passport-phones")] 
         public List<YPhone> PassportPhones { get; set; }
-
         public int Region { get; set; }
         public DateTime RegisteredAt { get; set; }
         public string SecondName { get; set; }

@@ -8,8 +8,6 @@ namespace Yandex.Music.Api.Models.Search.Track
 {
     public class YSearchTrackModel
     {
-        #region Свойства
-
         public List<YSearchAlbumModel> Albums { get; set; }
         public List<YSearchArtist> Artists { get; set; }
         public bool Available { get; set; }
@@ -27,9 +25,8 @@ namespace Yandex.Music.Api.Models.Search.Track
         public string StorageDir { get; set; }
         public string Title { get; set; }
         public YTrackSharingFlag TrackSharingFlag { get; set; }
+        public YTrackSource TrackSource { get; set; }
         public YSearchTrackType Type { get; set; }
         public string Version { get; set; }
-
-        #endregion
     }
 }

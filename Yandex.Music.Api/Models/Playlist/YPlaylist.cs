@@ -32,13 +32,10 @@ namespace Yandex.Music.Api.Models.Playlist
         public string BackgroundImageUrl { get; set; }
         public string BackgroundVideoUrl { get; set; }
         public bool Collective { get; set; }
-
         [JsonConverter(typeof(YCoverConverter))]
         public YCover Cover { get; set; }
-
         [JsonConverter(typeof(YCoverConverter))]
         public YCover CoverWithoutText { get; set; }
-
         public List<YId> RecentTracks { get; set; }
         public DateTime Created { get; set; }
         public string Description { get; set; }

@@ -14,10 +14,8 @@ namespace Yandex.Music.Api.Models.Artist
         public bool Composer { get; set; }
         public List<string> Countries { get; set; }
         public YArtistCounts Counts { get; set; }
-
         [JsonConverter(typeof(YCoverConverter))]
         public YCover Cover { get; set; }
-
         public List<string> DbAliases { get; set; }
         #warning Непонятная коллекция с содержимым разных типов
         public List<object> Decomposed { get; set; }

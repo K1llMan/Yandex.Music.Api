@@ -6,8 +6,6 @@ namespace Yandex.Music.Api.Models.Account
 {
     public class YAccountResult
     {
-        #region Свойства
-
         public YAccount Account { get; set; }
         public string DefaultEmail { get; set; }
         public YMasterHub MasterHub { get; set; }
@@ -24,7 +22,5 @@ namespace Yandex.Music.Api.Models.Account
             set => BarBelow = value;
         }
         public string Userhash { get; set; }
-
-        #endregion
     }
 }

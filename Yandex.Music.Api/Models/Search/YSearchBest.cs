@@ -18,8 +18,6 @@ namespace Yandex.Music.Api.Models.Search
     /// </summary>
     internal class YSearchBestConverter : JsonConverter
     {
-        #region Поля
-
         public override bool CanConvert(Type objectType)
         {
             throw new NotImplementedException();
@@ -62,23 +60,13 @@ namespace Yandex.Music.Api.Models.Search
             throw new NotImplementedException();
         }
 
-        #endregion
-
-        #region Свойства
-
         public override bool CanWrite => false;
-
-        #endregion
     }
 
     [JsonConverter(typeof(YSearchBestConverter))]
     public class YSearchBest
     {
-        #region Свойства
-
         public dynamic Result { get; set; }
         public YSearchType Type { get; set; }
-
-        #endregion
     }
 }

@@ -9,10 +9,8 @@ namespace Yandex.Music.Api.Models.Common.Cover
     public enum YCoverType
     {
         Error,
-
         [EnumMember(Value = "from-artist-photos")]
         FromArtistPhotos,
-
         [EnumMember(Value = "from-album-cover")]
         FromAlbumCover,
         Mosaic,
