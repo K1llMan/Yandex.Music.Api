@@ -151,11 +151,14 @@ namespace Yandex.Music.Api.API
         /// Получение ссылки для загрузки
         /// </summary>
         /// <param name="storage">Хранилище</param>
-        /// <param name="trackKey">Ключ трека в формате {идентифактор трека:идентификатор альбома}</param>
+        /// <param name="trackKey">Ключ трека в формате {идентификатор трека:идентификатор альбома}</param>
         /// <returns></returns>
         public string GetFileLink(AuthStorage storage, string trackKey)
         {
-            YTrackDownloadInfo mainDownloadResponse = GetMetadataForDownload(storage, trackKey).Result.First(m => m.Codec == "mp3");
+            YTrackDownloadInfo mainDownloadResponse = GetMetadataForDownload(storage, trackKey)
+                .Result
+                .OrderByDescending(i => i.BitrateInKbps)
+                .First(m => m.Codec == "mp3");
             YStorageDownloadFile storageDownloadResponse = GetDownloadFileInfo(storage, mainDownloadResponse);
 
             return BuildLinkForDownload(mainDownloadResponse, storageDownloadResponse);
