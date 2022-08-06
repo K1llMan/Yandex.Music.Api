@@ -43,6 +43,11 @@ namespace Yandex.Music.Api.Models.Common
         /// <summary>
         /// Пользователи
         /// </summary>
-        User
+        User,
+        
+        /// <summary>
+        /// Эпизод подкаста
+        /// </summary>
+        PodcastEpisode
     }
 }

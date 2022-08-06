@@ -8,6 +8,7 @@ using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Search.Album;
 using Yandex.Music.Api.Models.Search.Artist;
 using Yandex.Music.Api.Models.Search.Playlist;
+using Yandex.Music.Api.Models.Search.PodcastEpisode;
 using Yandex.Music.Api.Models.Search.Track;
 using Yandex.Music.Api.Models.Search.Video;
 
@@ -32,11 +33,15 @@ namespace Yandex.Music.Api.Models.Search
             JsonObjectContract contract = (JsonObjectContract) serializer.ContractResolver.ResolveContract(objectType);
             YSearchBest best = existingValue as YSearchBest ?? (YSearchBest) contract.DefaultCreator();
 
-            best.Type = (YSearchType) Enum.Parse(typeof(YSearchType), obj["type"].ToString(), true);
+            string valueToParse = obj["type"].ToString().Replace("_", string.Empty);
+            best.Type = (YSearchType) Enum.Parse(typeof(YSearchType), valueToParse, true);
 
             switch (best.Type) {
                 case YSearchType.Track:
                     best.Result = JsonConvert.DeserializeObject<YSearchTrackModel>(obj["result"].ToString());
+                    break;
+                case YSearchType.PodcastEpisode:
+                    best.Result = JsonConvert.DeserializeObject<YSearchPodcastEpisodeModel>(obj["result"].ToString());
                     break;
                 case YSearchType.Album:
                     best.Result = JsonConvert.DeserializeObject<YSearchAlbumModel>(obj["result"].ToString());
