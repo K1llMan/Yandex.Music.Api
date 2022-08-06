@@ -2,11 +2,11 @@
 # Данный GITIGNORE-файл был автоматически создан Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs
-/.vscode
+.vs
+.vscode
 /docs/build
-*/bin
-*/obj
+bin
+obj
 /output
 
 /Yandex.Music.Api.sln.DotSettings.user

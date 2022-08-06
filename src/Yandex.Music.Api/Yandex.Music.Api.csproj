@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="$(SolutionDir)\Configs\Common.xml" />
+  <PropertyGroup>
+    <PackageId>KM.Yandex.Music.Api</PackageId>
+    <Description>Unofficial Yandex.Music API library</Description>
+    <PackageTags>yandex;music;api</PackageTags>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="README.md">
+      <Link>README.md</Link>
+    </Content>
+  </ItemGroup>
+</Project>

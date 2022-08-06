@@ -4,7 +4,7 @@
 [![Nuget Client](https://img.shields.io/nuget/dt/KM.Yandex.Music.Client)](https://www.nuget.org/packages/KM.Yandex.Music.Client/)
 
  
- Yandex.Music API (Unofficial) for .Net Core
+ Yandex.Music API (Unofficial) for .Net
 ====
 
 Форк [Yandex.Music API (Unofficial) for .Net Core](https://github.com/Winster332/Yandex.Music.Api)
