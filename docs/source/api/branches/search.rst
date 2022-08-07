@@ -55,6 +55,18 @@ Search API
 
 .. code-block:: csharp
 
+   public YResponse<YSearch> PodcastEpisodeAsync(AuthStorage storage, string podcastName, int pageNumber = 0)
+
+Поиск по подкастам в асинхронном режиме.
+
+.. code-block:: csharp
+
+   public YResponse<YSearch> PodcastEpisode(AuthStorage storage, string podcastName, int pageNumber = 0)
+
+Поиск по подкастам.
+
+.. code-block:: csharp
+
    public async Task<YResponse<YSearch>> VideosAsync(AuthStorage storage, string videoName, int pageNumber = 0)
 
 Поиск по видеозаписям в асинхронном режиме.

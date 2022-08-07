@@ -17,6 +17,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         #region Поля
 
         private static string track = "All I Got";
+        private static string podcast = "Душевный подкаст‍";
         private static string album = "Black Is the Colour";
         private static string artist = "Arven";
         private static string playlist = "Лучшие песни русского рока";
@@ -65,6 +66,14 @@ namespace Yandex.Music.Api.Tests.Tests.API
 
         [Fact, YandexTrait(TraitGroup.SearchAPI)]
         [Order(5)]
+        public void PodcastEpisode_ValidData_True()
+        {
+            YResponse<YSearch> response = Fixture.API.Search.PodcastEpisode(Fixture.Storage, podcast);
+            response.Result.PodcastEpisode.Total.Should().BeGreaterThan(0);
+        }
+
+        [Fact, YandexTrait(TraitGroup.SearchAPI)]
+        [Order(6)]
         public void Suggest_ValidData_True()
         {
             YResponse<YSearchSuggest> suggest = Fixture.API.Search.Suggest(Fixture.Storage, artist);

@@ -71,6 +71,7 @@ YandexMusicApi
 │   ├── Albums / Async (AuthStorage storage, string albumName, int pageNumber = 0)
 │   ├── Artist / Async (AuthStorage storage, string artistName, int pageNumber = 0)
 │   ├── Playlist / Async (AuthStorage storage, string playlistName, int pageNumber = 0)
+│   ├── PodcastEpisode / Async (AuthStorage storage, string podcastName, int pageNumber = 0)
 │   ├── Videos / Async (AuthStorage storage, string videoName, int pageNumber = 0)
 │   ├── Users / Async (AuthStorage storage, string videoName, int pageNumber = 0) *
 │   ├── Search / Async (AuthStorage storage, string searchText, YSearchType searchType, int page = 0)

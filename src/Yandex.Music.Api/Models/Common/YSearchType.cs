@@ -1,3 +1,5 @@
+using System.Runtime.Serialization;
+
 namespace Yandex.Music.Api.Models.Common
 {
     /// <summary>
@@ -29,6 +31,12 @@ namespace Yandex.Music.Api.Models.Common
         /// Плейлисты
         /// </summary>
         Playlist,
+
+        /// <summary>
+        /// Эпизод подкаста
+        /// </summary>
+        [EnumMember(Value = "podcast_episode")]
+        PodcastEpisode,
 
         /// <summary>
         /// Видео
