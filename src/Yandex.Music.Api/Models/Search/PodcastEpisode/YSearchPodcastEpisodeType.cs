@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Yandex.Music.Api.Models.Search.Podcast
+namespace Yandex.Music.Api.Models.Search.PodcastEpisode
 {
     public enum YSearchPodcastEpisodeType
     {

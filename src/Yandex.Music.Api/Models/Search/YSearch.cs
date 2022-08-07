@@ -4,7 +4,7 @@ using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Search.Album;
 using Yandex.Music.Api.Models.Search.Artist;
 using Yandex.Music.Api.Models.Search.Playlist;
-using Yandex.Music.Api.Models.Search.Podcast;
+using Yandex.Music.Api.Models.Search.PodcastEpisode;
 using Yandex.Music.Api.Models.Search.Track;
 using Yandex.Music.Api.Models.Search.User;
 using Yandex.Music.Api.Models.Search.Video;

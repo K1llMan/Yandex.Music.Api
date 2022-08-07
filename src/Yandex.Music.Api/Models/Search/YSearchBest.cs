@@ -8,6 +8,7 @@ using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Search.Album;
 using Yandex.Music.Api.Models.Search.Artist;
 using Yandex.Music.Api.Models.Search.Playlist;
+using Yandex.Music.Api.Models.Search.PodcastEpisode;
 using Yandex.Music.Api.Models.Search.Track;
 using Yandex.Music.Api.Models.Search.Video;
 
@@ -46,6 +47,9 @@ namespace Yandex.Music.Api.Models.Search
                     break;
                 case YSearchType.Playlist:
                     best.Result = JsonConvert.DeserializeObject<YSearchPlaylistModel>(obj["result"].ToString());
+                    break;
+                case YSearchType.PodcastEpisode:
+                    best.Result = JsonConvert.DeserializeObject<YSearchPodcastEpisodeModel>(obj["result"].ToString());
                     break;
                 case YSearchType.Video:
                     best.Result = JsonConvert.DeserializeObject<YSearchVideoModel>(obj["result"].ToString());

@@ -5,7 +5,7 @@ using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Search.Album;
 using Yandex.Music.Api.Models.Search.Artist;
 
-namespace Yandex.Music.Api.Models.Search.Podcast
+namespace Yandex.Music.Api.Models.Search.PodcastEpisode
 {
     public class YSearchPodcastEpisodeModel
     {
