@@ -14,10 +14,11 @@ namespace Yandex.Music.Api.Requests.Search
 
         public YRequest<YResponse<YSearch>> Create(string searchText, YSearchType searchType, int page = 0)
         {
-            Dictionary<string, string> query = new Dictionary<string, string> {
+            Dictionary<string, string> query = new()
+            {
                 {"text", searchText},
                 {"type", searchType.ToString()},
-                {"page", page.ToString()},
+                {"page", page.ToString()}
             };
 
             FormRequest($"{YEndpoints.API}/search", query: query);

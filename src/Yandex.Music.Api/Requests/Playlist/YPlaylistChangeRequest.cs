@@ -15,7 +15,8 @@ namespace Yandex.Music.Api.Requests.Playlist
     {
         #region Поля
 
-        private JsonSerializerSettings settings = new JsonSerializerSettings {
+        private JsonSerializerSettings settings = new()
+        {
             Converters = new List<JsonConverter> {
                 new StringEnumConverter {
                     NamingStrategy = new CamelCaseNamingStrategy()
@@ -33,13 +34,15 @@ namespace Yandex.Music.Api.Requests.Playlist
 
         public YRequest<YResponse<YPlaylist>> Create(YPlaylist playlist, List<YPlaylistChange> changes)
         {
-            Dictionary<string, string> query = new Dictionary<string, string> {
+            Dictionary<string, string> query = new()
+            {
                 { "kind", playlist.Kind },
                 { "revision", playlist.Revision.ToString() },
                 { "diff", JsonConvert.SerializeObject(changes, settings) }
             };
 
-            List<KeyValuePair<string, string>> headers = new List<KeyValuePair<string, string>> {
+            List<KeyValuePair<string, string>> headers = new()
+            {
                 YRequestHeaders.Get(YHeader.ContentType, "application/x-www-form-urlencoded")
             };
 

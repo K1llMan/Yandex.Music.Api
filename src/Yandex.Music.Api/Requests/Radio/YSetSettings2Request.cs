@@ -15,7 +15,7 @@ namespace Yandex.Music.Api.Requests.Radio
     {
         #region Поля
 
-        private JsonSerializerSettings settings = new JsonSerializerSettings
+        private JsonSerializerSettings settings = new()
         {
             Converters = new List<JsonConverter> {
                 new StringEnumConverter {
@@ -34,7 +34,8 @@ namespace Yandex.Music.Api.Requests.Radio
 
         public YRequest<YResponse<string>> Create(YStationDescription station, YStationSettings2 settings2)
         {
-            List<KeyValuePair<string, string>> headers = new List<KeyValuePair<string, string>> {
+            List<KeyValuePair<string, string>> headers = new()
+            {
                 YRequestHeaders.Get(YHeader.ContentType, storage)
             };
 

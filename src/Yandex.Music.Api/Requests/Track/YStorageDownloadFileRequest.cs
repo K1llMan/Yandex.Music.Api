@@ -14,7 +14,8 @@ namespace Yandex.Music.Api.Requests.Track
 
         public YRequest<YStorageDownloadFile> Create(string src)
         {
-            Dictionary<string, string> query = new Dictionary<string, string> {
+            Dictionary<string, string> query = new()
+            {
                 {"format", "json"}
             };
 

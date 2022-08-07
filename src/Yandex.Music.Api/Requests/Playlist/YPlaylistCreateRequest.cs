@@ -15,12 +15,14 @@ namespace Yandex.Music.Api.Requests.Playlist
 
         public YRequest<YResponse<YPlaylist>> Create(string name)
         {
-            Dictionary<string, string> query = new Dictionary<string, string> {
+            Dictionary<string, string> query = new()
+            {
                 { "title", name },
-                { "visibility", "public" },
+                { "visibility", "public" }
             };
 
-            List<KeyValuePair<string, string>> headers = new List<KeyValuePair<string, string>> {
+            List<KeyValuePair<string, string>> headers = new()
+            {
                 YRequestHeaders.Get(YHeader.ContentType, "application/x-www-form-urlencoded")
             };
 

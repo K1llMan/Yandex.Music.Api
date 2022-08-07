@@ -13,7 +13,8 @@ namespace Yandex.Music.Api.Requests.Track
 
         public YRequest<YResponse<List<YTrackDownloadInfo>>> Create(string trackKey, bool direct)
         {
-            Dictionary<string, string> query = new Dictionary<string, string> {
+            Dictionary<string, string> query = new()
+            {
                 { "direct", direct.ToString() }
             };
 

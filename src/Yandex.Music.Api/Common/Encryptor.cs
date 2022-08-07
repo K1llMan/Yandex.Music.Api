@@ -47,8 +47,8 @@ namespace Yandex.Music.Api.Common
 
         public byte[] Encrypt(byte[] data)
         {
-            using (MemoryStream ms = new MemoryStream()) {
-                using (CryptoStream csEncrypt = new CryptoStream(ms, rijAlg.CreateEncryptor(keyHash, IVHash), CryptoStreamMode.Write)) {
+            using (MemoryStream ms = new()) {
+                using (CryptoStream csEncrypt = new(ms, rijAlg.CreateEncryptor(keyHash, IVHash), CryptoStreamMode.Write)) {
                     csEncrypt.Write(data, 0, data.Length);
 
                     if (!csEncrypt.HasFlushedFinalBlock)
@@ -61,8 +61,8 @@ namespace Yandex.Music.Api.Common
 
         public byte[] Decrypt(byte[] data)
         {
-            using (MemoryStream ms = new MemoryStream()) {
-                using (CryptoStream csDecrypt = new CryptoStream(ms, rijAlg.CreateDecryptor(keyHash, IVHash), CryptoStreamMode.Write)) {
+            using (MemoryStream ms = new()) {
+                using (CryptoStream csDecrypt = new(ms, rijAlg.CreateDecryptor(keyHash, IVHash), CryptoStreamMode.Write)) {
                     csDecrypt.Write(data, 0, data.Length);
 
                     if (!csDecrypt.HasFlushedFinalBlock)

@@ -17,16 +17,18 @@ namespace Yandex.Music.Api.Requests.Auth
 
         public YRequest<YAuth> Create(string login, string password)
         {
-            List<KeyValuePair<string, string>> headers = new List<KeyValuePair<string, string>> {
+            List<KeyValuePair<string, string>> headers = new()
+            {
                 YRequestHeaders.Get(YHeader.ContentType, "application/x-www-form-urlencoded")
             };
 
-            Dictionary<string, string> body = new Dictionary<string, string> {
+            Dictionary<string, string> body = new()
+            {
                 { "grant_type", "password" },
                 { "client_id", CLIENT_ID },
                 { "client_secret", CLIENT_SECRET },
                 { "username", login },
-                { "password", password },
+                { "password", password }
             };
 
             FormRequest($"{YEndpoints.OAuth}/token", WebRequestMethods.Http.Post, headers: headers, body: GetQueryString(body));

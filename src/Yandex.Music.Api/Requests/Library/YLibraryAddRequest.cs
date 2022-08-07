@@ -15,11 +15,13 @@ namespace Yandex.Music.Api.Requests.Library
 
         public YRequest<YResponse<T>> Create(string id, YLibrarySection section, YLibrarySectionType type = YLibrarySectionType.Likes)
         {
-            Dictionary<string, string> body = new Dictionary<string, string> {
+            Dictionary<string, string> body = new()
+            {
                 { $"{section.ToString().ToLower().TrimEnd('s')}-ids", id }
             };
 
-            List<KeyValuePair<string, string>> headers = new List<KeyValuePair<string, string>> {
+            List<KeyValuePair<string, string>> headers = new()
+            {
                 YRequestHeaders.Get(YHeader.ContentType, "application/x-www-form-urlencoded")
             };
 

@@ -14,7 +14,8 @@ namespace Yandex.Music.Api.Requests.Search
 
         public YRequest<YResponse<YSearchSuggest>> Create(string searchText)
         {
-            Dictionary<string, string> query = new Dictionary<string, string> {
+            Dictionary<string, string> query = new()
+            {
                 { "part", searchText }
             };
 

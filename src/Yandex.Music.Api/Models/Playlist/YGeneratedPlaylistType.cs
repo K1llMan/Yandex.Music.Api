@@ -42,6 +42,6 @@ namespace Yandex.Music.Api.Models.Playlist
         /// <summary>
         /// Кинопоиск
         /// </summary>
-        Kinopoisk,
+        Kinopoisk
     }
 }

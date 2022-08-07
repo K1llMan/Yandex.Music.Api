@@ -41,7 +41,7 @@ namespace Yandex.Music.Api.Requests
             Dictionary<string, string> query = null, List<KeyValuePair<string, string>> headers = null, string body = null)
         {
             string queryStr = string.Empty;
-            if (query != null && query.Count > 0)
+            if (query is { Count: > 0 })
                 queryStr = "?" + GetQueryString(query);
 
             Uri uri = new($"{url}{queryStr}");
@@ -51,12 +51,11 @@ namespace Yandex.Music.Api.Requests
                 request.Proxy = storage.Context.WebProxy;
 
             request.Method = method;
-            if (storage.Context.Cookies == null)
-                storage.Context.Cookies = new CookieContainer();
+            storage.Context.Cookies ??= new CookieContainer();
 
             storage.SetHeaders(request);
 
-            if (headers != null && headers.Count > 0)
+            if (headers is { Count: > 0 })
                 foreach (KeyValuePair<string, string> header in headers)
                     request.Headers.Add(header.Key, header.Value);
 

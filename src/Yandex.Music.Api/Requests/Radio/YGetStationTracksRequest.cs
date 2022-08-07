@@ -14,7 +14,8 @@ namespace Yandex.Music.Api.Requests.Radio
 
         public YRequest<YResponse<YStationSequence>> Create(YStationDescription station, string prevTrackId = "")
         {
-            Dictionary<string, string> query = new Dictionary<string, string> {
+            Dictionary<string, string> query = new()
+            {
                 { "settings2", "true" }
             };
 

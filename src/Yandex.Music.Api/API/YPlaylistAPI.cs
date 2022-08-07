@@ -457,7 +457,8 @@ namespace Yandex.Music.Api.API
         public async Task<YResponse<YPlaylist>> InsertTracksAsync(AuthStorage storage, YPlaylist playlist, params YTrack[] tracks)
         {
             return await ChangePlaylist(storage, playlist, new List<YPlaylistChange> {
-                    new YPlaylistChange {
+                    new()
+                    {
                         Operation = YPlaylistChangeType.Insert,
                         At = 0,
                         Tracks = tracks.Select(t => t.GetKey()).ToList()
