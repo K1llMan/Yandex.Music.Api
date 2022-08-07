@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 
 namespace Yandex.Music.Api.Models.Common
 {
@@ -8,9 +8,7 @@ namespace Yandex.Music.Api.Models.Common
     public class YResponse<T>
     {
         public YInvocationInfo InvocationInfo { get; set; }
-
         public T Result { get; set; }
-
         public YPager Pager { get; set; }
     }
 }

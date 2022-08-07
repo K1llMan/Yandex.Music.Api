@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,7 +14,7 @@ namespace Yandex.Music.Api.Common
         private readonly string debugDir;
         private readonly string logFileName;
 
-        #endregion
+        #endregion Поля
 
         #region Свойства
 
@@ -24,16 +24,16 @@ namespace Yandex.Music.Api.Common
 
         public string OutputDir { get; }
 
-        #endregion
+        #endregion Свойства
 
         #region Основные функции
 
         public T Deserialize<T>(string url, string json, JsonSerializerSettings settings)
         {
-            Dictionary<string, List<string>> errors = new Dictionary<string, List<string>>();
+            Dictionary<string, List<string>> errors = new();
 
             settings.Error = (sender, args) =>  {
-                int pos = args.ErrorContext.Error.Message.IndexOf("Path");
+                int pos = args.ErrorContext.Error.Message.IndexOf("Path", StringComparison.Ordinal);
                 string error = args.ErrorContext.Error.Message.Substring(0, pos);
                 string path = args.ErrorContext.Error.Message.Substring(pos);
 
@@ -56,19 +56,15 @@ namespace Yandex.Music.Api.Common
                 string fileName = Path.Combine(debugDir, $"{DateTime.Now:yyyy-MM-dd hh-mm-ss.fff} " +
                     $"{url.Trim('/').Replace("/", "-").Replace(":", "-")}.json");
 
-                using (FileStream fs = new FileStream(fileName, FileMode.Create)) {
-                    using (StreamWriter sr = new StreamWriter(fs)) {
-                        sr.Write(JsonConvert.SerializeObject(JsonConvert.DeserializeObject(json), Formatting.Indented));
-                    }
-                }
+                using FileStream fs = new(fileName, FileMode.Create);
+                using StreamWriter sr = new(fs);
+                sr.Write(JsonConvert.SerializeObject(JsonConvert.DeserializeObject(json), Formatting.Indented));
 
-                using (FileStream fs = new FileStream(logFileName, FileMode.Append)) {
-                    using (StreamWriter sr = new StreamWriter(fs)) {
-                        sr.WriteLine($"{fileName}:");
-                        sr.WriteLine(string.Join("\r\n", errors.Select(p =>
-                            $"\t{p.Key}\r\n: {string.Join("\r\n", p.Value.Select(s => $"\t\t{s}"))}")));
-                    }
-                }
+                using FileStream logFs = new(logFileName, FileMode.Append);
+                using StreamWriter logSr = new(logFs);
+                logSr.WriteLine($"{fileName}:");
+                logSr.WriteLine(string.Join("\r\n", errors.Select(p =>
+                    $"\t{p.Key}\r\n: {string.Join("\r\n", p.Value.Select(s => $"\t\t{s}"))}")));
             }
 
             return obj;

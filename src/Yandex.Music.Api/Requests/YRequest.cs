@@ -133,7 +133,7 @@ namespace Yandex.Music.Api.Requests
 
             using HttpWebResponse response = await GetWebResponseAsync();
 
-            return (nameof(T).Equals(nameof(HttpWebResponse)))
+            return typeof(T) == typeof(HttpWebResponse)
                 ? (T)(object)response
                 : await GetDataFromResponseAsync(response);
         }

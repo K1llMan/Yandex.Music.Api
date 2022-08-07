@@ -32,7 +32,7 @@ namespace Yandex.Music.Api.API
             string secret = $"XGRlBW9FXlekgbPrRHuSiA{path.Substring(1, path.Length - 1)}{s}";
             MD5 md5 = MD5.Create();
             byte[] md5Hash = md5.ComputeHash(Encoding.UTF8.GetBytes(secret));
-            HMACSHA1 hmacsha1 = new HMACSHA1();
+            HMACSHA1 hmacsha1 = new();
             byte[] hmasha1Hash = hmacsha1.ComputeHash(md5Hash);
             string sign = BitConverter.ToString(hmasha1Hash).Replace("-", "").ToLower();
 
@@ -172,10 +172,7 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public string GetFileLink(AuthStorage storage, YTrack track)
         {
-            YTrackDownloadInfo mainDownloadResponse = GetMetadataForDownload(storage, track).Result.First(m => m.Codec == "mp3");
-            YStorageDownloadFile storageDownloadResponse = GetDownloadFileInfo(storage, mainDownloadResponse);
-
-            return BuildLinkForDownload(mainDownloadResponse, storageDownloadResponse);
+            return GetFileLink(storage, track.GetKey().ToString());
         }
 
         #region Получение данных трека
@@ -190,10 +187,10 @@ namespace Yandex.Music.Api.API
         {
             string fileLink = GetFileLink(storage, trackKey);
 
-            try {
-                using (WebClient client = new WebClient()) {
-                    client.DownloadFile(fileLink, filePath);
-                }
+            try
+            {
+                using WebClient client = new();
+                client.DownloadFile(fileLink, filePath);
             }
             catch (Exception ex) {
                 Console.WriteLine(ex.ToString());
@@ -208,19 +205,7 @@ namespace Yandex.Music.Api.API
         /// <param name="filePath">Путь для файла</param>
         public void ExtractToFile(AuthStorage storage, YTrack track, string filePath)
         {
-            string fileLink = GetFileLink(storage, track.GetKey().ToString());
-
-            try
-            {
-                using (WebClient client = new WebClient())
-                {
-                    client.DownloadFile(fileLink, filePath);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
+            ExtractToFile(storage, track.GetKey().ToString(), filePath);
         }
 
         /// <summary>
@@ -233,12 +218,12 @@ namespace Yandex.Music.Api.API
         {
             string fileLink = GetFileLink(storage, trackKey);
 
-            byte[] bytes = default(byte[]);
+            byte[] bytes = default;
 
-            try {
-                using (WebClient client = new WebClient()) {
-                    bytes = client.DownloadData(fileLink);
-                }
+            try
+            {
+                using WebClient client = new();
+                bytes = client.DownloadData(fileLink);
             }
             catch (Exception ex) {
                 Console.WriteLine(ex.ToString());
@@ -255,23 +240,7 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public byte[] ExtractData(AuthStorage storage, YTrack track)
         {
-            string fileLink = GetFileLink(storage, track.GetKey().ToString());
-
-            byte[] bytes = default(byte[]);
-
-            try
-            {
-                using (WebClient client = new WebClient())
-                {
-                    bytes = client.DownloadData(fileLink);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-
-            return bytes;
+            return ExtractData(storage, track.GetKey().ToString());
         }
 
         #endregion Получение данных трека

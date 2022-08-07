@@ -1,4 +1,4 @@
-﻿using Yandex.Music.Api.Models.Playlist;
+using Yandex.Music.Api.Models.Playlist;
 using Yandex.Music.Api.Models.Track;
 
 namespace Yandex.Music.Client.Extensions

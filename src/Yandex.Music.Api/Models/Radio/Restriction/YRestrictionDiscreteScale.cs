@@ -1,4 +1,4 @@
-﻿namespace Yandex.Music.Api.Models.Radio.Restriction
+namespace Yandex.Music.Api.Models.Radio.Restriction
 {
     public class YRestrictionDiscreteScale : YRestriction
     {

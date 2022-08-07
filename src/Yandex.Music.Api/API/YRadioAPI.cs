@@ -5,7 +5,6 @@ using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Radio;
 using Yandex.Music.Api.Requests.Radio;
-using Yandex.Music.Api.Requests.Track;
 
 namespace Yandex.Music.Api.API
 {
@@ -17,7 +16,7 @@ namespace Yandex.Music.Api.API
 
         #region Основные функции
 
-        public YRadioAPI(YandexMusicApi yandex) :base(yandex)
+        public YRadioAPI(YandexMusicApi yandex): base(yandex)
         {
         }
 
@@ -118,6 +117,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <param name="station">Радиостанция</param>
+        /// <param name="prevTrackId">Идентификатор предыдущего трека</param>
         /// <returns></returns>
         public async Task<YResponse<YStationSequence>> GetStationTracksAsync(AuthStorage storage, YStation station, string prevTrackId = "")
         {

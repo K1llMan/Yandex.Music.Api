@@ -19,6 +19,9 @@ namespace Yandex.Music.Api.Common
         private readonly MD5 md5;
         private readonly Rijndael rijAlg;
 
+
+        #endregion Поля
+
         #region Вспомогательные функции
 
         private byte[] GetHash(string value)
@@ -27,8 +30,6 @@ namespace Yandex.Music.Api.Common
         }
 
         #endregion Вспомогательные функции
-
-        #endregion
 
         #region Основные функции
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using Yandex.Music.Api.Models.Playlist;
 

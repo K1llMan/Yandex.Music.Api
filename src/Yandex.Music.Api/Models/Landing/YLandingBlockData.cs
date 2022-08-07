@@ -1,4 +1,4 @@
-﻿namespace Yandex.Music.Api.Models.Landing
+namespace Yandex.Music.Api.Models.Landing
 {
     public class YLandingBlockData
     {

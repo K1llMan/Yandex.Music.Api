@@ -1,4 +1,4 @@
-﻿using Yandex.Music.Api.Models.Common;
+using Yandex.Music.Api.Models.Common;
 
 namespace Yandex.Music.Api.Models.Account
 {

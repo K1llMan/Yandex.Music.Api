@@ -1,4 +1,4 @@
-﻿namespace Yandex.Music.Api.Models.Search.Track
+namespace Yandex.Music.Api.Models.Search.Track
 {
     public enum YSearchTrackType
     {

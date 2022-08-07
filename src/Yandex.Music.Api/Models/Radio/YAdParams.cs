@@ -1,4 +1,4 @@
-﻿namespace Yandex.Music.Api.Models.Radio
+namespace Yandex.Music.Api.Models.Radio
 {
     public class YAdParams
     {

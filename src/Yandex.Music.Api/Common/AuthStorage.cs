@@ -57,7 +57,7 @@ namespace Yandex.Music.Api.Common
             Context = new HttpContext();
             Debug = settings;
 
-            if (Debug != null && Debug.ClearDirectory)
+            if (Debug is { ClearDirectory: true })
                 Debug.Clear();
         }
 

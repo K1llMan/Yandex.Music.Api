@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Extensions;

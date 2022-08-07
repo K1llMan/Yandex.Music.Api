@@ -1,4 +1,4 @@
-﻿namespace Yandex.Music.Api.API
+namespace Yandex.Music.Api.API
 {
     /// <summary>
     /// Родительский класс для ветки API

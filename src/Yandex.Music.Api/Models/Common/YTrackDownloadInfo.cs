@@ -1,4 +1,4 @@
-﻿namespace Yandex.Music.Api.Models.Common
+namespace Yandex.Music.Api.Models.Common
 {
     public class YTrackDownloadInfo
     {

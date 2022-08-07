@@ -1,4 +1,4 @@
-﻿namespace Yandex.Music.Api.Requests
+namespace Yandex.Music.Api.Requests
 {
     /// <summary>
     /// Класс со списком URL для доступа к функционалу API
