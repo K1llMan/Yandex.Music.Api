@@ -27,6 +27,7 @@ namespace Yandex.Music.Api.Models.Artist
         public List<YPlaylist> Playlists { get; set; }
         public List<YTrack> PopularTracks { get; set; }
         public List<YArtist> SimilarArtists { get; set; }
+        public YStats Stats { get; set; }
         public List<YVideo> Videos { get; set; }
         public List<YVinyl> Vinyls { get; set; }
     }
