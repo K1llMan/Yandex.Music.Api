@@ -9,8 +9,8 @@ bin
 obj
 /output
 
-/Yandex.Music.Api.sln.DotSettings.user
-/Yandex.Music.Api/Yandex.Music.Api.csproj.user
+/src/Yandex.Music.Api.sln.DotSettings.user
+/src/Yandex.Music.Api/Yandex.Music.Api.csproj.user
 
 
 

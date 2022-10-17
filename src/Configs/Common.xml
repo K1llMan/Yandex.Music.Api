@@ -5,9 +5,10 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>1.0.0</Version>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
-    <FileVersion>1.0.0</FileVersion>
+    <ApiVersion>1.0.1</ApiVersion>
+    <Version>$(ApiVersion)</Version>
+    <AssemblyVersion>$(ApiVersion)</AssemblyVersion>
+    <FileVersion>$(ApiVersion)</FileVersion>
     <Authors>K1llM@n</Authors>
     <ProjectUrl>https://github.com/K1llMan/Yandex.Music.Api</ProjectUrl>
     <RepositoryUrl>https://github.com/K1llMan/Yandex.Music.Api</RepositoryUrl>
