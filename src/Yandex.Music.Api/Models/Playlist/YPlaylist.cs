@@ -36,6 +36,7 @@ namespace Yandex.Music.Api.Models.Playlist
         public YCover Cover { get; set; }
         [JsonConverter(typeof(YCoverConverter))]
         public YCover CoverWithoutText { get; set; }
+        public YCustomWave CustomWave { get; set; }
         public List<YId> RecentTracks { get; set; }
         public DateTime Created { get; set; }
         public string Description { get; set; }

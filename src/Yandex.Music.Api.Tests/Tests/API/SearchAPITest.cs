@@ -16,7 +16,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
     {
         #region Поля
 
-        private static string track = "All I Got";
+        private static string track = "Parkway Drive - Carrion";
         private static string podcast = "Душевный подкаст‍";
         private static string album = "Black Is the Colour";
         private static string artist = "Arven";

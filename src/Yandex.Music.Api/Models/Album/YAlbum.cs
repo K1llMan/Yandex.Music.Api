@@ -1,5 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
@@ -7,6 +11,43 @@ using Yandex.Music.Api.Models.Track;
 
 namespace Yandex.Music.Api.Models.Album
 {
+    public sealed class YLabelConverter : JsonConverter
+    {
+        public override bool CanConvert(Type objectType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            if (reader.TokenType == JsonToken.Null)
+                return null;
+
+            JArray jArray = JArray.Load(reader);
+            JTokenType tokenType = jArray.FirstOrDefault()?.Type ?? JTokenType.String;
+            object label;
+
+            try
+            {
+                label = tokenType switch {
+                    JTokenType.Object => jArray.ToObject<List<YLabel>>(),
+                    _ => jArray.ToObject<List<string>>()
+                };
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Ошибка десериализации типа \"{objectType.Name}\".", ex);
+            }
+
+            return label;
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class YAlbum : YBaseModel
     {
         public YButton ActionButton { get; set; }
@@ -24,7 +65,8 @@ namespace Yandex.Music.Api.Models.Album
         public List<YAlbum> Duplicates { get; set; }
         public string Genre { get; set; }
         public string Id { get; set; }
-        public List<YLabel> Labels { get; set; }
+        [JsonConverter(typeof(YLabelConverter))]
+        public dynamic Labels { get; set; }
         public int LikesCount { get; set; }
         public string MetaTagId { get; set; }
         public YMetaType MetaType { get; set; }
