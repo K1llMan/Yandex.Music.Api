@@ -12,9 +12,9 @@ namespace Yandex.Music.Api.API
     {
         #region Вспомогательные функции
 
-        private async Task<YAuth> AuthPassport(AuthStorage storage, string login, string password)
+        private Task<YAuth> AuthPassport(AuthStorage storage, string login, string password)
         {
-            return await new YAuthorizeRequest(api, storage)
+            return new YAuthorizeRequest(api, storage)
                 .Create(login, password)
                 .GetResponseAsync();
         }
@@ -97,9 +97,9 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public async Task<YResponse<YAccountResult>> GetUserAuthAsync(AuthStorage storage)
+        public Task<YResponse<YAccountResult>> GetUserAuthAsync(AuthStorage storage)
         {
-            return await new YGetAuthInfoRequest(api, storage)
+            return new YGetAuthInfoRequest(api, storage)
                 .Create()
                 .GetResponseAsync();
         }

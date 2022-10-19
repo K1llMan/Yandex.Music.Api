@@ -25,11 +25,9 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public async Task<YResponse<YStationsDashboard>> GetStationsDashboardAsync(AuthStorage storage)
+        public Task<YResponse<YStationsDashboard>> GetStationsDashboardAsync(AuthStorage storage)
         {
-            return await new YGetStationsDashboardRequest(api, storage)
-                .Create()
-                .GetResponseAsync();
+            return new YGetStationsDashboardRequest(api, storage).Create().GetResponseAsync();
         }
 
         /// <summary>
@@ -47,11 +45,9 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public async Task<YResponse<List<YStation>>> GetStationsAsync(AuthStorage storage)
+        public Task<YResponse<List<YStation>>> GetStationsAsync(AuthStorage storage)
         {
-            return await new YGetStationsRequest(api, storage)
-                .Create()
-                .GetResponseAsync();
+            return new YGetStationsRequest(api, storage).Create().GetResponseAsync();
         }
 
         /// <summary>
@@ -71,11 +67,9 @@ namespace Yandex.Music.Api.API
         /// <param name="type">Тип</param>
         /// <param name="tag">Тэг</param>
         /// <returns></returns>
-        public async Task<YResponse<List<YStation>>> GetStationAsync(AuthStorage storage, string type, string tag)
+        public Task<YResponse<List<YStation>>> GetStationAsync(AuthStorage storage, string type, string tag)
         {
-            return await new YGetStationRequest(api, storage)
-                .Create(type, tag)
-                .GetResponseAsync();
+            return new YGetStationRequest(api, storage).Create(type, tag).GetResponseAsync();
         }
 
         /// <summary>
@@ -119,11 +113,9 @@ namespace Yandex.Music.Api.API
         /// <param name="station">Радиостанция</param>
         /// <param name="prevTrackId">Идентификатор предыдущего трека</param>
         /// <returns></returns>
-        public async Task<YResponse<YStationSequence>> GetStationTracksAsync(AuthStorage storage, YStation station, string prevTrackId = "")
+        public Task<YResponse<YStationSequence>> GetStationTracksAsync(AuthStorage storage, YStation station, string prevTrackId = "")
         {
-            return await new YGetStationTracksRequest(api, storage)
-                .Create(station.Station, prevTrackId)
-                .GetResponseAsync();
+            return new YGetStationTracksRequest(api, storage).Create(station.Station, prevTrackId).GetResponseAsync();
         }
 
         /// <summary>
@@ -144,11 +136,9 @@ namespace Yandex.Music.Api.API
         /// <param name="station">Радиостанция</param>
         /// <param name="settings">Настройки</param>
         /// <returns></returns>
-        public async Task<YResponse<string>> SetStationSettings2Async(AuthStorage storage, YStation station, YStationSettings2 settings)
+        public Task<YResponse<string>> SetStationSettings2Async(AuthStorage storage, YStation station, YStationSettings2 settings)
         {
-            return await new YSetSettings2Request(api, storage)
-                .Create(station.Station, settings)
-                .GetResponseAsync();
+            return new YSetSettings2Request(api, storage).Create(station.Station, settings).GetResponseAsync();
         }
 
         /// <summary>

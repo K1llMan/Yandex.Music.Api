@@ -24,9 +24,9 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="albumId">Идентификатор</param> 
         /// <returns></returns>
-        public async Task<YResponse<YAlbum>> GetAsync(AuthStorage storage, string albumId)
+        public Task<YResponse<YAlbum>> GetAsync(AuthStorage storage, string albumId)
         {
-            return await new YGetAlbumRequest(api, storage)
+            return new YGetAlbumRequest(api, storage)
                 .Create(albumId)
                 .GetResponseAsync();
         }

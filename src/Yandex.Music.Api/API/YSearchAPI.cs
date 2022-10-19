@@ -25,9 +25,9 @@ namespace Yandex.Music.Api.API
         /// <param name="trackName">Имя трека</param>
         /// <param name="pageNumber">Номер страницы</param>
         /// <returns></returns>
-        public async Task<YResponse<YSearch>> TrackAsync(AuthStorage storage, string trackName, int pageNumber = 0)
+        public Task<YResponse<YSearch>> TrackAsync(AuthStorage storage, string trackName, int pageNumber = 0)
         {
-            return await SearchAsync(storage, trackName, YSearchType.Track, pageNumber);
+            return SearchAsync(storage, trackName, YSearchType.Track, pageNumber);
         }
 
         /// <summary>
@@ -49,9 +49,9 @@ namespace Yandex.Music.Api.API
         /// <param name="albumName">Имя альбома</param>
         /// <param name="pageNumber">Номер страницы</param>
         /// <returns></returns>
-        public async Task<YResponse<YSearch>> AlbumsAsync(AuthStorage storage, string albumName, int pageNumber = 0)
+        public Task<YResponse<YSearch>> AlbumsAsync(AuthStorage storage, string albumName, int pageNumber = 0)
         {
-            return await SearchAsync(storage, albumName, YSearchType.Album, pageNumber);
+            return SearchAsync(storage, albumName, YSearchType.Album, pageNumber);
         }
 
         /// <summary>
@@ -73,9 +73,9 @@ namespace Yandex.Music.Api.API
         /// <param name="artistName">Имя артиста</param>
         /// <param name="pageNumber">Номер страницы</param>
         /// <returns></returns>
-        public async Task<YResponse<YSearch>> ArtistAsync(AuthStorage storage, string artistName, int pageNumber = 0)
+        public Task<YResponse<YSearch>> ArtistAsync(AuthStorage storage, string artistName, int pageNumber = 0)
         {
-            return await SearchAsync(storage, artistName, YSearchType.Artist, pageNumber);
+            return SearchAsync(storage, artistName, YSearchType.Artist, pageNumber);
         }
 
         /// <summary>
@@ -97,9 +97,9 @@ namespace Yandex.Music.Api.API
         /// <param name="playlistName">Имя плейлиста</param>
         /// <param name="pageNumber">Номер страницы</param>
         /// <returns></returns>
-        public async Task<YResponse<YSearch>> PlaylistAsync(AuthStorage storage, string playlistName, int pageNumber = 0)
+        public Task<YResponse<YSearch>> PlaylistAsync(AuthStorage storage, string playlistName, int pageNumber = 0)
         {
-            return await SearchAsync(storage, playlistName, YSearchType.Playlist, pageNumber);
+            return SearchAsync(storage, playlistName, YSearchType.Playlist, pageNumber);
         }
 
         /// <summary>
@@ -121,9 +121,9 @@ namespace Yandex.Music.Api.API
         /// <param name="podcastName">Имя подкаста</param>
         /// <param name="pageNumber">Номер страницы</param>
         /// <returns></returns>
-        public async Task<YResponse<YSearch>> PodcastEpisodeAsync(AuthStorage storage, string podcastName, int pageNumber = 0)
+        public Task<YResponse<YSearch>> PodcastEpisodeAsync(AuthStorage storage, string podcastName, int pageNumber = 0)
         {
-            return await SearchAsync(storage, podcastName, YSearchType.PodcastEpisode, pageNumber);
+            return SearchAsync(storage, podcastName, YSearchType.PodcastEpisode, pageNumber);
         }
 
         /// <summary>
@@ -145,9 +145,9 @@ namespace Yandex.Music.Api.API
         /// <param name="videoName">Имя видео</param>
         /// <param name="pageNumber">Номер страницы</param>
         /// <returns></returns>
-        public async Task<YResponse<YSearch>> VideosAsync(AuthStorage storage, string videoName, int pageNumber = 0)
+        public Task<YResponse<YSearch>> VideosAsync(AuthStorage storage, string videoName, int pageNumber = 0)
         {
-            return await SearchAsync(storage, videoName, YSearchType.Video, pageNumber);
+            return SearchAsync(storage, videoName, YSearchType.Video, pageNumber);
         }
 
         /// <summary>
@@ -169,9 +169,9 @@ namespace Yandex.Music.Api.API
         /// <param name="userName">Имя пользователя</param>
         /// <param name="pageNumber">Номер страницы</param>
         /// <returns></returns>
-        public async Task<YResponse<YSearch>> UsersAsync(AuthStorage storage, string userName, int pageNumber = 0)
+        public Task<YResponse<YSearch>> UsersAsync(AuthStorage storage, string userName, int pageNumber = 0)
         {
-            return await SearchAsync(storage, userName, YSearchType.User, pageNumber);
+            return SearchAsync(storage, userName, YSearchType.User, pageNumber);
         }
 
         /// <summary>
@@ -194,11 +194,9 @@ namespace Yandex.Music.Api.API
         /// <param name="searchType">Тип поиска</param>
         /// <param name="page">Страница</param>
         /// <returns></returns>
-        public async Task<YResponse<YSearch>> SearchAsync(AuthStorage storage, string searchText, YSearchType searchType, int page = 0)
+        public Task<YResponse<YSearch>> SearchAsync(AuthStorage storage, string searchText, YSearchType searchType, int page = 0)
         {
-            return await new YSearchRequest(api, storage)
-                .Create(searchText, searchType, page)
-                .GetResponseAsync();
+            return new YSearchRequest(api, storage).Create(searchText, searchType, page).GetResponseAsync();
         }
 
         /// <summary>
@@ -220,9 +218,9 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="searchText">Поисковый запрос</param>
         /// <returns></returns>
-        public async Task<YResponse<YSearchSuggest>> SuggestAsync(AuthStorage storage, string searchText)
+        public Task<YResponse<YSearchSuggest>> SuggestAsync(AuthStorage storage, string searchText)
         {
-            return await new YSearchSuggestRequest(api, storage)
+            return new YSearchSuggestRequest(api, storage)
                 .Create(searchText)
                 .GetResponseAsync();
         }

@@ -20,8 +20,7 @@ namespace Yandex.Music.Api.API
     {
         #region Вспомогательные функции
 
-        private string BuildLinkForDownload(YTrackDownloadInfo mainDownloadResponse,
-            YStorageDownloadFile storageDownload)
+        private string BuildLinkForDownload(YTrackDownloadInfo mainDownloadResponse, YStorageDownloadFile storageDownload)
         {
             string path = storageDownload.Path;
             string host = storageDownload.Host;
@@ -55,9 +54,9 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="trackId">Идентификатор трека</param>
         /// <returns></returns>
-        public async Task<YResponse<List<YTrack>>> GetAsync(AuthStorage storage, string trackId)
+        public Task<YResponse<List<YTrack>>> GetAsync(AuthStorage storage, string trackId)
         {
-            return await new YGetTrackRequest(api, storage)
+            return new YGetTrackRequest(api, storage)
                 .Create(trackId)
                 .GetResponseAsync();
         }
@@ -80,11 +79,9 @@ namespace Yandex.Music.Api.API
         /// <param name="trackKey">Ключ трека в формате {идентифактор трека:идентификатор альбома}</param>
         /// <param name="direct">Должен ли ответ содержать прямую ссылку на загрузку</param>
         /// <returns></returns>
-        public async Task<YResponse<List<YTrackDownloadInfo>>> GetMetadataForDownloadAsync(AuthStorage storage, string trackKey, bool direct)
+        public Task<YResponse<List<YTrackDownloadInfo>>> GetMetadataForDownloadAsync(AuthStorage storage, string trackKey, bool direct)
         {
-            return await new YTrackDownloadInfoRequest(api, storage)
-                .Create(trackKey, direct)
-                .GetResponseAsync();
+            return new YTrackDownloadInfoRequest(api, storage).Create(trackKey, direct).GetResponseAsync();
         }
 
         /// <summary>
@@ -106,9 +103,9 @@ namespace Yandex.Music.Api.API
         /// <param name="track">Трек</param>
         /// <param name="direct">Должен ли ответ содержать прямую ссылку на загрузку</param>
         /// <returns></returns>
-        public async Task<YResponse<List<YTrackDownloadInfo>>> GetMetadataForDownloadAsync(AuthStorage storage, YTrack track, bool direct = false)
+        public Task<YResponse<List<YTrackDownloadInfo>>> GetMetadataForDownloadAsync(AuthStorage storage, YTrack track, bool direct = false)
         {
-            return await GetMetadataForDownloadAsync(storage, track.GetKey().ToString(), direct);
+            return GetMetadataForDownloadAsync(storage, track.GetKey().ToString(), direct);
         }
 
         /// <summary>
@@ -129,9 +126,9 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="metadataInfo">Метаданные для загрузки</param>
         /// <returns></returns>
-        public async Task<YStorageDownloadFile> GetDownloadFileInfoAsync(AuthStorage storage, YTrackDownloadInfo metadataInfo)
+        public Task<YStorageDownloadFile> GetDownloadFileInfoAsync(AuthStorage storage, YTrackDownloadInfo metadataInfo)
         {
-            return await new YStorageDownloadFileRequest(api, storage)
+            return new YStorageDownloadFileRequest(api, storage)
                 .Create(metadataInfo.DownloadInfoUrl)
                 .GetResponseAsync();
         }
