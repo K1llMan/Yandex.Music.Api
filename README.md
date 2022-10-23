@@ -15,5 +15,7 @@ API переделано под работу с API официального п�
 
 [Документация](https://yandexmusicapicsharp.readthedocs.io/ru/latest/index.html)
 
+[История версий](https://github.com/K1llMan/Yandex.Music.Api/blob/master/CHANGELOG.md)
+
 ## LICENCE
 [GNU General Public License v3.0](https://github.com/K1llMan/Yandex.Music.Api/blob/master/LICENSE)
