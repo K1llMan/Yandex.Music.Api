@@ -56,8 +56,8 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public Task<YResponse<List<YTrack>>> GetAsync(AuthStorage storage, string trackId)
         {
-            return new YGetTrackRequest(api, storage)
-                .Create(trackId)
+            return new YGetTrackBuilder(api, storage)
+                .Build(trackId)
                 .GetResponseAsync();
         }
 
@@ -81,7 +81,9 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public Task<YResponse<List<YTrackDownloadInfo>>> GetMetadataForDownloadAsync(AuthStorage storage, string trackKey, bool direct)
         {
-            return new YTrackDownloadInfoRequest(api, storage).Create(trackKey, direct).GetResponseAsync();
+            return new YTrackDownloadInfoBuilder(api, storage)
+                .Build((trackKey, direct))
+                .GetResponseAsync();
         }
 
         /// <summary>
@@ -128,8 +130,8 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public Task<YStorageDownloadFile> GetDownloadFileInfoAsync(AuthStorage storage, YTrackDownloadInfo metadataInfo)
         {
-            return new YStorageDownloadFileRequest(api, storage)
-                .Create(metadataInfo.DownloadInfoUrl)
+            return new YStorageDownloadFileBuilder(api, storage)
+                .Build(metadataInfo.DownloadInfoUrl)
                 .GetResponseAsync();
         }
 

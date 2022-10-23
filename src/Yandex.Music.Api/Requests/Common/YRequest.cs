@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -12,19 +13,13 @@ using Newtonsoft.Json;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Common;
 
-namespace Yandex.Music.Api.Requests
+namespace Yandex.Music.Api.Requests.Common
 {
     internal class YRequest<T>
     {
-        public YRequest(YandexMusicApi yandex, AuthStorage auth)
-        {
-            api = yandex;
-            storage = auth;
-        }
-
         #region Поля
 
-        private HttpWebRequest fullRequest;
+        private HttpRequestMessage msg;
         protected YandexMusicApi api;
         protected AuthStorage storage;
 
@@ -72,20 +67,12 @@ namespace Yandex.Music.Api.Requests
             request.Headers[HttpRequestHeader.AcceptCharset] = Encoding.UTF8.WebName;
             request.Headers[HttpRequestHeader.AcceptEncoding] = "gzip";
             request.AutomaticDecompression = DecompressionMethods.GZip;
-
-            fullRequest = request;
         }
 
-        protected async Task<T> GetDataFromResponseAsync(HttpWebResponse response)
+        protected async Task<T> GetDataFromResponseAsync(HttpResponseMessage response)
         {
             try {
-                string result;
-                await using (Stream stream = response.GetResponseStream()) {
-                    StreamReader reader = new(stream);
-                    result = await reader.ReadToEndAsync();
-                }
-
-                storage.Context.Cookies.Add(response.Cookies);
+                string result = await response.Content.ReadAsStringAsync();
 
                 JsonSerializerSettings settings = new()
                 {
@@ -95,7 +82,7 @@ namespace Yandex.Music.Api.Requests
                 };
 
                 return storage.Debug != null 
-                    ? storage.Debug.Deserialize<T>(response.ResponseUri.AbsolutePath, result, settings) 
+                    ? storage.Debug.Deserialize<T>(response.RequestMessage?.RequestUri?.AbsolutePath, result, settings) 
                     : JsonConvert.DeserializeObject<T>(result, settings);
             }
             catch (Exception ex) {
@@ -104,16 +91,23 @@ namespace Yandex.Music.Api.Requests
             }
         }
 
-        private async Task<HttpWebResponse> GetWebResponseAsync()
+        private Task<HttpResponseMessage> GetWebResponseAsync()
         {
             try
             {
-                return (HttpWebResponse)await fullRequest.GetResponseAsync();
+                HttpClient client = new(new SocketsHttpHandler {
+                    Proxy = storage.Context.WebProxy,
+                    AutomaticDecompression = DecompressionMethods.GZip,
+                    UseCookies = true,
+                    CookieContainer = storage.Context.Cookies,
+                });
+
+                return client.SendAsync(msg);
             }
             catch (Exception ex)
             {
                 using StreamReader sr = new(((WebException)ex).Response.GetResponseStream());
-                string result = await sr.ReadToEndAsync();
+                string result = sr.ReadToEnd();
                 Console.WriteLine(result);
 
                 throw;
@@ -124,15 +118,21 @@ namespace Yandex.Music.Api.Requests
 
         #region Основные функции
 
+        public YRequest(HttpRequestMessage message, YandexMusicApi yandex, AuthStorage auth)
+        {
+            msg = message;
+            api = yandex;
+            storage = auth;
+        }
 
         public async Task<T> GetResponseAsync()
         {
-            if (fullRequest == null)
+            if (msg == null)
                 return default;
 
-            using HttpWebResponse response = await GetWebResponseAsync();
+            using HttpResponseMessage response = await GetWebResponseAsync();
 
-            return typeof(T) == typeof(HttpWebResponse)
+            return typeof(T) == typeof(HttpResponseMessage)
                 ? (T)(object)response
                 : await GetDataFromResponseAsync(response);
         }

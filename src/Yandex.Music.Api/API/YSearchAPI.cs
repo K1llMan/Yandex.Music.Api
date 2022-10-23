@@ -196,7 +196,9 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public Task<YResponse<YSearch>> SearchAsync(AuthStorage storage, string searchText, YSearchType searchType, int page = 0)
         {
-            return new YSearchRequest(api, storage).Create(searchText, searchType, page).GetResponseAsync();
+            return new YSearchBuilder(api, storage)
+                .Build((searchText, searchType, page))
+                .GetResponseAsync();
         }
 
         /// <summary>
@@ -220,8 +222,8 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public Task<YResponse<YSearchSuggest>> SuggestAsync(AuthStorage storage, string searchText)
         {
-            return new YSearchSuggestRequest(api, storage)
-                .Create(searchText)
+            return new YSearchSuggestBuilder(api, storage)
+                .Build(searchText)
                 .GetResponseAsync();
         }
 

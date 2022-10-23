@@ -51,8 +51,8 @@ namespace Yandex.Music.Api.API
         /// <returns>Плейлист после изменений</returns>
         private Task<YResponse<YPlaylist>> ChangePlaylist(AuthStorage storage, YPlaylist playlist, List<YPlaylistChange> changes)
         {
-            return new YPlaylistChangeRequest(api, storage)
-                .Create(playlist, changes)
+            return new YPlaylistChangeBuilder(api, storage)
+                .Build((playlist, changes))
                 .GetResponseAsync();
         }
 
@@ -78,7 +78,9 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public Task<YResponse<YLanding>> LandingAsync(AuthStorage storage)
         {
-            return new YGetPlaylistMainPageRequest(api, storage).Create().GetResponseAsync();
+            return new YGetPlaylistMainPageBuilder(api, storage)
+                .Build(null)
+                .GetResponseAsync();
         }
 
         /// <summary>
@@ -102,7 +104,9 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public Task<YResponse<List<YPlaylist>>> FavoritesAsync(AuthStorage storage)
         {
-            return new YGetPlaylistFavoritesRequest(api, storage).Create().GetResponseAsync();
+            return new YGetPlaylistFavoritesBuilder(api, storage)
+                .Build(null)
+                .GetResponseAsync();
         }
 
         /// <summary>
@@ -268,7 +272,9 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public Task<YResponse<YPlaylist>> GetAsync(AuthStorage storage, string user, string kinds)
         {
-            return new YGetPlaylistRequest(api, storage).Create(user, kinds).GetResponseAsync();
+            return new YGetPlaylistBuilder(api, storage)
+                .Build((user, kinds))
+                .GetResponseAsync();
         }
 
         /// <summary>
@@ -291,7 +297,9 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public Task<YResponse<YPlaylist>> GetAsync(AuthStorage storage, YPlaylist playlist)
         {
-            return new YGetPlaylistRequest(api, storage).Create(playlist).GetResponseAsync();
+            return new YGetPlaylistBuilder(api, storage)
+                .Build((playlist.Owner.Uid, playlist.Kind))
+                .GetResponseAsync();
         }
 
         /// <summary>
@@ -317,7 +325,9 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public Task<YResponse<YPlaylist>> CreateAsync(AuthStorage storage, string name)
         {
-            return new YPlaylistCreateRequest(api, storage).Create(name).GetResponseAsync();
+            return new YPlaylistCreateBuilder(api, storage)
+                .Build(name)
+                .GetResponseAsync();
         }
 
         /// <summary>
@@ -340,7 +350,9 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public Task<YResponse<YPlaylist>> RenameAsync(AuthStorage storage, string kinds, string name)
         {
-            return new YPlaylistRenameRequest(api, storage).Create(kinds, name).GetResponseAsync();
+            return new YPlaylistRenameBuilder(api, storage)
+                .Build((kinds, name))
+                .GetResponseAsync();
         }
 
         /// <summary>
@@ -388,8 +400,8 @@ namespace Yandex.Music.Api.API
         public Task<bool> DeleteAsync(AuthStorage storage, string kinds)
         {
             try {
-                return new YPlaylistRemoveRequest(api, storage)
-                    .Create(kinds)
+                return new YPlaylistRemoveBuilder(api, storage)
+                    .Build(kinds)
                     .GetResponseAsync()
                     .ContinueWith(r => true);
             }

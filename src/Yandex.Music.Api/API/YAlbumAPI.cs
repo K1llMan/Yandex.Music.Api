@@ -26,8 +26,8 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public Task<YResponse<YAlbum>> GetAsync(AuthStorage storage, string albumId)
         {
-            return new YGetAlbumRequest(api, storage)
-                .Create(albumId)
+            return new YGetAlbumBuilder(api, storage)
+                .Build(albumId)
                 .GetResponseAsync();
         }
 

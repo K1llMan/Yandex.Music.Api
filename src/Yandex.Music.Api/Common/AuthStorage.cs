@@ -1,7 +1,7 @@
 using System.Net;
 
 using Yandex.Music.Api.Models.Account;
-using Yandex.Music.Api.Requests;
+using Yandex.Music.Api.Requests.Common;
 
 namespace Yandex.Music.Api.Common
 {

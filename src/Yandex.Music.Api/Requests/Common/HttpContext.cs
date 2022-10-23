@@ -1,7 +1,7 @@
 using System;
 using System.Net;
 
-namespace Yandex.Music.Api.Requests
+namespace Yandex.Music.Api.Requests.Common
 {
     public class HttpContext
     {

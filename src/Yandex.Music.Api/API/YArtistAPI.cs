@@ -26,8 +26,8 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public Task<YResponse<YArtistBriefInfo>> GetAsync(AuthStorage storage, string artistId)
         {
-            return new YGetArtistRequest(api, storage)
-                .Create(artistId)
+            return new YGetArtistBuilder(api, storage)
+                .Build(artistId)
                 .GetResponseAsync();
         }
 

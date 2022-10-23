@@ -14,8 +14,8 @@ namespace Yandex.Music.Api.API
 
         private Task<YAuth> AuthPassport(AuthStorage storage, string login, string password)
         {
-            return new YAuthorizeRequest(api, storage)
-                .Create(login, password)
+            return new YAuthorizeBuilder(api, storage)
+                .Build((login, password))
                 .GetResponseAsync();
         }
 
@@ -99,8 +99,8 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public Task<YResponse<YAccountResult>> GetUserAuthAsync(AuthStorage storage)
         {
-            return new YGetAuthInfoRequest(api, storage)
-                .Create()
+            return new YGetAuthInfoBuilder(api, storage)
+                .Build(null)
                 .GetResponseAsync();
         }
 
