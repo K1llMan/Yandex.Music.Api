@@ -1,5 +1,3 @@
-using Newtonsoft.Json;
-
 namespace Yandex.Music.Api.Models.Common
 {
     /// <summary>

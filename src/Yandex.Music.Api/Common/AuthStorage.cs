@@ -1,5 +1,6 @@
 using System.Net;
 
+using Yandex.Music.Api.Common.Providers;
 using Yandex.Music.Api.Models.Account;
 using Yandex.Music.Api.Requests.Common;
 
@@ -34,6 +35,11 @@ namespace Yandex.Music.Api.Common
         /// </summary>
         public YAccount User { get; set; }
 
+        /// <summary>
+        /// Провайдер запросов
+        /// </summary>
+        public IRequestProvider Provider { get; }
+
         #endregion
 
         #region Вспомогательные функции
@@ -41,12 +47,6 @@ namespace Yandex.Music.Api.Common
         #endregion Вспомогательные функции
 
         #region Основные функции
-
-        public void SetHeaders(HttpWebRequest request)
-        {
-            if (!string.IsNullOrEmpty(Token))
-                request.Headers.Add("Authorization", $"OAuth {Token}");
-        }
 
         /// <summary>
         /// Конструктор
@@ -56,9 +56,28 @@ namespace Yandex.Music.Api.Common
             User = new YAccount();
             Context = new HttpContext();
             Debug = settings;
+            Provider = new DefaultRequestProvider(this);
 
             if (Debug is { ClearDirectory: true })
+            {
                 Debug.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        public AuthStorage(IRequestProvider provider, DebugSettings settings = null)
+        {
+            User = new YAccount();
+            Context = new HttpContext();
+            Debug = settings;
+            Provider = provider;
+
+            if (Debug is { ClearDirectory: true })
+            {
+                Debug.Clear();
+            }
         }
 
         /// <summary>
