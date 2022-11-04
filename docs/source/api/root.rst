@@ -11,7 +11,9 @@ YandexMusicAPI
 :doc:`Album <branches/album>`
    API для взаимодействия с альбомами.
 :doc:`Artist <branches/artist>`
-   API для взаимодействия с артистами.
+   API для взаимодействия с исполнителями.
+:doc:`Library <branches/landing>`
+   API для взаимодействия с главной страницей.   
 :doc:`Library <branches/library>`
    API для взаимодействия с библиотекой.
 :doc:`Playlist <branches/playlist>`
@@ -31,6 +33,7 @@ YandexMusicAPI
    branches/album
    branches/artist
    branches/library
+   branches/landing
    branches/playlist
    branches/radio
    branches/search

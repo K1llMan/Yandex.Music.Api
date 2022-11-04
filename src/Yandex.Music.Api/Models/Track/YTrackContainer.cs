@@ -5,6 +5,7 @@ namespace Yandex.Music.Api.Models.Track
     public class YTrackContainer : IEquatable<YTrackContainer>
     {
         public string Id { get; set; }
+        public string AlbumId { get; set; }
         public decimal OriginalIndex { get; set; }
         public bool Recent { get; set; }
         public DateTime Timestamp { get; set; }

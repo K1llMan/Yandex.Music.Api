@@ -7,6 +7,7 @@ using Yandex.Music.Api.Models.Account;
 using Yandex.Music.Api.Models.Album;
 using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
+using Yandex.Music.Api.Models.Feed;
 using Yandex.Music.Api.Models.Landing;
 using Yandex.Music.Api.Models.Playlist;
 using Yandex.Music.Api.Models.Radio;
@@ -87,6 +88,15 @@ namespace Yandex.Music.Client
         }
 
         #endregion Альбомы
+
+        #region Главная страница
+
+        public YFeed Feed()
+        {
+            return api.Landing.GetFeed(storage).Result;
+        }
+
+        #endregion Главная страница
 
         #region Исполнители
 

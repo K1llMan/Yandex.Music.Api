@@ -13,4 +13,7 @@
       <Link>README.md</Link>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Requests\Feed\" />
+  </ItemGroup>
 </Project>

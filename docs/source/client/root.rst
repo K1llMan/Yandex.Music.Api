@@ -55,6 +55,12 @@ YandexMusicClient
 
 .. code-block:: csharp
 
+   public YFeed Feed()
+
+Получение ленты.   
+
+.. code-block:: csharp
+
    public YArtistBriefInfo GetArtist(string id)
 
 Получение исполнителя по идентификатору.

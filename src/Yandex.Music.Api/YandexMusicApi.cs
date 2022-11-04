@@ -10,42 +10,47 @@ namespace Yandex.Music.Api
         #region Ветки API
 
         /// <summary>
-        /// Album API
+        /// API альбомов
         /// </summary>
         public YAlbumAPI Album { get; }
 
         /// <summary>
-        /// Artist API
+        /// API исполнителей
         /// </summary>
         public YArtistAPI Artist { get; }
 
         /// <summary>
-        /// Library API
+        /// API главной страницы
+        /// </summary>
+        public YLandingAPI Landing { get; }
+
+        /// <summary>
+        /// API библиотеки
         /// </summary>
         public YLibraryAPI Library { get; }
 
         /// <summary>
-        /// Playlist API
+        /// API плейлистов
         /// </summary>
         public YPlaylistAPI Playlist { get; }
 
         /// <summary>
-        /// Radio API
+        /// API радио
         /// </summary>
         public YRadioAPI Radio { get; }
 
         /// <summary>
-        /// Search API
+        /// API поиска
         /// </summary>
         public YSearchAPI Search { get; }
 
         /// <summary>
-        /// Track API
+        /// API треков
         /// </summary>
         public YTrackAPI Track { get; }
 
         /// <summary>
-        /// User API
+        /// API пользователя
         /// </summary>
         public YUserAPI User { get; }
 
@@ -60,6 +65,7 @@ namespace Yandex.Music.Api
         {
             Album = new YAlbumAPI(this);
             Artist = new YArtistAPI(this);
+            Landing = new YLandingAPI(this);
             Library = new YLibraryAPI(this);
             Playlist = new YPlaylistAPI(this);
             Radio = new YRadioAPI(this);

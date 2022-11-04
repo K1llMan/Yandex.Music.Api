@@ -33,6 +33,8 @@ YandexMusicApi
 │   └── Get / Async (AuthStorage storage, string albumId)
 ├── Artist
 │   └── Get / Async (AuthStorage storage, string artistId)
+├── Landing
+│   └── Feed / Async (AuthStorage storage)
 ├── Playlist
 │   ├── Get / Async (AuthStorage storage, string user, string kinds)
 │   ├── Get / Async (AuthStorage storage, YPlaylist playlist)

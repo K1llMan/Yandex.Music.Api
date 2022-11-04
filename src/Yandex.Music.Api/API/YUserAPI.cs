@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Account;
 using Yandex.Music.Api.Models.Common;
-using Yandex.Music.Api.Requests.Auth;
+using Yandex.Music.Api.Requests.Account;
 
 namespace Yandex.Music.Api.API
 {

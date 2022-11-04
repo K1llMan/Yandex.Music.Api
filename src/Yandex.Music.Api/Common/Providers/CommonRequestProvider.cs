@@ -43,9 +43,16 @@ namespace Yandex.Music.Api.Common.Providers
                 }
             };
 
-            return storage.Debug != null
-                ? storage.Debug.Deserialize<T>(response.RequestMessage?.RequestUri?.AbsolutePath, result, settings)
-                : JsonConvert.DeserializeObject<T>(result, settings); ;
+            try
+            {
+                return storage.Debug != null
+                    ? storage.Debug.Deserialize<T>(response.RequestMessage?.RequestUri?.AbsolutePath, result, settings)
+                    : JsonConvert.DeserializeObject<T>(result, settings);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Ошибка десериализации {ex}");
+            }
         }
 
         #endregion IRequestProvider
