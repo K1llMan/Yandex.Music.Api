@@ -91,6 +91,11 @@ namespace Yandex.Music.Client
 
         #region Главная страница
 
+        public YLanding GetLanding(params YLandingBlockType[] blocks)
+        {
+            return api.Landing.Get(storage, blocks).Result;
+        }
+
         public YFeed Feed()
         {
             return api.Landing.GetFeed(storage).Result;
@@ -116,12 +121,8 @@ namespace Yandex.Music.Client
 
         public List<YPlaylist> GetPersonalPlaylists()
         {
-            YLanding landing = api.Playlist.Landing(storage).Result;
-
-            return landing.Blocks
-                .FirstOrDefault(b => b.Type == "personal-playlists")
-                ?.Entities
-                .Select(e => api.Playlist.Get(storage, e.Data?.Data).Result)
+            return api.Playlist.GetPersonalPlaylists(storage)
+                .Select(r => r.Result)
                 .ToList();
         }
 

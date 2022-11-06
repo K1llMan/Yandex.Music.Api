@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Landing;
+using Yandex.Music.Api.Models.Landing.Entity.Entities;
 using Yandex.Music.Api.Models.Playlist;
 using Yandex.Music.Api.Models.Track;
 using Yandex.Music.Api.Requests.Playlist;
@@ -27,18 +28,10 @@ namespace Yandex.Music.Api.API
         /// <returns>Плейлист</returns>
         private Task<YResponse<YPlaylist>> GetPersonalPlaylist(AuthStorage storage, YGeneratedPlaylistType type)
         {
-            return LandingAsync(storage)
+            return GetPersonalPlaylistsAsync(storage)
                 .ContinueWith(list => {
-                    YPlaylist playlist = list.GetAwaiter().GetResult().Result.Blocks
-                        .Where(b => b.Type == "personal-playlists")
-                        .SelectMany(b => b.Entities)
-                        .FirstOrDefault(e => e.Data.Type == type)
-                        ?.Data
-                        .Data;
-
-                    return playlist == null
-                        ? null
-                        : Get(storage, playlist);
+                    return list.GetAwaiter().GetResult()
+                        .FirstOrDefault(e => e.Result.GeneratedPlaylistType == type);
                 });
         }
 
@@ -72,25 +65,30 @@ namespace Yandex.Music.Api.API
         #region Список с главной
 
         /// <summary>
-        /// Получение персональных списков
+        /// Получение списка персональных плейлистов
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public Task<YResponse<YLanding>> LandingAsync(AuthStorage storage)
+        public Task<List<YResponse<YPlaylist>>> GetPersonalPlaylistsAsync(AuthStorage storage)
         {
-            return new YGetPlaylistMainPageBuilder(api, storage)
-                .Build(null)
-                .GetResponseAsync();
+            return api.Landing.GetAsync(storage, YLandingBlockType.PersonalPlaylists)
+                .ContinueWith(landing => landing.GetAwaiter().GetResult()
+                    .Result
+                    .Blocks
+                    .FirstOrDefault(b => b.Type == YLandingBlockType.PersonalPlaylists)
+                    ?.Entities
+                    .Select(e => api.Playlist.Get(storage, ((YLandingEntityPersonalPlaylist)e).Data?.Data))
+                    .ToList());
         }
 
         /// <summary>
-        /// Получение персональных списков
+        /// Получение списка персональных плейлистов
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public YResponse<YLanding> Landing(AuthStorage storage)
+        public List<YResponse<YPlaylist>> GetPersonalPlaylists(AuthStorage storage)
         {
-            return LandingAsync(storage).GetAwaiter().GetResult();
+            return GetPersonalPlaylistsAsync(storage).GetAwaiter().GetResult();
         }
 
         #endregion Список с главной

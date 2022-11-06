@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 using Yandex.Music.Api.Models.Playlist;
 
-namespace Yandex.Music.Api.Models.Landing
+namespace Yandex.Music.Api.Models.Landing.Entity.Entities
 {
-    public class YLandingBlockEntityData
+    public class YPersonalPlaylist
     {
         public YPlaylist Data { get; set; }
         public List<string> Description { get; set; }

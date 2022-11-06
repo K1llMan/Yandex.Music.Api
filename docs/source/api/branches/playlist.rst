@@ -7,13 +7,13 @@ Playlist API
 
 .. code-block:: csharp
 
-   public async Task<YResponse<YLanding>> LandingAsync(AuthStorage storage)
+   public Task<List<YResponse<YPlaylist>>> GetPersonalPlaylistsAsync(AuthStorage storage)
 
 Получение списка персональных плейлистов в асинхронном режиме.
 
 .. code-block:: csharp
 
-   public YResponse<YLanding> Landing(AuthStorage storage)
+   public List<YResponse<YPlaylist>> GetPersonalPlaylists(AuthStorage storage)
 
 Получение списка персональных плейлистов.
 

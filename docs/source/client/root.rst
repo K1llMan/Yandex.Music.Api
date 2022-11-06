@@ -55,6 +55,12 @@ YandexMusicClient
 
 .. code-block:: csharp
 
+   public YLanding GetLanding(params YLandingBlockType[] blocks)
+
+Получение блоков главной страницы.   
+
+.. code-block:: csharp
+
    public YFeed Feed()
 
 Получение ленты.   

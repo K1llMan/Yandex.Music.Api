@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using FluentAssertions;
 
 using Xunit;
@@ -5,7 +7,6 @@ using Xunit.Abstractions;
 using Xunit.Extensions.Ordering;
 
 using Yandex.Music.Api.Models.Common;
-using Yandex.Music.Api.Models.Landing;
 using Yandex.Music.Api.Models.Playlist;
 using Yandex.Music.Api.Tests.Traits;
 
@@ -40,12 +41,12 @@ namespace Yandex.Music.Api.Tests.Tests.API
 
         [Fact, YandexTrait(TraitGroup.PlaylistAPI)]
         [Order(1)]
-        public void Landing_ValidData_True()
+        public void PersonalPlaylists_ValidData_True()
         {
-            YLanding mainPage = Fixture.API.Playlist.Landing(Fixture.Storage).Result;
+            List<YResponse<YPlaylist>> mainPage = Fixture.API.Playlist.GetPersonalPlaylists(Fixture.Storage);
 
             mainPage.Should().NotBeNull();
-            mainPage.Blocks.Count.Should().BePositive();
+            mainPage.Count.Should().BePositive();
         }
 
         [Fact, YandexTrait(TraitGroup.PlaylistAPI)]

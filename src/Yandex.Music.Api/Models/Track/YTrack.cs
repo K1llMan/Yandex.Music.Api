@@ -24,8 +24,6 @@ namespace Yandex.Music.Api.Models.Track
         public long FileSize { get; set; }
         public string Id { get; set; }
         public bool IsSuitableForChildren { get; set; }
-        public bool HasLyrics { get; set; }
-        public bool HasSyncLyrics { get; set; }
         public YMajor Major { get; set; }
         public YTrackNormalization Normalization { get; set; }
         public YTrackNormalizationR128 R128 { get; set; }

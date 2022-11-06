@@ -12,7 +12,7 @@ YandexMusicAPI
    API для взаимодействия с альбомами.
 :doc:`Artist <branches/artist>`
    API для взаимодействия с исполнителями.
-:doc:`Library <branches/landing>`
+:doc:`Landing <branches/landing>`
    API для взаимодействия с главной страницей.   
 :doc:`Library <branches/library>`
    API для взаимодействия с библиотекой.

@@ -18,6 +18,8 @@ namespace Yandex.Music.Api.Common
 
         #region Свойства
 
+        public bool SaveResponse { get; set; }
+
         public bool ClearDirectory { get; set; }
 
         public string LogFileName { get; }
@@ -48,18 +50,22 @@ namespace Yandex.Music.Api.Common
 
             T obj = JsonConvert.DeserializeObject<T>(json, settings);
 
-            // Запись ответа от API с ошибкой
-            if (errors.Count > 0) {
+            string fileName = Path.Combine(debugDir, $"{DateTime.Now:yyyy-MM-dd hh-mm-ss.fff} " +
+                $"{url.Trim('/').Replace("/", "-").Replace(":", "-")}.json");
+
+            // Ответ сохраняется либо безусловно, либо при ошибке
+            if (SaveResponse || errors.Count > 0)
+            {
                 if (!Directory.Exists(OutputDir))
                     Directory.CreateDirectory(OutputDir);
-
-                string fileName = Path.Combine(debugDir, $"{DateTime.Now:yyyy-MM-dd hh-mm-ss.fff} " +
-                    $"{url.Trim('/').Replace("/", "-").Replace(":", "-")}.json");
 
                 using FileStream fs = new(fileName, FileMode.Create);
                 using StreamWriter sr = new(fs);
                 sr.Write(JsonConvert.SerializeObject(JsonConvert.DeserializeObject(json), Formatting.Indented));
+            }
 
+            // Запись ответа от API с ошибкой
+            if (errors.Count > 0) {
                 using FileStream logFs = new(logFileName, FileMode.Append);
                 using StreamWriter logSr = new(logFs);
                 logSr.WriteLine($"{fileName}:");

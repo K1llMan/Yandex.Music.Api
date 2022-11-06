@@ -1,3 +1,6 @@
+using System;
+using System.Reflection;
+
 using Yandex.Music.Api.API;
 
 namespace Yandex.Music.Api
@@ -12,47 +15,47 @@ namespace Yandex.Music.Api
         /// <summary>
         /// API альбомов
         /// </summary>
-        public YAlbumAPI Album { get; }
+        public YAlbumAPI Album { get; internal set; }
 
         /// <summary>
         /// API исполнителей
         /// </summary>
-        public YArtistAPI Artist { get; }
+        public YArtistAPI Artist { get; internal set; }
 
         /// <summary>
         /// API главной страницы
         /// </summary>
-        public YLandingAPI Landing { get; }
+        public YLandingAPI Landing { get; internal set; }
 
         /// <summary>
         /// API библиотеки
         /// </summary>
-        public YLibraryAPI Library { get; }
+        public YLibraryAPI Library { get; internal set; }
 
         /// <summary>
         /// API плейлистов
         /// </summary>
-        public YPlaylistAPI Playlist { get; }
+        public YPlaylistAPI Playlist { get; internal set; }
 
         /// <summary>
         /// API радио
         /// </summary>
-        public YRadioAPI Radio { get; }
+        public YRadioAPI Radio { get; internal set; }
 
         /// <summary>
         /// API поиска
         /// </summary>
-        public YSearchAPI Search { get; }
+        public YSearchAPI Search { get; internal set; }
 
         /// <summary>
         /// API треков
         /// </summary>
-        public YTrackAPI Track { get; }
+        public YTrackAPI Track { get; internal set; }
 
         /// <summary>
         /// API пользователя
         /// </summary>
-        public YUserAPI User { get; }
+        public YUserAPI User { get; internal set; }
 
         #endregion Ветки API
 
@@ -63,15 +66,8 @@ namespace Yandex.Music.Api
         /// </summary>
         public YandexMusicApi()
         {
-            Album = new YAlbumAPI(this);
-            Artist = new YArtistAPI(this);
-            Landing = new YLandingAPI(this);
-            Library = new YLibraryAPI(this);
-            Playlist = new YPlaylistAPI(this);
-            Radio = new YRadioAPI(this);
-            Search = new YSearchAPI(this);
-            Track = new YTrackAPI(this);
-            User = new YUserAPI(this);
+            foreach (PropertyInfo property in GetType().GetProperties())
+                property.SetValue(this, Activator.CreateInstance(property.PropertyType, this));
         }
 
         #endregion Основные функции

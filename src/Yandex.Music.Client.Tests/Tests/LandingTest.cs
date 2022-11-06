@@ -5,6 +5,7 @@ using Xunit.Abstractions;
 using Xunit.Extensions.Ordering;
 
 using Yandex.Music.Api.Models.Feed;
+using Yandex.Music.Api.Models.Landing;
 
 namespace Yandex.Music.Client.Tests.Tests
 {
@@ -14,7 +15,15 @@ namespace Yandex.Music.Client.Tests.Tests
     {
         [Fact]
         [Order(0)]
-        public void Get_ValidData_True()
+        public void GetLanding_ValidData_True()
+        {
+            YLanding landing = Fixture.Client.GetLanding(YLandingBlockType.Chart);
+            landing.Should().NotBe(null);
+        }
+
+        [Fact]
+        [Order(1)]
+        public void Feed_ValidData_True()
         {
             YFeed feed = Fixture.Client.Feed();
             feed.Should().NotBe(null);

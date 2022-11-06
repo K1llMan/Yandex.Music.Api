@@ -34,10 +34,12 @@ YandexMusicApi
 ├── Artist
 │   └── Get / Async (AuthStorage storage, string artistId)
 ├── Landing
+│   └── Get / Async (AuthStorage storage, params YLandingBlockType[] blocks)
 │   └── Feed / Async (AuthStorage storage)
 ├── Playlist
 │   ├── Get / Async (AuthStorage storage, string user, string kinds)
-│   ├── Get / Async (AuthStorage storage, YPlaylist playlist)
+│   ├── Get / Async (AuthStorage storage, string user, string kinds)
+│   ├── GetPersonalPlaylists / Async (AuthStorage storage)
 │   ├── Favorites / Async (AuthStorage storage)
 │   ├── OfTheDay / Async (AuthStorage storage)
 │   ├── DejaVu / Async (AuthStorage storage)

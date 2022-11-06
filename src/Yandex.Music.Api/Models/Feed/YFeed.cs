@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using Yandex.Music.Api.Models.Landing;
+using Yandex.Music.Api.Models.Landing.Entity.Entities;
 
 namespace Yandex.Music.Api.Models.Feed
 {
@@ -12,7 +12,7 @@ namespace Yandex.Music.Api.Models.Feed
         public bool Pumpkin { get; set; }
         public bool IsWizardPassed { get; set; }
         public List<YFeedDay> Days { get; set; }
-        public List<YLandingBlockEntityData> GeneratedPlaylists { get; set; }
+        public List<YPersonalPlaylist> GeneratedPlaylists { get; set; }
         public List<YHeadline> Headlines { get; set; }
         public DateTime Today { get; set; }
     }
