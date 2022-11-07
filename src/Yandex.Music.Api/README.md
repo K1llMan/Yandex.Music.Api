@@ -28,13 +28,17 @@ YandexMusicApi
 │   ├── ExtractToFile (AuthStorage storage, string trackKey, string filePath)
 │   ├── ExtractToFile (AuthStorage storage, YTrack track, string filePath)
 │   ├── ExtractData (AuthStorage storage, string trackKey)
-│   └── ExtractData (AuthStorage storage, YTrack track)
+│   ├── ExtractData (AuthStorage storage, YTrack track)
+│   ├── GetSupplement / Async (AuthStorage storage, string trackId)
+│   ├── GetSupplement / Async (AuthStorage storage, YTrack track)
+│   ├── GetSimilar / Async (AuthStorage storage, string trackId)
+│   └── GetSimilar / Async (AuthStorage storage, YTrack track)
 ├── Album
 │   └── Get / Async (AuthStorage storage, string albumId)
 ├── Artist
 │   └── Get / Async (AuthStorage storage, string artistId)
 ├── Landing
-│   └── Get / Async (AuthStorage storage, params YLandingBlockType[] blocks)
+│   ├── Get / Async (AuthStorage storage, params YLandingBlockType[] blocks)
 │   └── Feed / Async (AuthStorage storage)
 ├── Playlist
 │   ├── Get / Async (AuthStorage storage, string user, string kinds)

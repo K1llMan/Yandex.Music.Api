@@ -91,3 +91,51 @@ Track API
    public byte[] ExtractData(AuthStorage storage, YTrack track)
 
 Получение данных в виде двоичного массива.
+
+.. code-block:: csharp
+
+   public Task<YResponse<YTrackSupplement>> GetSupplementAsync(AuthStorage storage, string trackId)
+
+Получение дополнительной информации для трека.
+
+.. code-block:: csharp
+
+   public YResponse<YTrackSupplement> GetSupplement(AuthStorage storage, string trackId)
+
+Получение дополнительной информации для трека.
+
+.. code-block:: csharp
+
+   public Task<YResponse<YTrackSupplement>> GetSupplementAsync(AuthStorage storage, YTrack track)
+
+Получение дополнительной информации для трека.
+
+.. code-block:: csharp
+
+   public YResponse<YTrackSupplement> GetSupplement(AuthStorage storage, YTrack track)
+
+Получение дополнительной информации для трека.
+
+.. code-block:: csharp
+
+   public Task<YResponse<YTrackSimilar>> GetSimilarAsync(AuthStorage storage, string trackId)
+
+Получение похожих треков.
+
+.. code-block:: csharp
+
+   public YResponse<YTrackSimilar> GetSimilar(AuthStorage storage, string trackId)
+
+Получение похожих треков.
+
+.. code-block:: csharp
+
+   public Task<YResponse<YTrackSimilar>> GetSimilarAsync(AuthStorage storage, YTrack track)
+
+Получение похожих треков.
+
+.. code-block:: csharp
+
+   public YResponse<YTrackSimilar> GetSimilar(AuthStorage storage, YTrack track)
+
+Получение похожих треков.

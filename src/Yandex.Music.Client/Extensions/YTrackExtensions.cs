@@ -36,5 +36,15 @@ namespace Yandex.Music.Client.Extensions
         {
             return track.Context.API.Library.RemoveTrackDislike(track.Context.Storage, track).Result.Revision;
         }
+
+        public static YTrackSupplement Supplement(this YTrack track)
+        {
+            return track.Context.API.Track.GetSupplement(track.Context.Storage, track).Result;
+        }
+
+        public static YTrackSimilar Similar(this YTrack track)
+        {
+            return track.Context.API.Track.GetSimilar(track.Context.Storage, track).Result;
+        }
     }
 }

@@ -174,6 +174,110 @@ namespace Yandex.Music.Api.API
             return GetFileLink(storage, track.GetKey().ToString());
         }
 
+        #region GetSupplement
+
+        /// <summary>
+        /// Получение дополнительной информации для трека
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="trackId">Идентификатор трека</param>
+        /// <returns></returns>
+        public Task<YResponse<YTrackSupplement>> GetSupplementAsync(AuthStorage storage, string trackId)
+        {
+            return new YGetTrackSupplementBuilder(api, storage)
+                .Build(trackId)
+                .GetResponseAsync();
+        }
+
+        /// <summary>
+        /// Получение дополнительной информации для трека
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="trackId">Идентификатор трека</param>
+        /// <returns></returns>
+        public YResponse<YTrackSupplement> GetSupplement(AuthStorage storage, string trackId)
+        {
+            return GetSupplementAsync(storage, trackId).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Получение дополнительной информации для трека
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="track">Трек</param>
+        /// <returns></returns>
+        public Task<YResponse<YTrackSupplement>> GetSupplementAsync(AuthStorage storage, YTrack track)
+        {
+            return new YGetTrackSupplementBuilder(api, storage)
+                .Build(track.GetKey().ToString())
+                .GetResponseAsync();
+        }
+
+        /// <summary>
+        /// Получение дополнительной информации для трека
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="track">Трек</param>
+        /// <returns></returns>
+        public YResponse<YTrackSupplement> GetSupplement(AuthStorage storage, YTrack track)
+        {
+            return GetSupplementAsync(storage, track).GetAwaiter().GetResult();
+        }
+
+        #endregion GetSupplement
+
+        #region GetSimilar
+
+        /// <summary>
+        /// Получение похожих треков
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="trackId">Идентификатор трека</param>
+        /// <returns></returns>
+        public Task<YResponse<YTrackSimilar>> GetSimilarAsync(AuthStorage storage, string trackId)
+        {
+            return new YGetTrackSimilarBuilder(api, storage)
+                .Build(trackId)
+                .GetResponseAsync();
+        }
+
+        /// <summary>
+        /// Получение похожих треков
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="trackId">Идентификатор трека</param>
+        /// <returns></returns>
+        public YResponse<YTrackSimilar> GetSimilar(AuthStorage storage, string trackId)
+        {
+            return GetSimilarAsync(storage, trackId).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Получение похожих треков
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="track">Трек</param>
+        /// <returns></returns>
+        public Task<YResponse<YTrackSimilar>> GetSimilarAsync(AuthStorage storage, YTrack track)
+        {
+            return new YGetTrackSimilarBuilder(api, storage)
+                .Build(track.GetKey().ToString())
+                .GetResponseAsync();
+        }
+
+        /// <summary>
+        /// Получение похожих треков
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="track">Трек</param>
+        /// <returns></returns>
+        public YResponse<YTrackSimilar> GetSimilar(AuthStorage storage, YTrack track)
+        {
+            return GetSimilarAsync(storage, track).GetAwaiter().GetResult();
+        }
+
+        #endregion GetSimilar
+
         #region Получение данных трека
 
         /// <summary>

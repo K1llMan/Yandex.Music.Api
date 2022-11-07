@@ -9,6 +9,7 @@ using Xunit.Abstractions;
 using Xunit.Extensions.Ordering;
 
 using Yandex.Music.Api.Models.Common;
+using Yandex.Music.Api.Models.Track;
 using Yandex.Music.Api.Tests.Traits;
 
 namespace Yandex.Music.Api.Tests.Tests.API
@@ -21,8 +22,8 @@ namespace Yandex.Music.Api.Tests.Tests.API
 
         private string extractedFileName = "test.mp3";
 
-        // Кино - "Группа крови"
-        private string trackId = "106259";
+        // Metallica - Enter Sandman
+        private string trackId = "57703";
 
         private static YResponse<List<YTrackDownloadInfo>> downloadInfo;
         private static YStorageDownloadFile downloadFile;
@@ -34,7 +35,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         public void Get_ValidData_True()
         {
             Fixture.Track = Fixture.API.Track.Get(Fixture.Storage, trackId).Result.FirstOrDefault();
-            Fixture.Track.Title.Should().Be("Группа крови");
+            Fixture.Track.Title.Should().Be("Enter Sandman");
         }
 
         [Fact, YandexTrait(TraitGroup.TrackAPI)]
@@ -81,6 +82,26 @@ namespace Yandex.Music.Api.Tests.Tests.API
             Fixture.API.Track.ExtractToFile(Fixture.Storage, Fixture.Track, extractedFileName);
 
             File.Exists(extractedFileName).Should().BeTrue();
+        }
+
+        [Fact, YandexTrait(TraitGroup.TrackAPI)]
+        [Order(5)]
+        public void GetSupplement_ValidData_True()
+        {
+            Fixture.Track.Should().NotBe(null);
+            YResponse<YTrackSupplement> supplement = Fixture.API.Track.GetSupplement(Fixture.Storage, Fixture.Track);
+
+            supplement.Should().NotBeNull();
+        }
+
+        [Fact, YandexTrait(TraitGroup.TrackAPI)]
+        [Order(6)]
+        public void GetSimilar_ValidData_True()
+        {
+            Fixture.Track.Should().NotBe(null);
+            YResponse<YTrackSimilar> similar = Fixture.API.Track.GetSimilar(Fixture.Storage, Fixture.Track);
+
+            similar.Should().NotBeNull();
         }
 
         public TrackAPITest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 using FluentAssertions;
 
@@ -9,6 +8,7 @@ using Xunit.Abstractions;
 using Xunit.Extensions.Ordering;
 
 using Yandex.Music.Api.Models.Common;
+using Yandex.Music.Api.Models.Track;
 using Yandex.Music.Client.Extensions;
 
 namespace Yandex.Music.Client.Tests.Tests
@@ -21,8 +21,8 @@ namespace Yandex.Music.Client.Tests.Tests
 
         private string extractedFileName = "test.mp3";
 
-        // Кино - "Группа крови"
-        private string trackId = "106259";
+        // Metallica - Enter Sandman
+        private string trackId = "57703";
 
         private static YResponse<List<YTrackDownloadInfo>> downloadInfo;
         private static YStorageDownloadFile downloadFile;
@@ -34,7 +34,7 @@ namespace Yandex.Music.Client.Tests.Tests
         public void Get_ValidData_True()
         {
             Fixture.Track = Fixture.Client.GetTrack(trackId);
-            Fixture.Track.Title.Should().Be("Группа крови");
+            Fixture.Track.Title.Should().Be("Enter Sandman");
         }
 
         [Fact]
@@ -95,6 +95,22 @@ namespace Yandex.Music.Client.Tests.Tests
         {
             int revision = Fixture.Track.RemoveDislike();
             revision.Should().BeGreaterThan(0);
+        }
+
+        [Fact]
+        [Order(7)]
+        public void Supplement_ValidData_True()
+        {
+            YTrackSupplement supplement = Fixture.Track.Supplement();
+            supplement.Should().NotBeNull();
+        }
+
+        [Fact]
+        [Order(8)]
+        public void Similar_ValidData_True()
+        {
+            YTrackSimilar similar = Fixture.Track.Similar();
+            similar.Should().NotBeNull();
         }
 
         public TrackTest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
