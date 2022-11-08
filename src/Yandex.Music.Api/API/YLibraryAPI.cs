@@ -133,9 +133,9 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public Task<YResponse<YLibraryTrack>> GetDislikedTracksAsync(AuthStorage storage)
+        public Task<YResponse<YLibraryTracks>> GetDislikedTracksAsync(AuthStorage storage)
         {
-            return GetLibrarySection<YLibraryTrack>(storage, YLibrarySection.Tracks, YLibrarySectionType.Dislikes);
+            return GetLibrarySection<YLibraryTracks>(storage, YLibrarySection.Tracks, YLibrarySectionType.Dislikes);
         }
 
         /// <summary>
@@ -143,9 +143,29 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public YResponse<YLibraryTrack> GetDislikedTracks(AuthStorage storage)
+        public YResponse<YLibraryTracks> GetDislikedTracks(AuthStorage storage)
         {
             return GetDislikedTracksAsync(storage).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Получение дизлайкнутых исполнителей
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <returns></returns>
+        public Task<YResponse<List<YArtist>>> GetDislikedArtistsAsync(AuthStorage storage)
+        {
+            return GetLibrarySection<List<YArtist>>(storage, YLibrarySection.Artists, YLibrarySectionType.Dislikes);
+        }
+
+        /// <summary>
+        /// Получение дизлайкнутых исполнителей
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <returns></returns>
+        public YResponse<List<YArtist>> GetDislikedArtists(AuthStorage storage)
+        {
+            return GetDislikedArtistsAsync(storage).GetAwaiter().GetResult();
         }
 
         #endregion Дизлайки

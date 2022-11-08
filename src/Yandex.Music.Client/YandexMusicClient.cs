@@ -9,6 +9,7 @@ using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Feed;
 using Yandex.Music.Api.Models.Landing;
+using Yandex.Music.Api.Models.Library;
 using Yandex.Music.Api.Models.Playlist;
 using Yandex.Music.Api.Models.Radio;
 using Yandex.Music.Api.Models.Search;
@@ -30,18 +31,12 @@ namespace Yandex.Music.Client
         /// <summary>
         /// Аккаунт
         /// </summary>
-        public YAccount Account
-        {
-            get { return storage.User; }
-        }
+        public YAccount Account => storage.User;
 
         /// <summary>
         /// Флаг авторизации
         /// </summary>
-        public bool IsAuthorized
-        {
-            get { return storage.IsAuthorized; }
-        }
+        public bool IsAuthorized => storage.IsAuthorized;
 
         #endregion Свойства
 
@@ -191,6 +186,44 @@ namespace Yandex.Music.Client
         }
 
         #endregion Поиск
+
+        #region Библиотека
+
+        public List<YTrack> GetLikedTracks()
+        {
+            string[] ids = api.Library.GetLikedTracks(storage)
+                .Result
+                .Library
+                .Tracks
+                .Select(t => t.Id)
+                .ToArray();
+
+            return api.Track.Get(storage, ids).Result;
+        }
+
+        public List<YTrack> GetDislikedTracks()
+        {
+            string[] ids = api.Library.GetDislikedTracks(storage)
+                .Result
+                .Library
+                .Tracks
+                .Select(t => t.Id)
+                .ToArray();
+
+            return api.Track.Get(storage, ids).Result;
+        }
+
+        public List<YAlbum> GetLikedAlbums()
+        {
+            string[] ids = api.Library.GetLikedAlbums(storage)
+                .Result
+                .Select(a => a.Id)
+                .ToArray();
+
+            return api.Album.GetList(storage, ids).Result;
+        }
+
+        #endregion Библиотека
 
         #region Радио
 

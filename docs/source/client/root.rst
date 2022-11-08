@@ -157,6 +157,24 @@ YandexMusicClient
 
 .. code-block:: csharp
 
+   public List<YTrack> GetLikedTracks()
+
+Получение списка понравившихся треков.
+
+.. code-block:: csharp
+
+   public List<YTrack> GetDislikedTracks()
+
+Получение списка непонравившихся треков.
+
+.. code-block:: csharp
+
+   public List<YAlbum> GetLikedAlbums()
+
+Получение списка понравившихся альбомов.
+
+.. code-block:: csharp
+
    public List<YStation> GetRadioDashboard()
 
 Получение списка рекомендованных радиостанций.

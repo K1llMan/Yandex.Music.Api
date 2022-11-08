@@ -34,7 +34,8 @@ YandexMusicApi
 │   ├── GetSimilar / Async (AuthStorage storage, string trackId)
 │   └── GetSimilar / Async (AuthStorage storage, YTrack track)
 ├── Album
-│   └── Get / Async (AuthStorage storage, string albumId)
+│   ├── Get / Async (AuthStorage storage, string albumId)
+│   └── GetList / Async (AuthStorage storage, params string[] albumIds)
 ├── Artist
 │   └── Get / Async (AuthStorage storage, string artistId)
 ├── Landing

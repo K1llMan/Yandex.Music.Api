@@ -150,6 +150,23 @@ namespace Yandex.Music.Api.Tests.Tests.API
             removed.Should().BeTrue();
         }
 
+        [Fact, YandexTrait(TraitGroup.LibraryAPI)]
+        [Order(12)]
+        public void GetDislikedTracks_ValidData_True()
+        {
+            YLibraryTracks tracks = Fixture.API.Library.GetDislikedTracks(Fixture.Storage).Result;
+
+            tracks.Library.Tracks.Count.Should().BePositive();
+        }
+
+        [Fact, YandexTrait(TraitGroup.LibraryAPI)]
+        [Order(12)]
+        public void GetDislikedArtists_ValidData_True()
+        {
+            List<YArtist> artists = Fixture.API.Library.GetDislikedArtists(Fixture.Storage).Result;
+
+            artists.Should().NotBeNull();
+        }
 
         public LibraryAPITest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
         {
