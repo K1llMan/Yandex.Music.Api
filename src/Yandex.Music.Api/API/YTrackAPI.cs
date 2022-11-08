@@ -52,12 +52,12 @@ namespace Yandex.Music.Api.API
         /// Получение трека
         /// </summary>
         /// <param name="storage">Хранилище</param>
-        /// <param name="trackId">Идентификатор трека</param>
+        /// <param name="trackIds">Идентификаторы треков</param>
         /// <returns></returns>
-        public Task<YResponse<List<YTrack>>> GetAsync(AuthStorage storage, string trackId)
+        public Task<YResponse<List<YTrack>>> GetAsync(AuthStorage storage, params string[] trackIds)
         {
-            return new YGetTrackBuilder(api, storage)
-                .Build(trackId)
+            return new YGetTracksBuilder(api, storage)
+                .Build(trackIds)
                 .GetResponseAsync();
         }
 
@@ -65,11 +65,11 @@ namespace Yandex.Music.Api.API
         /// Получение трека
         /// </summary>
         /// <param name="storage">Хранилище</param>
-        /// <param name="trackId">Идентификатор трека</param>
+        /// <param name="trackIds">Идентификаторы треков</param>
         /// <returns></returns>
-        public YResponse<List<YTrack>> Get(AuthStorage storage, string trackId)
+        public YResponse<List<YTrack>> Get(AuthStorage storage, params string[] trackIds)
         {
-            return GetAsync(storage, trackId).GetAwaiter().GetResult();
+            return GetAsync(storage, trackIds).GetAwaiter().GetResult();
         }
 
         /// <summary>

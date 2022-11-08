@@ -78,6 +78,11 @@ namespace Yandex.Music.Client
             return api.Track.Get(storage, id).Result.FirstOrDefault();
         }
 
+        public List<YTrack> GetTracks(params string[] ids)
+        {
+            return api.Track.Get(storage, ids).Result;
+        }
+
         #endregion Треки
 
         #region Альбомы

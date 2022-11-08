@@ -49,6 +49,12 @@ YandexMusicClient
 
 .. code-block:: csharp
 
+   public List<YTrack> GetTracks(params string[] ids)
+
+Получение списка треков по идентификаторам.
+
+.. code-block:: csharp
+
    public YAlbum GetAlbum(string id)
 
 Получение альбома по идентификатору.

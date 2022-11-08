@@ -7,13 +7,13 @@ Track API
 
 .. code-block:: csharp
 
-   public async Task<YResponse<List<YTrack>>> GetAsync(AuthStorage storage, string trackId)
+   public Task<YResponse<List<YTrack>>> GetAsync(AuthStorage storage, params string[] trackIds)
 
 Получение трека в асинхронном режиме.
 
 .. code-block:: csharp
 
-   public YResponse<List<YTrack>> Get(AuthStorage storage, string trackId)
+   public YResponse<List<YTrack>> Get(AuthStorage storage, params string[] trackIds)
 
 Получение трека.
 
