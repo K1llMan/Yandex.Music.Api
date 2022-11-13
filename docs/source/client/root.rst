@@ -49,7 +49,7 @@ YandexMusicClient
 
 .. code-block:: csharp
 
-   public List<YTrack> GetTracks(params string[] ids)
+   public List<YTrack> GetTracks(IEnumerable<string> ids)
 
 Получение списка треков по идентификаторам.
 
@@ -58,6 +58,12 @@ YandexMusicClient
    public YAlbum GetAlbum(string id)
 
 Получение альбома по идентификатору.
+
+.. code-block:: csharp
+
+   public List<YAlbum> GetAlbums(IEnumerable<string> ids)
+
+Получение списка альбомов по идентификаторам.
 
 .. code-block:: csharp
 
@@ -79,9 +85,21 @@ YandexMusicClient
 
 .. code-block:: csharp
 
+   public List<YArtist> GetArtists(IEnumerable<string> ids)
+
+Получение списка исполнителей по идентификаторам.
+
+.. code-block:: csharp
+
    public YPlaylist GetPlaylist(string user, string id)
 
 Получение плейлиста по пользователю и идентификатору.
+
+.. code-block:: csharp
+
+   public List<YPlaylist> GetPlaylists(IEnumerable<(string user, string id)> ids)
+
+Получение списка плейлистов по пользователю и идентификатору.
 
 .. code-block:: csharp
 

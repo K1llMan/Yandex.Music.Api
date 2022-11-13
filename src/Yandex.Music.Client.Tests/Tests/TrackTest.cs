@@ -117,7 +117,7 @@ namespace Yandex.Music.Client.Tests.Tests
         [Order(9)]
         public void GetTracks_ValidData_True()
         {
-            List<YTrack> tracks = Fixture.Client.GetTracks("43422600", "28061202");
+            List<YTrack> tracks = Fixture.Client.GetTracks(new[] { "43422600", "28061202" });
             tracks.Count.Should().Be(2);
         }
 

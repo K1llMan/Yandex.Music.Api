@@ -214,7 +214,7 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public YResponse<YPlaylist> Alice(AuthStorage storage)
         {
-            return MissedAsync(storage).GetAwaiter().GetResult();
+            return AliceAsync(storage).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -266,12 +266,12 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <param name="user">Uid пользователя-владельца плейлиста</param>
-        /// <param name="kinds">Тип</param>
+        /// <param name="kind">Тип</param>
         /// <returns></returns>
-        public Task<YResponse<YPlaylist>> GetAsync(AuthStorage storage, string user, string kinds)
+        public Task<YResponse<YPlaylist>> GetAsync(AuthStorage storage, string user, string kind)
         {
             return new YGetPlaylistBuilder(api, storage)
-                .Build((user, kinds))
+                .Build((user, kind))
                 .GetResponseAsync();
         }
 
@@ -285,6 +285,30 @@ namespace Yandex.Music.Api.API
         public YResponse<YPlaylist> Get(AuthStorage storage, string user, string kinds)
         {
             return GetAsync(storage, user, kinds).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Получение плейлистов
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="ids">Список пар пользователь:тип</param>
+        /// <returns></returns>
+        public Task<YResponse<List<YPlaylist>>> GetAsync(AuthStorage storage, IEnumerable<(string user, string kind)> ids)
+        {
+            return new YGetPlaylistsBuilder(api, storage)
+                .Build(ids)
+                .GetResponseAsync();
+        }
+
+        /// <summary>
+        /// Получение плейлиста
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="ids">Список пар пользователь:тип</param>
+        /// <returns></returns>
+        public YResponse<List<YPlaylist>> Get(AuthStorage storage, IEnumerable<(string user, string kind)> ids)
+        {
+            return GetAsync(storage, ids).GetAwaiter().GetResult();
         }
 
         /// <summary>

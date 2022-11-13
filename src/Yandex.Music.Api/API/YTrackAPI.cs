@@ -49,12 +49,36 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
-        /// Получение трека
+        /// Получение треков
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="trackId">Идентификатор трека</param>
+        /// <returns></returns>
+        public Task<YResponse<List<YTrack>>> GetAsync(AuthStorage storage, string trackId)
+        {
+            return new YGetTracksBuilder(api, storage)
+                .Build(new[] { trackId })
+                .GetResponseAsync();
+        }
+
+        /// <summary>
+        /// Получение треков
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="trackId">Идентификатор трека</param>
+        /// <returns></returns>
+        public YResponse<List<YTrack>> Get(AuthStorage storage, string trackId)
+        {
+            return GetAsync(storage, trackId).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Получение треков
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <param name="trackIds">Идентификаторы треков</param>
         /// <returns></returns>
-        public Task<YResponse<List<YTrack>>> GetAsync(AuthStorage storage, params string[] trackIds)
+        public Task<YResponse<List<YTrack>>> GetAsync(AuthStorage storage, IEnumerable<string> trackIds)
         {
             return new YGetTracksBuilder(api, storage)
                 .Build(trackIds)
@@ -62,12 +86,12 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
-        /// Получение трека
+        /// Получение треков
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <param name="trackIds">Идентификаторы треков</param>
         /// <returns></returns>
-        public YResponse<List<YTrack>> Get(AuthStorage storage, params string[] trackIds)
+        public YResponse<List<YTrack>> Get(AuthStorage storage, IEnumerable<string> trackIds)
         {
             return GetAsync(storage, trackIds).GetAwaiter().GetResult();
         }

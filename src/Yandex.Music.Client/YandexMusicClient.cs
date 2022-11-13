@@ -73,7 +73,7 @@ namespace Yandex.Music.Client
             return api.Track.Get(storage, id).Result.FirstOrDefault();
         }
 
-        public List<YTrack> GetTracks(params string[] ids)
+        public List<YTrack> GetTracks(IEnumerable<string> ids)
         {
             return api.Track.Get(storage, ids).Result;
         }
@@ -85,6 +85,11 @@ namespace Yandex.Music.Client
         public YAlbum GetAlbum(string id)
         {
             return api.Album.Get(storage, id).Result;
+        }
+
+        public List<YAlbum> GetAlbums(IEnumerable<string> ids)
+        {
+            return api.Album.Get(storage, ids).Result;
         }
 
         #endregion Альбомы
@@ -110,6 +115,11 @@ namespace Yandex.Music.Client
             return api.Artist.Get(storage, id).Result;
         }
 
+        public List<YArtist> GetArtists(IEnumerable<string> ids)
+        {
+            return api.Artist.Get(storage, ids).Result;
+        }
+
         #endregion Исполнители
 
         #region Плейлисты
@@ -117,6 +127,11 @@ namespace Yandex.Music.Client
         public YPlaylist GetPlaylist(string user, string id)
         {
             return api.Playlist.Get(storage, user,id).Result;
+        }
+
+        public List<YPlaylist> GetPlaylists(IEnumerable<(string user, string id)> ids)
+        {
+            return api.Playlist.Get(storage, ids).Result;
         }
 
         public List<YPlaylist> GetPersonalPlaylists()
@@ -220,7 +235,7 @@ namespace Yandex.Music.Client
                 .Select(a => a.Id)
                 .ToArray();
 
-            return api.Album.GetList(storage, ids).Result;
+            return api.Album.Get(storage, ids).Result;
         }
 
         #endregion Библиотека

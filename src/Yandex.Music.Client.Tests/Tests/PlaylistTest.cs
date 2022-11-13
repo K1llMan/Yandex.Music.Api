@@ -40,6 +40,14 @@ namespace Yandex.Music.Client.Tests.Tests
 
         [Fact]
         [Order(1)]
+        public void GetList_ValidData_True()
+        {
+            List<YPlaylist> playlists = Fixture.Client.GetPlaylists(new[] { ("103372440", "2007"), ("103372440", "1878") });
+            playlists.Count.Should().Be(2);
+        }
+
+        [Fact]
+        [Order(2)]
         public void GetPersonalPlaylists_ValidData_True()
         {
             List<YPlaylist> response = Fixture.Client.GetPersonalPlaylists();
@@ -48,7 +56,16 @@ namespace Yandex.Music.Client.Tests.Tests
         }
 
         [Fact]
-        [Order(2)]
+        [Order(3)]
+        public void Favorites_ValidData_True()
+        {
+            YPlaylist response = Fixture.Client.GetFavorites();
+
+            response.Should().NotBeNull();
+        }
+
+        [Fact]
+        [Order(4)]
         public void OfTheDay_ValidData_True()
         {
             YPlaylist response = Fixture.Client.GetOfTheDay();
@@ -57,7 +74,7 @@ namespace Yandex.Music.Client.Tests.Tests
         }
 
         [Fact]
-        [Order(3)]
+        [Order(5)]
         public void Premiere_ValidData_True()
         {
             YPlaylist response = Fixture.Client.GetPremiere();
@@ -66,7 +83,7 @@ namespace Yandex.Music.Client.Tests.Tests
         }
 
         [Fact]
-        [Order(4)]
+        [Order(6)]
         public void DejaVu_ValidData_True()
         {
             YPlaylist response = Fixture.Client.GetDejaVu();
@@ -75,7 +92,7 @@ namespace Yandex.Music.Client.Tests.Tests
         }
 
         [Fact]
-        [Order(5)]
+        [Order(7)]
         public void Missed_ValidData_True()
         {
             YPlaylist response = Fixture.Client.GetMissed();
@@ -84,7 +101,7 @@ namespace Yandex.Music.Client.Tests.Tests
         }
 
         [Fact]
-        [Order(6)]
+        [Order(8)]
         public void Alice_ValidData_True()
         {
             YPlaylist response = Fixture.Client.GetAlice();
@@ -93,7 +110,7 @@ namespace Yandex.Music.Client.Tests.Tests
         }
 
         [Fact]
-        [Order(7)]
+        [Order(9)]
         public void Podcasts_ValidData_True()
         {
             YPlaylist response = Fixture.Client.GetPodcasts();
@@ -102,7 +119,7 @@ namespace Yandex.Music.Client.Tests.Tests
         }
 
         [Fact]
-        [Order(8)]
+        [Order(10)]
         public void Rewind_ValidData_True()
         {
             YPlaylist response = Fixture.Client.GetRewind();
@@ -111,7 +128,7 @@ namespace Yandex.Music.Client.Tests.Tests
         }
 
         [Fact]
-        [Order(9)]
+        [Order(11)]
         public void Create_ValidData_True()
         {
             Fixture.CreatedPlaylist = Fixture.Client.CreatePlaylist("Test Playlist");
@@ -120,7 +137,7 @@ namespace Yandex.Music.Client.Tests.Tests
         }
 
         [Fact]
-        [Order(10)]
+        [Order(12)]
         public void InsertTrack_ValidData_True()
         {
             Fixture.CreatedPlaylist.Should().NotBeNull();
@@ -132,7 +149,7 @@ namespace Yandex.Music.Client.Tests.Tests
         }
 
         [Fact]
-        [Order(11)]
+        [Order(13)]
         public void DeleteTrack_ValidData_True()
         {
             Fixture.CreatedPlaylist.Should().NotBeNull();
@@ -144,7 +161,7 @@ namespace Yandex.Music.Client.Tests.Tests
         }
 
         [Fact]
-        [Order(12)]
+        [Order(14)]
         public void Rename_ValidData_True()
         {
             Fixture.CreatedPlaylist.Should().NotBeNull();
@@ -155,7 +172,7 @@ namespace Yandex.Music.Client.Tests.Tests
         }
 
         [Fact]
-        [Order(13)]
+        [Order(15)]
         public void Remove_ValidData_True()
         {
             Fixture.CreatedPlaylist.Should().NotBeNull();

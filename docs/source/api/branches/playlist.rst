@@ -127,6 +127,18 @@ Playlist API
 
 .. code-block:: csharp
 
+   public Task<YResponse<List<YPlaylist>>> GetAsync(AuthStorage storage, IEnumerable<(string user, string kind)> ids)
+
+Получение списка плейлистов в асинхронном режиме.
+
+.. code-block:: csharp
+
+   public YResponse<List<YPlaylist>> Get(AuthStorage storage, IEnumerable<(string user, string kind)> ids)
+
+Получение списка плейлистов.
+
+.. code-block:: csharp
+
    public async Task<YResponse<YPlaylist>> GetAsync(AuthStorage storage, YPlaylist playlist)
 
 Получение плейлиста в асинхронном режиме.

@@ -19,7 +19,8 @@ YandexMusicApi
 │   ├── Authorize / Async (AuthStorage storage, string token)
 │   └── GetUserAuth / Async (AuthStorage storage)
 ├── Track
-│   ├── Get / Async (AuthStorage storage, params string[] trackIds)
+│   ├── Get / Async (AuthStorage storage, string trackId)
+│   ├── Get / Async (AuthStorage storage, IEnumerable<string> trackIds)
 │   ├── GetMetadataForDownload / Async (AuthStorage storage, string trackKey, bool direct)
 │   ├── GetMetadataForDownload / Async (AuthStorage storage, YTrack track, bool direct)
 │   ├── GetDownloadFileInfo / Async (AuthStorage storage, YTrackDownloadInfoResponse metadataInfo)
@@ -35,15 +36,16 @@ YandexMusicApi
 │   └── GetSimilar / Async (AuthStorage storage, YTrack track)
 ├── Album
 │   ├── Get / Async (AuthStorage storage, string albumId)
-│   └── GetList / Async (AuthStorage storage, params string[] albumIds)
+│   └── Get / Async (AuthStorage storage, IEnumerable<string> albumIds)
 ├── Artist
-│   └── Get / Async (AuthStorage storage, string artistId)
+│   ├── Get / Async (AuthStorage storage, string artistId)
+│   └── Get / Async (AuthStorage storage, IEnumerable<string> artistIds)
 ├── Landing
 │   ├── Get / Async (AuthStorage storage, params YLandingBlockType[] blocks)
 │   └── Feed / Async (AuthStorage storage)
 ├── Playlist
 │   ├── Get / Async (AuthStorage storage, string user, string kinds)
-│   ├── Get / Async (AuthStorage storage, string user, string kinds)
+│   ├── Get / Async (AuthStorage storage, IEnumerable<(string user, string kind)> ids)
 │   ├── GetPersonalPlaylists / Async (AuthStorage storage)
 │   ├── Favorites / Async (AuthStorage storage)
 │   ├── OfTheDay / Async (AuthStorage storage)

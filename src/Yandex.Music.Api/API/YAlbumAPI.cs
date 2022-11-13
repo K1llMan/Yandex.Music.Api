@@ -48,7 +48,7 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="albumIds">Идентификаторы альбомов</param> 
         /// <returns></returns>
-        public Task<YResponse<List<YAlbum>>> GetListAsync(AuthStorage storage, params string[] albumIds)
+        public Task<YResponse<List<YAlbum>>> GetAsync(AuthStorage storage, IEnumerable<string> albumIds)
         {
             return new YGetAlbumsBuilder(api, storage)
                 .Build(albumIds)
@@ -61,9 +61,9 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="albumIds">Идентификаторы альбомов</param> 
         /// <returns></returns>
-        public YResponse<List<YAlbum>> GetList(AuthStorage storage, params string[] albumIds)
+        public YResponse<List<YAlbum>> Get(AuthStorage storage, IEnumerable<string> albumIds)
         {
-            return GetListAsync(storage, albumIds).GetAwaiter().GetResult();
+            return GetAsync(storage, albumIds).GetAwaiter().GetResult();
         }
 
         #endregion Основные функции

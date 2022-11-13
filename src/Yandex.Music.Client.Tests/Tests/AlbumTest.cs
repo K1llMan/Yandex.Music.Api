@@ -1,9 +1,12 @@
+using System.Collections.Generic;
+
 using FluentAssertions;
 
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Extensions.Ordering;
 
+using Yandex.Music.Api.Models.Album;
 using Yandex.Music.Client.Extensions;
 
 namespace Yandex.Music.Client.Tests.Tests
@@ -29,6 +32,14 @@ namespace Yandex.Music.Client.Tests.Tests
 
         [Fact]
         [Order(1)]
+        public void GetAlbums_ValidData_True()
+        {
+            List<YAlbum> albums = Fixture.Client.GetAlbums(new[] { "5778040", "3350968" });
+            albums.Count.Should().BePositive();
+        }
+
+        [Fact]
+        [Order(2)]
         public void AddLike_ValidData_True()
         {
             Fixture.Album.Should().NotBe(null);
@@ -37,7 +48,7 @@ namespace Yandex.Music.Client.Tests.Tests
         }
 
         [Fact]
-        [Order(2)]
+        [Order(3)]
         public void RemoveLike_ValidData_True()
         {
             Fixture.Album.Should().NotBe(null);

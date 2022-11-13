@@ -2,6 +2,8 @@
 {
     public enum YChartProgress
     {
+        Up,
+        Down,
         Same
     }
 }

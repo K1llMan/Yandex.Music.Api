@@ -429,7 +429,7 @@
             </summary>
             <param name="storage">Хранилище</param>
             <param name="user">Uid пользователя-владельца плейлиста</param>
-            <param name="kinds">Тип</param>
+            <param name="kind">Тип</param>
             <returns></returns>
         </member>
         <member name="M:Yandex.Music.Api.API.YPlaylist.Get(Yandex.Music.Api.Common.YAuthStorage,System.String,System.String)">
@@ -438,7 +438,7 @@
             </summary>
             <param name="storage">Хранилище</param>
             <param name="user">Uid пользователя-владельца плейлиста</param> 
-            <param name="kinds">Тип</param>
+            <param name="kind">Тип</param>
             <returns></returns>
         </member>
         <member name="M:Yandex.Music.Api.API.YPlaylist.GetAsync(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YPlaylist.YPlaylist)">
@@ -478,7 +478,7 @@
             Переименование
             </summary>
             <param name="storage">Хранилище</param>
-            <param name="kinds">Идентификатор плейлиста</param>
+            <param name="kind">Идентификатор плейлиста</param>
             <param name="name">Заголовок</param>
             <returns></returns>
         </member>
@@ -487,7 +487,7 @@
             Переименование
             </summary>
             <param name="storage">Хранилище</param>
-            <param name="kinds">Идентификатор плейлиста</param>
+            <param name="kind">Идентификатор плейлиста</param>
             <param name="name">Заголовок</param>
             <returns></returns>
         </member>
@@ -514,7 +514,7 @@
             Удаление
             </summary>
             <param name="storage">Хранилище</param>
-            <param name="kinds">Тип</param>
+            <param name="kind">Тип</param>
             <returns></returns>
         </member>
         <member name="M:Yandex.Music.Api.API.YPlaylist.Delete(Yandex.Music.Api.Common.YAuthStorage,System.String)">
@@ -522,7 +522,7 @@
             Удаление
             </summary>
             <param name="storage">Хранилище</param>
-            <param name="kinds">Тип</param>
+            <param name="kind">Тип</param>
             <returns></returns>
         </member>
         <member name="M:Yandex.Music.Api.API.YPlaylist.DeleteAsync(Yandex.Music.Api.Common.YAuthStorage,Yandex.Music.Api.Common.YPlaylist.YPlaylist)">

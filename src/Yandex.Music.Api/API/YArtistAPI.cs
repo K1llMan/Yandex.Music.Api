@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Yandex.Music.Api.Common;
@@ -39,6 +40,29 @@ namespace Yandex.Music.Api.API
         public YResponse<YArtistBriefInfo> Get(AuthStorage storage, string artistId)
         {
             return GetAsync(storage, artistId).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Получение исполнителей
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="artistIds">Идентификаторы</param> 
+        /// <returns></returns>
+        public Task<YResponse<List<YArtist>>> GetAsync(AuthStorage storage, IEnumerable<string> artistIds)
+        {
+            return new YGetArtistsBuilder(api, storage)
+                .Build(artistIds)
+                .GetResponseAsync();
+        }
+
+        /// <summary>
+        /// Получение исполнителя
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="artistIds">Идентификаторы</param> 
+        public YResponse<List<YArtist>> Get(AuthStorage storage, IEnumerable<string> artistIds)
+        {
+            return GetAsync(storage, artistIds).GetAwaiter().GetResult();
         }
 
         #endregion Основные функции

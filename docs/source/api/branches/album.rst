@@ -19,12 +19,12 @@ YAlbumAPI
 
 .. code-block:: csharp
 
-   public Task<YResponse<List<YAlbum>>> GetListAsync(AuthStorage storage, params string[] albumIds)
+   public Task<YResponse<List<YAlbum>>> GetAsync(AuthStorage storage, IEnumerable<string> albumIds)
 
 Получение списка альбомов.
 
 .. code-block:: csharp
 
-   public YResponse<List<YAlbum>> GetList(AuthStorage storage, params string[] albumIds)
+   public YResponse<List<YAlbum>> Get(AuthStorage storage, IEnumerable<string> albumIds)
 
 Получение списка альбомов.

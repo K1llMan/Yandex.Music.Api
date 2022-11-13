@@ -7,15 +7,27 @@ Track API
 
 .. code-block:: csharp
 
-   public Task<YResponse<List<YTrack>>> GetAsync(AuthStorage storage, params string[] trackIds)
+   public Task<YResponse<List<YTrack>>> GetAsync(AuthStorage storage, string trackId)
 
 Получение трека в асинхронном режиме.
 
 .. code-block:: csharp
 
-   public YResponse<List<YTrack>> Get(AuthStorage storage, params string[] trackIds)
+   public YResponse<List<YTrack>> Get(AuthStorage storage, string trackId)
 
 Получение трека.
+
+.. code-block:: csharp
+
+   public Task<YResponse<List<YTrack>>> GetAsync(AuthStorage storage, IEnumerable<string> trackIds)
+
+Получение списка треков в асинхронном режиме.
+
+.. code-block:: csharp
+
+   public YResponse<List<YTrack>> Get(AuthStorage storage, IEnumerable<string> trackIds)
+
+Получение списка треков.
 
 .. note:: Здесь и далее trackKey формируется в формате "<id альбома>:<id трека>".
 

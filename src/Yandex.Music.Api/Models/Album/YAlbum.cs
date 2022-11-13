@@ -54,6 +54,7 @@ namespace Yandex.Music.Api.Models.Album
         public List<YArtist> Artists { get; set; }
         public bool Available { get; set; }
         public bool AvailableForMobile { get; set; }
+        public List<string> AvailableForOptions { get; set; }
         public bool AvailableForPremiumUsers { get; set; }
         public bool AvailablePartially { get; set; }
         public string BackgroundImageUrl { get; set; }

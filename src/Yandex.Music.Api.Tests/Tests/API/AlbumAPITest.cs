@@ -35,7 +35,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(1)]
         public void GetAlbums_ValidData_True()
         {
-            YResponse<List<YAlbum>> albums = Fixture.API.Album.GetList(Fixture.Storage, "5778040", "3350968");
+            YResponse<List<YAlbum>> albums = Fixture.API.Album.Get(Fixture.Storage, new[] { "5778040", "3350968" });
             albums.Result.Count.Should().BePositive();
         }
 

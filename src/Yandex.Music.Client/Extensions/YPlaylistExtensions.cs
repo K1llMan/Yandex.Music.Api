@@ -13,6 +13,13 @@ namespace Yandex.Music.Client.Extensions
             return playlist.Owner.Uid == playlist.Context.Storage.User.Uid;
         }
 
+        public static YPlaylist WithTracks(this YPlaylist playlist)
+        {
+            return playlist.Tracks != null 
+                ? playlist 
+                : playlist.Context.API.Playlist.Get(playlist.Context.Storage, playlist).Result;
+        }
+
         public static string AddLike(this YPlaylist playlist)
         {
             return playlist.Context.API.Library.AddPlaylistLike(playlist.Context.Storage, playlist).Result;

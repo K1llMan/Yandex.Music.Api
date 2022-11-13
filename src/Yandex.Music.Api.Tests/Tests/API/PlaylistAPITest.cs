@@ -167,6 +167,14 @@ namespace Yandex.Music.Api.Tests.Tests.API
             response.Should().BeTrue();
         }
 
+        [Fact, YandexTrait(TraitGroup.PlaylistAPI)]
+        [Order(14)]
+        public void GetList_ValidData_True()
+        {
+            YResponse<List<YPlaylist>> playlists = Fixture.API.Playlist.Get(Fixture.Storage, new [] { ( "103372440", "2007"), ("103372440", "1878") });
+            playlists.Result.Count.Should().Be(2);
+        }
+
         public PlaylistAPITest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
         {
         }
