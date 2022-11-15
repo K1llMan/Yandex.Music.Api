@@ -128,7 +128,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
             Fixture.CreatedPlaylist.Should().NotBeNull();
             Fixture.Track.Should().NotBeNull();
 
-            Fixture.CreatedPlaylist = Fixture.API.Playlist.InsertTracks(Fixture.Storage, Fixture.CreatedPlaylist, Fixture.Track).Result;
+            Fixture.CreatedPlaylist = Fixture.API.Playlist.InsertTracks(Fixture.Storage, Fixture.CreatedPlaylist, new [] { Fixture.Track }).Result;
 
             Fixture.CreatedPlaylist.Should().NotBeNull();
         }
@@ -140,7 +140,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
             Fixture.CreatedPlaylist.Should().NotBeNull();
             Fixture.Track.Should().NotBeNull();
 
-            Fixture.CreatedPlaylist = Fixture.API.Playlist.DeleteTracks(Fixture.Storage, Fixture.CreatedPlaylist, Fixture.Track).Result;
+            Fixture.CreatedPlaylist = Fixture.API.Playlist.DeleteTracks(Fixture.Storage, Fixture.CreatedPlaylist, new[] { Fixture.Track }).Result;
 
             Fixture.CreatedPlaylist.Should().NotBeNull();
         }

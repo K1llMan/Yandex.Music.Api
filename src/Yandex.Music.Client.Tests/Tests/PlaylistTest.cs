@@ -59,7 +59,7 @@ namespace Yandex.Music.Client.Tests.Tests
         [Order(3)]
         public void Favorites_ValidData_True()
         {
-            YPlaylist response = Fixture.Client.GetFavorites();
+            List<YPlaylist> response = Fixture.Client.GetFavorites();
 
             response.Should().NotBeNull();
         }

@@ -42,16 +42,16 @@ namespace Yandex.Music.Api.API
         /// <param name="playlist">Плейлист</param>
         /// <param name="changes">Список изменений</param>
         /// <returns>Плейлист после изменений</returns>
-        private Task<YResponse<YPlaylist>> ChangePlaylist(AuthStorage storage, YPlaylist playlist, List<YPlaylistChange> changes)
+        private Task<YResponse<YPlaylist>> ChangePlaylist(AuthStorage storage, YPlaylist playlist, IEnumerable<YPlaylistChange> changes)
         {
             return new YPlaylistChangeBuilder(api, storage)
                 .Build((playlist, changes))
                 .GetResponseAsync();
         }
 
-        private List<YTrack> RemoveIdentical(YTrack[] tracks)
+        private IEnumerable<YTrack> RemoveIdentical(IEnumerable<YTrack> tracks)
         {
-            return tracks.Distinct().ToList();
+            return tracks.Distinct();
         }
 
         #endregion Вспомогательные функции
@@ -474,9 +474,16 @@ namespace Yandex.Music.Api.API
         /// <param name="playlist">Плейлист</param>
         /// <param name="tracks">Треки для добавления</param>
         /// <returns></returns>
-        public Task<YResponse<YPlaylist>> InsertTracksAsync(AuthStorage storage, YPlaylist playlist, params YTrack[] tracks)
+        public Task<YResponse<YPlaylist>> InsertTracksAsync(AuthStorage storage, YPlaylist playlist, IEnumerable<YTrack> tracks)
         {
-            return ChangePlaylist(storage, playlist, new List<YPlaylistChange> { new() { Operation = YPlaylistChangeType.Insert, At = 0, Tracks = tracks.Select(t => t.GetKey()).ToList() } }).ContinueWith(p => Get(storage, p.Result.Result));
+            return ChangePlaylist(storage, playlist, new List<YPlaylistChange> { 
+                    new() {
+                        Operation = YPlaylistChangeType.Insert, 
+                        At = 0, 
+                        Tracks = tracks.Select(t => t.GetKey())
+                    }
+                })
+                .ContinueWith(p => Get(storage, p.Result.Result));
         }
 
         /// <summary>
@@ -486,7 +493,7 @@ namespace Yandex.Music.Api.API
         /// <param name="playlist">Плейлист</param>
         /// <param name="tracks">Треки для добавления</param>
         /// <returns></returns>
-        public YResponse<YPlaylist> InsertTracks(AuthStorage storage, YPlaylist playlist, params YTrack[] tracks)
+        public YResponse<YPlaylist> InsertTracks(AuthStorage storage, YPlaylist playlist, IEnumerable<YTrack> tracks)
         {
             return InsertTracksAsync(storage, playlist, tracks).GetAwaiter().GetResult();
         }
@@ -498,7 +505,7 @@ namespace Yandex.Music.Api.API
         /// <param name="playlist">Плейлист</param>
         /// <param name="tracks">Треки для удаления</param>
         /// <returns></returns>
-        public Task<YResponse<YPlaylist>> DeleteTracksAsync(AuthStorage storage, YPlaylist playlist, params YTrack[] tracks)
+        public Task<YResponse<YPlaylist>> DeleteTracksAsync(AuthStorage storage, YPlaylist playlist, IEnumerable<YTrack> tracks)
         {
             List<YPlaylistChange> changes = RemoveIdentical(tracks)
                 .Select(t => playlist.Tracks.Select(c => c.Track).ToList().IndexOf(t))
@@ -526,7 +533,7 @@ namespace Yandex.Music.Api.API
         /// <param name="playlist">Плейлист</param>
         /// <param name="tracks">Треки для удаления</param>
         /// <returns></returns>
-        public YResponse<YPlaylist> DeleteTracks(AuthStorage storage, YPlaylist playlist, params YTrack[] tracks)
+        public YResponse<YPlaylist> DeleteTracks(AuthStorage storage, YPlaylist playlist, IEnumerable<YTrack> tracks)
         {
             return DeleteTracksAsync(storage, playlist, tracks).GetAwaiter().GetResult();
         }

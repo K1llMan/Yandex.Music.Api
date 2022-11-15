@@ -13,6 +13,6 @@ namespace Yandex.Music.Api.Models.Playlist
         [JsonProperty("op")] 
         public YPlaylistChangeType Operation { get; set; }
         public int? To { get; set; }
-        public List<YTrackAlbumPair> Tracks { get; set; }
+        public IEnumerable<YTrackAlbumPair> Tracks { get; set; }
     }
 }

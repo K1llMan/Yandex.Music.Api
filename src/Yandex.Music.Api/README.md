@@ -59,8 +59,8 @@ YandexMusicApi
 │   ├── Rename / Async (AuthStorage storage, YPlaylist playlist, string name)
 │   ├── Delete / Async (AuthStorage storage, string kinds)
 │   ├── Delete / Async (AuthStorage storage, YPlaylist playlist)
-│   ├── InsertTracks / Async (AuthStorage storage, YPlaylist playlist, List<YTrack> tracks)
-│   └── DeleteTrack / Async (AuthStorage storage, YPlaylist playlist, List<YTrack> tracks)
+│   ├── InsertTracks / Async (AuthStorage storage, YPlaylist playlist, IEnumerable<YTrack> tracks)
+│   └── DeleteTrack / Async (AuthStorage storage, YPlaylist playlist, IEnumerable<YTrack> tracks)
 ├── Library
 │   ├── GetLikedTracks / Async (AuthStorage storage)
 │   ├── GetLikedAlbums / Async (AuthStorage storage)

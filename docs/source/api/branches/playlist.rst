@@ -213,24 +213,24 @@ Playlist API
 
 .. code-block:: csharp
 
-   public async Task<YResponse<YPlaylist>> InsertTracksAsync(AuthStorage storage, YPlaylist playlist, params YTrack[] tracks)
+   public async Task<YResponse<YPlaylist>> InsertTracksAsync(AuthStorage storage, YPlaylist playlist, IEnumerable<YTrack> tracks)
 
 Добавление треков в асинхронном режиме.
 
 .. code-block:: csharp
 
-   public YResponse<YPlaylist> InsertTracks(AuthStorage storage, YPlaylist playlist, params YTrack[] tracks)
+   public YResponse<YPlaylist> InsertTracks(AuthStorage storage, YPlaylist playlist, IEnumerable<YTrack> tracks)
 
 Добавление треков.
 
 .. code-block:: csharp
 
-   public async Task<YResponse<YPlaylist>> DeleteTracksAsync(AuthStorage storage, YPlaylist playlist, params YTrack[] tracks)
+   public async Task<YResponse<YPlaylist>> DeleteTracksAsync(AuthStorage storage, YPlaylist playlist, IEnumerable<YTrack> tracks)
 
 Удаление треков в асинхронном режиме.
 
 .. code-block:: csharp
 
-   public YResponse<YPlaylist> DeleteTracks(AuthStorage storage, YPlaylist playlist, params YTrack[] tracks)
+   public YResponse<YPlaylist> DeleteTracks(AuthStorage storage, YPlaylist playlist, IEnumerable<YTrack> tracks)
 
 Удаление треков.
