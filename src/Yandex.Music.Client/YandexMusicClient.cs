@@ -238,6 +238,36 @@ namespace Yandex.Music.Client
             return api.Album.Get(storage, ids).Result;
         }
 
+        public List<YArtist> GetLikedArtists()
+        {
+            string[] ids = api.Library.GetLikedArtists(storage)
+                .Result
+                .Select(a => a.Id)
+                .ToArray();
+
+            return api.Artist.Get(storage, ids).Result;
+        }
+
+        public List<YArtist> GetDislikedArtists()
+        {
+            string[] ids = api.Library.GetDislikedArtists(storage)
+                .Result
+                .Select(a => a.Id)
+                .ToArray();
+
+            return api.Artist.Get(storage, ids).Result;
+        }
+
+        public List<YPlaylist> GetLikedPlaylists()
+        {
+            (string, string)[] ids = api.Library.GetLikedPlaylists(storage)
+                .Result
+                .Select(a => (a.Playlist.Uid, a.Playlist.Kind))
+                .ToArray();
+
+            return api.Playlist.Get(storage, ids).Result;
+        }
+
         #endregion Библиотека
 
         #region Радио

@@ -7,7 +7,9 @@ using Xunit.Abstractions;
 using Xunit.Extensions.Ordering;
 
 using Yandex.Music.Api.Models.Album;
+using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Library;
+using Yandex.Music.Api.Models.Playlist;
 using Yandex.Music.Api.Models.Track;
 
 namespace Yandex.Music.Client.Tests.Tests
@@ -41,6 +43,33 @@ namespace Yandex.Music.Client.Tests.Tests
             List<YAlbum> albums = Fixture.Client.GetLikedAlbums();
 
             albums.Should().NotBeNull();
+        }
+
+        [Fact]
+        [Order(3)]
+        public void GetLikedArtists_ValidData_True()
+        {
+            List<YArtist> artists = Fixture.Client.GetLikedArtists();
+
+            artists.Should().NotBeNull();
+        }
+
+        [Fact]
+        [Order(4)]
+        public void GetDislikedArtists_ValidData_True()
+        {
+            List<YArtist> artists = Fixture.Client.GetDislikedArtists();
+
+            artists.Should().NotBeNull();
+        }
+
+        [Fact]
+        [Order(5)]
+        public void GetLlikedPlaylists_ValidData_True()
+        {
+            List<YPlaylist> playlists = Fixture.Client.GetLikedPlaylists();
+
+            playlists.Should().NotBeNull();
         }
 
         public LibraryTest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
