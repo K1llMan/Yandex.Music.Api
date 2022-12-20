@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 using Newtonsoft.Json;
@@ -32,6 +33,7 @@ namespace Yandex.Music.Api.Models.Artist
         public string OgImage { get; set; }
         public YArtistRatings Ratings { get; set; }
         public bool TicketsAvailable { get; set; }
+        public DateTime Timestamp { get; set; }
         public bool Various { get; set; }
         public string YaMoneyId { get; set; }
     }
