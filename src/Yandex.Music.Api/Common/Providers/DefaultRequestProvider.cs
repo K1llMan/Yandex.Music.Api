@@ -47,12 +47,24 @@ namespace Yandex.Music.Api.Common.Providers
         {
             try
             {
+#if NETCOREAPP
                 HttpClient client = new(new SocketsHttpHandler {
                     Proxy = storage.Context.WebProxy,
                     AutomaticDecompression = DecompressionMethods.GZip,
                     UseCookies = true,
                     CookieContainer = storage.Context.Cookies,
                 });
+#endif
+
+#if NETSTANDARD2_0
+                HttpClient client = HttpClientFactory.Create(new HttpClientHandler()
+                {
+                    Proxy = storage.Context.WebProxy,
+                    AutomaticDecompression = DecompressionMethods.GZip,
+                    UseCookies = true,
+                    CookieContainer = storage.Context.Cookies
+                });
+#endif
 
                 return client.SendAsync(message);
             }
