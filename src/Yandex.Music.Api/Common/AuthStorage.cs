@@ -28,7 +28,7 @@ namespace Yandex.Music.Api.Common
         /// <summary>
         /// Токен авторизации
         /// </summary>
-        public string Token { get; internal set; }
+        public string Token => UserAuthToken?.AccessToken;
 
         /// <summary>
         /// Пользователь
@@ -39,6 +39,11 @@ namespace Yandex.Music.Api.Common
         /// Провайдер запросов
         /// </summary>
         public IRequestProvider Provider { get; }
+
+        /// <summary>
+        /// Gets or sets the user authentication token.
+        /// </summary>
+        public YAuth UserAuthToken { get; set; }
 
         #endregion
 
