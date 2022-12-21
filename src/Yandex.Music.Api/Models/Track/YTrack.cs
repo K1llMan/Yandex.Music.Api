@@ -20,6 +20,7 @@ namespace Yandex.Music.Api.Models.Track
         public bool Best { get; set; }
         public string ContentWarning { get; set; }
         public string CoverUri { get; set; }
+        public List<string> ClipIds { get; set; }
         public long DurationMs { get; set; }
         public string Error { get; set; }
         public long FileSize { get; set; }

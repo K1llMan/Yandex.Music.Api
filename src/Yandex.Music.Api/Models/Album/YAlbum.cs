@@ -63,6 +63,7 @@ namespace Yandex.Music.Api.Models.Album
         public bool ChildContent { get; set; }
         public string ContentWarning { get; set; }
         public string CoverUri { get; set; }
+        public YCustomWave CustomWave { get; set; }
         public List<YAlbum> Duplicates { get; set; }
         public string Genre { get; set; }
         public string Id { get; set; }

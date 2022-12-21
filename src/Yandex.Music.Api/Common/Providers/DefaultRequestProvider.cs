@@ -57,8 +57,7 @@ namespace Yandex.Music.Api.Common.Providers
 #endif
 
 #if NETSTANDARD2_0
-                HttpClient client = HttpClientFactory.Create(new HttpClientHandler()
-                {
+                HttpClient client = HttpClientFactory.Create(new HttpClientHandler() {
                     Proxy = storage.Context.WebProxy,
                     AutomaticDecompression = DecompressionMethods.GZip,
                     UseCookies = true,

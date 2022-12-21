@@ -42,6 +42,11 @@ namespace Yandex.Music.Api.Models.Playlist
         /// <summary>
         /// Кинопоиск
         /// </summary>
-        Kinopoisk
+        Kinopoisk,
+
+        /// <summary>
+        /// Перемотка 2022
+        /// </summary>
+        Rewind2022
     }
 }

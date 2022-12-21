@@ -15,11 +15,13 @@ namespace Yandex.Music.Api.Extensions
 
         public static string SplitByCapitalLetter(this string str, string delimiter)
         {
-            return string.Join(delimiter, (Regex.Matches(str, @"([A-Z]+)(?=([A-Z][a-z]|$)) | [A-Z][a-z].+?(?=([A-Z]|$))", RegexOptions.IgnorePatternWhitespace) as IList<Match>)!.Select(m => m.ToString()));
+            return string.Join(delimiter, Regex.Matches(str, @"([A-Z]+)(?=([A-Z][a-z]|$)) | [A-Z][a-z].+?(?=([A-Z]|$))", RegexOptions.IgnorePatternWhitespace)
+                .Cast<Match>()
+                .Select(m => m.ToString()));
         }
 
         /// <summary>
-        /// Проверяет соответствие регулярному выражению
+        /// РџСЂРѕРІРµСЂСЏРµС‚ СЃРѕРѕС‚РІРµС‚СЃС‚РІРёРµ СЂРµРіСѓР»СЏСЂРЅРѕРјСѓ РІС‹СЂР°Р¶РµРЅРёСЋ
         /// </summary>
         public static bool IsMatch(this string str, string pattern, RegexOptions options)
         {
@@ -27,7 +29,7 @@ namespace Yandex.Music.Api.Extensions
         }
 
         /// <summary>
-        /// Проверяет соответствие регулярному выражению
+        /// РџСЂРѕРІРµСЂСЏРµС‚ СЃРѕРѕС‚РІРµС‚СЃС‚РІРёРµ СЂРµРіСѓР»СЏСЂРЅРѕРјСѓ РІС‹СЂР°Р¶РµРЅРёСЋ
         /// </summary>
         public static bool IsMatch(this string str, string pattern)
         {
@@ -35,7 +37,7 @@ namespace Yandex.Music.Api.Extensions
         }
 
         /// <summary>
-        /// Возвращает совпадения для регулярного выражения
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃРѕРІРїР°РґРµРЅРёСЏ РґР»СЏ СЂРµРіСѓР»СЏСЂРЅРѕРіРѕ РІС‹СЂР°Р¶РµРЅРёСЏ
         /// </summary>
         public static string[] GetMatches(this string str, string pattern, RegexOptions options = RegexOptions.IgnoreCase)
         {
