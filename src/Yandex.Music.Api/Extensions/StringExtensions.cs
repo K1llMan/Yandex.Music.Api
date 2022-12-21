@@ -15,7 +15,7 @@ namespace Yandex.Music.Api.Extensions
 
         public static string SplitByCapitalLetter(this string str, string delimiter)
         {
-            return string.Join(delimiter, (Regex.Matches(str, @"([A-Z]+)(?=([A-Z][a-z]|$)) | [A-Z][a-z].+?(?=([A-Z]|$))", RegexOptions.IgnorePatternWhitespace) as IList<Match>)?.Select(m => m.ToString()));
+            return string.Join(delimiter, (Regex.Matches(str, @"([A-Z]+)(?=([A-Z][a-z]|$)) | [A-Z][a-z].+?(?=([A-Z]|$))", RegexOptions.IgnorePatternWhitespace) as IList<Match>)!.Select(m => m.ToString()));
         }
 
         /// <summary>
