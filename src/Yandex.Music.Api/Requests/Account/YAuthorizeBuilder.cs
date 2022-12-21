@@ -8,7 +8,7 @@ using Yandex.Music.Api.Requests.Common;
 
 namespace Yandex.Music.Api.Requests.Account
 {
-    [YOAuthRequest(WebRequestMethods.Http.Get, "token")]
+    [YOAuthRequest(WebRequestMethods.Http.Post, "token")]
     public class YAuthorizeBuilder : YRequestBuilder<YAuth, (string login, string password)>
     {
         #region Поля
