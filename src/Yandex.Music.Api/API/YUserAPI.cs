@@ -38,6 +38,8 @@ namespace Yandex.Music.Api.API
             if (string.IsNullOrEmpty(token))
                 throw new Exception("Задан пустой токен авторизации.");
 
+            storage.Token = token;
+
             // Пытаемся получить информацию о пользователе
             YResponse<YAccountResult> authInfo = await GetUserAuthAsync(storage);
 
@@ -74,8 +76,7 @@ namespace Yandex.Music.Api.API
         public async Task AuthorizeAsync(AuthStorage storage, string login, string password)
         {
             YAuth result = await AuthPassport(storage, login, password);
-            storage.UserAuthToken = result;
-
+            
             await AuthorizeAsync(storage, result.AccessToken);
         }
 

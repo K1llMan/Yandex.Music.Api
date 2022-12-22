@@ -28,7 +28,7 @@ namespace Yandex.Music.Api.Common
         /// <summary>
         /// Токен авторизации
         /// </summary>
-        public string Token => UserAuthToken?.AccessToken;
+        public string Token { get; internal set; }
 
         /// <summary>
         /// Пользователь
