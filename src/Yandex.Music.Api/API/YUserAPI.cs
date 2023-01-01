@@ -8,7 +8,6 @@ using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Account;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Requests.Account;
-using YAuthCaptcha = Yandex.Music.Api.Models.Account.YAuthCaptcha;
 
 namespace Yandex.Music.Api.API
 {
@@ -238,7 +237,7 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
-        /// Authentications the letter asynchronous.
+        /// Authentications by the letter.
         /// </summary>
         public async Task<YAccessToken> AuthLetterAsync(AuthStorage storage)
         {
@@ -254,6 +253,11 @@ namespace Yandex.Music.Api.API
             return await LoginByCookiesAsync(storage);
         }
 
+        /// <summary>
+        /// Authenticate by the application password.
+        /// </summary>
+        /// <param name="storage">The storage.</param>
+        /// <param name="password">The password from yandex key application.</param>
         public async Task<YAccessToken> AuthAppPassword(AuthStorage storage, string password)
         {
             if (storage.AuthToken == null || string.IsNullOrWhiteSpace(storage.AuthToken.CsfrToken))
