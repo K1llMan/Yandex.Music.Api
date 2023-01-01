@@ -1,9 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="$(SolutionDir)\Configs\Common.xml" />
+  <Import Project="$(ProjectDir)..\Configs\Common.xml" />
   <PropertyGroup>
     <PackageId>KM.Yandex.Music.Api</PackageId>
     <Description>Unofficial Yandex.Music API library</Description>
     <PackageTags>yandex;music;api</PackageTags>
+    <TargetFrameworks>net5.0;net6.0;netstandard2.0;</TargetFrameworks>
     <LangVersion>9.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
