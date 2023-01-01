@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using Yandex.Music.Api;
 using Yandex.Music.Api.Common;
@@ -64,9 +63,6 @@ namespace Yandex.Music.Client
             return storage.IsAuthorized;
         }
 
-        /// <summary>
-        /// Get link to QR-code auth.
-        /// </summary>
         public Task<string> GetAuthQRLinkAsync()
         {
             return api.User.GetAuthQRLinkAsync(storage);
@@ -97,10 +93,6 @@ namespace Yandex.Music.Client
             return api.User.AuthLetterAsync(storage);
         }
 
-        /// <summary>
-        /// Create login session and return supported auth methods.
-        /// </summary>
-        /// <param name="userName">Name of the user.</param>
         public Task<YAuthTypes> LoginUserAsync(string userName)
         {
             return api.User.LoginUserAsync(storage, userName);

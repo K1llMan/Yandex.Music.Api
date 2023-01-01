@@ -120,15 +120,13 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
-        /// Create login session and return supported auth methods.
+        /// Создает севнс входа и возвращает доступные методы авторизации
         /// </summary>
-        /// <param name="storage">The storage.</param>
-        /// <param name="userName">Name of the user.</param>
         public async Task<YAuthTypes> LoginUserAsync(AuthStorage storage, string userName)
         {
             if (!await GetCsrfTokenAsync(storage))
             {
-                throw new Exception("Unable to get csrf token.");
+                throw new Exception("Не возможно инициализировать сессию входа.");
             }
 
             var response = await new YAuthLoginUserBuilder(api, storage)
@@ -141,13 +139,13 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
-        /// Get link to QR-code auth.
+        /// Получить ссылку на QR код
         /// </summary>
         public async Task<string> GetAuthQRLinkAsync(AuthStorage storage)
         {
             if (!await GetCsrfTokenAsync(storage))
             {
-                throw new Exception("Unable to get csrf token.");
+                throw new Exception("Не возможно инициализировать сессию входа.");
             }
 
             var response = await new YAuthQRBuilder(api, storage)
@@ -195,14 +193,14 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
-        /// Gets the captcha.
+        /// Получить <see cref="YAuthCaptcha"/>
         /// </summary>
         public Task<YAuthCaptcha> GetCaptchaAsync(AuthStorage storage)
         {
             if (storage.AuthToken == null ||
                 string.IsNullOrWhiteSpace(storage.AuthToken.CsfrToken))
             {
-                throw new AuthenticationException($"Need login first. Execute {nameof(LoginUserAsync)} before using.");
+                throw new AuthenticationException($"Не найдена сессия входа. Выполните {nameof(LoginUserAsync)} перед использованием");
             }
 
             return new Requests.Account.YAuthCaptchaBuilder(api, storage)
@@ -211,14 +209,14 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
-        /// Logins the by captcha.
+        /// Выполнить вход после получения captcha
         /// </summary>
         public Task<YAuthBase> LoginByCaptchaAsync(AuthStorage storage, string captchaValue)
         {
             if (storage.AuthToken == null ||
                 string.IsNullOrWhiteSpace(storage.AuthToken.CsfrToken))
             {
-                throw new AuthenticationException($"Need login first. Execute {nameof(LoginUserAsync)} before it.");
+                throw new AuthenticationException($"Не найдена сессия входа. Выполните {nameof(LoginUserAsync)} перед использованием");
             }
 
             return new YAuthLoginCaptchaBuilder(api, storage)
@@ -227,7 +225,7 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
-        /// Gets the authentication letter.
+        /// Получить письмо авторизации, на почту пользователя
         /// </summary>
         public Task<YAuthLetter> GetAuthLetterAsync(AuthStorage storage)
         {
@@ -237,7 +235,7 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
-        /// Authentications by the letter.
+        /// Авторизоваться после подтвеждения входа через письмо
         /// </summary>
         public async Task<YAccessToken> AuthLetterAsync(AuthStorage storage)
         {
@@ -254,15 +252,13 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
-        /// Authenticate by the application password.
+        /// Войти с помощью пароля из yandex прложения
         /// </summary>
-        /// <param name="storage">The storage.</param>
-        /// <param name="password">The password from yandex key application.</param>
         public async Task<YAccessToken> AuthAppPassword(AuthStorage storage, string password)
         {
             if (storage.AuthToken == null || string.IsNullOrWhiteSpace(storage.AuthToken.CsfrToken))
             {
-                throw new AuthenticationException($"Need login first. Execute {nameof(LoginUserAsync)} before using.");
+                throw new AuthenticationException($"Не найдена сессия входа. Выполните {nameof(LoginUserAsync)} перед использованием");
             }
 
             var response = await new YAuthAppPasswordBuilder(api, storage)
@@ -281,7 +277,7 @@ namespace Yandex.Music.Api.API
         {
             if (storage.AuthToken == null)
             {
-                throw new Exception("Не выполнен запрос на авторизацию.");
+                throw new Exception("Не возможно инициализировать сессию входа.");
             }
 
             var auth = await new YAuthCookiesBuilder(api, storage)
@@ -304,7 +300,7 @@ namespace Yandex.Music.Api.API
 
             if (!authMethodsResponse.IsSuccessStatusCode)
             {
-                throw new HttpRequestException("Invalid request");
+                throw new HttpRequestException("Не возможно получить CFRF токен.");
             }
 
             var responseString = await authMethodsResponse.Content.ReadAsStringAsync();
