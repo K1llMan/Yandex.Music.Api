@@ -31,11 +31,21 @@ namespace Yandex.Music.Api.Requests.Common
             if (msg == null)
                 return default;
 
-            using HttpResponseMessage response = await provider.GetWebResponseAsync(msg);
+            HttpResponseMessage response = await provider.GetWebResponseAsync(msg);
 
-            return typeof(T) == typeof(HttpResponseMessage)
-                ? (T)(object)response
-                : await provider.GetDataFromResponseAsync<T>(api, response);
+            if (typeof(T) == typeof(HttpResponseMessage))
+            {
+                return (T)(object)response;
+            }
+
+            try
+            {
+                return await provider.GetDataFromResponseAsync<T>(api, response);
+            }
+            finally
+            {
+                response.Dispose();
+            }
         }
 
         #endregion Основные функции

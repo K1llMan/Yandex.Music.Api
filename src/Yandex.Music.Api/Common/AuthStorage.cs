@@ -41,9 +41,11 @@ namespace Yandex.Music.Api.Common
         public IRequestProvider Provider { get; }
 
         /// <summary>
-        /// Gets or sets the user authentication token.
+        /// Gets or sets the access token.
         /// </summary>
-        public YAuth UserAuthToken { get; set; }
+        public YAccessToken AccessToken { get; set; }
+
+        internal YAuthToken AuthToken { get; set; }
 
         #endregion
 
