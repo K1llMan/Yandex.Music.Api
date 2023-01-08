@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 using System.Web;
@@ -84,6 +85,8 @@ namespace Yandex.Music.Api.Requests.Common
             if (!string.IsNullOrEmpty(storage.Token))
                 msg.Headers.TryAddWithoutValidation(HttpRequestHeader.Authorization.GetName(), $"OAuth {storage.Token}");
 
+            SetCustomHeaders(msg.Headers);
+
             return msg;
         }
 
@@ -114,6 +117,10 @@ namespace Yandex.Music.Api.Requests.Common
         protected virtual HttpContent GetContent(ParamsTuple tuple)
         {
             return null;
+        }
+
+        protected virtual void SetCustomHeaders(HttpRequestHeaders headers)
+        {
         }
 
         protected string SerializeJson(object data)

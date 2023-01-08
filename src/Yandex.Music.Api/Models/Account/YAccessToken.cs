@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace Yandex.Music.Api.Models.Account
 {
-    public class YAuth
+    public class YAccessToken
     {
         [JsonProperty("access_token")] 
         public string AccessToken { get; set; }

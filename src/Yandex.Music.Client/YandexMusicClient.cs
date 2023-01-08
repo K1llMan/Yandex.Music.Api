@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
 using Yandex.Music.Api;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Account;
@@ -9,7 +9,6 @@ using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Feed;
 using Yandex.Music.Api.Models.Landing;
-using Yandex.Music.Api.Models.Library;
 using Yandex.Music.Api.Models.Playlist;
 using Yandex.Music.Api.Models.Radio;
 using Yandex.Music.Api.Models.Search;
@@ -62,6 +61,46 @@ namespace Yandex.Music.Client
             api.User.Authorize(storage, token);
 
             return storage.IsAuthorized;
+        }
+
+        public Task<string> GetAuthQRLinkAsync()
+        {
+            return api.User.GetAuthQRLinkAsync(storage);
+        }
+
+        public Task<bool> LoginQRAsync()
+        {
+            return api.User.LoginQRAsync(storage);
+        }
+
+        public Task<YAuthCaptcha> GetCaptchaAsync()
+        {
+            return api.User.GetCaptchaAsync(storage);
+        }
+
+        public Task LoginCaptchaAsync(string captcha)
+        {
+            return api.User.LoginByCaptchaAsync(storage, captcha);
+        }
+
+        public Task<YAuthLetter> GetAuthLetterAsync()
+        {
+            return api.User.GetAuthLetterAsync(storage);
+        }
+
+        public Task<YAccessToken> AuthLetterAsync()
+        {
+            return api.User.AuthLetterAsync(storage);
+        }
+
+        public Task<YAuthTypes> LoginUserAsync(string userName)
+        {
+            return api.User.LoginUserAsync(storage, userName);
+        }
+
+        public Task<YAccessToken> AuthAppPassword(string password)
+        {
+            return api.User.AuthAppPassword(storage, password);
         }
 
         #endregion Авторизация
