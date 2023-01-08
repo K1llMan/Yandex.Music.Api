@@ -4,6 +4,8 @@ using Xunit;
 using Xunit.Abstractions;
 using Xunit.Extensions.Ordering;
 
+using Yandex.Music.Api.Models.Account;
+using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Tests.Traits;
 
 namespace Yandex.Music.Api.Tests.Tests.API
@@ -19,6 +21,16 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Fact]
         [YandexTrait(TraitGroup.UserAPI)]
         [Order(0)]
+        public void AuthorizeTypes_ValidData_True()
+        {
+            YAuthTypes types = Fixture.API.User.CreateAuthSession(Fixture.Storage, Fixture.AppSettings.Login);
+
+            types.Should().NotBeNull();
+        }
+
+        [Fact]
+        [YandexTrait(TraitGroup.UserAPI)]
+        [Order(1)]
         public void Authorize_ValidData_True()
         {
             if (!string.IsNullOrEmpty(Fixture.AppSettings.Token))
@@ -31,10 +43,10 @@ namespace Yandex.Music.Api.Tests.Tests.API
 
         [Fact]
         [YandexTrait(TraitGroup.UserAPI)]
-        [Order(1)]
+        [Order(2)]
         public void GetUserAuth_ValidData_True()
         {
-            var response = Fixture.API.User.GetUserAuth(Fixture.Storage);
+            YResponse<YAccountResult> response = Fixture.API.User.GetUserAuth(Fixture.Storage);
             response.Result.Account.Login.Should().Be(Fixture.Storage.User.Login);
         }
     }

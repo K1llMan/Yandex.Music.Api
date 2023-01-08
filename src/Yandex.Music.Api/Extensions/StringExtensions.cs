@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -41,10 +40,12 @@ namespace Yandex.Music.Api.Extensions
         /// </summary>
         public static string[] GetMatches(this string str, string pattern, RegexOptions options = RegexOptions.IgnoreCase)
         {
-            if (str.IsMatch(pattern, options))
-                return Regex.Matches(str, pattern, options).Cast<Match>().Select(m => m.Value).ToArray();
-
-            return new string[] { };
+            return str.IsMatch(pattern, options) 
+                ? Regex.Matches(str, pattern, options)
+                    .Cast<Match>()
+                    .Select(m => m.Value)
+                    .ToArray() 
+                : new string[] { };
         }
     }
 }

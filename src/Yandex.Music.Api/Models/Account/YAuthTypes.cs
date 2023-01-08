@@ -21,10 +21,10 @@ namespace Yandex.Music.Api.Models.Account
         public string CanAuthorize { get; set; }
 
         [JsonProperty("preferred_auth_method")]
-        public string PreferredAuthMethod { get; set; }
+        public YAuthMethod PreferredAuthMethod { get; set; }
 
         [JsonProperty("auth_methods")]
-        public List<string> AuthMethods { get; set; }
+        public List<YAuthMethod> AuthMethods { get; set; }
 
         [JsonProperty("can_register")]
         public bool CanRegister { get; set; }

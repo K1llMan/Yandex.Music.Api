@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 using Yandex.Music.Api;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Account;
@@ -63,14 +64,19 @@ namespace Yandex.Music.Client
             return storage.IsAuthorized;
         }
 
+        public Task<YAuthTypes> CreateAuthSessionAsync(string userName)
+        {
+            return api.User.CreateAuthSessionAsync(storage, userName);
+        }
+
         public Task<string> GetAuthQRLinkAsync()
         {
             return api.User.GetAuthQRLinkAsync(storage);
         }
 
-        public Task<bool> LoginQRAsync()
+        public Task<bool> AuthorizeByQRAsync()
         {
-            return api.User.LoginQRAsync(storage);
+            return api.User.AuthorizeByQRAsync(storage);
         }
 
         public Task<YAuthCaptcha> GetCaptchaAsync()
@@ -78,9 +84,9 @@ namespace Yandex.Music.Client
             return api.User.GetCaptchaAsync(storage);
         }
 
-        public Task LoginCaptchaAsync(string captcha)
+        public Task AuthorizeByCaptchaAsync(string captcha)
         {
-            return api.User.LoginByCaptchaAsync(storage, captcha);
+            return api.User.AuthorizeByCaptchaAsync(storage, captcha);
         }
 
         public Task<YAuthLetter> GetAuthLetterAsync()
@@ -88,19 +94,14 @@ namespace Yandex.Music.Client
             return api.User.GetAuthLetterAsync(storage);
         }
 
-        public Task<YAccessToken> AuthLetterAsync()
+        public Task<YAccessToken> AuthorizeByLetterAsync()
         {
-            return api.User.AuthLetterAsync(storage);
+            return api.User.AuthorizeByLetterAsync(storage);
         }
 
-        public Task<YAuthTypes> LoginUserAsync(string userName)
+        public Task<YAccessToken> AuthorizeByAppPassword(string password)
         {
-            return api.User.LoginUserAsync(storage, userName);
-        }
-
-        public Task<YAccessToken> AuthAppPassword(string password)
-        {
-            return api.User.AuthAppPassword(storage, password);
+            return api.User.AuthorizeByAppPassword(storage, password);
         }
 
         #endregion Авторизация

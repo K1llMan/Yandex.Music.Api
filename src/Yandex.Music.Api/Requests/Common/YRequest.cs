@@ -34,9 +34,7 @@ namespace Yandex.Music.Api.Requests.Common
             HttpResponseMessage response = await provider.GetWebResponseAsync(msg);
 
             if (typeof(T) == typeof(HttpResponseMessage))
-            {
                 return (T)(object)response;
-            }
 
             try
             {

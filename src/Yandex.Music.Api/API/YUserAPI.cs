@@ -22,6 +22,53 @@ namespace Yandex.Music.Api.API
                 .GetResponseAsync();
         }
 
+        private bool GetCsrfTokenAsync(AuthStorage storage)
+        {
+            using HttpResponseMessage authMethodsResponse = new YGetAuthMethodsBuilder(api, storage)
+                .Build(null)
+                .GetResponseAsync()
+                .GetAwaiter()
+                .GetResult();
+
+            if (!authMethodsResponse.IsSuccessStatusCode)
+                throw new HttpRequestException("Невозможно получить CFRF-токен.");
+
+            string responseString = authMethodsResponse.Content
+                .ReadAsStringAsync()
+                .GetAwaiter()
+                .GetResult();
+            Match match = Regex.Match(responseString, "\"csrf_token\" value=\"([^\"]+)\"");
+
+            if (!match.Success || match.Groups.Count < 2)
+                return false;
+
+            storage.AuthToken = new YAuthToken {
+                CsfrToken = match.Groups[1].Value
+            };
+
+            return true;
+        }
+
+        private async Task<YAccessToken> LoginByCookiesAsync(AuthStorage storage)
+        {
+            if (storage.AuthToken == null)
+                throw new AuthenticationException("Невозможно инициализировать сессию входа.");
+
+            return await new YAuthCookiesBuilder(api, storage)
+                .Build(null)
+                .GetResponseAsync()
+                .ContinueWith(task => {
+                    YAccessToken accessToken = task.Result;
+
+                    storage.IsAuthorized = !string.IsNullOrEmpty(accessToken.AccessToken);
+
+                    storage.AccessToken = accessToken;
+                    storage.Token = accessToken.AccessToken;
+
+                    return accessToken;
+                });
+        }
+
         #endregion Вспомогательные функции
 
         #region Основные функции
@@ -120,104 +167,117 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
-        /// Создает севнс входа и возвращает доступные методы авторизации
+        /// Создание сеанса и получение доступных методов авторизации
         /// </summary>
-        public async Task<YAuthTypes> LoginUserAsync(AuthStorage storage, string userName)
+        /// <param name="storage">Хранилище</param>
+        /// <param name="userName">Имя пользователя</param>
+        /// <returns></returns>
+        public Task<YAuthTypes> CreateAuthSessionAsync(AuthStorage storage, string userName)
         {
-            if (!await GetCsrfTokenAsync(storage))
-            {
-                throw new Exception("Не возможно инициализировать сессию входа.");
-            }
+            if (!GetCsrfTokenAsync(storage))
+                throw new Exception("Невозможно инициализировать сессию входа.");
 
-            var response = await new YAuthLoginUserBuilder(api, storage)
+            return new YAuthLoginUserBuilder(api, storage)
                 .Build((storage.AuthToken.CsfrToken, userName))
-                .GetResponseAsync();
+                .GetResponseAsync()
+                .ContinueWith(task => {
+                    YAuthTypes types = task.Result;
+                    storage.AuthToken.TrackId = types.TrackId;
 
-            storage.AuthToken.TrackId = response.TrackId;
-
-            return response;
+                    return types;
+                });
         }
 
         /// <summary>
-        /// Получить ссылку на QR код
+        /// Создание сеанса и получение доступных методов авторизации
         /// </summary>
-        public async Task<string> GetAuthQRLinkAsync(AuthStorage storage)
+        /// <param name="storage">Хранилище</param>
+        /// <param name="userName">Имя пользователя</param>
+        /// <returns></returns>
+        public YAuthTypes CreateAuthSession(AuthStorage storage, string userName)
         {
-            if (!await GetCsrfTokenAsync(storage))
-            {
-                throw new Exception("Не возможно инициализировать сессию входа.");
-            }
-
-            var response = await new YAuthQRBuilder(api, storage)
-                .Build(null)
-                .GetResponseAsync();
-
-            if (response.Status.Equals("ok"))
-            {
-                storage.AuthToken = new YAuthToken
-                {
-                    TrackId = response.TrackId,
-                    CsfrToken = response.CsrfToken
-                };
-
-                return $"https://passport.yandex.ru/auth/magic/code/?track_id={response.TrackId}";
-            }
-
-            return string.Empty;
+            return CreateAuthSessionAsync(storage, userName)
+                .GetAwaiter()
+                .GetResult();
         }
 
         /// <summary>
-        /// Выполнить вход после подтверждения QR кода.
+        /// Получение ссылки на QR-код
         /// </summary>
-        public async Task<bool> LoginQRAsync(AuthStorage storage)
+        /// <param name="storage">Хранилище</param>
+        /// <returns></returns>
+        public Task<string> GetAuthQRLinkAsync(AuthStorage storage)
+        {
+            if (!GetCsrfTokenAsync(storage))
+                throw new Exception("Невозможно инициализировать сессию входа.");
+
+            return new YAuthQRBuilder(api, storage)
+                .Build(null)
+                .GetResponseAsync()
+                .ContinueWith(task => {
+                    YAuthQR result = task.Result;
+
+                    if (result.Status != YAuthStatus.Ok)
+                        return string.Empty;
+
+                    storage.AuthToken = new YAuthToken {
+                        TrackId = result.TrackId,
+                        CsfrToken = result.CsrfToken
+                    };
+
+                    return $"https://passport.yandex.ru/auth/magic/code/?track_id={result.TrackId}";
+                });
+        }
+
+        /// <summary>
+        /// Авторизация по QR-коду
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <returns></returns>
+        public Task<bool> AuthorizeByQRAsync(AuthStorage storage)
         {
             if (storage.AuthToken == null)
-            {
                 throw new Exception("Не выполнен запрос на авторизацию по QR.");
-            }
 
-            using var response = await new YAuthLoginQRBuilder(api, storage)
-                .Build(null)
-                .GetResponseAsync();
-
-            var responseData = await storage.Provider.GetDataFromResponseAsync<YAuthQRStatus>(api, response);
-
-            if (responseData == null || !responseData.Status.Equals("ok"))
+            try
             {
-                throw new Exception("Не выполнен запрос на авторизация по QR.");
+                return new YAuthLoginQRBuilder(api, storage)
+                    .Build(null)
+                    .GetResponseAsync()
+                    .ContinueWith(_ => LoginByCookiesAsync(storage))
+                    .ContinueWith(_ => true);
             }
-
-            await LoginByCookiesAsync(storage);
-
-            return true;
+            catch (Exception ex)
+            {
+                throw new AuthenticationException("Ошибка авторизации по QR.", ex);
+            }
         }
 
         /// <summary>
-        /// Получить <see cref="YAuthCaptcha"/>
+        /// Получение <see cref="YAuthCaptcha"/>
         /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <returns></returns>
         public Task<YAuthCaptcha> GetCaptchaAsync(AuthStorage storage)
         {
-            if (storage.AuthToken == null ||
-                string.IsNullOrWhiteSpace(storage.AuthToken.CsfrToken))
-            {
-                throw new AuthenticationException($"Не найдена сессия входа. Выполните {nameof(LoginUserAsync)} перед использованием");
-            }
+            if (storage.AuthToken == null || string.IsNullOrWhiteSpace(storage.AuthToken.CsfrToken))
+                throw new AuthenticationException($"Не найдена сессия входа. Выполните {nameof(CreateAuthSessionAsync)} перед использованием.");
 
-            return new Requests.Account.YAuthCaptchaBuilder(api, storage)
+            return new YAuthCaptchaBuilder(api, storage)
                 .Build(null)
                 .GetResponseAsync();
         }
 
         /// <summary>
-        /// Выполнить вход после получения captcha
+        /// Авторизация по captcha
         /// </summary>
-        public Task<YAuthBase> LoginByCaptchaAsync(AuthStorage storage, string captchaValue)
+        /// <param name="storage">Хранилище</param>
+        /// <param name="captchaValue">Значение captcha</param>
+        /// <returns></returns>
+        public Task<YAuthBase> AuthorizeByCaptchaAsync(AuthStorage storage, string captchaValue)
         {
-            if (storage.AuthToken == null ||
-                string.IsNullOrWhiteSpace(storage.AuthToken.CsfrToken))
-            {
-                throw new AuthenticationException($"Не найдена сессия входа. Выполните {nameof(LoginUserAsync)} перед использованием");
-            }
+            if (storage.AuthToken == null || string.IsNullOrWhiteSpace(storage.AuthToken.CsfrToken))
+                throw new AuthenticationException($"Не найдена сессия входа. Выполните {nameof(CreateAuthSessionAsync)} перед использованием.");
 
             return new YAuthLoginCaptchaBuilder(api, storage)
                 .Build(captchaValue)
@@ -225,8 +285,10 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
-        /// Получить письмо авторизации, на почту пользователя
+        /// Получение письма авторизации на почту пользователя
         /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <returns></returns>
         public Task<YAuthLetter> GetAuthLetterAsync(AuthStorage storage)
         {
             return new YAuthLetterBuilder(api, storage)
@@ -235,88 +297,45 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
-        /// Авторизоваться после подтвеждения входа через письмо
+        /// Авторизация после подтверждения входа через письмо
         /// </summary>
-        public async Task<YAccessToken> AuthLetterAsync(AuthStorage storage)
+        /// <param name="storage">Хранилище</param>
+        /// <returns></returns>
+        public Task<YAccessToken> AuthorizeByLetterAsync(AuthStorage storage)
         {
-            var status = await new YAuthLoginLetterBuilder(api, storage)
+            YAuthLetterStatus status = new YAuthLoginLetterBuilder(api, storage)
                 .Build(null)
-                .GetResponseAsync();
+                .GetResponseAsync()
+                .GetAwaiter()
+                .GetResult();
 
-            if (status.Status.Equals("ok") && !status.MagicLinkConfirmed)
-            {
-                throw new Exception("Не подтвержден вход посредством mail.");
-            }
+            if (status.Status == YAuthStatus.Ok && !status.MagicLinkConfirmed)
+                throw new Exception("Не подтвержден вход посредством e-mail.");
 
-            return await LoginByCookiesAsync(storage);
+            return LoginByCookiesAsync(storage);
         }
 
         /// <summary>
-        /// Войти с помощью пароля из yandex прложения
+        /// Авторизация с помощью пароля из приложения Яндекс
         /// </summary>
-        public async Task<YAccessToken> AuthAppPassword(AuthStorage storage, string password)
+        /// <param name="storage">Хранилище</param>
+        /// <param name="password">Пароль</param>
+        /// <returns></returns>
+        public Task<YAccessToken> AuthorizeByAppPassword(AuthStorage storage, string password)
         {
             if (storage.AuthToken == null || string.IsNullOrWhiteSpace(storage.AuthToken.CsfrToken))
-            {
-                throw new AuthenticationException($"Не найдена сессия входа. Выполните {nameof(LoginUserAsync)} перед использованием");
-            }
+                throw new AuthenticationException($"Не найдена сессия входа. Выполните {nameof(CreateAuthSessionAsync)} перед использованием.");
 
-            var response = await new YAuthAppPasswordBuilder(api, storage)
+            YAuthBase response = new YAuthAppPasswordBuilder(api, storage)
                 .Build(password)
-                .GetResponseAsync();
+                .GetResponseAsync()
+                .GetAwaiter()
+                .GetResult();
 
-            if (!response.Status.Equals("ok") || !string.IsNullOrWhiteSpace(response.RedirectUrl))
-            {
-                throw new Exception("Ошибка авторизации.");
-            }
+            if (response.Status != YAuthStatus.Ok || !string.IsNullOrWhiteSpace(response.RedirectUrl))
+                throw new AuthenticationException("Ошибка авторизации.");
 
-            return await LoginByCookiesAsync(storage);
-        }
-
-        private async Task<YAccessToken> LoginByCookiesAsync(AuthStorage storage)
-        {
-            if (storage.AuthToken == null)
-            {
-                throw new Exception("Не возможно инициализировать сессию входа.");
-            }
-
-            var auth = await new YAuthCookiesBuilder(api, storage)
-                .Build(null)
-                .GetResponseAsync();
-
-            storage.IsAuthorized = !string.IsNullOrEmpty(auth.AccessToken);
-
-            storage.AccessToken = auth;
-            storage.Token = auth.AccessToken;
-
-            return auth;
-        }
-
-        private async Task<bool> GetCsrfTokenAsync(AuthStorage storage)
-        {
-            using var authMethodsResponse = await new YGetAuthMethodsBuilder(api, storage)
-                .Build(null)
-                .GetResponseAsync();
-
-            if (!authMethodsResponse.IsSuccessStatusCode)
-            {
-                throw new HttpRequestException("Не возможно получить CFRF токен.");
-            }
-
-            var responseString = await authMethodsResponse.Content.ReadAsStringAsync();
-            var match = Regex.Match(responseString, "\"csrf_token\" value=\"([^\"]+)\"");
-
-            if (!match.Success || match.Groups.Count < 2)
-            {
-                return false;
-            }
-
-            storage.AuthToken = new YAuthToken
-            {
-                CsfrToken = match.Groups[1].Value
-            };
-
-            return true;
+            return LoginByCookiesAsync(storage);
         }
 
         #endregion Основные функции

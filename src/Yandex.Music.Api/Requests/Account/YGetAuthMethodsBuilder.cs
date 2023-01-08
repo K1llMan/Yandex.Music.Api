@@ -1,6 +1,7 @@
 ﻿using System.Collections.Specialized;
 using System.Net;
 using System.Net.Http;
+
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Requests.Common;
 
@@ -15,7 +16,9 @@ namespace Yandex.Music.Api.Requests.Account
 
         protected override NameValueCollection GetQueryParams(string tuple)
         {
-            return new NameValueCollection { { "app_platform", "android" } };
+            return new NameValueCollection {
+                { "app_platform", "android" }
+            };
         }
     }
 }

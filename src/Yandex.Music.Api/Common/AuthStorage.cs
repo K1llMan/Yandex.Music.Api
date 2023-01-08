@@ -47,11 +47,7 @@ namespace Yandex.Music.Api.Common
 
         internal YAuthToken AuthToken { get; set; }
 
-        #endregion
-
-        #region Вспомогательные функции
-
-        #endregion Вспомогательные функции
+        #endregion Свойства
 
         #region Основные функции
 
