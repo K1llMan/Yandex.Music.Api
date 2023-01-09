@@ -17,7 +17,15 @@ YandexMusicApi
 ├── Users
 │   ├── Authorize / Async (AuthStorage storage, string username, string password)
 │   ├── Authorize / Async (AuthStorage storage, string token)
-│   └── GetUserAuth / Async (AuthStorage storage)
+│   ├── GetUserAuth / Async (AuthStorage storage)
+│   ├── CreateAuthSession / Async (AuthStorage storage, string userName)
+│   ├── GetAuthQRLink / Async (AuthStorage storage)
+│   ├── AuthorizeByQR / Async (AuthStorage storage)
+│   ├── GetCaptcha / Async (AuthStorage storage)
+│   ├── AuthorizeByCaptcha / Async (AuthStorage storage, string captchaValue)
+│   ├── GetAuthLetter / Async (AuthStorage storage)
+│   ├── AuthorizeByLetter / Async (AuthStorage storage)
+│   └── AuthorizeByAppPassword / Async (AuthStorage storage, string password)
 ├── Track
 │   ├── Get / Async (AuthStorage storage, string trackId)
 │   ├── Get / Async (AuthStorage storage, IEnumerable<string> trackIds)

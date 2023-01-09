@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 using Yandex.Music.Api;
 using Yandex.Music.Api.Common;
@@ -64,42 +63,42 @@ namespace Yandex.Music.Client
             return storage.IsAuthorized;
         }
 
-        public Task<YAuthTypes> CreateAuthSessionAsync(string userName)
+        public YAuthTypes CreateAuthSession(string userName)
         {
-            return api.User.CreateAuthSessionAsync(storage, userName);
+            return api.User.CreateAuthSession(storage, userName);
         }
 
-        public Task<string> GetAuthQRLinkAsync()
+        public string GetAuthQRLink()
         {
-            return api.User.GetAuthQRLinkAsync(storage);
+            return api.User.GetAuthQRLink(storage);
         }
 
-        public Task<bool> AuthorizeByQRAsync()
+        public bool AuthorizeByQR()
         {
-            return api.User.AuthorizeByQRAsync(storage);
+            return api.User.AuthorizeByQR(storage);
         }
 
-        public Task<YAuthCaptcha> GetCaptchaAsync()
+        public YAuthCaptcha GetCaptcha()
         {
-            return api.User.GetCaptchaAsync(storage);
+            return api.User.GetCaptcha(storage);
         }
 
-        public Task AuthorizeByCaptchaAsync(string captcha)
+        public void AuthorizeByCaptcha(string captcha)
         {
-            return api.User.AuthorizeByCaptchaAsync(storage, captcha);
+            api.User.AuthorizeByCaptcha(storage, captcha);
         }
 
-        public Task<YAuthLetter> GetAuthLetterAsync()
+        public YAuthLetter GetAuthLetter()
         {
-            return api.User.GetAuthLetterAsync(storage);
+            return api.User.GetAuthLetter(storage);
         }
 
-        public Task<YAccessToken> AuthorizeByLetterAsync()
+        public YAccessToken AuthorizeByLetter()
         {
-            return api.User.AuthorizeByLetterAsync(storage);
+            return api.User.AuthorizeByLetter(storage);
         }
 
-        public Task<YAccessToken> AuthorizeByAppPassword(string password)
+        public YAccessToken AuthorizeByAppPassword(string password)
         {
             return api.User.AuthorizeByAppPassword(storage, password);
         }

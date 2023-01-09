@@ -196,9 +196,7 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public YAuthTypes CreateAuthSession(AuthStorage storage, string userName)
         {
-            return CreateAuthSessionAsync(storage, userName)
-                .GetAwaiter()
-                .GetResult();
+            return CreateAuthSessionAsync(storage, userName).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -230,6 +228,16 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
+        /// Получение ссылки на QR-код
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <returns></returns>
+        public string GetAuthQRLink(AuthStorage storage)
+        {
+            return GetAuthQRLinkAsync(storage).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
         /// Авторизация по QR-коду
         /// </summary>
         /// <param name="storage">Хранилище</param>
@@ -254,6 +262,16 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
+        /// Авторизация по QR-коду
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <returns></returns>
+        public bool AuthorizeByQR(AuthStorage storage)
+        {
+            return AuthorizeByQRAsync(storage).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
         /// Получение <see cref="YAuthCaptcha"/>
         /// </summary>
         /// <param name="storage">Хранилище</param>
@@ -266,6 +284,16 @@ namespace Yandex.Music.Api.API
             return new YAuthCaptchaBuilder(api, storage)
                 .Build(null)
                 .GetResponseAsync();
+        }
+
+        /// <summary>
+        /// Получение <see cref="YAuthCaptcha"/>
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <returns></returns>
+        public YAuthCaptcha GetCaptcha(AuthStorage storage)
+        {
+            return GetCaptchaAsync(storage).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -285,6 +313,17 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
+        /// Авторизация по captcha
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="captchaValue">Значение captcha</param>
+        /// <returns></returns>
+        public YAuthBase AuthorizeByCaptcha(AuthStorage storage, string captchaValue)
+        {
+            return AuthorizeByCaptchaAsync(storage, captchaValue).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
         /// Получение письма авторизации на почту пользователя
         /// </summary>
         /// <param name="storage">Хранилище</param>
@@ -294,6 +333,16 @@ namespace Yandex.Music.Api.API
             return new YAuthLetterBuilder(api, storage)
                 .Build(null)
                 .GetResponseAsync();
+        }
+
+        /// <summary>
+        /// Получение письма авторизации на почту пользователя
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <returns></returns>
+        public YAuthLetter GetAuthLetter(AuthStorage storage)
+        {
+            return GetAuthLetterAsync(storage).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -316,12 +365,22 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
+        /// Авторизация после подтверждения входа через письмо
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <returns></returns>
+        public YAccessToken AuthorizeByLetter(AuthStorage storage)
+        {
+            return AuthorizeByLetterAsync(storage).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
         /// Авторизация с помощью пароля из приложения Яндекс
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <param name="password">Пароль</param>
         /// <returns></returns>
-        public Task<YAccessToken> AuthorizeByAppPassword(AuthStorage storage, string password)
+        public Task<YAccessToken> AuthorizeByAppPasswordAsync(AuthStorage storage, string password)
         {
             if (storage.AuthToken == null || string.IsNullOrWhiteSpace(storage.AuthToken.CsfrToken))
                 throw new AuthenticationException($"Не найдена сессия входа. Выполните {nameof(CreateAuthSessionAsync)} перед использованием.");
@@ -336,6 +395,17 @@ namespace Yandex.Music.Api.API
                 throw new AuthenticationException("Ошибка авторизации.");
 
             return LoginByCookiesAsync(storage);
+        }
+
+        /// <summary>
+        /// Авторизация с помощью пароля из приложения Яндекс
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="password">Пароль</param>
+        /// <returns></returns>
+        public YAccessToken AuthorizeByAppPassword(AuthStorage storage, string password)
+        {
+            return AuthorizeByAppPasswordAsync(storage, password).GetAwaiter().GetResult();
         }
 
         #endregion Основные функции

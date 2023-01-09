@@ -41,6 +41,55 @@ YandexMusicClient
 
 Авторизация с использованием токена.
 
+
+.. code-block:: csharp
+
+   public YAuthTypes CreateAuthSession(string userName)
+
+Создание сеанса и получение доступных методов авторизации.
+
+.. code-block:: csharp
+
+   public string GetAuthQRLink()
+
+Получение ссылки на QR-код.
+
+.. code-block:: csharp
+
+   public bool AuthorizeByQR()
+
+Авторизация по QR-коду.
+
+.. code-block:: csharp
+
+   public YAuthCaptcha GetCaptcha()
+
+Получение данных captcha.
+
+.. code-block:: csharp
+
+   public void AuthorizeByCaptcha(string captcha)
+
+Авторизация по captcha.
+
+.. code-block:: csharp
+
+   public YAuthLetter GetAuthLetter()
+
+Получение письма авторизации на почту пользователя.
+
+.. code-block:: csharp
+
+   public YAccessToken AuthorizeByLetter()
+
+Авторизация после подтверждения входа через письмо.
+
+.. code-block:: csharp
+
+   public YAccessToken AuthorizeByAppPassword(string password)
+
+Авторизация с помощью пароля из приложения Яндекс.
+
 .. code-block:: csharp
 
    public YTrack GetTrack(string id)
