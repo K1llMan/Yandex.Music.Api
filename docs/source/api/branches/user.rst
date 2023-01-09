@@ -72,13 +72,13 @@ YUserAPI
 
 .. code-block:: csharp
 
-   public Task<bool> AuthorizeByQRAsync(AuthStorage storage)
+   public Task<bool> LoginByQRAsync(AuthStorage storage)
 
 Авторизация по QR-коду в асинхронном режиме.
 
 .. code-block:: csharp
 
-   public bool AuthorizeByQR(AuthStorage storage)
+   public bool LoginByQR(AuthStorage storage)
 
 Авторизация по QR-коду.
 
@@ -96,13 +96,13 @@ YUserAPI
 
 .. code-block:: csharp
 
-   public Task<YAuthBase> AuthorizeByCaptchaAsync(AuthStorage storage, string captchaValue)
+   public Task<YAuthBase> LoginByCaptchaAsync(AuthStorage storage, string captchaValue)
 
 Авторизация по captcha в асинхронном режиме.
 
 .. code-block:: csharp
 
-   public YAuthBase AuthorizeByCaptcha(AuthStorage storage, string captchaValue)
+   public YAuthBase LoginByCaptcha(AuthStorage storage, string captchaValue)
 
 Авторизация по captcha.
 
@@ -120,24 +120,36 @@ YUserAPI
 
 .. code-block:: csharp
 
-   public Task<YAccessToken> AuthorizeByLetterAsync(AuthStorage storage)
+   public Task<YAccessToken> LoginByLetterAsync(AuthStorage storage)
 
 Авторизация после подтверждения входа через письмо в асинхронном режиме.
 
 .. code-block:: csharp
 
-   public YAccessToken AuthorizeByLetter(AuthStorage storage)
+   public YAccessToken LoginByLetter(AuthStorage storage)
 
 Авторизация после подтверждения входа через письмо.
 
 .. code-block:: csharp
 
-   public Task<YAccessToken> AuthorizeByAppPasswordAsync(AuthStorage storage, string password)
+   public Task<YAccessToken> LoginByAppPasswordAsync(AuthStorage storage, string password)
 
 Авторизация с помощью пароля из приложения Яндекс в асинхронном режиме.
 
 .. code-block:: csharp
 
-   public YAccessToken AuthorizeByAppPassword(AuthStorage storage, string password)
+   public YAccessToken LoginByAppPassword(AuthStorage storage, string password)
 
 Авторизация с помощью пароля из приложения Яндекс.
+
+.. code-block:: csharp
+
+   public Task<YAccessToken> GetAccessTokenAsync(AuthStorage storage)
+
+Метод позволяет получить AcessToken после выполнения авторизации посредством QR, Mail, App password.
+
+.. code-block:: csharp
+
+   public Task<YAccessToken> GetAccessToken(AuthStorage storage)
+
+Метод позволяет получить AcessToken после выполнения авторизации посредством QR, Mail, App password.

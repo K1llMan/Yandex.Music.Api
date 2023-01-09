@@ -73,9 +73,9 @@ namespace Yandex.Music.Client
             return api.User.GetAuthQRLink(storage);
         }
 
-        public bool AuthorizeByQR()
+        public bool LoginByQR()
         {
-            return api.User.AuthorizeByQR(storage);
+            return api.User.LoginByQR(storage);
         }
 
         public YAuthCaptcha GetCaptcha()
@@ -83,9 +83,9 @@ namespace Yandex.Music.Client
             return api.User.GetCaptcha(storage);
         }
 
-        public void AuthorizeByCaptcha(string captcha)
+        public void LoginByCaptcha(string captcha)
         {
-            api.User.AuthorizeByCaptcha(storage, captcha);
+            api.User.LoginByCaptcha(storage, captcha);
         }
 
         public YAuthLetter GetAuthLetter()
@@ -93,14 +93,19 @@ namespace Yandex.Music.Client
             return api.User.GetAuthLetter(storage);
         }
 
-        public YAccessToken AuthorizeByLetter()
+        public bool LoginByLetter()
         {
-            return api.User.AuthorizeByLetter(storage);
+            return api.User.LoginByLetter(storage);
         }
 
-        public YAccessToken AuthorizeByAppPassword(string password)
+        public bool LoginByAppPassword(string password)
         {
-            return api.User.AuthorizeByAppPassword(storage, password);
+            return api.User.LoginByAppPassword(storage, password);
+        }
+
+        public YAccessToken GetAccessToken()
+        {
+            return api.User.GetAccessToken(storage);
         }
 
         #endregion Авторизация
@@ -165,7 +170,7 @@ namespace Yandex.Music.Client
 
         public YPlaylist GetPlaylist(string user, string id)
         {
-            return api.Playlist.Get(storage, user,id).Result;
+            return api.Playlist.Get(storage, user, id).Result;
         }
 
         public List<YPlaylist> GetPlaylists(IEnumerable<(string user, string id)> ids)

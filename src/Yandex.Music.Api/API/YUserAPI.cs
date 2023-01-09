@@ -49,24 +49,30 @@ namespace Yandex.Music.Api.API
             return true;
         }
 
-        private async Task<YAccessToken> LoginByCookiesAsync(AuthStorage storage)
+        private async Task<bool> LoginByCookiesAsync(AuthStorage storage)
         {
             if (storage.AuthToken == null)
-                throw new AuthenticationException("Невозможно инициализировать сессию входа.");
+                throw new Exception("Невозможно инициализировать сессию входа.");
 
-            return await new YAuthCookiesBuilder(api, storage)
+            var auth = await new YAuthCookiesBuilder(api, storage)
                 .Build(null)
-                .GetResponseAsync()
-                .ContinueWith(task => {
-                    YAccessToken accessToken = task.Result;
+                .GetResponseAsync();
 
-                    storage.IsAuthorized = !string.IsNullOrEmpty(accessToken.AccessToken);
+            storage.AccessToken = auth;
 
-                    storage.AccessToken = accessToken;
-                    storage.Token = accessToken.AccessToken;
+            var validateTokenResponse = await new YValidateTokenBuilder(api, storage)
+                .Build(null)
+                .GetResponseAsync();
 
-                    return accessToken;
-                });
+            if (!validateTokenResponse.Status.Equals("ok"))
+            {
+                throw new Exception("Вход в аккаунт невыполнен.");
+            }
+
+            storage.IsAuthorized = !string.IsNullOrWhiteSpace(validateTokenResponse.Uid);
+            storage.Token = auth.AccessToken;
+
+            return storage.IsAuthorized;
         }
 
         #endregion Вспомогательные функции
@@ -242,7 +248,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public Task<bool> AuthorizeByQRAsync(AuthStorage storage)
+        public Task<bool> LoginByQRAsync(AuthStorage storage)
         {
             if (storage.AuthToken == null)
                 throw new Exception("Не выполнен запрос на авторизацию по QR.");
@@ -266,9 +272,9 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public bool AuthorizeByQR(AuthStorage storage)
+        public bool LoginByQR(AuthStorage storage)
         {
-            return AuthorizeByQRAsync(storage).GetAwaiter().GetResult();
+            return LoginByQRAsync(storage).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -302,7 +308,7 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="captchaValue">Значение captcha</param>
         /// <returns></returns>
-        public Task<YAuthBase> AuthorizeByCaptchaAsync(AuthStorage storage, string captchaValue)
+        public Task<YAuthBase> LoginByCaptchaAsync(AuthStorage storage, string captchaValue)
         {
             if (storage.AuthToken == null || string.IsNullOrWhiteSpace(storage.AuthToken.CsfrToken))
                 throw new AuthenticationException($"Не найдена сессия входа. Выполните {nameof(CreateAuthSessionAsync)} перед использованием.");
@@ -320,7 +326,7 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public YAuthBase AuthorizeByCaptcha(AuthStorage storage, string captchaValue)
         {
-            return AuthorizeByCaptchaAsync(storage, captchaValue).GetAwaiter().GetResult();
+            return LoginByCaptchaAsync(storage, captchaValue).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -350,7 +356,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public Task<YAccessToken> AuthorizeByLetterAsync(AuthStorage storage)
+        public Task<bool> LoginByLetterAsync(AuthStorage storage)
         {
             YAuthLetterStatus status = new YAuthLoginLetterBuilder(api, storage)
                 .Build(null)
@@ -369,9 +375,9 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public YAccessToken AuthorizeByLetter(AuthStorage storage)
+        public bool LoginByLetter(AuthStorage storage)
         {
-            return AuthorizeByLetterAsync(storage).GetAwaiter().GetResult();
+            return LoginByLetterAsync(storage).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -380,7 +386,7 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="password">Пароль</param>
         /// <returns></returns>
-        public Task<YAccessToken> AuthorizeByAppPasswordAsync(AuthStorage storage, string password)
+        public Task<bool> LoginByAppPasswordAsync(AuthStorage storage, string password)
         {
             if (storage.AuthToken == null || string.IsNullOrWhiteSpace(storage.AuthToken.CsfrToken))
                 throw new AuthenticationException($"Не найдена сессия входа. Выполните {nameof(CreateAuthSessionAsync)} перед использованием.");
@@ -403,9 +409,32 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="password">Пароль</param>
         /// <returns></returns>
-        public YAccessToken AuthorizeByAppPassword(AuthStorage storage, string password)
+        public bool LoginByAppPassword(AuthStorage storage, string password)
         {
-            return AuthorizeByAppPasswordAsync(storage, password).GetAwaiter().GetResult();
+            return LoginByAppPasswordAsync(storage, password).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Метод позволяет получить <see cref="YAccessToken"/> после выполнения авторизации посредством QR, Mail, App password.
+        /// </summary>
+        public async Task<YAccessToken> GetAccessTokenAsync(AuthStorage storage)
+        {
+            if (storage.AuthToken == null)
+                throw new Exception("Не найдена сессия входа.");
+
+            var accessToken = await new YGetMusicTokenBuilder(api, storage)
+                .Build(null)
+                .GetResponseAsync();
+
+            return accessToken;
+        }
+
+        /// <summary>
+        /// Метод позволяет получить <see cref="YAccessToken"/> после выполнения авторизации посредством QR, Mail, App password.
+        /// </summary>
+        public YAccessToken GetAccessToken(AuthStorage storage)
+        {
+            return GetAccessTokenAsync(storage).GetAwaiter().GetResult();
         }
 
         #endregion Основные функции
