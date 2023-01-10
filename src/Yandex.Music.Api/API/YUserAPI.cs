@@ -255,7 +255,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public async Task<bool> LoginByQRAsync(AuthStorage storage)
+        public async Task<bool> AuthorizeByQRAsync(AuthStorage storage)
         {
             if (storage.AuthToken == null)
                 throw new Exception("Не выполнен запрос на авторизацию по QR.");
@@ -282,9 +282,9 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public bool LoginByQR(AuthStorage storage)
+        public bool AuthorizeByQR(AuthStorage storage)
         {
-            return LoginByQRAsync(storage).GetAwaiter().GetResult();
+            return AuthorizeByQRAsync(storage).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -318,7 +318,7 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="captchaValue">Значение captcha</param>
         /// <returns></returns>
-        public Task<YAuthBase> LoginByCaptchaAsync(AuthStorage storage, string captchaValue)
+        public Task<YAuthBase> AuthorizeByCaptchaAsync(AuthStorage storage, string captchaValue)
         {
             if (storage.AuthToken == null || string.IsNullOrWhiteSpace(storage.AuthToken.CsfrToken))
                 throw new AuthenticationException($"Не найдена сессия входа. Выполните {nameof(CreateAuthSessionAsync)} перед использованием.");
@@ -334,9 +334,9 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="captchaValue">Значение captcha</param>
         /// <returns></returns>
-        public YAuthBase LoginByCaptcha(AuthStorage storage, string captchaValue)
+        public YAuthBase AuthorizeByCaptcha(AuthStorage storage, string captchaValue)
         {
-            return LoginByCaptchaAsync(storage, captchaValue).GetAwaiter().GetResult();
+            return AuthorizeByCaptchaAsync(storage, captchaValue).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -366,7 +366,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public Task<bool> LoginByLetterAsync(AuthStorage storage)
+        public Task<bool> AuthorizeByLetterAsync(AuthStorage storage)
         {
             YAuthLetterStatus status = new YAuthLoginLetterBuilder(api, storage)
                 .Build(null)
@@ -385,9 +385,9 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public bool LoginByLetter(AuthStorage storage)
+        public bool AuthorizeByLetter(AuthStorage storage)
         {
-            return LoginByLetterAsync(storage).GetAwaiter().GetResult();
+            return AuthorizeByLetterAsync(storage).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -396,7 +396,7 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="password">Пароль</param>
         /// <returns></returns>
-        public Task<bool> LoginByAppPasswordAsync(AuthStorage storage, string password)
+        public Task<bool> AuthorizeByAppPasswordAsync(AuthStorage storage, string password)
         {
             if (storage.AuthToken == null || string.IsNullOrWhiteSpace(storage.AuthToken.CsfrToken))
                 throw new AuthenticationException($"Не найдена сессия входа. Выполните {nameof(CreateAuthSessionAsync)} перед использованием.");
@@ -419,9 +419,9 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="password">Пароль</param>
         /// <returns></returns>
-        public bool LoginByAppPassword(AuthStorage storage, string password)
+        public bool AuthorizeByAppPassword(AuthStorage storage, string password)
         {
-            return LoginByAppPasswordAsync(storage, password).GetAwaiter().GetResult();
+            return AuthorizeByAppPasswordAsync(storage, password).GetAwaiter().GetResult();
         }
 
         /// <summary>
