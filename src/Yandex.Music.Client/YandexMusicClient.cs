@@ -73,7 +73,7 @@ namespace Yandex.Music.Client
             return api.User.GetAuthQRLink(storage);
         }
 
-        public bool LoginByQR()
+        public bool AuthorizeByQR()
         {
             return api.User.AuthorizeByQR(storage);
         }
@@ -83,7 +83,7 @@ namespace Yandex.Music.Client
             return api.User.GetCaptcha(storage);
         }
 
-        public void LoginByCaptcha(string captcha)
+        public void AuthorizeByCaptcha(string captcha)
         {
             api.User.AuthorizeByCaptcha(storage, captcha);
         }
@@ -93,12 +93,12 @@ namespace Yandex.Music.Client
             return api.User.GetAuthLetter(storage);
         }
 
-        public bool LoginByLetter()
+        public bool AuthorizeByLetter()
         {
             return api.User.AuthorizeByLetter(storage);
         }
 
-        public bool LoginByAppPassword(string password)
+        public bool AuthorizeByAppPassword(string password)
         {
             return api.User.AuthorizeByAppPassword(storage, password);
         }
