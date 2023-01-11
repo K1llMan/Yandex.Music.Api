@@ -141,3 +141,15 @@ YUserAPI
    public YAccessToken AuthorizeByAppPassword(AuthStorage storage, string password)
 
 Авторизация с помощью пароля из приложения Яндекс.
+
+.. code-block:: csharp
+
+   public Task<YAccessToken> GetAccessTokenAsync(AuthStorage storage)
+
+Метод позволяет получить AcessToken после выполнения авторизации посредством QR, Mail, App password.
+
+.. code-block:: csharp
+
+   public Task<YAccessToken> GetAccessToken(AuthStorage storage)
+
+Метод позволяет получить AcessToken после выполнения авторизации посредством QR, Mail, App password.

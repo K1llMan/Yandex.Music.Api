@@ -93,14 +93,19 @@ namespace Yandex.Music.Client
             return api.User.GetAuthLetter(storage);
         }
 
-        public YAccessToken AuthorizeByLetter()
+        public bool AuthorizeByLetter()
         {
             return api.User.AuthorizeByLetter(storage);
         }
 
-        public YAccessToken AuthorizeByAppPassword(string password)
+        public bool AuthorizeByAppPassword(string password)
         {
             return api.User.AuthorizeByAppPassword(storage, password);
+        }
+
+        public YAccessToken GetAccessToken()
+        {
+            return api.User.GetAccessToken(storage);
         }
 
         #endregion Авторизация
@@ -165,7 +170,7 @@ namespace Yandex.Music.Client
 
         public YPlaylist GetPlaylist(string user, string id)
         {
-            return api.Playlist.Get(storage, user,id).Result;
+            return api.Playlist.Get(storage, user, id).Result;
         }
 
         public List<YPlaylist> GetPlaylists(IEnumerable<(string user, string id)> ids)

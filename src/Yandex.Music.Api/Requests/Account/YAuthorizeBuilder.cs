@@ -11,13 +11,6 @@ namespace Yandex.Music.Api.Requests.Account
     [YOAuthRequest(WebRequestMethods.Http.Post, "token")]
     public class YAuthorizeBuilder : YRequestBuilder<YAccessToken, (string login, string password)>
     {
-        #region Поля
-
-        private static string CLIENT_ID = "23cabbbdc6cd418abb4b39c32c41195d";
-        private static string CLIENT_SECRET = "53bc75238f0c4d08a118e51fe9203300";
-
-        #endregion Поля
-
         public YAuthorizeBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
         {
         }
@@ -26,8 +19,8 @@ namespace Yandex.Music.Api.Requests.Account
         {
             return new FormUrlEncodedContent(new Dictionary<string, string> {
                 { "grant_type", "password" },
-                { "client_id", CLIENT_ID },
-                { "client_secret", CLIENT_SECRET },
+                { "client_id", Constants.ClientId },
+                { "client_secret", Constants.ClientSecret },
                 { "username", tuple.login },
                 { "password", tuple.password }
             });
