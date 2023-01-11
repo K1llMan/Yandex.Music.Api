@@ -19,8 +19,8 @@ namespace Yandex.Music.Api.Requests.Account
         {
             return new FormUrlEncodedContent(new Dictionary<string, string> {
                 { "grant_type", "password" },
-                { "client_id", Constants.ClientId },
-                { "client_secret", Constants.ClientSecret },
+                { "client_id", YConstants.ClientId },
+                { "client_secret", YConstants.ClientSecret },
                 { "username", tuple.login },
                 { "password", tuple.password }
             });

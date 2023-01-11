@@ -26,7 +26,7 @@ YandexMusicApi
 │   ├── GetAuthLetter / Async (AuthStorage storage)
 │   ├── AuthorizeByLetter / Async (AuthStorage storage)
 │   ├── AuthorizeByAppPassword / Async (AuthStorage storage, string password)
-│	└──	GetAccessToken / Async (AuthStorage storage)
+│   └── GetAccessToken / Async (AuthStorage storage)
 ├── Track
 │   ├── Get / Async (AuthStorage storage, string trackId)
 │   ├── Get / Async (AuthStorage storage, IEnumerable<string> trackIds)

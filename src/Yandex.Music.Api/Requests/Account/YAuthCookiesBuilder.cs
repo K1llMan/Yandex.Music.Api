@@ -17,9 +17,6 @@ namespace Yandex.Music.Api.Requests.Account
     [YMobileProxyRequest(WebRequestMethods.Http.Post, "1/bundle/oauth/token_by_sessionid")]
     internal class YAuthCookiesBuilder : YRequestBuilder<YAccessToken, string>
     {
-        private const string CLIENT_ID = "c0ebe342af7d48fbbbfcf2d2eedb8f9e";
-        private const string CLIENT_SECRET = "ad0a908f0aa341a182a37ecd75bc319e";
-
         public YAuthCookiesBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
         {
         }
@@ -50,8 +47,8 @@ namespace Yandex.Music.Api.Requests.Account
         protected override HttpContent GetContent(string tuple)
         {
             return new FormUrlEncodedContent(new Dictionary<string, string> {
-                { "client_id", CLIENT_ID },
-                { "client_secret", CLIENT_SECRET }
+                { "client_id", YConstants.XClientId },
+                { "client_secret", YConstants.XClientSecret }
             });
         }
     }

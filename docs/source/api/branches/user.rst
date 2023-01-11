@@ -146,10 +146,10 @@ YUserAPI
 
    public Task<YAccessToken> GetAccessTokenAsync(AuthStorage storage)
 
-Метод позволяет получить AcessToken после выполнения авторизации посредством QR, Mail, App password.
+Получение YAccessToken после авторизации с помощью QR, e-mail, пароля из приложения в асинхронном режиме.
 
 .. code-block:: csharp
 
-   public Task<YAccessToken> GetAccessToken(AuthStorage storage)
+   public YAccessToken GetAccessToken(AuthStorage storage)
 
-Метод позволяет получить AcessToken после выполнения авторизации посредством QR, Mail, App password.
+Получение YAccessToken после авторизации с помощью QR, e-mail, пароля из приложения.

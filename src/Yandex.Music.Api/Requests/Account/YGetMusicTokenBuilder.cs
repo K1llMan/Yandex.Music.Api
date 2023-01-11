@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Account;
 using Yandex.Music.Api.Requests.Common;
@@ -19,8 +20,8 @@ namespace Yandex.Music.Api.Requests.Account
         {
             return new FormUrlEncodedContent(new Dictionary<string, string>
             {
-                { "client_id", Constants.ClientId },
-                { "client_secret", Constants.ClientSecret },
+                { "client_id", YConstants.ClientId },
+                { "client_secret", YConstants.ClientSecret },
                 { "grant_type", "x-token" },
                 { "access_token", storage.AccessToken.AccessToken }
             });

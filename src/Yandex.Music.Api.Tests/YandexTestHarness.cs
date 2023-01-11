@@ -35,13 +35,9 @@ namespace Yandex.Music.Api.Tests
 
         private AppSettings GetAppSettings()
         {
-            string fileSource;
-
-            using (var stream = new FileStream("appsettings.json", FileMode.Open)) {
-                using (var reader = new StreamReader(stream)) {
-                    fileSource = reader.ReadToEnd();
-                }
-            }
+            using FileStream stream = new("appsettings.json", FileMode.Open);
+            using StreamReader reader = new(stream);
+            string fileSource = reader.ReadToEnd();
 
             return JsonConvert.DeserializeObject<AppSettings>(fileSource);
         }
