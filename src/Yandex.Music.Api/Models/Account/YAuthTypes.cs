@@ -32,7 +32,7 @@ namespace Yandex.Music.Api.Models.Account
         public string Country { get; set; }
 
         [JsonProperty("phone_number")]
-        public YPhone PhoneNumber { get; set; }
+        public YPhoneNumber PhoneNumberNumber { get; set; }
 
         [JsonProperty("magic_link_email")]
         public string MagicLinkEmail { get; set; }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using Newtonsoft.Json;
 
 using Yandex.Music.Api.Models.Common;
@@ -8,6 +10,7 @@ namespace Yandex.Music.Api.Models.Account
     {
         public YAccount Account { get; set; }
         public string DefaultEmail { get; set; }
+        public List<string> HasOptions { get; set; }
         public YMasterHub MasterHub { get; set; }
         public YPermissions Permissions { get; set; }
         public YPlus Plus { get; set; }

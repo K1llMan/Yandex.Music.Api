@@ -23,6 +23,10 @@ namespace Yandex.Music.Api.Models.Feed.Event
                         feedEvent = jObject.ToObject<YFeedEventGenreTracksTop>();
                         break;
 
+                    case YFeedEventType.NewAlbums:
+                        feedEvent = jObject.ToObject<YFeedEventAlbums>();
+                        break;
+
                     case YFeedEventType.NewAlbumsOfFavoriteGenre:
                         feedEvent = jObject.ToObject<YFeedEventGenreAlbums>();
                         break;
