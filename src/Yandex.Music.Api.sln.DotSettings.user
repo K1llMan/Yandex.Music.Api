@@ -8,6 +8,15 @@
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/AutoDetectedNamingRules/=EnumMember/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/AutoDetectedNamingRules/=PrivateInstanceFields/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="_" Suffix="" Style="aaBb" /&gt;</s:String>
 	<s:Boolean x:Key="/Default/CodeStyle/Naming/CSharpAutoNaming/IsNamingAutoDetectionCompleted/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=2cb47fd7_002Df6d9_002D4d57_002Db033_002D8deb9d4b56cf/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Get_ValidData_True" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=2cb47fd7_002Df6d9_002D4d57_002Db033_002D8deb9d4b56cf/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Get_ValidData_True" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Solution /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=903e74f7_002Dea8e_002D4324_002Dbdb1_002D205b85d16768/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Get_ValidData_True #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::ED0FC303-CFCC-424B-B62E-0DD427794AD6::net5.0::Yandex.Music.Client.Tests.Tests.PlaylistTest.Get_ValidData_True&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::ED0FC303-CFCC-424B-B62E-0DD427794AD6::net5.0::Yandex.Music.Client.Tests.Tests.QueueTest.CreateQueue_ValidData_True&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::ED0FC303-CFCC-424B-B62E-0DD427794AD6::net5.0::Yandex.Music.Client.Tests.Tests.PlaylistTest.Premiere_ValidData_True&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::ED0FC303-CFCC-424B-B62E-0DD427794AD6::net5.0::Yandex.Music.Client.Tests.Tests.PlaylistTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::ED0FC303-CFCC-424B-B62E-0DD427794AD6::net5.0::Yandex.Music.Client.Tests.Tests.QueueTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
