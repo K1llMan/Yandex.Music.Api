@@ -13,19 +13,11 @@ namespace Yandex.Music.Client.Tests.Tests
     [TestBeforeAfter]
     public class QueueTest : YandexTest
     {
-        private readonly ITestOutputHelper _testOutputHelper;
-
-        #region Поля
-        
-        private string QueueId { get; set; }
-            
-        #endregion
-
         [Fact]
         [Order(0)]
         public void CreateQueue_ValidData_True()
         {
-            YNewQueue newQueue = Fixture.Client.CreateQueue(new YQueue
+            Fixture.NewQueue = Fixture.Client.CreateQueue(new YQueue
             {
                 Context = new YContext
                 {
@@ -47,17 +39,16 @@ namespace Yandex.Music.Client.Tests.Tests
                 IsInteractive = true
             });
             
-            QueueId = newQueue.Id;
-            newQueue.Id.Should().NotBeNullOrWhiteSpace();
+            Fixture.NewQueue.Id.Should().NotBeNullOrWhiteSpace();
         }
 
         [Fact]
         [Order(1)]
         public void GetQueue_ValidData_True()
         {
-            Fixture.Queue = Fixture.Client.GetQueue(QueueId);
+            YQueue queue = Fixture.Client.GetQueue(Fixture.NewQueue.Id);
 
-            Fixture.Queue.Should().NotBeNull();
+            queue.Id.Should().NotBeNullOrWhiteSpace();
         }
         
         [Fact]
@@ -73,14 +64,13 @@ namespace Yandex.Music.Client.Tests.Tests
         [Order(3)]
         public void QueueUpdatePosition_ValidData_True()
         {
-            YUpdatedQueue updatedQueue = Fixture.Client.QueueUpdatePosition(QueueId, 0, true);
+            YUpdatedQueue updatedQueue = Fixture.Client.QueueUpdatePosition(Fixture.NewQueue.Id, 0, true);
 
             updatedQueue.Status.Should().Be("ok");
         }
 
         public QueueTest(YandexTestHarness fixture, ITestOutputHelper output, ITestOutputHelper testOutputHelper) : base(fixture, output)
         {
-            _testOutputHelper = testOutputHelper;
         }
     }
 }

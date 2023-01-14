@@ -67,7 +67,7 @@ namespace Yandex.Music.Client.Tests
 
         public YStation Station { get; set; }
         
-        public YQueue Queue { get; set; }
+        public YNewQueue NewQueue { get; set; }
 
         #endregion Поля для сохранения тестовых данных
 

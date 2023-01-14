@@ -65,7 +65,7 @@ namespace Yandex.Music.Api.Tests
 
         public YPlaylist CreatedPlaylist { get; set; }
         
-        public YQueue Queue { get; set; }
+        public YNewQueue NewQueue { get; set; }
 
         public YResponse<List<YStation>> Station {get; set; }
 
