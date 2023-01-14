@@ -51,6 +51,11 @@ namespace Yandex.Music.Api
         /// API треков
         /// </summary>
         public YTrackAPI Track { get; internal set; }
+        
+        /// <summary>
+        /// API очередей
+        /// </summary>
+        public YQueueAPI Queue { get; internal set; }
 
         /// <summary>
         /// API пользователя

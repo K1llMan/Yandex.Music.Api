@@ -37,6 +37,7 @@ namespace Yandex.Music.Api.Requests.Common
 
         protected YandexMusicApi api;
         protected AuthStorage storage;
+        protected string Device = "os=CSharp; os_version=; manufacturer=Marshal; model=Yandex Music API; clid=; device_id=random; uuid=random";
 
         #endregion Поля
 
@@ -75,7 +76,7 @@ namespace Yandex.Music.Api.Requests.Common
             HttpRequestMessage msg = new() {
                 RequestUri = BuildUri(tuple),
                 Method = new HttpMethod(requestInfo.Method),
-                Content = GetContent(tuple)
+                Content = GetContent(tuple) ?? GetStringContent(tuple)
             };
 
             msg.Headers.TryAddWithoutValidation(HttpRequestHeader.AcceptCharset.GetName(), Encoding.UTF8.WebName);
@@ -115,6 +116,11 @@ namespace Yandex.Music.Api.Requests.Common
         }
 
         protected virtual HttpContent GetContent(ParamsTuple tuple)
+        {
+            return null;
+        }
+        
+        protected virtual StringContent GetStringContent(ParamsTuple tuple)
         {
             return null;
         }

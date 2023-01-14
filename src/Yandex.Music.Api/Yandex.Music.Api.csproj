@@ -16,6 +16,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Models\Queue" />
     <Folder Include="Requests\Feed\" />
   </ItemGroup>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">

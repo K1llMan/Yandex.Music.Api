@@ -10,9 +10,11 @@ using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Feed;
 using Yandex.Music.Api.Models.Landing;
 using Yandex.Music.Api.Models.Playlist;
+using Yandex.Music.Api.Models.Queue;
 using Yandex.Music.Api.Models.Radio;
 using Yandex.Music.Api.Models.Search;
 using Yandex.Music.Api.Models.Track;
+using Yandex.Music.Api.Requests.Queue;
 
 namespace Yandex.Music.Client
 {
@@ -333,6 +335,30 @@ namespace Yandex.Music.Client
 
         #endregion Радио
 
+        #region Очереди
+
+        public YQueueItemsContainer QueuesList(string device = null)
+        {
+            return api.Queue.List(storage, device).Result;
+        }
+        
+        public YQueue GetQueue(string queueId)
+        {
+            return api.Queue.Get(storage, queueId).Result;
+        }
+
+        public YNewQueue CreateQueue(YQueue queue, string device = null)
+        {
+            return api.Queue.Create(storage, queue, device).Result;
+        }
+
+        public YUpdatedQueue QueueUpdatePosition(string queueId, int currentIndex, bool isInteractive, string device = null)
+        {
+            return api.Queue.UpdatePosition(storage, queueId, currentIndex, isInteractive, device).Result;
+        }
+
+        #endregion
+        
         #endregion Основные функции
     }
 }
