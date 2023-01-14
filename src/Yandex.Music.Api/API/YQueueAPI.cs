@@ -22,7 +22,7 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="device">Устройство</param>
         /// <returns></returns>
-        public Task<YResponse<YQueueItemsContainer>> ListAsync(AuthStorage storage, string device)
+        public Task<YResponse<YQueueItemsContainer>> ListAsync(AuthStorage storage, string device = null)
         {
             return new YQueuesListBuilder(api, storage)
                 .Build(device)
@@ -35,7 +35,7 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="device">Устройство</param>
         /// <returns></returns>
-        public YResponse<YQueueItemsContainer> List(AuthStorage storage, string device)
+        public YResponse<YQueueItemsContainer> List(AuthStorage storage, string device = null)
         {
             return ListAsync(storage, device).GetAwaiter().GetResult();
         }
