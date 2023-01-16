@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <ApiVersion>1.2.1</ApiVersion>
+    <ApiVersion>1.3.0</ApiVersion>
     <Version>$(ApiVersion)</Version>
     <AssemblyVersion>$(ApiVersion)</AssemblyVersion>
     <FileVersion>$(ApiVersion)</FileVersion>
-    <Authors>K1llM@n, martin211</Authors>
+    <Authors>K1llM@n, martin211, shuryak</Authors>
     <ProjectUrl>https://github.com/K1llMan/Yandex.Music.Api</ProjectUrl>
     <RepositoryUrl>https://github.com/K1llMan/Yandex.Music.Api</RepositoryUrl>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
