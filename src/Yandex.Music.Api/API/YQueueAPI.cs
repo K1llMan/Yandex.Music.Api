@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Common;
@@ -89,13 +88,14 @@ namespace Yandex.Music.Api.API
         {
             return CreateAsync(storage, queue, device).GetAwaiter().GetResult();
         }
-        
+
         /// <summary>
-        /// Установка текущего индекса проигрываемого трека в очереди треков.
+        /// Установка текущего индекса проигрываемого трека в очереди треков
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <param name="queueId">Идентификатор очереди</param>
         /// <param name="currentIndex">Текущий индекс</param>
+        /// <param name="isInteractive">Флаг интерактивности</param>
         /// <param name="device">Устройство</param>
         /// <returns></returns>
         public Task<YResponse<YUpdatedQueue>> UpdatePositionAsync(AuthStorage storage, string queueId, int currentIndex, bool isInteractive, string device = null)
@@ -106,11 +106,12 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
-        /// Установка текущего индекса проигрываемого трека в очереди треков.
+        /// Установка текущего индекса проигрываемого трека в очереди треков
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <param name="queueId">Идентификатор очереди</param>
         /// <param name="currentIndex">Текущий индекс</param>
+        /// <param name="isInteractive">Флаг интерактивности</param>
         /// <param name="device">Устройство</param>
         /// <returns></returns>
         public YResponse<YUpdatedQueue> UpdatePosition(AuthStorage storage, string queueId, int currentIndex, bool isInteractive, string device = null)

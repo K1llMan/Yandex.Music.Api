@@ -18,6 +18,8 @@ YandexMusicAPI
    API для взаимодействия с библиотекой.
 :doc:`Playlist <branches/playlist>`
    API для взаимодействия с плейлистами.
+:doc:`Playlist <branches/queue>`
+   API для взаимодействия с очередями.
 :doc:`Radio <branches/radio>`
    API для взаимодействия с радио.
 :doc:`Search <branches/search>`

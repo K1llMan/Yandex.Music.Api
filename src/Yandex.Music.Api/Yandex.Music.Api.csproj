@@ -15,10 +15,6 @@
       <Link>README.md</Link>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Queue" />
-    <Folder Include="Requests\Feed\" />
-  </ItemGroup>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />

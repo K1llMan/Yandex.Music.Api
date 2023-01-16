@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Net;
 using System.Net.Http.Headers;
+
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Queue;
@@ -9,7 +10,7 @@ using Yandex.Music.Api.Requests.Common;
 
 namespace Yandex.Music.Api.Requests.Queue
 {
-    [YApiRequest(WebRequestMethods.Http.Post, "/queues/{queueId}/update-position")]
+    [YApiRequest(WebRequestMethods.Http.Post, "queues/{queueId}/update-position")]
     public class YQueueUpdatePositionBuilder : YRequestBuilder<YResponse<YUpdatedQueue>, (string queueId, int currentIndex, bool isInteractive)>
     {
         public YQueueUpdatePositionBuilder(YandexMusicApi yandex, AuthStorage auth, string device = null) : base(yandex, auth)

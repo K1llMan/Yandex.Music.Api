@@ -3,6 +3,7 @@ using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Extensions.Ordering;
+
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Queue;
 using Yandex.Music.Api.Tests.Traits;
@@ -17,18 +18,14 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(0)]
         public void Create_ValidData_True()
         {
-            YResponse<YNewQueue> newQueue = Fixture.API.Queue.Create(Fixture.Storage, new YQueue
-            {
-                Context = new YContext
-                {
+            YResponse<YNewQueue> newQueue = Fixture.API.Queue.Create(Fixture.Storage, new YQueue {
+                Context = new YContext {
                     Description = "Сироп",
                     Id = "track:819992702",
                     Type = "radio"
                 },
-                Tracks = new List<YTrackId>
-                {
-                    new()
-                    {
+                Tracks = new List<YTrackId> {
+                    new() {
                         TrackId = "109253661",
                         AlbumId = "24174855",
                         From = "desktop_win-radio-radio_track_81999270-default"

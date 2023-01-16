@@ -357,8 +357,8 @@ namespace Yandex.Music.Client
             return api.Queue.UpdatePosition(storage, queueId, currentIndex, isInteractive, device).Result;
         }
 
-        #endregion
-        
+        #endregion Очереди
+
         #endregion Основные функции
     }
 }

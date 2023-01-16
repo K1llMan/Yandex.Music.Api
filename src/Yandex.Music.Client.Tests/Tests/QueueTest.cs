@@ -1,9 +1,9 @@
-using System;
 using System.Collections.Generic;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Extensions.Ordering;
+
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Queue;
 
@@ -17,18 +17,14 @@ namespace Yandex.Music.Client.Tests.Tests
         [Order(0)]
         public void CreateQueue_ValidData_True()
         {
-            Fixture.NewQueue = Fixture.Client.CreateQueue(new YQueue
-            {
-                Context = new YContext
-                {
+            Fixture.NewQueue = Fixture.Client.CreateQueue(new YQueue {
+                Context = new YContext {
                     Description = "Сироп",
                     Id = "track:819992702",
                     Type = "radio"
                 },
-                Tracks = new List<YTrackId>()
-                {
-                    new()
-                    {
+                Tracks = new List<YTrackId> {
+                    new() {
                         TrackId = "109253661",
                         AlbumId = "24174855",
                         From = "desktop_win-radio-radio_track_81999270-default"

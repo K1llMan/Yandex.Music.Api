@@ -275,3 +275,27 @@ YandexMusicClient
    public YStation GetRadioStation(YStationId id)
 
 Получение радиостанции по идентификатору.
+
+.. code-block:: csharp
+
+   public YQueueItemsContainer QueuesList(string device = null)
+
+Получение всех очередей треков с разных устройств для синхронизации между ними.
+
+.. code-block:: csharp
+
+   public YQueue GetQueue(string queueId)
+
+Получение очереди.
+
+.. code-block:: csharp
+
+   public YNewQueue CreateQueue(YQueue queue, string device = null)
+
+Создание новой очереди треков.
+
+.. code-block:: csharp
+
+   public YUpdatedQueue QueueUpdatePosition(string queueId, int currentIndex, bool isInteractive, string device = null)
+
+Установка текущего индекса проигрываемого трека в очереди треков.

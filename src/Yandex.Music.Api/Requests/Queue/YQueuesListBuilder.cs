@@ -1,6 +1,6 @@
-using System;
 using System.Net;
 using System.Net.Http.Headers;
+
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Queue;
