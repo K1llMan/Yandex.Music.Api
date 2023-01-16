@@ -103,6 +103,11 @@ YandexMusicApi
 │   ├── GetStation / Async (AuthStorage storage, YStationId id)
 │   ├── GetStationTracks / Async (AuthStorage storage, YStation station, string prevTrackId = "")
 │   └── SetStationSettings2 / Async (AuthStorage storage, YStation station, YStationSettings2 settings)
+├── Queue
+│   ├── List / Async (AuthStorage storage, string device = null)
+│   ├── Get / Async (AuthStorage storage, string queueId)
+│   ├── Create / Async (AuthStorage storage, YQueue queue, string device = null)
+│   └── UpdatePosition / Async (AuthStorage storage, string queueId, int currentIndex, bool isInteractive, string device = null)
 └── Future
     ...
 ```

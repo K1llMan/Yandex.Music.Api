@@ -37,6 +37,7 @@ namespace Yandex.Music.Api.Requests.Common
 
         protected YandexMusicApi api;
         protected AuthStorage storage;
+        protected string Device = "os=CSharp; os_version=; manufacturer=Marshal; model=Yandex Music API; clid=; device_id=random; uuid=random";
 
         #endregion Поля
 

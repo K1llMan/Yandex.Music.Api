@@ -9,6 +9,7 @@ using Yandex.Music.Api.Models.Album;
 using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Playlist;
+using Yandex.Music.Api.Models.Queue;
 using Yandex.Music.Api.Models.Radio;
 using Yandex.Music.Api.Models.Track;
 
@@ -65,6 +66,8 @@ namespace Yandex.Music.Client.Tests
         public YPlaylist CreatedPlaylist { get; set; }
 
         public YStation Station { get; set; }
+        
+        public YNewQueue NewQueue { get; set; }
 
         #endregion Поля для сохранения тестовых данных
 
