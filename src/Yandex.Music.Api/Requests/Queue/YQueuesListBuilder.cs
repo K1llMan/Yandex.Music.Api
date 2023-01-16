@@ -21,9 +21,6 @@ namespace Yandex.Music.Api.Requests.Queue
 
         protected override void SetCustomHeaders(HttpRequestHeaders headers)
         {
-            // TODO: delete
-            Console.WriteLine("---> HEADER: " + Device);
-            
             headers.Add("X-Yandex-Music-Device", Device);
         }
     }
