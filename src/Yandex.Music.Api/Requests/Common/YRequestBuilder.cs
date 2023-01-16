@@ -76,7 +76,7 @@ namespace Yandex.Music.Api.Requests.Common
             HttpRequestMessage msg = new() {
                 RequestUri = BuildUri(tuple),
                 Method = new HttpMethod(requestInfo.Method),
-                Content = GetContent(tuple) ?? GetStringContent(tuple)
+                Content = GetContent(tuple)
             };
 
             msg.Headers.TryAddWithoutValidation(HttpRequestHeader.AcceptCharset.GetName(), Encoding.UTF8.WebName);
@@ -116,11 +116,6 @@ namespace Yandex.Music.Api.Requests.Common
         }
 
         protected virtual HttpContent GetContent(ParamsTuple tuple)
-        {
-            return null;
-        }
-        
-        protected virtual StringContent GetStringContent(ParamsTuple tuple)
         {
             return null;
         }

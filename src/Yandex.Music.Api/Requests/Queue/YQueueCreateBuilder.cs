@@ -2,7 +2,11 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Queue;
@@ -21,12 +25,17 @@ namespace Yandex.Music.Api.Requests.Queue
             }
         }
 
-        // Для метода "queues" JSON-значения строкового вида "null" являются недопустимыми, а они необходимы.
-        // Поэтому пришлось создать метод GetStringContent.
-        // TODO: унифицировать способ формирования контента.
-        protected override StringContent GetStringContent(YQueue queue)
+        protected override HttpContent GetContent(YQueue queue)
         {
-            return new StringContent(SerializeJson(queue), Encoding.UTF8, "application/json");
+            JsonSerializerOptions settings = new() {
+                Converters = {
+                    new JsonStringEnumConverter()
+                },
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            };
+
+            return JsonContent.Create(queue, new MediaTypeHeaderValue("application/json"), settings);
         }
         
         protected override void SetCustomHeaders(HttpRequestHeaders headers)
