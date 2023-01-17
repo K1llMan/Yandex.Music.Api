@@ -1,8 +1,13 @@
 Yandex.Music API (Unofficial) for .Net
 ====
 
-Форк [Yandex.Music API (Unofficial) for .Net Core](https://github.com/Winster332/Yandex.Music.Api)
-API переделано под работу с API официального приложения, подобно [[Alpha] Неофициальная Python библиотека для API Yandex Music](https://github.com/MarshalX/yandex-music-api) 
+Изначально было форком [Yandex.Music API (Unofficial) for .Net Core](https://github.com/Winster332/Yandex.Music.Api), отсоединено по причине отсутствия поддержки родительского проекта и полном переписывании функционала библиотеки.
+
+API переделано под работу с API официального приложения, подобно [API Yandex Music - неофициальная Python библиотека](https://github.com/MarshalX/yandex-music-api) 
+
+[Документация](https://yandexmusicapicsharp.readthedocs.io/ru/latest/index.html)
+
+[История версий](https://github.com/K1llMan/Yandex.Music.Api/blob/master/CHANGELOG.md)
 
 Функционал
 -------
@@ -114,8 +119,7 @@ YandexMusicApi
 
 Функции, помеченные звёздочкой, вероятно, не работают или передают неверные параметры.
 
-Библиотека требует рефакторинга и переработки иерархии классов моделей. Отсутствует функционал радио.
+Отсутствует функционал радио.
 
-LICENCE
--------
+## LICENCE
 [GNU General Public License v3.0](https://github.com/K1llMan/Yandex.Music.Api/blob/master/LICENSE)

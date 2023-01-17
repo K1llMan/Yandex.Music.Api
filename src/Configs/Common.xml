@@ -13,5 +13,10 @@
     <ProjectUrl>https://github.com/K1llMan/Yandex.Music.Api</ProjectUrl>
     <RepositoryUrl>https://github.com/K1llMan/Yandex.Music.Api</RepositoryUrl>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+        <None Include="README.md" Pack="true" PackagePath=""/>
+    </ItemGroup>
 </Project>
