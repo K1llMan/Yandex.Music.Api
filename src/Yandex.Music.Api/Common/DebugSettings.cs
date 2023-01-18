@@ -22,8 +22,6 @@ namespace Yandex.Music.Api.Common
 
         public bool ClearDirectory { get; set; }
 
-        public string LogFileName { get; }
-
         public string OutputDir { get; }
 
         #endregion Свойства
@@ -85,10 +83,8 @@ namespace Yandex.Music.Api.Common
         public DebugSettings(string outputDir, string logFile)
         {
             OutputDir = outputDir;
-            LogFileName = logFile;
 
             debugDir = Path.Combine(AppContext.BaseDirectory, OutputDir);
-            //LogFileName = Path.Combine(debugDir, LogFileName);
 
             _debugger = new DefaultDebugWriter(outputDir, logFile);
         }

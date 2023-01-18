@@ -16,14 +16,12 @@ namespace Yandex.Music.Api.Common
 
             if (!Directory.Exists(debugDir))
                 Directory.CreateDirectory(debugDir);
-
-            if (File.Exists(logFileName))
-                File.Delete(logFileName);
         }
 
         public void Error(string message)
         {
-            using FileStream logFs = new(_logFileName, FileMode.Append);
+            var logFile = Path.Combine(_debugDir, _logFileName);
+            using FileStream logFs = new(logFile, FileMode.Append);
             using StreamWriter logSr = new(logFs);
             logSr.WriteLine(message);
         }
