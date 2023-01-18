@@ -12,7 +12,7 @@ namespace Yandex.Music.Api.Common
         #region Поля
 
         private readonly string debugDir;
-        private readonly string logFileName;
+        private readonly IYDebugWriter _debugger;
 
         #endregion Поля
 
@@ -50,27 +50,19 @@ namespace Yandex.Music.Api.Common
 
             T obj = JsonConvert.DeserializeObject<T>(json, settings);
 
-            string fileName = Path.Combine(debugDir, $"{DateTime.Now:yyyy-MM-dd hh-mm-ss.fff} " +
-                $"{url.Trim('/').Replace("/", "-").Replace(":", "-")}.json");
+            string fileName = $"{DateTime.Now:yyyy-MM-dd hh-mm-ss.fff} " +
+                              $"{url.Trim('/').Replace("/", "-").Replace(":", "-")}.json";
 
             // Ответ сохраняется либо безусловно, либо при ошибке
             if (SaveResponse || errors.Count > 0)
             {
-                if (!Directory.Exists(OutputDir))
-                    Directory.CreateDirectory(OutputDir);
-
-                using FileStream fs = new(fileName, FileMode.Create);
-                using StreamWriter sr = new(fs);
-                sr.Write(JsonConvert.SerializeObject(JsonConvert.DeserializeObject(json), Formatting.Indented));
+                _debugger.Debug(fileName, JsonConvert.SerializeObject(JsonConvert.DeserializeObject(json), Formatting.Indented)); 
             }
 
             // Запись ответа от API с ошибкой
-            if (errors.Count > 0) {
-                using FileStream logFs = new(logFileName, FileMode.Append);
-                using StreamWriter logSr = new(logFs);
-                logSr.WriteLine($"{fileName}:");
-                logSr.WriteLine(string.Join("\r\n", errors.Select(p =>
-                    $"\t{p.Key}\r\n: {string.Join("\r\n", p.Value.Select(s => $"\t\t{s}"))}")));
+            if (errors.Count > 0)
+            {
+                _debugger.Error($"{fileName}:{Environment.NewLine}{string.Join("\r\n", errors.Select(p => $"\t{p.Key}\r\n: {string.Join("\r\n", p.Value.Select(s => $"\t\t{s}"))}"))}");
             }
 
             return obj;
@@ -85,16 +77,20 @@ namespace Yandex.Music.Api.Common
                 File.Delete(file);
         }
 
+        public DebugSettings(IYDebugWriter debugger)
+        {
+            _debugger = debugger;
+        }
+        
         public DebugSettings(string outputDir, string logFile)
         {
             OutputDir = outputDir;
             LogFileName = logFile;
 
             debugDir = Path.Combine(AppContext.BaseDirectory, OutputDir);
-            logFileName = Path.Combine(debugDir, LogFileName);
+            //LogFileName = Path.Combine(debugDir, LogFileName);
 
-            if (File.Exists(logFileName))
-                File.Delete(logFileName);
+            _debugger = new DefaultDebugWriter(outputDir, logFile);
         }
 
         #endregion Основные функции
