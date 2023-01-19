@@ -15,7 +15,6 @@ using Yandex.Music.Api.Models.Queue;
 using Yandex.Music.Api.Models.Radio;
 using Yandex.Music.Api.Models.Search;
 using Yandex.Music.Api.Models.Track;
-using Yandex.Music.Api.Requests.Queue;
 
 namespace Yandex.Music.Client
 {

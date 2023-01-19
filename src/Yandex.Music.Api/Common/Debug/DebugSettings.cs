@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 using Newtonsoft.Json;
 using Yandex.Music.Api.Common.Debug.Writer;
@@ -46,18 +45,18 @@ namespace Yandex.Music.Api.Common.Debug
 
             T obj = JsonConvert.DeserializeObject<T>(json, settings);
 
-            var logEntryId = string.Empty;
+            string requestId = string.Empty;
 
             // Ответ сохраняется либо безусловно, либо при ошибке
             if (SaveResponse || errors.Count > 0)
             {
-                logEntryId = debugWriter.SaveResponse(url, JsonConvert.SerializeObject(JsonConvert.DeserializeObject(json), Formatting.Indented));
+                requestId = debugWriter.SaveResponse(url, JsonConvert.SerializeObject(JsonConvert.DeserializeObject(json), Formatting.Indented));
             }
 
             // Запись ответа от API с ошибкой
             if (errors.Count > 0)
             {
-                debugWriter.Error($"{logEntryId}:{Environment.NewLine}{string.Join("\r\n", errors.Select(p => $"\t{p.Key}\r\n: {string.Join("\r\n", p.Value.Select(s => $"\t\t{s}"))}"))}");
+                debugWriter.Error(requestId, errors);
             }
 
             return obj;

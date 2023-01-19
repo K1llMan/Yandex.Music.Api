@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Yandex.Music.Api.Common.Debug.Writer
@@ -14,13 +16,16 @@ namespace Yandex.Music.Api.Common.Debug.Writer
             this.logFileName = logFileName;
             this.debugDir = debugDir;
 
-            if (!Directory.Exists(debugDir))
-                Directory.CreateDirectory(debugDir);
+            if (!Directory.Exists(this.debugDir))
+                Directory.CreateDirectory(this.debugDir);
         }
 
-        public void Error(string message)
+        public void Error(string requestId, Dictionary<string, List<string>> errors)
         {
-            var logFile = Path.Combine(debugDir, logFileName);
+            string message = $"{requestId}:" +
+                $"{Environment.NewLine}{string.Join("\r\n", errors.Select(p => $"\t{p.Key}\r\n{string.Join("\r\n", p.Value.Select(s => $"\t\t{s}"))}"))}";
+
+            string logFile = Path.Combine(debugDir, logFileName);
             using FileStream logFs = new(logFile, FileMode.Append);
             using StreamWriter logSr = new(logFs);
             logSr.WriteLine(message);
@@ -38,9 +43,9 @@ namespace Yandex.Music.Api.Common.Debug.Writer
         public string SaveResponse(string url, string message)
         {
             string fileName = $"{DateTime.Now:yyyy-MM-dd hh-mm-ss.fff} " +
-                              $"{url.Trim('/').Replace("/", "-").Replace(":", "-")}.json";
+                $"{url.Trim('/').Replace("/", "-").Replace(":", "-")}.json";
 
-            var responseFile = Path.Combine(debugDir, fileName);
+            string responseFile = Path.Combine(debugDir, fileName);
 
             using FileStream fs = new(responseFile, FileMode.Create);
             using StreamWriter sr = new(fs);

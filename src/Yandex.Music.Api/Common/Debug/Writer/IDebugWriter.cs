@@ -1,8 +1,10 @@
-﻿namespace Yandex.Music.Api.Common.Debug.Writer
+﻿using System.Collections.Generic;
+
+namespace Yandex.Music.Api.Common.Debug.Writer
 {
     public interface IDebugWriter
     {
-        void Error(string message);
+        void Error(string requestId, Dictionary<string, List<string>> errors);
 
         void Clear();
 
