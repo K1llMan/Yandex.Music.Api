@@ -21,7 +21,7 @@ namespace Yandex.Music.Client.Tests
         {
             AppSettings = GetAppSettings();
 
-            var writer = new DefaultDebugWriter("responses", "log.txt");
+            IDebugWriter writer = new DefaultDebugWriter("responses", "log.txt");
 
             Client = new YandexMusicClient(new DebugSettings(writer) {
                 ClearDirectory = true

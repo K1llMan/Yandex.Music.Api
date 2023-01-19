@@ -23,7 +23,7 @@ namespace Yandex.Music.Api.Tests
         {
             AppSettings = GetAppSettings();
 
-            var writer = new DefaultDebugWriter("responses", "log.txt");
+            IDebugWriter writer = new DefaultDebugWriter("responses", "log.txt");
 
             Storage = new AuthStorage(new DebugSettings(writer) {
                 ClearDirectory = true
