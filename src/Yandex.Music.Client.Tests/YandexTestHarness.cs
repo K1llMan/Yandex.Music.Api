@@ -4,6 +4,8 @@ using System.IO;
 using Newtonsoft.Json;
 
 using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Common.Debug;
+using Yandex.Music.Api.Common.Debug.Writer;
 using Yandex.Music.Api.Models.Album;
 using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Playlist;
@@ -19,7 +21,9 @@ namespace Yandex.Music.Client.Tests
         {
             AppSettings = GetAppSettings();
 
-            Client = new YandexMusicClient(new DebugSettings("responses", "log.txt") {
+            IDebugWriter writer = new DefaultDebugWriter("responses", "log.txt");
+
+            Client = new YandexMusicClient(new DebugSettings(writer) {
                 ClearDirectory = true
             });
         }
