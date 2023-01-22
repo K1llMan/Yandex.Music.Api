@@ -75,7 +75,7 @@ namespace Yandex.Music.Client
             return api.User.GetAuthQRLink(storage);
         }
 
-        public bool AuthorizeByQR()
+        public YAuthQRStatus AuthorizeByQR()
         {
             return api.User.AuthorizeByQR(storage);
         }
@@ -100,7 +100,7 @@ namespace Yandex.Music.Client
             return api.User.AuthorizeByLetter(storage);
         }
 
-        public bool AuthorizeByAppPassword(string password)
+        public YAuthBase AuthorizeByAppPassword(string password)
         {
             return api.User.AuthorizeByAppPassword(storage, password);
         }

@@ -254,24 +254,28 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public Task<bool> AuthorizeByQRAsync(AuthStorage storage)
+        public async Task<YAuthQRStatus> AuthorizeByQRAsync(AuthStorage storage)
         {
             if (storage.AuthToken == null)
                 throw new Exception("Не выполнен запрос на авторизацию по QR.");
 
             try
             {
-                return new YAuthLoginQRBuilder(api, storage)
+                return await new YAuthLoginQRBuilder(api, storage)
                     .Build(null)
                     .GetResponseAsync()
                     .ContinueWith(task => {
                         YAuthQRStatus qrStatus = task.Result;
                         if (qrStatus.Status != YAuthStatus.Ok)
-                            throw new Exception("Ошибка авторизации по QR.");
+                            return qrStatus;
 
-                        return LoginByCookiesAsync(storage)
-                            .GetAwaiter()
-                            .GetResult();
+                        bool ok = LoginByCookiesAsync(storage).GetAwaiter().GetResult();
+                        if (!ok)
+                        {
+                            throw new Exception("Ошибка авторизации по QR.");
+                        }
+
+                        return qrStatus;
                     });
             }
             catch (Exception ex)
@@ -285,7 +289,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public bool AuthorizeByQR(AuthStorage storage)
+        public YAuthQRStatus AuthorizeByQR(AuthStorage storage)
         {
             return AuthorizeByQRAsync(storage).GetAwaiter().GetResult();
         }
@@ -399,21 +403,28 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="password">Пароль</param>
         /// <returns></returns>
-        public Task<bool> AuthorizeByAppPasswordAsync(AuthStorage storage, string password)
+        public async Task<YAuthBase> AuthorizeByAppPasswordAsync(AuthStorage storage, string password)
         {
             if (storage.AuthToken == null || string.IsNullOrWhiteSpace(storage.AuthToken.CsfrToken))
                 throw new AuthenticationException($"Не найдена сессия входа. Выполните {nameof(CreateAuthSessionAsync)} перед использованием.");
 
-            YAuthBase response = new YAuthAppPasswordBuilder(api, storage)
+            YAuthBase response = await new YAuthAppPasswordBuilder(api, storage)
                 .Build(password)
-                .GetResponseAsync()
-                .GetAwaiter()
-                .GetResult();
+                .GetResponseAsync();
 
-            if (response.Status != YAuthStatus.Ok || !string.IsNullOrWhiteSpace(response.RedirectUrl))
-                throw new AuthenticationException("Ошибка авторизации.");
+            // if (response.Status != YAuthStatus.Ok || !string.IsNullOrWhiteSpace(response.RedirectUrl))
+            //     throw new AuthenticationException("Ошибка авторизации.");
 
-            return LoginByCookiesAsync(storage);
+            if (response.Status == YAuthStatus.Ok && response.Errors == null)
+            {
+                bool ok = await LoginByCookiesAsync(storage);
+                if (!ok)
+                {
+                    throw new AuthenticationException("Ошибка авторизации.");
+                }
+            }
+
+            return response; // TODO: make
         }
 
         /// <summary>
@@ -422,7 +433,7 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="password">Пароль</param>
         /// <returns></returns>
-        public bool AuthorizeByAppPassword(AuthStorage storage, string password)
+        public YAuthBase AuthorizeByAppPassword(AuthStorage storage, string password)
         {
             return AuthorizeByAppPasswordAsync(storage, password).GetAwaiter().GetResult();
         }

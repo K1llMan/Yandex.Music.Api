@@ -2,6 +2,7 @@
 {
     public enum YAuthStatus
     {
-        Ok
+        Ok,
+        Error
     }
 }
