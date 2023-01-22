@@ -85,9 +85,9 @@ namespace Yandex.Music.Client
             return api.User.GetCaptcha(storage);
         }
 
-        public void AuthorizeByCaptcha(string captcha)
+        public YAuthBase AuthorizeByCaptcha(string captcha)
         {
-            api.User.AuthorizeByCaptcha(storage, captcha);
+            return api.User.AuthorizeByCaptcha(storage, captcha);
         }
 
         public YAuthLetter GetAuthLetter()
