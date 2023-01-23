@@ -15,5 +15,7 @@ namespace Yandex.Music.Api.Models.Account
         public string Id { get; set; }
 
         public string State { get; set; }
+        
+        public YAuthCaptcha Captcha { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Yandex.Music.Api.Models.Account
 {
@@ -8,5 +9,7 @@ namespace Yandex.Music.Api.Models.Account
 
         [JsonProperty("redirect_url")]
         public string RedirectUrl { get; set; }
+        
+        public List<YAuthError> Errors { get; set; }
     }
 }
