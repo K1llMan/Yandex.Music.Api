@@ -412,10 +412,7 @@ namespace Yandex.Music.Api.API
                 .Build(password)
                 .GetResponseAsync();
 
-            // if (response.Status != YAuthStatus.Ok || !string.IsNullOrWhiteSpace(response.RedirectUrl))
-            //     throw new AuthenticationException("Ошибка авторизации.");
-
-            if (response.Status == YAuthStatus.Ok && response.Errors == null)
+            if (response.Status == YAuthStatus.Ok)
             {
                 bool ok = await LoginByCookiesAsync(storage);
                 if (!ok)
