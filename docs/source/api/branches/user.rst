@@ -72,13 +72,13 @@ YUserAPI
 
 .. code-block:: csharp
 
-   public Task<bool> AuthorizeByQRAsync(AuthStorage storage)
+   public Task<YAuthQRStatus> AuthorizeByQRAsync(AuthStorage storage)
 
 Авторизация по QR-коду в асинхронном режиме.
 
 .. code-block:: csharp
 
-   public bool AuthorizeByQR(AuthStorage storage)
+   public YAuthQRStatus AuthorizeByQR(AuthStorage storage)
 
 Авторизация по QR-коду.
 
@@ -120,25 +120,25 @@ YUserAPI
 
 .. code-block:: csharp
 
-   public Task<YAccessToken> AuthorizeByLetterAsync(AuthStorage storage)
+   public Task<bool> AuthorizeByLetterAsync(AuthStorage storage)
 
 Авторизация после подтверждения входа через письмо в асинхронном режиме.
 
 .. code-block:: csharp
 
-   public YAccessToken AuthorizeByLetter(AuthStorage storage)
+   public bool AuthorizeByLetter(AuthStorage storage)
 
 Авторизация после подтверждения входа через письмо.
 
 .. code-block:: csharp
 
-   public Task<YAccessToken> AuthorizeByAppPasswordAsync(AuthStorage storage, string password)
+   public Task<YAuthBase> AuthorizeByAppPasswordAsync(AuthStorage storage, string password)
 
 Авторизация с помощью пароля из приложения Яндекс в асинхронном режиме.
 
 .. code-block:: csharp
 
-   public YAccessToken AuthorizeByAppPassword(AuthStorage storage, string password)
+   public YAuthBase AuthorizeByAppPassword(AuthStorage storage, string password)
 
 Авторизация с помощью пароля из приложения Яндекс.
 

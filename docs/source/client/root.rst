@@ -56,7 +56,7 @@ YandexMusicClient
 
 .. code-block:: csharp
 
-   public bool AuthorizeByQR()
+   public YAuthQRStatus AuthorizeByQR()
 
 Авторизация по QR-коду.
 
@@ -68,7 +68,7 @@ YandexMusicClient
 
 .. code-block:: csharp
 
-   public void AuthorizeByCaptcha(string captcha)
+   public YAuthBase AuthorizeByCaptcha(string captcha)
 
 Авторизация по captcha.
 
@@ -80,13 +80,13 @@ YandexMusicClient
 
 .. code-block:: csharp
 
-   public YAccessToken AuthorizeByLetter()
+   public bool AuthorizeByLetter()
 
 Авторизация после подтверждения входа через письмо.
 
 .. code-block:: csharp
 
-   public YAccessToken AuthorizeByAppPassword(string password)
+   public YAuthBase AuthorizeByAppPassword(string password)
 
 Авторизация с помощью пароля из приложения Яндекс.
 

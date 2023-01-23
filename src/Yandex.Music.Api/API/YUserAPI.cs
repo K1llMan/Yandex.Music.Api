@@ -271,9 +271,7 @@ namespace Yandex.Music.Api.API
 
                         bool ok = LoginByCookiesAsync(storage).GetAwaiter().GetResult();
                         if (!ok)
-                        {
-                            throw new Exception("Ошибка авторизации по QR.");
-                        }
+                            throw new AuthenticationException("Ошибка авторизации по QR.");
 
                         return qrStatus;
                     });
@@ -416,9 +414,7 @@ namespace Yandex.Music.Api.API
             {
                 bool ok = await LoginByCookiesAsync(storage);
                 if (!ok)
-                {
                     throw new AuthenticationException("Ошибка авторизации.");
-                }
             }
 
             return response;
