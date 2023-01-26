@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 namespace Yandex.Music.Api.Models.Track
 {
@@ -9,7 +10,13 @@ namespace Yandex.Music.Api.Models.Track
 
         public override string ToString()
         {
-            return $"{Id}:{AlbumId}";
+            var sb = new StringBuilder(Id);
+            if (string.IsNullOrWhiteSpace(AlbumId))
+                return sb.ToString();
+
+            sb.Append(':');
+            sb.Append(AlbumId);
+            return sb.ToString();
         }
 
         #region IEquatable
