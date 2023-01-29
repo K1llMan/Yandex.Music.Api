@@ -11,7 +11,7 @@ namespace Yandex.Music.Api.Models.Feed {
     {
         public DateTime Day { get; set; }
         [JsonConverter(typeof(YFeedEventConverter))]
-        public List<YFeedEvent> Events { get; set; }
+        public List<YFeedEventTitled> Events { get; set; }
         public List<YTrack> TracksToPlay { get; set; }
         public List<YFeedDayTrackWithAds> TracksToPlayWithAds { get; set; }
     }

@@ -19,6 +19,8 @@ namespace Yandex.Music.Api.Models.Feed.Event
         [EnumMember(Value = "new-tracks-of-favorite-genre")]
         NewTracksOfFavoriteGenre,
 
+        Notification,
+
         [EnumMember(Value = "rare-artist")]
         RareArtist,
 

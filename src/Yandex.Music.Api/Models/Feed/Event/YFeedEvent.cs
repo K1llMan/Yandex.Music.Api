@@ -9,71 +9,69 @@ namespace Yandex.Music.Api.Models.Feed.Event
 {
     public sealed class YFeedEventConverter : JsonConverter
     {
-        private YFeedEvent GetEvent(JToken jObject)
+        private YFeedEventTitled GetEvent(JToken jObject)
         {
-            YFeedEvent feedEvent;
+            YFeedEventTitled feedEvent;
 
-            try
+            YFeedEventType type = jObject[jObject["typeForFrom"] != null ? "typeForFrom" : "type"]
+                .ToObject<YFeedEventType>();
+
+            switch (type)
             {
-                YFeedEventType type = jObject["typeForFrom"].ToObject<YFeedEventType>();
+                case YFeedEventType.GenreTop:
+                    feedEvent = jObject.ToObject<YFeedEventGenreTracksTop>();
+                    break;
 
-                switch (type)
-                {
-                    case YFeedEventType.GenreTop:
-                        feedEvent = jObject.ToObject<YFeedEventGenreTracksTop>();
-                        break;
+                case YFeedEventType.NewAlbums:
+                    feedEvent = jObject.ToObject<YFeedEventAlbums>();
+                    break;
 
-                    case YFeedEventType.NewAlbums:
-                        feedEvent = jObject.ToObject<YFeedEventAlbums>();
-                        break;
+                case YFeedEventType.NewAlbumsOfFavoriteGenre:
+                    feedEvent = jObject.ToObject<YFeedEventGenreAlbums>();
+                    break;
 
-                    case YFeedEventType.NewAlbumsOfFavoriteGenre:
-                        feedEvent = jObject.ToObject<YFeedEventGenreAlbums>();
-                        break;
+                case YFeedEventType.Notification:
+                    feedEvent = jObject.ToObject<YFeedEventNotification>();
+                    break;
 
-                    case YFeedEventType.RecentTrackLikeToTracks:
-                        feedEvent = jObject.ToObject<YFeedEventLikeTrack>();
-                        break;
+                case YFeedEventType.RecentTrackLikeToTracks:
+                    feedEvent = jObject.ToObject<YFeedEventLikeTrack>();
+                    break;
 
-                    case YFeedEventType.RecommendedArtistsWithArtistsFromHistory:
-                        feedEvent = jObject.ToObject<YFeedEventArtistWithArtists>();
-                        break;
+                case YFeedEventType.RecommendedArtistsWithArtistsFromHistory:
+                    feedEvent = jObject.ToObject<YFeedEventArtistWithArtists>();
+                    break;
 
-                    case YFeedEventType.RecommendedSimilarArtists:
-                        feedEvent = jObject.ToObject<YFeedEventSimilarArtists>();
-                        break;
+                case YFeedEventType.RecommendedSimilarArtists:
+                    feedEvent = jObject.ToObject<YFeedEventSimilarArtists>();
+                    break;
 
-                    case YFeedEventType.RecommendedSimilarGenre:
-                        feedEvent = jObject.ToObject<YFeedEventSimilarGenre>();
-                        break;
+                case YFeedEventType.RecommendedSimilarGenre:
+                    feedEvent = jObject.ToObject<YFeedEventSimilarGenre>();
+                    break;
 
-                    case YFeedEventType.MissedTracksByArtist:
-                    case YFeedEventType.RareArtist:
-                    case YFeedEventType.RecommendedTracksByArtistFromHistory:
-                        feedEvent = jObject.ToObject<YFeedEventArtist>();
-                        break;
+                case YFeedEventType.MissedTracksByArtist:
+                case YFeedEventType.RareArtist:
+                case YFeedEventType.RecommendedTracksByArtistFromHistory:
+                    feedEvent = jObject.ToObject<YFeedEventArtist>();
+                    break;
 
-                    case YFeedEventType.NewTracksOfFavoriteGenre:
-                    case YFeedEventType.TracksByGenre:
-                        feedEvent = jObject.ToObject<YFeedEventGenreTracks>();
-                        break;
+                case YFeedEventType.NewTracksOfFavoriteGenre:
+                case YFeedEventType.TracksByGenre:
+                    feedEvent = jObject.ToObject<YFeedEventGenreTracks>();
+                    break;
 
-                    case YFeedEventType.WellForgottenOldArtists:
-                        feedEvent = jObject.ToObject<YFeedEventArtists>();
-                        break;
+                case YFeedEventType.WellForgottenOldArtists:
+                    feedEvent = jObject.ToObject<YFeedEventArtists>();
+                    break;
 
-                    case YFeedEventType.WellForgottenOldTracks:
-                        feedEvent = jObject.ToObject<YFeedEventTracks>();
-                        break;
+                case YFeedEventType.WellForgottenOldTracks:
+                    feedEvent = jObject.ToObject<YFeedEventTracks>();
+                    break;
 
-                    default:
-                        feedEvent = jObject.ToObject<YFeedEvent>();
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Ошибка десериализации типа \"{jObject["typeForFrom"]}\".", ex);
+                default:
+                    feedEvent = jObject.ToObject<YFeedEventTitled>();
+                    break;
             }
 
             return feedEvent;
@@ -81,7 +79,7 @@ namespace Yandex.Music.Api.Models.Feed.Event
 
         public override bool CanConvert(Type objectType)
         {
-            return typeof(YFeedEvent).IsAssignableFrom(objectType);
+            return typeof(YFeedEventTitled).IsAssignableFrom(objectType);
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -103,8 +101,6 @@ namespace Yandex.Music.Api.Models.Feed.Event
     public class YFeedEvent
     {
         public string Id { get; set; }
-        public List<YFeedEventTitle> Title { get; set; }
-        public YFeedEventType TypeForFrom { get; set; }
         public YFeedEventType Type { get; set; }
     }
 }
