@@ -11,5 +11,6 @@ namespace Yandex.Music.Api.Models.Account
         public string AlertType { get; set; }
         public YButton Button { get; set; }
         public bool CloseButton { get; set; }
+        public YStyles CloseButtonStyles { get; set; }
     }
 }
