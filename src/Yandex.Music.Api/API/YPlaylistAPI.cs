@@ -198,26 +198,6 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
-        /// Алиса
-        /// </summary>
-        /// <param name="storage">Хранилище</param>
-        /// <returns></returns>
-        public Task<YResponse<YPlaylist>> AliceAsync(AuthStorage storage)
-        {
-            return GetPersonalPlaylist(storage, YGeneratedPlaylistType.Origin);
-        }
-
-        /// <summary>
-        /// Алиса
-        /// </summary>
-        /// <param name="storage">Хранилище</param>
-        /// <returns></returns>
-        public YResponse<YPlaylist> Alice(AuthStorage storage)
-        {
-            return AliceAsync(storage).GetAwaiter().GetResult();
-        }
-
-        /// <summary>
         /// Подкасты
         /// </summary>
         /// <param name="storage">Хранилище</param>
@@ -238,7 +218,7 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
-        /// Мой 2020
+        /// Кинопоиск
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
@@ -248,7 +228,7 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
-        /// Большая перемотка
+        /// Кинопоиск
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>

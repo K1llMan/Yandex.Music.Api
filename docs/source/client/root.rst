@@ -164,12 +164,6 @@ YandexMusicClient
 
 .. code-block:: csharp
 
-   public YPlaylist GetAlice()
-
-Получение плейлиста Алисы.
-
-.. code-block:: csharp
-
    public YPlaylist GetDejaVu()
 
 Получение плейлиста Дежавю.

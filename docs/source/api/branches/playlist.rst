@@ -79,18 +79,6 @@ Playlist API
 
 .. code-block:: csharp
 
-   public async Task<YResponse<YPlaylist>> AliceAsync(AuthStorage storage)
-
-Получение плейлиста Алисы в асинхронном режиме.
-
-.. code-block:: csharp
-
-   public YResponse<YPlaylist> Alice(AuthStorage storage)
-
-Получение плейлиста Алисы.
-
-.. code-block:: csharp
-
    public async Task<YResponse<YPlaylist>> PodcastsAsync(AuthStorage storage)
 
 Получение плейлиста Подкасты в асинхронном режиме.

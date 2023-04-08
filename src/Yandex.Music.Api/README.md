@@ -20,7 +20,7 @@ API для удобства разделено на следующие ветк�
 YandexMusicApi
 │
 ├── Users
-│   ├── Authorize / Async (AuthStorage storage, string username, string password)
+│   ├── Authorize / Async (AuthStorage storage, string username, string password) [Obsolete]
 │   ├── Authorize / Async (AuthStorage storage, string token)
 │   ├── GetUserAuth / Async (AuthStorage storage)
 │   ├── CreateAuthSession / Async (AuthStorage storage, string userName)
@@ -66,7 +66,6 @@ YandexMusicApi
 │   ├── DejaVu / Async (AuthStorage storage)
 │   ├── Premiere / Async (AuthStorage storage)
 │   ├── Missed / Async (AuthStorage storage)
-│   ├── Alice / Async (AuthStorage storage)
 │   ├── Podcasts / Async (AuthStorage storage)
 │   ├── Create / Async (AuthStorage storage, string name)
 │   ├── Rename / Async (AuthStorage storage, string kinds, string name)

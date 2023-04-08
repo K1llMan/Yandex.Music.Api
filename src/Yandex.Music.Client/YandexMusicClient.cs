@@ -194,11 +194,6 @@ namespace Yandex.Music.Client
             return api.Playlist.Favorites(storage).Result;
         }
 
-        public YPlaylist GetAlice()
-        {
-            return api.Playlist.Alice(storage).Result;
-        }
-
         public YPlaylist GetDejaVu()
         {
             return api.Playlist.DejaVu(storage).Result;

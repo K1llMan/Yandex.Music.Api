@@ -86,15 +86,6 @@ namespace Yandex.Music.Api.Tests.Tests.API
         }
 
         [Fact, YandexTrait(TraitGroup.PlaylistAPI)]
-        [Order(6)]
-        public void Alice_ValidData_True()
-        {
-            YResponse<YPlaylist> response = Fixture.API.Playlist.Alice(Fixture.Storage);
-
-            response.Should().NotBeNull();
-        }
-
-        [Fact, YandexTrait(TraitGroup.PlaylistAPI)]
         [Order(7)]
         public void Podcasts_ValidData_True()
         {

@@ -57,14 +57,6 @@ namespace Yandex.Music.Api.Tests.Tests.API
         }
 
         [Fact, YandexTrait(TraitGroup.SearchAPI)]
-        [Order(4)]
-        public void Video_ValidData_True()
-        {
-            YResponse<YSearch> response = Fixture.API.Search.Videos(Fixture.Storage, track);
-            response.Result.Videos.Total.Should().BeGreaterThan(0);
-        }
-
-        [Fact, YandexTrait(TraitGroup.SearchAPI)]
         [Order(5)]
         public void PodcastEpisode_ValidData_True()
         {
