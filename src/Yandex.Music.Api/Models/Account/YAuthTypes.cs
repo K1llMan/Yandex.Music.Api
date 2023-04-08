@@ -14,6 +14,9 @@ namespace Yandex.Music.Api.Models.Account
         [JsonProperty("use_new_suggest_by_phone")]
         public bool UseNewSuggestByPhone { get; set; }
 
+        [JsonProperty("is_rfc_2fa_enabled")]
+        public bool IsRfc2faEnabled { get; set; }
+
         [JsonProperty("track_id")]
         public string TrackId { get; set; }
 

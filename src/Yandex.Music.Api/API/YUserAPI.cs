@@ -135,6 +135,7 @@ namespace Yandex.Music.Api.API
         /// <param name="login">Логин</param>
         /// <param name="password">Пароль</param>
         /// <returns></returns>
+        [Obsolete("Работает лишь на малом количестве аккаунтов, рекомендуется авторизация по токену.")]
         public async Task AuthorizeAsync(AuthStorage storage, string login, string password)
         {
             YAccessToken result = await AuthPassport(storage, login, password);
@@ -151,6 +152,7 @@ namespace Yandex.Music.Api.API
         /// <param name="login">Логин</param>
         /// <param name="password">Пароль</param>
         /// <returns></returns>
+        [Obsolete("Работает лишь на малом количестве аккаунтов, рекомендуется авторизация по токену.")]
         public void Authorize(AuthStorage storage, string login, string password)
         {
             AuthorizeAsync(storage, login, password).GetAwaiter().GetResult();
