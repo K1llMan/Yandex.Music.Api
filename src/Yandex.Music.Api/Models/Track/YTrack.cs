@@ -23,6 +23,7 @@ namespace Yandex.Music.Api.Models.Track
         public List<string> ClipIds { get; set; }
         public long DurationMs { get; set; }
         public string Error { get; set; }
+        public YTrackFade Fade { get; set; }
         public long FileSize { get; set; }
         public string Id { get; set; }
         public bool IsSuitableForChildren { get; set; }

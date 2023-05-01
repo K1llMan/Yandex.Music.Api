@@ -20,8 +20,6 @@ namespace Yandex.Music.Client.Tests.Tests
         {
             if (!string.IsNullOrEmpty(Fixture.AppSettings.Token))
                 Fixture.Client.Authorize(Fixture.AppSettings.Token);
-            else
-                Fixture.Client.Authorize(Fixture.AppSettings.Login, Fixture.AppSettings.Password);
 
             Fixture.Client.IsAuthorized.Should().BeTrue();
         }

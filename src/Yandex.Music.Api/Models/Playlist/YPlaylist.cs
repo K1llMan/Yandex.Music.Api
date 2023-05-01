@@ -70,7 +70,7 @@ namespace Yandex.Music.Api.Models.Playlist
         public string TextColor { get; set; }
         public string Title { get; set; }
         public int TrackCount { get; set; }
-        public List<int> TrackIds { get; set; }
+        public List<string> TrackIds { get; set; }
         public List<YTrackContainer> Tracks { get; set; }
         public string Uid { get; set; }
         public string UrlPart { get; set; }

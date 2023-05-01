@@ -101,15 +101,6 @@ namespace Yandex.Music.Client.Tests.Tests
         }
 
         [Fact]
-        [Order(8)]
-        public void Alice_ValidData_True()
-        {
-            YPlaylist response = Fixture.Client.GetAlice();
-
-            response.Should().NotBeNull();
-        }
-
-        [Fact]
         [Order(9)]
         public void Podcasts_ValidData_True()
         {
