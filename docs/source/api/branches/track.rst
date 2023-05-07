@@ -70,9 +70,21 @@ Track API
 
 .. code-block:: csharp
 
+   public string GetFileLinkAsync(AuthStorage storage, string trackKey)
+
+Получение ссылки в асинхронном режиме.
+
+.. code-block:: csharp
+
    public string GetFileLink(AuthStorage storage, string trackKey)
 
 Получение ссылки.
+
+.. code-block:: csharp
+
+   public string GetFileLinkAsync(AuthStorage storage, YTrack track)
+
+Получение ссылки в асинхронном режиме.
 
 .. code-block:: csharp
 
@@ -82,9 +94,21 @@ Track API
 
 .. code-block:: csharp
 
+   public void ExtractToFileAsync(AuthStorage storage, string trackKey, string filePath)
+
+Сохранение в файл в асинхронном режиме.
+
+.. code-block:: csharp
+
    public void ExtractToFile(AuthStorage storage, string trackKey, string filePath)
 
 Сохранение в файл.
+
+.. code-block:: csharp
+
+   public void ExtractToFileAsync(AuthStorage storage, YTrack track, string filePath)
+
+Сохранение в файл в асинхронном режиме.
 
 .. code-block:: csharp
 
@@ -94,15 +118,51 @@ Track API
 
 .. code-block:: csharp
 
+   public byte[] ExtractDataAsync(AuthStorage storage, string trackKey)
+
+Получение данных в виде двоичного массива в асинхронном режиме.
+
+.. code-block:: csharp
+
    public byte[] ExtractData(AuthStorage storage, string trackKey)
 
 Получение данных в виде двоичного массива.
 
 .. code-block:: csharp
 
+   public byte[] ExtractDataAsync(AuthStorage storage, YTrack track)
+
+Получение данных в виде двоичного массива в асинхронном режиме.
+
+.. code-block:: csharp
+
    public byte[] ExtractData(AuthStorage storage, YTrack track)
 
 Получение данных в виде двоичного массива.
+
+.. code-block:: csharp
+
+   public byte[] ExtractStreamAsync(AuthStorage storage, string trackKey)
+
+Получение данных в виде потока в асинхронном режиме.
+
+.. code-block:: csharp
+
+   public byte[] ExtractStreamData(AuthStorage storage, string trackKey)
+
+Получение данных в виде потока.
+
+.. code-block:: csharp
+
+   public byte[] ExtractStreamAsync(AuthStorage storage, YTrack track)
+
+Получение данных в виде потока в асинхронном режиме.
+
+.. code-block:: csharp
+
+   public byte[] ExtractStreamData(AuthStorage storage, YTrack track)
+
+Получение данных в виде потока.
 
 .. code-block:: csharp
 

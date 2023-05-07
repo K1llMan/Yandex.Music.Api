@@ -37,14 +37,20 @@ namespace Yandex.Music.Api.Common.Providers
         {
             string result = await response.Content.ReadAsStringAsync();
 
-            JsonSerializerSettings settings = new() {
-                Converters = new List<JsonConverter> {
-                    new YExecutionContextConverter(api, storage)
-                }
-            };
+            if (!response.IsSuccessStatusCode)
+            {
+                YErrorResponse exception = JsonConvert.DeserializeObject<YErrorResponse>(result);
+                throw exception ?? new Exception("Ошибка десериализации ответа с ошибкой.");
+            }
 
             try
             {
+                JsonSerializerSettings settings = new() {
+                    Converters = new List<JsonConverter> {
+                        new YExecutionContextConverter(api, storage)
+                    }
+                };
+
                 return storage.Debug != null
                     ? storage.Debug.Deserialize<T>(response.RequestMessage?.RequestUri?.AbsolutePath, result, settings)
                     : JsonConvert.DeserializeObject<T>(result, settings);

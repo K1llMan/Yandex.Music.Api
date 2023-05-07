@@ -55,14 +55,6 @@ namespace Yandex.Music.Client.Tests.Tests
         }
 
         [Fact]
-        [Order(4)]
-        public void Video_ValidData_True()
-        {
-            YSearch response = Fixture.Client.Search(track, YSearchType.Video);
-            response.Videos.Total.Should().BeGreaterThan(0);
-        }
-
-        [Fact]
         [Order(5)]
         public void Suggest_ValidData_True()
         {

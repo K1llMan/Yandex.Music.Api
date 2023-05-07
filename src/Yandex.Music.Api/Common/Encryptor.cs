@@ -17,7 +17,7 @@ namespace Yandex.Music.Api.Common
         private readonly byte[] keyHash;
 
         private readonly MD5 md5;
-        private readonly Rijndael rijAlg;
+        private readonly Aes aesAlg;
 
 
         #endregion Поля
@@ -37,9 +37,9 @@ namespace Yandex.Music.Api.Common
         {
             md5 = MD5.Create();
 
-            rijAlg = Rijndael.Create();
-            rijAlg.BlockSize = 128;
-            rijAlg.Padding = PaddingMode.PKCS7;
+            aesAlg = Aes.Create();
+            aesAlg.BlockSize = 128;
+            aesAlg.Padding = PaddingMode.PKCS7;
 
             keyHash = GetHash(key);
             IVHash = GetHash(IV);
@@ -47,30 +47,28 @@ namespace Yandex.Music.Api.Common
 
         public byte[] Encrypt(byte[] data)
         {
-            using (MemoryStream ms = new()) {
-                using (CryptoStream csEncrypt = new(ms, rijAlg.CreateEncryptor(keyHash, IVHash), CryptoStreamMode.Write)) {
-                    csEncrypt.Write(data, 0, data.Length);
+            using MemoryStream ms = new();
+            using CryptoStream csEncrypt = new(ms, aesAlg.CreateEncryptor(keyHash, IVHash), CryptoStreamMode.Write);
 
-                    if (!csEncrypt.HasFlushedFinalBlock)
-                        csEncrypt.FlushFinalBlock();
+            csEncrypt.Write(data, 0, data.Length);
 
-                    return ms.ToArray();
-                }
-            }
+            if (!csEncrypt.HasFlushedFinalBlock)
+                csEncrypt.FlushFinalBlock();
+
+            return ms.ToArray();
         }
 
         public byte[] Decrypt(byte[] data)
         {
-            using (MemoryStream ms = new()) {
-                using (CryptoStream csDecrypt = new(ms, rijAlg.CreateDecryptor(keyHash, IVHash), CryptoStreamMode.Write)) {
-                    csDecrypt.Write(data, 0, data.Length);
+            using MemoryStream ms = new();
+            using CryptoStream csDecrypt = new(ms, aesAlg.CreateDecryptor(keyHash, IVHash), CryptoStreamMode.Write);
 
-                    if (!csDecrypt.HasFlushedFinalBlock)
-                        csDecrypt.FlushFinalBlock();
+            csDecrypt.Write(data, 0, data.Length);
 
-                    return ms.ToArray();
-                }
-            }
+            if (!csDecrypt.HasFlushedFinalBlock)
+                csDecrypt.FlushFinalBlock();
+
+            return ms.ToArray();
         }
 
         #endregion Основные функции

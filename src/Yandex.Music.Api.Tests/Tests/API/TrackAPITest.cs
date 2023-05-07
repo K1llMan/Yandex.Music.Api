@@ -82,10 +82,33 @@ namespace Yandex.Music.Api.Tests.Tests.API
             Fixture.API.Track.ExtractToFile(Fixture.Storage, Fixture.Track, extractedFileName);
 
             File.Exists(extractedFileName).Should().BeTrue();
+            new FileInfo(extractedFileName).Length.Should().BePositive();
         }
 
         [Fact, YandexTrait(TraitGroup.TrackAPI)]
         [Order(5)]
+        public void ExtractData_ValidData_True()
+        {
+            Fixture.Track.Should().NotBe(null);
+
+            byte[] data = Fixture.API.Track.ExtractData(Fixture.Storage, Fixture.Track);
+
+            data.Length.Should().BePositive();
+        }
+
+        [Fact, YandexTrait(TraitGroup.TrackAPI)]
+        [Order(6)]
+        public void ExtractStream_ValidData_True()
+        {
+            Fixture.Track.Should().NotBe(null);
+
+            Stream stream = Fixture.API.Track.ExtractStream(Fixture.Storage, Fixture.Track);
+
+            stream.Length.Should().BePositive();
+        }
+
+        [Fact, YandexTrait(TraitGroup.TrackAPI)]
+        [Order(7)]
         public void GetSupplement_ValidData_True()
         {
             Fixture.Track.Should().NotBe(null);
@@ -95,7 +118,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         }
 
         [Fact, YandexTrait(TraitGroup.TrackAPI)]
-        [Order(6)]
+        [Order(8)]
         public void GetSimilar_ValidData_True()
         {
             Fixture.Track.Should().NotBe(null);

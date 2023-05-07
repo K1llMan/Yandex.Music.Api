@@ -21,6 +21,7 @@ namespace Yandex.Music.Api.Models.Track
         public string ContentWarning { get; set; }
         public string CoverUri { get; set; }
         public List<string> ClipIds { get; set; }
+        public List<string> Disclaimers { get; set; }
         public long DurationMs { get; set; }
         public string Error { get; set; }
         public YTrackFade Fade { get; set; }
