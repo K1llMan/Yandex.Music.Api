@@ -15,9 +15,11 @@
     <PackageReleaseNotes>https://github.com/K1llMan/Yandex.Music.Api/blob/$(ApiVersion)/CHANGELOG.md</PackageReleaseNotes>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
         <None Include="README.md" Pack="true" PackagePath=""/>
+        <None Include="../Resources/icon.png" Pack="true" PackagePath=""/>
     </ItemGroup>
 </Project>

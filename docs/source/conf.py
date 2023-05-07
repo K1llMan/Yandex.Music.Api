@@ -19,7 +19,7 @@ master_doc = 'index'
 # -- Project information -----------------------------------------------------
 
 project = 'Yandex Music API'
-copyright = '2022, K1llM@n'
+copyright = '2023, K1llM@n'
 author = 'K1llM@n, based on Winster332 project'
 
 language = 'ru'
@@ -48,7 +48,7 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'furo'
 html_search_language = 'ru'
 
 # Add any paths that contain custom static files (such as style sheets) here,
