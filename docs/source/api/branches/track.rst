@@ -168,7 +168,7 @@ Track API
 
    public Task<YResponse<YTrackSupplement>> GetSupplementAsync(AuthStorage storage, string trackId)
 
-Получение дополнительной информации для трека.
+Получение дополнительной информации для трека в асинхронном режиме.
 
 .. code-block:: csharp
 
@@ -180,7 +180,7 @@ Track API
 
    public Task<YResponse<YTrackSupplement>> GetSupplementAsync(AuthStorage storage, YTrack track)
 
-Получение дополнительной информации для трека.
+Получение дополнительной информации для трека в асинхронном режиме.
 
 .. code-block:: csharp
 
@@ -192,7 +192,7 @@ Track API
 
    public Task<YResponse<YTrackSimilar>> GetSimilarAsync(AuthStorage storage, string trackId)
 
-Получение похожих треков.
+Получение похожих треков в асинхронном режиме.
 
 .. code-block:: csharp
 
@@ -204,7 +204,7 @@ Track API
 
    public Task<YResponse<YTrackSimilar>> GetSimilarAsync(AuthStorage storage, YTrack track)
 
-Получение похожих треков.
+Получение похожих треков в асинхронном режиме.
 
 .. code-block:: csharp
 

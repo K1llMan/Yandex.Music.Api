@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.com/K1llMan/Yandex.Music.Api.svg?branch=master)](https://travis-ci.com/K1llMan/Yandex.Music.Api)
 [![Documentation Status](https://readthedocs.org/projects/yandexmusicapicsharp/badge/?version=latest)](https://yandexmusicapicsharp.readthedocs.io/ru/latest/?badge=latest)
 [![Nuget](https://img.shields.io/nuget/v/KM.Yandex.Music.Api?label=KM.Yandex.Music.Api)](https://www.nuget.org/packages/KM.Yandex.Music.Api/)
 [![Nuget](https://img.shields.io/nuget/v/KM.Yandex.Music.Client?label=KM.Yandex.Music.Client)](https://www.nuget.org/packages/KM.Yandex.Music.Client/)
