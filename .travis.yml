@@ -1,6 +1,0 @@
-language: csharp
-solution: Yandex.Music.Api.sln
-install:
-  - nuget restore Yandex.Music.Api.sln
-script:
-  - msbuild /p:Configuration=Release Yandex.Music.Api.sln
