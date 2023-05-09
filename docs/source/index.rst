@@ -3,8 +3,5 @@
 
 .. toctree::
    readme
-
-   :hidden:
-
    api/api
    client/client
