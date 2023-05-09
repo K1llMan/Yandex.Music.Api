@@ -20,7 +20,7 @@ def copy_resources(app, docname):
         output_dir = os.path.join(app.outdir, 'src', 'Resources')
         source_dir = os.path.join(app.srcdir, '..', '..', 'src', 'Resources')
         if not os.path.exists(output_dir):
-            os.makedirs(os.path.join(app.outdir, 'src', 'Resources'))
+            #os.makedirs(os.path.join(app.outdir, 'src', 'Resources'))
             shutil.copytree(source_dir, output_dir)
 
 def setup(app):
