@@ -15,12 +15,12 @@ import sys
 import shutil
 sys.path.insert(0, os.path.abspath('../..'))
 
+# Copy resources
 def copy_resources(app, docname):
     if app.builder.name == 'html':
         output_dir = os.path.join(app.outdir, 'src', 'Resources')
         source_dir = os.path.join(app.srcdir, '..', '..', 'src', 'Resources')
         if not os.path.exists(output_dir):
-            #os.makedirs(os.path.join(app.outdir, 'src', 'Resources'))
             shutil.copytree(source_dir, output_dir)
 
 def setup(app):
