@@ -1,4 +1,4 @@
-# <img width="48" height="48" src="src/Resources/icon.png"> Yandex.Music API (Unofficial) for .Net
+# Yandex.Music API (Unofficial) for .Net
 
 [![Nuget](https://img.shields.io/nuget/v/KM.Yandex.Music.Api?label=KM.Yandex.Music.Api)](https://www.nuget.org/packages/KM.Yandex.Music.Api/)
 [![Nuget](https://img.shields.io/nuget/v/KM.Yandex.Music.Client?label=KM.Yandex.Music.Client)](https://www.nuget.org/packages/KM.Yandex.Music.Client/)
@@ -14,5 +14,5 @@ API переделано под работу с API официального п�
 ```{include} ../../CHANGELOG.md
 ```
 
-## LICENCE
+# LICENCE
 [GNU General Public License v3.0](https://github.com/K1llMan/Yandex.Music.Api/blob/master/LICENSE)
