@@ -31,12 +31,6 @@ YandexMusicClient
 
 .. code-block:: csharp
 
-   public bool Authorize(string login, string password)
-
-Авторизация с использованием логина и пароля.
-
-.. code-block:: csharp
-
    public bool Authorize(string token)
 
 Авторизация с использованием токена.

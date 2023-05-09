@@ -7,21 +7,6 @@ YUserAPI
 
 .. code-block:: csharp
 
-   public Task AuthorizeAsync(AuthStorage storage, string login, string password)
-
-Авторизация в асинхронном режиме с использованием логина и пароля.
-
-.. code-block:: csharp
-
-   public void Authorize(AuthStorage storage, string login, string password)
-
-Авторизация с использованием логина и пароля.
-
-.. tip:: Рекомендуется использовать эти методы только для первоначального получения токена, а в дальнейшем использовать его.
-
-
-.. code-block:: csharp
-
    public Task AuthorizeAsync(AuthStorage storage, string token)
 
 Авторизация в асинхронном режиме с использованием токена.
