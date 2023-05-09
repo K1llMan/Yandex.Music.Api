@@ -9,6 +9,8 @@ API переделано под работу с API официального п�
 
 [История версий](https://github.com/K1llMan/Yandex.Music.Api/blob/master/CHANGELOG.md)
 
+[Telegram-чат](https://t.me/yandex_music_api)
+
 Функционал
 -------
 
@@ -119,8 +121,6 @@ YandexMusicApi
 ```
 
 Функции, помеченные звёздочкой, вероятно, не работают или передают неверные параметры.
-
-Отсутствует функционал радио.
 
 ## LICENCE
 [GNU General Public License v3.0](https://github.com/K1llMan/Yandex.Music.Api/blob/master/LICENSE)

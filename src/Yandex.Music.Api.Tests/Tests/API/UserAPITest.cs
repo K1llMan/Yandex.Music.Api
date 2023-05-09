@@ -35,8 +35,6 @@ namespace Yandex.Music.Api.Tests.Tests.API
         {
             if (!string.IsNullOrEmpty(Fixture.AppSettings.Token))
                 Fixture.API.User.Authorize(Fixture.Storage, Fixture.AppSettings.Token);
-            else
-                Fixture.API.User.Authorize(Fixture.Storage, Fixture.AppSettings.Login, Fixture.AppSettings.Password);
 
             Fixture.Storage.IsAuthorized.Should().BeTrue();
         }

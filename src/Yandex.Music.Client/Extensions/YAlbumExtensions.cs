@@ -1,30 +1,25 @@
-using System.Collections.Generic;
-
 using Yandex.Music.Api.Models.Album;
-using Yandex.Music.Api.Models.Track;
 
 namespace Yandex.Music.Client.Extensions
 {
     /// <summary>
     /// Методы-расширения для альбома
     /// </summary>
-    public static class YAlbumExtensions
+    public static partial class YAlbumExtensions
     {
         public static YAlbum WithTracks(this YAlbum album)
         {
-            return album.Volumes != null 
-                ? album 
-                : album.Context.API.Album.Get(album.Context.Storage, album.Id).Result;
+            return WithTracksAsync(album).GetAwaiter().GetResult();
         }
 
         public static string AddLike(this YAlbum album)
         {
-            return album.Context.API.Library.AddAlbumLike(album.Context.Storage, album).Result;
+            return AddLikeAsync(album).GetAwaiter().GetResult();
         }
 
         public static string RemoveLike(this YAlbum album)
         {
-            return album.Context.API.Library.RemoveAlbumLike(album.Context.Storage, album).Result;
+            return RemoveLikeAsync(album).GetAwaiter().GetResult();
         }
     }
 }

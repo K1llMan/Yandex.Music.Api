@@ -6,7 +6,7 @@ namespace Yandex.Music.Client.Extensions
     /// <summary>
     /// Методы-расширения для плейлиста
     /// </summary>
-    public static class YPlaylistExtensions
+    public static partial class YPlaylistExtensions
     {
         private static bool CheckUser(YPlaylist playlist)
         {
@@ -15,45 +15,37 @@ namespace Yandex.Music.Client.Extensions
 
         public static YPlaylist WithTracks(this YPlaylist playlist)
         {
-            return playlist.Tracks != null 
-                ? playlist 
-                : playlist.Context.API.Playlist.Get(playlist.Context.Storage, playlist).Result;
+            return WithTracksAsync(playlist).GetAwaiter().GetResult();
         }
 
         public static string AddLike(this YPlaylist playlist)
         {
-            return playlist.Context.API.Library.AddPlaylistLike(playlist.Context.Storage, playlist).Result;
+            return AddLikeAsync(playlist).GetAwaiter().GetResult();
         }
 
         public static string RemoveLike(this YPlaylist playlist)
         {
-            return playlist.Context.API.Library.RemovePlaylistLike(playlist.Context.Storage, playlist).Result;
+            return RemoveLikeAsync(playlist).GetAwaiter().GetResult();
         }
 
         public static YPlaylist Rename(this YPlaylist playlist, string newName)
         {
-            return CheckUser(playlist)
-                ? playlist.Context.API.Playlist.Rename(playlist.Context.Storage, playlist, newName).Result
-                : playlist;
+            return RenameAsync(playlist, newName).GetAwaiter().GetResult();
         }
 
         public static bool Delete(this YPlaylist playlist)
         {
-            return CheckUser(playlist) && playlist.Context.API.Playlist.Delete(playlist.Context.Storage, playlist);
+            return DeleteAsync(playlist).GetAwaiter().GetResult();
         }
 
         public static YPlaylist InsertTracks(this YPlaylist playlist, params YTrack[] tracks)
         {
-            return CheckUser(playlist)
-                ? playlist.Context.API.Playlist.InsertTracks(playlist.Context.Storage, playlist, tracks).Result
-                : playlist;
+            return InsertTracksAsync(playlist, tracks).GetAwaiter().GetResult();
         }
 
         public static YPlaylist RemoveTracks(this YPlaylist playlist, params YTrack[] tracks)
         {
-            return CheckUser(playlist)
-                ? playlist.Context.API.Playlist.DeleteTracks(playlist.Context.Storage, playlist, tracks).Result
-                : playlist;
+            return RemoveTracksAsync(playlist, tracks).GetAwaiter().GetResult();
         }
     }
 }

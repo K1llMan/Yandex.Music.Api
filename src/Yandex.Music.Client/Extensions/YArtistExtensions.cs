@@ -5,21 +5,21 @@ namespace Yandex.Music.Client.Extensions
     /// <summary>
     /// Методы-расширения для исполнителя
     /// </summary>
-    public static class YArtistExtensions
+    public static partial class YArtistExtensions
     {
         public static YArtistBriefInfo BriefInfo(this YArtist artist)
         {
-            return artist.Context.API.Artist.Get(artist.Context.Storage, artist.Id).Result;
+            return BriefInfoAsync(artist).GetAwaiter().GetResult();
         }
 
         public static string AddLike(this YArtist artist)
         {
-            return artist.Context.API.Library.AddArtistLike(artist.Context.Storage, artist).Result;
+            return AddLikeAsync(artist).GetAwaiter().GetResult();
         }
 
         public static string RemoveLike(this YArtist artist)
         {
-            return artist.Context.API.Library.RemoveArtistLike(artist.Context.Storage, artist).Result;
+            return RemoveLikeAsync(artist).GetAwaiter().GetResult();
         }
     }
 }

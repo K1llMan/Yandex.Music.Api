@@ -113,7 +113,7 @@ namespace Yandex.Music.Client.Tests.Tests
         [Order(10)]
         public void Rewind_ValidData_True()
         {
-            YPlaylist response = Fixture.Client.GetRewind();
+            YPlaylist response = Fixture.Client.GetKinopoisk();
 
             response.Should().NotBeNull();
         }

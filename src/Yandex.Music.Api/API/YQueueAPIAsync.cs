@@ -1,6 +1,8 @@
+using System.Threading.Tasks;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Queue;
+using Yandex.Music.Api.Requests.Queue;
 
 namespace Yandex.Music.Api.API
 {
@@ -9,28 +11,36 @@ namespace Yandex.Music.Api.API
     /// </summary>
     public partial class YQueueAPI : YCommonAPI
     {
+        public YQueueAPI(YandexMusicApi yandex) : base(yandex)
+        {
+        }
+
         /// <summary>
         /// Получение всех очередей треков с разных устройств для синхронизации между ними
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <param name="device">Устройство</param>
         /// <returns></returns>
-        public YResponse<YQueueItemsContainer> List(AuthStorage storage, string device = null)
+        public Task<YResponse<YQueueItemsContainer>> ListAsync(AuthStorage storage, string device = null)
         {
-            return ListAsync(storage, device).GetAwaiter().GetResult();
+            return new YQueuesListBuilder(api, storage)
+                .Build(device)
+                .GetResponseAsync();
         }
-
+        
         /// <summary>
         /// Получение очереди
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <param name="queueId">Идентификатор очереди</param>
         /// <returns></returns>
-        public YResponse<YQueue> Get(AuthStorage storage, string queueId)
+        public Task<YResponse<YQueue>> GetAsync(AuthStorage storage, string queueId)
         {
-            return GetAsync(storage, queueId).GetAwaiter().GetResult();
+            return new YGetQueueBuilder(api, storage)
+                .Build(queueId)
+                .GetResponseAsync();
         }
-        
+
         /// <summary>
         /// Создание новой очереди треков
         /// </summary>
@@ -38,9 +48,11 @@ namespace Yandex.Music.Api.API
         /// <param name="queue">Очередь треков</param>
         /// <param name="device">Устройство</param>
         /// <returns></returns>
-        public YResponse<YNewQueue> Create(AuthStorage storage, YQueue queue, string device = null)
+        public Task<YResponse<YNewQueue>> CreateAsync(AuthStorage storage, YQueue queue, string device = null)
         {
-            return CreateAsync(storage, queue, device).GetAwaiter().GetResult();
+            return new YQueueCreateBuilder(api, storage, device)
+                .Build(queue)
+                .GetResponseAsync();
         }
 
         /// <summary>
@@ -52,9 +64,11 @@ namespace Yandex.Music.Api.API
         /// <param name="isInteractive">Флаг интерактивности</param>
         /// <param name="device">Устройство</param>
         /// <returns></returns>
-        public YResponse<YUpdatedQueue> UpdatePosition(AuthStorage storage, string queueId, int currentIndex, bool isInteractive, string device = null)
+        public Task<YResponse<YUpdatedQueue>> UpdatePositionAsync(AuthStorage storage, string queueId, int currentIndex, bool isInteractive, string device = null)
         {
-            return UpdatePositionAsync(storage, queueId, currentIndex, isInteractive, device).GetAwaiter().GetResult();
+            return new YQueueUpdatePositionBuilder(api, storage, device)
+                .Build((queueId, currentIndex, isInteractive))
+                .GetResponseAsync();
         }
     }
 }

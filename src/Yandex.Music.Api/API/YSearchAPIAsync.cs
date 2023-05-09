@@ -1,6 +1,9 @@
+using System.Threading.Tasks;
+
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Search;
+using Yandex.Music.Api.Requests.Search;
 
 namespace Yandex.Music.Api.API
 {
@@ -11,6 +14,10 @@ namespace Yandex.Music.Api.API
     {
         #region Основные функции
 
+        public YSearchAPI(YandexMusicApi yandex): base(yandex)
+        {
+        }
+
         /// <summary>
         /// Поиск по трекам
         /// </summary>
@@ -18,9 +25,9 @@ namespace Yandex.Music.Api.API
         /// <param name="trackName">Имя трека</param>
         /// <param name="pageNumber">Номер страницы</param>
         /// <returns></returns>
-        public YResponse<YSearch> Track(AuthStorage storage, string trackName, int pageNumber = 0)
+        public Task<YResponse<YSearch>> TrackAsync(AuthStorage storage, string trackName, int pageNumber = 0)
         {
-            return TrackAsync(storage, trackName, pageNumber).GetAwaiter().GetResult();
+            return SearchAsync(storage, trackName, YSearchType.Track, pageNumber);
         }
 
         /// <summary>
@@ -30,9 +37,9 @@ namespace Yandex.Music.Api.API
         /// <param name="albumName">Имя альбома</param>
         /// <param name="pageNumber">Номер страницы</param>
         /// <returns></returns>
-        public YResponse<YSearch> Albums(AuthStorage storage, string albumName, int pageNumber = 0)
+        public Task<YResponse<YSearch>> AlbumsAsync(AuthStorage storage, string albumName, int pageNumber = 0)
         {
-            return AlbumsAsync(storage, albumName, pageNumber).GetAwaiter().GetResult();
+            return SearchAsync(storage, albumName, YSearchType.Album, pageNumber);
         }
 
         /// <summary>
@@ -42,9 +49,9 @@ namespace Yandex.Music.Api.API
         /// <param name="artistName">Имя артиста</param>
         /// <param name="pageNumber">Номер страницы</param>
         /// <returns></returns>
-        public YResponse<YSearch> Artist(AuthStorage storage, string artistName, int pageNumber = 0)
+        public Task<YResponse<YSearch>> ArtistAsync(AuthStorage storage, string artistName, int pageNumber = 0)
         {
-            return ArtistAsync(storage, artistName, pageNumber).GetAwaiter().GetResult();
+            return SearchAsync(storage, artistName, YSearchType.Artist, pageNumber);
         }
 
         /// <summary>
@@ -54,9 +61,9 @@ namespace Yandex.Music.Api.API
         /// <param name="playlistName">Имя плейлиста</param>
         /// <param name="pageNumber">Номер страницы</param>
         /// <returns></returns>
-        public YResponse<YSearch> Playlist(AuthStorage storage, string playlistName, int pageNumber = 0)
+        public Task<YResponse<YSearch>> PlaylistAsync(AuthStorage storage, string playlistName, int pageNumber = 0)
         {
-            return PlaylistAsync(storage, playlistName, pageNumber).GetAwaiter().GetResult();
+            return SearchAsync(storage, playlistName, YSearchType.Playlist, pageNumber);
         }
 
         /// <summary>
@@ -66,21 +73,21 @@ namespace Yandex.Music.Api.API
         /// <param name="podcastName">Имя подкаста</param>
         /// <param name="pageNumber">Номер страницы</param>
         /// <returns></returns>
-        public YResponse<YSearch> PodcastEpisode(AuthStorage storage, string podcastName, int pageNumber = 0)
+        public Task<YResponse<YSearch>> PodcastEpisodeAsync(AuthStorage storage, string podcastName, int pageNumber = 0)
         {
-            return PodcastEpisodeAsync(storage, podcastName, pageNumber).GetAwaiter().GetResult();
+            return SearchAsync(storage, podcastName, YSearchType.PodcastEpisode, pageNumber);
         }
 
         /// <summary>
         /// Поиск по видео
         /// </summary>
         /// <param name="storage">Хранилище</param>
-        /// <param name="videoName">Имя пользователя</param>
+        /// <param name="videoName">Имя видео</param>
         /// <param name="pageNumber">Номер страницы</param>
         /// <returns></returns>
-        public YResponse<YSearch> Videos(AuthStorage storage, string videoName, int pageNumber = 0)
+        public Task<YResponse<YSearch>> VideosAsync(AuthStorage storage, string videoName, int pageNumber = 0)
         {
-            return VideosAsync(storage, videoName, pageNumber).GetAwaiter().GetResult();
+            return SearchAsync(storage, videoName, YSearchType.Video, pageNumber);
         }
 
         /// <summary>
@@ -90,9 +97,9 @@ namespace Yandex.Music.Api.API
         /// <param name="userName">Имя пользователя</param>
         /// <param name="pageNumber">Номер страницы</param>
         /// <returns></returns>
-        public YResponse<YSearch> Users(AuthStorage storage, string userName, int pageNumber = 0)
+        public Task<YResponse<YSearch>> UsersAsync(AuthStorage storage, string userName, int pageNumber = 0)
         {
-            return UsersAsync(storage, userName, pageNumber).GetAwaiter().GetResult();
+            return SearchAsync(storage, userName, YSearchType.User, pageNumber);
         }
 
         /// <summary>
@@ -103,9 +110,11 @@ namespace Yandex.Music.Api.API
         /// <param name="searchType">Тип поиска</param>
         /// <param name="page">Страница</param>
         /// <returns></returns>
-        public YResponse<YSearch> Search(AuthStorage storage, string searchText, YSearchType searchType, int page = 0)
+        public Task<YResponse<YSearch>> SearchAsync(AuthStorage storage, string searchText, YSearchType searchType, int page = 0)
         {
-            return SearchAsync(storage, searchText, searchType, page).GetAwaiter().GetResult();
+            return new YSearchBuilder(api, storage)
+                .Build((searchText, searchType, page))
+                .GetResponseAsync();
         }
 
         /// <summary>
@@ -114,9 +123,11 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="searchText">Поисковый запрос</param>
         /// <returns></returns>
-        public YResponse<YSearchSuggest> Suggest(AuthStorage storage, string searchText)
+        public Task<YResponse<YSearchSuggest>> SuggestAsync(AuthStorage storage, string searchText)
         {
-            return SuggestAsync(storage, searchText).GetAwaiter().GetResult();
+            return new YSearchSuggestBuilder(api, storage)
+                .Build(searchText)
+                .GetResponseAsync();
         }
 
         #endregion Основные функции
