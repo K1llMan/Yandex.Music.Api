@@ -36,7 +36,9 @@ language = 'ru'
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.napoleon'
+    'sphinx.ext.napoleon',
+    'sphinx_copybutton',
+    'myst_parser'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -53,6 +55,7 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
+html_title = 'Yandex Music API'
 html_theme = 'furo'
 html_search_language = 'ru'
 
