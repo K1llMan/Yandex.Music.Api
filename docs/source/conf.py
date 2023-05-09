@@ -16,6 +16,11 @@ sys.path.insert(0, os.path.abspath('../..'))
 
 master_doc = 'index'
 
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
+
 # -- Project information -----------------------------------------------------
 
 project = 'Yandex Music API'
