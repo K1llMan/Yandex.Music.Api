@@ -22,13 +22,20 @@ namespace Yandex.Music.Api.Common.Providers
             if (ex is not WebException webException) 
                 return ex;
 
-            using StreamReader sr = new(webException.Response.GetResponseStream());
-            string result = sr.ReadToEnd();
+            if (webException.Response is null)
+                return ex;
 
+            Stream s = webException.Response.GetResponseStream();
+            if (s is null)
+                return ex;
 
-            YErrorResponse exception = JsonConvert.DeserializeObject<YErrorResponse>(result);
+            using (StreamReader sr = new StreamReader(s)) {
+                string result = sr.ReadToEnd();
+                
+                YErrorResponse exception = JsonConvert.DeserializeObject<YErrorResponse>(result);
 
-            return exception ?? ex;
+                return exception ?? ex;
+            }
         }
 
         #endregion Вспомогательные функции
