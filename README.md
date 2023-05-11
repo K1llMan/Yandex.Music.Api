@@ -16,5 +16,12 @@ API переделано под работу с API официального п�
 
 [Telegram-чат](https://t.me/yandex_music_api)
 
+## Благодарность за вклад в развитие библиотеки
+
+* [martin211](https://github.com/martin211)
+* [shuryak](https://github.com/shuryak)
+* [PrepConcedeITIS](https://github.com/PrepConcedeITIS)
+* [Lauriero](https://github.com/Lauriero)
+
 ## LICENCE
 [GNU General Public License v3.0](https://github.com/K1llMan/Yandex.Music.Api/blob/master/LICENSE)
