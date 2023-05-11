@@ -383,10 +383,11 @@ namespace Yandex.Music.Client
         /// <param name="searchText">Поисковый запрос</param>
         /// <param name="searchType">Тип поиска</param>
         /// <param name="page">Страница</param>
+        /// <param name="pageSize">Размер страницы</param>
         /// <returns></returns>
-        public Task<YSearch> Search(string searchText, YSearchType searchType, int page = 0)
+        public Task<YSearch> Search(string searchText, YSearchType searchType, int page = 0, int pageSize = 20)
         {
-            return api.Search.SearchAsync(storage, searchText, searchType, page)
+            return api.Search.SearchAsync(storage, searchText, searchType, page, pageSize)
                 .ContinueWith(t => t.Result.Result);
         }
 

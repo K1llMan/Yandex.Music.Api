@@ -57,7 +57,9 @@ YandexMusicApi
 │   └── Get / Async (AuthStorage storage, IEnumerable<string> albumIds)
 ├── Artist
 │   ├── Get / Async (AuthStorage storage, string artistId)
-│   └── Get / Async (AuthStorage storage, IEnumerable<string> artistIds)
+│   ├── Get / Async (AuthStorage storage, IEnumerable<string> artistIds)
+│   ├── GetTracks / Async (AuthStorage storage, string artistId, int page = 0, int pageSize = 20)
+│   └── GetAllTracks / Async (AuthStorage storage, string artistId)
 ├── Landing
 │   ├── Get / Async (AuthStorage storage, params YLandingBlockType[] blocks)
 │   └── Feed / Async (AuthStorage storage)
@@ -95,14 +97,14 @@ YandexMusicApi
 │   ├── AddPlaylistLike / Async(AuthStorage storage, YPlaylist playlist)
 │   └── RemovePlaylistLike / Async(AuthStorage storage, YPlaylist playlist)
 ├── Search
-│   ├── Track / Async (AuthStorage storage, string trackName, int pageNumber = 0)
-│   ├── Albums / Async (AuthStorage storage, string albumName, int pageNumber = 0)
-│   ├── Artist / Async (AuthStorage storage, string artistName, int pageNumber = 0)
-│   ├── Playlist / Async (AuthStorage storage, string playlistName, int pageNumber = 0)
-│   ├── PodcastEpisode / Async (AuthStorage storage, string podcastName, int pageNumber = 0)
-│   ├── Videos / Async (AuthStorage storage, string videoName, int pageNumber = 0)
-│   ├── Users / Async (AuthStorage storage, string videoName, int pageNumber = 0) *
-│   ├── Search / Async (AuthStorage storage, string searchText, YSearchType searchType, int page = 0)
+│   ├── Track / Async (AuthStorage storage, string trackName, int pageNumber = 0, int pageSize = 20)
+│   ├── Albums / Async (AuthStorage storage, string albumName, int pageNumber = 0, int pageSize = 20)
+│   ├── Artist / Async (AuthStorage storage, string artistName, int pageNumber = 0, int pageSize = 20)
+│   ├── Playlist / Async (AuthStorage storage, string playlistName, int pageNumber = 0, int pageSize = 20)
+│   ├── PodcastEpisode / Async (AuthStorage storage, string podcastName, int pageNumber = 0, int pageSize = 20)
+│   ├── Videos / Async (AuthStorage storage, string videoName, int pageNumber = 0, int pageSize = 20)
+│   ├── Users / Async (AuthStorage storage, string videoName, int pageNumber = 0, int pageSize = 20) *
+│   ├── Search / Async (AuthStorage storage, string searchText, YSearchType searchType, int page = 0, int pageSize = 20)
 │   └── Suggest / Async (AuthStorage storage, string searchText)
 ├── Radio
 │   ├── GetStationsDashboard / Async (AuthStorage storage)

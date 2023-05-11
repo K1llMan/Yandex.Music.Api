@@ -13,7 +13,7 @@ namespace Yandex.Music.Api.API
     /// <summary>
     /// API для взаимодействия с библиотекой
     /// </summary>
-    public partial class YLibraryAPI : YCommonAPI
+    public partial class YLibraryAPI
     {
         #region Основные функции
 

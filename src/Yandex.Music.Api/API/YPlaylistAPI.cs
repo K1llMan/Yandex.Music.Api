@@ -10,7 +10,7 @@ namespace Yandex.Music.Api.API
     /// <summary>
     /// API для взамодействия с плейлистами
     /// </summary>
-    public partial class YPlaylistAPI : YCommonAPI
+    public partial class YPlaylistAPI
     {
         #region Основные функции
 

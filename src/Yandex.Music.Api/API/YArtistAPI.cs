@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
-using Yandex.Music.Api.Models.Track;
 
 namespace Yandex.Music.Api.API
 {
     /// <summary>
     /// API для взаимодействия с исполнителями
     /// </summary>
-    public partial class YArtistAPI : YCommonAPI
+    public partial class YArtistAPI
     {
         #region Основные функции
 
@@ -45,7 +44,7 @@ namespace Yandex.Music.Api.API
         /// <param name="artistId">Идентификатор исполнителя</param>
         /// <param name="page">Страница ответов</param>
         /// <param name="pageSize">Количество треков на странице ответов</param>
-        public YResponse<YTracksContainer> GetTracks(AuthStorage storage, string artistId, int page = 0,
+        public YResponse<YTracksPage> GetTracks(AuthStorage storage, string artistId, int page = 0,
             int pageSize = 20)
         {
             return GetTracksAsync(storage, artistId, page, pageSize).GetAwaiter().GetResult();
@@ -56,7 +55,7 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <param name="artistId">Идентификатор исполнителя</param>
-        public YResponse<YTracksContainer> GetAllTracks(AuthStorage storage, string artistId)
+        public YResponse<YTracksPage> GetAllTracks(AuthStorage storage, string artistId)
         {
             return GetAllTracksAsync(storage, artistId).GetAwaiter().GetResult();
         }

@@ -200,7 +200,7 @@ YandexMusicClient
 
 .. code-block:: csharp
 
-   public YSearch Search(string searchText, YSearchType searchType, int page = 0)
+   public YSearch Search(string searchText, YSearchType searchType, int page = 0, int pageSize = 20)
 
 Поиск.
 

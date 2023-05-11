@@ -19,12 +19,12 @@ YArtistAPI
 
 .. code-block:: csharp
 
-   public Task<YResponse<YTracksContainer>> GetTracksAsync(AuthStorage storage, string artistId, int page = 0, int pageSize = 20)
+   public Task<YResponse<YTracksPage>> GetTracksAsync(AuthStorage storage, string artistId, int page = 0, int pageSize = 20)
 
 Получение списка треков исполнителя с пагинацией.
 
 .. code-block:: csharp
 
-   public Task<YResponse<YTracksContainer>> GetAllTracksAsync(AuthStorage storage, string artistId)
+   public Task<YResponse<YTracksPage>> GetAllTracksAsync(AuthStorage storage, string artistId)
 
 Получение списка всех треков исполнителя.

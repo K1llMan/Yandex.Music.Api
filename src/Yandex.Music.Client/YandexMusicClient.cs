@@ -362,10 +362,11 @@ namespace Yandex.Music.Client
         /// <param name="searchText">Поисковый запрос</param>
         /// <param name="searchType">Тип поиска</param>
         /// <param name="page">Страница</param>
+        /// <param name="pageSize">Размер страницы</param>
         /// <returns></returns>
-        public YSearch Search(string searchText, YSearchType searchType, int page = 0)
+        public YSearch Search(string searchText, YSearchType searchType, int page = 0, int pageSize = 20)
         {
-            return api.Search.Search(storage, searchText, searchType, page).Result;
+            return api.Search.Search(storage, searchText, searchType, page, pageSize).Result;
         }
 
         /// <summary>

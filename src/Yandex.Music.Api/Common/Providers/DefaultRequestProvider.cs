@@ -29,13 +29,12 @@ namespace Yandex.Music.Api.Common.Providers
             if (s is null)
                 return ex;
 
-            using (StreamReader sr = new StreamReader(s)) {
-                string result = sr.ReadToEnd();
+            using StreamReader sr = new(s);
+            string result = sr.ReadToEnd();
                 
-                YErrorResponse exception = JsonConvert.DeserializeObject<YErrorResponse>(result);
+            YErrorResponse exception = JsonConvert.DeserializeObject<YErrorResponse>(result);
 
-                return exception ?? ex;
-            }
+            return exception ?? ex;
         }
 
         #endregion Вспомогательные функции

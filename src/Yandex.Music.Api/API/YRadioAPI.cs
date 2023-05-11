@@ -9,7 +9,7 @@ namespace Yandex.Music.Api.API
     /// <summary>
     /// API для взаимодействия с радио
     /// </summary>
-    public partial class YRadioAPI: YCommonAPI
+    public partial class YRadioAPI
     {
         #region Основные функции
 

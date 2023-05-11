@@ -8,7 +8,6 @@ using Xunit.Extensions.Ordering;
 
 using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
-using Yandex.Music.Api.Models.Track;
 using Yandex.Music.Api.Tests.Traits;
 
 namespace Yandex.Music.Api.Tests.Tests.API
@@ -44,7 +43,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(2)]
         public void GetTracks_ValidData_True()
         {
-            YResponse<YTracksContainer> tracks = Fixture.API.Artist.GetTracks(Fixture.Storage, artistId, 1, 30);
+            YResponse<YTracksPage> tracks = Fixture.API.Artist.GetTracks(Fixture.Storage, artistId, 1, 30);
             tracks.Result.Tracks.Count.Should().Be(30);
         }
         
@@ -52,7 +51,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(3)]
         public void GetAllTracks_ValidData_True()
         {
-            YResponse<YTracksContainer> tracks = Fixture.API.Artist.GetAllTracks(Fixture.Storage, artistId);
+            YResponse<YTracksPage> tracks = Fixture.API.Artist.GetAllTracks(Fixture.Storage, artistId);
             tracks.Result.Tracks.Count.Should().BeGreaterThan(30);
         }
 

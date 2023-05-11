@@ -7,7 +7,7 @@ namespace Yandex.Music.Api.API
     /// <summary>
     /// API для взаимодействия с очередями
     /// </summary>
-    public partial class YQueueAPI : YCommonAPI
+    public partial class YQueueAPI
     {
         /// <summary>
         /// Получение всех очередей треков с разных устройств для синхронизации между ними
