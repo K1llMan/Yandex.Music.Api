@@ -9,7 +9,7 @@
     <Version>$(ApiVersion)</Version>
     <AssemblyVersion>$(ApiVersion)</AssemblyVersion>
     <FileVersion>$(ApiVersion)</FileVersion>
-    <Authors>K1llM@n, martin211, shuryak, PrepConcedeITIS</Authors>
+    <Authors>K1llM@n</Authors>
     <ProjectUrl>https://github.com/K1llMan/Yandex.Music.Api</ProjectUrl>
     <RepositoryUrl>https://github.com/K1llMan/Yandex.Music.Api</RepositoryUrl>
     <PackageReleaseNotes>https://github.com/K1llMan/Yandex.Music.Api/blob/$(ApiVersion)/CHANGELOG.md</PackageReleaseNotes>
