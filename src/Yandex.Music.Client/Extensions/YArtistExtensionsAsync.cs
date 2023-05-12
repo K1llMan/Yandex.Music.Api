@@ -11,34 +11,34 @@ namespace Yandex.Music.Client.Extensions
     /// </summary>
     public static partial class YArtistExtensions
     {
-        public static Task<YArtistBriefInfo> BriefInfoAsync(this YArtist artist)
+        public static async Task<YArtistBriefInfo> BriefInfoAsync(this YArtist artist)
         {
-            return artist.Context.API.Artist.GetAsync(artist.Context.Storage, artist.Id)
-                .ContinueWith(t => t.Result.Result);
+            return (await artist.Context.API.Artist.GetAsync(artist.Context.Storage, artist.Id))
+                .Result;
         }
 
-        public static Task<YTracksPage> GetTracksAsync(this YArtist artist, int page = 0, int pageSize = 20)
+        public static async Task<YTracksPage> GetTracksAsync(this YArtist artist, int page = 0, int pageSize = 20)
         {
-            return artist.Context.API.Artist.GetTracksAsync(artist.Context.Storage, artist.Id, page, pageSize)
-                .ContinueWith(t => t.Result.Result);
+            return (await artist.Context.API.Artist.GetTracksAsync(artist.Context.Storage, artist.Id, page, pageSize))
+                .Result;
         }
 
-        public static Task<List<YTrack>> GetAllTracksAsync(this YArtist artist)
+        public static async Task<List<YTrack>> GetAllTracksAsync(this YArtist artist)
         {
-            return artist.Context.API.Artist.GetAllTracksAsync(artist.Context.Storage, artist.Id)
-                .ContinueWith(t => t.Result.Result.Tracks);
+            return (await artist.Context.API.Artist.GetAllTracksAsync(artist.Context.Storage, artist.Id))
+                .Result.Tracks;
         }
 
-        public static Task<string> AddLikeAsync(this YArtist artist)
+        public static async Task<string> AddLikeAsync(this YArtist artist)
         {
-            return artist.Context.API.Library.AddArtistLikeAsync(artist.Context.Storage, artist)
-                .ContinueWith(t => t.Result.Result);
+            return (await artist.Context.API.Library.AddArtistLikeAsync(artist.Context.Storage, artist))
+                .Result;
         }
 
-        public static Task<string> RemoveLikeAsync(this YArtist artist)
+        public static async Task<string> RemoveLikeAsync(this YArtist artist)
         {
-            return artist.Context.API.Library.RemoveArtistLikeAsync(artist.Context.Storage, artist)
-                .ContinueWith(t => t.Result.Result);
+            return (await artist.Context.API.Library.RemoveArtistLikeAsync(artist.Context.Storage, artist))
+                .Result;
         }
     }
 }

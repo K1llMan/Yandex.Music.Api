@@ -10,6 +10,7 @@ namespace Yandex.Music.Api.Models.Account
     public class YAccount
     {
         public bool Child { get; set; }
+        public string Birthday { get; set; }
         public string DisplayName { get; set; }
         public string FirstName { get; set; }
         public string FullName { get; set; }

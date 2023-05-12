@@ -10,16 +10,16 @@ namespace Yandex.Music.Client.Extensions
     /// </summary>
     public static partial class YStationResultExtensions
     {
-        public static Task<List<YSequenceItem>> GetTracksAsync(this YStation station, string prevTrackId = "")
+        public static async Task<List<YSequenceItem>> GetTracksAsync(this YStation station, string prevTrackId = "")
         {
-            return station.Context.API.Radio.GetStationTracksAsync(station.Context.Storage, station, prevTrackId)
-                .ContinueWith(t => t.Result.Result.Sequence);
+            return (await station.Context.API.Radio.GetStationTracksAsync(station.Context.Storage, station, prevTrackId))
+                .Result.Sequence;
         }
 
-        public static Task<string> SetSettings2Async(this YStation station, YStationSettings2 settings)
+        public static async Task<string> SetSettings2Async(this YStation station, YStationSettings2 settings)
         {
-            return station.Context.API.Radio.SetStationSettings2Async(station.Context.Storage, station, settings)
-                .ContinueWith(t => t.Result.Result);
+            return (await station.Context.API.Radio.SetStationSettings2Async(station.Context.Storage, station, settings))
+                .Result;
         }
     }
 }

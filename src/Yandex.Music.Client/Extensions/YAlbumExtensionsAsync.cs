@@ -9,24 +9,24 @@ namespace Yandex.Music.Client.Extensions
     /// </summary>
     public static partial class YAlbumExtensions
     {
-        public static Task<YAlbum> WithTracksAsync(this YAlbum album)
+        public static async Task<YAlbum> WithTracksAsync(this YAlbum album)
         {
             return album.Volumes != null 
-                ? Task.FromResult(album)
-                : album.Context.API.Album.GetAsync(album.Context.Storage, album.Id)
-                    .ContinueWith(t => t.Result.Result);
+                ? album
+                : (await album.Context.API.Album.GetAsync(album.Context.Storage, album.Id))
+                    .Result;
         }
 
-        public static Task<string> AddLikeAsync(this YAlbum album)
+        public static async Task<string> AddLikeAsync(this YAlbum album)
         {
-            return album.Context.API.Library.AddAlbumLikeAsync(album.Context.Storage, album)
-                .ContinueWith(t => t.Result.Result);
+            return (await album.Context.API.Library.AddAlbumLikeAsync(album.Context.Storage, album))
+                .Result;
         }
 
-        public static Task<string> RemoveLikeAsync(this YAlbum album)
+        public static async Task<string> RemoveLikeAsync(this YAlbum album)
         {
-            return album.Context.API.Library.RemoveAlbumLikeAsync(album.Context.Storage, album)
-                .ContinueWith(t => t.Result.Result);
+            return (await album.Context.API.Library.RemoveAlbumLikeAsync(album.Context.Storage, album))
+                .Result;
         }
     }
 }

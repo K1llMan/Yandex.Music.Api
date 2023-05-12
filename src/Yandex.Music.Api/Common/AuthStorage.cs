@@ -32,7 +32,7 @@ namespace Yandex.Music.Api.Common
         public string Token { get; internal set; }
 
         /// <summary>
-        /// Пользователь
+        /// Аккаунт
         /// </summary>
         public YAccount User { get; set; }
 

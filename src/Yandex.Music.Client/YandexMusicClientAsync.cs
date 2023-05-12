@@ -11,6 +11,7 @@ using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Feed;
 using Yandex.Music.Api.Models.Landing;
+using Yandex.Music.Api.Models.Library;
 using Yandex.Music.Api.Models.Playlist;
 using Yandex.Music.Api.Models.Queue;
 using Yandex.Music.Api.Models.Radio;
@@ -60,10 +61,10 @@ namespace Yandex.Music.Client
         /// </summary>
         /// <param name="token">Токен авторизации</param>
         /// <returns></returns>
-        public Task<bool> Authorize(string token)
+        public async Task<bool> Authorize(string token)
         {
-            return api.User.AuthorizeAsync(storage, token)
-                .ContinueWith(_ => storage.IsAuthorized);
+            await api.User.AuthorizeAsync(storage, token);
+            return storage.IsAuthorized;
         }
 
         /// <summary>
@@ -149,6 +150,14 @@ namespace Yandex.Music.Client
             return api.User.GetAccessTokenAsync(storage);
         }
 
+        /// <summary>
+        /// Получение информации о пользователе через логин Яндекса
+        /// </summary>
+        public Task<YLoginInfo> GetLoginInfo()
+        {
+            return api.User.GetLoginInfoAsync(storage);
+        }
+
         #endregion Авторизация
 
         #region Треки
@@ -158,10 +167,10 @@ namespace Yandex.Music.Client
         /// </summary>
         /// <param name="id">id трека</param>
         /// <returns></returns>
-        public Task<YTrack> GetTrack(string id)
+        public async Task<YTrack> GetTrack(string id)
         {
-            return api.Track.GetAsync(storage, id)
-                .ContinueWith(t => t.Result.Result.FirstOrDefault());
+            return (await api.Track.GetAsync(storage, id))
+                .Result.FirstOrDefault();
         }
 
         /// <summary>
@@ -169,10 +178,10 @@ namespace Yandex.Music.Client
         /// </summary>
         /// <param name="ids">Список id треков</param>
         /// <returns></returns>
-        public Task<List<YTrack>> GetTracks(IEnumerable<string> ids)
+        public async Task<List<YTrack>> GetTracks(IEnumerable<string> ids)
         {
-            return api.Track.GetAsync(storage, ids)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Track.GetAsync(storage, ids))
+                .Result;
         }
 
         #endregion Треки
@@ -184,10 +193,10 @@ namespace Yandex.Music.Client
         /// </summary>
         /// <param name="id">id альбома</param>
         /// <returns></returns>
-        public Task<YAlbum> GetAlbum(string id)
+        public async Task<YAlbum> GetAlbum(string id)
         {
-            return api.Album.GetAsync(storage, id)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Album.GetAsync(storage, id))
+                .Result;
         }
 
         /// <summary>
@@ -195,10 +204,10 @@ namespace Yandex.Music.Client
         /// </summary>
         /// <param name="ids">Список id альбомов</param>
         /// <returns></returns>
-        public Task<List<YAlbum>> GetAlbums(IEnumerable<string> ids)
+        public async Task<List<YAlbum>> GetAlbums(IEnumerable<string> ids)
         {
-            return api.Album.GetAsync(storage, ids)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Album.GetAsync(storage, ids))
+                .Result;
         }
 
         #endregion Альбомы
@@ -210,20 +219,20 @@ namespace Yandex.Music.Client
         /// </summary>
         /// <param name="blocks">Типы запрашиваемых блоков</param>
         /// <returns></returns>
-        public Task<YLanding> GetLanding(params YLandingBlockType[] blocks)
+        public async Task<YLanding> GetLanding(params YLandingBlockType[] blocks)
         {
-            return api.Landing.GetAsync(storage, blocks)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Landing.GetAsync(storage, blocks))
+                .Result;
         }
 
         /// <summary>
         /// Получение ленты
         /// </summary>
         /// <returns></returns>
-        public Task<YFeed> Feed()
+        public async Task<YFeed> Feed()
         {
-            return api.Landing.GetFeedAsync(storage)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Landing.GetFeedAsync(storage))
+                .Result;
         }
 
         #endregion Главная страница
@@ -235,10 +244,10 @@ namespace Yandex.Music.Client
         /// </summary>
         /// <param name="id">id исполнителя</param>
         /// <returns></returns>
-        public Task<YArtistBriefInfo> GetArtist(string id)
+        public async Task<YArtistBriefInfo> GetArtist(string id)
         {
-            return api.Artist.GetAsync(storage, id)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Artist.GetAsync(storage, id))
+                .Result;
         }
 
         /// <summary>
@@ -246,10 +255,10 @@ namespace Yandex.Music.Client
         /// </summary>
         /// <param name="ids">Список id исполнителей</param>
         /// <returns></returns>
-        public Task<List<YArtist>> GetArtists(IEnumerable<string> ids)
+        public async Task<List<YArtist>> GetArtists(IEnumerable<string> ids)
         {
-            return api.Artist.GetAsync(storage, ids)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Artist.GetAsync(storage, ids))
+                .Result;
         }
 
         #endregion Исполнители
@@ -262,10 +271,10 @@ namespace Yandex.Music.Client
         /// <param name="user">Пользователь</param>
         /// <param name="id">id плейлиста</param>
         /// <returns></returns>
-        public Task<YPlaylist> GetPlaylist(string user, string id)
+        public async Task<YPlaylist> GetPlaylist(string user, string id)
         {
-            return api.Playlist.GetAsync(storage, user, id)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Playlist.GetAsync(storage, user, id))
+                .Result;
         }
 
         /// <summary>
@@ -273,93 +282,92 @@ namespace Yandex.Music.Client
         /// </summary>
         /// <param name="ids">Список кортежей с пользователем и id плейлиста</param>
         /// <returns></returns>
-        public Task<List<YPlaylist>> GetPlaylists(IEnumerable<(string user, string id)> ids)
+        public async Task<List<YPlaylist>> GetPlaylists(IEnumerable<(string user, string id)> ids)
         {
-            return api.Playlist.GetAsync(storage, ids)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Playlist.GetAsync(storage, ids))
+                .Result;
         }
 
         /// <summary>
         /// Получение списка персональных плейлистов
         /// </summary>
         /// <returns></returns>
-        public Task<List<YPlaylist>> GetPersonalPlaylists()
+        public async Task<List<YPlaylist>> GetPersonalPlaylists()
         {
-            return api.Playlist.GetPersonalPlaylistsAsync(storage)
-                .ContinueWith(t => t.Result
-                    .Select(r => r.Result)
-                    .ToList()
-                );
+            List<YResponse<YPlaylist>> playlists = await api.Playlist.GetPersonalPlaylistsAsync(storage);
+            return playlists
+                .Select(r => r.Result)
+                .ToList();
         }
 
         /// <summary>
         /// Избранное
         /// </summary>
         /// <returns></returns>
-        public Task<List<YPlaylist>> GetFavorites()
+        public async Task<List<YPlaylist>> GetFavorites()
         {
-            return api.Playlist.FavoritesAsync(storage)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Playlist.FavoritesAsync(storage))
+                .Result;
         }
 
         /// <summary>
         /// Дежавю
         /// </summary>
         /// <returns></returns>
-        public Task<YPlaylist> GetDejaVu()
+        public async Task<YPlaylist> GetDejaVu()
         {
-            return api.Playlist.DejaVuAsync(storage)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Playlist.DejaVuAsync(storage))
+                .Result;
         }
 
         /// <summary>
         /// Тайник
         /// </summary>
         /// <returns></returns>
-        public Task<YPlaylist> GetMissed()
+        public async Task<YPlaylist> GetMissed()
         {
-            return api.Playlist.MissedAsync(storage)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Playlist.MissedAsync(storage))
+                .Result;
         }
 
         /// <summary>
         /// Плейлист дня
         /// </summary>
         /// <returns></returns>
-        public Task<YPlaylist> GetOfTheDay()
+        public async Task<YPlaylist> GetOfTheDay()
         {
-            return api.Playlist.OfTheDayAsync(storage)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Playlist.OfTheDayAsync(storage))
+                .Result;
         }
 
         /// <summary>
         /// Подкасты
         /// </summary>
         /// <returns></returns>
-        public Task<YPlaylist> GetPodcasts()
+        public async Task<YPlaylist> GetPodcasts()
         {
-            return api.Playlist.PodcastsAsync(storage)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Playlist.PodcastsAsync(storage))
+                .Result;
         }
 
         /// <summary>
         /// Кинопоиск
         /// </summary>
         /// <returns></returns>
-        public Task<YPlaylist> GetKinopoisk()
+        public async Task<YPlaylist> GetKinopoisk()
         {
-            return api.Playlist.KinopoiskAsync(storage)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Playlist.KinopoiskAsync(storage))
+                .Result;
         }
 
         /// <summary>
         /// Премьера
         /// </summary>
         /// <returns></returns>
-        public Task<YPlaylist> GetPremiere()
+        public async Task<YPlaylist> GetPremiere()
         {
-            return api.Playlist.PremiereAsync(storage)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Playlist.PremiereAsync(storage))
+                .Result;
         }
 
         /// <summary>
@@ -367,10 +375,10 @@ namespace Yandex.Music.Client
         /// </summary>
         /// <param name="name">Заголовок</param>
         /// <returns></returns>
-        public Task<YPlaylist> CreatePlaylist(string name)
+        public async Task<YPlaylist> CreatePlaylist(string name)
         {
-            return api.Playlist.CreateAsync(storage, name)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Playlist.CreateAsync(storage, name))
+                .Result;
         }
 
         #endregion Плейлисты
@@ -385,10 +393,10 @@ namespace Yandex.Music.Client
         /// <param name="page">Страница</param>
         /// <param name="pageSize">Размер страницы</param>
         /// <returns></returns>
-        public Task<YSearch> Search(string searchText, YSearchType searchType, int page = 0, int pageSize = 20)
+        public async Task<YSearch> Search(string searchText, YSearchType searchType, int page = 0, int pageSize = 20)
         {
-            return api.Search.SearchAsync(storage, searchText, searchType, page, pageSize)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Search.SearchAsync(storage, searchText, searchType, page, pageSize))
+                .Result;
         }
 
         /// <summary>
@@ -396,10 +404,10 @@ namespace Yandex.Music.Client
         /// </summary>
         /// <param name="searchText">Поисковый запрос</param>
         /// <returns></returns>
-        public Task<YSearchSuggest> GetSearchSuggestions(string searchText)
+        public async Task<YSearchSuggest> GetSearchSuggestions(string searchText)
         {
-            return api.Search.SuggestAsync(storage, searchText)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Search.SuggestAsync(storage, searchText))
+                .Result;
         }
 
         #endregion Поиск
@@ -410,100 +418,99 @@ namespace Yandex.Music.Client
         /// Получение лайкнутых треков
         /// </summary>
         /// <returns></returns>
-        public Task<List<YTrack>> GetLikedTracks()
+        public async Task<List<YTrack>> GetLikedTracks()
         {
-            return api.Library.GetLikedTracksAsync(storage)
-                .ContinueWith(task => task.Result
-                    .Result
-                    .Library
-                    .Tracks
-                    .Select(t => t.Id)
-                    .ToArray()
-                )
-                .ContinueWith(task => api.Track.Get(storage, task.Result))
-                .ContinueWith(task => task.Result.Result);
+            YResponse<YLibraryTracks> likes = await api.Library.GetLikedTracksAsync(storage);
+            string[] ids = likes
+                .Result
+                .Library
+                .Tracks
+                .Select(t => t.Id)
+                .ToArray();
+
+            return (await api.Track.GetAsync(storage, ids))
+                .Result;
         }
 
         /// <summary>
         /// Получение дизлайкнутых треков
         /// </summary>
         /// <returns></returns>
-        public Task<List<YTrack>> GetDislikedTracks()
+        public async Task<List<YTrack>> GetDislikedTracks()
         {
-            return api.Library.GetDislikedTracksAsync(storage)
-                .ContinueWith(task => task.Result
-                    .Result
-                    .Library
-                    .Tracks
-                    .Select(t => t.Id)
-                    .ToArray()
-                )
-                .ContinueWith(task => api.Track.Get(storage, task.Result))
-                .ContinueWith(task => task.Result.Result);
+            YResponse<YLibraryTracks> likes = await api.Library.GetDislikedTracksAsync(storage);
+            string[] ids = likes
+                .Result
+                .Library
+                .Tracks
+                .Select(t => t.Id)
+                .ToArray();
+
+            return (await api.Track.GetAsync(storage, ids))
+                .Result;
         }
 
         /// <summary>
         /// Получение лайкнутых альбомов
         /// </summary>
         /// <returns></returns>
-        public Task<List<YAlbum>> GetLikedAlbums()
+        public async Task<List<YAlbum>> GetLikedAlbums()
         {
-            return api.Library.GetLikedAlbumsAsync(storage)
-                .ContinueWith(task => task.Result
-                    .Result
-                    .Select(t => t.Id)
-                    .ToArray()
-                )
-                .ContinueWith(task => api.Album.Get(storage, task.Result))
-                .ContinueWith(task => task.Result.Result);
+            YResponse<List<YLibraryAlbum>> albums = await api.Library.GetLikedAlbumsAsync(storage);
+            string[] ids = albums
+                .Result
+                .Select(t => t.Id)
+                .ToArray();
+
+            return (await api.Album.GetAsync(storage, ids))
+                .Result;
         }
 
         /// <summary>
         /// Получение лайкнутых исполнителей
         /// </summary>
         /// <returns></returns>
-        public Task<List<YArtist>> GetLikedArtists()
+        public async Task<List<YArtist>> GetLikedArtists()
         {
-            return api.Library.GetLikedArtistsAsync(storage)
-                .ContinueWith(task => task.Result
-                    .Result
-                    .Select(t => t.Id)
-                    .ToArray()
-                )
-                .ContinueWith(task => api.Artist.Get(storage, task.Result))
-                .ContinueWith(task => task.Result.Result);
+            YResponse<List<YArtist>> artists = await api.Library.GetLikedArtistsAsync(storage);
+            string[] ids = artists
+                .Result
+                .Select(t => t.Id)
+                .ToArray();
+
+            return (await api.Artist.GetAsync(storage, ids))
+                .Result;
         }
 
         /// <summary>
         /// Получение дизлайкнутых исполнителей
         /// </summary>
         /// <returns></returns>
-        public Task<List<YArtist>> GetDislikedArtists()
+        public async Task<List<YArtist>> GetDislikedArtists()
         {
-            return api.Library.GetDislikedArtistsAsync(storage)
-                .ContinueWith(task => task.Result
-                    .Result
-                    .Select(t => t.Id)
-                    .ToArray()
-                )
-                .ContinueWith(task => api.Artist.Get(storage, task.Result))
-                .ContinueWith(task => task.Result.Result);
+            YResponse<List<YArtist>> artists = await api.Library.GetDislikedArtistsAsync(storage);
+            string[] ids = artists
+                .Result
+                .Select(t => t.Id)
+                .ToArray();
+
+            return (await api.Artist.GetAsync(storage, ids))
+                .Result;
         }
 
         /// <summary>
         /// Получение лайкнутых плейлистов
         /// </summary>
         /// <returns></returns>
-        public Task<List<YPlaylist>> GetLikedPlaylists()
+        public async Task<List<YPlaylist>> GetLikedPlaylists()
         {
-            return api.Library.GetLikedPlaylistsAsync(storage)
-                .ContinueWith(task => task.Result
-                    .Result
-                    .Select(a => (a.Playlist.Uid, a.Playlist.Kind))
-                    .ToArray()
-                )
-                .ContinueWith(task => api.Playlist.Get(storage, task.Result))
-                .ContinueWith(task => task.Result.Result);
+            YResponse<List<YLibraryPlaylists>> playlists = await api.Library.GetLikedPlaylistsAsync(storage);
+            (string, string)[] ids = playlists
+                .Result
+                .Select(a => (a.Playlist.Uid, a.Playlist.Kind))
+                .ToArray();
+            return (await api.Playlist.GetAsync(storage, ids))
+                .Result;
         }
 
         #endregion Библиотека
@@ -514,20 +521,20 @@ namespace Yandex.Music.Client
         /// Получение списка рекомендованных радиостанций
         /// </summary>
         /// <returns></returns>
-        public Task<List<YStation>> GetRadioDashboard()
+        public async Task<List<YStation>> GetRadioDashboard()
         {
-            return api.Radio.GetStationsDashboardAsync(storage)
-                .ContinueWith(t => t.Result.Result.Stations);
+            return (await api.Radio.GetStationsDashboardAsync(storage))
+                .Result.Stations;
         }
 
         /// <summary>
         /// Получение списка радиостанций
         /// </summary>
         /// <returns></returns>
-        public Task<List<YStation>> GetRadioStations()
+        public async Task<List<YStation>> GetRadioStations()
         {
-            return api.Radio.GetStationsAsync(storage)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Radio.GetStationsAsync(storage))
+                .Result;
         }
 
         /// <summary>
@@ -535,10 +542,10 @@ namespace Yandex.Music.Client
         /// </summary>
         /// <param name="id">Идентификатор станции</param>
         /// <returns></returns>
-        public Task<YStation> GetRadioStation(YStationId id)
+        public async Task<YStation> GetRadioStation(YStationId id)
         {
-            return api.Radio.GetStationAsync(storage, id)
-                .ContinueWith(t => t.Result.Result.FirstOrDefault());
+            return (await api.Radio.GetStationAsync(storage, id))
+                .Result.FirstOrDefault();
         }
 
         #endregion Радио
@@ -550,10 +557,10 @@ namespace Yandex.Music.Client
         /// </summary>
         /// <param name="device">Устройство</param>
         /// <returns></returns>
-        public Task<YQueueItemsContainer> QueuesList(string device = null)
+        public async Task<YQueueItemsContainer> QueuesList(string device = null)
         {
-            return api.Queue.ListAsync(storage, device)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Queue.ListAsync(storage, device))
+                .Result;
         }
 
         /// <summary>
@@ -561,10 +568,10 @@ namespace Yandex.Music.Client
         /// </summary>
         /// <param name="queueId">Идентификатор очереди</param>
         /// <returns></returns>
-        public Task<YQueue> GetQueue(string queueId)
+        public async Task<YQueue> GetQueue(string queueId)
         {
-            return api.Queue.GetAsync(storage, queueId)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Queue.GetAsync(storage, queueId))
+                .Result;
         }
 
         /// <summary>
@@ -573,10 +580,10 @@ namespace Yandex.Music.Client
         /// <param name="queue">Очередь треков</param>
         /// <param name="device">Устройство</param>
         /// <returns></returns>
-        public Task<YNewQueue> CreateQueue(YQueue queue, string device = null)
+        public async Task<YNewQueue> CreateQueue(YQueue queue, string device = null)
         {
-            return api.Queue.CreateAsync(storage, queue, device)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Queue.CreateAsync(storage, queue, device))
+                .Result;
         }
 
         /// <summary>
@@ -587,10 +594,10 @@ namespace Yandex.Music.Client
         /// <param name="isInteractive">Флаг интерактивности</param>
         /// <param name="device">Устройство</param>
         /// <returns></returns>
-        public Task<YUpdatedQueue> QueueUpdatePosition(string queueId, int currentIndex, bool isInteractive, string device = null)
+        public async Task<YUpdatedQueue> QueueUpdatePosition(string queueId, int currentIndex, bool isInteractive, string device = null)
         {
-            return api.Queue.UpdatePositionAsync(storage, queueId, currentIndex, isInteractive, device)
-                .ContinueWith(t => t.Result.Result);
+            return (await api.Queue.UpdatePositionAsync(storage, queueId, currentIndex, isInteractive, device))
+                .Result;
         }
 
         #endregion Очереди

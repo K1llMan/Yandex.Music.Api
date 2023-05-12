@@ -18,21 +18,17 @@ namespace Yandex.Music.Api.API
     {
         #region Вспомогательные функции
 
-        private bool GetCsrfTokenAsync(AuthStorage storage)
+        private async Task<bool> GetCsrfTokenAsync(AuthStorage storage)
         {
-            using HttpResponseMessage authMethodsResponse = new YGetAuthMethodsBuilder(api, storage)
+            using HttpResponseMessage authMethodsResponse = await new YGetAuthMethodsBuilder(api, storage)
                 .Build(null)
-                .GetResponseAsync()
-                .GetAwaiter()
-                .GetResult();
+                .GetResponseAsync();
 
             if (!authMethodsResponse.IsSuccessStatusCode)
                 throw new HttpRequestException("Невозможно получить CFRF-токен.");
 
-            string responseString = authMethodsResponse.Content
-                .ReadAsStringAsync()
-                .GetAwaiter()
-                .GetResult();
+            string responseString = await authMethodsResponse.Content
+                .ReadAsStringAsync();
             Match match = Regex.Match(responseString, "\"csrf_token\" value=\"([^\"]+)\"");
 
             if (!match.Success || match.Groups.Count < 2)
@@ -45,36 +41,30 @@ namespace Yandex.Music.Api.API
             return true;
         }
 
-        private Task<bool> LoginByCookiesAsync(AuthStorage storage)
+        private async Task<bool> LoginByCookiesAsync(AuthStorage storage)
         {
             if (storage.AuthToken == null)
                 throw new AuthenticationException("Невозможно инициализировать сессию входа.");
 
-            return new YAuthCookiesBuilder(api, storage)
+            YAccessToken accessToken = await new YGetAuthCookiesBuilder(api, storage)
                 .Build(null)
-                .GetResponseAsync()
-                .ContinueWith(task => {
-                    YAccessToken accessToken = task.Result;
+                .GetResponseAsync();
 
-                    storage.IsAuthorized = !string.IsNullOrEmpty(accessToken.AccessToken);
+            storage.IsAuthorized = !string.IsNullOrEmpty(accessToken.AccessToken);
 
-                    storage.AccessToken = accessToken;
-                    storage.Token = accessToken.AccessToken;
-                })
-                .ContinueWith(_ => {
-                    YShortInfo validateTokenResponse = new YValidateTokenBuilder(api, storage)
-                        .Build(null)
-                        .GetResponseAsync()
-                        .GetAwaiter()
-                        .GetResult();
+            storage.AccessToken = accessToken;
+            storage.Token = accessToken.AccessToken;
 
-                    if (validateTokenResponse.Status != YAuthStatus.Ok)
-                        throw new Exception("Вход в аккаунт не выполнен.");
+            YShortAccountInfo validateTokenResponse = await new YGetShortAccountInifoBuilder(api, storage)
+                .Build(null)
+                .GetResponseAsync();
 
-                    storage.IsAuthorized = !string.IsNullOrWhiteSpace(validateTokenResponse.Uid);
+            if (validateTokenResponse.Status != YAuthStatus.Ok)
+                throw new Exception("Вход в аккаунт не выполнен.");
 
-                    return storage.IsAuthorized;
-                });
+            storage.IsAuthorized = !string.IsNullOrWhiteSpace(validateTokenResponse.Uid);
+
+            return storage.IsAuthorized;
         }
 
         #endregion Вспомогательные функции
@@ -128,20 +118,18 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="userName">Имя пользователя</param>
         /// <returns></returns>
-        public Task<YAuthTypes> CreateAuthSessionAsync(AuthStorage storage, string userName)
+        public async Task<YAuthTypes> CreateAuthSessionAsync(AuthStorage storage, string userName)
         {
-            if (!GetCsrfTokenAsync(storage))
+            if (!await GetCsrfTokenAsync(storage))
                 throw new Exception("Невозможно инициализировать сессию входа.");
 
-            return new YAuthLoginUserBuilder(api, storage)
+            YAuthTypes types = await new YGetAuthLoginUserBuilder(api, storage)
                 .Build((storage.AuthToken.CsfrToken, userName))
-                .GetResponseAsync()
-                .ContinueWith(task => {
-                    YAuthTypes types = task.Result;
-                    storage.AuthToken.TrackId = types.TrackId;
+                .GetResponseAsync();
 
-                    return types;
-                });
+            storage.AuthToken.TrackId = types.TrackId;
+
+            return types;
         }
 
         /// <summary>
@@ -149,27 +137,24 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public Task<string> GetAuthQRLinkAsync(AuthStorage storage)
+        public async Task<string> GetAuthQRLinkAsync(AuthStorage storage)
         {
-            if (!GetCsrfTokenAsync(storage))
+            if (!await GetCsrfTokenAsync(storage))
                 throw new Exception("Невозможно инициализировать сессию входа.");
 
-            return new YAuthQRBuilder(api, storage)
+            YAuthQR result = await new YGetAuthQRBuilder(api, storage)
                 .Build(null)
-                .GetResponseAsync()
-                .ContinueWith(task => {
-                    YAuthQR result = task.Result;
+                .GetResponseAsync();
 
-                    if (result.Status != YAuthStatus.Ok)
-                        return string.Empty;
+            if (result.Status != YAuthStatus.Ok)
+                return string.Empty;
 
-                    storage.AuthToken = new YAuthToken {
-                        TrackId = result.TrackId,
-                        CsfrToken = result.CsrfToken
-                    };
+            storage.AuthToken = new YAuthToken {
+                TrackId = result.TrackId,
+                CsfrToken = result.CsrfToken
+            };
 
-                    return $"https://passport.yandex.ru/auth/magic/code/?track_id={result.TrackId}";
-                });
+            return $"https://passport.yandex.ru/auth/magic/code/?track_id={result.TrackId}";
         }
 
         /// <summary>
@@ -184,20 +169,17 @@ namespace Yandex.Music.Api.API
 
             try
             {
-                return await new YAuthLoginQRBuilder(api, storage)
+                YAuthQRStatus qrStatus = await new YGetAuthLoginQRBuilder(api, storage)
                     .Build(null)
-                    .GetResponseAsync()
-                    .ContinueWith(task => {
-                        YAuthQRStatus qrStatus = task.Result;
+                    .GetResponseAsync();
                         if (qrStatus.Status != YAuthStatus.Ok)
                             return qrStatus;
 
-                        bool ok = LoginByCookiesAsync(storage).GetAwaiter().GetResult();
-                        if (!ok)
-                            throw new AuthenticationException("Ошибка авторизации по QR.");
+                bool ok = await LoginByCookiesAsync(storage);
+                if (!ok)
+                    throw new AuthenticationException("Ошибка авторизации по QR.");
 
-                        return qrStatus;
-                    });
+                return qrStatus;
             }
             catch (Exception ex)
             {
@@ -215,7 +197,7 @@ namespace Yandex.Music.Api.API
             if (storage.AuthToken == null || string.IsNullOrWhiteSpace(storage.AuthToken.CsfrToken))
                 throw new AuthenticationException($"Не найдена сессия входа. Выполните {nameof(CreateAuthSessionAsync)} перед использованием.");
 
-            return new YAuthCaptchaBuilder(api, storage)
+            return new YGetAuthCaptchaBuilder(api, storage)
                 .Build(null)
                 .GetResponseAsync();
         }
@@ -231,7 +213,7 @@ namespace Yandex.Music.Api.API
             if (storage.AuthToken == null || string.IsNullOrWhiteSpace(storage.AuthToken.CsfrToken))
                 throw new AuthenticationException($"Не найдена сессия входа. Выполните {nameof(CreateAuthSessionAsync)} перед использованием.");
 
-            return new YAuthLoginCaptchaBuilder(api, storage)
+            return new YGetAuthLoginCaptchaBuilder(api, storage)
                 .Build(captchaValue)
                 .GetResponseAsync();
         }
@@ -243,7 +225,7 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public Task<YAuthLetter> GetAuthLetterAsync(AuthStorage storage)
         {
-            return new YAuthLetterBuilder(api, storage)
+            return new YGetAuthLetterBuilder(api, storage)
                 .Build(null)
                 .GetResponseAsync();
         }
@@ -255,7 +237,7 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public async Task<bool> AuthorizeByLetterAsync(AuthStorage storage)
         {
-            YAuthLetterStatus status = await new YAuthLoginLetterBuilder(api, storage)
+            YAuthLetterStatus status = await new YGetAuthLoginLetterBuilder(api, storage)
                 .Build(null)
                 .GetResponseAsync();
 
@@ -276,7 +258,7 @@ namespace Yandex.Music.Api.API
             if (storage.AuthToken == null || string.IsNullOrWhiteSpace(storage.AuthToken.CsfrToken))
                 throw new AuthenticationException($"Не найдена сессия входа. Выполните {nameof(CreateAuthSessionAsync)} перед использованием.");
 
-            YAuthBase response = await new YAuthAppPasswordBuilder(api, storage)
+            YAuthBase response = await new YGetAuthAppPasswordBuilder(api, storage)
                 .Build(password)
                 .GetResponseAsync();
 
@@ -305,6 +287,16 @@ namespace Yandex.Music.Api.API
             storage.Token = accessToken.AccessToken;
 
             return accessToken;
+        }
+
+        /// <summary>
+        /// Получение информации о пользователе через логин Яндекса
+        /// </summary>
+        public Task<YLoginInfo> GetLoginInfoAsync(AuthStorage storage)
+        {
+            return new YGetLoginInfoBuilder(api, storage)
+                .Build(null)
+                .GetResponseAsync();
         }
 
         #endregion Основные функции

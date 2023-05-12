@@ -47,5 +47,14 @@ namespace Yandex.Music.Api.Tests.Tests.API
             YResponse<YAccountResult> response = Fixture.API.User.GetUserAuth(Fixture.Storage);
             response.Result.Account.Login.Should().Be(Fixture.Storage.User.Login);
         }
+
+        [Fact]
+        [YandexTrait(TraitGroup.UserAPI)]
+        [Order(3)]
+        public void GetLoginInfo_ValidData_True()
+        {
+            YLoginInfo response = Fixture.API.User.GetLoginInfo(Fixture.Storage);
+            response.Login.Should().Be(Fixture.Storage.User.Login);
+        }
     }
 }

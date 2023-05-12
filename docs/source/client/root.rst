@@ -86,6 +86,12 @@ YandexMusicClient
 
 .. code-block:: csharp
 
+   public YLoginInfo GetLoginInfo()
+
+Получение информации о пользователе через логин Яндекса.
+
+.. code-block:: csharp
+
    public YTrack GetTrack(string id)
 
 Получение трека по идентификатору.

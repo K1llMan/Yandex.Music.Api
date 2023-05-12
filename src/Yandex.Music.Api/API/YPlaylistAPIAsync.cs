@@ -26,13 +26,10 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="type">Тип</param>
         /// <returns>Плейлист</returns>
-        private Task<YResponse<YPlaylist>> GetPersonalPlaylist(AuthStorage storage, YGeneratedPlaylistType type)
+        private async Task<YResponse<YPlaylist>> GetPersonalPlaylist(AuthStorage storage, YGeneratedPlaylistType type)
         {
-            return GetPersonalPlaylistsAsync(storage)
-                .ContinueWith(list => {
-                    return list.Result
-                        .FirstOrDefault(e => e.Result.GeneratedPlaylistType == type);
-                });
+            List<YResponse<YPlaylist>> list = await GetPersonalPlaylistsAsync(storage);
+            return list.FirstOrDefault(e => e.Result.GeneratedPlaylistType == type);
         }
 
         /// <summary>
@@ -69,16 +66,20 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
-        public Task<List<YResponse<YPlaylist>>> GetPersonalPlaylistsAsync(AuthStorage storage)
+        public async Task<List<YResponse<YPlaylist>>> GetPersonalPlaylistsAsync(AuthStorage storage)
         {
-            return api.Landing.GetAsync(storage, YLandingBlockType.PersonalPlaylists)
-                .ContinueWith(landing => landing.Result
-                    .Result
-                    .Blocks
-                    .FirstOrDefault(b => b.Type == YLandingBlockType.PersonalPlaylists)
-                    ?.Entities
-                    .Select(e => api.Playlist.Get(storage, ((YLandingEntityPersonalPlaylist)e).Data?.Data))
-                    .ToList());
+            YResponse<YLanding> landing = await api.Landing.GetAsync(storage, YLandingBlockType.PersonalPlaylists);
+
+            IEnumerable<Task<YResponse<YPlaylist>>> tasks = landing
+                .Result
+                .Blocks
+                .FirstOrDefault(b => b.Type == YLandingBlockType.PersonalPlaylists)
+                ?.Entities
+                .Select(e => api.Playlist.GetAsync(storage, ((YLandingEntityPersonalPlaylist)e).Data?.Data));
+
+            return tasks == null
+                ? new List<YResponse<YPlaylist>>()
+                : new List<YResponse<YPlaylist>>(await Task.WhenAll(tasks));
         }
 
         #endregion Список с главной
@@ -250,19 +251,20 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="kinds">Тип</param>
         /// <returns></returns>
-        public Task<bool> DeleteAsync(AuthStorage storage, string kinds)
+        public async Task<bool> DeleteAsync(AuthStorage storage, string kinds)
         {
             try {
-                return new YPlaylistRemoveBuilder(api, storage)
+                await new YPlaylistRemoveBuilder(api, storage)
                     .Build(kinds)
-                    .GetResponseAsync()
-                    .ContinueWith(r => true);
+                    .GetResponseAsync();
+
+                return true;
             }
             catch (Exception ex) {
                 Console.WriteLine(ex);
             }
 
-            return Task.FromResult(false);
+            return false;
         }
 
         /// <summary>
@@ -283,16 +285,17 @@ namespace Yandex.Music.Api.API
         /// <param name="playlist">Плейлист</param>
         /// <param name="tracks">Треки для добавления</param>
         /// <returns></returns>
-        public Task<YResponse<YPlaylist>> InsertTracksAsync(AuthStorage storage, YPlaylist playlist, IEnumerable<YTrack> tracks)
+        public async Task<YResponse<YPlaylist>> InsertTracksAsync(AuthStorage storage, YPlaylist playlist, IEnumerable<YTrack> tracks)
         {
-            return ChangePlaylist(storage, playlist, new List<YPlaylistChange> { 
+            YResponse<YPlaylist> change = await ChangePlaylist(storage, playlist, new List<YPlaylistChange> { 
                     new() {
                         Operation = YPlaylistChangeType.Insert, 
                         At = 0, 
                         Tracks = tracks.Select(t => t.GetKey())
                     }
-                })
-                .ContinueWith(p => Get(storage, p.Result.Result));
+                });
+
+            return await GetAsync(storage, change.Result);
         }
 
         /// <summary>

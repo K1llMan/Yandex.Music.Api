@@ -119,18 +119,14 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="trackKey">Ключ трека в формате {идентификатор трека:идентификатор альбома}</param>
         /// <returns></returns>
-        public Task<string> GetFileLinkAsync(AuthStorage storage, string trackKey)
+        public async Task<string> GetFileLinkAsync(AuthStorage storage, string trackKey)
         {
-             return GetMetadataForDownloadAsync(storage, trackKey)
-                .ContinueWith(meta => meta.Result
-                        .Result
-                        .OrderByDescending(i => i.BitrateInKbps)
-                        .First(m => m.Codec == "mp3")
-                )
-                .ContinueWith(downloadInfo =>((YTrackDownloadInfo info, Task<YStorageDownloadFile> storage)) 
-                    (downloadInfo.Result, GetDownloadFileInfoAsync(storage, downloadInfo.Result))
-                )
-                .ContinueWith(t => BuildLinkForDownload(t.Result.info, t.Result.storage.Result));
+            YResponse<List<YTrackDownloadInfo>> meta = await GetMetadataForDownloadAsync(storage, trackKey);
+            YTrackDownloadInfo info = meta.Result
+                .OrderByDescending(i => i.BitrateInKbps)
+                .First(m => m.Codec == "mp3");
+            YStorageDownloadFile storageDownload = await GetDownloadFileInfoAsync(storage, info);
+            return BuildLinkForDownload(info, storageDownload);
         }
 
         /// <summary>

@@ -23,7 +23,7 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
-        /// Получение информации об авторизации
+        /// Получение информации об аккаунте
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <returns></returns>
@@ -121,6 +121,14 @@ namespace Yandex.Music.Api.API
         public YAccessToken GetAccessToken(AuthStorage storage)
         {
             return GetAccessTokenAsync(storage).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Получение информации о пользователе через логин Яндекса
+        /// </summary>
+        public YLoginInfo GetLoginInfo(AuthStorage storage)
+        {
+            return GetLoginInfoAsync(storage).GetAwaiter().GetResult();
         }
 
         #endregion Основные функции

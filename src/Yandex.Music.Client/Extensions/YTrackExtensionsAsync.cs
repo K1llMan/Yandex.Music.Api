@@ -19,40 +19,40 @@ namespace Yandex.Music.Client.Extensions
             return track.Context.API.Track.ExtractToFileAsync(track.Context.Storage, track, filePath);
         }
 
-        public static Task<int> AddLikeAsync(this YTrack track)
+        public static async Task<int> AddLikeAsync(this YTrack track)
         {
-            return track.Context.API.Library.AddTrackLikeAsync(track.Context.Storage, track)
-                .ContinueWith(t => t.Result.Result.Revision);
+            return (await track.Context.API.Library.AddTrackLikeAsync(track.Context.Storage, track))
+                .Result.Revision;
         }
 
-        public static Task<int> RemoveLikeAsync(this YTrack track)
+        public static async Task<int> RemoveLikeAsync(this YTrack track)
         {
-            return track.Context.API.Library.RemoveTrackLikeAsync(track.Context.Storage, track)
-                .ContinueWith(t => t.Result.Result.Revision);
+            return (await track.Context.API.Library.RemoveTrackLikeAsync(track.Context.Storage, track))
+                .Result.Revision;
         }
 
-        public static Task<int> AddDislikeAsync(this YTrack track)
+        public static async Task<int> AddDislikeAsync(this YTrack track)
         {
-            return track.Context.API.Library.AddTrackDislikeAsync(track.Context.Storage, track)
-                .ContinueWith(t => t.Result.Result.Revision);
+            return (await track.Context.API.Library.AddTrackDislikeAsync(track.Context.Storage, track))
+                .Result.Revision;
         }
 
-        public static Task<int> RemoveDislikeAsync(this YTrack track)
+        public static async Task<int> RemoveDislikeAsync(this YTrack track)
         {
-            return track.Context.API.Library.RemoveTrackDislikeAsync(track.Context.Storage, track)
-                .ContinueWith(t => t.Result?.Result ?? -1);
+            return (await track.Context.API.Library.RemoveTrackDislikeAsync(track.Context.Storage, track))
+                ?.Result ?? -1;
         }
 
-        public static Task<YTrackSupplement> SupplementAsync(this YTrack track)
+        public static async Task<YTrackSupplement> SupplementAsync(this YTrack track)
         {
-            return track.Context.API.Track.GetSupplementAsync(track.Context.Storage, track)
-                .ContinueWith(t => t.Result.Result);
+            return (await track.Context.API.Track.GetSupplementAsync(track.Context.Storage, track))
+                .Result;
         }
 
-        public static Task<YTrackSimilar> SimilarAsync(this YTrack track)
+        public static async Task<YTrackSimilar> SimilarAsync(this YTrack track)
         {
-            return track.Context.API.Track.GetSimilarAsync(track.Context.Storage, track)
-                .ContinueWith(t => t.Result.Result);
+            return (await track.Context.API.Track.GetSimilarAsync(track.Context.Storage, track))
+                .Result;
         }
     }
 }

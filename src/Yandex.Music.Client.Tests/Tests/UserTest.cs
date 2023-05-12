@@ -4,6 +4,8 @@ using Xunit;
 using Xunit.Abstractions;
 using Xunit.Extensions.Ordering;
 
+using Yandex.Music.Api.Models.Account;
+
 namespace Yandex.Music.Client.Tests.Tests
 {
     [Collection("Yandex Test Harness"), Order(1)]
@@ -29,6 +31,14 @@ namespace Yandex.Music.Client.Tests.Tests
         public void GetUserAuth_ValidData_True()
         {
             Fixture.Client.Account.Should().NotBeNull();
+        }
+
+        [Fact]
+        [Order(2)]
+        public void GetLoginInfo_ValidData_True()
+        {
+            YLoginInfo response = Fixture.Client.GetLoginInfo();
+            response.Login.Should().Be(Fixture.Client.Account.Login);
         }
     }
 }

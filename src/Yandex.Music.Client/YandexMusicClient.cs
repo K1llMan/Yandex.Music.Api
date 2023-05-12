@@ -148,6 +148,14 @@ namespace Yandex.Music.Client
             return api.User.GetAccessToken(storage);
         }
 
+        /// <summary>
+        /// Получение информации о пользователе через логин Яндекса
+        /// </summary>
+        public YLoginInfo GetLoginInfo()
+        {
+            return api.User.GetLoginInfo(storage);
+        }
+
         #endregion Авторизация
 
         #region Треки
