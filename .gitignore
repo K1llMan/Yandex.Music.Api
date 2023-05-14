@@ -6,6 +6,8 @@ obj
 /output
 .idea
 *.user
+generated
+*.DotSettings
 
 /src/Yandex.Music.Api.Tests/appsettings.json
 /src/Yandex.Music.Client.Tests/appsettings.json

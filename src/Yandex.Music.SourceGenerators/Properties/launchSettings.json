@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GeneratorsDebug": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\Yandex.Music.SourceGenerators.Tests\\Yandex.Music.SourceGenerators.Tests.csproj"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{{~ for using in Usings ~}}
+using {{ using }};
+{{~ end ~}}
+
+namespace {{Namespace}}
+{
+	{{~ for comment in DocumentationComment ~}}
+	/// {{ comment }}
+	{{~ end ~}}
+	{{ClassModifiers}} class {{ClassName}} 
+	{
+		
+	}
+}
