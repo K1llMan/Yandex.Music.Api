@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.CodeAnalysis;
+using System.Collections.Generic;
 
 namespace Yandex.Music.SourceGenerators.Models
 {
-    public class ClassTemplateModel
+    public class ClassTemplateModel : BaseTemplateModel<INamedTypeSymbol>
     {
-        public string ClassName { get; set; }
-        public string ClassModifiers { get; set; }
+        public string Modifiers { get; set; }
         public string Namespace { get; set; }
         public List<string> Usings { get; set; }
-        public string[] DocumentationComment { get; set; }
+        public List<MethodTemplateModel> Methods { get; set; }
     }
 }

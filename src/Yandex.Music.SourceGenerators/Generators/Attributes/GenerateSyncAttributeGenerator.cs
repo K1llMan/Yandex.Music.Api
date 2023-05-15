@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -50,7 +51,11 @@ namespace Yandex.Music.SourceGenerators.Generators.Attributes
                 return null; //TODO: issue a diagnostic that it must be top level
             }
 
-            return SourceTemplater.Render("SyncClassTemplate.tmp", classSymbol.GetTemplateModel());
+            Predicate<IMethodSymbol> methodPredicate = m => m.MethodKind != MethodKind.Constructor 
+                && (m.IsAsync 
+                || m.ReturnType.Name == "Task");
+
+            return SourceTemplater.Render("SyncClassTemplate.tmp", classSymbol.GetTemplateModel(methodPredicate));
             /*
             // begin building the generated source
             string namespaceName = classSymbol.ContainingNamespace.ToDisplayString();

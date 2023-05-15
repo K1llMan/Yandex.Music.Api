@@ -7,8 +7,16 @@ namespace {{Namespace}}
 	{{~ for comment in DocumentationComment ~}}
 	/// {{ comment }}
 	{{~ end ~}}
-	{{ClassModifiers}} class {{ClassName}} 
+	{{Modifiers}} class {{Name}} 
 	{
-		
+		{{~ for method in Methods ~}}
+		{{~ for comment in method.DocumentationComment ~}}
+		/// {{ comment }}
+		{{~ end ~}}
+		{{ method.Accessibility }} {{ for argument in method.ReturnType.Arguments }}{{ argument }}{{ end }} {{ method.Name }}()
+		{
+			return {{ method.Name }}().GetAwaiter().GetResult();
+		}
+		{{~ end ~}}
 	}
 }
