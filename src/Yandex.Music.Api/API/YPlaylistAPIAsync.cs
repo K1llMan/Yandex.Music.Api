@@ -16,6 +16,7 @@ namespace Yandex.Music.Api.API
     /// <summary>
     /// API для взамодействия с плейлистами
     /// </summary>
+    [GenerateSync]
     public partial class YPlaylistAPI : YCommonAPI
     {
         #region Вспомогательные функции

@@ -16,10 +16,16 @@
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>
+
+    <!-- Сгенерированные файлы -->
+    <EmitCompilerGeneratedFiles>false</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>generated</CompilerGeneratedFilesOutputPath>
+    <!-- Необходимо для перехвата комментариев -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-        <None Include="README.md" Pack="true" PackagePath=""/>
-        <None Include="../Resources/icon.png" Pack="true" PackagePath=""/>
-    </ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath=""/>
+    <None Include="../Resources/icon.png" Pack="true" PackagePath=""/>
+  </ItemGroup>
 </Project>

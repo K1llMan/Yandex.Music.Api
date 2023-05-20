@@ -13,7 +13,6 @@ namespace Yandex.Music.SourceGenerators.Generators
         #region Поля
 
         private List<IAttributeGenerator> generators = new() {
-            //new AsyncifyAttributeGenerator(),
             new GenerateSyncAttributeGenerator()
         };
 

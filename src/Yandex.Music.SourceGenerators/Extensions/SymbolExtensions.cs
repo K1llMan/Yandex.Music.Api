@@ -13,26 +13,34 @@ namespace Yandex.Music.SourceGenerators.Extensions
 {
     public static class SymbolExtensions
     {
+        private static string GetTypeName(ITypeSymbol typeSymbol)
+        {
+            if (typeSymbol.SpecialType != SpecialType.None)
+                return typeSymbol.ToString();
+
+            if (typeSymbol is IArrayTypeSymbol arrayTypeSymbol)
+                return GetTypeName(arrayTypeSymbol.ElementType);
+
+            return typeSymbol.Name;
+        }
+
         public static TypeTemplateModel GetTemplateModel(this ITypeSymbol typeSymbol)
         {
-            if (typeSymbol is INamedTypeSymbol namedTypeSymbol)
-            {
-                return new TypeTemplateModel
-                {
-                    Symbol = typeSymbol,
-                    Name = typeSymbol.Name,
-                    DocumentationComment = typeSymbol.ExtractXmlComment(),
-                    Arguments = namedTypeSymbol.TypeArguments
-                        .Select(t => t.GetTemplateModel())
-                        .ToList()
-                };
-            }
-
-            return new TypeTemplateModel {
+            TypeTemplateModel model = new() {
                 Symbol = typeSymbol,
-                Name = typeSymbol.Name,
+                Name = GetTypeName(typeSymbol),
                 DocumentationComment = typeSymbol.ExtractXmlComment()
             };
+
+            if (typeSymbol is INamedTypeSymbol namedTypeSymbol)
+                model.Arguments = namedTypeSymbol.TypeArguments
+                        .Select(t => t.GetTemplateModel())
+                        .ToList();
+
+            if (typeSymbol is IArrayTypeSymbol arrayTypeSymbol)
+                model.IsArray = true;
+
+            return model;
         }
 
         public static MethodParameterTemplateModel GetTemplateModel(this IParameterSymbol parameterSymbol)
@@ -59,7 +67,7 @@ namespace Yandex.Music.SourceGenerators.Extensions
             };
         }
 
-        public static ClassTemplateModel GetTemplateModel(this INamedTypeSymbol classSymbol, Predicate<IMethodSymbol> methodPredicate = null)
+        public static ClassTemplateModel GetTemplateModel(this INamedTypeSymbol classSymbol)
         {
             SyntaxReference syntaxReference = classSymbol.DeclaringSyntaxReferences.First();
             ClassDeclarationSyntax syntax = (ClassDeclarationSyntax)syntaxReference.GetSyntax();
@@ -71,11 +79,11 @@ namespace Yandex.Music.SourceGenerators.Extensions
                 .ToList();
 
             return new ClassTemplateModel {
+                Symbol = classSymbol,
                 Name = classSymbol.Name,
                 DocumentationComment = classSymbol.ExtractXmlComment(),
-                Modifiers = syntax.Modifiers.ToFullString(),
+                Modifiers = syntax.Modifiers.ToFullString().Trim(),
                 Methods = methods
-                    .Where(m => methodPredicate?.Invoke(m) ?? true)
                     .Select(m => m.GetTemplateModel())
                     .ToList(),
                 Namespace = classSymbol.ContainingNamespace.ToDisplayString(),

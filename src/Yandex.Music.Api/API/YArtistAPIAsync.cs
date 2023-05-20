@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,6 +12,7 @@ namespace Yandex.Music.Api.API
     /// <summary>
     /// API для взаимодействия с исполнителями
     /// </summary>
+    [GenerateSync]
     public partial class YArtistAPI : YCommonAPI
     {
         #region Основные функции

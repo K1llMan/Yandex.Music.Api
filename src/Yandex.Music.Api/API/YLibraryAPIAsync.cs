@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -15,6 +16,7 @@ namespace Yandex.Music.Api.API
     /// <summary>
     /// API для взаимодействия с библиотекой
     /// </summary>
+    [GenerateSync]
     public partial class YLibraryAPI : YCommonAPI
     {
         #region Вспомогательные функции

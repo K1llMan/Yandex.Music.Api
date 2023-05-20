@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 
 using Yandex.Music.Api.Common;
@@ -10,6 +11,7 @@ namespace Yandex.Music.Api.API
     /// <summary>
     /// API для поиска
     /// </summary>
+    [GenerateSync]
     public partial class YSearchAPI : YCommonAPI
     {
         #region Основные функции

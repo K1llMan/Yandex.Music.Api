@@ -17,31 +17,18 @@ namespace Yandex.Music.SourceGenerators.Generators.Attributes
     {
         #region Вспомогательные функции
 
-        private void ProcessMethod(StringBuilder source, IMethodSymbol methodSymbol)
+        private ClassTemplateModel ModifyModel(ClassTemplateModel model)
         {
-            // SayHello => SayHelloAsync
-            string asyncMethodName = $"{methodSymbol.Name}Async";
-            string staticModifier = methodSymbol.IsStatic ? "static" : string.Empty;
+            // Только публичные асинхронные методы
+            Predicate<IMethodSymbol> methodPredicate = m => m.MethodKind != MethodKind.Constructor
+                && m.DeclaredAccessibility == Accessibility.Public
+                && (m.IsAsync || m.ReturnType.Name == "Task");
 
-            // void => Task, bool => Task<bool>
-            string asyncReturnType = methodSymbol.ReturnType.Name == "Void" ?
-                "Task" :
-                $"Task<{methodSymbol.ReturnType.Name}>";
+            model.Methods = model.Methods
+                .Where(m => methodPredicate(m.Symbol))
+                .ToList();
 
-            // int number, string name
-            string parameters = string.Join(",", methodSymbol.Parameters.Select(p => $"{p.Type} {p.Name}"));
-            // number, name
-            string arguments = string.Join(",", methodSymbol.Parameters.Select(p => p.Name));
-
-            source.Append($@"
-            /// <summary>
-            /// Асинхронный {methodSymbol.Name}
-            /// </summary>
-            public {staticModifier} {asyncReturnType} {asyncMethodName}({parameters})
-            {{
-                return Task.Run(() => {methodSymbol.Name}({arguments}));
-            }}
-            ");
+            return model;
         }
 
         private string ProcessClass(INamedTypeSymbol classSymbol)
@@ -51,37 +38,10 @@ namespace Yandex.Music.SourceGenerators.Generators.Attributes
                 return null; //TODO: issue a diagnostic that it must be top level
             }
 
-            Predicate<IMethodSymbol> methodPredicate = m => m.MethodKind != MethodKind.Constructor 
-                && (m.IsAsync 
-                || m.ReturnType.Name == "Task");
-
-            return SourceTemplater.Render("SyncClassTemplate.tmp", classSymbol.GetTemplateModel(methodPredicate));
-            /*
-            // begin building the generated source
-            string namespaceName = classSymbol.ContainingNamespace.ToDisplayString();
-
-            StringBuilder source = new($@"
-{usings}
-
-namespace {namespaceName}
-{{
-    public partial class {classSymbol.Name}
-    {{
-");
-
-            foreach (ISymbol? member in classSymbol.GetMembers())
-            {
-                if (member is IMethodSymbol method)
-                {
-                    if (!method.Name.EndsWith("Async") && method.ReturnType.Name != "Task" && !method.IsAsync)
-                        continue;
-
-                    ProcessMethod(source, method);
-                }
-
-                source.Append("} }");
-            }
-            */
+            return SourceTemplater.Render(
+                "SyncClassTemplate.tmp", 
+                ModifyModel(classSymbol.GetTemplateModel())
+            );
         }
 
         #endregion Вспомогательные функции

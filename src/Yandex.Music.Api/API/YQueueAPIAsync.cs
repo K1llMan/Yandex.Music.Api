@@ -1,4 +1,6 @@
+using System;
 using System.Threading.Tasks;
+
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Queue;
@@ -9,6 +11,7 @@ namespace Yandex.Music.Api.API
     /// <summary>
     /// API для взаимодействия с очередями
     /// </summary>
+    [GenerateSync]
     public partial class YQueueAPI : YCommonAPI
     {
         public YQueueAPI(YandexMusicApi yandex) : base(yandex)

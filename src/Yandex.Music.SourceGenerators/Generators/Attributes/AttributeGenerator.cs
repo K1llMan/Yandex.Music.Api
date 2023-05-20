@@ -80,7 +80,6 @@ namespace Yandex.Music.SourceGenerators.Generators.Attributes
 
         #region Основные функции
 
-
         public void VisitNode(SyntaxNode node)
         {
             if (FilterNode(node))

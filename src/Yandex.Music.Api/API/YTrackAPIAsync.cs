@@ -16,6 +16,7 @@ namespace Yandex.Music.Api.API
     /// <summary>
     /// API для взаимодействия с треками
     /// </summary>
+    [GenerateSync]
     public partial class YTrackAPI : YCommonAPI
     {
         #region Вспомогательные функции

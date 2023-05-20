@@ -8,7 +8,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-
+    <ProjectReference Include="..\Yandex.Music.SourceGenerators\Yandex.Music.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="README.md">

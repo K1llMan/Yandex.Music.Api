@@ -17,10 +17,27 @@ namespace Yandex.Music.SourceGenerators.Tests
     [GenerateSync]
     public partial class TestClass
     {
-        public Task<List<bool>> AnotherPrintNumberAsync(int number)
+        public Task<List<bool>> AnotherPrintNumberAsync(int number, params string[] names)
         {
             Console.WriteLine(number);
             return Task.FromResult(new List<bool> { true });
+        }
+
+        /// <summary>
+        /// Комментарий
+        /// </summary>
+        /// <param name="number"></param>
+        /// <param name="on"></param>
+        public Task<bool> BoolPrintNumberAsync(int number, string on = "", bool off = true)
+        {
+            Console.WriteLine(number);
+            return Task.FromResult(Convert.ToBoolean(on));
+        }
+
+        public Task TaskPrintNumberAsync(int number, List<Task> tasks)
+        {
+            Console.WriteLine(number);
+            return Task.CompletedTask;
         }
 
         /// <summary>

@@ -3,14 +3,14 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
+    <!-- Сгенерированные файлы -->
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>generated</CompilerGeneratedFilesOutputPath>
     <!-- Необходимо для перехвата комментариев -->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Yandex.Music.SourceGenerators\Yandex.Music.SourceGenerators.csproj"
-                      OutputItemType="Analyzer"
-                      ReferenceOutputAssembly="false"/>
+    <ProjectReference Include="..\Yandex.Music.SourceGenerators\Yandex.Music.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
-
 </Project>

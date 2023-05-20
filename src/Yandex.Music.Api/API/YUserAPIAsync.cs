@@ -14,6 +14,7 @@ namespace Yandex.Music.Api.API
     /// <summary>
     /// API для пользователя
     /// </summary>
+    [GenerateSync]
     public partial class YUserAPI : YCommonAPI
     {
         #region Вспомогательные функции
