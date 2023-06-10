@@ -8,6 +8,7 @@ namespace Yandex.Music.Api.Models.Common
     {
         public List<YArtist> Artists { get; set; }
         public string ClipId { get; set; }
+        public List<string> Disclaimers { get; set; }
         public int Duration { get; set; }
         public bool Explicit { get; set; }
         public string PlayerId { get; set; }

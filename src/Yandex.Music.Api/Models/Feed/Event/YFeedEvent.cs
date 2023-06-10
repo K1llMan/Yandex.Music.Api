@@ -65,6 +65,7 @@ namespace Yandex.Music.Api.Models.Feed.Event
                     feedEvent = jObject.ToObject<YFeedEventArtists>();
                     break;
 
+                case YFeedEventType.NeverHeardFromLibrary:
                 case YFeedEventType.WellForgottenOldTracks:
                     feedEvent = jObject.ToObject<YFeedEventTracks>();
                     break;

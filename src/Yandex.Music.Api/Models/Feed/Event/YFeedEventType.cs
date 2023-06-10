@@ -10,6 +10,9 @@ namespace Yandex.Music.Api.Models.Feed.Event
         [EnumMember(Value = "missed-tracks-by-artist")]
         MissedTracksByArtist,
 
+        [EnumMember(Value = "never-heard-from-library")]
+        NeverHeardFromLibrary,
+
         [EnumMember(Value = "new-albums")]
         NewAlbums,
 

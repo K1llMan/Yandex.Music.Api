@@ -21,6 +21,7 @@ namespace Yandex.Music.Api.Models.Artist
         #warning Непонятная коллекция с содержимым разных типов
         public List<object> Decomposed { get; set; }
         public YDescription Description { get; set; }
+        public List<string> Disclaimers { get; set; }
         public string EndDate { get; set; }
         public string EnWikipediaLink { get; set; }
         public List<string> Genres { get; set; }
