@@ -4,7 +4,8 @@ namespace Yandex.Music.Api.Models.Common
 {
     public class YProduct
     {
-        public string CommonPeriodDuration { get; set;}
+        public string CommonPeriodDuration { get; set; }
+        public string TrialPeriodDuration { get; set; }
         public bool Debug { get; set; }
         public int Duration { get; set;}
         public bool Family { get; set;}

@@ -10,6 +10,16 @@ namespace Yandex.Music.Api.Models.Common
         /// <summary>
         /// Социальная сеть
         /// </summary>
-        Social
+        Social,
+
+        /// <summary>
+        /// Twitter
+        /// </summary>
+        Twitter,
+
+        /// <summary>
+        /// YouTube
+        /// </summary>
+        YouTube
     }
 }
