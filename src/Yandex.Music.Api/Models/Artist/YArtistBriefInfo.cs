@@ -33,5 +33,6 @@ namespace Yandex.Music.Api.Models.Artist
         public YStats Stats { get; set; }
         public List<YVideo> Videos { get; set; }
         public List<YVinyl> Vinyls { get; set; }
+        public List<YLink> Links { get; set; }
     }
 }
