@@ -126,7 +126,7 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="track">Трек</param>
         /// <returns></returns>
-        public YResponse<int> RemoveTrackDislike(AuthStorage storage, YTrack track)
+        public YResponse<YRevision> RemoveTrackDislike(AuthStorage storage, YTrack track)
         {
             return RemoveTrackDislikeAsync(storage, track).GetAwaiter().GetResult();
         }

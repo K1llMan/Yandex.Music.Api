@@ -64,6 +64,7 @@ namespace Yandex.Music.Api.Models.Album
         public string ContentWarning { get; set; }
         public string CoverUri { get; set; }
         public YCustomWave CustomWave { get; set; }
+        public string Description { get; set; }
         public List<string> Disclaimers { get; set; }
         public List<YAlbum> Duplicates { get; set; }
         public string Genre { get; set; }
@@ -78,6 +79,7 @@ namespace Yandex.Music.Api.Models.Album
         public List<YPrerolls> Prerolls { get; set; }
         public bool Recent { get; set; }
         public DateTime ReleaseDate { get; set; }
+        public string ShortDescription { get; set; }
         public YSortOrder SortOrder { get; set; }
         public string StorageDir { get; set; }
         public string Title { get; set; }

@@ -324,15 +324,6 @@ namespace Yandex.Music.Client
         }
 
         /// <summary>
-        /// Подкасты
-        /// </summary>
-        /// <returns></returns>
-        public YPlaylist GetPodcasts()
-        {
-            return api.Playlist.Podcasts(storage).Result;
-        }
-
-        /// <summary>
         /// Кинопоиск
         /// </summary>
         /// <returns></returns>

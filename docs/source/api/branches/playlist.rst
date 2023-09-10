@@ -43,12 +43,6 @@ Playlist API
 
 .. code-block:: csharp
 
-   public async Task<YResponse<YPlaylist>> PodcastsAsync(AuthStorage storage)
-
-Получение плейлиста Подкасты.
-
-.. code-block:: csharp
-
    public async Task<YResponse<YPlaylist>> KinopoiskAsync(AuthStorage storage)
 
 Получение плейлиста Кинопоиск.

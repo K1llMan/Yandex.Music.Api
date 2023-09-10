@@ -40,7 +40,7 @@ namespace Yandex.Music.Client.Extensions
         public static async Task<int> RemoveDislikeAsync(this YTrack track)
         {
             return (await track.Context.API.Library.RemoveTrackDislikeAsync(track.Context.Storage, track))
-                ?.Result ?? -1;
+                ?.Result.Revision ?? -1;
         }
 
         public static async Task<YTrackSupplement> SupplementAsync(this YTrack track)

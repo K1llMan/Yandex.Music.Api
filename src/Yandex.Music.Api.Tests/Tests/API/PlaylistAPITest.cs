@@ -86,24 +86,6 @@ namespace Yandex.Music.Api.Tests.Tests.API
         }
 
         [Fact, YandexTrait(TraitGroup.PlaylistAPI)]
-        [Order(7)]
-        public void Podcasts_ValidData_True()
-        {
-            YResponse<YPlaylist> response = Fixture.API.Playlist.Podcasts(Fixture.Storage);
-
-            response.Should().NotBeNull();
-        }
-
-        [Fact, YandexTrait(TraitGroup.PlaylistAPI)]
-        [Order(8)]
-        public void Rewind_ValidData_True()
-        {
-            YResponse<YPlaylist> response = Fixture.API.Playlist.Kinopoisk(Fixture.Storage);
-
-            response.Should().NotBeNull();
-        }
-
-        [Fact, YandexTrait(TraitGroup.PlaylistAPI)]
         [Order(9)]
         public void Create_ValidData_True()
         {
