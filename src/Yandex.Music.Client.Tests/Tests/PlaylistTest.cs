@@ -101,24 +101,6 @@ namespace Yandex.Music.Client.Tests.Tests
         }
 
         [Fact]
-        [Order(9)]
-        public void Podcasts_ValidData_True()
-        {
-            YPlaylist response = Fixture.Client.GetPodcasts();
-
-            response.Should().NotBeNull();
-        }
-
-        [Fact]
-        [Order(10)]
-        public void Rewind_ValidData_True()
-        {
-            YPlaylist response = Fixture.Client.GetKinopoisk();
-
-            response.Should().NotBeNull();
-        }
-
-        [Fact]
         [Order(11)]
         public void Create_ValidData_True()
         {

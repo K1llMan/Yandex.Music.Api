@@ -341,16 +341,6 @@ namespace Yandex.Music.Client
         }
 
         /// <summary>
-        /// Подкасты
-        /// </summary>
-        /// <returns></returns>
-        public async Task<YPlaylist> GetPodcasts()
-        {
-            return (await api.Playlist.PodcastsAsync(storage))
-                .Result;
-        }
-
-        /// <summary>
         /// Кинопоиск
         /// </summary>
         /// <returns></returns>

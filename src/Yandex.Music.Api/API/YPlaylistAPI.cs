@@ -81,16 +81,6 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
-        /// Подкасты
-        /// </summary>
-        /// <param name="storage">Хранилище</param>
-        /// <returns></returns>
-        public YResponse<YPlaylist> Podcasts(AuthStorage storage)
-        {
-            return PodcastsAsync(storage).GetAwaiter().GetResult();
-        }
-
-        /// <summary>
         /// Кинопоиск
         /// </summary>
         /// <param name="storage">Хранилище</param>

@@ -157,9 +157,9 @@ namespace Yandex.Music.Api.API
         /// <param name="storage">Хранилище</param>
         /// <param name="track">Трек</param>
         /// <returns></returns>
-        public Task<YResponse<int>> RemoveTrackDislikeAsync(AuthStorage storage, YTrack track)
+        public Task<YResponse<YRevision>> RemoveTrackDislikeAsync(AuthStorage storage, YTrack track)
         {
-            return new YLibraryRemoveBuilder<int>(api, storage)
+            return new YLibraryRemoveBuilder<YRevision>(api, storage)
                 .Build((track.GetKey().ToString(), YLibrarySection.Tracks, YLibrarySectionType.Dislikes))
                 .GetResponseAsync();
         }

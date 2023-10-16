@@ -55,7 +55,7 @@ YLibraryAPI
 
 .. code-block:: csharp
 
-   public async Task<YResponse<int>> RemoveTrackDislikeAsync(AuthStorage storage, YTrack track)
+   public async Task<YResponse<YRevision>> RemoveTrackDislikeAsync(AuthStorage storage, YTrack track)
 
 Удаление трека из списка дизлайкнутых.
 

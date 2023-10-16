@@ -11,6 +11,6 @@ namespace Yandex.Music.Api.Models.Landing.Entity.Entities
         public bool Notify { get; set; }
         public string PreviewDescription { get; set; }
         public bool Ready { get; set; }
-        public YGeneratedPlaylistType Type { get; set; }
+        public string Type { get; set; }
     }
 }

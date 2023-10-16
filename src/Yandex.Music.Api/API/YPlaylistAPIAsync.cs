@@ -29,7 +29,7 @@ namespace Yandex.Music.Api.API
         private async Task<YResponse<YPlaylist>> GetPersonalPlaylist(AuthStorage storage, YGeneratedPlaylistType type)
         {
             List<YResponse<YPlaylist>> list = await GetPersonalPlaylistsAsync(storage);
-            return list.FirstOrDefault(e => e.Result.GeneratedPlaylistType == type);
+            return list.FirstOrDefault(e => string.Equals(e.Result.GeneratedPlaylistType, type.ToString(), StringComparison.CurrentCultureIgnoreCase));
         }
 
         /// <summary>
@@ -136,16 +136,6 @@ namespace Yandex.Music.Api.API
         public Task<YResponse<YPlaylist>> MissedAsync(AuthStorage storage)
         {
             return GetPersonalPlaylist(storage, YGeneratedPlaylistType.MissedLikes);
-        }
-
-        /// <summary>
-        /// Подкасты
-        /// </summary>
-        /// <param name="storage">Хранилище</param>
-        /// <returns></returns>
-        public Task<YResponse<YPlaylist>> PodcastsAsync(AuthStorage storage)
-        {
-            return GetPersonalPlaylist(storage, YGeneratedPlaylistType.Podcasts);
         }
 
         /// <summary>

@@ -72,7 +72,7 @@ YandexMusicApi
 │   ├── DejaVu / Async (AuthStorage storage)
 │   ├── Premiere / Async (AuthStorage storage)
 │   ├── Missed / Async (AuthStorage storage)
-│   ├── Podcasts / Async (AuthStorage storage)
+│   ├── Kinopoisk / Async (AuthStorage storage)
 │   ├── Create / Async (AuthStorage storage, string name)
 │   ├── Rename / Async (AuthStorage storage, string kinds, string name)
 │   ├── Rename / Async (AuthStorage storage, YPlaylist playlist, string name)
