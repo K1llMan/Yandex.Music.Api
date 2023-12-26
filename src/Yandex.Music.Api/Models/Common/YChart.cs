@@ -1,4 +1,6 @@
-﻿namespace Yandex.Music.Api.Models.Landing.Entity.Entities
+﻿using Yandex.Music.Api.Models.Landing.Entity.Entities;
+
+namespace Yandex.Music.Api.Models.Common
 {
     public class YChart
     {

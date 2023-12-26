@@ -18,9 +18,11 @@ namespace Yandex.Music.Api.Models.Track
         public List<string> AvailableForOptions { get; set; }
         public string BackgroundVideoUri { get; set; }
         public bool Best { get; set; }
+        public YChart Chart { get; set; }
         public string ContentWarning { get; set; }
         public string CoverUri { get; set; }
         public List<string> ClipIds { get; set; }
+        public YDerivedColors DerivedColors { get; set; }
         public List<string> Disclaimers { get; set; }
         public long DurationMs { get; set; }
         public string Error { get; set; }
