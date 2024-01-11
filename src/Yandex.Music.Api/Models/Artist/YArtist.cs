@@ -25,6 +25,7 @@ namespace Yandex.Music.Api.Models.Artist
         public List<string> Disclaimers { get; set; }
         public string EndDate { get; set; }
         public string EnWikipediaLink { get; set; }
+        public List<YExtraAction> ExtraActions { get; set; }
         public List<string> Genres { get; set; }
         public string Id { get; set; }
         public string InitDate { get; set; }

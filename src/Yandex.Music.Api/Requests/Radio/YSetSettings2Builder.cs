@@ -38,7 +38,7 @@ namespace Yandex.Music.Api.Requests.Radio
                 },
                 Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                IgnoreNullValues = true
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
             };
 
             return JsonContent.Create(tuple.settings2, new MediaTypeHeaderValue("application/json"), settings);

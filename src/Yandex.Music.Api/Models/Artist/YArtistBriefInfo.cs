@@ -23,6 +23,7 @@ namespace Yandex.Music.Api.Models.Artist
         public List<YClip> Clips { get; set; }
         public List<YConcert> Concerts { get; set; }
         public YCustomWave CustomWave { get; set; }
+        public List<YExtraAction> ExtraActions { get; set; }
         public bool HasPromotions { get; set; }
         public List<string> LastReleaseIds { get; set; }
         public List<YAlbum> LastReleases { get; set; }

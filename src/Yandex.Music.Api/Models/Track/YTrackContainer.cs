@@ -7,6 +7,8 @@ namespace Yandex.Music.Api.Models.Track
         public string Id { get; set; }
         public string AlbumId { get; set; }
         public decimal OriginalIndex { get; set; }
+        public decimal OriginalShuffleIndex { get; set; }
+
         public bool Recent { get; set; }
         public DateTime Timestamp { get; set; }
         public YTrack Track { get; set; }

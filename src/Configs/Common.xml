@@ -1,11 +1,11 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <TargetFrameworks>net5.0;net6.0;netstandard2.0;</TargetFrameworks>
+    <TargetFrameworks>net7.0;net8.0;netstandard2.0;</TargetFrameworks>
     <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
   </PropertyGroup>
 
   <PropertyGroup>
-    <ApiVersion>1.5.0</ApiVersion>
+    <ApiVersion>1.6.0</ApiVersion>
     <Version>$(ApiVersion)</Version>
     <AssemblyVersion>$(ApiVersion)</AssemblyVersion>
     <FileVersion>$(ApiVersion)</FileVersion>
