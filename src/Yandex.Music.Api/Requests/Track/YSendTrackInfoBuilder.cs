@@ -4,15 +4,15 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+
 using Yandex.Music.Api.Common;
-using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Track;
 using Yandex.Music.Api.Requests.Common;
 
 namespace Yandex.Music.Api.Requests.Track
 {
     [YApiRequest(WebRequestMethods.Http.Post, "play-audio")]
-    public class YSendTrackInfoBuilder : YRequestBuilder<YResponse<string>, (YTrack track, string from, bool fromcache, string playId, string playlistId, double totalPlayedSeconds, double endPositionSeconds)>
+    public class YSendTrackInfoBuilder : YRequestBuilder<string, (YTrack track, string from, bool fromcache, string playId, string playlistId, double totalPlayedSeconds, double endPositionSeconds)>
     {
         public YSendTrackInfoBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
         {
@@ -31,9 +31,9 @@ namespace Yandex.Music.Api.Requests.Track
                 { "album-id", tuple.track.Albums.FirstOrDefault()?.Id },
                 { "from", tuple.from },
                 { "playlist-id", tuple.playlistId },
-                { "track-length-seconds", ((double)(tuple.track.DurationMs / 1000)).ToString() },
-                { "total-played-seconds", tuple.totalPlayedSeconds.ToString() },
-                { "end-position-seconds", tuple.endPositionSeconds.ToString() },
+                { "track-length-seconds", ((double)(tuple.track.DurationMs / 1000)).ToString(CultureInfo.InvariantCulture) },
+                { "total-played-seconds", tuple.totalPlayedSeconds.ToString(CultureInfo.InvariantCulture) },
+                { "end-position-seconds", tuple.endPositionSeconds.ToString(CultureInfo.InvariantCulture) },
             };
 
             return new FormUrlEncodedContent(formData);

@@ -9,7 +9,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 using Yandex.Music.Api.Common;
-using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Radio;
 using Yandex.Music.Api.Models.Track;
 using Yandex.Music.Api.Requests.Common;
@@ -17,7 +16,7 @@ using Yandex.Music.Api.Requests.Common;
 namespace Yandex.Music.Api.Requests.Radio
 {
     [YApiRequest(WebRequestMethods.Http.Post, "rotor/station/{type}:{tag}/feedback")]
-    public class YSetStationFeedbackBuilder : YRequestBuilder<YResponse<string>, (YStationFeedbackType type, YStation station, YTrack track, string batchId, double totalPlayedSeconds)>
+    public class YSetStationFeedbackBuilder : YRequestBuilder<string, (YStationFeedbackType type, YStation station, YTrack track, string batchId, double totalPlayedSeconds)>
     {
         public YSetStationFeedbackBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
         {

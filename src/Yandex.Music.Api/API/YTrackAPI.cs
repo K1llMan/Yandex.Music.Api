@@ -106,13 +106,12 @@ namespace Yandex.Music.Api.API
         /// <param name="endPositionSeconds">Окончательное значение воспроизведенных секунд</param>
         /// </summary>
         /// <returns></returns>
-        public void SendPlayTrackInfo(AuthStorage storage, YTrack track, string from, bool fromCache = false, string playId = "", string playlistId = "", double totalPlayedSeconds = 0, double endPositionSeconds = 0)
+        public string SendPlayTrackInfo(AuthStorage storage, YTrack track, string from, bool fromCache = false, string playId = "", string playlistId = "", double totalPlayedSeconds = 0, double endPositionSeconds = 0)
         {
             if (string.IsNullOrWhiteSpace(playId))
                 playId = $"{new Random(1000)}-{new Random(1000)}-{new Random(1000)}";
 
-            SendPlayTrackInfoAsync(storage, track, from, fromCache, playId, playlistId, totalPlayedSeconds,
-                endPositionSeconds).GetAwaiter().GetResult();
+            return SendPlayTrackInfoAsync(storage, track, from, fromCache, playId, playlistId, totalPlayedSeconds, endPositionSeconds).GetAwaiter().GetResult();
         }
 
         #region GetSupplement

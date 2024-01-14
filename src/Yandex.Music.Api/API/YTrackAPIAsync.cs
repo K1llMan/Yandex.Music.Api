@@ -152,7 +152,7 @@ namespace Yandex.Music.Api.API
         /// <param name="endPositionSeconds">Окончательное значение воспроизведенных секунд</param>
         /// </summary>
         /// <returns></returns>
-        public Task SendPlayTrackInfoAsync(AuthStorage storage, YTrack track, string from, bool fromCache = false, string playId = "", string playlistId = "", double totalPlayedSeconds = 0, double endPositionSeconds = 0)
+        public Task<string> SendPlayTrackInfoAsync(AuthStorage storage, YTrack track, string from, bool fromCache = false, string playId = "", string playlistId = "", double totalPlayedSeconds = 0, double endPositionSeconds = 0)
         {
             return new YSendTrackInfoBuilder(api, storage)
                 .Build((track, from, fromCache, playId, playlistId, totalPlayedSeconds, endPositionSeconds))

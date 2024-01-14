@@ -91,7 +91,7 @@ namespace Yandex.Music.Api.API
         /// <param name="batchId">Уникальный идентификатор партии треков. Возвращается при получении треков</param>
         /// <param name="totalPlayedSeconds">колько было проиграно секунд трекаперед действием</param>
         /// <returns></returns>
-        public YResponse<string> SendStationFeedBack(AuthStorage storage, YStation station, YStationFeedbackType type, YTrack? track = null, string batchId = "", double totalPlayedSeconds = 0)
+        public string SendStationFeedBack(AuthStorage storage, YStation station, YStationFeedbackType type, YTrack track = null, string batchId = "", double totalPlayedSeconds = 0)
         {
             return SendStationFeedBackAsync(storage, station, type, track, batchId, totalPlayedSeconds).GetAwaiter().GetResult();
         }
