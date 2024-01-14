@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -49,7 +50,7 @@ namespace Yandex.Music.Api.Requests.Radio
             {
                 Type = tuple.type,
                 From = tuple.station.Station.IdForFrom,
-                Timestamp = timestamp,
+                Timestamp = timestamp
             };
 
             if (tuple.track != null)
@@ -58,9 +59,17 @@ namespace Yandex.Music.Api.Requests.Radio
             if (tuple.totalPlayedSeconds > 0)
                 feedBack.TotalPlayedSeconds = tuple.totalPlayedSeconds;
 
-            var content = JsonContent.Create(feedBack, new MediaTypeHeaderValue("application/json"), settings);
+            return JsonContent.Create(feedBack, new MediaTypeHeaderValue("application/json"), settings); ;
+        }
 
-            return content;
+        protected override NameValueCollection GetQueryParams((YStationFeedbackType type, YStation station, YTrack track, string batchId, double totalPlayedSeconds) tuple)
+        {
+            NameValueCollection query = new NameValueCollection();
+
+            if (!string.IsNullOrWhiteSpace(tuple.batchId))
+                query.Add("batch-id", tuple.batchId);
+
+            return query;
         }
     }
 }
