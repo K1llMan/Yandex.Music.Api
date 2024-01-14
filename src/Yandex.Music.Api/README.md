@@ -51,7 +51,8 @@ YandexMusicApi
 │   ├── GetSupplement / Async (AuthStorage storage, string trackId)
 │   ├── GetSupplement / Async (AuthStorage storage, YTrack track)
 │   ├── GetSimilar / Async (AuthStorage storage, string trackId)
-│   └── GetSimilar / Async (AuthStorage storage, YTrack track)
+│   ├── GetSimilar / Async (AuthStorage storage, YTrack track)
+│   └── SendPlayTrackInfo / Async (AuthStorage storage, YTrack track, string from, bool fromCache = false, string playId = "", string playlistId = "", double totalPlayedSeconds = 0, double endPositionSeconds = 0)
 ├── Album
 │   ├── Get / Async (AuthStorage storage, string albumId)
 │   └── Get / Async (AuthStorage storage, IEnumerable<string> albumIds)
@@ -112,7 +113,8 @@ YandexMusicApi
 │   ├── GetStation / Async (AuthStorage storage, string type, string tag)
 │   ├── GetStation / Async (AuthStorage storage, YStationId id)
 │   ├── GetStationTracks / Async (AuthStorage storage, YStation station, string prevTrackId = "")
-│   └── SetStationSettings2 / Async (AuthStorage storage, YStation station, YStationSettings2 settings)
+│   ├── SetStationSettings2 / Async (AuthStorage storage, YStation station, YStationSettings2 settings)
+│   └── SendStationFeedBack / Async (AuthStorage storage, YStation station, YStationFeedbackType type, YTrack? track = null, string batchId = "", double totalPlayedSeconds = 0)
 ├── Queue
 │   ├── List / Async (AuthStorage storage, string device = null)
 │   ├── Get / Async (AuthStorage storage, string queueId)
