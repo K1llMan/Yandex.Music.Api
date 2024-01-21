@@ -23,8 +23,7 @@ namespace Yandex.Music.Api.Requests.Account
 
         protected override void SetCustomHeaders(HttpRequestHeaders headers)
         {
-            CookieCollection cookieCollection = new CookieCollection
-            {
+            CookieCollection cookieCollection = new() {
                 storage.Context.Cookies.GetCookies(new Uri("https://yandex.ru/")),
                 storage.Context.Cookies.GetCookies(new Uri("https://passport.yandex.ru/"))
             };
@@ -34,7 +33,7 @@ namespace Yandex.Music.Api.Requests.Account
 #endif
 
 #if NETSTANDARD2_0
-            StringBuilder cookieValue = new StringBuilder();
+            StringBuilder cookieValue = new();
             foreach (Cookie cookie in cookieCollection)
             {
                 cookieValue.Append($"{cookie.Name}={cookie.Value};");

@@ -20,7 +20,7 @@ namespace Yandex.Music.Api.Requests.Track
 
         protected override HttpContent GetContent((YTrack track, string from, bool fromCache, string playId, string playlistId, double totalPlayedSeconds, double endPositionSeconds) tuple)
         {
-            Dictionary<string, string> formData = new Dictionary<string, string> {
+            Dictionary<string, string> formData = new() {
                 { "track_id", tuple.track.Id },
                 { "from-cache", tuple.fromCache.ToString() },
                 { "play_id", tuple.playId },

@@ -25,8 +25,7 @@ namespace Yandex.Music.Api.Requests.Radio
 
         protected override Dictionary<string, string> GetSubstitutions((YStationFeedbackType type, YStation station, YTrack track, string batchId, double totalPlayedSeconds) tuple)
         {
-            return new Dictionary<string, string>
-            {
+            return new Dictionary<string, string> {
                 { "type", tuple.station.Station.Id.Type },
                 { "tag", tuple.station.Station.Id.Tag }
             };
@@ -45,7 +44,8 @@ namespace Yandex.Music.Api.Requests.Radio
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault
             };
 
-            YStationFeedback feedBack = new YStationFeedback {
+            YStationFeedback feedBack = new()
+            {
                 Type = tuple.type,
                 From = tuple.station.Station.IdForFrom,
                 Timestamp = timestamp
@@ -62,7 +62,7 @@ namespace Yandex.Music.Api.Requests.Radio
 
         protected override NameValueCollection GetQueryParams((YStationFeedbackType type, YStation station, YTrack track, string batchId, double totalPlayedSeconds) tuple)
         {
-            NameValueCollection query = new NameValueCollection();
+            NameValueCollection query = new();
 
             if (!string.IsNullOrWhiteSpace(tuple.batchId))
                 query.Add("batch-id", tuple.batchId);
