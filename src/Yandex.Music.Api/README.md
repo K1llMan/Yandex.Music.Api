@@ -11,7 +11,7 @@ API переделано под работу с API официального п�
 
 [Telegram-чат](https://t.me/yandex_music_api)
 
-Функционал
+Функциональность
 -------
 
 Работа с API осуществляется через хранилище AuthStorage, являющееся по сути сущностью для пользователя, поэтому его необходимо передавать в вызов каждой функции.
@@ -114,7 +114,7 @@ YandexMusicApi
 │   ├── GetStation / Async (AuthStorage storage, YStationId id)
 │   ├── GetStationTracks / Async (AuthStorage storage, YStation station, string prevTrackId = "")
 │   ├── SetStationSettings2 / Async (AuthStorage storage, YStation station, YStationSettings2 settings)
-│   └── SendStationFeedBack / Async (AuthStorage storage, YStation station, YStationFeedbackType type, YTrack? track = null, string batchId = "", double totalPlayedSeconds = 0)
+│   └── SendStationFeedBack / Async (AuthStorage storage, YStation station, YStationFeedbackType type, YTrack track = null, string batchId = "", double totalPlayedSeconds = 0)
 ├── Queue
 │   ├── List / Async (AuthStorage storage, string device = null)
 │   ├── Get / Async (AuthStorage storage, string queueId)

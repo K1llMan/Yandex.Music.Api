@@ -37,6 +37,11 @@ namespace Yandex.Music.Client.Extensions
             return RemoveDislikeAsync(track).GetAwaiter().GetResult();
         }
 
+        public static string SendPlayTrackInfo(this YTrack track, string from, bool fromCache = false, string playId = "", string playlistId = "", double totalPlayedSeconds = 0, double endPositionSeconds = 0)
+        {
+            return SendPlayTrackInfoAsync(track, from, fromCache, playId, playlistId, totalPlayedSeconds).GetAwaiter().GetResult();
+        }
+
         public static YTrackSupplement Supplement(this YTrack track)
         {
             return SupplementAsync(track).GetAwaiter().GetResult();

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
 using Yandex.Music.Api.Models.Radio;
+using Yandex.Music.Api.Models.Track;
 
 namespace Yandex.Music.Client.Extensions
 {
@@ -17,6 +18,11 @@ namespace Yandex.Music.Client.Extensions
         public static string SetSettings2(this YStation station, YStationSettings2 settings)
         {
             return SetSettings2Async(station, settings).GetAwaiter().GetResult();
+        }
+
+        public static string SendFeedBack(this YStation station, YStationFeedbackType type, YTrack track = null, string batchId = "", double totalPlayedSeconds = 0)
+        {
+            return SendFeedBackAsync(station, type, track, batchId, totalPlayedSeconds).GetAwaiter().GetResult();
         }
     }
 }

@@ -105,7 +105,7 @@ namespace Yandex.Music.Api.API
         /// <param name="type">Тип обратной связи</param>
         /// <param name="track">Трек</param>
         /// <param name="batchId">Уникальный идентификатор партии треков. Возвращается при получении треков</param>
-        /// <param name="totalPlayedSeconds">колько было проиграно секунд трекаперед действием</param>
+        /// <param name="totalPlayedSeconds">Сколько было проиграно секунд трека перед действием</param>
         /// <returns></returns>
         public Task<string> SendStationFeedBackAsync(AuthStorage storage, YStation station, YStationFeedbackType type, YTrack track = null, string batchId = "", double totalPlayedSeconds = 0)
         {

@@ -34,10 +34,9 @@ namespace Yandex.Music.Api.Requests.Radio
 
         protected override HttpContent GetContent((YStationFeedbackType type, YStation station, YTrack track, string batchId, double totalPlayedSeconds) tuple)
         {
-            var timestamp = ((DateTimeOffset)DateTime.Now).ToUnixTimeSeconds();
+            long timestamp = ((DateTimeOffset)DateTime.Now).ToUnixTimeSeconds();
 
-            JsonSerializerOptions settings = new()
-            {
+            JsonSerializerOptions settings = new() {
                 Converters = {
                     new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
                 },
@@ -46,8 +45,7 @@ namespace Yandex.Music.Api.Requests.Radio
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault
             };
 
-            YStationFeedback feedBack = new YStationFeedback
-            {
+            YStationFeedback feedBack = new YStationFeedback {
                 Type = tuple.type,
                 From = tuple.station.Station.IdForFrom,
                 Timestamp = timestamp

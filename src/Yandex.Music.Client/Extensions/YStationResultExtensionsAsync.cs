@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Yandex.Music.Api.Models.Radio;
+using Yandex.Music.Api.Models.Track;
 
 namespace Yandex.Music.Client.Extensions
 {
@@ -20,6 +21,11 @@ namespace Yandex.Music.Client.Extensions
         {
             return (await station.Context.API.Radio.SetStationSettings2Async(station.Context.Storage, station, settings))
                 .Result;
+        }
+
+        public static Task<string> SendFeedBackAsync(this YStation station, YStationFeedbackType type, YTrack track = null, string batchId = "", double totalPlayedSeconds = 0)
+        {
+            return station.Context.API.Radio.SendStationFeedBackAsync(station.Context.Storage, station, type, track, batchId, totalPlayedSeconds);
         }
     }
 }

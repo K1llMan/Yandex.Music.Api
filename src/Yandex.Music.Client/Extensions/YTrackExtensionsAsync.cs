@@ -43,6 +43,11 @@ namespace Yandex.Music.Client.Extensions
                 ?.Result.Revision ?? -1;
         }
 
+        public static Task<string> SendPlayTrackInfoAsync(this YTrack track, string from, bool fromCache = false, string playId = "", string playlistId = "", double totalPlayedSeconds = 0, double endPositionSeconds = 0)
+        {
+            return track.Context.API.Track.SendPlayTrackInfoAsync(track.Context.Storage, track, from, fromCache, playId, playlistId, totalPlayedSeconds);
+        }
+
         public static async Task<YTrackSupplement> SupplementAsync(this YTrack track)
         {
             return (await track.Context.API.Track.GetSupplementAsync(track.Context.Storage, track))

@@ -46,9 +46,15 @@ Track API
 
 .. code-block:: csharp
 
-   public string GetFileLinkAsync(AuthStorage storage, YTrack track)
+   public string GetFileLinkAsync(AuthStorage storage, string trackKey)
 
 Получение ссылки.
+
+.. code-block:: csharp
+
+   public Task<string> SendPlayTrackInfoAsync(AuthStorage storage, YTrack track, string from, bool fromCache = false, string playId = "", string playlistId = "", double totalPlayedSeconds = 0, double endPositionSeconds = 0)
+
+Отправка текущего состояния прослушиваемого трека.
 
 .. code-block:: csharp
 

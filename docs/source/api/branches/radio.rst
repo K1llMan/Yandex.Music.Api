@@ -40,3 +40,9 @@ Radio API
    public async Task<YResponse<string>> SetStationSettings2Async(AuthStorage storage, YStation station, YStationSettings2 settings)
 
 Установка настроек радиостанции.
+
+.. code-block:: csharp
+
+   public Task<string> SendStationFeedBackAsync(AuthStorage storage, YStation station, YStationFeedbackType type, YTrack track = null, string batchId = "", double totalPlayedSeconds = 0)
+
+Отправка обратной связи на действия при прослушивании радио.
