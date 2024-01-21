@@ -1,10 +1,11 @@
 ﻿namespace Yandex.Music.Api.Models.Radio
 {
-    public enum YStationFeedback
+    internal sealed class YStationFeedback
     {
-        RadioStarted, 
-        TrackStarted, 
-        TrackFinished, 
-        Skip
+        public YStationFeedbackType Type { get; set; }
+        public long Timestamp { get; set; }
+        public string From { get; set; }
+        public double TotalPlayedSeconds { get; set; }
+        public string TrackId { get; set; }
     }
 }

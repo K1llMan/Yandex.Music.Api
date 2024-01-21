@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Radio;
+using Yandex.Music.Api.Models.Track;
 using Yandex.Music.Api.Requests.Radio;
 
 namespace Yandex.Music.Api.API
@@ -93,6 +94,23 @@ namespace Yandex.Music.Api.API
         {
             return new YSetSettings2Builder(api, storage)
                 .Build((station.Station, settings))
+                .GetResponseAsync();
+        }
+
+        /// <summary>
+        /// Отправка обратной связи на действия при прослушивании радио
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="station">Радиостанция</param>
+        /// <param name="type">Тип обратной связи</param>
+        /// <param name="track">Трек</param>
+        /// <param name="batchId">Уникальный идентификатор партии треков. Возвращается при получении треков</param>
+        /// <param name="totalPlayedSeconds">колько было проиграно секунд трекаперед действием</param>
+        /// <returns></returns>
+        public Task<string> SendStationFeedBackAsync(AuthStorage storage, YStation station, YStationFeedbackType type, YTrack track = null, string batchId = "", double totalPlayedSeconds = 0)
+        {
+            return new YSetStationFeedbackBuilder(api, storage)
+                .Build((type, station, track, batchId, totalPlayedSeconds))
                 .GetResponseAsync();
         }
 

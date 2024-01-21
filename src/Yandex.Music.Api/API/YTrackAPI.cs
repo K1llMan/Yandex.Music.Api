@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -91,6 +92,26 @@ namespace Yandex.Music.Api.API
         public string GetFileLink(AuthStorage storage, YTrack track)
         {
             return GetFileLinkAsync(storage, track.GetKey().ToString()).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Метод для отправки текущего состояния прослушиваемого трека
+        /// <param name="storage">Хранилище</param>
+        /// <param name="track">Трек</param>
+        /// <param name="from">Наименования клиента с которого происходит прослушивание</param>
+        /// <param name="fromCache">Проигрывается ли трек с кеша</param>
+        /// <param name="playId">Уникальный идентификатор проигрывания</param>
+        /// <param name="playlistId">Уникальный идентификатор плейлиста, если таковой прослушивается</param>
+        /// <param name="totalPlayedSeconds">Сколько было всего воспроизведено трека в секундах</param>
+        /// <param name="endPositionSeconds">Окончательное значение воспроизведенных секунд</param>
+        /// </summary>
+        /// <returns></returns>
+        public string SendPlayTrackInfo(AuthStorage storage, YTrack track, string from, bool fromCache = false, string playId = "", string playlistId = "", double totalPlayedSeconds = 0, double endPositionSeconds = 0)
+        {
+            if (string.IsNullOrWhiteSpace(playId))
+                playId = $"{new Random(1000)}-{new Random(1000)}-{new Random(1000)}";
+
+            return SendPlayTrackInfoAsync(storage, track, from, fromCache, playId, playlistId, totalPlayedSeconds, endPositionSeconds).GetAwaiter().GetResult();
         }
 
         #region GetSupplement
