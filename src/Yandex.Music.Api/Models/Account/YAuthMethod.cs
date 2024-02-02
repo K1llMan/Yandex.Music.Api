@@ -10,6 +10,8 @@ namespace Yandex.Music.Api.Models.Account
         [EnumMember(Value = "magic_link")]
         MagicLink,
         Magic,
-        Otp
+        Otp,
+        [EnumMember(Value = "social_gg")]
+        Social
     }
 }
