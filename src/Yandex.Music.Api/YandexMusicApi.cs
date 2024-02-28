@@ -62,6 +62,11 @@ namespace Yandex.Music.Api
         /// </summary>
         public YUserAPI User { get; internal set; }
 
+        /// <summary>
+        /// API user generated контента
+        /// </summary>
+        public YUgcAPI UserGeneratedContent { get; internal set; }
+
         #endregion Ветки API
 
         #region Основные функции

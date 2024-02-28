@@ -50,7 +50,7 @@ namespace Yandex.Music.Api.Requests.Common
 
         #region Вспомогательные функции
 
-        private Uri BuildUri(ParamsTuple tuple)
+        protected virtual Uri BuildUri(ParamsTuple tuple)
         {
             NameValueCollection queryParams = GetQueryParams(tuple);
             NameValueCollection modifiedParams = HttpUtility.ParseQueryString(string.Empty);
