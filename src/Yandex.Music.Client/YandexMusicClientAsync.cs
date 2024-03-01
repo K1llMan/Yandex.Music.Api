@@ -17,6 +17,7 @@ using Yandex.Music.Api.Models.Queue;
 using Yandex.Music.Api.Models.Radio;
 using Yandex.Music.Api.Models.Search;
 using Yandex.Music.Api.Models.Track;
+using Yandex.Music.Api.Models.Web.Ugc;
 
 namespace Yandex.Music.Client
 {
@@ -592,6 +593,12 @@ namespace Yandex.Music.Client
 
         #endregion Очереди
 
+        public async Task<YUgcTrackUploadResult> UploadTrackToPlaylist(string playlistId, string fileName, byte[] fileBytes)
+        {
+            var uploadLinkResponse = await api.UserGeneratedContent.GetUgcUploadLinkAsync(storage, fileName, playlistId);
+            return await api.UserGeneratedContent.UploadUgcTrackAsync(storage, uploadLinkResponse.PostTarget, fileBytes);
+        }
+        
         #endregion Основные функции
     }
 }
