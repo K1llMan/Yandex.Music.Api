@@ -20,7 +20,7 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public Task<YUgcUpload> GetUgcUploadLinkAsync(AuthStorage storage, string fileName, string playlistId)
         {
-            return new YUgcUploadLinkBuilder(api, storage)
+            return new YUgcGetUploadLinkBuilder(api, storage)
                 .Build((fileName, playlistId))
                 .GetResponseAsync();
         }

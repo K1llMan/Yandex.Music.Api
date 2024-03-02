@@ -593,11 +593,24 @@ namespace Yandex.Music.Client
 
         #endregion Очереди
 
-        public async Task<YUgcTrackUploadResult> UploadTrackToPlaylist(string playlistId, string fileName, byte[] fileBytes)
+        #region Загрузка треков
+
+        /// <summary>
+        /// Загрузка трека в плейлист
+        /// </summary>
+        /// <param name="playlistId">Идентификатор плейлиста</param>
+        /// <param name="fileName">Названеи загружаемого файла</param>
+        /// <param name="fileBytes">Массив байтов из файла</param>
+        /// <returns></returns>
+        public async Task<YUgcTrackUploadResult> UploadTrackToPlaylist(string playlistId, string fileName,
+            byte[] fileBytes)
         {
             var uploadLinkResponse = await api.UserGeneratedContent.GetUgcUploadLinkAsync(storage, fileName, playlistId);
-            return await api.UserGeneratedContent.UploadUgcTrackAsync(storage, uploadLinkResponse.PostTarget, fileBytes);
+            return await api.UserGeneratedContent.UploadUgcTrackAsync(storage, uploadLinkResponse.PostTarget,
+                fileBytes);
         }
+
+        #endregion
         
         #endregion Основные функции
     }

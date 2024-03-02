@@ -9,11 +9,11 @@ using Yandex.Music.Api.Requests.Common;
 namespace Yandex.Music.Api.Requests.Ugc
 {
     [YWebApiRequest(WebRequestMethods.Http.Get, "handlers/ugc-upload.jsx")]
-    public class YUgcUploadLinkBuilder : YRequestBuilder<YUgcUpload, (string FileName, string PlaylistId)>
+    public class YUgcGetUploadLinkBuilder : YRequestBuilder<YUgcUpload, (string FileName, string PlaylistId)>
     {
         private static readonly Lazy<Random> Random = new(() => new Random());
 
-        public YUgcUploadLinkBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
+        public YUgcGetUploadLinkBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
         {
         }
 
