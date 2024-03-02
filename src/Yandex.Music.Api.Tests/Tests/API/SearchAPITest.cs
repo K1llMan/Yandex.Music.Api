@@ -57,7 +57,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         }
 
         [Fact, YandexTrait(TraitGroup.SearchAPI)]
-        [Order(5)]
+        [Order(4)]
         public void PodcastEpisode_ValidData_True()
         {
             YResponse<YSearch> response = Fixture.API.Search.PodcastEpisode(Fixture.Storage, podcast);
@@ -65,7 +65,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         }
 
         [Fact, YandexTrait(TraitGroup.SearchAPI)]
-        [Order(6)]
+        [Order(5)]
         public void Suggest_ValidData_True()
         {
             YResponse<YSearchSuggest> suggest = Fixture.API.Search.Suggest(Fixture.Storage, artist);

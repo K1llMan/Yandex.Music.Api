@@ -11,7 +11,7 @@ using Yandex.Music.Api.Tests.Traits;
 
 namespace Yandex.Music.Api.Tests.Tests.API
 {
-    [Collection("Yandex Test Harness"), Order(3)]
+    [Collection("Yandex Test Harness"), Order(10)]
     [TestBeforeAfter]
     public class LandingAPITest : YandexTest
     {

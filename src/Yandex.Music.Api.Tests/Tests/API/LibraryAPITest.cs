@@ -160,7 +160,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         }
 
         [Fact, YandexTrait(TraitGroup.LibraryAPI)]
-        [Order(12)]
+        [Order(13)]
         public void GetDislikedArtists_ValidData_True()
         {
             List<YArtist> artists = Fixture.API.Library.GetDislikedArtists(Fixture.Storage).Result;
