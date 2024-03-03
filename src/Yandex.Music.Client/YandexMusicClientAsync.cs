@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -599,17 +600,57 @@ namespace Yandex.Music.Client
         /// Загрузка трека в плейлист
         /// </summary>
         /// <param name="playlistId">Идентификатор плейлиста</param>
-        /// <param name="fileName">Названеи загружаемого файла</param>
+        /// <param name="fileName">Название загружаемого файла</param>
         /// <param name="fileBytes">Массив байтов из файла</param>
         /// <returns></returns>
         public async Task<YResponse<string>> UploadTrackToPlaylist(string playlistId, string fileName,
             byte[] fileBytes)
         {
-            var uploadLinkResponse = await api.UserGeneratedContent.GetUgcUploadLinkAsync(storage, fileName, playlistId);
+            YUgcUpload uploadLinkResponse = await api.UserGeneratedContent.GetUgcUploadLinkAsync(storage,
+                fileName, playlistId);
             return await api.UserGeneratedContent.UploadUgcTrackAsync(storage, uploadLinkResponse.PostTarget,
                 fileBytes);
         }
 
+        /// <summary>
+        /// Загрузка трека в плейлист
+        /// </summary>
+        /// <param name="playlistId">Идентификатор плейлиста</param>
+        /// <param name="fileName">Название загружаемого файла</param>
+        /// <param name="stream">Стрим загружаемого трека</param>
+        /// <returns></returns>
+        public async Task<YResponse<string>> UploadTrackToPlaylist(string playlistId, string fileName, Stream stream)
+        {
+            byte[] fileBytes;
+            if (stream is MemoryStream memStream)
+            {
+                fileBytes = memStream.ToArray();
+            }
+            else
+            {
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    await stream.CopyToAsync(memoryStream);
+                    fileBytes = memoryStream.ToArray();
+                }
+            }
+
+            return await UploadTrackToPlaylist(playlistId, fileName, fileBytes);
+        }
+
+        /// <summary>
+        /// Загрузка трека в плейлист
+        /// </summary>
+        /// <param name="playlistId">Идентификатор плейлиста</param>
+        /// <param name="filePath">Путь к файлу</param>
+        /// <returns></returns>
+        public async Task<YResponse<string>> UploadTrackToPlaylist(string playlistId, string filePath)
+        {
+            var fileName = Path.GetFileName(filePath);
+            var fileBytes = File.ReadAllBytes(filePath);
+            return await UploadTrackToPlaylist(playlistId, fileName, fileBytes);
+        }
+        
         #endregion Загрузка треков
         
         #endregion Основные функции

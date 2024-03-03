@@ -15,20 +15,50 @@ namespace Yandex.Music.Client.Tests.Tests
     {
         private const string SampleFilePath = "Static/sample-3s.mp3";
         private const string SuccessUploadResult = "CREATED";
+
         public YUserGeneratedContentTest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
         {
         }
-        
+
         [Fact]
         [Order(0)]
         public void UploadTrackToPlaylist_ValidData_True()
         {
             string fileName = Path.GetFileName(SampleFilePath);
             byte[] bytes = File.ReadAllBytes(SampleFilePath);
-            YPlaylist playlist = Fixture.Client.CreatePlaylist($"UploadTestPlaylist-{DateTime.UtcNow:s}");
-            Fixture.Client.UploadTrackToPlaylist(playlist.Kind, fileName, bytes).Result.Should().Be(SuccessUploadResult);
+            YPlaylist playlist = CreatePlaylist();
+            Fixture.Client.UploadTrackToPlaylist(playlist.Kind, fileName, bytes).Result.Should()
+                .Be(SuccessUploadResult);
             playlist.Delete().Should().BeTrue();
+        }
+
+        [Fact]
+        [Order(1)]
+        public void UploadTrackStreamToPlaylist_ValidData_True()
+        {
+            YPlaylist playlist = CreatePlaylist();
+            Fixture.Client.UploadTrackToPlaylist(playlist.Kind, SampleFilePath).Result.Should().Be(SuccessUploadResult);
+            playlist.Delete().Should().BeTrue();
+        }
+
+        [Fact]
+        [Order(2)]
+        public void UploadTrackPathToPlaylist_ValidData_True()
+        {
+            string fileName = Path.GetFileName(SampleFilePath);
+            using (Stream stream = new FileStream(SampleFilePath, FileMode.Open))
+            {
+                YPlaylist playlist = CreatePlaylist();
+                Fixture.Client.UploadTrackToPlaylist(playlist.Kind, fileName, stream).Result.Should()
+                    .Be(SuccessUploadResult);
+                playlist.Delete().Should().BeTrue();
+            }
+        }
+
+        private YPlaylist CreatePlaylist()
+        {
+            YPlaylist playlist = Fixture.Client.CreatePlaylist($"UploadTestPlaylist-{DateTime.UtcNow:s}");
+            return playlist;
         }
     }
 }
-
