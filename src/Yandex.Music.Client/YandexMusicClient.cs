@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 using Yandex.Music.Api;
@@ -15,6 +16,7 @@ using Yandex.Music.Api.Models.Queue;
 using Yandex.Music.Api.Models.Radio;
 using Yandex.Music.Api.Models.Search;
 using Yandex.Music.Api.Models.Track;
+using Yandex.Music.Api.Models.Web.Ugc;
 
 namespace Yandex.Music.Client
 {
@@ -552,6 +554,62 @@ namespace Yandex.Music.Client
 
         #endregion Очереди
 
+        #region Загрузка треков
+        
+        /// <summary>
+        /// Загрузка трека в плейлист
+        /// </summary>
+        /// <param name="playlistId">Идентификатор плейлиста</param>
+        /// <param name="fileName">Название загружаемого файла</param>
+        /// <param name="fileBytes">Массив байтов из файла</param>
+        /// <returns></returns>
+        public YResponse<string> UploadTrackToPlaylist(string playlistId, string fileName, byte[] fileBytes)
+        {
+            YUgcUpload uploadLinkResponse = api.UserGeneratedContent.GetUgcUploadLink(storage, fileName, playlistId);
+            return api.UserGeneratedContent.UploadUgcTrack(storage, uploadLinkResponse.PostTarget, fileBytes);
+        }
+        
+        /// <summary>
+        /// Загрузка трека в плейлист
+        /// </summary>
+        /// <param name="playlistId">Идентификатор плейлиста</param>
+        /// <param name="fileName">Название загружаемого файла</param>
+        /// <param name="stream">Стрим загружаемого трека</param>
+        /// <returns></returns>
+        public YResponse<string> UploadTrackToPlaylist(string playlistId, string fileName, Stream stream)
+        {
+            byte[] fileBytes;
+            if (stream is MemoryStream memStream)
+            {
+                fileBytes = memStream.ToArray();
+            }
+            else
+            {
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    stream.CopyTo(memoryStream);
+                    fileBytes = memoryStream.ToArray();
+                }
+            }
+
+            return UploadTrackToPlaylist(playlistId, fileName, fileBytes);
+        }
+
+        /// <summary>
+        /// Загрузка трека в плейлист
+        /// </summary>
+        /// <param name="playlistId">Идентификатор плейлиста</param>
+        /// <param name="filePath">Путь к файлу</param>
+        /// <returns></returns>
+        public YResponse<string> UploadTrackToPlaylist(string playlistId, string filePath)
+        {
+            var fileName = Path.GetFileName(filePath);
+            var fileBytes = File.ReadAllBytes(filePath);
+            return UploadTrackToPlaylist(playlistId, fileName, fileBytes);
+        }
+
+        #endregion Загрузка треков
+        
         #endregion Основные функции
     }
 }
