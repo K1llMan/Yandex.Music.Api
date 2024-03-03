@@ -10,6 +10,7 @@ using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Queue;
 using Yandex.Music.Api.Requests.Common;
+using Yandex.Music.Api.Requests.Common.Attributes;
 
 namespace Yandex.Music.Api.Requests.Queue
 {

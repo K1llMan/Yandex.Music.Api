@@ -1,6 +1,6 @@
-﻿namespace Yandex.Music.Api.Requests.Common
+﻿namespace Yandex.Music.Api.Requests.Common.Attributes
 {
-    public class YApiRequestAttribute: YBasePathRequestAttribute
+    public class YApiRequestAttribute : YBasePathRequestAttribute
     {
         public YApiRequestAttribute(string method, string url) : base(method, url)
         {

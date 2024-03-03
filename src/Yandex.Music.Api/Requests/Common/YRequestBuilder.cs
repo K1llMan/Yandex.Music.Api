@@ -15,6 +15,7 @@ using Newtonsoft.Json.Serialization;
 
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Extensions;
+using Yandex.Music.Api.Requests.Common.Attributes;
 
 namespace Yandex.Music.Api.Requests.Common
 {

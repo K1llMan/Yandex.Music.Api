@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Account;
 using Yandex.Music.Api.Requests.Common;
+using Yandex.Music.Api.Requests.Common.Attributes;
 
 namespace Yandex.Music.Api.Requests.Account
 {

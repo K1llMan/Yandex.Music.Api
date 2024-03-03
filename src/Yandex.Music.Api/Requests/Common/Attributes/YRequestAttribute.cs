@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace Yandex.Music.Api.Requests.Common
+namespace Yandex.Music.Api.Requests.Common.Attributes
 {
     /// <summary>
     /// Атрибут запроса без привязки к базовому адресу
     /// </summary>
-    public class YRequestAttribute: Attribute
+    public class YRequestAttribute : Attribute
     {
         #region Поля
 
