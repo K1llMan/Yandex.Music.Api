@@ -8,9 +8,9 @@ using Xunit.Abstractions;
 using Xunit.Extensions.Ordering;
 
 using Yandex.Music.Api.Models.Playlist;
-using Yandex.Music.Client.Extensions;
+using Yandex.Music.Api.Models.Ugc;
 
-namespace Yandex.Music.Client.Tests.Tests
+namespace Yandex.Music.Api.Tests.Tests.API
 {
     [Collection("Yandex Test Harness"), Order(11)]
     [TestBeforeAfter]
@@ -27,9 +27,17 @@ namespace Yandex.Music.Client.Tests.Tests
         [Order(0)]
         public void UploadTrackStreamToPlaylist_ValidData_True()
         {
-            YPlaylist playlist = Fixture.Client.CreatePlaylist($"UploadTestPlaylist-{DateTime.UtcNow:s}");
-            Fixture.Client.UploadTrackToPlaylist(playlist, Path.GetFileName(sampleFilePath), sampleFilePath).Should().Be(successUploadResult);
-            playlist.Delete().Should().BeTrue();
+            YPlaylist playlist = Fixture.API.Playlist.Create(Fixture.Storage, $"UploadTestPlaylist-{DateTime.UtcNow:s}")
+                .Result;
+
+            YUgcUpload upload = Fixture.API.UserGeneratedContent.GetUgcUploadLink(Fixture.Storage, playlist, Path.GetFileName(sampleFilePath));
+            upload.Should().NotBeNull();
+
+            Fixture.API.UserGeneratedContent.UploadUgcTrack(Fixture.Storage, upload.PostTarget, sampleFilePath)
+                .Result.Should().Be(successUploadResult);
+
+            Fixture.API.Playlist.Delete(Fixture.Storage, playlist).Should().BeTrue();
         }
+
     }
 }

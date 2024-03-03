@@ -30,6 +30,8 @@ YandexMusicAPI
    API для взаимодействия с треками.
 :doc:`User <branches/user>`
    API для взаимодействия с пользовательскими данными.
+:doc:`User <branches/ugc>`
+   API для взаимодействия с загружаемым пользователем содержимым.
 
 .. toctree::
    :hidden:
@@ -43,3 +45,4 @@ YandexMusicAPI
    branches/search
    branches/track
    branches/user
+   branches/ugc

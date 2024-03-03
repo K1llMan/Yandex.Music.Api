@@ -293,3 +293,21 @@ YandexMusicClient
    public YUpdatedQueue QueueUpdatePosition(string queueId, int currentIndex, bool isInteractive, string device = null)
 
 Установка текущего индекса проигрываемого трека в очереди треков.
+
+.. code-block:: csharp
+
+   public string UploadTrackToPlaylist(YPlaylist playlist, string fileName, string filePath)
+
+Загрузка трека в плейлист из файла.
+
+.. code-block:: csharp
+
+   public string UploadTrackToPlaylist(YPlaylist playlist, string fileName, Stream stream)
+
+Загрузка трека в плейлист из потока.
+
+.. code-block:: csharp
+
+   public string UploadTrackToPlaylist(YPlaylist playlist, string fileName, byte[] file)
+
+Загрузка трека в плейлист из массива.

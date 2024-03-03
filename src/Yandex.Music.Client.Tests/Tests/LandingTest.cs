@@ -9,7 +9,7 @@ using Yandex.Music.Api.Models.Landing;
 
 namespace Yandex.Music.Client.Tests.Tests
 {
-    [Collection("Yandex Test Harness"), Order(4)]
+    [Collection("Yandex Test Harness"), Order(10)]
     [TestBeforeAfter]
     public class LandingAPITest : YandexTest
     {

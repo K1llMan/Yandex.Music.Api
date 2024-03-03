@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Yandex.Music.Api.Models.Web.Ugc
+namespace Yandex.Music.Api.Models.Ugc
 {
     public class YUgcUpload
     {

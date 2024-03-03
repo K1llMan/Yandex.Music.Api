@@ -120,6 +120,11 @@ YandexMusicApi
 │   ├── Get / Async (AuthStorage storage, string queueId)
 │   ├── Create / Async (AuthStorage storage, YQueue queue, string device = null)
 │   └── UpdatePosition / Async (AuthStorage storage, string queueId, int currentIndex, bool isInteractive, string device = null)
+├── Ugc
+│   ├── GetUgcUploadLink / Async (AuthStorage storage, YPlaylist playlist, string fileName)
+│   ├── UploadUgcTrack / Async (AuthStorage storage, string uploadLink, string filePath)
+│   ├── UploadUgcTrack / Async (AuthStorage storage, string uploadLink, Stream stream)
+│   └── UploadUgcTrack / Async (AuthStorage storage, string uploadLink, byte[] file)
 └── Future
     ...
 ```

@@ -16,7 +16,7 @@ using Yandex.Music.Api.Models.Queue;
 using Yandex.Music.Api.Models.Radio;
 using Yandex.Music.Api.Models.Search;
 using Yandex.Music.Api.Models.Track;
-using Yandex.Music.Api.Models.Web.Ugc;
+using Yandex.Music.Api.Models.Ugc;
 
 namespace Yandex.Music.Client
 {
@@ -555,61 +555,54 @@ namespace Yandex.Music.Client
         #endregion Очереди
 
         #region Загрузка треков
-        
-        /// <summary>
-        /// Загрузка трека в плейлист
-        /// </summary>
-        /// <param name="playlistId">Идентификатор плейлиста</param>
-        /// <param name="fileName">Название загружаемого файла</param>
-        /// <param name="fileBytes">Массив байтов из файла</param>
-        /// <returns></returns>
-        public YResponse<string> UploadTrackToPlaylist(string playlistId, string fileName, byte[] fileBytes)
-        {
-            YUgcUpload uploadLinkResponse = api.UserGeneratedContent.GetUgcUploadLink(storage, fileName, playlistId);
-            return api.UserGeneratedContent.UploadUgcTrack(storage, uploadLinkResponse.PostTarget, fileBytes);
-        }
-        
-        /// <summary>
-        /// Загрузка трека в плейлист
-        /// </summary>
-        /// <param name="playlistId">Идентификатор плейлиста</param>
-        /// <param name="fileName">Название загружаемого файла</param>
-        /// <param name="stream">Стрим загружаемого трека</param>
-        /// <returns></returns>
-        public YResponse<string> UploadTrackToPlaylist(string playlistId, string fileName, Stream stream)
-        {
-            byte[] fileBytes;
-            if (stream is MemoryStream memStream)
-            {
-                fileBytes = memStream.ToArray();
-            }
-            else
-            {
-                using (MemoryStream memoryStream = new MemoryStream())
-                {
-                    stream.CopyTo(memoryStream);
-                    fileBytes = memoryStream.ToArray();
-                }
-            }
 
-            return UploadTrackToPlaylist(playlistId, fileName, fileBytes);
+        /// <summary>
+        /// Загрузка трека в плейлист из файла
+        /// </summary>
+        /// <param name="playlist">Плейлист, куда будет загружен трек</param>
+        /// <param name="fileName">Название загружаемого файла</param>
+        /// <param name="filePath">Загружаемый файл</param>
+        public string UploadTrackToPlaylist(YPlaylist playlist, string fileName, string filePath)
+        {
+            YUgcUpload uploadLinkResponse = api.UserGeneratedContent
+                .GetUgcUploadLink(storage, playlist, fileName);
+
+            return api.UserGeneratedContent.UploadUgcTrack(storage, uploadLinkResponse.PostTarget, filePath)
+                .Result;
         }
 
         /// <summary>
-        /// Загрузка трека в плейлист
+        /// Загрузка трека в плейлист из потока
         /// </summary>
-        /// <param name="playlistId">Идентификатор плейлиста</param>
-        /// <param name="filePath">Путь к файлу</param>
-        /// <returns></returns>
-        public YResponse<string> UploadTrackToPlaylist(string playlistId, string filePath)
+        /// <param name="playlist">Плейлист, куда будет загружен трек</param>
+        /// <param name="fileName">Название загружаемого файла</param>
+        /// <param name="stream">Поток с данными для загрузки</param>
+        public string UploadTrackToPlaylist(YPlaylist playlist, string fileName, Stream stream)
         {
-            var fileName = Path.GetFileName(filePath);
-            var fileBytes = File.ReadAllBytes(filePath);
-            return UploadTrackToPlaylist(playlistId, fileName, fileBytes);
+            YUgcUpload uploadLinkResponse = api.UserGeneratedContent
+                .GetUgcUploadLink(storage, playlist, fileName);
+
+            return api.UserGeneratedContent.UploadUgcTrack(storage, uploadLinkResponse.PostTarget, stream)
+                .Result;
+        }
+
+        /// <summary>
+        /// Загрузка трека в плейлист из массива
+        /// </summary>
+        /// <param name="playlist">Плейлист, куда будет загружен трек</param>
+        /// <param name="fileName">Название загружаемого файла</param>
+        /// <param name="file">Массив байтов из файла</param>
+        public string UploadTrackToPlaylist(YPlaylist playlist, string fileName, byte[] file)
+        {
+            YUgcUpload uploadLinkResponse = api.UserGeneratedContent
+                .GetUgcUploadLink(storage, playlist, fileName);
+
+            return api.UserGeneratedContent.UploadUgcTrack(storage, uploadLinkResponse.PostTarget, file)
+                .Result;
         }
 
         #endregion Загрузка треков
-        
+
         #endregion Основные функции
     }
 }
