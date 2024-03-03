@@ -1,22 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Web.Ugc;
 using Yandex.Music.Api.Requests.Common;
 
 namespace Yandex.Music.Api.Requests.Ugc
 {
-    [YWebApiRequest(WebRequestMethods.Http.Post, "")]
-    public class YUgcUploadBuilder : YRequestBuilder<YUgcTrackUploadResult, (string PostTargetLink, byte[] FileBytes)>
+    [YRequest(WebRequestMethods.Http.Post, "{postTargetLink}")]
+    public class YUgcUploadBuilder : YRequestBuilder<YResponse<string>, (string PostTargetLink, byte[] FileBytes)>
     {
         public YUgcUploadBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
         {
         }
 
-        protected override Uri BuildUri((string PostTargetLink, byte[] FileBytes) tuple)
+        protected override Dictionary<string, string> GetSubstitutions((string PostTargetLink, byte[] FileBytes) tuple)
         {
-            return new Uri(tuple.PostTargetLink);
+            return new Dictionary<string, string> {
+                { "postTargetLink", tuple.PostTargetLink }
+            };
         }
 
         protected override HttpContent GetContent((string PostTargetLink, byte[] FileBytes) tuple)

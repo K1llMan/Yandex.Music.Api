@@ -562,13 +562,13 @@ namespace Yandex.Music.Client
         /// <param name="fileName">Названеи загружаемого файла</param>
         /// <param name="fileBytes">Массив байтов из файла</param>
         /// <returns></returns>
-        public YUgcTrackUploadResult UploadTrackToPlaylist(string playlistId, string fileName, byte[] fileBytes)
+        public YResponse<string> UploadTrackToPlaylist(string playlistId, string fileName, byte[] fileBytes)
         {
             var uploadLinkResponse = api.UserGeneratedContent.GetUgcUploadLink(storage, fileName, playlistId);
             return api.UserGeneratedContent.UploadUgcTrack(storage, uploadLinkResponse.PostTarget, fileBytes);
         }
 
-        #endregion
+        #endregion Загрузка треков
         
         #endregion Основные функции
     }

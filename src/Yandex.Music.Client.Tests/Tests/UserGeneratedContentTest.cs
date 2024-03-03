@@ -4,11 +4,12 @@ using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Extensions.Ordering;
+using Yandex.Music.Api.Models.Playlist;
 using Yandex.Music.Client.Extensions;
 
 namespace Yandex.Music.Client.Tests.Tests
 {
-    [Collection("Yandex Test Harness"), Order(10)]
+    [Collection("Yandex Test Harness"), Order(12)]
     [TestBeforeAfter]
     public class YUserGeneratedContentTest : YandexTest
     {
@@ -22,10 +23,9 @@ namespace Yandex.Music.Client.Tests.Tests
         [Order(0)]
         public void UploadTrackToPlaylist_ValidData_True()
         {
-            var fileName = Path.GetFileName(SampleFilePath);
-            var bytes = File.ReadAllBytes(SampleFilePath);
-            Fixture.Client.Authorize(Fixture.AppSettings.Token);
-            var playlist = Fixture.Client.CreatePlaylist($"UploadTestPlaylist-{DateTime.UtcNow:s}");
+            string fileName = Path.GetFileName(SampleFilePath);
+            byte[] bytes = File.ReadAllBytes(SampleFilePath);
+            YPlaylist playlist = Fixture.Client.CreatePlaylist($"UploadTestPlaylist-{DateTime.UtcNow:s}");
             Fixture.Client.UploadTrackToPlaylist(playlist.Kind, fileName, bytes).Result.Should().Be(SuccessUploadResult);
             playlist.Delete().Should().BeTrue();
         }

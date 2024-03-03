@@ -1,4 +1,5 @@
 using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Web.Ugc;
 
 namespace Yandex.Music.Api.API
@@ -24,7 +25,7 @@ namespace Yandex.Music.Api.API
         /// <param name="uploadLink">Ссылка на балансировщик для загрузки, можно получить из GetUgcUploadLinkAsync</param>
         /// <param name="file">Загружаемый трек в виде массив байтов</param>
         /// <returns></returns>
-        public YUgcTrackUploadResult UploadUgcTrack(AuthStorage storage, string uploadLink, byte[] file)
+        public YResponse<string> UploadUgcTrack(AuthStorage storage, string uploadLink, byte[] file)
         {
             return UploadUgcTrackAsync(storage, uploadLink, file).GetAwaiter().GetResult();
         }
