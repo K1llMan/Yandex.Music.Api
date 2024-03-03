@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 
 using Yandex.Music.Api.Models.Album;
 
-namespace Yandex.Music.Client.Extensions
+namespace Yandex.Music.Api.Extensions.API
 {
     /// <summary>
     /// Методы-расширения для альбома

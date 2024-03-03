@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Yandex.Music.Api.Models.Playlist;
 using Yandex.Music.Api.Models.Track;
 
-namespace Yandex.Music.Client.Extensions
+namespace Yandex.Music.Api.Extensions.API
 {
     /// <summary>
     /// Методы-расширения для плейлиста
@@ -57,6 +57,18 @@ namespace Yandex.Music.Client.Extensions
                 ? (await playlist.Context.API.Playlist.DeleteTracksAsync(playlist.Context.Storage, playlist, tracks))
                     .Result
                 : playlist;
+        }
+
+        public static async Task<bool> UploadTracksAsync(this YPlaylist playlist, string filePath, string fileName)
+        {
+            if (!CheckUser(playlist))
+                return false;
+
+            string target = (await playlist.Context.API.UserGeneratedContent.GetUgcUploadLinkAsync(playlist.Context.Storage, playlist, fileName))
+                .PostTarget;
+
+            return (await playlist.Context.API.UserGeneratedContent.UploadUgcTrackAsync(playlist.Context.Storage, target, filePath))
+                .Result == "CREATED";
         }
     }
 }

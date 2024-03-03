@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
+
 using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Track;
 
-namespace Yandex.Music.Client.Extensions
+namespace Yandex.Music.Api.Extensions.API
 {
     /// <summary>
     /// Методы-расширения для исполнителя

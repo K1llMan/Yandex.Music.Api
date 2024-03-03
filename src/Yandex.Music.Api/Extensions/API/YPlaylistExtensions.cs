@@ -1,7 +1,7 @@
 using Yandex.Music.Api.Models.Playlist;
 using Yandex.Music.Api.Models.Track;
 
-namespace Yandex.Music.Client.Extensions
+namespace Yandex.Music.Api.Extensions.API
 {
     /// <summary>
     /// Методы-расширения для плейлиста
@@ -46,6 +46,11 @@ namespace Yandex.Music.Client.Extensions
         public static YPlaylist RemoveTracks(this YPlaylist playlist, params YTrack[] tracks)
         {
             return RemoveTracksAsync(playlist, tracks).GetAwaiter().GetResult();
+        }
+
+        public static bool UploadTracks(this YPlaylist playlist, string filePath, string fileName)
+        {
+            return UploadTracksAsync(playlist, filePath, fileName).GetAwaiter().GetResult();
         }
     }
 }

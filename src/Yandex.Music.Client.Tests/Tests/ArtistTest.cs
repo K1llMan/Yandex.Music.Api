@@ -6,9 +6,9 @@ using Xunit;
 using Xunit.Abstractions;
 using Xunit.Extensions.Ordering;
 
+using Yandex.Music.Api.Extensions.API;
 using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Track;
-using Yandex.Music.Client.Extensions;
 
 namespace Yandex.Music.Client.Tests.Tests
 {

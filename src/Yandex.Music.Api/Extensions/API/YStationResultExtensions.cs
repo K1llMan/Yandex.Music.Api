@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Yandex.Music.Api.Models.Radio;
 using Yandex.Music.Api.Models.Track;
 
-namespace Yandex.Music.Client.Extensions
+namespace Yandex.Music.Api.Extensions.API
 {
     /// <summary>
     /// Методы-расширения для радиостанции
