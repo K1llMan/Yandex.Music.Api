@@ -12,14 +12,14 @@ namespace Yandex.Music.Client.Tests.Tests;
 
 [Collection("Yandex Test Harness"), Order(12)]
 [TestBeforeAfter]
-public class YLabelTest : YandexTest
+public class LabelTest : YandexTest
 {
     private static YLabel SampleLabel = new YLabel
     {
         Id = "2179708"
     };
 
-    public YLabelTest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
+    public LabelTest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
     {
     }
 

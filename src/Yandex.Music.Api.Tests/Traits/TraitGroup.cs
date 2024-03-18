@@ -5,6 +5,7 @@ namespace Yandex.Music.Api.Tests.Traits
         Models,
         AlbumAPI,
         ArtistAPI,
+        LabelAPI,
         LibraryAPI,
         PlaylistAPI,
         RadioAPI,
