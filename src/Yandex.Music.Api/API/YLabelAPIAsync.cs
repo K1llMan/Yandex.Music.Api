@@ -1,9 +1,6 @@
-using System.Collections.Generic;
-
 using Yandex.Music.Api.Common;
-using Yandex.Music.Api.Models.Album;
-using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
+using Yandex.Music.Api.Models.Label;
 
 namespace Yandex.Music.Api.API
 {
@@ -20,7 +17,7 @@ namespace Yandex.Music.Api.API
         /// <param name="label">Лейбл</param>
         /// <param name="page">Страница</param>
         /// <returns></returns>
-        public YResponse<List<YAlbum>> GetAlbumsByLabel(AuthStorage storage, YLabel label, int page)
+        public YResponse<YLabelAlbums> GetAlbumsByLabel(AuthStorage storage, YLabel label, int page)
         {
             return GetAlbumsByLabelAsync(storage, label, page).GetAwaiter().GetResult();
         }
@@ -32,7 +29,7 @@ namespace Yandex.Music.Api.API
         /// <param name="label">Лейбл</param>
         /// <param name="page">Страница</param>
         /// <returns></returns>
-        public YResponse<List<YArtist>> GetArtistsByLabel(AuthStorage storage, YLabel label, int page)
+        public YResponse<YLabelArtists> GetArtistsByLabel(AuthStorage storage, YLabel label, int page)
         {
             return GetArtistsByLabelAsync(storage, label, page).GetAwaiter().GetResult();
         }

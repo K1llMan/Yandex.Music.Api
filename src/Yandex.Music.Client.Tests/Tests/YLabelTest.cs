@@ -5,6 +5,7 @@ using Xunit;
 using Xunit.Abstractions;
 using Xunit.Extensions.Ordering;
 using Yandex.Music.Api.Models.Album;
+using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
 
 namespace Yandex.Music.Client.Tests.Tests;
@@ -17,6 +18,7 @@ public class YLabelTest : YandexTest
     {
         Id = "2179708"
     };
+
     public YLabelTest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
     {
     }
@@ -27,14 +29,15 @@ public class YLabelTest : YandexTest
     {
         List<YAlbum> albumsByLabel = Fixture.Client.GetAlbumsByLabel(SampleLabel);
         albumsByLabel.Should().NotBeNullOrEmpty();
-        if (albumsByLabel.Count > 0)
-        {
-            var x = albumsByLabel.First().Labels;
-        }
+        List<YLabel> labels = albumsByLabel.First().Labels;
+        labels.Should().Contain(label => label.Id == SampleLabel.Id);
     }
+
     [Fact]
     [Order(1)]
     public void GetLabelArtists_ValidData_True()
     {
+        List<YArtist> albumsByLabel = Fixture.Client.GetArtistsByLabel(SampleLabel);
+        albumsByLabel.Should().NotBeNullOrEmpty();
     }
 }

@@ -4,13 +4,14 @@ using System.Net;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
+using Yandex.Music.Api.Models.Label;
 using Yandex.Music.Api.Requests.Common;
 using Yandex.Music.Api.Requests.Common.Attributes;
 
 namespace Yandex.Music.Api.Requests.Label
 {
     [YApiRequest(WebRequestMethods.Http.Get, "labels/{labelId}/artists")]
-    public class YGetLabelArtistsBuilder : YRequestBuilder<YResponse<List<YArtist>>, (YLabel label, int pageNumber)>
+    public class YGetLabelArtistsBuilder : YRequestBuilder<YResponse<YLabelArtists>, (YLabel label, int pageNumber)>
     {
         public YGetLabelArtistsBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
         {
