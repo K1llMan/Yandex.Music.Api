@@ -311,3 +311,15 @@ YandexMusicClient
    public string UploadTrackToPlaylist(YPlaylist playlist, string fileName, byte[] file)
 
 Загрузка трека в плейлист из массива.
+
+.. code-block:: csharp
+
+   public List<YAlbum> GetAlbumsByLabel(YLabel label, int page = 0)
+
+Получение списка альбомов лейбла.
+
+.. code-block:: csharp
+
+   public List<YArtist> GetArtistsByLabel(YLabel label, int page = 0)
+
+Получение списка артистов лейбла.
