@@ -16,7 +16,7 @@ public class LabelTest : YandexTest
 {
     private static YLabel SampleLabel = new YLabel
     {
-        Id = "2179708"
+        Id = "841322"
     };
 
     public LabelTest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)

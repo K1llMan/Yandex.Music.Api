@@ -608,8 +608,8 @@ namespace Yandex.Music.Client
         /// <summary>
         /// Получение списка альбомов лейбла
         /// </summary>
-        /// <param name="label"></param>
-        /// <param name="page"></param>
+        /// <param name="label">Лейбл</param>
+        /// <param name="page">Страница</param>
         public List<YAlbum> GetAlbumsByLabel(YLabel label, int page = 0)
         {
             return api.Label.GetAlbumsByLabel(storage, label, page).Result.Albums;
