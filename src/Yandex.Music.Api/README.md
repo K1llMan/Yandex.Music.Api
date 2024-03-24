@@ -61,6 +61,9 @@ YandexMusicApi
 │   ├── Get / Async (AuthStorage storage, IEnumerable<string> artistIds)
 │   ├── GetTracks / Async (AuthStorage storage, string artistId, int page = 0, int pageSize = 20)
 │   └── GetAllTracks / Async (AuthStorage storage, string artistId)
+├── Labels
+│   ├── GetAlbumsByLabel / Async (AuthStorage storage, YLabel label, int page)
+│   └── GetArtistsByLabel / Async (AuthStorage storage, YLabel label, int page)
 ├── Landing
 │   ├── Get / Async (AuthStorage storage, params YLandingBlockType[] blocks)
 │   └── Feed / Async (AuthStorage storage)

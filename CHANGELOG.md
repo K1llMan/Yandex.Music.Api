@@ -1,5 +1,7 @@
 # История изменений
 
+## 1.9.0
+* Добавлено получение информации по лейблам. ([PrepConcedeITIS](https://github.com/PrepConcedeITIS))
 ## 1.8.0
 * Добавлена загрузка пользовательских треков. ([PrepConcedeITIS](https://github.com/PrepConcedeITIS))
 * Методы-расширения перемещены в модуль с API.
