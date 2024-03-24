@@ -5,6 +5,7 @@ using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Extensions.Ordering;
+
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Label;
 using Yandex.Music.Api.Tests.Traits;
@@ -17,8 +18,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
     {
         #region Поля
 
-        private static YLabel sampleLabel = new YLabel
-        {
+        private YLabel sampleLabel = new() {
             Id = "841322"
         };
 
@@ -32,9 +32,10 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(0)]
         public async Task GetAlbumsFromLabel_ValidData_True()
         {
-            YResponse<YLabelAlbums> labelAlbums =
-                await Fixture.API.Label.GetAlbumsByLabelAsync(Fixture.Storage, sampleLabel, 0);
+            YResponse<YLabelAlbums> labelAlbums = await Fixture.API.Label
+                .GetAlbumsByLabelAsync(Fixture.Storage, sampleLabel, 0);
             labelAlbums.Result.Should().NotBeNull();
+
             if (labelAlbums.Result.Pager.Total > labelAlbums.Result.Pager.PerPage * (labelAlbums.Result.Pager.Page + 1))
             {
                 labelAlbums = await Fixture.API.Label
@@ -50,14 +51,15 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(1)]
         public async Task GetArtistsFromLabel_ValidData_True()
         {
-            YResponse<YLabelArtists> labelAlbums =
-                await Fixture.API.Label.GetArtistsByLabelAsync(Fixture.Storage, sampleLabel, 0);
-            labelAlbums.Result.Should().NotBeNull();
-            if (labelAlbums.Result.Pager.Total > labelAlbums.Result.Pager.PerPage * (labelAlbums.Result.Pager.Page + 1))
+            YResponse<YLabelArtists> labelArtists = await Fixture.API.Label
+                .GetArtistsByLabelAsync(Fixture.Storage, sampleLabel, 0);
+            labelArtists.Result.Should().NotBeNull();
+
+            if (labelArtists.Result.Pager.Total > labelArtists.Result.Pager.PerPage * (labelArtists.Result.Pager.Page + 1))
             {
-                labelAlbums = await Fixture.API.Label
-                    .GetArtistsByLabelAsync(Fixture.Storage, sampleLabel, labelAlbums.Result.Pager.Page++);
-                labelAlbums.Result.Should().NotBeNull();
+                labelArtists = await Fixture.API.Label
+                    .GetArtistsByLabelAsync(Fixture.Storage, sampleLabel, labelArtists.Result.Pager.Page++);
+                labelArtists.Result.Should().NotBeNull();
             }
         }
     }

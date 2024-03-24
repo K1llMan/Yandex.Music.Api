@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Net;
+
 using Yandex.Music.Api.Common;
-using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Label;
 using Yandex.Music.Api.Requests.Common;
@@ -19,16 +19,14 @@ namespace Yandex.Music.Api.Requests.Label
 
         protected override NameValueCollection GetQueryParams((YLabel label, int pageNumber) tuple)
         {
-            return new NameValueCollection
-            {
+            return new NameValueCollection {
                 { "page", tuple.pageNumber.ToString() }
             };
         }
 
         protected override Dictionary<string, string> GetSubstitutions((YLabel label, int pageNumber) tuple)
         {
-            return new Dictionary<string, string>
-            {
+            return new Dictionary<string, string> {
                 { "labelId", tuple.label.Id }
             };
         }
