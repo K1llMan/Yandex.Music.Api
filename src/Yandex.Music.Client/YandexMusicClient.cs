@@ -603,6 +603,30 @@ namespace Yandex.Music.Client
 
         #endregion Загрузка треков
 
+        #region Лейблы
+
+        /// <summary>
+        /// Получение списка альбомов лейбла
+        /// </summary>
+        /// <param name="label">Лейбл</param>
+        /// <param name="page">Страница</param>
+        public List<YAlbum> GetAlbumsByLabel(YLabel label, int page = 0)
+        {
+            return api.Label.GetAlbumsByLabel(storage, label, page).Result.Albums;
+        }
+
+        /// <summary>
+        /// Получение списка артистов лейбла
+        /// </summary>
+        /// <param name="label">Лейбл</param>
+        /// <param name="page">Страница</param>
+        public List<YArtist> GetArtistsByLabel(YLabel label, int page = 0)
+        {
+            return api.Label.GetArtistsByLabel(storage, label, page).Result.Artists;
+        }
+
+        #endregion Лейблы
+
         #endregion Основные функции
     }
 }

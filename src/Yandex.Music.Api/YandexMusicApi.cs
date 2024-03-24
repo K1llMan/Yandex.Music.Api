@@ -23,6 +23,11 @@ namespace Yandex.Music.Api
         public YArtistAPI Artist { get; internal set; }
 
         /// <summary>
+        /// API лейблов
+        /// </summary>
+        public YLabelAPI Label { get; internal set; }
+
+        /// <summary>
         /// API главной страницы
         /// </summary>
         public YLandingAPI Landing { get; internal set; }
