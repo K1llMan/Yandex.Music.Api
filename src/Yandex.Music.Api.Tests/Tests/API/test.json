@@ -1,0 +1,72 @@
+[
+  {
+    "client": "android",
+    "context": "playlist",
+    "contextItem": "978085124:1033",
+    "tracks": [
+      {
+        "trackId": {
+          "id": 123953366,
+          "albumId": 30319657
+        },
+        "timestamp": "2024-04-12T17:05:27+03:00"
+      }
+    ]
+  },
+  {
+    "client": "web",
+    "context": "playlist",
+    "contextItem": "503646255:124353148",
+    "tracks": [
+      {
+        "trackId": {
+          "id": 66480352,
+          "albumId": 10842949
+        },
+        "timestamp": "2024-04-12T14:07:00+03:00"
+      }
+    ]
+  },
+  {
+    "client": "web",
+    "context": "album",
+    "contextItem": 30566114,
+    "tracks": [
+      {
+        "trackId": {
+          "id": 124504721,
+          "albumId": 30566114
+        },
+        "timestamp": "2024-04-12T10:21:44+03:00"
+      }
+    ]
+  },
+  {
+    "client": "android",
+    "context": "album",
+    "contextItem": 30579941,
+    "tracks": [
+      {
+        "trackId": {
+          "id": 124534706,
+          "albumId": 30579941
+        },
+        "timestamp": "2024-04-10T23:25:39+03:00"
+      }
+    ]
+  },
+  {
+    "client": "android",
+    "context": "album",
+    "contextItem": 30319657,
+    "tracks": [
+      {
+        "trackId": {
+          "id": 123953380,
+          "albumId": 30319657
+        },
+        "timestamp": "2024-04-10T08:59:39+03:00"
+      }
+    ]
+  }
+]

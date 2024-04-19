@@ -9,6 +9,7 @@ using Xunit.Extensions.Ordering;
 using Yandex.Music.Api.Models.Album;
 using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
+using Yandex.Music.Api.Models.Landing.Entity.Entities.Context;
 using Yandex.Music.Api.Models.Library;
 using Yandex.Music.Api.Tests.Traits;
 
@@ -164,6 +165,24 @@ namespace Yandex.Music.Api.Tests.Tests.API
         public void GetDislikedArtists_ValidData_True()
         {
             List<YArtist> artists = Fixture.API.Library.GetDislikedArtists(Fixture.Storage).Result;
+
+            artists.Should().NotBeNull();
+        }
+
+        [Fact, YandexTrait(TraitGroup.LibraryAPI)]
+        [Order(14)]
+        public void GetRecentlyListened_ValidData_True()
+        {
+            Fixture.API.User.Authorize(Fixture.Storage, Fixture.AppSettings.Token);
+            
+            IEnumerable<YPlayContextType> types = new[]
+            {
+                YPlayContextType.Album, YPlayContextType.Artist, YPlayContextType.Playlist
+            };
+            int trackCount = 1;
+            int contextCount = 5;
+            var artists = Fixture.API.Library
+                .GetRecentlyListened(Fixture.Storage, types,trackCount, contextCount).Result;
 
             artists.Should().NotBeNull();
         }
