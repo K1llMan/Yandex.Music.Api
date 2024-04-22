@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 using FluentAssertions;
 
@@ -11,6 +12,7 @@ using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Landing.Entity.Entities.Context;
 using Yandex.Music.Api.Models.Library;
+using Yandex.Music.Api.Models.Track;
 using Yandex.Music.Api.Tests.Traits;
 
 namespace Yandex.Music.Api.Tests.Tests.API
@@ -173,18 +175,19 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(14)]
         public void GetRecentlyListened_ValidData_True()
         {
-            Fixture.API.User.Authorize(Fixture.Storage, Fixture.AppSettings.Token);
-            
             IEnumerable<YPlayContextType> types = new[]
             {
                 YPlayContextType.Album, YPlayContextType.Artist, YPlayContextType.Playlist
             };
-            int trackCount = 1;
+            int trackCount = 2;
             int contextCount = 5;
-            var artists = Fixture.API.Library
+            YRecentlyListenedContext recentlyListened = Fixture.API.Library
                 .GetRecentlyListened(Fixture.Storage, types,trackCount, contextCount).Result;
 
-            artists.Should().NotBeNull();
+            recentlyListened.Should().NotBeNull();
+            recentlyListened.Contexts.Should().NotBeNullOrEmpty();
+            recentlyListened.Contexts.First().Tracks.Should().NotBeNullOrEmpty();
+            recentlyListened.Contexts.First().ContextItem.Should().NotBeNull();
         }
 
         public LibraryAPITest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)

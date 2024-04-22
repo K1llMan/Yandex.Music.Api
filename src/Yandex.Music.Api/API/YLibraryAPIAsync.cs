@@ -245,13 +245,18 @@ namespace Yandex.Music.Api.API
 
         #endregion Добавление/удаление в списки лайков/дизлайков
 
-        public Task<YResponse<YRecentlyListened[]>> GetRecentlyListenedAsync(AuthStorage storage, IEnumerable<YPlayContextType> contextTypes,
-            int trackCount, int contextCount)
+        #region Получение списка "Вы недавно слушали"
+
+        public Task<YResponse<YRecentlyListenedContext>> GetRecentlyListenedAsync(AuthStorage storage,
+            IEnumerable<YPlayContextType> contextTypes, int trackCount, int contextCount)
         {
             return new YGetLibraryRecentlyListenedBuilder(api, storage)
                 .Build((contextTypes, trackCount, contextCount))
                 .GetResponseAsync();
         }
+
+        #endregion Получение списка "Вы недавно слушали"
+        
         #endregion Основные функции
     }
 }

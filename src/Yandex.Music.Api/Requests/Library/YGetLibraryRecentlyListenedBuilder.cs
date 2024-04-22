@@ -12,7 +12,7 @@ using Yandex.Music.Api.Requests.Common.Attributes;
 namespace Yandex.Music.Api.Requests.Library
 {
     [YApiRequest(WebRequestMethods.Http.Get, "/users/{uid}/contexts")]
-    public class YGetLibraryRecentlyListenedBuilder : YRequestBuilder<YResponse<YRecentlyListened[]>,
+    public class YGetLibraryRecentlyListenedBuilder : YRequestBuilder<YResponse<YRecentlyListenedContext>,
         (IEnumerable<YPlayContextType> contextTypes, int trackCount, int contextCount)>
     {
         public YGetLibraryRecentlyListenedBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
