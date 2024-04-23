@@ -28,6 +28,15 @@ namespace Yandex.Music.Client.Tests.Tests
             YFeed feed = Fixture.Client.Feed();
             feed.Should().NotBe(null);
         }
+        
+        [Fact]
+        [Order(2)]
+        public void ChildrenLanding_ValidData_True()
+        {
+            //var feed = Fixture.Client.();
+            //feed.Should().NotBe(null);
+        }
+        
         public LandingAPITest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
         {
         }

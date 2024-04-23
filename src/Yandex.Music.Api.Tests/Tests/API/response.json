@@ -1,0 +1,4421 @@
+﻿{
+  "title": "Детям",
+  "blocks": [
+    {
+      "id": "PROMOTIONS_KIDS",
+      "title": "Самое-самое",
+      "type": "promotions",
+      "typeForFrom": "catalogue-promotions",
+      "entities": [
+        {
+          "id": "e1fd7OwX",
+          "type": "promotion",
+          "data": {
+            "promoId": "66276eca616df770382531a6",
+            "title": "Навстречу приключениям всей семьёй!",
+            "subtitle": "Учимся дружбе вместе с любимыми героями",
+            "heading": "Премьера",
+            "url": "/album/30568123",
+            "urlScheme": "yandexmusic://album/30568123",
+            "image": "avatars.yandex.net/get-music-feed-promotion/27702/66276eca616df770382531a6-landing.image/%%",
+            "blockEntityDataId": "66276eca616df770382531a6"
+          }
+        },
+        {
+          "id": "8lbkvocN",
+          "type": "promotion",
+          "data": {
+            "promoId": "6622384deac10530c89ef5d4",
+            "title": "Как вести себя рядом с дорогой?",
+            "subtitle": "Учим правила играючи вместе с Робокаром Поли!",
+            "heading": "Новинка",
+            "url": "/album/30816944",
+            "urlScheme": "yandexmusic://album/30816944",
+            "image": "avatars.yandex.net/get-music-feed-promotion/59901/6622384deac10530c89ef5d4-landing.image/%%",
+            "blockEntityDataId": "6622384deac10530c89ef5d4"
+          }
+        },
+        {
+          "id": "Rrj3suOp",
+          "type": "promotion",
+          "data": {
+            "promoId": "661818596c689b6e980717ad",
+            "title": "Отправляемся в путешествие по орбите!",
+            "subtitle": "Вместе с Любознайцем и Музеем Космонавтики",
+            "heading": "Новый подкаст",
+            "url": "/album/30666437",
+            "urlScheme": "yandexmusic://album/30666437",
+            "image": "avatars.yandex.net/get-music-feed-promotion/30089/6618176558bc1656b409032e-landing.image/%%",
+            "blockEntityDataId": "661818596c689b6e980717ad"
+          }
+        },
+        {
+          "id": "FZZFe2zx",
+          "type": "promotion",
+          "data": {
+            "promoId": "6613d228c90b5d576bcbe0b1",
+            "title": "Что такое настоящий талант, и кто такие герои?",
+            "subtitle": "«Царевны» отправляются в новые приключения!",
+            "heading": "Слушайте и смотрите",
+            "url": "/album/30568124",
+            "urlScheme": "yandexmusic://album/30568124",
+            "image": "avatars.yandex.net/get-music-feed-promotion/59901/6613cf80177f02449f82dfd1-landing.image/%%",
+            "blockEntityDataId": "6613d228c90b5d576bcbe0b1"
+          }
+        },
+        {
+          "id": "bwQ8CEJx",
+          "type": "promotion",
+          "data": {
+            "promoId": "661916c4a4ba987e1f893a29",
+            "title": "Загадочный и неизвестный космос!",
+            "subtitle": "Отправляемся в путешествие вместе со Смешариками",
+            "heading": "Новинка",
+            "url": "/album/30670191",
+            "urlScheme": "yandexmusic://album/30670191",
+            "image": "avatars.yandex.net/get-music-feed-promotion/59901/661915bf58bc1656b409086a-landing.image/%%",
+            "blockEntityDataId": "661916c4a4ba987e1f893a29"
+          }
+        }
+      ]
+    },
+    {
+      "id": "CATEGORIES_TAB_KIDS_NEW",
+      "title": "Что послушаем?",
+      "type": "categories-tab",
+      "typeForFrom": "catalogue-categories-tab",
+      "entities": [
+        {
+          "id": "q3LFWahT",
+          "type": "category",
+          "data": {
+            "categoryId": "fairytales",
+            "title": "ㅤ",
+            "url": "/kids/category/fairytales",
+            "urlScheme": "yandexmusic://kids/category/fairytales",
+            "textColor": "#000000",
+            "textBackgroundColor": "transparent",
+            "backgroundImageUri": "avatars.yandex.net/get-music-misc/49997/ruBackgroundImage-fairytales-1678357901932/%%",
+            "hasBackgroundImageText": false,
+            "voiceTitle": "Cказки и книжки",
+            "blockEntityDataId": "fairytales"
+          }
+        },
+        {
+          "id": "fHvZTcPw",
+          "type": "category",
+          "data": {
+            "categoryId": "heroes",
+            "title": "ㅤ",
+            "url": "/post/6106e4ac26686a765570ee54",
+            "urlScheme": "yandexmusic://post/6106e4ac26686a765570ee54",
+            "textColor": "#000000",
+            "textBackgroundColor": "#000000",
+            "backgroundImageUri": "avatars.yandex.net/get-music-misc/70683/ruBackgroundImage-heroes-1712133212239/%%",
+            "hasBackgroundImageText": false,
+            "voiceTitle": "Вселенные героев",
+            "blockEntityDataId": "heroes"
+          }
+        },
+        {
+          "id": "TXIjdM4J",
+          "type": "category",
+          "data": {
+            "categoryId": "podcasts",
+            "title": "ㅤ",
+            "url": "/kids/category/podcasts",
+            "urlScheme": "yandexmusic://kids/category/podcasts",
+            "textColor": "#000000",
+            "textBackgroundColor": "default",
+            "backgroundImageUri": "avatars.yandex.net/get-music-misc/34161/ruBackgroundImage-podcasts-1678357698232/%%",
+            "hasBackgroundImageText": false,
+            "voiceTitle": "Развивайки",
+            "blockEntityDataId": "podcasts"
+          }
+        },
+        {
+          "id": "LfzPBj8K",
+          "type": "category",
+          "data": {
+            "categoryId": "songs",
+            "title": "ㅤ",
+            "url": "/kids/category/songs",
+            "urlScheme": "yandexmusic://kids/category/songs",
+            "textColor": "#000000",
+            "textBackgroundColor": "transparent",
+            "backgroundImageUri": "avatars.yandex.net/get-music-misc/2413828/ruBackgroundImage-songs-1678356102350/%%",
+            "hasBackgroundImageText": false,
+            "voiceTitle": "Песенки",
+            "blockEntityDataId": "songs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kids_exclusive",
+      "title": "Только на Яндекс Музыке",
+      "type": "editorial-playlists",
+      "typeForFrom": "catalogue-editorial-playlists",
+      "viewAllUrl": "/kids/editorial/album/kids_exclusive",
+      "viewAllUrlScheme": "yandexmusic://kids/editorial/album/kids_exclusive",
+      "entities": [
+        {
+          "id": "L81joo4u",
+          "type": "album",
+          "data": {
+            "id": 30568123,
+            "title": "Барбоскины. Дружная команда",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/10129881/be6f2126.a.30568123-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/10129881/be6f2126.a.30568123-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 7,
+            "likesCount": 128,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 17976844,
+                "name": "Владимир Князев",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/10139807/61f77a22.a.29882065-1/%%",
+                  "prefix": "61f77a22.a.29882065-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4006342,
+                "name": "Издательство «Эксмо»"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "С Барбоскиными скучно не бывает! Дружное семейство вновь отправляется навстречу весёлым приключениям. Хотите узнать, какую хитрость придумал дедушка, чтобы отвлечь внуков от гаджетов; как Гена и Дружок научились не завидовать друг другу, а ценить собственные таланты; кем оказался таинственный друг Малыша и о чём болтают кузнечики? Тогда слушайте аудиокнигу и погружайтесь в удивительный мир любимых героев!",
+            "disclaimers": [],
+            "blockEntityDataId": "30568123"
+          }
+        },
+        {
+          "id": "HHxR47b3",
+          "type": "album",
+          "data": {
+            "id": 30816944,
+            "title": "РОБОКАР ПОЛИ – БЕЗОПАСНОСТЬ ПРЕВЫШЕ ВСЕГО",
+            "type": "podcast",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/10918712/a312a86f.a.30816944-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/10918712/a312a86f.a.30816944-1/%%",
+            "genre": "podcasts",
+            "trackCount": 20,
+            "likesCount": 235,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [],
+            "labels": [],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [
+              125073255,
+              125072007,
+              125073256
+            ],
+            "description": "Главные шалуны Брумстауна Кевин и Даги бегают по городу и вечно попадают в разные неприятности. Озорные дети рискуют попасть под машину на пешеходных переходах и узких улицах!\u003cbr/\u003e\u003cbr/\u003eНеосторожные действия на дороге или обочине могут привести к серьёзной аварии. И чтобы этого не случилось, Робокар Поли и его команда расскажут детям о правилах дорожной безопасности и покажут как действовать в случае чрезвычайной ситуации и конечно придут на помощь в самую нужную минуту",
+            "disclaimers": [],
+            "blockEntityDataId": "30816944"
+          }
+        },
+        {
+          "id": "t4VwPqLR",
+          "type": "album",
+          "data": {
+            "id": 30670191,
+            "title": "Смешарики. Космические истории",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/10126140/502b2250.a.30670191-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/10126140/502b2250.a.30670191-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 7,
+            "likesCount": 1315,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 5436088,
+                "name": "Михаил Хрусталёв",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/10126140/502b2250.a.30670191-1/%%",
+                  "prefix": "502b2250.a.30670191-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              },
+              {
+                "id": 3414566,
+                "name": "Смешарики",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-artist-photos",
+                  "uri": "avatars.yandex.net/get-music-content/4388221/f7852ead.p.3414566/%%",
+                  "prefix": "f7852ead.p.3414566/"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4006342,
+                "name": "Издательство «Эксмо»"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Нас всех привлекает космос \u0026#8212; загадочный и неизвестный! Вот и Смешарики стремятся разгадать его тайны. Крош убеждён, что наша планета не может быть круглой, и вместе со своим лучшим другом Ёжиком отправляется искать край Земли. Когда научное сообщество лишает Плутон статуса планеты, Лосяш в знак протеста объявляет голодовку и становится героем галактического масштаба! А ещё в этом выпуске вас ждут таинственные круги на полях, сражения с инопланетными чудовищами и настоящий выход в открытый космос! Слушайте космический аудиоспектакль о приключениях любимых героев!",
+            "disclaimers": [],
+            "blockEntityDataId": "30670191"
+          }
+        },
+        {
+          "id": "1Bpdqijc",
+          "type": "album",
+          "data": {
+            "id": 30666437,
+            "title": "Любознаец и путешествие по орбите с музеем Космонавтики",
+            "type": "podcast",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/10960834/db345ec7.a.30666437-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/10960834/db345ec7.a.30666437-1/%%",
+            "genre": "podcasts",
+            "trackCount": 4,
+            "likesCount": 963,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 21931937,
+                "name": "Любознаец",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-artist-photos",
+                  "uri": "avatars.yandex.net/get-music-content/6386858/a23b8714.p.21931937/%%",
+                  "prefix": "a23b8714.p.21931937/"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 5515816,
+                "name": "Плюс Детям"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [
+              124720215
+            ],
+            "shortDescription": "Подкаст для любознательных детей про полёты человека в космос",
+            "description": "В новом сезоне Любознаец отправится в путешествие по орбите. Он и его новый соведущий блогер Борис Веденский узнают: Как стать астронавтом и чем заняться на орбите? Зачем нужны спутники и кто убирает космический мусор? Какие рекорды человек поставил в космосе?\u003cbr/\u003e\u003cbr/\u003eНайти ответы им помогут научный сотрудник музея Космонавтики Алексей Сафонов, а своим опытом полёта в космос поделится Александр Лавейкин, 203-ий летчик-космонавт мира и герой Советского Союза.\u003cbr/\u003e\u003cbr/\u003eЭти увлекательные истории будут интересны ребятам 5-10 лет.\u003cbr/\u003e\u003cbr/\u003eКосмическое приключение в Сказбуке от Плюс Детям: \u003ca href\u003d\"https://clck.ru/39s2a2\" target\u003d\"_blank\" rel\u003d\"noopener noreferrer\"\u003ehttps://clck.ru/39s2a2\u003c/a\u003e\u003cbr/\u003e\u003cbr/\u003eПродакшн: Rise\u0026rsquo;n\u0026rsquo;Shine Agency",
+            "disclaimers": [],
+            "blockEntityDataId": "30666437"
+          }
+        },
+        {
+          "id": "zwcTpYeC",
+          "type": "album",
+          "data": {
+            "id": 30568124,
+            "title": "Царевны. Удивительные приключения",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/9837520/67c4851b.a.30568124-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/9837520/67c4851b.a.30568124-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 5,
+            "likesCount": 834,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 3800443,
+                "name": "Ирина Обрезкова",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/10210263/bd23dfa8.a.27276939-1/%%",
+                  "prefix": "bd23dfa8.a.27276939-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4006342,
+                "name": "Издательство «Эксмо»"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Встречайте новые волшебные приключения героев любимого мультсериала \u0026laquo;Царевны\u0026raquo; - Даши, Василисы, Вари, Алёнки и Сони! На этот раз им предстоит вернуть на небо осколки золотой кометы, выяснить, в чём заключается секрет любого таланта, какие качества определяют истинного героя и почему Яга оказалась ценнее всех в Дивногорье. Волшебство, дружба и добро ждут вас!",
+            "disclaimers": [],
+            "blockEntityDataId": "30568124"
+          }
+        },
+        {
+          "id": "rdvcBTJf",
+          "type": "album",
+          "data": {
+            "id": 30468961,
+            "title": "Розыгрыши с Финником",
+            "type": "podcast",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/10874616/0b1dac81.a.30468961-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/10874616/0b1dac81.a.30468961-1/%%",
+            "genre": "podcasts",
+            "trackCount": 10,
+            "likesCount": 894,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 17907577,
+                "name": "Финник",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-artist-photos",
+                  "uri": "avatars.yandex.net/get-music-content/5502420/78d34a67.p.17907577/%%",
+                  "prefix": "78d34a67.p.17907577/"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 5194957,
+                "name": "Riki"
+              },
+              {
+                "id": 2615544,
+                "name": "Яндекс Музыка"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [
+              124449831,
+              124296438
+            ],
+            "description": "Финник \u0026#8212; не только первый в мире домовой детектив, но и большой шутник и знаток розыгрышей. В своём подкасте Финник расскажет, как люди в разное время разыгрывали друзей, коллег и даже целые города! А ещё удивит всех фактами настоящих чудес из мира природы, науки и человеческих изобретений.\u003cbr/\u003e\u003cbr/\u003eГотовы смеяться и удивляться? Тогда включайте подкаст \u0026laquo;Розыгрыши с Финником\u0026raquo;.",
+            "disclaimers": [],
+            "blockEntityDataId": "30468961"
+          }
+        },
+        {
+          "id": "xod7m5S7",
+          "type": "album",
+          "data": {
+            "id": 30406184,
+            "title": "Ольга Василькова, Лена Репетур. «Эх. История о маленьком гепарде, который не умел бегать»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "year": 2024,
+            "releaseDate": "2024-03-26T00:00:00+03:00",
+            "coverUri": "avatars.yandex.net/get-music-content/10874616/dfa774a7.a.30406184-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/10874616/dfa774a7.a.30406184-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 1,
+            "likesCount": 1544,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 21904191,
+                "name": "Нина Иванчикова",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-artist-photos",
+                  "uri": "avatars.yandex.net/get-music-content/10874616/b23f24bc.p.21904191/%%",
+                  "prefix": "b23f24bc.p.21904191/"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Никто не читает детям сказки лучше, чем бабушки и дедушки! Поэтому мы решили запустить серию \u0026#8212; \u0026laquo;Бабушкины сказки\u0026raquo;. В роли бабушки у нас \u0026#8212; Нина Иванчикова, мама Кати Iowa, которая к дню рождения своего внука Лёвы записала ему, а также и всем детям, которые слушают Яндекс Музыку сказку издательства \u0026laquo;Белая Ворона\u0026raquo; \u0026laquo;Эх. История о маленьком гепарде, который не умел бегать\u0026raquo;. Это история о невезучем гепарде по имени Эх, у которого никак не получалось быстро бегать пока он не услышал по-настоящему интересную историю!\u003cbr/\u003e",
+            "disclaimers": [],
+            "blockEntityDataId": "30406184"
+          }
+        },
+        {
+          "id": "jPtcslS2",
+          "type": "album",
+          "data": {
+            "id": 28525508,
+            "title": "Михаил Санадзе. «Когда я вырасту, я стану хоккеистом»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/10139807/38020b34.a.28525508-2/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/10139807/38020b34.a.28525508-2/%%",
+            "genre": "childrensliterature",
+            "trackCount": 11,
+            "likesCount": 1421,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 4769448,
+                "name": "Алексей Багдасаров",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/7852894/f387ff04.a.24855919-1/%%",
+                  "prefix": "f387ff04.a.24855919-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 5399666,
+                "name": "Поляндрия Принт"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Сева Михайлов и\u0026nbsp;его отец находят на\u0026nbsp;чердаке старую клюшку с\u0026nbsp;автографом. Оказывается, она хранится в\u0026nbsp;семье очень давно, с\u0026nbsp;зимней Олимпиады\u0026nbsp;1956\u0026nbsp;года, когда сборная СССР выиграла первое олимпийское золото. Кому из\u0026nbsp;знаменитых хоккеистов принадлежала клюшка? Сева ищет разгадку\u0026nbsp;этой тайны и\u0026nbsp;начинает свой путь в\u0026nbsp;мир хоккея. Прочитав эту увлекательную, почти детективную историю, дети\u0026nbsp;многое узнают об\u0026nbsp;игре в\u0026nbsp;хоккей, о\u0026nbsp;спортивных школах и\u0026nbsp;хоккейных клубах,\u0026nbsp;о\u0026nbsp;достижениях советских и\u0026nbsp;российских спортсменов, а\u0026nbsp;также о\u0026nbsp;людях\u0026nbsp;разных профессий, без которых невозможно представить современный хоккей",
+            "disclaimers": [],
+            "blockEntityDataId": "28525508"
+          }
+        },
+        {
+          "id": "XVU1eBO1",
+          "type": "album",
+          "data": {
+            "id": 30125454,
+            "title": "Любознаец и удивительное искусство с Пушкинским музеем",
+            "type": "podcast",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/10874616/553cf0a0.a.30125454-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/10874616/553cf0a0.a.30125454-1/%%",
+            "genre": "podcasts",
+            "trackCount": 9,
+            "likesCount": 3829,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 21931937,
+                "name": "Любознаец",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-artist-photos",
+                  "uri": "avatars.yandex.net/get-music-content/6386858/a23b8714.p.21931937/%%",
+                  "prefix": "a23b8714.p.21931937/"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 5515816,
+                "name": "Плюс Детям"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [
+              123515836,
+              123515838
+            ],
+            "description": "Заяц Любознаец задумал стать художником и хочет больше узнать об искусстве. Кто такие \u0026laquo;врачи искусства\u0026raquo;, как понять абстрактную живопись, что такое вдохновение, где искать идеи для творчества, как появились музеи и почему среди известных художников так мало женщин? Узнать ответы на эти и другие вопросы Любознайцу помогает соведущая - актриса театра и кино Лиза Арзамасова, а также бывший сотрудник Пушкинского музея, искусствовед Оксана Киташова.\u003cbr/\u003e\u003cbr/\u003eЭти короткие истории будут интересны детям 5-10 лет, которые хотят больше узнать об изобразительном искусстве.\u003cbr/\u003e\u003cbr/\u003eПомогите ребёнку развить творческий потенциал с приложением \u0026laquo;Рисовайка\u0026raquo; от Плюс Детям бесплатно: \u003ca href\u003d\"https://clck.ru/39FrZQ\" target\u003d\"_blank\" rel\u003d\"noopener noreferrer\"\u003ehttps://clck.ru/39FrZQ\u003c/a\u003e\u003cbr/\u003e\u003cbr/\u003eПосетить Пушкинский музей: \u003ca href\u003d\"https://pushkinmuseum.art\" target\u003d\"_blank\" rel\u003d\"noopener noreferrer\"\u003ehttps://pushkinmuseum.art\u003c/a\u003e\u003cbr/\u003e\u003cbr/\u003eУзнать больше о детских программах Пушкинского музея \u0026laquo;Мусейон\u0026raquo;: \u003ca href\u003d\"https://t.me/museyon\" target\u003d\"_blank\" rel\u003d\"noopener noreferrer\"\u003ehttps://t.me/museyon\u003c/a\u003e\u003cbr/\u003e\u003cbr/\u003eВсе сезоны Любознайца и другие подкасты Плюс Детям: \u003ca href\u003d\"https://music.yandex.ru/kids/editorial/album/kids_podcasts_plus_detyam\" target\u003d\"_blank\" rel\u003d\"noopener noreferrer\"\u003ehttps://music.yandex.ru/kids/editorial/album/kids_podcasts_plus_detyam\u003c/a\u003e\u003cbr/\u003e\u003cbr/\u003eПродакшн: \u003ca href\u003d\"https://rnsagency.ru/\" target\u003d\"_blank\" rel\u003d\"noopener noreferrer\"\u003eRise\u0026rsquo;n\u0026rsquo;Shine Agency\u003c/a\u003e",
+            "disclaimers": [],
+            "blockEntityDataId": "30125454"
+          }
+        },
+        {
+          "id": "8CoAIOnz",
+          "type": "album",
+          "data": {
+            "id": 30129709,
+            "title": "Смешарики. Очаровательные истории",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/5853241/0b6a3071.a.30129709-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/5853241/0b6a3071.a.30129709-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 7,
+            "likesCount": 752,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 5436088,
+                "name": "Михаил Хрусталёв",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/10126140/502b2250.a.30670191-1/%%",
+                  "prefix": "502b2250.a.30670191-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              },
+              {
+                "id": 3414566,
+                "name": "Смешарики",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-artist-photos",
+                  "uri": "avatars.yandex.net/get-music-content/4388221/f7852ead.p.3414566/%%",
+                  "prefix": "f7852ead.p.3414566/"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4006342,
+                "name": "Издательство «Эксмо»"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "В некотором царстве, в некотором государстве жили две прекрасные дамы... Впрочем, вы их и так хорошо знаете! Нюша любит читать книги и грезить о приключениях и принцах, а Совунья \u0026#8212; настоящая хозяйка, которая делает лучшие на свете соленья. Но в какой-то миг сказочные грёзы становятся реальностью, а от закатывания банок требуется отдых. Чего только ни происходит с нашими очаровательными дамами! За Нюшей гоняется избушка на курьих ножках, а Совунья хорошенько отсыпается, и даже торнадо её не разбудить. Где найти аленький цветочек? Как стать стюардессой и отправиться в незабываемый полёт? Есть ли жизнь после поражения любимой хоккейной команды? Смешарики точно знают ответы на эти и другие вопросы! Слушайте увлекательный аудиоспектакль про Нюшу и Совунью и присоединяйтесь к приключениям любимых героев!",
+            "disclaimers": [],
+            "blockEntityDataId": "30129709"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kids_sport",
+      "title": "Для маленьких чемпионов",
+      "description": "Книги, подкасты и сказки про спорт",
+      "type": "editorial-playlists",
+      "typeForFrom": "catalogue-editorial-playlists",
+      "viewAllUrl": "/kids/editorial/album/kids_sport",
+      "viewAllUrlScheme": "yandexmusic://kids/editorial/album/kids_sport",
+      "entities": [
+        {
+          "id": "HJWo3ok4",
+          "type": "album",
+          "data": {
+            "id": 28525508,
+            "title": "Михаил Санадзе. «Когда я вырасту, я стану хоккеистом»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/10139807/38020b34.a.28525508-2/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/10139807/38020b34.a.28525508-2/%%",
+            "genre": "childrensliterature",
+            "trackCount": 11,
+            "likesCount": 1421,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 4769448,
+                "name": "Алексей Багдасаров",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/7852894/f387ff04.a.24855919-1/%%",
+                  "prefix": "f387ff04.a.24855919-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 5399666,
+                "name": "Поляндрия Принт"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Сева Михайлов и\u0026nbsp;его отец находят на\u0026nbsp;чердаке старую клюшку с\u0026nbsp;автографом. Оказывается, она хранится в\u0026nbsp;семье очень давно, с\u0026nbsp;зимней Олимпиады\u0026nbsp;1956\u0026nbsp;года, когда сборная СССР выиграла первое олимпийское золото. Кому из\u0026nbsp;знаменитых хоккеистов принадлежала клюшка? Сева ищет разгадку\u0026nbsp;этой тайны и\u0026nbsp;начинает свой путь в\u0026nbsp;мир хоккея. Прочитав эту увлекательную, почти детективную историю, дети\u0026nbsp;многое узнают об\u0026nbsp;игре в\u0026nbsp;хоккей, о\u0026nbsp;спортивных школах и\u0026nbsp;хоккейных клубах,\u0026nbsp;о\u0026nbsp;достижениях советских и\u0026nbsp;российских спортсменов, а\u0026nbsp;также о\u0026nbsp;людях\u0026nbsp;разных профессий, без которых невозможно представить современный хоккей",
+            "disclaimers": [],
+            "blockEntityDataId": "28525508"
+          }
+        },
+        {
+          "id": "JA6kyJsD",
+          "type": "album",
+          "data": {
+            "id": 22011422,
+            "title": "Приключения Плюха и Шваха. Мы чемпионы. Часть 3",
+            "type": "fairy-tale",
+            "metaType": "podcast",
+            "year": 2017,
+            "releaseDate": "2017-05-22T00:00:00+03:00",
+            "coverUri": "avatars.yandex.net/get-music-content/6202531/1b8bd7da.a.22011422-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/6202531/1b8bd7da.a.22011422-1/%%",
+            "genre": "fairytales",
+            "trackCount": 24,
+            "likesCount": 1031,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 2959144,
+                "name": "Лариса Брохман",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/2442093/f616d71b.a.10312662-1/%%",
+                  "prefix": "f616d71b.a.10312662-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              },
+              {
+                "id": 3100829,
+                "name": "Клоун Плюх",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/149669/fc361dc0.a.4420978-1/%%",
+                  "prefix": "fc361dc0.a.4420978-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4369740,
+                "name": "ООО \"Издательство Робинс\". Лицензия Gamma"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [
+              103130707,
+              103130706,
+              103130717
+            ],
+            "description": "Продолжение приключений клоунов Плюха и Шваха в новом сборнике историй.\u003cbr/\u003e\u003cbr/\u003eКто не хочет услышать новые истории о Плюхе и Швахе? Тем более, что эти истории всегда смешные, увлекательные, а иногда и вовсе невероятные. В новом сборнике слушателей ждёт множество спортивных историй \u0026#8212; высокопрыгательная, плавательная, трамплинная и даже шахматная! А слушатели смогут узнать больше о спорте и насладиться новыми приключениями любимых клоунов.",
+            "disclaimers": [],
+            "blockEntityDataId": "22011422"
+          }
+        },
+        {
+          "id": "rU31y43S",
+          "type": "album",
+          "data": {
+            "id": 27766809,
+            "title": "Малышарики. Чемпионы и другие истории",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/9837803/79420f48.a.27766809-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/9837803/79420f48.a.27766809-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 10,
+            "likesCount": 480,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 16341423,
+                "name": "Анна Геллер",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/9737237/9fb268e7.a.25892993-1/%%",
+                  "prefix": "9fb268e7.a.25892993-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4006342,
+                "name": "Издательство «Эксмо»"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Наши добрые и невероятно милые маленькие герои возвращаются! Малышарики ищут верхушку игрушечной звёздочки и изучают новые фигуры. Нюшенька и Барашик запоминают, как правильно ходить друг к дружке в гости. Ёжик в который раз помогает Крошику и объясняет, как надевать сапожки, чтобы те дружили. Вдвоём малыши учатся считать до четырёх и спасают ромашку, которой не хватает солнышка. А озорница Пандочка показывает настоящие фокусы и вместе с Барашиком собирается летать! С Малышариками дети учатся быть общительными и вежливыми, открытыми и добрыми, внимательными и чуткими. Учатся отличать безобидное от опасного, чаще смеяться и реже грустить. А ещё познавать такой интересный и такой разнообразный мир вокруг!",
+            "disclaimers": [],
+            "blockEntityDataId": "27766809"
+          }
+        },
+        {
+          "id": "mnPVIP4h",
+          "type": "album",
+          "data": {
+            "id": 29749774,
+            "title": "Люся и Рома спасают хоккей",
+            "type": "podcast",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/5503671/cd5b3eb9.a.29749774-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/5503671/cd5b3eb9.a.29749774-1/%%",
+            "genre": "podcasts",
+            "trackCount": 10,
+            "likesCount": 2124,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [],
+            "labels": [
+              {
+                "id": 2336099,
+                "name": "Детское радио"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [
+              124014912,
+              124262887
+            ],
+            "shortDescription": "Спортивная фантастика",
+            "description": "Хочешь заглянуть в недалёкое будущее? Готов пройти 25 уровней испытаний Суперкомпьютера, который запустил программу исчезновения любимой игры?! Тогда действуй! Ты \u0026#8212; в команде! Вместе с тобой дети из будущего \u0026#8212; Люся и Рома, а также тренер КХЛыч! Перемещения во времени, сложные, но интересные задания, невероятные встречи с легендарными хоккеистами и весёлые приключения \u0026#8212; всё это ждёт тебя в новом подкасте \u0026laquo;Люся и Рома спасают хоккей!\u0026raquo;. Слушай в эфире Детского радио и эксклюзивно в Яндекс Музыке. Это настоящая спортивная фантастика!",
+            "disclaimers": [],
+            "blockEntityDataId": "29749774"
+          }
+        },
+        {
+          "id": "y7SDBx6X",
+          "type": "album",
+          "data": {
+            "id": 24424000,
+            "title": "Майкл Бонд. «Медвежонок Паддингтон — чемпион Книга 13»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/6058982/da258464.a.24424000-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/6058982/da258464.a.24424000-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 7,
+            "likesCount": 730,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 16826131,
+                "name": "Алла Човжик",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/7852894/54e5417a.a.24893061-1/%%",
+                  "prefix": "54e5417a.a.24893061-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4753230,
+                "name": "Азбука Аттикус"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "В Лондоне всё время происходит что-то новое и не всегда понятное маленькому медвежонку. Например, Олимпийские игры. Они даже начаться не успели, а Паддингтон уже становится их сенса цией. Тут уж волей-неволей приходится задуматься о ежедневных тренировках. Но как быть, если занятия в спортзале не очень-то сочетаются с булочками и какао? Однако медвежонок в синем пальтишке не таков, чтобы пасовать перед препятствиями. Даже если его спортивная форма оставляет желать чуть-чуть лучшего, всё равно Паддингтон \u0026#8212; настоящий чемпион!",
+            "disclaimers": [],
+            "blockEntityDataId": "24424000"
+          }
+        },
+        {
+          "id": "ksZJc7LV",
+          "type": "album",
+          "data": {
+            "id": 26584321,
+            "title": "Дневник чемпиона. Детские рассказы.",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "year": 2023,
+            "releaseDate": "2023-08-01T00:00:00+03:00",
+            "coverUri": "avatars.yandex.net/get-music-content/10103188/b2ef8594.a.26584321-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/10103188/b2ef8594.a.26584321-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 4,
+            "likesCount": 354,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 2690128,
+                "name": "Дмитрий Губерниев",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/10103188/b2ef8594.a.26584321-1/%%",
+                  "prefix": "b2ef8594.a.26584321-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              },
+              {
+                "id": 19640806,
+                "name": "Олег Мосалев",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/10103188/b2ef8594.a.26584321-1/%%",
+                  "prefix": "b2ef8594.a.26584321-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              },
+              {
+                "id": 8362642,
+                "name": "Роман Скворцов",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/10103188/b2ef8594.a.26584321-1/%%",
+                  "prefix": "b2ef8594.a.26584321-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 911930,
+                "name": "Klark"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "disclaimers": [],
+            "blockEntityDataId": "26584321"
+          }
+        },
+        {
+          "id": "YZxRbtNC",
+          "type": "album",
+          "data": {
+            "id": 19634154,
+            "title": "Футбол для дружбы",
+            "type": "podcast",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/5375761/4143e7b9.a.19634154-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/5375761/4143e7b9.a.19634154-1/%%",
+            "genre": "podcasts",
+            "trackCount": 17,
+            "likesCount": 440,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [],
+            "labels": [
+              {
+                "id": 2336099,
+                "name": "Детское радио"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [
+              111302195,
+              111411392,
+              111586320
+            ],
+            "shortDescription": "Разбираемся в правилах самого популярного вида спорта в мире",
+            "description": "Футбол \u0026#8211; самый популярный вид спорта в мире! И один из самых древних: оказывается, первый матч сыграли в Китае в 476 году до нашей эры! Конечно, с тех пор футбол или соккер, как эту игру называют в США и Канаде, сильно изменился. Разобраться во всех правилах и нюансах нам поможет спортивный комментатор Детского радио - Захар! Заодно вместе с ним узнаем, что такое дриблинг и сэйв, почему итальянский судья Пьерлуиджи Коллина получил прозвище Фантомас и кто играет в болотный футбол?\u003cbr/\u003e\u003cbr/\u003e0+",
+            "disclaimers": [],
+            "blockEntityDataId": "19634154"
+          }
+        },
+        {
+          "id": "m5X1dars",
+          "type": "album",
+          "data": {
+            "id": 17136615,
+            "title": "Оле-Оле-Оле!",
+            "type": "podcast",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/5309210/be964618.a.17136615-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/5309210/be964618.a.17136615-1/%%",
+            "genre": "podcasts",
+            "trackCount": 175,
+            "likesCount": 899,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [],
+            "labels": [
+              {
+                "id": 2336099,
+                "name": "Детское радио"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [
+              122263202,
+              124100120,
+              123584531
+            ],
+            "shortDescription": "Всё о спорте для мальчишек и девчонок!",
+            "description": "Футбол, хоккей, сумо, поло, дайвинг, BMХ, дельтапланеризм, пинг-понг, айкидо\u0026hellip; А еще \u0026#8211; городки, снежки, шахматы и бильярд! Обо всех этих видах спорта и играх лучше других знает спортивный эксперт Детского радио \u0026#8211; Захар!\u003cbr/\u003eСлушаем и запоминаем!\u003cbr/\u003eНа старт! Внимание! Go!",
+            "disclaimers": [],
+            "blockEntityDataId": "17136615"
+          }
+        },
+        {
+          "id": "z8P9Yp0s",
+          "type": "album",
+          "data": {
+            "id": 8036079,
+            "title": "Аудиоэнциклопедия. Занимаемся спортом",
+            "type": "fairy-tale",
+            "metaType": "podcast",
+            "year": 2013,
+            "releaseDate": "2013-10-01T00:00:00+04:00",
+            "coverUri": "avatars.yandex.net/get-music-content/142001/4f9d9541.a.8036079-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/142001/4f9d9541.a.8036079-1/%%",
+            "genre": "fairytales",
+            "trackCount": 14,
+            "likesCount": 1530,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 5097013,
+                "name": "Чевостик",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-artist-photos",
+                  "uri": "avatars.yandex.net/get-music-content/4388221/7fe8ea1d.p.5097013/%%",
+                  "prefix": "7fe8ea1d.p.5097013/"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 272854,
+                "name": "Music1"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [
+              55200121,
+              55200118,
+              55200119
+            ],
+            "description": "Увлекательная аудиоэнциклопедия о спорте и его истории для детей.\u003cbr/\u003e\u003cbr/\u003eЛюбознательный Чевостик и умный дядя Кузя отправляются в захватывающее приключение, чтобы узнать больше об истории спорта и спортивных упражнениях. Где начинается история Олимпийских игр? Что такое спортивная ходьба? Какие два вида спорта объединяет биатлон? Вместе с Чевостиком дети получат ответы на эти и многие другие вопросы, а ещё поймут, как занятия спортом помогают улучшать здоровье и настроение.",
+            "disclaimers": [],
+            "blockEntityDataId": "8036079"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kids_detective_plus",
+      "title": "Загадки и расследования",
+      "type": "editorial-playlists",
+      "typeForFrom": "catalogue-editorial-playlists",
+      "viewAllUrl": "/kids/editorial/album/kids_detective_plus",
+      "viewAllUrlScheme": "yandexmusic://kids/editorial/album/kids_detective_plus",
+      "entities": [
+        {
+          "id": "MwECuBIC",
+          "type": "album",
+          "data": {
+            "id": 22239962,
+            "title": "Анна Старобинец. «Зверский детектив. Логово волка»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "year": 2022,
+            "releaseDate": "2022-04-05T00:00:00+03:00",
+            "coverUri": "avatars.yandex.net/get-music-content/6296749/3001e800.a.22239962-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/6296749/3001e800.a.22239962-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 16,
+            "likesCount": 27493,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 16508877,
+                "name": "Александр Лушин",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/9737237/400f7962.a.26014731-1/%%",
+                  "prefix": "400f7962.a.26014731-1"
+                },
+                "decomposed": [
+                  ", ",
+                  {
+                    "id": 16508872,
+                    "name": "Анна Лебедь",
+                    "various": false,
+                    "composer": false,
+                    "cover": {
+                      "type": "from-album-cover",
+                      "uri": "avatars.yandex.net/get-music-content/5413909/aed35039.a.24479211-1/%%",
+                      "prefix": "aed35039.a.24479211-1"
+                    },
+                    "genres": [],
+                    "disclaimers": []
+                  },
+                  ", ",
+                  {
+                    "id": 8320548,
+                    "name": "Сергей Мардарь",
+                    "various": false,
+                    "composer": false,
+                    "cover": {
+                      "type": "from-album-cover",
+                      "uri": "avatars.yandex.net/get-music-content/9737237/74b6c432.a.26028599-1/%%",
+                      "prefix": "74b6c432.a.26028599-1"
+                    },
+                    "genres": [],
+                    "disclaimers": []
+                  },
+                  ", ",
+                  {
+                    "id": 12138932,
+                    "name": "Валентин Воробьев",
+                    "various": false,
+                    "composer": false,
+                    "cover": {
+                      "type": "from-album-cover",
+                      "uri": "avatars.yandex.net/get-music-content/6296749/3001e800.a.22239962-1/%%",
+                      "prefix": "3001e800.a.22239962-1"
+                    },
+                    "genres": [],
+                    "disclaimers": []
+                  },
+                  ", ",
+                  {
+                    "id": 16508874,
+                    "name": "Антон Леонов",
+                    "various": false,
+                    "composer": false,
+                    "cover": {
+                      "type": "from-album-cover",
+                      "uri": "avatars.yandex.net/get-music-content/9737237/74b6c432.a.26028599-1/%%",
+                      "prefix": "74b6c432.a.26028599-1"
+                    },
+                    "genres": [],
+                    "disclaimers": []
+                  },
+                  ", ",
+                  {
+                    "id": 16508875,
+                    "name": "Сергей Азеев",
+                    "various": false,
+                    "composer": false,
+                    "cover": {
+                      "type": "from-album-cover",
+                      "uri": "avatars.yandex.net/get-music-content/9737237/400f7962.a.26014731-1/%%",
+                      "prefix": "400f7962.a.26014731-1"
+                    },
+                    "genres": [],
+                    "disclaimers": []
+                  }
+                ],
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4767176,
+                "name": "Издательство «Абрикобукс»"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": false,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": false,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Обитатели Дальнего леса могут спать спокойно: закон строго запрещает убийства на его территории, даже волку приходится довольствоваться белыми грибами и лузгать жуков. За порядком на вверенной территории следит опытный сыщик Барсук Старший. Но знали бы вы, как ему надоели все \u003cbr/\u003eэти мелкие правонарушения, из которых состоят рабочие будни. Да и младший помощник Барсукот жаждет дел посерьезнее кражи сосновой шишки или неубранного помета. Шокирующие новости появляются внезапно. \u003cbr/\u003e\u003cbr/\u003eСообщение по лягушачьему ква-каунтеру нарушает спокойствие заурядного вечера посетителей бара \u0026laquo;Сучок\u0026raquo;, а следом и всего леса. Барсук Старший отправляется по следу. Детективы методично выслушивают свидетелей, Сычи Адвокаты следят за буквой закона, а Грач Врач и Мышь Психолог \u0026#8212; за накалом страстей. Неслыханное злодеяние будет раскрыто, чего бы это ни стоило.\u003cbr/\u003e\u003cbr/\u003e\u0026hellip;Мутный, расплывчатый силуэт зверя во мгле\u0026hellip; Он осторожно крадётся к курятнику, опустив голову и прижимаясь к земле\u0026hellip; Повадки хищника. Повадки профессионального киллера. Вот он задирает свою хищную морду к полной луне\u0026hellip;\u003cbr/\u003eО, как знаком Барсуку полиции этот мечтательный взгляд на луну перед молниеносным броском \u0026#8212; короткий магический ритуал, исполняемый ночью зверем-убийцей.\u003cbr/\u003e\u003cbr/\u003eАнна Старобинец успела сменить несколько профессий, прежде чем поняла, что больше всего на свете любит сочинять истории, от которых невозможно оторваться. Сегодня её книги переведены на множество языков, удостоены литературных премий, по ним сняты фильмы. \u0026laquo;Зверский детектив\u0026raquo; \u0026#8212; это серия захватывающих детективов о приключениях сыщиков Барсука и Барсукота. Дети и взрослые не смогут оторваться от этих книг до самой последней страницы! Первая книга серии \u0026#8212; \u0026laquo;В логове волка\u0026raquo;.\u003cbr/\u003e\u003cbr/\u003eМасса остроумных деталей и диалогов, выразительные персонажи, тревожная и притягательная атмосфера \u0026#8212; всё на месте.\u003cbr/\u003eДарья Варденбург, \u0026laquo;Афиша-Воздух\u0026raquo;\u003cbr/\u003e\u003cbr/\u003eДетский детектив \u0026#8212; редкий жанр, а детский психологический детектив \u0026#8212; и подавно. И поэтому серия Анны Старобинец \u0026laquo;Зверский детектив\u0026raquo; обещает стать событием.\u003cbr/\u003eЕлене Пестерева, PSYCHOLOGIES\u003cbr/\u003e\u003cbr/\u003e\u0026copy; Издательство Абрикос\u003cbr/\u003e\u003cbr/\u003eИнсценировка: Анна Старобинец\u003cbr/\u003eТексты песен и музыка Александр Лушин\u003cbr/\u003eКомпозитор Сергей Азеев\u003cbr/\u003eРежиссер Роман Каганович",
+            "disclaimers": [],
+            "blockEntityDataId": "22239962"
+          }
+        },
+        {
+          "id": "D3dtxBmF",
+          "type": "album",
+          "data": {
+            "id": 24716943,
+            "title": "Энид Блайтон. «Тайна сгоревшего коттеджа»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/8316823/7f6e3fbe.a.24716943-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/8316823/7f6e3fbe.a.24716943-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 19,
+            "likesCount": 1473,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 16826131,
+                "name": "Алла Човжик",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/7852894/54e5417a.a.24893061-1/%%",
+                  "prefix": "54e5417a.a.24893061-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4753230,
+                "name": "Азбука Аттикус"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "В деревушке Петерсвуд произошло самое что ни на есть настоящее преступление! Кто-то поджёг коттедж в саду мистера Хика. Пятеро детей, живущих по соседству, не собираются ждать, когда дело раскроет местный полицейский по прозвищу А-ну-ка-разойдись, и организуют клуб сыщиков. Вместе со своим псом ребята идут по следу преступника, но подозреваемых оказывается слишком много.",
+            "disclaimers": [],
+            "blockEntityDataId": "24716943"
+          }
+        },
+        {
+          "id": "VzSPUyBX",
+          "type": "album",
+          "data": {
+            "id": 24278500,
+            "title": "Энрике Лоренсо, Роберто Сантьяго. «Детективы-футболисты. Тайна невозможного ограбления»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/5853241/5c895d62.a.24278500-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/5853241/5c895d62.a.24278500-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 50,
+            "likesCount": 943,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 17969463,
+                "name": "Максим Чечель",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/5853241/5c895d62.a.24278500-1/%%",
+                  "prefix": "5c895d62.a.24278500-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4971004,
+                "name": "Вилли Винки"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "В Севилью ла Чика приезжает всемирно известная выставка \u0026quot;Сокровища Древнего Египта\u0026quot;. Это определённо событие года, все вокруг только и говорят об этом. Команда детективов-футболистов отправляется на экскурсию, во время которой пропадает самый драгоценный экспонат - Око Ра. Пакету и его друзьям предстоит доказать свою невиновность и выяснить, кто же стоит за ограблением.\u003cbr/\u003e  Автор Роберто Сантьяго работал сценаристом на телевидении, редактором и продюсером.\u003cbr/\u003e  Серия про детективов-футболистов стала настоящим культурным феноменом, это одни из самых продаваемых книг в Испании, они переведены на разные языки мира, а в 2018 году даже были экранизированы.\u003cbr/\u003e\u003cbr/\u003eПереводчик(и): Фадеева Екатерина Андреевна",
+            "disclaimers": [],
+            "blockEntityDataId": "24278500"
+          }
+        },
+        {
+          "id": "P5NkpbrL",
+          "type": "album",
+          "data": {
+            "id": 24879131,
+            "title": "Штефан Геммель. «Дневник пропавшего профессора»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/8096180/2e5eb1bd.a.24879131-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/8096180/2e5eb1bd.a.24879131-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 14,
+            "likesCount": 1270,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 10345102,
+                "name": "Семён Мендельсон",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/9707577/1a262271.a.25827717-1/%%",
+                  "prefix": "1a262271.a.25827717-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4732056,
+                "name": "Эксмодетство"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Алекс всегда знал, что на чердаке бабушкиного дома можно найти что-то очень необычное! Не зря же ему было запрещено ходить туда. Но он и подумать не мог, что отыщет секретную комнату своего дедушки-профессора, таинственно исчезнувшего несколько лет назад. Здесь мальчик нашёл не только кучу старинных артефактов, но и дневник дедушки. Оказалось, что профессор Аврелий изучал\u0026hellip; магию! Он отчаянно хотел разгадать тайну волшебного шара \u0026#8212; магического артефакта, обладающего огромной силой. И теперь Алекс должен продолжить его дело! Ведь это единственный способ найти дедушку. Но какие опасности поджидают его на этом пути? Эта книга стала абсолютным бестселлером у себя на родине, в Германии. Уже тысячи детей благодаря ей полюбили чтение! Приключения, тайны, магия и дружба \u0026#8212; здесь есть всё, что нужно хорошей детской книге. Написано легко и динамично, а внутри \u0026#8212; красивые чёрно-белые иллюстрации.\u003cbr/\u003e\u003cbr/\u003eПереводчик(и): Юлия Капустюк",
+            "disclaimers": [],
+            "blockEntityDataId": "24879131"
+          }
+        },
+        {
+          "id": "dcn0J0CZ",
+          "type": "album",
+          "data": {
+            "id": 24261960,
+            "title": "Александра Калинина. «Детективы из 4\"А\"»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/5853241/d0b8a9a1.a.24261960-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/5853241/d0b8a9a1.a.24261960-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 8,
+            "likesCount": 1259,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 4533223,
+                "name": "Максим Сергеев",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/5576540/7d43dec5.a.24259541-1/%%",
+                  "prefix": "7d43dec5.a.24259541-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 3303185,
+                "name": "Малыш"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Детективы из 4\u0026laquo;А\u0026raquo; могут всё и знают ответ на любой вопрос!\u003cbr/\u003e  Кто такой \u0026laquo;гераневый похититель\u0026raquo;? Хомяк сбежал или его украли? О чём \u0026laquo;говорит\u0026raquo; шерстинка на полу? Откуда в варежке появляются деньги?\u003cbr/\u003e  Любая, даже самая сложная, загадка будет разгадана, ведь за дело берутся настоящие профессионалы из четвёртого класса...",
+            "disclaimers": [],
+            "blockEntityDataId": "24261960"
+          }
+        },
+        {
+          "id": "3HqjRHn6",
+          "type": "album",
+          "data": {
+            "id": 27859113,
+            "title": "Стив Стивенсон. «Агата Мистери. Кн. 1. Загадка Фараона»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/10930741/dfde5157.a.27859113-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/10930741/dfde5157.a.27859113-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 10,
+            "likesCount": 773,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 16826131,
+                "name": "Алла Човжик",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/7852894/54e5417a.a.24893061-1/%%",
+                  "prefix": "54e5417a.a.24893061-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4753230,
+                "name": "Азбука Аттикус"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Наделённая потрясающим чутьём и феноменальной памятью, Агата Мистери мечтает стать писательницей детективных романов. Но это в будущем, а пока она просто превосходная сыщица! Вместе со своим незадачливым двоюродным братом Ларри, студентом детективной школы, она путешествует по миру, чтобы решать самые запутанные загадки. А помогают им преданный дворецкий, вредный сибирский кот и множество неподражаемых чудаковатых родственников.\u003cbr/\u003e Загадка фараона.\u003cbr/\u003e Египет, Долина царей. Группа археологов готовится объявить миру о находке гробницы таинственного фараона. Это открытие могло бы стать величайшей сенсацией... но, к сожалению, бесценная табличка с указаниями, как найти гробницу, похищена. И эту загадку под силу разрешить только будущим детективам Агате и Ларри Мистери!\u003cbr/\u003e\u003cbr/\u003eПереводчик(и): Екатерина Даровская",
+            "disclaimers": [],
+            "blockEntityDataId": "27859113"
+          }
+        },
+        {
+          "id": "mYuHrWhS",
+          "type": "album",
+          "data": {
+            "id": 25753486,
+            "title": "Келли Оливер. «Секрет старинного дневника»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/8871869/9fea8c33.a.25753486-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/8871869/9fea8c33.a.25753486-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 19,
+            "likesCount": 585,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 18634776,
+                "name": "Вероника Нефёдова",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/8871869/9fea8c33.a.25753486-1/%%",
+                  "prefix": "9fea8c33.a.25753486-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4732056,
+                "name": "Эксмодетство"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Девочка по имени Кейси ведёт расследование! Она живёт на ферме и очень любит животных (а ещё мечтает оказаться в школьной газете!). По всему городу начали пропадать питомцы, поэтому Кейси открывает своё поисковое агентство. Впереди сбор улик, поиск ответов на каверзные вопросы и целая карта сокровищ! Аналоги: Кот-детектив и Мейзи Хитчинс (Холли Вебб!).\u003cbr/\u003e\u003cbr/\u003eПереводчик(и): Елена Погосян",
+            "disclaimers": [],
+            "blockEntityDataId": "25753486"
+          }
+        },
+        {
+          "id": "H5W176pV",
+          "type": "album",
+          "data": {
+            "id": 22239957,
+            "title": "Анна Старобинец. «Зверский детектив. Когти гнева»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "year": 2022,
+            "releaseDate": "2022-04-05T00:00:00+03:00",
+            "coverUri": "avatars.yandex.net/get-music-content/5966316/9fb5245e.a.22239957-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/5966316/9fb5245e.a.22239957-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 25,
+            "likesCount": 9925,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 16508877,
+                "name": "Александр Лушин",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/9737237/400f7962.a.26014731-1/%%",
+                  "prefix": "400f7962.a.26014731-1"
+                },
+                "decomposed": [
+                  ", ",
+                  {
+                    "id": 16508872,
+                    "name": "Анна Лебедь",
+                    "various": false,
+                    "composer": false,
+                    "cover": {
+                      "type": "from-album-cover",
+                      "uri": "avatars.yandex.net/get-music-content/5413909/aed35039.a.24479211-1/%%",
+                      "prefix": "aed35039.a.24479211-1"
+                    },
+                    "genres": [],
+                    "disclaimers": []
+                  },
+                  ", ",
+                  {
+                    "id": 8320548,
+                    "name": "Сергей Мардарь",
+                    "various": false,
+                    "composer": false,
+                    "cover": {
+                      "type": "from-album-cover",
+                      "uri": "avatars.yandex.net/get-music-content/9737237/74b6c432.a.26028599-1/%%",
+                      "prefix": "74b6c432.a.26028599-1"
+                    },
+                    "genres": [],
+                    "disclaimers": []
+                  },
+                  ", ",
+                  {
+                    "id": 16508873,
+                    "name": "Роман Каганович",
+                    "various": false,
+                    "composer": false,
+                    "cover": {
+                      "type": "from-album-cover",
+                      "uri": "avatars.yandex.net/get-music-content/9737237/74b6c432.a.26028599-1/%%",
+                      "prefix": "74b6c432.a.26028599-1"
+                    },
+                    "genres": [],
+                    "disclaimers": []
+                  },
+                  ", ",
+                  {
+                    "id": 12138932,
+                    "name": "Валентин Воробьев",
+                    "various": false,
+                    "composer": false,
+                    "cover": {
+                      "type": "from-album-cover",
+                      "uri": "avatars.yandex.net/get-music-content/6296749/3001e800.a.22239962-1/%%",
+                      "prefix": "3001e800.a.22239962-1"
+                    },
+                    "genres": [],
+                    "disclaimers": []
+                  },
+                  ", ",
+                  {
+                    "id": 16508874,
+                    "name": "Антон Леонов",
+                    "various": false,
+                    "composer": false,
+                    "cover": {
+                      "type": "from-album-cover",
+                      "uri": "avatars.yandex.net/get-music-content/9737237/74b6c432.a.26028599-1/%%",
+                      "prefix": "74b6c432.a.26028599-1"
+                    },
+                    "genres": [],
+                    "disclaimers": []
+                  },
+                  ", ",
+                  {
+                    "id": 16508875,
+                    "name": "Сергей Азеев",
+                    "various": false,
+                    "composer": false,
+                    "cover": {
+                      "type": "from-album-cover",
+                      "uri": "avatars.yandex.net/get-music-content/9737237/400f7962.a.26014731-1/%%",
+                      "prefix": "400f7962.a.26014731-1"
+                    },
+                    "genres": [],
+                    "disclaimers": []
+                  },
+                  ", ",
+                  {
+                    "id": 10127187,
+                    "name": "Виталий Гудков",
+                    "various": false,
+                    "composer": false,
+                    "cover": {
+                      "type": "from-album-cover",
+                      "uri": "avatars.yandex.net/get-music-content/9737237/74b6c432.a.26028599-1/%%",
+                      "prefix": "74b6c432.a.26028599-1"
+                    },
+                    "genres": [],
+                    "disclaimers": []
+                  }
+                ],
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4711717,
+                "name": "Everbook"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": false,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": false,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Третья часть приключений следователей Дальнего леса. Барсукот влюбился в прекрасную кошку, но её похитила жуткая шайка котов-хулиганов \u0026laquo;Когти гнева\u0026raquo;. Барсукам полиции Дальнего леса начинают приходить письма с требованием выкупа. Барсукот решается на отчаянные поступки: рискует жизнью, нарушает кодекс чести и ставит карьеру под угрозу. Однако возникает вопрос: была ли кошка похищена?\u003cbr/\u003e\u003cbr/\u003eИнсценировка: Анна Старобинец\u003cbr/\u003eРежиссер: Роман Каганович\u003cbr/\u003eТексты песен и музыка: Александр Лушин\u003cbr/\u003eЗвукорежиссер: Дмитрий Турьев\u003cbr/\u003eКомпозитор: Сергей Азеев\u003cbr/\u003eПравообладатель: Абрикобукс\u003cbr/\u003e\u003cbr/\u003eПро автора:\u003cbr/\u003eАнна Старобинец успела сменить несколько профессий, прежде чем поняла, что больше всего на свете любит сочинять истории, от которых невозможно оторваться. Сегодня её книги переведены на множество языков, удостоены литературных премий, по ним сняты фильмы. Анна гениально умеет \u0026laquo;закручивать\u0026raquo; сюжет, великолепно владеет словом и очень смешно шутит, зверски смешно!",
+            "disclaimers": [],
+            "blockEntityDataId": "22239957"
+          }
+        },
+        {
+          "id": "CYASUzsF",
+          "type": "album",
+          "data": {
+            "id": 22941397,
+            "title": "Кэролайн Кин. «Нэнси Дрю и дневник незнакомца»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "year": 2020,
+            "releaseDate": "2020-09-28T00:00:00+03:00",
+            "coverUri": "avatars.yandex.net/get-music-content/6021799/1564c466.a.22941397-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/6021799/1564c466.a.22941397-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 21,
+            "likesCount": 597,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 10345103,
+                "name": "Ксения Бржезовская",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/6058982/d3cf7383.a.24261945-1/%%",
+                  "prefix": "d3cf7383.a.24261945-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 3303185,
+                "name": "Малыш"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Нэнси Дрю обязательно раскроет эту тайну!\u003cbr/\u003e\u003cbr/\u003e\u0026laquo;Нэнси Дрю и дневник незнакомца\u0026raquo; \u0026#8211; это аудиокнига о легендарной американской девушке-сыщице Нэнси Дрю. Её новое дело началось с того, что ей очень захотелось помочь маленькой бедной девочке и её матери: их отец уехал в поисках работы и пропал. Погиб, сбежал или похищен? Ведь этот мужчина не просто безработный, а талантливый изобретатель! Где же ты, Джо Свенсон?\u003cbr/\u003e\u003cbr/\u003eПеревод: Татьяна Буцкая",
+            "disclaimers": [],
+            "blockEntityDataId": "22941397"
+          }
+        },
+        {
+          "id": "ydwub8Hl",
+          "type": "album",
+          "data": {
+            "id": 24275500,
+            "title": "Валерий Роньшин. «Эмма Мухина и Тайна танцующей коровы»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/5502420/94ed1c04.a.24275500-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/5502420/94ed1c04.a.24275500-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 34,
+            "likesCount": 251,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 16313518,
+                "name": "Елена Дельвер",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/10930741/bab79631.a.27743042-1/%%",
+                  "prefix": "bab79631.a.27743042-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 3303185,
+                "name": "Малыш"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [
+              109592232,
+              109592233,
+              109592235
+            ],
+            "description": "Детективная повесть из цикла \u0026laquo;Тайны Эммы Мухиной\u0026raquo; известного писателя В. Роньшина о приключениях девочки-школьницы, наделенной уникальным талантом раскрывать самые запутанные преступления. Ее способности ценят профессионалы на самом верху. И как всегда рядом с ней ее верные друзья и помощники \u0026#8212; одноклассник Володька Воробьев и пес Гафчик. Юным читателям скучать не придется.\u003cbr/\u003e  Для среднего школьного возраста.",
+            "disclaimers": [],
+            "blockEntityDataId": "24275500"
+          }
+        }
+      ]
+    },
+    {
+      "id": "RADIO",
+      "title": "Слушать без перерыва",
+      "type": "radio",
+      "typeForFrom": "catalogue-radio",
+      "entities": [
+        {
+          "id": "IUlrymYf",
+          "type": "station",
+          "data": {
+            "id": {
+              "tag": "forchildren",
+              "type": "genre"
+            },
+            "data": {
+              "station": {
+                "id": {
+                  "type": "genre",
+                  "tag": "forchildren"
+                },
+                "name": "Детская музыка",
+                "icon": {
+                  "backgroundColor": "#FFB0CF",
+                  "imageUrl": "avatars.yandex.net/get-music-misc/70683/rotor-kids_songs-icon/%%"
+                },
+                "mtsIcon": {
+                  "backgroundColor": "#90EE90",
+                  "imageUrl": "avatars.yandex.net/get-music-misc/40584/rotor-genre-children-mts-icon/%%"
+                },
+                "fullImageUrl": "avatars.yandex.net/get-music-misc/70850/rotor-genre-forchildren-full-image-IamKb/%%",
+                "mtsFullImageUrl": "avatars.yandex.net/get-music-misc/2419084/rotor-genre-forchildren-mts-full-image-VSDSa/%%",
+                "idForFrom": "genre-forchildren",
+                "restrictions": {
+                  "language": {
+                    "type": "enum",
+                    "name": "По языку",
+                    "possibleValues": [
+                      {
+                        "value": "any",
+                        "name": "Любой",
+                        "unspecified": true,
+                        "serializedSeed": "settingLanguage:any"
+                      }
+                    ]
+                  },
+                  "mood": {
+                    "type": "discrete-scale",
+                    "name": "Под настроение",
+                    "min": {
+                      "value": 1,
+                      "name": "Грустнее"
+                    },
+                    "max": {
+                      "value": 4,
+                      "name": "Веселее"
+                    }
+                  },
+                  "energy": {
+                    "type": "discrete-scale",
+                    "name": "Энергичность",
+                    "min": {
+                      "value": 1,
+                      "name": "Спокойнее"
+                    },
+                    "max": {
+                      "value": 4,
+                      "name": "Бодрее"
+                    }
+                  },
+                  "diversity": {
+                    "type": "enum",
+                    "name": "По характеру",
+                    "possibleValues": [
+                      {
+                        "value": "default",
+                        "name": "Все"
+                      },
+                      {
+                        "value": "diverse",
+                        "name": "Редкие"
+                      },
+                      {
+                        "value": "favorite",
+                        "name": "Любимые"
+                      },
+                      {
+                        "value": "popular",
+                        "name": "Популярные"
+                      }
+                    ]
+                  }
+                },
+                "restrictions2": {
+                  "diversity": {
+                    "type": "enum",
+                    "name": "По характеру",
+                    "possibleValues": [
+                      {
+                        "value": "favorite",
+                        "name": "Любимое",
+                        "imageUrl": "https://avatars.mds.yandex.net/get-music-misc/34161/img.613f11c98de8bb5a0cbe9201/orig",
+                        "serializedSeed": "settingDiversity:favorite"
+                      },
+                      {
+                        "value": "discover",
+                        "name": "Незнакомое",
+                        "imageUrl": "https://avatars.mds.yandex.net/get-music-misc/70683/img.613f11ca8de8bb5a0cbe9202/orig",
+                        "serializedSeed": "settingDiversity:discover"
+                      },
+                      {
+                        "value": "popular",
+                        "name": "Популярное",
+                        "imageUrl": "https://avatars.mds.yandex.net/get-music-misc/30221/img.613f11c98de8bb5a0cbe9200/orig",
+                        "serializedSeed": "settingDiversity:popular"
+                      },
+                      {
+                        "value": "default",
+                        "name": "Любое",
+                        "unspecified": true,
+                        "serializedSeed": "settingDiversity:default"
+                      }
+                    ]
+                  },
+                  "moodEnergy": {
+                    "type": "enum",
+                    "name": "Под настроение",
+                    "possibleValues": [
+                      {
+                        "value": "active",
+                        "name": "Бодрое",
+                        "imageUrl": "https://avatars.mds.yandex.net/get-music-misc/49997/img.6144b25fc0719634c7e6a46e/orig",
+                        "serializedSeed": "settingMoodEnergy:active"
+                      },
+                      {
+                        "value": "fun",
+                        "name": "Весёлое",
+                        "imageUrl": "https://avatars.mds.yandex.net/get-music-misc/49997/img.6144b263c0719634c7e6a471/orig",
+                        "serializedSeed": "settingMoodEnergy:fun"
+                      },
+                      {
+                        "value": "calm",
+                        "name": "Спокойное",
+                        "imageUrl": "https://avatars.mds.yandex.net/get-music-misc/70850/img.6144b261c0719634c7e6a470/orig",
+                        "serializedSeed": "settingMoodEnergy:calm"
+                      },
+                      {
+                        "value": "sad",
+                        "name": "Грустное",
+                        "imageUrl": "https://avatars.mds.yandex.net/get-music-misc/2406661/img.6144b260c0719634c7e6a46f/orig",
+                        "serializedSeed": "settingMoodEnergy:sad"
+                      },
+                      {
+                        "value": "all",
+                        "name": "Любое",
+                        "unspecified": true,
+                        "serializedSeed": "settingMoodEnergy:all"
+                      }
+                    ]
+                  },
+                  "language": {
+                    "type": "enum",
+                    "name": "По языку",
+                    "possibleValues": [
+                      {
+                        "value": "any",
+                        "name": "Любой",
+                        "unspecified": true,
+                        "serializedSeed": "settingLanguage:any"
+                      }
+                    ]
+                  }
+                },
+                "specialContext": false
+              },
+              "rupTitle": "Моя волна",
+              "rupDescription": "Волна подстраивается под жанр и вас. Слушайте только то, что нравится!",
+              "settings2": {
+                "diversity": "default",
+                "moodEnergy": "all",
+                "language": "any"
+              },
+              "explanation": ""
+            },
+            "blockEntityDataId": "genre:forchildren"
+          }
+        },
+        {
+          "id": "y5ZJ6ZFj",
+          "type": "station",
+          "data": {
+            "id": {
+              "tag": "station-17",
+              "type": "editorial"
+            },
+            "data": {
+              "station": {
+                "id": {
+                  "type": "editorial",
+                  "tag": "station-17"
+                },
+                "name": "Колыбельные",
+                "icon": {
+                  "backgroundColor": "#9665FE",
+                  "imageUrl": "avatars.yandex.net/get-music-misc/2406661/rotor-kids_lullaby-icon/%%"
+                },
+                "mtsIcon": {
+                  "backgroundColor": "#FF6665",
+                  "imageUrl": "avatars.yandex.net/get-music-misc/editorial-station-17-cover/%%"
+                },
+                "idForFrom": "editorial-station17",
+                "restrictions": {
+                  "language": {
+                    "type": "enum",
+                    "name": "По языку",
+                    "possibleValues": [
+                      {
+                        "value": "russian",
+                        "name": "Русский",
+                        "serializedSeed": "settingLanguage:russian"
+                      },
+                      {
+                        "value": "not-russian",
+                        "name": "Иностранный",
+                        "serializedSeed": "settingLanguage:not-russian"
+                      },
+                      {
+                        "value": "any",
+                        "name": "Любой",
+                        "unspecified": true,
+                        "serializedSeed": "settingLanguage:any"
+                      },
+                      {
+                        "value": "without-words",
+                        "name": "Без слов",
+                        "serializedSeed": "settingLanguage:without-words"
+                      }
+                    ]
+                  },
+                  "mood": {
+                    "type": "discrete-scale",
+                    "name": "Под настроение",
+                    "min": {
+                      "value": 1,
+                      "name": "Грустнее"
+                    },
+                    "max": {
+                      "value": 4,
+                      "name": "Веселее"
+                    }
+                  },
+                  "energy": {
+                    "type": "discrete-scale",
+                    "name": "Энергичность",
+                    "min": {
+                      "value": 1,
+                      "name": "Спокойнее"
+                    },
+                    "max": {
+                      "value": 4,
+                      "name": "Бодрее"
+                    }
+                  },
+                  "diversity": {
+                    "type": "enum",
+                    "name": "По характеру",
+                    "possibleValues": [
+                      {
+                        "value": "default",
+                        "name": "Все"
+                      },
+                      {
+                        "value": "diverse",
+                        "name": "Редкие"
+                      },
+                      {
+                        "value": "favorite",
+                        "name": "Любимые"
+                      },
+                      {
+                        "value": "popular",
+                        "name": "Популярные"
+                      }
+                    ]
+                  }
+                },
+                "restrictions2": {
+                  "diversity": {
+                    "type": "enum",
+                    "name": "По характеру",
+                    "possibleValues": [
+                      {
+                        "value": "favorite",
+                        "name": "Любимое",
+                        "imageUrl": "https://avatars.mds.yandex.net/get-music-misc/34161/img.613f11c98de8bb5a0cbe9201/orig",
+                        "serializedSeed": "settingDiversity:favorite"
+                      },
+                      {
+                        "value": "discover",
+                        "name": "Незнакомое",
+                        "imageUrl": "https://avatars.mds.yandex.net/get-music-misc/70683/img.613f11ca8de8bb5a0cbe9202/orig",
+                        "serializedSeed": "settingDiversity:discover"
+                      },
+                      {
+                        "value": "popular",
+                        "name": "Популярное",
+                        "imageUrl": "https://avatars.mds.yandex.net/get-music-misc/30221/img.613f11c98de8bb5a0cbe9200/orig",
+                        "serializedSeed": "settingDiversity:popular"
+                      },
+                      {
+                        "value": "default",
+                        "name": "Любое",
+                        "unspecified": true,
+                        "serializedSeed": "settingDiversity:default"
+                      }
+                    ]
+                  },
+                  "moodEnergy": {
+                    "type": "enum",
+                    "name": "Под настроение",
+                    "possibleValues": [
+                      {
+                        "value": "active",
+                        "name": "Бодрое",
+                        "imageUrl": "https://avatars.mds.yandex.net/get-music-misc/49997/img.6144b25fc0719634c7e6a46e/orig",
+                        "serializedSeed": "settingMoodEnergy:active"
+                      },
+                      {
+                        "value": "fun",
+                        "name": "Весёлое",
+                        "imageUrl": "https://avatars.mds.yandex.net/get-music-misc/49997/img.6144b263c0719634c7e6a471/orig",
+                        "serializedSeed": "settingMoodEnergy:fun"
+                      },
+                      {
+                        "value": "calm",
+                        "name": "Спокойное",
+                        "imageUrl": "https://avatars.mds.yandex.net/get-music-misc/70850/img.6144b261c0719634c7e6a470/orig",
+                        "serializedSeed": "settingMoodEnergy:calm"
+                      },
+                      {
+                        "value": "sad",
+                        "name": "Грустное",
+                        "imageUrl": "https://avatars.mds.yandex.net/get-music-misc/2406661/img.6144b260c0719634c7e6a46f/orig",
+                        "serializedSeed": "settingMoodEnergy:sad"
+                      },
+                      {
+                        "value": "all",
+                        "name": "Любое",
+                        "unspecified": true,
+                        "serializedSeed": "settingMoodEnergy:all"
+                      }
+                    ]
+                  },
+                  "language": {
+                    "type": "enum",
+                    "name": "По языку",
+                    "possibleValues": [
+                      {
+                        "value": "russian",
+                        "name": "Русский",
+                        "serializedSeed": "settingLanguage:russian"
+                      },
+                      {
+                        "value": "not-russian",
+                        "name": "Иностранный",
+                        "serializedSeed": "settingLanguage:not-russian"
+                      },
+                      {
+                        "value": "any",
+                        "name": "Любой",
+                        "unspecified": true,
+                        "serializedSeed": "settingLanguage:any"
+                      },
+                      {
+                        "value": "without-words",
+                        "name": "Без слов",
+                        "serializedSeed": "settingLanguage:without-words"
+                      }
+                    ]
+                  }
+                },
+                "specialContext": false
+              },
+              "settings2": {
+                "diversity": "default",
+                "moodEnergy": "all",
+                "language": "any"
+              },
+              "explanation": ""
+            },
+            "blockEntityDataId": "editorial:station-17"
+          }
+        },
+        {
+          "id": "QQwPluFb",
+          "type": "station",
+          "data": {
+            "id": {
+              "tag": "station-16",
+              "type": "editorial"
+            },
+            "data": {
+              "station": {
+                "id": {
+                  "type": "editorial",
+                  "tag": "station-16"
+                },
+                "name": "Белый шум",
+                "icon": {
+                  "backgroundColor": "#D8D6D6",
+                  "imageUrl": "avatars.yandex.net/get-music-misc/40584/rotor-kids_whitenoise-icon/%%"
+                },
+                "mtsIcon": {
+                  "backgroundColor": "#FF6665",
+                  "imageUrl": "avatars.yandex.net/get-music-misc/editorial-station-16-cover/%%"
+                },
+                "idForFrom": "editorial-station16",
+                "restrictions": {
+                  "language": {
+                    "type": "enum",
+                    "name": "По языку",
+                    "possibleValues": [
+                      {
+                        "value": "russian",
+                        "name": "Русский",
+                        "serializedSeed": "settingLanguage:russian"
+                      },
+                      {
+                        "value": "not-russian",
+                        "name": "Иностранный",
+                        "serializedSeed": "settingLanguage:not-russian"
+                      },
+                      {
+                        "value": "any",
+                        "name": "Любой",
+                        "unspecified": true,
+                        "serializedSeed": "settingLanguage:any"
+                      },
+                      {
+                        "value": "without-words",
+                        "name": "Без слов",
+                        "serializedSeed": "settingLanguage:without-words"
+                      }
+                    ]
+                  },
+                  "mood": {
+                    "type": "discrete-scale",
+                    "name": "Под настроение",
+                    "min": {
+                      "value": 1,
+                      "name": "Грустнее"
+                    },
+                    "max": {
+                      "value": 4,
+                      "name": "Веселее"
+                    }
+                  },
+                  "energy": {
+                    "type": "discrete-scale",
+                    "name": "Энергичность",
+                    "min": {
+                      "value": 1,
+                      "name": "Спокойнее"
+                    },
+                    "max": {
+                      "value": 4,
+                      "name": "Бодрее"
+                    }
+                  },
+                  "diversity": {
+                    "type": "enum",
+                    "name": "По характеру",
+                    "possibleValues": [
+                      {
+                        "value": "default",
+                        "name": "Все"
+                      },
+                      {
+                        "value": "diverse",
+                        "name": "Редкие"
+                      },
+                      {
+                        "value": "favorite",
+                        "name": "Любимые"
+                      },
+                      {
+                        "value": "popular",
+                        "name": "Популярные"
+                      }
+                    ]
+                  }
+                },
+                "restrictions2": {
+                  "diversity": {
+                    "type": "enum",
+                    "name": "По характеру",
+                    "possibleValues": [
+                      {
+                        "value": "favorite",
+                        "name": "Любимое",
+                        "imageUrl": "https://avatars.mds.yandex.net/get-music-misc/34161/img.613f11c98de8bb5a0cbe9201/orig",
+                        "serializedSeed": "settingDiversity:favorite"
+                      },
+                      {
+                        "value": "discover",
+                        "name": "Незнакомое",
+                        "imageUrl": "https://avatars.mds.yandex.net/get-music-misc/70683/img.613f11ca8de8bb5a0cbe9202/orig",
+                        "serializedSeed": "settingDiversity:discover"
+                      },
+                      {
+                        "value": "popular",
+                        "name": "Популярное",
+                        "imageUrl": "https://avatars.mds.yandex.net/get-music-misc/30221/img.613f11c98de8bb5a0cbe9200/orig",
+                        "serializedSeed": "settingDiversity:popular"
+                      },
+                      {
+                        "value": "default",
+                        "name": "Любое",
+                        "unspecified": true,
+                        "serializedSeed": "settingDiversity:default"
+                      }
+                    ]
+                  },
+                  "moodEnergy": {
+                    "type": "enum",
+                    "name": "Под настроение",
+                    "possibleValues": [
+                      {
+                        "value": "active",
+                        "name": "Бодрое",
+                        "imageUrl": "https://avatars.mds.yandex.net/get-music-misc/49997/img.6144b25fc0719634c7e6a46e/orig",
+                        "serializedSeed": "settingMoodEnergy:active"
+                      },
+                      {
+                        "value": "fun",
+                        "name": "Весёлое",
+                        "imageUrl": "https://avatars.mds.yandex.net/get-music-misc/49997/img.6144b263c0719634c7e6a471/orig",
+                        "serializedSeed": "settingMoodEnergy:fun"
+                      },
+                      {
+                        "value": "calm",
+                        "name": "Спокойное",
+                        "imageUrl": "https://avatars.mds.yandex.net/get-music-misc/70850/img.6144b261c0719634c7e6a470/orig",
+                        "serializedSeed": "settingMoodEnergy:calm"
+                      },
+                      {
+                        "value": "sad",
+                        "name": "Грустное",
+                        "imageUrl": "https://avatars.mds.yandex.net/get-music-misc/2406661/img.6144b260c0719634c7e6a46f/orig",
+                        "serializedSeed": "settingMoodEnergy:sad"
+                      },
+                      {
+                        "value": "all",
+                        "name": "Любое",
+                        "unspecified": true,
+                        "serializedSeed": "settingMoodEnergy:all"
+                      }
+                    ]
+                  },
+                  "language": {
+                    "type": "enum",
+                    "name": "По языку",
+                    "possibleValues": [
+                      {
+                        "value": "russian",
+                        "name": "Русский",
+                        "serializedSeed": "settingLanguage:russian"
+                      },
+                      {
+                        "value": "not-russian",
+                        "name": "Иностранный",
+                        "serializedSeed": "settingLanguage:not-russian"
+                      },
+                      {
+                        "value": "any",
+                        "name": "Любой",
+                        "unspecified": true,
+                        "serializedSeed": "settingLanguage:any"
+                      },
+                      {
+                        "value": "without-words",
+                        "name": "Без слов",
+                        "serializedSeed": "settingLanguage:without-words"
+                      }
+                    ]
+                  }
+                },
+                "specialContext": false
+              },
+              "settings2": {
+                "diversity": "default",
+                "moodEnergy": "all",
+                "language": "any"
+              },
+              "explanation": ""
+            },
+            "blockEntityDataId": "editorial:station-16"
+          }
+        },
+        {
+          "id": "bSkzHCLn",
+          "type": "station",
+          "data": {
+            "id": {
+              "tag": "station-1",
+              "type": "editorial"
+            },
+            "data": {
+              "station": {
+                "id": {
+                  "type": "editorial",
+                  "tag": "station-1"
+                },
+                "name": "Сказки для сна",
+                "icon": {
+                  "backgroundColor": "#8193FB",
+                  "imageUrl": "avatars.yandex.net/get-music-misc/2419084/rotor-kids_fairytales-icon/%%"
+                },
+                "mtsIcon": {
+                  "backgroundColor": "#FF6665",
+                  "imageUrl": "avatars.yandex.net/get-music-misc/editorial-station-1-cover/%%"
+                },
+                "idForFrom": "editorial-station1",
+                "restrictions": {
+                  "language": {
+                    "type": "enum",
+                    "name": "По языку",
+                    "possibleValues": [
+                      {
+                        "value": "any",
+                        "name": "Любой",
+                        "unspecified": true,
+                        "serializedSeed": "settingLanguage:any"
+                      }
+                    ]
+                  },
+                  "mood": {
+                    "type": "discrete-scale",
+                    "name": "Под настроение",
+                    "min": {
+                      "value": 1,
+                      "name": "Грустнее"
+                    },
+                    "max": {
+                      "value": 4,
+                      "name": "Веселее"
+                    }
+                  },
+                  "energy": {
+                    "type": "discrete-scale",
+                    "name": "Энергичность",
+                    "min": {
+                      "value": 1,
+                      "name": "Спокойнее"
+                    },
+                    "max": {
+                      "value": 4,
+                      "name": "Бодрее"
+                    }
+                  },
+                  "diversity": {
+                    "type": "enum",
+                    "name": "По характеру",
+                    "possibleValues": [
+                      {
+                        "value": "default",
+                        "name": "Все"
+                      },
+                      {
+                        "value": "diverse",
+                        "name": "Редкие"
+                      },
+                      {
+                        "value": "favorite",
+                        "name": "Любимые"
+                      },
+                      {
+                        "value": "popular",
+                        "name": "Популярные"
+                      }
+                    ]
+                  }
+                },
+                "restrictions2": {
+                  "diversity": {
+                    "type": "enum",
+                    "name": "По характеру",
+                    "possibleValues": [
+                      {
+                        "value": "default",
+                        "name": "Любое",
+                        "unspecified": true,
+                        "serializedSeed": "settingDiversity:default"
+                      }
+                    ]
+                  },
+                  "moodEnergy": {
+                    "type": "enum",
+                    "name": "Под настроение",
+                    "possibleValues": [
+                      {
+                        "value": "all",
+                        "name": "Любое",
+                        "unspecified": true,
+                        "serializedSeed": "settingMoodEnergy:all"
+                      }
+                    ]
+                  },
+                  "language": {
+                    "type": "enum",
+                    "name": "По языку",
+                    "possibleValues": [
+                      {
+                        "value": "any",
+                        "name": "Любой",
+                        "unspecified": true,
+                        "serializedSeed": "settingLanguage:any"
+                      }
+                    ]
+                  }
+                },
+                "specialContext": false
+              },
+              "settings2": {
+                "diversity": "default",
+                "moodEnergy": "all",
+                "language": "any"
+              },
+              "explanation": ""
+            },
+            "blockEntityDataId": "editorial:station-1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kids_malysh_nikolya",
+      "title": "Приключения малыша Николя",
+      "type": "editorial-playlists",
+      "typeForFrom": "catalogue-editorial-playlists",
+      "viewAllUrl": "/kids/editorial/album/kids_malysh_nikolya",
+      "viewAllUrlScheme": "yandexmusic://kids/editorial/album/kids_malysh_nikolya",
+      "entities": [
+        {
+          "id": "1Ft9Msc8",
+          "type": "album",
+          "data": {
+            "id": 25967461,
+            "title": "Рене Госинни. «Малыш Николя»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/9737237/421ca7c6.a.25967461-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/9737237/421ca7c6.a.25967461-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 19,
+            "likesCount": 1761,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 16826131,
+                "name": "Алла Човжик",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/7852894/54e5417a.a.24893061-1/%%",
+                  "prefix": "54e5417a.a.24893061-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4753230,
+                "name": "Азбука Аттикус"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Эта история началась в далёкие пятидесятые годы прошлого века с небольших юмористических рисунков, автором которых был художник Жан-Жак Сампе. Его друг писатель Рене Госинни решил к этим рисункам написать тексты. Таким образом получились забавные рассказы-комиксы, героем которых стал малыш Николя. Этого симпатичного мальчишку юные читатели очень полюбили и с нетерпением ждали публикации очередного рассказа. Авторы сочиняли и рисовали всё новые и новые истории, и издатели решили объединить их в книжки.\u003cbr/\u003eС тех пор прошло немало лет, но малыш Николя по-прежнему необычайно популярен и любим детьми многих стран мира. Весёлые истории об этом добром, обаятельном сорванце, о его приятелях и школе близки и понятны детям.\u003cbr/\u003eИ не важно, на каком языке они разговаривают.\u003cbr/\u003e\u003cbr/\u003eПереводчик(и): Ирина Прессман",
+            "disclaimers": [],
+            "blockEntityDataId": "25967461"
+          }
+        },
+        {
+          "id": "UCoc0UUj",
+          "type": "album",
+          "data": {
+            "id": 26118067,
+            "title": "Рене Госинни. «Малыш Николя и его друзья»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/9784575/9f57b07c.a.26118067-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/9784575/9f57b07c.a.26118067-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 16,
+            "likesCount": 660,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 16826131,
+                "name": "Алла Човжик",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/7852894/54e5417a.a.24893061-1/%%",
+                  "prefix": "54e5417a.a.24893061-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4753230,
+                "name": "Азбука Аттикус"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Наш знакомый французский школьник Николя со своей шумной ватагой друзей снова с нами! Эти озорники и большие выдумщики не перестают удивлять своими забавными приключения и проделками \u0026#8211; они играют, гоняют в футбол на пустыре, ходят в кино, зоопарк и цирк, путешествуют, бывает, даже ссорятся и дерутся, но потом непременно мирятся. В общем, весело проводят время! Читатели во многих странах мира полюбили этих обаятельных ребят и успели с ними подружиться. А кто ещё не знаком с ними, скорее открывайте книжку \u0026#8211; будет интересно, смешно и весело!\u003cbr/\u003e\u003cbr/\u003eПереводчик(и): Ирина Прессман",
+            "disclaimers": [],
+            "blockEntityDataId": "26118067"
+          }
+        },
+        {
+          "id": "3NCMxXhp",
+          "type": "album",
+          "data": {
+            "id": 26118070,
+            "title": "Рене Госинни. «Малыш Николя на переменках»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/9737237/3bcc92f9.a.26118070-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/9737237/3bcc92f9.a.26118070-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 16,
+            "likesCount": 508,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 16826131,
+                "name": "Алла Човжик",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/7852894/54e5417a.a.24893061-1/%%",
+                  "prefix": "54e5417a.a.24893061-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4753230,
+                "name": "Азбука Аттикус"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "На страницах книги юных читателей ждёт встреча с их любимым героем Николя и его приятелями \u0026#8212; Руфюсом, Альцестом, Мексаном, Клотером и другими. Этим сорванцам не приходится скучать ни минуты \u0026#8212; они не устают придумывать себе всё новые и новые приключения, попадая порой в самые смешные и нелепые ситуации. Вам наверняка интересно узнать, как проводит время эта весёлая компания? Тогда скорее открывайте книжку!\u003cbr/\u003e\u003cbr/\u003eПереводчик(и): Ирина Прессман",
+            "disclaimers": [],
+            "blockEntityDataId": "26118070"
+          }
+        },
+        {
+          "id": "cD1J2DW3",
+          "type": "album",
+          "data": {
+            "id": 27859102,
+            "title": "Рене Госинни. «Малыш Николя проказничает»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/9837405/ca8ba7cd.a.27859102-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/9837405/ca8ba7cd.a.27859102-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 15,
+            "likesCount": 423,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 16826131,
+                "name": "Алла Човжик",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/7852894/54e5417a.a.24893061-1/%%",
+                  "prefix": "54e5417a.a.24893061-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4753230,
+                "name": "Азбука Аттикус"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "В этой книге \u0026#8211; новые рассказы о проделках малыша Николя и его друзей. Этот обаятельный сорванец необычайно любим детьми, потому что всё, что происходит с ним и шумной ватагой его приятелей, интересно, близко и понятно каждому ребёнку.\u003cbr/\u003e\u003cbr/\u003eПереводчик(и): Левин Вадим",
+            "disclaimers": [],
+            "blockEntityDataId": "27859102"
+          }
+        },
+        {
+          "id": "RDqpde0f",
+          "type": "album",
+          "data": {
+            "id": 27330636,
+            "title": "Рене Госинни. «Малыш Николя в школе»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/9838169/7f724101.a.27330636-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/9838169/7f724101.a.27330636-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 16,
+            "likesCount": 375,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 16826131,
+                "name": "Алла Човжик",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/7852894/54e5417a.a.24893061-1/%%",
+                  "prefix": "54e5417a.a.24893061-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4753230,
+                "name": "Азбука Аттикус"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "В книгу вошли новые истории из жизни Николя \u0026#8211; симпатичного мальчугана, полюбившегося уже многим читателям. Вместе со своими приятелями Эдом, Жоффруа, Руфюсом, Мексаном и Альцестом он выдумывает забавные игры, проказничает на уроках и переменках (за что, конечно, получает наказание), гоняет в футбол, ссорится с друзьями и тут же мирится, ведь совершенно невозможно долго находиться в ссоре со своими лучшими друзьями\u0026hellip; Много интересного происходит в жизни Николя и его весёлой компании! Обо всём \u0026#8211; в этой замечательной книжке.\u003cbr/\u003e\u003cbr/\u003eПереводчик(и): Вадим Левин",
+            "disclaimers": [],
+            "blockEntityDataId": "27330636"
+          }
+        },
+        {
+          "id": "xpcaJelP",
+          "type": "album",
+          "data": {
+            "id": 27859114,
+            "title": "Рене Госинни. «Малыш Николя веселится»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/10641165/b7a1a496.a.27859114-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/10641165/b7a1a496.a.27859114-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 15,
+            "likesCount": 329,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 16826131,
+                "name": "Алла Човжик",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/7852894/54e5417a.a.24893061-1/%%",
+                  "prefix": "54e5417a.a.24893061-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4753230,
+                "name": "Азбука Аттикус"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Новые рассказы о весёлом, озорном мальчугане Николя снова подарят юным читателям радость встречи с их любимым героем! С этим обаятельным сорванцом и его друзьями никогда не бывает скучно. Поэтому каждый рассказ \u0026#8211; это очередное приключение, проделка или игра. А уж на выдумки у этой компании фантазия никогда не иссякает\u0026hellip;\u003cbr/\u003e\u003cbr/\u003eПереводчик(и): Левин Вадим",
+            "disclaimers": [],
+            "blockEntityDataId": "27859114"
+          }
+        },
+        {
+          "id": "V6mMHDC1",
+          "type": "album",
+          "data": {
+            "id": 27757929,
+            "title": "Рене Госинни. «Малыш Николя путешествует»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/10930741/9f86c0ca.a.27757929-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/10930741/9f86c0ca.a.27757929-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 16,
+            "likesCount": 345,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 16826131,
+                "name": "Алла Човжик",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/7852894/54e5417a.a.24893061-1/%%",
+                  "prefix": "54e5417a.a.24893061-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4753230,
+                "name": "Азбука Аттикус"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Уже миллионы детей познакомились с малышом Николя \u0026#8211; добрым, весёлым, озорным мальчуганом \u0026#8211; и компанией его друзей, таких же неугомонных сорванцов. Все вместе они здорово проводят время \u0026#8211; играют, ходят в кино, в гости друг к другу, иногда шалят и ссорятся, бывает, даже дерутся, а потом непременно мирятся. И каждый раз читатели с нетерпением ждут очередных историй о приключениях этой шумной ватаги. А кто ещё незнаком с Николя и его друзьями, скорее открывайте книжку \u0026#8211; вы обязательно подружитесь с ними!\u003cbr/\u003e\u003cbr/\u003eПереводчик(и): Вадим Левин",
+            "disclaimers": [],
+            "blockEntityDataId": "27757929"
+          }
+        },
+        {
+          "id": "exJsd332",
+          "type": "album",
+          "data": {
+            "id": 26118064,
+            "title": "Рене Госинни. «Каникулы малыша Николя»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/9707577/b9fb1155.a.26118064-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/9707577/b9fb1155.a.26118064-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 18,
+            "likesCount": 628,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 16826131,
+                "name": "Алла Човжик",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/7852894/54e5417a.a.24893061-1/%%",
+                  "prefix": "54e5417a.a.24893061-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4753230,
+                "name": "Азбука Аттикус"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Закончился утомительный учебный год. Николя получил приз за красноречие \u0026#8211; не столько за качество, сколько за количество, \u0026#8211; и распрощался со своими товарищами \u0026#8211; Альцестом, Руфюсом, Эдом, Жоффруа, Мексаном, Жоакимом, Клотером и Аньяном. Книги и тетради сложены, и самое время подумать об отдыхе.\u003cbr/\u003e  Но в семье Николя с выбором места, куда можно было бы отправиться на каникулы, проблем нет, потому что\u0026hellip;\u003cbr/\u003e\u003cbr/\u003eПереводчик(и): Ирина Прессман",
+            "disclaimers": [],
+            "blockEntityDataId": "26118064"
+          }
+        },
+        {
+          "id": "ZE1s1kxH",
+          "type": "album",
+          "data": {
+            "id": 27859108,
+            "title": "Рене Госинни. «Малыш Николя и воздушный шар»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/10930741/82d1833b.a.27859108-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/10930741/82d1833b.a.27859108-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 10,
+            "likesCount": 359,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 16826131,
+                "name": "Алла Човжик",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/7852894/54e5417a.a.24893061-1/%%",
+                  "prefix": "54e5417a.a.24893061-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4753230,
+                "name": "Азбука Аттикус"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Встречайте нашего маленького знакомого Николя! Вы наверняка помните, какие забавные истории приключились с ним и его школьными друзьями. Эти непоседы всегда здорово и весело проводили время \u0026#8211; играли, проказничали, иногда ссорились, случалось, даже дрались, но потом непременно мирились. На страницах этой книги \u0026#8211; новые истории из жизни сорванца Николя и его приятелей-выдумщиков. А те, кто ещё не знаком с этим обаятельным и непосредственным мальчишкой, советуем обязательно прочитать и другие рассказы о нём.\u003cbr/\u003e\u003cbr/\u003eПереводчик(и): Левин Вадим",
+            "disclaimers": [],
+            "blockEntityDataId": "27859108"
+          }
+        },
+        {
+          "id": "cfl9yCkx",
+          "type": "album",
+          "data": {
+            "id": 27330634,
+            "title": "Рене Госинни. «Проделки малыша Николя»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/10103188/d8a97324.a.27330634-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/10103188/d8a97324.a.27330634-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 16,
+            "likesCount": 345,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 16826131,
+                "name": "Алла Човжик",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/7852894/54e5417a.a.24893061-1/%%",
+                  "prefix": "54e5417a.a.24893061-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4753230,
+                "name": "Азбука Аттикус"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Большой выдумщик и озорник малыш Николя не перестаёт удивлять своими приключениями. Этот симпатичный мальчуган покорил сердца миллионов читателей. Дети с нетерпением ждут очередных историй о нём и его школьных приятелях \u0026#8211; историй увлекательных, смешных, трогательных.\u003cbr/\u003e\u003cbr/\u003eПереводчик(и): Вадим Левин",
+            "disclaimers": [],
+            "blockEntityDataId": "27330634"
+          }
+        }
+      ]
+    },
+    {
+      "id": "lady_bug",
+      "title": "Леди Баг и Супер-Кот",
+      "type": "editorial-playlists",
+      "typeForFrom": "catalogue-editorial-playlists",
+      "viewAllUrl": "/kids/editorial/album/lady_bug",
+      "viewAllUrlScheme": "yandexmusic://kids/editorial/album/lady_bug",
+      "entities": [
+        {
+          "id": "7z1bj8jB",
+          "type": "album",
+          "data": {
+            "id": 28755862,
+            "title": "Анна Миллер. «Леди Баг и Супер-Кот. День героев»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/10703962/68f0e5f5.a.28755862-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/10703962/68f0e5f5.a.28755862-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 6,
+            "likesCount": 4953,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 5436088,
+                "name": "Михаил Хрусталёв",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/10126140/502b2250.a.30670191-1/%%",
+                  "prefix": "502b2250.a.30670191-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4739156,
+                "name": "Издательство АСТ"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Париж отмечает День героев. Праздник, когда каждый может сделать доброе дело и почувствовать себя настоящим героем! Одноклассники Маринетт хорошо подготовились, а вот она сама... просто не успела. Нелегко патрулировать город ночью в образе Леди Баг и ничего не забыть! В отличие от Маринетт Бражник придумал грандиозный план. Он выбрал День героев моментом для решающего нападения на Париж! Леди Баг, Супер-Коту и другим супергероям предстоит встретиться со всеми старыми врагами сразу!",
+            "disclaimers": [],
+            "blockEntityDataId": "28755862"
+          }
+        },
+        {
+          "id": "9vCeUuxS",
+          "type": "album",
+          "data": {
+            "id": 28254536,
+            "title": "Елена Саморядова. «Леди Баг и Супер-Кот. Ананси»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/9837803/7f173836.a.28254536-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/9837803/7f173836.a.28254536-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 6,
+            "likesCount": 3583,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 5436088,
+                "name": "Михаил Хрусталёв",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/10126140/502b2250.a.30670191-1/%%",
+                  "prefix": "502b2250.a.30670191-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4739156,
+                "name": "Издательство АСТ"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Пока Маринетт и её друзья весело проводят выходные, Бражник строит коварный план нападения на Париж. В этот раз жертвой заколдованной акумы становится Нора. Превратившись в гигантского паука, Ананси атакует колесо обозрения и похищает Алю. Жители города оказались в ловушке, и теперь всем грозит опасность.\u003cbr/\u003e Удастся ли Леди Баг и Супер-Коту победить зло?",
+            "disclaimers": [],
+            "blockEntityDataId": "28254536"
+          }
+        },
+        {
+          "id": "vh2fd0JJ",
+          "type": "album",
+          "data": {
+            "id": 28254537,
+            "title": "Елена Саморядова. «Леди Баг и Супер-Кот. Королева Ос»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/9837405/276333fe.a.28254537-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/9837405/276333fe.a.28254537-1/%%",
+            "genre": "childrensliterature",
+            "trackCount": 6,
+            "likesCount": 2936,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 21031471,
+                "name": "Дарья Фролова",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/9837405/276333fe.a.28254537-1/%%",
+                  "prefix": "276333fe.a.28254537-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4739156,
+                "name": "Издательство АСТ"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Кто бы мог подумать, что знаменитый модный критик Одри Буржуа посчитает Маринетт прекрасным дизайнером и пригласит её в Нью-Йорк? Но еще удивительней то, что ответственная Леди Баг могла потерять талисман, который попал в руки... Хлои! Что же будет делать самая вредная и заносчивая одноклассница Маринетт со своей новой силой? Кажется, Париж ожидает появления новой супергероини!",
+            "disclaimers": [],
+            "blockEntityDataId": "28254537"
+          }
+        },
+        {
+          "id": "02Rj1Bns",
+          "type": "album",
+          "data": {
+            "id": 28055341,
+            "title": "Елена Саморядова. «Леди Баг и Супер-Кот. Сирена»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/10126140/afbffa9d.a.28055341-2/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/10126140/afbffa9d.a.28055341-2/%%",
+            "genre": "childrensliterature",
+            "trackCount": 6,
+            "likesCount": 3178,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 5436088,
+                "name": "Михаил Хрусталёв",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/10126140/502b2250.a.30670191-1/%%",
+                  "prefix": "502b2250.a.30670191-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4739156,
+                "name": "Издательство АСТ"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Супер-Кот обижается, злодейка Сирена превратила Париж в\u0026hellip; море! Столько проблем в один день у Леди Баг ещё не было! На помощь придёт Мастер Фу с Книгой заклинаний. Супергероям предстоит открыть в себе новые магические способности!",
+            "disclaimers": [],
+            "blockEntityDataId": "28055341"
+          }
+        },
+        {
+          "id": "jZmnfsNt",
+          "type": "album",
+          "data": {
+            "id": 28055335,
+            "title": "Елена Саморядова. «Леди Баг и Супер-Кот. Королева стиля»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/10210263/02d63725.a.28055335-2/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/10210263/02d63725.a.28055335-2/%%",
+            "genre": "childrensliterature",
+            "trackCount": 6,
+            "likesCount": 2289,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 5436088,
+                "name": "Михаил Хрусталёв",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/10126140/502b2250.a.30670191-1/%%",
+                  "prefix": "502b2250.a.30670191-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4739156,
+                "name": "Издательство АСТ"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Маринетт предстоит важный день: на модном показе Габриэля Агреста Эдриан пройдётся по подиуму в шляпе, которую она сшила! Но, как всегда, без приключений не обойтись! Сначала Маринетт узнаёт, что на показе будет сама Одри Буржуа \u0026#8212; знаменитый фешн-критик, потом Бражник превращает Одри в Королеву Стиля, а Супер-Кот почему-то не спешит помогать своей напарнице! Леди Баг отправляется к Мастеру Фу за новой силой...",
+            "disclaimers": [],
+            "blockEntityDataId": "28055335"
+          }
+        },
+        {
+          "id": "c79TvERC",
+          "type": "album",
+          "data": {
+            "id": 28055333,
+            "title": "Фиона Харрис. «Леди Баг и Супер-Кот. Месье Голубь»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/9837405/afa0fa3d.a.28055333-2/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/9837405/afa0fa3d.a.28055333-2/%%",
+            "genre": "childrensliterature",
+            "trackCount": 6,
+            "likesCount": 2408,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 5436088,
+                "name": "Михаил Хрусталёв",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/10126140/502b2250.a.30670191-1/%%",
+                  "prefix": "502b2250.a.30670191-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4739156,
+                "name": "Издательство АСТ"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Что делать, если приходится сражаться не только с суперзлодеем, но ещё и с огромной стаей недружелюбных голубей? Леди Баг и Супер-Коту предстоит это выяснить! И, возможно, эта битва даст Маринетт идею для\u0026hellip; модного аксессуара!\u003cbr/\u003e\u003cbr/\u003eПереводчик(и): Алиса Чечина",
+            "disclaimers": [],
+            "blockEntityDataId": "28055333"
+          }
+        },
+        {
+          "id": "UEMCZJSM",
+          "type": "album",
+          "data": {
+            "id": 28055342,
+            "title": "Фиона Харрис. «Леди Баг и Супер-Кот. Леди Вайфай»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/9837803/6a85523d.a.28055342-2/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/9837803/6a85523d.a.28055342-2/%%",
+            "genre": "childrensliterature",
+            "trackCount": 6,
+            "likesCount": 3195,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 5436088,
+                "name": "Михаил Хрусталёв",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/10126140/502b2250.a.30670191-1/%%",
+                  "prefix": "502b2250.a.30670191-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4739156,
+                "name": "Издательство АСТ"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Во что бы то ни стало Аля решила выяснить настоящую личность Леди Баг! Кто бы мог подумать, что это стремление приведёт её к встрече с Бражником, а Маринетт придётся сразиться с лучшей подругой?\u003cbr/\u003e\u003cbr/\u003eПереводчик(и): Алиса Чечина",
+            "disclaimers": [],
+            "blockEntityDataId": "28055342"
+          }
+        },
+        {
+          "id": "8IpijjUo",
+          "type": "album",
+          "data": {
+            "id": 28055340,
+            "title": "Елена Саморядова. «Леди Баг и Супер-Кот. Вольпина»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/9837405/45aa4c76.a.28055340-2/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/9837405/45aa4c76.a.28055340-2/%%",
+            "genre": "childrensliterature",
+            "trackCount": 6,
+            "likesCount": 2451,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 5436088,
+                "name": "Михаил Хрусталёв",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/10126140/502b2250.a.30670191-1/%%",
+                  "prefix": "502b2250.a.30670191-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4739156,
+                "name": "Издательство АСТ"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "В класс Маринетт пришла новая ученица, которая тут же обратила всё своё внимание на Эдриана. Леди Баг предстоит выяснить, кто же эта девочка \u0026#8212; супергероиня или\u0026hellip; очередная жертва Бражника. К тому же настало время познакомиться с Великим Хранителем!",
+            "disclaimers": [],
+            "blockEntityDataId": "28055340"
+          }
+        },
+        {
+          "id": "9HJkLand",
+          "type": "album",
+          "data": {
+            "id": 28055339,
+            "title": "Елена Саморядова. «Леди Баг и Супер-Кот. Собиратель»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/10092855/e97405c7.a.28055339-2/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/10092855/e97405c7.a.28055339-2/%%",
+            "genre": "childrensliterature",
+            "trackCount": 6,
+            "likesCount": 2181,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 5436088,
+                "name": "Михаил Хрусталёв",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/10126140/502b2250.a.30670191-1/%%",
+                  "prefix": "502b2250.a.30670191-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4739156,
+                "name": "Издательство АСТ"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Маринетт нашла Книгу заклинаний и показала её Мастеру Фу. Великий Хранитель сказал, что тот, у кого была эта книга, может быть Бражником! Теперь Габриэлю Агресту придётся пойти на неожиданный и рискованный шаг, чтобы запутать Леди Баг и Супер-Кота.",
+            "disclaimers": [],
+            "blockEntityDataId": "28055339"
+          }
+        },
+        {
+          "id": "eZXHjwbE",
+          "type": "album",
+          "data": {
+            "id": 28055334,
+            "title": "Фиона Харрис. «Леди Баг и Супер-Кот. Непогода»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/10210263/caa3ac35.a.28055334-2/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/10210263/caa3ac35.a.28055334-2/%%",
+            "genre": "childrensliterature",
+            "trackCount": 6,
+            "likesCount": 4234,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 5436088,
+                "name": "Михаил Хрусталёв",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/10126140/502b2250.a.30670191-1/%%",
+                  "prefix": "502b2250.a.30670191-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4739156,
+                "name": "Издательство АСТ"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "Париж в опасности! Злодейка Непогода обрушила на город всю  мощь природы! Сможет ли Маринетт одновременно справиться с обязанностями супергероини и... няни для маленькой непоседы Манон?\u003cbr/\u003e\u003cbr/\u003eПереводчик(и): Алиса Чечина",
+            "disclaimers": [],
+            "blockEntityDataId": "28055334"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kids_chart",
+      "title": "Популярное",
+      "description": "Детям нравится",
+      "type": "editorial-playlists",
+      "typeForFrom": "catalogue-editorial-playlists",
+      "viewAllUrl": "/kids/editorial/album/kids_chart",
+      "viewAllUrlScheme": "yandexmusic://kids/editorial/album/kids_chart",
+      "entities": [
+        {
+          "id": "Ymxznjjj",
+          "type": "album",
+          "data": {
+            "id": 82212,
+            "title": "Созвездие сказок - Лев Николаевич Толстой",
+            "type": "fairy-tale",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/32236/a1119c51.a.82212-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/32236/a1119c51.a.82212-1/%%",
+            "genre": "fairytales",
+            "trackCount": 23,
+            "likesCount": 3502,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 6955753,
+                "name": "А. Корнева",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/32236/a1119c51.a.82212-1/%%",
+                  "prefix": "a1119c51.a.82212-1"
+                },
+                "decomposed": [
+                  ", ",
+                  {
+                    "id": 6955689,
+                    "name": "И. Суханова",
+                    "various": false,
+                    "composer": false,
+                    "cover": {
+                      "type": "from-album-cover",
+                      "uri": "avatars.yandex.net/get-music-content/32236/a1119c51.a.82212-1/%%",
+                      "prefix": "a1119c51.a.82212-1"
+                    },
+                    "genres": [],
+                    "disclaimers": []
+                  },
+                  ", ",
+                  {
+                    "id": 6955716,
+                    "name": "Е.Н. Ипатий",
+                    "various": false,
+                    "composer": false,
+                    "cover": {
+                      "type": "from-album-cover",
+                      "uri": "avatars.yandex.net/get-music-content/32236/a1119c51.a.82212-1/%%",
+                      "prefix": "a1119c51.a.82212-1"
+                    },
+                    "genres": [],
+                    "disclaimers": []
+                  },
+                  ", ",
+                  {
+                    "id": 6955052,
+                    "name": "Н.И. Тимофеев",
+                    "various": false,
+                    "composer": false,
+                    "cover": {
+                      "type": "from-album-cover",
+                      "uri": "avatars.yandex.net/get-music-content/32236/a1119c51.a.82212-1/%%",
+                      "prefix": "a1119c51.a.82212-1"
+                    },
+                    "genres": [],
+                    "disclaimers": []
+                  }
+                ],
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 585754,
+                "name": "Медиалайн"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [
+              740883,
+              740867,
+              740869
+            ],
+            "disclaimers": [],
+            "blockEntityDataId": "82212"
+          }
+        },
+        {
+          "id": "mT4lccbi",
+          "type": "album",
+          "data": {
+            "id": 9336738,
+            "title": "Сказки на ночь для детей и малышей",
+            "type": "fairy-tale",
+            "metaType": "podcast",
+            "year": 2019,
+            "releaseDate": "2019-11-26T00:00:00+03:00",
+            "coverUri": "avatars.yandex.net/get-music-content/118603/b6d5bf0b.a.9336738-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/118603/b6d5bf0b.a.9336738-1/%%",
+            "genre": "fairytales",
+            "trackCount": 101,
+            "likesCount": 10421,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 8455139,
+                "name": "Сказочный Сон",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/118603/b6d5bf0b.a.9336738-1/%%",
+                  "prefix": "b6d5bf0b.a.9336738-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 1971709,
+                "name": "Сказочный Сон"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [
+              60437816,
+              60437811,
+              60437712
+            ],
+            "disclaimers": [],
+            "blockEntityDataId": "9336738"
+          }
+        },
+        {
+          "id": "Z1pjO3sY",
+          "type": "album",
+          "data": {
+            "id": 3737066,
+            "title": "Сборник лучших сказок",
+            "type": "fairy-tale",
+            "metaType": "podcast",
+            "year": 2016,
+            "coverUri": "avatars.yandex.net/get-music-content/9737237/323790a6.a.3737066-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/9737237/323790a6.a.3737066-1/%%",
+            "genre": "fairytales",
+            "trackCount": 33,
+            "likesCount": 3667,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 4576163,
+                "name": "Детское издательство «Елена»",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/9737237/323790a6.a.3737066-1/%%",
+                  "prefix": "323790a6.a.3737066-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 272854,
+                "name": "Music1"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [
+              30882481,
+              30882496,
+              30882494
+            ],
+            "disclaimers": [],
+            "blockEntityDataId": "3737066"
+          }
+        },
+        {
+          "id": "LM4F5ZFf",
+          "type": "album",
+          "data": {
+            "id": 11169446,
+            "title": "Сказки на ночь для детей и малышей. Часть 2",
+            "type": "fairy-tale",
+            "metaType": "podcast",
+            "year": 2020,
+            "releaseDate": "2020-06-19T00:00:00+03:00",
+            "coverUri": "avatars.yandex.net/get-music-content/2810397/1e054702.a.11169446-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/2810397/1e054702.a.11169446-1/%%",
+            "genre": "fairytales",
+            "trackCount": 101,
+            "likesCount": 7452,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 8455139,
+                "name": "Сказочный Сон",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/118603/b6d5bf0b.a.9336738-1/%%",
+                  "prefix": "b6d5bf0b.a.9336738-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 1971709,
+                "name": "Сказочный Сон"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [
+              67782243,
+              67782304,
+              67782324
+            ],
+            "disclaimers": [],
+            "blockEntityDataId": "11169446"
+          }
+        },
+        {
+          "id": "fl6zWAPw",
+          "type": "album",
+          "data": {
+            "id": 16404026,
+            "title": "Нерпа Юма. Сказки Байкала",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "year": 2021,
+            "releaseDate": "2021-06-22T00:00:00+03:00",
+            "coverUri": "avatars.yandex.net/get-music-content/5235336/82d4a7ae.a.16404026-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/5235336/82d4a7ae.a.16404026-1/%%",
+            "genre": "fairytales",
+            "trackCount": 32,
+            "likesCount": 9482,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [],
+            "labels": [],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [
+              85747285,
+              85747282,
+              85747283
+            ],
+            "shortDescription": "Нерпа Юма. Сказки Байкала. Читают звёзды!\u003cbr/\u003eУдивительные приключения Юмы!",
+            "description": "Нерпа Юма. Сказки Байкала. Читают звёзды!\u003cbr/\u003eУдивительные приключения Юмы!",
+            "disclaimers": [],
+            "blockEntityDataId": "16404026"
+          }
+        },
+        {
+          "id": "sYAsPYT1",
+          "type": "album",
+          "data": {
+            "id": 20217368,
+            "title": "Андрей Усачев. «Умная собачка Соня»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "year": 2021,
+            "releaseDate": "2021-12-24T00:00:00+03:00",
+            "coverUri": "avatars.yandex.net/get-music-content/5678677/2eca8530.a.20217368-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/5678677/2eca8530.a.20217368-1/%%",
+            "genre": "fairytales",
+            "trackCount": 20,
+            "likesCount": 21704,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 3816072,
+                "name": "Ирина Богушевская",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/7852894/f387ff04.a.24855919-1/%%",
+                  "prefix": "f387ff04.a.24855919-1"
+                },
+                "decomposed": [
+                  ", ",
+                  {
+                    "id": 5460095,
+                    "name": "Александр Пожаров",
+                    "various": false,
+                    "composer": false,
+                    "cover": {
+                      "type": "from-album-cover",
+                      "uri": "avatars.yandex.net/get-music-content/5314916/533e5e1a.a.24160002-1/%%",
+                      "prefix": "533e5e1a.a.24160002-1"
+                    },
+                    "genres": [],
+                    "disclaimers": []
+                  },
+                  ", ",
+                  {
+                    "id": 15500173,
+                    "name": "Татьяна Шпагина",
+                    "various": false,
+                    "composer": false,
+                    "cover": {
+                      "type": "from-album-cover",
+                      "uri": "avatars.yandex.net/get-music-content/5678677/2eca8530.a.20217368-1/%%",
+                      "prefix": "2eca8530.a.20217368-1"
+                    },
+                    "genres": [],
+                    "disclaimers": []
+                  }
+                ],
+                "genres": [],
+                "disclaimers": []
+              },
+              {
+                "id": 17938268,
+                "name": "Умная собачка Соня",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/5678677/2eca8530.a.20217368-1/%%",
+                  "prefix": "2eca8530.a.20217368-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 713561,
+                "name": "Аудио Издательство ВИМБО"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "\u003cbr/\u003eИрина Богушевская в аудиоспектакле по самой известной книге Андрея Усачева \u0026laquo;Умная собачка Соня\u0026raquo;.\u003cbr/\u003eЛюбопытная маленькая Соня задаётся множеством вопросов: Где живет Эхо? Можно ли поймать кита в ванне? Кто сделал лужу на улице, и будут ли этого кого-то ругать?.. На все эти вопросы Соня обязательно найдёт ответ и станет значительно умнее. А вместе с ней и дети, которые услышат эту весёлую и трогательную историю.\u003cbr/\u003e\u003cbr/\u003eИсполнители: Ирина Богушевская, Александр Пожаров, Татьяна Шпагина\u003cbr/\u003e\u003cbr/\u003eРежиссёр: Дмитрий Креминский\u003cbr/\u003eМузыка: Александр Пинегин\u003cbr/\u003eИллюстрации: Елена Станикова\u003cbr/\u003e  \u003cbr/\u003e \u0026copy; А.А.Усачев \u003cbr/\u003e \u003cbr/\u003e Запись произведена продюсерским центром \u0026laquo;Вимбо\u0026raquo;\u003cbr/\u003e \u0026copy;\u0026amp;\u0026#8471; ООО \u0026ldquo;Вимбо\u0026rdquo;, Москва, Россия \u003cbr/\u003e Продюсеры: Вадим Бух, Михаил Литваков",
+            "disclaimers": [],
+            "blockEntityDataId": "20217368"
+          }
+        },
+        {
+          "id": "ZdVB0LSs",
+          "type": "album",
+          "data": {
+            "id": 22013392,
+            "title": "Сказки для малышей",
+            "type": "fairy-tale",
+            "metaType": "podcast",
+            "year": 2021,
+            "releaseDate": "2021-04-08T00:00:00+03:00",
+            "coverUri": "avatars.yandex.net/get-music-content/5966316/b24ceaf7.a.22013392-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/5966316/b24ceaf7.a.22013392-1/%%",
+            "genre": "fairytales",
+            "trackCount": 17,
+            "likesCount": 754,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 3460850,
+                "name": "Александра Иванова",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/5966316/b24ceaf7.a.22013392-1/%%",
+                  "prefix": "b24ceaf7.a.22013392-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4369740,
+                "name": "ООО \"Издательство Робинс\". Лицензия Gamma"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [
+              103135245,
+              103135256,
+              103135242
+            ],
+            "disclaimers": [],
+            "blockEntityDataId": "22013392"
+          }
+        },
+        {
+          "id": "cMjfKnTv",
+          "type": "album",
+          "data": {
+            "id": 24855919,
+            "title": "Андрей Усачев. «Собачка Соня на даче»",
+            "type": "audiobook",
+            "metaType": "podcast",
+            "coverUri": "avatars.yandex.net/get-music-content/7852894/f387ff04.a.24855919-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/7852894/f387ff04.a.24855919-1/%%",
+            "genre": "fairytales",
+            "trackCount": 16,
+            "likesCount": 23563,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 4769448,
+                "name": "Алексей Багдасаров",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/7852894/f387ff04.a.24855919-1/%%",
+                  "prefix": "f387ff04.a.24855919-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              },
+              {
+                "id": 3816072,
+                "name": "Ирина Богушевская",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/7852894/f387ff04.a.24855919-1/%%",
+                  "prefix": "f387ff04.a.24855919-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              },
+              {
+                "id": 17077294,
+                "name": "Александр Гаврилин",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/7852894/f387ff04.a.24855919-1/%%",
+                  "prefix": "f387ff04.a.24855919-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              },
+              {
+                "id": 16522332,
+                "name": "Наталия Казначеева",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/7852894/f387ff04.a.24855919-1/%%",
+                  "prefix": "f387ff04.a.24855919-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              },
+              {
+                "id": 7206177,
+                "name": "Кирилл Радциг",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/7852894/f387ff04.a.24855919-1/%%",
+                  "prefix": "f387ff04.a.24855919-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              },
+              {
+                "id": 13218523,
+                "name": "Илья Сланевский",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/7852894/f387ff04.a.24855919-1/%%",
+                  "prefix": "f387ff04.a.24855919-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 713561,
+                "name": "Аудио Издательство ВИМБО"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "description": "\u0026quot;Веселая, активная, неунывающая, а главное \u0026#8212; очень умная собачка Соня отправляется в новое приключение. Ее хозяин, Иван Иваныч, купил домик в деревне, и теперь их ждет целое лето на даче, а читателей ждут 15 новых занимательных смешных историй. Про то как Соня сажала картошку, училась плавать и варить очень вкусное варенье из вишни, делала ноги от злого быка, ну и конечно нашла новых друзей, которые научили ее радостной собачьей песне.\u003cbr/\u003e\u003cbr/\u003e Режиссер: Алексей Багдасаров\u003cbr/\u003eМузыка и исполнение песен: Александр Пинегин\u003cbr/\u003e\u003cbr/\u003e Иллюстрация: Евгений Антоненков\u003cbr/\u003e Дизайн: Юлия Стоцкая\u003cbr/\u003e\u003cbr/\u003e \u0026copy; А.А.Усачев\u003cbr/\u003e\u003cbr/\u003e Запись произведена Аудио Издательством ВИМБО\u003cbr/\u003e \u0026copy;\u0026amp;\u0026#8471; ООО \u0026laquo;Вимбо\u0026raquo;, 2023\u003cbr/\u003e Продюсеры: Вадим Бух, Михаил Литваков\u0026quot;",
+            "disclaimers": [],
+            "blockEntityDataId": "24855919"
+          }
+        },
+        {
+          "id": "ATQNfkla",
+          "type": "album",
+          "data": {
+            "id": 22393590,
+            "title": "SkazkaTerra: Сборник №2 полезных сказок для детей 6-ти лет",
+            "type": "fairy-tale",
+            "metaType": "podcast",
+            "year": 2022,
+            "releaseDate": "2022-04-26T00:00:00+03:00",
+            "coverUri": "avatars.yandex.net/get-music-content/6214856/109bd82f.a.22393590-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/6214856/109bd82f.a.22393590-1/%%",
+            "genre": "fairytales",
+            "trackCount": 15,
+            "likesCount": 1663,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 16580036,
+                "name": "Букчин",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/5502420/b7645b73.a.22447814-1/%%",
+                  "prefix": "b7645b73.a.22447814-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              },
+              {
+                "id": 16537100,
+                "name": "Бранд",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/6214856/2f9d693a.a.22381125-1/%%",
+                  "prefix": "2f9d693a.a.22381125-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              },
+              {
+                "id": 6036504,
+                "name": "Марина Казанкова",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/5502420/b7645b73.a.22447814-1/%%",
+                  "prefix": "b7645b73.a.22447814-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              },
+              {
+                "id": 16580035,
+                "name": "Андрей Плахотник",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/6214856/109bd82f.a.22393590-1/%%",
+                  "prefix": "109bd82f.a.22393590-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4412875,
+                "name": "SkazkaTerra"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [
+              104221405,
+              104221400,
+              104221401
+            ],
+            "disclaimers": [],
+            "blockEntityDataId": "22393590"
+          }
+        },
+        {
+          "id": "kOjl8Rw8",
+          "type": "album",
+          "data": {
+            "id": 22381125,
+            "title": "SkazkaTerra: Сборник №1 полезных сказок для детей 5-ти лет",
+            "type": "fairy-tale",
+            "metaType": "podcast",
+            "year": 2022,
+            "releaseDate": "2022-04-22T00:00:00+03:00",
+            "coverUri": "avatars.yandex.net/get-music-content/6214856/2f9d693a.a.22381125-1/%%",
+            "ogImage": "avatars.yandex.net/get-music-content/6214856/2f9d693a.a.22381125-1/%%",
+            "genre": "fairytales",
+            "trackCount": 16,
+            "likesCount": 3386,
+            "childContent": true,
+            "recent": false,
+            "veryImportant": false,
+            "artists": [
+              {
+                "id": 2632417,
+                "name": "Леонид Каневский",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/6214856/2f9d693a.a.22381125-1/%%",
+                  "prefix": "2f9d693a.a.22381125-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              },
+              {
+                "id": 16537102,
+                "name": "Наталья Батура",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/6214856/2f9d693a.a.22381125-1/%%",
+                  "prefix": "2f9d693a.a.22381125-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              },
+              {
+                "id": 16537101,
+                "name": "Гладкая",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/6214856/2f9d693a.a.22381125-1/%%",
+                  "prefix": "2f9d693a.a.22381125-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              },
+              {
+                "id": 16537100,
+                "name": "Бранд",
+                "various": false,
+                "composer": false,
+                "cover": {
+                  "type": "from-album-cover",
+                  "uri": "avatars.yandex.net/get-music-content/6214856/2f9d693a.a.22381125-1/%%",
+                  "prefix": "2f9d693a.a.22381125-1"
+                },
+                "genres": [],
+                "disclaimers": []
+              }
+            ],
+            "labels": [
+              {
+                "id": 4412875,
+                "name": "SkazkaTerra"
+              }
+            ],
+            "available": true,
+            "availableForPremiumUsers": true,
+            "availableForOptions": [
+              "bookmate"
+            ],
+            "availableForMobile": true,
+            "availablePartially": false,
+            "bests": [],
+            "disclaimers": [],
+            "blockEntityDataId": "22381125"
+          }
+        }
+      ]
+    },
+    {
+      "id": "MENU",
+      "title": "Ваши любимые",
+      "type": "menu",
+      "typeForFrom": "catalogue-menu",
+      "entities": [
+        {
+          "id": "EvJdarby",
+          "type": "menu-item-album",
+          "data": {
+            "title": "Альбомы",
+            "blockEntityDataId": "66280e88f17e6c4f996f396d"
+          }
+        },
+        {
+          "id": "ndHVXC1w",
+          "type": "menu-item-playlist",
+          "data": {
+            "title": "Плейлисты",
+            "blockEntityDataId": "66280e88f17e6c4f996f396e"
+          }
+        }
+      ]
+    },
+    {
+      "id": "CLIENT_WIDGET",
+      "title": "Добавьте близких в подписку",
+      "type": "client-widget",
+      "typeForFrom": "client-widget",
+      "entities": [
+        {
+          "id": "main",
+          "type": "client-widget",
+          "data": {
+            "type": "family-widget",
+            "title": "Добавьте близких в подписку",
+            "subtitle": "И они смогут слушать свои рекомендации",
+            "text": "Тут какой-то текст",
+            "imagePath": "avatars.yandex.net/get-music-misc/49997/banner-image-kids_banner-1646841617607/%%",
+            "blockEntityDataId": "family-widget"
+          }
+        }
+      ]
+    }
+  ],
+  "rupEnabled": false
+}

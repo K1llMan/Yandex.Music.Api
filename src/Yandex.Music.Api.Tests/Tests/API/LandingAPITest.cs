@@ -43,6 +43,15 @@ namespace Yandex.Music.Api.Tests.Tests.API
             landing.Blocks.Count.Should().BePositive();
         }
 
+        [Fact, YandexTrait(TraitGroup.AlbumAPI)]
+        [Order(2)]
+        public void GetChildrenLanding_ValidData_True()
+        {
+            Fixture.API.User.Authorize(Fixture.Storage, Fixture.AppSettings.Token);
+            
+            var feed = Fixture.API.Landing.GetChildrenLanding(Fixture.Storage);
+            feed.Should().NotBe(null);
+        }
 
         public LandingAPITest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
         {
