@@ -12,6 +12,7 @@ using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Feed;
 using Yandex.Music.Api.Models.Landing;
+using Yandex.Music.Api.Models.Landing.Entity.Entities.Context;
 using Yandex.Music.Api.Models.Library;
 using Yandex.Music.Api.Models.Playlist;
 using Yandex.Music.Api.Models.Queue;
@@ -505,6 +506,19 @@ namespace Yandex.Music.Client
                 .Result;
         }
 
+        /// <summary>
+        /// Получение списка недавно прослушанного
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<YRecentlyListened>> GetRecentlyListened(IEnumerable<YPlayContextType> contextTypes,
+            int trackCount, int contextCount)
+        {
+            YResponse<YRecentlyListenedContext> recentlyListenedResponse = await api.Library.GetRecentlyListenedAsync(
+                storage, contextTypes, trackCount, contextCount);
+
+            return recentlyListenedResponse.Result.Contexts;
+        }
+        
         #endregion Библиотека
 
         #region Радио

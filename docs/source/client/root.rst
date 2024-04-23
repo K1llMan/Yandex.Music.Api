@@ -254,6 +254,12 @@ YandexMusicClient
 
 .. code-block:: csharp
 
+   public List<YRecentlyListened> GetRecentlyListened(IEnumerable<YPlayContextType> contextTypes, int trackCount, int contextCount)
+
+Получение списка недавно прослушанного.
+
+.. code-block:: csharp
+
    public List<YStation> GetRadioDashboard()
 
 Получение списка рекомендованных радиостанций.
