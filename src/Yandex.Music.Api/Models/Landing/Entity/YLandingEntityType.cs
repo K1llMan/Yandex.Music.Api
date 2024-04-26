@@ -13,6 +13,14 @@ namespace Yandex.Music.Api.Models.Landing.Entity
         PlayContext,
         Playlist,
         Podcast,
-        Promotion
+        Promotion,
+        Category,
+        Station,
+        [EnumMember(Value = "menu-item-album")]
+        MenuItemAlbum,
+        [EnumMember(Value = "menu-item-playlist")]
+        MenuItemPlaylist,
+        [EnumMember(Value = "client-widget")]
+        ClientWidget
     }
 }

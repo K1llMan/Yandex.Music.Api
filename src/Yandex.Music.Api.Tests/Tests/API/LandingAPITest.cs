@@ -1,3 +1,4 @@
+using System.Linq;
 using FluentAssertions;
 
 using Xunit;
@@ -49,8 +50,10 @@ namespace Yandex.Music.Api.Tests.Tests.API
         {
             Fixture.API.User.Authorize(Fixture.Storage, Fixture.AppSettings.Token);
             
-            var feed = Fixture.API.Landing.GetChildrenLanding(Fixture.Storage);
-            feed.Should().NotBe(null);
+            YResponse<YChildrenLanding> landing = Fixture.API.Landing.GetChildrenLanding(Fixture.Storage);
+            landing.Should().NotBeNull();
+            landing.Result.Blocks.Should().NotBeNullOrEmpty();
+            landing.Result.Blocks.All(x=>x.Entities?.Count > 0).Should().BeTrue();
         }
 
         public LandingAPITest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
