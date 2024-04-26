@@ -230,6 +230,15 @@ namespace Yandex.Music.Client
             return api.Landing.GetFeed(storage).Result;
         }
 
+        /// <summary>
+        /// Получение 
+        /// </summary>
+        /// <returns></returns>
+        public YChildrenLanding ChildrenLanding()
+        {
+            return api.Landing.GetChildrenLanding(storage).Result;
+        }
+
         #endregion Главная страница
 
         #region Исполнители

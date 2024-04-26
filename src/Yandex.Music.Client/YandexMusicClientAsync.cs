@@ -238,6 +238,16 @@ namespace Yandex.Music.Client
                 .Result;
         }
 
+        /// <summary>
+        /// Получение ленты
+        /// </summary>
+        /// <returns></returns>
+        public async Task<YChildrenLanding> ChildrenLanding()
+        {
+            return (await api.Landing.GetChildrenLandingAsync(storage))
+                .Result;
+        }
+
         #endregion Главная страница
 
         #region Исполнители

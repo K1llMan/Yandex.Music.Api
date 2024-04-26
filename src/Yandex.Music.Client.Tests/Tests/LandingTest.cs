@@ -1,3 +1,4 @@
+using System.Linq;
 using FluentAssertions;
 
 using Xunit;
@@ -33,8 +34,10 @@ namespace Yandex.Music.Client.Tests.Tests
         [Order(2)]
         public void ChildrenLanding_ValidData_True()
         {
-            //var feed = Fixture.Client.();
-            //feed.Should().NotBe(null);
+            YChildrenLanding landing = Fixture.Client.ChildrenLanding();
+            landing.Should().NotBeNull();
+            landing.Blocks.Should().NotBeNullOrEmpty();
+            landing.Blocks.All(x => x.Entities?.Count > 0).Should().BeTrue();
         }
         
         public LandingAPITest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
