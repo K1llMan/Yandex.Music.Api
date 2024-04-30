@@ -1,4 +1,5 @@
 using System.Linq;
+
 using FluentAssertions;
 
 using Xunit;
@@ -48,8 +49,6 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(2)]
         public void GetChildrenLanding_ValidData_True()
         {
-            Fixture.API.User.Authorize(Fixture.Storage, Fixture.AppSettings.Token);
-            
             YResponse<YChildrenLanding> landing = Fixture.API.Landing.GetChildrenLanding(Fixture.Storage);
             landing.Should().NotBeNull();
             landing.Result.Blocks.Should().NotBeNullOrEmpty();
