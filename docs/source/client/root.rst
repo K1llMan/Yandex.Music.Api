@@ -128,6 +128,12 @@ YandexMusicClient
 
 .. code-block:: csharp
 
+    public YChildrenLanding ChildrenLanding()
+
+Получение лендинга детского раздела.   
+
+.. code-block:: csharp
+
    public YArtistBriefInfo GetArtist(string id)
 
 Получение исполнителя по идентификатору.

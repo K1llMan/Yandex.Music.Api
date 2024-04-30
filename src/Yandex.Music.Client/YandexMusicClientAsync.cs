@@ -239,7 +239,7 @@ namespace Yandex.Music.Client
         }
 
         /// <summary>
-        /// Получение ленты
+        /// Получение лендинга детского раздела
         /// </summary>
         /// <returns></returns>
         public async Task<YChildrenLanding> ChildrenLanding()

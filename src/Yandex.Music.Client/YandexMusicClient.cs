@@ -231,7 +231,7 @@ namespace Yandex.Music.Client
         }
 
         /// <summary>
-        /// Получение 
+        /// Получение лендинга детского раздела
         /// </summary>
         /// <returns></returns>
         public YChildrenLanding ChildrenLanding()
