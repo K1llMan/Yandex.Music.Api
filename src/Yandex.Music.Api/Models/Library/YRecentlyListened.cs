@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-
 using Yandex.Music.Api.Models.Landing.Entity.Entities.Context;
 
-namespace Yandex.Music.Api.Models.Track
+namespace Yandex.Music.Api.Models.Library
 {
     public class YRecentlyListened
     {

@@ -12,6 +12,7 @@ using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Feed;
 using Yandex.Music.Api.Models.Landing;
 using Yandex.Music.Api.Models.Landing.Entity.Entities.Context;
+using Yandex.Music.Api.Models.Library;
 using Yandex.Music.Api.Models.Playlist;
 using Yandex.Music.Api.Models.Queue;
 using Yandex.Music.Api.Models.Radio;

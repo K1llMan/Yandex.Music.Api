@@ -25,6 +25,7 @@ namespace Yandex.Music.Api.Models.Artist
         public YCustomWave CustomWave { get; set; }
         public List<YExtraAction> ExtraActions { get; set; }
         public bool HasPromotions { get; set; }
+        public bool HasTrailer { get; set; }
         public List<string> LastReleaseIds { get; set; }
         public List<YAlbum> LastReleases { get; set; }
         public List<YPlaylistUidPair> PlaylistIds { get; set; }

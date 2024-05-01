@@ -1,12 +1,10 @@
-namespace Yandex.Music.Api.Models.Common
+ï»¿namespace Yandex.Music.Api.Models.Common
 {
-    public class YButton
+    public class YButton: YStyle
     {
         public string Text { get; set; }
-        public string BgColor { get; set; }
-        public string TextColor { get; set; }
         public string Url { get; set; }
-        #warning Äóáëèğîâàíèå?
+        #warning Ğ”ÑƒĞ±Ğ»Ğ¸Ñ€Ğ¾Ğ²Ğ°Ğ½Ğ¸Ğµ?
         public string Uri { get; set; }
         public string Color { get; set; }
         public bool ViewBrowser { get; set; }

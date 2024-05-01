@@ -16,6 +16,8 @@ namespace Yandex.Music.Api.Models.Landing
         [JsonConverter(typeof(YLandingEntityConverter))]
         public List<YLandingEntity> Entities { get; set; }
         public YLandingBlockPlayContext PlayContext { get; set; }
+        public string ViewAllUrl { get; set; }
+        public string viewAllUrlScheme { get; set; }
         public string Title { get; set; }
         public YLandingBlockType Type { get; set; }
         public string TypeForFrom { get; set; }

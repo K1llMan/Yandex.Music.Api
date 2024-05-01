@@ -7,6 +7,8 @@ namespace Yandex.Music.Api.Models.Account
         Password,
         [EnumMember(Value = "magic_x_token")]
         MagicToken,
+        [EnumMember(Value = "magic_x_token_with_pictures")]
+        MagicTokenWithPictures,
         [EnumMember(Value = "magic_link")]
         MagicLink,
         Magic,

@@ -43,6 +43,7 @@ namespace Yandex.Music.Api.Models.Track
         public string RealId { get; set; }
         public bool RememberPosition { get; set; }
         public string ShortDescription { get; set; }
+        public List<string> SpecialAudioResources { get; set; }
         public string StorageDir { get; set; }
         public YTrack Substituted { get; set; }
         public string Title { get; set; }

@@ -1,4 +1,4 @@
-using FluentAssertions;
+﻿using FluentAssertions;
 
 using Xunit;
 using Xunit.Abstractions;
@@ -18,6 +18,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         {
         }
 
+        // Тут любит падать на капче
         [Fact]
         [YandexTrait(TraitGroup.UserAPI)]
         [Order(0)]

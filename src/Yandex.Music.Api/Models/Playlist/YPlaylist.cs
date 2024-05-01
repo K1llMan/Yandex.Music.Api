@@ -45,6 +45,7 @@ namespace Yandex.Music.Api.Models.Playlist
         public long DurationMs { get; set; }
         public bool EverPlayed { get; set; }
         public string GeneratedPlaylistType { get; set; }
+        public bool HasTrailer { get; set; }
         public string IdForFrom { get; set; }
         public string Image { get; set; }
         public bool IsBanner { get; set; }

@@ -202,8 +202,7 @@ namespace Yandex.Music.Api.API
 
         #region Получение списка "Вы недавно слушали"
 
-        public YResponse<YRecentlyListenedContext> GetRecentlyListened(AuthStorage storage,
-            IEnumerable<YPlayContextType> contextTypes, int trackCount, int contextCount)
+        public YResponse<YRecentlyListenedContext> GetRecentlyListened(AuthStorage storage, IEnumerable<YPlayContextType> contextTypes, int trackCount, int contextCount)
         {
             return GetRecentlyListenedAsync(storage, contextTypes, trackCount, contextCount).GetAwaiter().GetResult();
         }

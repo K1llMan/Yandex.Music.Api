@@ -68,6 +68,7 @@ namespace Yandex.Music.Api.Models.Album
         public string Description { get; set; }
         public List<string> Disclaimers { get; set; }
         public List<YAlbum> Duplicates { get; set; }
+        public bool HasTrailer { get; set; }
         public string Genre { get; set; }
         public string Id { get; set; }
         [JsonConverter(typeof(YLabelConverter))]
