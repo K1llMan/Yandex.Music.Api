@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <ApiVersion>1.9.0</ApiVersion>
+    <ApiVersion>1.10.0</ApiVersion>
     <Version>$(ApiVersion)</Version>
     <AssemblyVersion>$(ApiVersion)</AssemblyVersion>
     <FileVersion>$(ApiVersion)</FileVersion>

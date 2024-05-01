@@ -97,6 +97,6 @@ YLibraryAPI
 
 .. code-block:: csharp
 
-   public async YResponse<YRecentlyListenedContext> GetRecentlyListened(AuthStorage storage, IEnumerable<YPlayContextType> contextTypes, int trackCount, int contextCount)
+   public async YResponse<YRecentlyListenedContext> GetRecentlyListenedAsync(AuthStorage storage, IEnumerable<YPlayContextType> contextTypes, int trackCount, int contextCount)
 
 Получение списка "Вы недавно слушали"

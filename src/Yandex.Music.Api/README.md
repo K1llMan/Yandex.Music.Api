@@ -66,7 +66,8 @@ YandexMusicApi
 │   └── GetArtistsByLabel / Async (AuthStorage storage, YLabel label, int page)
 ├── Landing
 │   ├── Get / Async (AuthStorage storage, params YLandingBlockType[] blocks)
-│   └── Feed / Async (AuthStorage storage)
+│   ├── Feed / Async (AuthStorage storage)
+│   └── GetChildrenLanding / Async (AuthStorage storage)
 ├── Playlist
 │   ├── Get / Async (AuthStorage storage, string user, string kinds)
 │   ├── Get / Async (AuthStorage storage, IEnumerable<(string user, string kind)> ids)
@@ -98,8 +99,9 @@ YandexMusicApi
 │   ├── RemoveAlbumLike / Async (AuthStorage storage, YAlbum album)
 │   ├── AddArtistLike / Async (AuthStorage storage, YArtist artist)
 │   ├── RemoveArtistLike / Async (AuthStorage storage, YArtist artist)
-│   ├── AddPlaylistLike / Async(AuthStorage storage, YPlaylist playlist)
-│   └── RemovePlaylistLike / Async(AuthStorage storage, YPlaylist playlist)
+│   ├── AddPlaylistLike / Async (AuthStorage storage, YPlaylist playlist)
+│   ├── RemovePlaylistLike / Async (AuthStorage storage, YPlaylist playlist)
+│   └── GetRecentlyListened / Async (AuthStorage storage, IEnumerable<YPlayContextType> contextTypes, int trackCount, int contextCount)
 ├── Search
 │   ├── Track / Async (AuthStorage storage, string trackName, int pageNumber = 0, int pageSize = 20)
 │   ├── Albums / Async (AuthStorage storage, string albumName, int pageNumber = 0, int pageSize = 20)
