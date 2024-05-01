@@ -16,3 +16,9 @@ YLandingAPI
    public Task<YResponse<YFeed>> GetFeedAsync(AuthStorage storage)
 
 Получение ленты.
+
+.. code-block:: csharp
+
+   public Task<YResponse<YChildrenLanding>> GetChildrenLandingAsync(AuthStorage storage)
+
+Получение лендинга детского раздела

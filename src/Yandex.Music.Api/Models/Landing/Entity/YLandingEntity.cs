@@ -41,6 +41,19 @@ namespace Yandex.Music.Api.Models.Landing.Entity
                     case YLandingEntityType.Promotion:
                         entity = jObject.ToObject<YLandingEntityPromotion>();
                         break;
+                    case YLandingEntityType.Category:
+                        entity = jObject.ToObject<YLandingEntityCategory>();
+                        break;
+                    case YLandingEntityType.Station:
+                        entity = jObject.ToObject<YLandingEntityStation>();
+                        break;
+                    case YLandingEntityType.MenuItemAlbum:
+                    case YLandingEntityType.MenuItemPlaylist:
+                        entity = jObject.ToObject<YLandingEntityAlbumMenuItem>();
+                        break;
+                    case YLandingEntityType.ClientWidget:
+                        entity = jObject.ToObject<YLandingEntityClientWidget>();
+                        break;
                     default:
                         entity = jObject.ToObject<YLandingEntity>();
                         break;
@@ -48,7 +61,7 @@ namespace Yandex.Music.Api.Models.Landing.Entity
             }
             catch (Exception ex)
             {
-                throw new Exception($"Ошибка десериализации типа \"{jObject["type"]}\".", ex);
+                throw new Exception($"РћС€РёР±РєР° РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё С‚РёРїР° \"{jObject["type"]}\".", ex);
             }
 
             return entity;

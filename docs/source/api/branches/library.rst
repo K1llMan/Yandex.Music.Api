@@ -94,3 +94,9 @@ YLibraryAPI
    public async Task<YResponse<string>> RemovePlaylistLikeAsync(AuthStorage storage, YPlaylist playlist)
 
 Удаление плейлиста из списка лайкнутых.
+
+.. code-block:: csharp
+
+   public async YResponse<YRecentlyListenedContext> GetRecentlyListened(AuthStorage storage, IEnumerable<YPlayContextType> contextTypes, int trackCount, int contextCount)
+
+Получение списка "Вы недавно слушали"

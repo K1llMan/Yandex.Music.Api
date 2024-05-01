@@ -1,3 +1,5 @@
+using System.Linq;
+
 using FluentAssertions;
 
 using Xunit;
@@ -43,6 +45,15 @@ namespace Yandex.Music.Api.Tests.Tests.API
             landing.Blocks.Count.Should().BePositive();
         }
 
+        [Fact, YandexTrait(TraitGroup.AlbumAPI)]
+        [Order(2)]
+        public void GetChildrenLanding_ValidData_True()
+        {
+            YResponse<YChildrenLanding> landing = Fixture.API.Landing.GetChildrenLanding(Fixture.Storage);
+            landing.Should().NotBeNull();
+            landing.Result.Blocks.Should().NotBeNullOrEmpty();
+            landing.Result.Blocks.All(x=>x.Entities?.Count > 0).Should().BeTrue();
+        }
 
         public LandingAPITest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
         {

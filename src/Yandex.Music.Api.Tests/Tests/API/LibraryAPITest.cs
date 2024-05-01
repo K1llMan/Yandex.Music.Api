@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 using FluentAssertions;
 
@@ -9,7 +10,9 @@ using Xunit.Extensions.Ordering;
 using Yandex.Music.Api.Models.Album;
 using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
+using Yandex.Music.Api.Models.Landing.Entity.Entities.Context;
 using Yandex.Music.Api.Models.Library;
+using Yandex.Music.Api.Models.Track;
 using Yandex.Music.Api.Tests.Traits;
 
 namespace Yandex.Music.Api.Tests.Tests.API
@@ -166,6 +169,25 @@ namespace Yandex.Music.Api.Tests.Tests.API
             List<YArtist> artists = Fixture.API.Library.GetDislikedArtists(Fixture.Storage).Result;
 
             artists.Should().NotBeNull();
+        }
+
+        [Fact, YandexTrait(TraitGroup.LibraryAPI)]
+        [Order(14)]
+        public void GetRecentlyListened_ValidData_True()
+        {
+            IEnumerable<YPlayContextType> types = new[]
+            {
+                YPlayContextType.Album, YPlayContextType.Artist, YPlayContextType.Playlist
+            };
+            int trackCount = 2;
+            int contextCount = 5;
+            YRecentlyListenedContext recentlyListened = Fixture.API.Library
+                .GetRecentlyListened(Fixture.Storage, types,trackCount, contextCount).Result;
+
+            recentlyListened.Should().NotBeNull();
+            recentlyListened.Contexts.Should().NotBeNullOrEmpty();
+            recentlyListened.Contexts.First().Tracks.Should().NotBeNullOrEmpty();
+            recentlyListened.Contexts.First().ContextItem.Should().NotBeNull();
         }
 
         public LibraryAPITest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)

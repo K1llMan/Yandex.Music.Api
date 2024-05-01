@@ -33,6 +33,16 @@ namespace Yandex.Music.Api.API
             return GetFeedAsync(storage).GetAwaiter().GetResult();
         }
 
+        /// <summary>
+        /// Получение лендинга детского раздела
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <returns></returns>
+        public YResponse<YChildrenLanding> GetChildrenLanding(AuthStorage storage)
+        {
+            return GetChildrenLandingAsync(storage).GetAwaiter().GetResult();
+        }
+
         #endregion Основные функции
     }
 }

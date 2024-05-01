@@ -5,6 +5,7 @@ using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Album;
 using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
+using Yandex.Music.Api.Models.Landing.Entity.Entities.Context;
 using Yandex.Music.Api.Models.Library;
 using Yandex.Music.Api.Models.Playlist;
 using Yandex.Music.Api.Models.Track;
@@ -244,6 +245,18 @@ namespace Yandex.Music.Api.API
 
         #endregion Добавление/удаление в списки лайков/дизлайков
 
+        #region Получение списка "Вы недавно слушали"
+
+        public Task<YResponse<YRecentlyListenedContext>> GetRecentlyListenedAsync(AuthStorage storage,
+            IEnumerable<YPlayContextType> contextTypes, int trackCount, int contextCount)
+        {
+            return new YGetLibraryRecentlyListenedBuilder(api, storage)
+                .Build((contextTypes, trackCount, contextCount))
+                .GetResponseAsync();
+        }
+
+        #endregion Получение списка "Вы недавно слушали"
+        
         #endregion Основные функции
     }
 }

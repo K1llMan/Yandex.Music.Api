@@ -128,6 +128,12 @@ YandexMusicClient
 
 .. code-block:: csharp
 
+    public YChildrenLanding ChildrenLanding()
+
+Получение лендинга детского раздела.   
+
+.. code-block:: csharp
+
    public YArtistBriefInfo GetArtist(string id)
 
 Получение исполнителя по идентификатору.
@@ -251,6 +257,12 @@ YandexMusicClient
    public List<YPlaylist> GetLikedPlaylists()
 
 Получение списка понравившихся плейлистов.
+
+.. code-block:: csharp
+
+   public List<YRecentlyListened> GetRecentlyListened(IEnumerable<YPlayContextType> contextTypes, int trackCount, int contextCount)
+
+Получение списка недавно прослушанного.
 
 .. code-block:: csharp
 
