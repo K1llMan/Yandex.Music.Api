@@ -36,12 +36,20 @@ namespace Yandex.Music.Api.Common.Debug
 
                 if (pos > 0)
                 {
-                    error = path =
+                    error =
 #if NET7_0_OR_GREATER
-                        args.ErrorContext.Error.Message[pos..];
+                        args.ErrorContext.Error.Message[..pos]
 #else
-                        args.ErrorContext.Error.Message.Substring(pos);
+                        args.ErrorContext.Error.Message.Substring(0, pos)
 #endif
+                        ;
+                    path =
+#if NET7_0_OR_GREATER
+                        args.ErrorContext.Error.Message[pos..]
+#else
+                        args.ErrorContext.Error.Message.Substring(pos)
+#endif
+                        ;
                 }
                 else
                 {
@@ -87,6 +95,6 @@ namespace Yandex.Music.Api.Common.Debug
             this.debugWriter = debugWriter;
         }
 
-        #endregion Основные функции
+#endregion Основные функции
     }
 }

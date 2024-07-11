@@ -5,11 +5,12 @@ namespace Yandex.Music.Api.Extensions
 {
     public static class StringExtensions
     {
-        public static string ReplaceRegex(this string str, string regExpr, string replStr)
+        public static string ReplaceRegex(this string str, string regExpr, string replStr,
+                                          RegexOptions options = RegexOptions.IgnoreCase)
         {
             return str == null
                 ? string.Empty
-                : Regex.Replace(str, regExpr, replStr);
+                : Regex.Replace(str, regExpr, replStr, options);
         }
 
         public static string SplitByCapitalLetter(this string str, string delimiter)
