@@ -18,14 +18,16 @@ namespace Yandex.Music.Api.Requests.Track
 
         protected override Dictionary<string, string> GetSubstitutions((string trackKey, bool direct) tuple)
         {
-            return new Dictionary<string, string> {
+            return new Dictionary<string, string>
+            {
                 { "trackKey", tuple.trackKey }
             };
         }
 
         protected override NameValueCollection GetQueryParams((string trackKey, bool direct) tuple)
         {
-            return new NameValueCollection {
+            return new NameValueCollection
+            {
                 { "direct", tuple.direct.ToString() }
             };
         }

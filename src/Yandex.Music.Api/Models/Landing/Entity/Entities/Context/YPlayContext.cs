@@ -24,6 +24,7 @@ namespace Yandex.Music.Api.Models.Landing.Entity.Entities.Context
             {
                 YPlayContextType type = jObject["context"].ToObject<YPlayContextType>();
 
+#pragma warning disable IDE0066 // Преобразовать оператор switch в выражение
                 switch (type)
                 {
                     case YPlayContextType.Album:
@@ -39,6 +40,7 @@ namespace Yandex.Music.Api.Models.Landing.Entity.Entities.Context
                         context = jObject.ToObject<YPlayContext>();
                         break;
                 }
+#pragma warning restore IDE0066 // Преобразовать оператор switch в выражение
             }
             catch (Exception ex)
             {

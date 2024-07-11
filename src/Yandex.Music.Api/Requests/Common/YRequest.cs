@@ -10,8 +10,8 @@ namespace Yandex.Music.Api.Requests.Common
     {
         #region Поля
 
-        private HttpRequestMessage msg;
-        private IRequestProvider provider;
+        private readonly HttpRequestMessage msg;
+        private readonly IRequestProvider provider;
 
         protected YandexMusicApi api;
 

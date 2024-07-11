@@ -39,6 +39,7 @@ namespace Yandex.Music.Api.Extensions.API
 
         public static string SendPlayTrackInfo(this YTrack track, string from, bool fromCache = false, string playId = "", string playlistId = "", double totalPlayedSeconds = 0, double endPositionSeconds = 0)
         {
+            _ = endPositionSeconds;
             return SendPlayTrackInfoAsync(track, from, fromCache, playId, playlistId, totalPlayedSeconds).GetAwaiter().GetResult();
         }
 

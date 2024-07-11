@@ -22,7 +22,8 @@ namespace Yandex.Music.Api.Requests.Ugc
 
         protected override NameValueCollection GetQueryParams((YPlaylist playlist, string fileName) tuple)
         {
-            return new NameValueCollection {
+            return new NameValueCollection
+            {
                 { "filename", tuple.fileName },
                 { "kind", tuple.playlist.Kind },
                 { "visibility", "private" },

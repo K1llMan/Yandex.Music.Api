@@ -17,7 +17,7 @@ namespace Yandex.Music.Api.Common.Providers
     {
         #region Вспомогательные функции
 
-        private Exception ProcessException(Exception ex)
+        private static Exception ProcessException(Exception ex)
         {
             if (ex is not WebException webException) 
                 return ex;
@@ -53,23 +53,27 @@ namespace Yandex.Music.Api.Common.Providers
         {
             try
             {
-#if NETCOREAPP
-                HttpClient client = new(new SocketsHttpHandler {
-                    Proxy = storage.Context.WebProxy,
-                    AutomaticDecompression = DecompressionMethods.GZip,
-                    UseCookies = true,
-                    CookieContainer = storage.Context.Cookies,
-                });
+                HttpMessageHandler httpClientHandler =
+#if NET7_0_OR_GREATER
+                    new SocketsHttpHandler()
+#else
+                    new HttpClientHandler()
 #endif
+                    {
+                        Proxy = storage.Context.WebProxy,
+                        AutomaticDecompression = DecompressionMethods.GZip,
+                        UseCookies = true,
+                        CookieContainer = storage.Context.Cookies,
+                    };
 
-#if NETSTANDARD2_0
-                HttpClient client = HttpClientFactory.Create(new HttpClientHandler() {
-                    Proxy = storage.Context.WebProxy,
-                    AutomaticDecompression = DecompressionMethods.GZip,
-                    UseCookies = true,
-                    CookieContainer = storage.Context.Cookies
-                });
+                HttpClient client =
+#if NET7_0_OR_GREATER
+                    new(
+#else
+                    HttpClientFactory.Create(
 #endif
+                        httpClientHandler
+                    );
 
                 return client.SendAsync(message);
             }

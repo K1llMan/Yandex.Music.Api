@@ -33,7 +33,7 @@ namespace Yandex.Music.Api.Requests.Common
             ContractResolver = new CamelCasePropertyNamesContractResolver()
         };
 
-        private YRequestAttribute requestInfo;
+        private readonly YRequestAttribute requestInfo;
         private Dictionary<string, string> subs;
 
         protected YandexMusicApi api;

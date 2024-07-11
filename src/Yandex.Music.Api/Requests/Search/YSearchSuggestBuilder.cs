@@ -18,7 +18,8 @@ namespace Yandex.Music.Api.Requests.Search
 
         protected override NameValueCollection GetQueryParams(string searchText)
         {
-            return new NameValueCollection {
+            return new NameValueCollection
+            {
                 { "part", searchText }
             };
         }

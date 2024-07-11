@@ -17,7 +17,7 @@ namespace Yandex.Music.Api.Models.Landing
         public List<YLandingEntity> Entities { get; set; }
         public YLandingBlockPlayContext PlayContext { get; set; }
         public string ViewAllUrl { get; set; }
-        public string viewAllUrlScheme { get; set; }
+        public string ViewAllUrlScheme { get; set; }
         public string Title { get; set; }
         public YLandingBlockType Type { get; set; }
         public string TypeForFrom { get; set; }

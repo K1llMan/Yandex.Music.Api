@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 using Newtonsoft.Json;
@@ -16,6 +15,7 @@ namespace Yandex.Music.Api.Models.Feed.Event
             YFeedEventType type = jObject[jObject["typeForFrom"] != null ? "typeForFrom" : "type"]
                 .ToObject<YFeedEventType>();
 
+#pragma warning disable IDE0066 // Преобразовать оператор switch в выражение
             switch (type)
             {
                 case YFeedEventType.GenreTop:
@@ -70,10 +70,12 @@ namespace Yandex.Music.Api.Models.Feed.Event
                     feedEvent = jObject.ToObject<YFeedEventTracks>();
                     break;
 
+                case YFeedEventType.SimilarTracksFromHistory:
                 default:
                     feedEvent = jObject.ToObject<YFeedEventTitled>();
                     break;
             }
+#pragma warning restore IDE0066 // Преобразовать оператор switch в выражение
 
             return feedEvent;
         }

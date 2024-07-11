@@ -5,7 +5,13 @@ namespace Yandex.Music.Api.Requests.Common.Attributes
     /// <summary>
     /// Атрибут запроса без привязки к базовому адресу
     /// </summary>
+#if NET7_0_OR_GREATER
+#pragma warning disable CA1018 // Пометить атрибуты как AttributeUsageAttribute
+#endif
     public class YRequestAttribute : Attribute
+#if NET7_0_OR_GREATER
+#pragma warning restore CA1018 // Пометить атрибуты как AttributeUsageAttribute
+#endif
     {
         #region Поля
 

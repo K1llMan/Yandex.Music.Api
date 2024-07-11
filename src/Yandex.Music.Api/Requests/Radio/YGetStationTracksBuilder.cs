@@ -19,7 +19,8 @@ namespace Yandex.Music.Api.Requests.Radio
 
         protected override Dictionary<string, string> GetSubstitutions((YStationDescription station, string prevTrackId) tuple)
         {
-            return new Dictionary<string, string> {
+            return new Dictionary<string, string>
+            {
                 { "type", tuple.station.Id.Type },
                 { "tag", tuple.station.Id.Tag },
             };
@@ -27,7 +28,8 @@ namespace Yandex.Music.Api.Requests.Radio
 
         protected override NameValueCollection GetQueryParams((YStationDescription station, string prevTrackId) tuple)
         {
-            NameValueCollection query = new() {
+            NameValueCollection query = new()
+            {
                 { "settings2", "true" }
             };
 

@@ -18,17 +18,18 @@ namespace Yandex.Music.Api.Requests.Ugc
 
         protected override Dictionary<string, string> GetSubstitutions((string postTargetLink, byte[] fileBytes) tuple)
         {
-            return new Dictionary<string, string> {
+            return new Dictionary<string, string>
+            {
                 { "postTargetLink", tuple.postTargetLink }
             };
         }
 
         protected override HttpContent GetContent((string postTargetLink, byte[] fileBytes) tuple)
         {
-            return new MultipartFormDataContent {
+            return new MultipartFormDataContent
+            {
                 { new ByteArrayContent(tuple.fileBytes), "file" }
             };
         }
-        
     }
 }

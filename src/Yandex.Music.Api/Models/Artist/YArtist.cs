@@ -39,5 +39,10 @@ namespace Yandex.Music.Api.Models.Artist
         public DateTime Timestamp { get; set; }
         public bool Various { get; set; }
         public string YaMoneyId { get; set; }
+        /*
+         * Could not find member 'hasTrailer' on object of type 'YArtist'.
+         * Path 'result.artist.hasTrailer', line 1, position 2326.
+         */
+        public bool HasTrailer { get; set; }
     }
 }

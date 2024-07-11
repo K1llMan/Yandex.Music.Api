@@ -46,11 +46,6 @@ namespace Yandex.Music.Api.API
                 .GetResponseAsync();
         }
 
-        private IEnumerable<YTrack> RemoveIdentical(IEnumerable<YTrack> tracks)
-        {
-            return tracks.Distinct();
-        }
-
         #endregion Вспомогательные функции
 
         #region Основные функции
@@ -297,7 +292,7 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public Task<YResponse<YPlaylist>> DeleteTracksAsync(AuthStorage storage, YPlaylist playlist, IEnumerable<YTrack> tracks)
         {
-            List<YPlaylistChange> changes = RemoveIdentical(tracks)
+            List<YPlaylistChange> changes = tracks.Distinct()
                 .Select(t => playlist.Tracks.Select(c => c.Track).ToList().IndexOf(t))
                 .Where(i => i != -1)
                 .Select(i => {

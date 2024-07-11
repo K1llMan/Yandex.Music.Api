@@ -18,7 +18,8 @@ namespace Yandex.Music.Api.Requests.Track
 
         protected override Dictionary<string, string> GetSubstitutions(string trackId)
         {
-            return new Dictionary<string, string> {
+            return new Dictionary<string, string>
+            {
                 { "trackId", trackId }
             };
         }

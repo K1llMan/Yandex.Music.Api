@@ -29,8 +29,8 @@ namespace Yandex.Music.Client
     {
         #region Поля
 
-        private YandexMusicApi api;
-        private AuthStorage storage;
+        private readonly YandexMusicApi api;
+        private readonly AuthStorage storage;
 
         #endregion Поля
 
@@ -50,6 +50,9 @@ namespace Yandex.Music.Client
 
         #region Основные функции
 
+#if NET8_0_OR_GREATER
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0290")]
+#endif
         public YandexMusicClient(DebugSettings settings = null)
         {
             api = new YandexMusicApi();
@@ -651,6 +654,6 @@ namespace Yandex.Music.Client
 
         #endregion Лейблы
 
-        #endregion Основные функции
+#endregion Основные функции
     }
 }

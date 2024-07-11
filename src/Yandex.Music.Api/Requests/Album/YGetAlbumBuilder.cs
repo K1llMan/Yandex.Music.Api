@@ -18,7 +18,8 @@ namespace Yandex.Music.Api.Requests.Album
 
         protected override Dictionary<string, string> GetSubstitutions(string albumId)
         {
-            return new Dictionary<string, string> {
+            return new Dictionary<string, string>
+            {
                 { "albumId", albumId }
             };
         }

@@ -47,5 +47,61 @@ namespace Yandex.Music.Api.Models.Account
 
         [JsonProperty("has_plus")]
         public bool HasPlus { get; set; }
+
+        /*
+         * Could not find member 'location_id' on object of type 'YShortAccountInfo'.
+         * Path 'location_id', line 1, position 94.
+         */
+        [JsonProperty("location_id")]
+        public int LocationId { get; set; }
+
+        /*
+         * Could not find member 'gender' on object of type 'YShortAccountInfo'.
+         * Path 'gender', line 1, position 329.
+         */
+        [JsonProperty("gender")]
+        public string Gender { get; set; }
+
+        /*
+         * Could not find member 'is_avatar_empty' on object of type 'YShortAccountInfo'.
+         * Path 'is_avatar_empty', line 1, position 351.
+         */
+        [JsonProperty("is_avatar_empty")]
+        public bool IsAvatarEmpty { get; set; }
+
+        /*
+         * Could not find member 'machine_readable_login' on object of type 'YShortAccountInfo'.
+         * Path 'machine_readable_login', line 1, position 544.
+         */
+        [JsonProperty("machine_readable_login")]
+        public string MachineReadableLogin { get; set; }
+
+        /*
+         * Could not find member 'has_cards' on object of type 'YShortAccountInfo'.
+         * Path 'has_cards', line 1, position 569.
+         */
+        [JsonProperty("has_cards")]
+        public bool HasCards { get; set; }
+
+        /*
+         * Could not find member 'has_family' on object of type 'YShortAccountInfo'.
+         * Path 'has_family', line 1, position 588.
+         */
+        [JsonProperty("has_family")]
+        public bool HasFamily { get; set; }
+
+        /*
+         * Could not find member 'x_token_client_id' on object of type 'YShortAccountInfo'.
+         * Path 'x_token_client_id', line 1, position 644.
+         */
+        [JsonProperty("x_token_client_id")]
+        public string XTokenClientId { get; set; }
+
+        /*
+         * Could not find member 'x_token_need_reset' on object of type 'YShortAccountInfo'.
+         * Path 'x_token_need_reset', line 1, position 700.
+         */
+        [JsonProperty("x_token_need_reset")]
+        public bool XTokenNeedReset {  get; set; }
     }
 }

@@ -18,7 +18,8 @@ namespace Yandex.Music.Api.Requests.Search
 
         protected override NameValueCollection GetQueryParams((string searchText, YSearchType searchType, int page, int pageSize) tuple)
         {
-            return new NameValueCollection {
+            return new NameValueCollection
+            {
                 { "text", tuple.searchText },
                 { "type", tuple.searchType.ToString() },
                 { "page", tuple.page.ToString() },

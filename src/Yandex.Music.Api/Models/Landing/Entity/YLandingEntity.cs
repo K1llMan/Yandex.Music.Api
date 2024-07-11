@@ -18,6 +18,7 @@ namespace Yandex.Music.Api.Models.Landing.Entity
             {
                 YLandingEntityType type = jObject["type"].ToObject<YLandingEntityType>();
 
+#pragma warning disable IDE0066 // Преобразовать оператор switch в выражение
                 switch (type)
                 {
                     case YLandingEntityType.Album:
@@ -58,6 +59,7 @@ namespace Yandex.Music.Api.Models.Landing.Entity
                         entity = jObject.ToObject<YLandingEntity>();
                         break;
                 }
+#pragma warning restore IDE0066 // Преобразовать оператор switch в выражение
             }
             catch (Exception ex)
             {

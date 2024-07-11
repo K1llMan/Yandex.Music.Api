@@ -10,7 +10,7 @@ namespace Yandex.Music.Api.Common
     /// </summary>
     public class DataDownloader
     {
-        private AuthStorage authStorage;
+        private readonly AuthStorage authStorage;
 
         private async Task<HttpContent> GetResponseContent(string url)
         {

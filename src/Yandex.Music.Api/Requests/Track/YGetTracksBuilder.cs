@@ -19,10 +19,13 @@ namespace Yandex.Music.Api.Requests.Track
 
         protected override HttpContent GetContent(IEnumerable<string> trackIds)
         {
-            return new FormUrlEncodedContent(new Dictionary<string, string> {
+            Dictionary<string, string> formData = new()
+            {
                 { "track-ids", string.Join(",", trackIds) },
                 { "with-positions", "true" }
-            });
+            };
+
+            return new FormUrlEncodedContent(formData);
         }
     }
 }

@@ -24,6 +24,7 @@ namespace Yandex.Music.Api.Models.Radio.Restriction
             {
                 YRestrictionType type = jObject["type"].ToObject<YRestrictionType>();
 
+#pragma warning disable IDE0066 // Преобразовать оператор switch в выражение
                 switch (type)
                 {
                     case YRestrictionType.Enum:
@@ -36,6 +37,7 @@ namespace Yandex.Music.Api.Models.Radio.Restriction
                         restriction = jObject.ToObject<YRestriction>();
                         break;
                 }
+#pragma warning restore IDE0066 // Преобразовать оператор switch в выражение
             }
             catch (Exception ex)
             {

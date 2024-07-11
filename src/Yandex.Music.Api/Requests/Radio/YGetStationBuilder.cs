@@ -18,7 +18,8 @@ namespace Yandex.Music.Api.Requests.Radio
 
         protected override Dictionary<string, string> GetSubstitutions((string type, string tag) tuple)
         {
-            return new Dictionary<string, string> {
+            return new Dictionary<string, string>
+            {
                 { "type", tuple.type },
                 { "tag", tuple.tag }
             };

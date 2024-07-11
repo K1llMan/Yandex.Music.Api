@@ -10,8 +10,8 @@ namespace Yandex.Music.Api.Models.Common
     {
         #region Поля
 
-        private YandexMusicApi api;
-        private AuthStorage storage;
+        private readonly YandexMusicApi api;
+        private readonly AuthStorage storage;
 
         #endregion Поля
 

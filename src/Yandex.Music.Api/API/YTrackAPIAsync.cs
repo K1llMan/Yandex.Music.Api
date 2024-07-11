@@ -20,7 +20,7 @@ namespace Yandex.Music.Api.API
     {
         #region Вспомогательные функции
 
-        private string BuildLinkForDownload(YTrackDownloadInfo mainDownloadResponse, YStorageDownloadFile storageDownload)
+        private static string BuildLinkForDownload(YTrackDownloadInfo mainDownloadResponse, YStorageDownloadFile storageDownload)
         {
             string path = storageDownload.Path;
             string host = storageDownload.Host;
@@ -28,9 +28,24 @@ namespace Yandex.Music.Api.API
             string s = storageDownload.S;
             string codec = mainDownloadResponse.Codec;
 
-            string secret = $"XGRlBW9FXlekgbPrRHuSiA{path.Substring(1, path.Length - 1)}{s}";
-            MD5 md5 = MD5.Create();
-            byte[] md5Hash = md5.ComputeHash(Encoding.UTF8.GetBytes(secret));
+            string secret = "XGRlBW9FXlekgbPrRHuSiA" +
+#if NET7_0_OR_GREATER
+                $"{path[1..]}{s}";
+#else
+                $"{path.Substring(1)}{s}";
+#endif
+
+            byte[] md5Hash;
+
+#if NET7_0_OR_GREATER
+            md5Hash = MD5.HashData(Encoding.UTF8.GetBytes(secret));
+#else
+            using (MD5 md5 = MD5.Create())
+            {
+                md5Hash = md5.ComputeHash(Encoding.UTF8.GetBytes(secret));
+            }
+#endif
+
             HMACSHA1 hmacsha1 = new();
             byte[] hmasha1Hash = hmacsha1.ComputeHash(md5Hash);
             string sign = BitConverter.ToString(hmasha1Hash).Replace("-", "").ToLower();

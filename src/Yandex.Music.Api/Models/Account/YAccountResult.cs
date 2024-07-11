@@ -21,6 +21,7 @@ namespace Yandex.Music.Api.Models.Account
         public YBar BarBelow { get; set; }
         // Повторяющееся свойство с другим названием
         [JsonProperty("bar-below")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0051")]
         private YBar BarBelow2 {
             set => BarBelow = value;
         }

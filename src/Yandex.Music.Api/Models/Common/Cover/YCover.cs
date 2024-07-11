@@ -25,6 +25,7 @@ namespace Yandex.Music.Api.Models.Common.Cover
                     ? YCoverType.Error
                     : jObject["type"].ToObject<YCoverType>();
 
+#pragma warning disable IDE0066 // Преобразовать оператор switch в выражение
                 switch (type) {
                     case YCoverType.Error:
                         cover = jObject.ToObject<YCoverError>();
@@ -43,6 +44,7 @@ namespace Yandex.Music.Api.Models.Common.Cover
                         cover = jObject.ToObject<YCover>();
                         break;
                 }
+#pragma warning restore IDE0066 // Преобразовать оператор switch в выражение
             }
             catch (Exception ex) {
                 throw new Exception($"Ошибка десериализации типа \"{objectType.Name}\".", ex);

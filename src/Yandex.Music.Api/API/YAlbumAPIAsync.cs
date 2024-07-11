@@ -15,7 +15,7 @@ namespace Yandex.Music.Api.API
     {
         #region Основные функции
 
-        public YAlbumAPI(YandexMusicApi yandex): base(yandex)
+        public YAlbumAPI(YandexMusicApi yandex) : base(yandex)
         {
         }
 
@@ -23,7 +23,7 @@ namespace Yandex.Music.Api.API
         /// Получение альбома
         /// </summary>
         /// <param name="storage">Хранилище</param>
-        /// <param name="albumId">Идентификатор</param> 
+        /// <param name="albumId">Идентификатор</param>
         /// <returns></returns>
         public Task<YResponse<YAlbum>> GetAsync(AuthStorage storage, string albumId)
         {
@@ -36,7 +36,7 @@ namespace Yandex.Music.Api.API
         /// Получение альбомов по списку
         /// </summary>
         /// <param name="storage">Хранилище</param>
-        /// <param name="albumIds">Идентификаторы альбомов</param> 
+        /// <param name="albumIds">Идентификаторы альбомов</param>
         /// <returns></returns>
         public Task<YResponse<List<YAlbum>>> GetAsync(AuthStorage storage, IEnumerable<string> albumIds)
         {

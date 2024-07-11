@@ -27,7 +27,7 @@ namespace Yandex.Music.Api.API
         /// Получение исполнителя
         /// </summary>
         /// <param name="storage">Хранилище</param>
-        /// <param name="artistIds">Идентификаторы</param> 
+        /// <param name="artistIds">Идентификаторы</param>
         public YResponse<List<YArtist>> Get(AuthStorage storage, IEnumerable<string> artistIds)
         {
             return GetAsync(storage, artistIds).GetAwaiter().GetResult();
@@ -37,15 +37,14 @@ namespace Yandex.Music.Api.API
         /// Получение треков исполнителя с пагинацией
         /// <remarks>
         /// Треки поставляются по <paramref name="pageSize"/> штук на страницу,
-        /// для получения всех треков необходимо использовать метод <see cref="GetAllTracks"/> 
+        /// для получения всех треков необходимо использовать метод <see cref="GetAllTracks"/>
         /// </remarks>
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <param name="artistId">Идентификатор исполнителя</param>
         /// <param name="page">Страница ответов</param>
         /// <param name="pageSize">Количество треков на странице ответов</param>
-        public YResponse<YTracksPage> GetTracks(AuthStorage storage, string artistId, int page = 0,
-            int pageSize = 20)
+        public YResponse<YTracksPage> GetTracks(AuthStorage storage, string artistId, int page = 0, int pageSize = 20)
         {
             return GetTracksAsync(storage, artistId, page, pageSize).GetAwaiter().GetResult();
         }

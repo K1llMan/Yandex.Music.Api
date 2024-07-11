@@ -28,14 +28,26 @@ namespace Yandex.Music.Api.Common.Debug
         {
             Dictionary<string, List<string>> errors = new();
 
-            settings.Error = (sender, args) => {
+            settings.Error = (sender, args) =>
+            {
                 int pos = args.ErrorContext.Error.Message.IndexOf("Path", StringComparison.Ordinal);
-                string error = pos  > 0 
-                    ? args.ErrorContext.Error.Message.Substring(0, pos)
-                    : args.ErrorContext.Error.Message;
-                string path = pos > 0 
-                    ? args.ErrorContext.Error.Message.Substring(pos) 
-                    : args.ErrorContext.Path;
+
+                string error, path;
+
+                if (pos > 0)
+                {
+                    error = path =
+#if NET7_0_OR_GREATER
+                        args.ErrorContext.Error.Message[pos..];
+#else
+                        args.ErrorContext.Error.Message.Substring(pos);
+#endif
+                }
+                else
+                {
+                    error = args.ErrorContext.Error.Message;
+                    path = args.ErrorContext.Path;
+                }
 
                 if (!errors.ContainsKey(error))
                     errors[error] = new List<string>();

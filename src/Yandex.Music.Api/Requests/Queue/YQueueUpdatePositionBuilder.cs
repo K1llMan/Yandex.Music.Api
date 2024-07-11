@@ -24,7 +24,8 @@ namespace Yandex.Music.Api.Requests.Queue
         
         protected override Dictionary<string, string> GetSubstitutions((string queueId, int currentIndex, bool isInteractive) tuple)
         {
-            return new Dictionary<string, string> {
+            return new Dictionary<string, string>
+            {
                 { "queueId", tuple.queueId },
             };
         }
@@ -36,7 +37,8 @@ namespace Yandex.Music.Api.Requests.Queue
         
         protected override NameValueCollection GetQueryParams((string queueId, int currentIndex, bool isInteractive) tuple)
         {
-            return new NameValueCollection {
+            return new NameValueCollection
+            {
                 { "currentIndex", tuple.currentIndex.ToString() },
                 { "isInteractive", tuple.isInteractive.ToString().ToLower() }
             };

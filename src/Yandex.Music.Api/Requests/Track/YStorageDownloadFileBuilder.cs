@@ -19,14 +19,16 @@ namespace Yandex.Music.Api.Requests.Track
 
         protected override Dictionary<string, string> GetSubstitutions(string src)
         {
-            return new Dictionary<string, string> {
+            return new Dictionary<string, string>
+            {
                 { "src", src.Split('?')[0] }
             };
         }
 
         protected override NameValueCollection GetQueryParams(string src)
         {
-            NameValueCollection query = new() {
+            NameValueCollection query = new()
+            {
                 { "format", "json" }
             };
 
