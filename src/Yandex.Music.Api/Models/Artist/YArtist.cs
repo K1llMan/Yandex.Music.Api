@@ -39,5 +39,6 @@ namespace Yandex.Music.Api.Models.Artist
         public DateTime Timestamp { get; set; }
         public bool Various { get; set; }
         public string YaMoneyId { get; set; }
+        public bool HasTrailer { get; set; }
     }
 }

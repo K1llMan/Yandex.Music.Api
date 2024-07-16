@@ -4,6 +4,8 @@ namespace Yandex.Music.Api.Models.Account
 {
     public class YAccessToken
     {
+        [JsonProperty("status")]
+        public string Status { get; set; }
         [JsonProperty("access_token")] 
         public string AccessToken { get; set; }
         [JsonProperty("expires_in")] 
