@@ -47,5 +47,29 @@ namespace Yandex.Music.Api.Models.Account
 
         [JsonProperty("has_plus")]
         public bool HasPlus { get; set; }
+
+        [JsonProperty("location_id")]
+        public int LocationId { get; set; }
+
+        [JsonProperty("gender")]
+        public string Gender { get; set; }
+
+        [JsonProperty("is_avatar_empty")]
+        public bool IsAvatarEmpty { get; set; }
+
+        [JsonProperty("machine_readable_login")]
+        public string MachineReadableLogin { get; set; }
+
+        [JsonProperty("has_cards")]
+        public bool HasCards { get; set; }
+
+        [JsonProperty("has_family")]
+        public bool HasFamily { get; set; }
+
+        [JsonProperty("x_token_client_id")]
+        public string XTokenClientId { get; set; }
+
+        [JsonProperty("x_token_need_reset")]
+        public bool XTokenNeedReset { get; set; }
     }
 }
