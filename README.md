@@ -22,6 +22,7 @@ API переделано под работу с API официального п�
 * [shuryak](https://github.com/shuryak)
 * [PrepConcedeITIS](https://github.com/PrepConcedeITIS)
 * [Lauriero](https://github.com/Lauriero)
+* [BloodyBaRGaIn](https://github.com/BloodyBaRGaIn)
 
 ## LICENCE
 [GNU General Public License v3.0](https://github.com/K1llMan/Yandex.Music.Api/blob/master/LICENSE)
