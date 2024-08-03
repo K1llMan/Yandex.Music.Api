@@ -1,5 +1,7 @@
 # История изменений
 
+## 1.10.1
+* Актуализированы модели. (feat. [BloodyBaRGaIn](https://github.com/BloodyBaRGaIn))
 ## 1.10.0
 * Добавлено получение списка последних прослушиваний и лэндинга детского раздела. ([PrepConcedeITIS](https://github.com/PrepConcedeITIS))
 * Актуализированы модели.
