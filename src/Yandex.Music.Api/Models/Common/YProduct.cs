@@ -4,6 +4,8 @@ namespace Yandex.Music.Api.Models.Common
 {
     public class YProduct
     {
+        public string IntroPeriodDuration { get; set; }
+        public string StartPeriodDuration { get; set; }
         public string CommonPeriodDuration { get; set; }
         public string TrialPeriodDuration { get; set; }
         public bool Debug { get; set; }
@@ -12,6 +14,8 @@ namespace Yandex.Music.Api.Models.Common
         public string Feature { get; set; }
         public List<string> Features { get; set; }
         public bool Plus { get; set; }
+        public YPrice IntroPrice { get; set; }
+        public YPrice StartPrice { get; set; }
         public YPrice Price { get; set; }
         public string ProductId { get; set; }
         public int TrialDuration { get; set;}

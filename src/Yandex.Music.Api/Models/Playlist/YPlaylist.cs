@@ -73,6 +73,7 @@ namespace Yandex.Music.Api.Models.Playlist
         public int TrackCount { get; set; }
         public List<string> TrackIds { get; set; }
         public List<YTrackContainer> Tracks { get; set; }
+        public YTrailer Trailer { get; set; }
         public string Uid { get; set; }
         public string UrlPart { get; set; }
         public string Visibility { get; set; }

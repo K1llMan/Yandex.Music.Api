@@ -87,6 +87,7 @@ namespace Yandex.Music.Api.Models.Album
         public string Title { get; set; }
         public int TrackCount { get; set; }
         public YTrackPosition TrackPosition { get; set; }
+        public YTrailer Trailer { get; set; }
         public string Type { get; set; }
         public string Version { get; set; }
         public bool VeryImportant { get; set; }
