@@ -28,6 +28,7 @@ namespace Yandex.Music.Api.Models.Playlist
         public YButton ActionButton { get; set; }
         public string AnimatedCoverUri { get; set; }
         public bool Available { get; set; }
+        public YArtistPlaylistType ArtistPlaylistType { get; set; }
         public string BackgroundColor { get; set; }
         public string BackgroundImageUrl { get; set; }
         public string BackgroundVideoUrl { get; set; }

@@ -74,6 +74,7 @@ namespace Yandex.Music.Api.Models.Album
         [JsonConverter(typeof(YLabelConverter))]
         public dynamic Labels { get; set; }
         public int LikesCount { get; set; }
+        public bool ListeningFinished { get; set; }
         public string MetaTagId { get; set; }
         public YMetaType MetaType { get; set; }
         public string OgImage { get; set; }
