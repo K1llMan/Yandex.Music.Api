@@ -4,9 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-#if NETSTANDARD2_0
-using System.Text;
-#endif
 
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Account;
@@ -29,18 +26,7 @@ namespace Yandex.Music.Api.Requests.Account
                 storage.Context.Cookies.GetCookies(new Uri("https://passport.yandex.ru/"))
             };
 
-#if NETCOREAPP
             headers.Add("Ya-Client-Cookie", string.Join(";", cookieCollection.Select(c => $"{c.Name}={c.Value}")));
-#endif
-
-#if NETSTANDARD2_0
-            StringBuilder cookieValue = new();
-            foreach (Cookie cookie in cookieCollection)
-            {
-                cookieValue.Append($"{cookie.Name}={cookie.Value};");
-            }
-            headers.Add("Ya-Client-Cookie", cookieValue.ToString());
-#endif
             headers.Add("Ya-Client-Host", "passport.yandex.ru");
         }
 
