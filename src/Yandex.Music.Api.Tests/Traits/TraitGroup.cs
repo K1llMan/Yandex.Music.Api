@@ -12,6 +12,7 @@ namespace Yandex.Music.Api.Tests.Traits
         SearchAPI,
         TrackAPI,
         UserAPI,
-        QueueAPI
+        QueueAPI,
+        YnisonAPI
     }
 }

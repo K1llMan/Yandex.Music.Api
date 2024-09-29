@@ -72,6 +72,11 @@ namespace Yandex.Music.Api
         /// </summary>
         public YUgcAPI UserGeneratedContent { get; internal set; }
 
+        /// <summary>
+        /// API Ynison
+        /// </summary>
+        public YnisonAPI Ynison { get; internal set; }
+
         #endregion Ветки API
 
         #region Основные функции
