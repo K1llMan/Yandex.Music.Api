@@ -28,6 +28,15 @@ namespace Yandex.Music.Api.Common.Ynison
 
         #endregion Поля
 
+        #region Свойства
+
+        /// <summary>
+        /// Состояние
+        /// </summary>
+        public string State { get; internal set; }
+
+        #endregion Свойства
+
         #region Вспомогательные функции
 
         private string SerializeJson(object data)
@@ -116,6 +125,7 @@ namespace Yandex.Music.Api.Common.Ynison
                 state.Connect(token, redirectInfo.RedirectTicket);
                 state.OnReceive += d => {
                     Console.WriteLine(d.Data);
+                    State = d.Data;
                 };
                 state.BeginReceive();
                 // Отправка изначального состояния

@@ -1,4 +1,7 @@
-﻿using Xunit.Extensions.Ordering;
+﻿using System;
+using System.Threading;
+
+using Xunit.Extensions.Ordering;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -16,6 +19,12 @@ namespace Yandex.Music.Api.Tests.Tests.API
         public async void Connect_ValidData_True()
         {
             using YnisonListener listener = await Fixture.API.Ynison.Connect(Fixture.Storage);
+
+            while (true)
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(5));
+                Output.WriteLine(listener.State);
+            }
         }
 
         public YnisonAPITest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
