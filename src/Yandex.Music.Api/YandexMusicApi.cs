@@ -75,7 +75,7 @@ namespace Yandex.Music.Api
         /// <summary>
         /// API Ynison
         /// </summary>
-        public YnisonAPI Ynison { get; internal set; }
+        public YYnisonAPI Ynison { get; internal set; }
 
         #endregion Ветки API
 

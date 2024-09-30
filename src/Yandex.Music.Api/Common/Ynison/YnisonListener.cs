@@ -28,6 +28,7 @@ namespace Yandex.Music.Api.Common.Ynison
             }
         };
 
+        private AuthStorage storage;
         private YnisonWebSocket redirector;
         private YnisonWebSocket state;
 
@@ -36,16 +37,27 @@ namespace Yandex.Music.Api.Common.Ynison
         #region Свойства
 
         /// <summary>
-        /// Устройство
-        /// </summary>
-        public string DeviceId { get; }
-
-        /// <summary>
         /// Состояние
         /// </summary>
         public string State { get; internal set; }
 
         #endregion Свойства
+
+        #region События
+
+        public class ReceiveEventArgs
+        {
+            public string State { get; internal set; }
+        }
+
+        public delegate void OnReceiveEventHandler(ReceiveEventArgs args);
+
+        /// <summary>
+        /// Получение данных
+        /// </summary>
+        public event OnReceiveEventHandler OnReceive;
+
+        #endregion События
 
         #region Вспомогательные функции
 
@@ -56,86 +68,57 @@ namespace Yandex.Music.Api.Common.Ynison
 
         private string DefaultState()
         {
-            return """
-{
-    "update_full_state": {
-            "player_state": {
-                "player_queue": {
-                    "current_playable_index": -1,
-                    "entity_id": "",
-                    "entity_type": "VARIOUS",
-                    "playable_list": [],
-                    "options": {
-                        "repeat_mode": "NONE"
+            YYnisonVersion version = new() {
+                DeviceId = storage.DeviceId
+            };
+
+            YYnisonUpdateFullState fullState = new () {
+                UpdateFullState = new() {
+                    Device = new() {
+                        Info = new() {
+                            DeviceId = storage.DeviceId,
+                            AppName = "Yandex Music API",
+                            AppVersion = "0.0.1",
+                            Type = "WEB",
+                            Title = "YandexMusicAPI"
+                        }
                     },
-                    "entity_context": "BASED_ON_ENTITY_BY_DEFAULT",
-                    "version": {
-                        "device_id": "csharp",
-                        "version": "0",
-                        "timestamp_ms": "0"
-                    },
-                    "from_optional": ""
-                },
-                "status": {
-                    "duration_ms": 0,
-                    "paused": true,
-                    "playback_speed": 1,
-                    "progress_ms": 0,
-                    "version": {
-                        "device_id": "csharp",
-                        "version": "0",
-                        "timestamp_ms": "0"
+                    PlayerState = new() {
+                        PlayerQueue = new() {
+                            Version = version
+                        },
+                        Status = new() {
+                            Version = version
+                        }
                     }
                 }
-            },
-            "device": {
-                "capabilities": {
-                    "can_be_player": false,
-                    "can_be_remote_controller": true,
-                    "volume_granularity": 0
-                },
-                "info": {
-                    "device_id": "csharp",
-                    "type": "ANDROID",
-                    "app_version": "2024.05.1 #46gpr",
-                    "title": "Xiaomi",
-                    "app_name": "Yandex Music"
-                },
-                "volume_info": {
-                    "volume": 0
-                },
-                "is_shadow": false
-            },
-            "is_currently_active": false
-        },
-        "rid": "cade6dcf-b138-49e8-a4f5-e8f295beb963",
-        "player_action_timestamp_ms": 0,
-        "activity_interception_type": "DO_NOT_INTERCEPT_BY_DEFAULT"
-    }
-""";
+            };
+
+            return SerializeJson(fullState);
         }
 
         #endregion Вспомогательные функции
 
         #region Основные функции
 
-        public void Connect(string token)
+        public void Connect()
         {
-            redirector = new("wss://ynison.music.yandex.ru/redirector.YnisonRedirectService/GetRedirectToYnison", DeviceId);
-            redirector.Connect(token);
+            redirector = new(storage, "wss://ynison.music.yandex.ru/redirector.YnisonRedirectService/GetRedirectToYnison");
+            redirector.Connect();
             redirector.OnReceive += data => {
-                Console.WriteLine(data.Data);
-
                 YYnisonRedirect redirectInfo = JsonConvert.DeserializeObject<YYnisonRedirect>(data.Data, jsonSettings);
 
                 if (state != null)
                     return;
 
-                state = new($"wss://{redirectInfo.Host}/ynison_state.YnisonStateService/PutYnisonState", DeviceId);
-                state.Connect(token, redirectInfo.RedirectTicket);
+                state = new(storage, $"wss://{redirectInfo.Host}/ynison_state.YnisonStateService/PutYnisonState");
+                state.Connect(redirectInfo.RedirectTicket);
                 state.OnReceive += d => {
-                    Console.WriteLine(d.Data);
                     State = d.Data;
+
+                    OnReceive?.Invoke(new ReceiveEventArgs {
+                        State = State
+                    });
                 };
                 state.BeginReceive();
                 // Отправка изначального состояния
@@ -151,9 +134,9 @@ namespace Yandex.Music.Api.Common.Ynison
             redirector?.StopReceive();
         }
 
-        public YnisonListener(string device)
+        public YnisonListener(AuthStorage authStorage)
         {
-            DeviceId = device;
+            storage = authStorage;
         }
 
         #endregion Основные функции

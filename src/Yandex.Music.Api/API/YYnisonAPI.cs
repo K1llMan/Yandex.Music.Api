@@ -9,11 +9,11 @@ namespace Yandex.Music.Api.API
     /// <summary>
     /// API Ynison
     /// </summary>
-    public partial class YnisonAPI : YCommonAPI
+    public partial class YYnisonAPI : YCommonAPI
     {
         #region Основные функции
 
-        public YnisonAPI(YandexMusicApi yandex) : base(yandex)
+        public YYnisonAPI(YandexMusicApi yandex) : base(yandex)
         {
         }
 
@@ -22,8 +22,8 @@ namespace Yandex.Music.Api.API
             if (string.IsNullOrEmpty(storage.Token))
                 throw new Exception("Токен пользователя не задан.");
 
-            YnisonListener listener = new(storage.DeviceId);
-            listener.Connect(storage.Token);
+            YnisonListener listener = new(storage);
+            listener.Connect();
             return Task.FromResult(listener);
         }
 

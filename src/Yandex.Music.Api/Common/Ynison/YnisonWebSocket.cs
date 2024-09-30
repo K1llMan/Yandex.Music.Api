@@ -25,8 +25,8 @@ namespace Yandex.Music.Api.Common.Ynison
             ContractResolver = new CamelCasePropertyNamesContractResolver()
         };
 
+        private AuthStorage storage;
         private Uri uri;
-        private string device;
 
         private readonly ClientWebSocket socketClient = new();
 
@@ -68,7 +68,7 @@ namespace Yandex.Music.Api.Common.Ynison
             };
 
             Dictionary<string, string> protocol = new() {
-                { "Ynison-Device-Id", device },
+                { "Ynison-Device-Id", storage.DeviceId },
                 { "Ynison-Device-Info", SerializeJson(deviceInfo) }
             };
 
@@ -96,19 +96,19 @@ namespace Yandex.Music.Api.Common.Ynison
 
         #region Основные функции
 
-        public YnisonWebSocket(string url, string deviceId)
+        public YnisonWebSocket(AuthStorage authStorage, string url)
         {
+            storage = authStorage;
             uri = new Uri(url);
-            device = deviceId;
         }
 
-        public bool Connect(string token, string redirectTicket = null)
+        public bool Connect(string redirectTicket = null)
         {
             socketClient.Options.AddSubProtocol("Bearer");
 
             socketClient.Options.SetRequestHeader("Sec-WebSocket-Protocol", $"Bearer, v2, {GetProtocolData(redirectTicket)}");
             socketClient.Options.SetRequestHeader("Origin", "https://music.yandex.ru");
-            socketClient.Options.SetRequestHeader("Authorization", $"OAuth {token}");
+            socketClient.Options.SetRequestHeader("Authorization", $"OAuth {storage.Token}");
 
             socketClient.ConnectAsync(uri, CancellationToken.None)
                 .GetAwaiter()
@@ -144,10 +144,6 @@ namespace Yandex.Music.Api.Common.Ynison
             await socketClient.CloseAsync(WebSocketCloseStatus.NormalClosure, string.Empty, CancellationToken.None);
         }
 
-        public ValueTask Send(object obj)
-        {
-            return Send(SerializeJson(obj));
-        }
 
         public ValueTask Send(string json)
         {
