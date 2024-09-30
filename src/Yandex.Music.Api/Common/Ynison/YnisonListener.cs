@@ -16,11 +16,16 @@ namespace Yandex.Music.Api.Common.Ynison
         private readonly JsonSerializerSettings jsonSettings = new() {
             Converters = new List<JsonConverter> {
                 new StringEnumConverter {
-                    NamingStrategy = new CamelCaseNamingStrategy()
+                    // Важно! Унисон отдаёт данные в SnakeCase
+                    NamingStrategy = new SnakeCaseNamingStrategy()
                 }
             },
+            
             NullValueHandling = NullValueHandling.Ignore,
-            ContractResolver = new CamelCasePropertyNamesContractResolver()
+            ContractResolver = new DefaultContractResolver {
+                // Важно! Унисон отдаёт данные в SnakeCase
+                NamingStrategy = new SnakeCaseNamingStrategy()
+            }
         };
 
         private YnisonWebSocket redirector;
@@ -116,7 +121,7 @@ namespace Yandex.Music.Api.Common.Ynison
 
         public void Connect(string token)
         {
-            redirector = new("wss://ynison.music.yandex.ru/redirector.YnisonRedirectService/GetRedirectToYnison");
+            redirector = new("wss://ynison.music.yandex.ru/redirector.YnisonRedirectService/GetRedirectToYnison", DeviceId);
             redirector.Connect(token);
             redirector.OnReceive += data => {
                 Console.WriteLine(data.Data);
@@ -126,7 +131,7 @@ namespace Yandex.Music.Api.Common.Ynison
                 if (state != null)
                     return;
 
-                state = new($"wss://{redirectInfo.Host}/ynison_state.YnisonStateService/PutYnisonState");
+                state = new($"wss://{redirectInfo.Host}/ynison_state.YnisonStateService/PutYnisonState", DeviceId);
                 state.Connect(token, redirectInfo.RedirectTicket);
                 state.OnReceive += d => {
                     Console.WriteLine(d.Data);

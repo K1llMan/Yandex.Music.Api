@@ -26,6 +26,7 @@ namespace Yandex.Music.Api.Common.Ynison
         };
 
         private Uri uri;
+        private string device;
 
         private readonly ClientWebSocket socketClient = new();
 
@@ -67,7 +68,7 @@ namespace Yandex.Music.Api.Common.Ynison
             };
 
             Dictionary<string, string> protocol = new() {
-                { "Ynison-Device-Id", "csharp" },
+                { "Ynison-Device-Id", device },
                 { "Ynison-Device-Info", SerializeJson(deviceInfo) }
             };
 
@@ -95,9 +96,10 @@ namespace Yandex.Music.Api.Common.Ynison
 
         #region Основные функции
 
-        public YnisonWebSocket(string url)
+        public YnisonWebSocket(string url, string deviceId)
         {
             uri = new Uri(url);
+            device = deviceId;
         }
 
         public bool Connect(string token, string redirectTicket = null)
