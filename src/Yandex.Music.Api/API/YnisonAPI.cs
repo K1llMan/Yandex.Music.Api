@@ -22,7 +22,7 @@ namespace Yandex.Music.Api.API
             if (string.IsNullOrEmpty(storage.Token))
                 throw new Exception("Токен пользователя не задан.");
 
-            YnisonListener listener = new();
+            YnisonListener listener = new(storage.DeviceId);
             listener.Connect(storage.Token);
             return Task.FromResult(listener);
         }

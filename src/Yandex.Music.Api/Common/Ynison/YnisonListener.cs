@@ -31,6 +31,11 @@ namespace Yandex.Music.Api.Common.Ynison
         #region Свойства
 
         /// <summary>
+        /// Устройство
+        /// </summary>
+        public string DeviceId { get; }
+
+        /// <summary>
         /// Состояние
         /// </summary>
         public string State { get; internal set; }
@@ -139,6 +144,11 @@ namespace Yandex.Music.Api.Common.Ynison
         {
             state?.StopReceive();
             redirector?.StopReceive();
+        }
+
+        public YnisonListener(string device)
+        {
+            DeviceId = device;
         }
 
         #endregion Основные функции

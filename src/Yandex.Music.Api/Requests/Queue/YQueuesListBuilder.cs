@@ -15,14 +15,12 @@ namespace Yandex.Music.Api.Requests.Queue
         public YQueuesListBuilder(YandexMusicApi yandex, AuthStorage auth, string device = null) : base(yandex, auth)
         {
             if (device != null)
-            {
-                Device = device;   
-            }
+                this.device = device;   
         }
 
         protected override void SetCustomHeaders(HttpRequestHeaders headers)
         {
-            headers.Add("X-Yandex-Music-Device", Device);
+            headers.Add("X-Yandex-Music-Device", device);
         }
     }
 }

@@ -38,7 +38,7 @@ namespace Yandex.Music.Api.Requests.Common
 
         protected YandexMusicApi api;
         protected AuthStorage storage;
-        protected string Device = "os=CSharp; os_version=; manufacturer=Marshal; model=Yandex Music API; clid=; device_id=random; uuid=random";
+        protected string device;
 
         #endregion Поля
 
@@ -145,6 +145,9 @@ namespace Yandex.Music.Api.Requests.Common
 
             api = yandex;
             storage = auth;
+
+            // Устройство по умолчанию
+            device = $"os=CSharp; os_version=; manufacturer=K1llM@n; model=Yandex Music API; clid=; device_id={storage.DeviceId}; uuid=random";
         }
 
         internal YRequest<ResponseType> Build(ParamsTuple tuple)

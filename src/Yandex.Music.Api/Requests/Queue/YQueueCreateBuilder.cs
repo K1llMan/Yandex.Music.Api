@@ -20,9 +20,7 @@ namespace Yandex.Music.Api.Requests.Queue
         public YQueueCreateBuilder(YandexMusicApi yandex, AuthStorage auth, string device = null) : base(yandex, auth)
         {
             if (device != null)
-            {
-                Device = device;   
-            }
+                this.device = device;   
         }
 
         protected override HttpContent GetContent(YQueue queue)
@@ -40,7 +38,7 @@ namespace Yandex.Music.Api.Requests.Queue
         
         protected override void SetCustomHeaders(HttpRequestHeaders headers)
         {
-            headers.Add("X-Yandex-Music-Device", Device);
+            headers.Add("X-Yandex-Music-Device", device);
         }
     }
 }

@@ -17,9 +17,7 @@ namespace Yandex.Music.Api.Requests.Queue
         public YQueueUpdatePositionBuilder(YandexMusicApi yandex, AuthStorage auth, string device = null) : base(yandex, auth)
         {
             if (device != null)
-            {
-                Device = device;   
-            }
+                this.device = device;   
         }
         
         protected override Dictionary<string, string> GetSubstitutions((string queueId, int currentIndex, bool isInteractive) tuple)
@@ -31,7 +29,7 @@ namespace Yandex.Music.Api.Requests.Queue
         
         protected override void SetCustomHeaders(HttpRequestHeaders headers)
         {
-            headers.Add("X-Yandex-Music-Device", Device);
+            headers.Add("X-Yandex-Music-Device", device);
         }
         
         protected override NameValueCollection GetQueryParams((string queueId, int currentIndex, bool isInteractive) tuple)

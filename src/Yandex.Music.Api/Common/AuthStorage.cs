@@ -27,6 +27,11 @@ namespace Yandex.Music.Api.Common
         public bool IsAuthorized { get; internal set; }
 
         /// <summary>
+        /// Идентификатор устройства
+        /// </summary>
+        public string DeviceId { get; set; } = "csharp";
+
+        /// <summary>
         /// Токен авторизации
         /// </summary>
         public string Token { get; internal set; }
