@@ -3,6 +3,8 @@ using System.Threading;
 
 using FluentAssertions;
 
+using Newtonsoft.Json;
+
 using Xunit.Extensions.Ordering;
 using Xunit;
 using Xunit.Abstractions;
@@ -21,19 +23,21 @@ namespace Yandex.Music.Api.Tests.Tests.API
         public async void Connect_ValidData_True()
         {
             using YnisonListener listener = await Fixture.API.Ynison.Connect(Fixture.Storage);
+            /*
             listener.OnReceive += args => {
                 Output.WriteLine(args.State);
             };
+            */
 
             for (int i = 0; i < 2; i++)
             {
                 Thread.Sleep(TimeSpan.FromSeconds(5));
-                Output.WriteLine(listener.State);
+                Output.WriteLine(JsonConvert.SerializeObject(listener.State));
             }
 
             listener.Disconnect();
 
-            listener.State.Should().NotBeNullOrEmpty();
+            listener.State.Should().NotBeNull();
         }
 
         public YnisonAPITest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)

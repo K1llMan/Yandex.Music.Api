@@ -5,7 +5,10 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
+using Newtonsoft.Json.Linq;
+
 using Yandex.Music.Api.Models.Ynison;
+using Yandex.Music.Api.Models.Ynison.Messages;
 
 namespace Yandex.Music.Api.Common.Ynison
 {
@@ -15,10 +18,7 @@ namespace Yandex.Music.Api.Common.Ynison
 
         private readonly JsonSerializerSettings jsonSettings = new() {
             Converters = new List<JsonConverter> {
-                new StringEnumConverter {
-                    // Важно! Унисон отдаёт данные в SnakeCase
-                    NamingStrategy = new SnakeCaseNamingStrategy()
-                }
+                new StringEnumConverter()
             },
             
             NullValueHandling = NullValueHandling.Ignore,
@@ -39,7 +39,7 @@ namespace Yandex.Music.Api.Common.Ynison
         /// <summary>
         /// Состояние
         /// </summary>
-        public string State { get; internal set; }
+        public YYnisonState State { get; internal set; }
 
         #endregion Свойства
 
@@ -47,7 +47,7 @@ namespace Yandex.Music.Api.Common.Ynison
 
         public class ReceiveEventArgs
         {
-            public string State { get; internal set; }
+            public YYnisonState State { get; internal set; }
         }
 
         public delegate void OnReceiveEventHandler(ReceiveEventArgs args);
@@ -66,13 +66,33 @@ namespace Yandex.Music.Api.Common.Ynison
             return JsonConvert.SerializeObject(data, jsonSettings);
         }
 
+        private T Deserialize<T>(YYnisonMessageType messageType, string data)
+        {
+            return storage.Debug != null
+                ? storage.Debug.Deserialize<T>($"Ynison{messageType}", data, jsonSettings)
+                : JsonConvert.DeserializeObject<T>(data, jsonSettings);
+        }
+
+        private T DeserializeMessage<T>(YYnisonMessageType messageType, string data)
+        {
+            JObject o = JObject.Parse(data);
+            // Сообщение с ошибкой
+            if (o.ContainsKey("error"))
+            {
+                YYnisonErrorMessage exception = Deserialize<YYnisonErrorMessage>(YYnisonMessageType.Error, data);
+                throw exception ?? new Exception("Ошибка десериализации ответа с ошибкой.");
+            }
+
+            return Deserialize<T>(messageType, data);
+        }
+
         private string DefaultState()
         {
             YYnisonVersion version = new() {
                 DeviceId = storage.DeviceId
             };
 
-            YYnisonUpdateFullState fullState = new () {
+            YYnisonUpdateFullStateMessage fullState = new () {
                 UpdateFullState = new() {
                     Device = new() {
                         Info = new() {
@@ -103,18 +123,18 @@ namespace Yandex.Music.Api.Common.Ynison
 
         public void Connect()
         {
-            redirector = new(storage, "wss://ynison.music.yandex.ru/redirector.YnisonRedirectService/GetRedirectToYnison");
-            redirector.Connect();
+            redirector.Connect(storage, "wss://ynison.music.yandex.ru/redirector.YnisonRedirectService/GetRedirectToYnison");
             redirector.OnReceive += data => {
-                YYnisonRedirect redirectInfo = JsonConvert.DeserializeObject<YYnisonRedirect>(data.Data, jsonSettings);
+                YYnisonRedirect redirectInfo = Deserialize<YYnisonRedirect>(YYnisonMessageType.Redirect, data.Data);
 
-                if (state != null)
+                if (state.IsConnected)
                     return;
 
-                state = new(storage, $"wss://{redirectInfo.Host}/ynison_state.YnisonStateService/PutYnisonState");
-                state.Connect(redirectInfo.RedirectTicket);
+                state.Connect(storage, $"wss://{redirectInfo.Host}/ynison_state.YnisonStateService/PutYnisonState", redirectInfo.RedirectTicket);
                 state.OnReceive += d => {
-                    State = d.Data;
+                    YYnisonState s = DeserializeMessage<YYnisonState>(YYnisonMessageType.State, d.Data);
+
+                    State = s;
 
                     OnReceive?.Invoke(new ReceiveEventArgs {
                         State = State
@@ -137,6 +157,9 @@ namespace Yandex.Music.Api.Common.Ynison
         public YnisonListener(AuthStorage authStorage)
         {
             storage = authStorage;
+
+            redirector = new();
+            state = new();
         }
 
         #endregion Основные функции

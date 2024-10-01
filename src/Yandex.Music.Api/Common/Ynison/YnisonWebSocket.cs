@@ -21,12 +21,8 @@ namespace Yandex.Music.Api.Common.Ynison
                     NamingStrategy = new CamelCaseNamingStrategy()
                 }
             },
-            NullValueHandling = NullValueHandling.Ignore,
-            ContractResolver = new CamelCasePropertyNamesContractResolver()
+            NullValueHandling = NullValueHandling.Ignore
         };
-
-        private AuthStorage storage;
-        private Uri uri;
 
         private readonly ClientWebSocket socketClient = new();
 
@@ -37,6 +33,12 @@ namespace Yandex.Music.Api.Common.Ynison
         private readonly int size = 4096;
 
         #endregion Поля
+
+        #region Свойства
+
+        public bool IsConnected => socketClient.State == WebSocketState.Open;
+
+        #endregion Свойства
 
         #region События
 
@@ -60,7 +62,7 @@ namespace Yandex.Music.Api.Common.Ynison
             return JsonConvert.SerializeObject(obj, jsonSettings);
         }
 
-        private string GetProtocolData(string redirectTicket)
+        private string GetProtocolData(string deviceId, string redirectTicket)
         {
             Dictionary<string, object> deviceInfo = new() {
                 { "app_name", "Chrome" },
@@ -68,7 +70,7 @@ namespace Yandex.Music.Api.Common.Ynison
             };
 
             Dictionary<string, string> protocol = new() {
-                { "Ynison-Device-Id", storage.DeviceId },
+                { "Ynison-Device-Id", deviceId },
                 { "Ynison-Device-Info", SerializeJson(deviceInfo) }
             };
 
@@ -96,21 +98,15 @@ namespace Yandex.Music.Api.Common.Ynison
 
         #region Основные функции
 
-        public YnisonWebSocket(AuthStorage authStorage, string url)
-        {
-            storage = authStorage;
-            uri = new Uri(url);
-        }
-
-        public bool Connect(string redirectTicket = null)
+        public bool Connect(AuthStorage storage, string url, string redirectTicket = null)
         {
             socketClient.Options.AddSubProtocol("Bearer");
 
-            socketClient.Options.SetRequestHeader("Sec-WebSocket-Protocol", $"Bearer, v2, {GetProtocolData(redirectTicket)}");
+            socketClient.Options.SetRequestHeader("Sec-WebSocket-Protocol", $"Bearer, v2, {GetProtocolData(storage.DeviceId, redirectTicket)}");
             socketClient.Options.SetRequestHeader("Origin", "https://music.yandex.ru");
             socketClient.Options.SetRequestHeader("Authorization", $"OAuth {storage.Token}");
 
-            socketClient.ConnectAsync(uri, CancellationToken.None)
+            socketClient.ConnectAsync(new Uri(url), CancellationToken.None)
                 .GetAwaiter()
                 .GetResult();
 

@@ -3,5 +3,6 @@
     public class YYnisonDeviceVolumeInfo
     {
         public decimal Volume { get; set; }
+        public YYnisonVersion Version { get; set; }
     }
 }

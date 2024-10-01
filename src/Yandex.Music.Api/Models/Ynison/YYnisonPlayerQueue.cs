@@ -8,8 +8,7 @@ namespace Yandex.Music.Api.Models.Ynison
 
         public string EntityId { get; set; }
 
-        #warning нужен enum
-        public string EntityType { get; set; } = "VARIOUS";
+        public YYnisonEntityType EntityType { get; set; } = YYnisonEntityType.Various;
 
         #warning нужен enum?
         public string EntityContext { get; set; } = "BASED_ON_ENTITY_BY_DEFAULT";
@@ -17,6 +16,7 @@ namespace Yandex.Music.Api.Models.Ynison
         public YYnisonQueueOptions Options { get; set; } = new();
 
         public List<YYnisonPlayableItem> PlayableList { get; set; } = new();
+        public YYnisonQueue Queue { get; set; }
 
         public string FromOptional { get; set; }
 
