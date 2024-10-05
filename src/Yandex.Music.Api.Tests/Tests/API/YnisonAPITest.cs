@@ -32,7 +32,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
             for (int i = 0; i < 2; i++)
             {
                 Thread.Sleep(TimeSpan.FromSeconds(5));
-                Output.WriteLine(JsonConvert.SerializeObject(listener.State));
+                Output.WriteLine(JsonConvert.SerializeObject(listener.Current));
             }
 
             listener.Disconnect();

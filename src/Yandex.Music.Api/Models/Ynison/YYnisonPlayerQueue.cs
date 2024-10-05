@@ -10,8 +10,7 @@ namespace Yandex.Music.Api.Models.Ynison
 
         public YYnisonEntityType EntityType { get; set; } = YYnisonEntityType.Various;
 
-        #warning нужен enum?
-        public string EntityContext { get; set; } = "BASED_ON_ENTITY_BY_DEFAULT";
+        public YYnisonEntityContext EntityContext { get; set; } = YYnisonEntityContext.BasedOnEntityByDefault;
 
         public YYnisonQueueOptions Options { get; set; } = new();
 

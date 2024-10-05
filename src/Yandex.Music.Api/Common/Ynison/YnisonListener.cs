@@ -18,7 +18,7 @@ namespace Yandex.Music.Api.Common.Ynison
 
         private readonly JsonSerializerSettings jsonSettings = new() {
             Converters = new List<JsonConverter> {
-                new StringEnumConverter()
+                new StringEnumConverter(new UpperSnakeCaseNamingStrategy())
             },
             
             NullValueHandling = NullValueHandling.Ignore,
@@ -40,6 +40,11 @@ namespace Yandex.Music.Api.Common.Ynison
         /// Состояние
         /// </summary>
         public YYnisonState State { get; internal set; }
+
+        /// <summary>
+        /// Текущий проигрываемый трек
+        /// </summary>
+        public YYnisonPlayableItem Current => GetCurrent();
 
         #endregion Свойства
 
@@ -115,6 +120,15 @@ namespace Yandex.Music.Api.Common.Ynison
             };
 
             return SerializeJson(fullState);
+        }
+
+        private YYnisonPlayableItem GetCurrent()
+        {
+            if (State == null)
+                return null;
+
+            int index = State.PlayerState.PlayerQueue.CurrentPlayableIndex;
+            return State.PlayerState.PlayerQueue.PlayableList[index];
         }
 
         #endregion Вспомогательные функции

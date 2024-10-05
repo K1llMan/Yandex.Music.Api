@@ -9,8 +9,7 @@
         
         public string PlayableId { get; set; }
 
-        #warning нужен enum
-        public string PlayableType { get; set; }
+        public YYnisonPlayableItemType PlayableType { get; set; }
 
         public string Title { get; set; }
 
