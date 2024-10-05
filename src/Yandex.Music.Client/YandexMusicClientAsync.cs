@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Yandex.Music.Api;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Common.Debug;
+using Yandex.Music.Api.Common.Ynison;
 using Yandex.Music.Api.Models.Account;
 using Yandex.Music.Api.Models.Album;
 using Yandex.Music.Api.Models.Artist;
@@ -32,6 +33,7 @@ namespace Yandex.Music.Client
 
         private YandexMusicApi api;
         private AuthStorage storage;
+        private YnisonListener listener;
 
         #endregion Поля
 
@@ -46,6 +48,11 @@ namespace Yandex.Music.Client
         /// Флаг авторизации
         /// </summary>
         public bool IsAuthorized => storage.IsAuthorized;
+
+        /// <summary>
+        /// Унисон
+        /// </summary>
+        public YnisonListener Ynison => listener;
 
         #endregion Свойства
 
@@ -690,6 +697,15 @@ namespace Yandex.Music.Client
         }
 
         #endregion Лейблы
+
+        #region Унисон
+
+        public void ConnectToYnison()
+        {
+            listener = api.Ynison.Connect(storage);
+        }
+
+        #endregion Унисон
 
         #endregion Основные функции
     }
