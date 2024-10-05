@@ -335,3 +335,9 @@ YandexMusicClient
    public List<YArtist> GetArtistsByLabel(YLabel label, int page = 0)
 
 Получение списка артистов лейбла.
+
+.. code-block:: csharp
+
+   public void ConnectToYnison()
+
+Подключение к Унисон. Слушатель доступен через свойство клиента Ynison.

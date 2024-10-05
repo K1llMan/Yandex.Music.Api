@@ -11,7 +11,7 @@ API переделано под работу с API официального п�
 
 [Telegram-чат](https://t.me/yandex_music_api)
 
-Выражаю благодарность [участвовашим в разработке](https://github.com/K1llMan/Yandex.Music.Api/graphs/contributors).
+Выражаю благодарность [участвовавшим в разработке](https://github.com/K1llMan/Yandex.Music.Api/graphs/contributors).
 
 ```{include} ../../CHANGELOG.md
 ```

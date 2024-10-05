@@ -34,6 +34,8 @@ YandexMusicAPI
    API для взаимодействия с пользовательскими данными.
 :doc:`User <branches/ugc>`
    API для взаимодействия с загружаемым пользователем содержимым.
+:doc:`User <branches/ynison>`
+   API для взаимодействия с Унисон.
 
 .. toctree::
    :hidden:
@@ -49,3 +51,4 @@ YandexMusicAPI
    branches/track
    branches/user
    branches/ugc
+   branches/ynison

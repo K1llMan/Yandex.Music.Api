@@ -36,7 +36,7 @@ source_suffix = {
 # -- Project information -----------------------------------------------------
 
 project = 'Yandex Music API'
-copyright = '2023, K1llM@n'
+copyright = '2024, K1llM@n'
 author = 'K1llM@n, based on Winster332 project'
 
 language = 'ru'
