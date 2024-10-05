@@ -106,6 +106,8 @@ namespace Yandex.Music.Api.Common.Ynison
             socketClient.Options.SetRequestHeader("Origin", "https://music.yandex.ru");
             socketClient.Options.SetRequestHeader("Authorization", $"OAuth {storage.Token}");
 
+            socketClient.Options.Proxy = storage.Context.WebProxy;
+
             socketClient.ConnectAsync(new Uri(url), CancellationToken.None)
                 .GetAwaiter()
                 .GetResult();

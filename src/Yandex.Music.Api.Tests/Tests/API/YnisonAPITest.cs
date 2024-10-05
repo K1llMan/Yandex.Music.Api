@@ -20,9 +20,9 @@ namespace Yandex.Music.Api.Tests.Tests.API
     {
         [Fact, YandexTrait(TraitGroup.YnisonAPI)]
         [Order(0)]
-        public async void Connect_ValidData_True()
+        public void Connect_ValidData_True()
         {
-            using YnisonListener listener = await Fixture.API.Ynison.Connect(Fixture.Storage);
+            using YnisonListener listener = Fixture.API.Ynison.Connect(Fixture.Storage);
             /*
             listener.OnReceive += args => {
                 Output.WriteLine(args.State);

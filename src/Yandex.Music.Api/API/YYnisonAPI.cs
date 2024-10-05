@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Common.Ynison;
@@ -17,14 +16,14 @@ namespace Yandex.Music.Api.API
         {
         }
 
-        public Task<YnisonListener> Connect(AuthStorage storage)
+        public YnisonListener Connect(AuthStorage storage)
         {
             if (string.IsNullOrEmpty(storage.Token))
                 throw new Exception("Токен пользователя не задан.");
 
             YnisonListener listener = new(storage);
             listener.Connect();
-            return Task.FromResult(listener);
+            return listener;
         }
 
         #endregion Основные функции
