@@ -1,5 +1,7 @@
 # История изменений
 
+## 2.0.0
+* Добавлена базовая поддержка Унисон. Спасибо ([BloodyBaRGaIn](https://github.com/asnct)) за gist с примером подключения.
 ## 1.10.1
 * Актуализированы модели. (feat. [BloodyBaRGaIn](https://github.com/BloodyBaRGaIn))
 ## 1.10.0
