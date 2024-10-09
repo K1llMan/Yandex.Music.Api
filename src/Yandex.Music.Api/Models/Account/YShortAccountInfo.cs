@@ -66,6 +66,9 @@ namespace Yandex.Music.Api.Models.Account
         [JsonProperty("has_family")]
         public bool HasFamily { get; set; }
 
+        [JsonProperty("secure_phone_number")]
+        public string SequrePhoneNumber { get; set; }
+
         [JsonProperty("x_token_client_id")]
         public string XTokenClientId { get; set; }
 
