@@ -53,7 +53,9 @@ namespace Yandex.Music.Api.Models.Common.Cover
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            JObject cover = JObject.FromObject(value, serializer);
+
+            cover.WriteTo(writer);
         }
     }
 

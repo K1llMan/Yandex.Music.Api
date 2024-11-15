@@ -40,6 +40,7 @@ namespace Yandex.Music.Api.Models.Playlist
         public YCustomWave CustomWave { get; set; }
         public List<YId> RecentTracks { get; set; }
         public DateTime Created { get; set; }
+        public YDerivedColors DerivedColors { get; set; }
         public string Description { get; set; }
         public string DescriptionFormatted { get; set; }
         public bool DoNotIndex { get; set; }

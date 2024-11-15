@@ -20,6 +20,7 @@ namespace Yandex.Music.Api.Models.Artist
         public List<string> DbAliases { get; set; }
         #warning Непонятная коллекция с содержимым разных типов
         public List<object> Decomposed { get; set; }
+        public YDerivedColors DerivedColors { get; set; }
         public YDescription Description { get; set; }
         public YDeprecation Deprecation { get; set; }
         public List<string> Disclaimers { get; set; }

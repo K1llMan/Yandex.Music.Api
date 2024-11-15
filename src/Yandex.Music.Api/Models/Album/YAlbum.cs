@@ -44,7 +44,9 @@ namespace Yandex.Music.Api.Models.Album
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            JArray array = JArray.FromObject(value);
+
+            array.WriteTo(writer);
         }
     }
 
@@ -65,6 +67,7 @@ namespace Yandex.Music.Api.Models.Album
         public string ContentWarning { get; set; }
         public string CoverUri { get; set; }
         public YCustomWave CustomWave { get; set; }
+        public YDerivedColors DerivedColors { get; set; }
         public string Description { get; set; }
         public List<string> Disclaimers { get; set; }
         public List<YAlbum> Duplicates { get; set; }
