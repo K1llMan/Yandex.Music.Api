@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Common.Debug;
 using Yandex.Music.Api.Common.Debug.Writer;
+using Yandex.Music.Api.Common.Ynison;
 using Yandex.Music.Api.Models.Album;
 using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
@@ -34,6 +35,7 @@ namespace Yandex.Music.Api.Tests
 
         public void Dispose()
         {
+            Player.Disconnect();
         }
 
         #region Вспомогательные функции
@@ -72,6 +74,8 @@ namespace Yandex.Music.Api.Tests
         public YNewQueue NewQueue { get; set; }
 
         public YResponse<List<YStation>> Station {get; set; }
+
+        public YnisonPlayer Player { get; set; }
 
         #endregion Поля для сохранения тестовых данных
 

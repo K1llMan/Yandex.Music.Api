@@ -47,11 +47,23 @@ namespace Yandex.Music.Api.Common.Ynison
             public string Data { get; internal set; }
         }
 
-        public delegate void OnReceiveEventHandler(ReceiveEventArgs args);
+        public delegate void OnReceiveEventHandler(YnisonWebSocket socket, ReceiveEventArgs args);
         /// <summary>
         /// Получение данных
         /// </summary>
         public event OnReceiveEventHandler OnReceive;
+
+        public class CloseEventArgs
+        {
+            public WebSocketCloseStatus? Status { get; set; }
+            public string Description { get; set; }
+        }
+
+        public delegate void OnCloseEventHandler(YnisonWebSocket socket, CloseEventArgs args);
+        /// <summary>
+        /// Закрытие соединения
+        /// </summary>
+        public event OnCloseEventHandler OnClose;
 
         #endregion События
 
@@ -125,19 +137,17 @@ namespace Yandex.Music.Api.Common.Ynison
             do
             {
                 string content = await ReadSocketContent();
-                OnReceive?.Invoke(new ReceiveEventArgs {
+                OnReceive?.Invoke(this, new ReceiveEventArgs {
                     Data = content
                 });
 
                 data.Clear();
-            } while (!cancellation.IsCancellationRequested);
+            } while (!cancellation.IsCancellationRequested && socketClient.State == WebSocketState.Open);
 
-            /*
             OnClose?.Invoke(this, new CloseEventArgs {
                 Status = socketClient.CloseStatus,
                 Description = socketClient.CloseStatusDescription
             });
-            */
 
             await socketClient.CloseAsync(WebSocketCloseStatus.NormalClosure, string.Empty, CancellationToken.None);
         }

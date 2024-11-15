@@ -131,7 +131,7 @@ YandexMusicApi
 │   ├── UploadUgcTrack / Async (AuthStorage storage, string uploadLink, Stream stream)
 │   └── UploadUgcTrack / Async (AuthStorage storage, string uploadLink, byte[] file)
 ├── Ynison
-│   └── Connect (AuthStorage storage)
+│   └── GetPlayer (AuthStorage storage)
 └── Future
     ...
 ```

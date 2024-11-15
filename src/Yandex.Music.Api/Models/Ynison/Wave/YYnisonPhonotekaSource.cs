@@ -3,6 +3,7 @@
     public class YYnisonPhonotekaSource
     {
         public YYnisonEntityContext EntityContext { get; set; }
+        public YYnisonId AlbumId { get; set; }
         public YYnisonId PlaylistId { get; set; }
     }
 }

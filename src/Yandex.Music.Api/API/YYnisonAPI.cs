@@ -16,14 +16,12 @@ namespace Yandex.Music.Api.API
         {
         }
 
-        public YnisonListener Connect(AuthStorage storage)
+        public YnisonPlayer GetPlayer(AuthStorage storage)
         {
             if (string.IsNullOrEmpty(storage.Token))
                 throw new Exception("Токен пользователя не задан.");
 
-            YnisonListener listener = new(storage);
-            listener.Connect();
-            return listener;
+            return new(api, storage);
         }
 
         #endregion Основные функции

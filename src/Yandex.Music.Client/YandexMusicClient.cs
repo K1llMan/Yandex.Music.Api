@@ -32,7 +32,7 @@ namespace Yandex.Music.Client
 
         private YandexMusicApi api;
         private AuthStorage storage;
-        private YnisonListener listener;
+        private YnisonPlayer player;
 
         #endregion Поля
 
@@ -51,7 +51,7 @@ namespace Yandex.Music.Client
         /// <summary>
         /// Унисон
         /// </summary>
-        public YnisonListener Ynison => listener;
+        public YnisonPlayer Ynison => player;
 
         #endregion Свойства
 
@@ -662,7 +662,7 @@ namespace Yandex.Music.Client
 
         public void ConnectToYnison()
         {
-            listener = api.Ynison.Connect(storage);
+            player = api.Ynison.GetPlayer(storage);
         }
 
         #endregion Унисон

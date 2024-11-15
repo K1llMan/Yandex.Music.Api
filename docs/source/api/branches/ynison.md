@@ -6,7 +6,7 @@ YYnisonAPI
 ------------------------------------------------------------------
 
 ``` csharp
-public YnisonListener Connect(AuthStorage storage)
+public YnisonPlayer GetPlayer(AuthStorage storage)
 ```  
 
 Подключение к Унисон.
