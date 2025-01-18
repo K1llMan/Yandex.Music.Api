@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 
 using Yandex.Music.Api.Models.Artist;
 using Yandex.Music.Api.Models.Common;
+using Yandex.Music.Api.Models.Common.Cover;
 using Yandex.Music.Api.Models.Track;
 
 namespace Yandex.Music.Api.Models.Album
@@ -66,6 +67,8 @@ namespace Yandex.Music.Api.Models.Album
         public bool ChildContent { get; set; }
         public string ContentWarning { get; set; }
         public string CoverUri { get; set; }
+        [JsonConverter(typeof(YCoverConverter))]
+        public YCover Cover { get; set; }
         public YCustomWave CustomWave { get; set; }
         public YDerivedColors DerivedColors { get; set; }
         public string Description { get; set; }

@@ -21,6 +21,10 @@ namespace Yandex.Music.Api.Models.Common.Cover
             YCover cover;
 
             try {
+                // Фиктивный тип, т.к. у такой обложки нет поля с типом
+                if (jObject["type"] == null)
+                    jObject.Add("type", "color");
+
                 YCoverType type = jObject["error"] != null
                     ? YCoverType.Error
                     : jObject["type"].ToObject<YCoverType>();
@@ -28,6 +32,9 @@ namespace Yandex.Music.Api.Models.Common.Cover
                 switch (type) {
                     case YCoverType.Error:
                         cover = jObject.ToObject<YCoverError>();
+                        break;
+                    case YCoverType.Color:
+                        cover = jObject.ToObject<YCoverColor>();
                         break;
                     case YCoverType.FromAlbumCover:
                     case YCoverType.FromArtistPhotos:

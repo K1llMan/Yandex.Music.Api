@@ -8,6 +8,7 @@ namespace Yandex.Music.Api.Models.Common.Cover
     [JsonConverter(typeof(StringEnumConverter))]
     public enum YCoverType
     {
+        Color,
         Error,
         [EnumMember(Value = "from-artist-photos")]
         FromArtistPhotos,

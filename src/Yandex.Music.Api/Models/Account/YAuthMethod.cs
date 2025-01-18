@@ -14,6 +14,7 @@ namespace Yandex.Music.Api.Models.Account
         Magic,
         Otp,
         [EnumMember(Value = "social_gg")]
-        Social
+        Social,
+        WebAuthN
     }
 }

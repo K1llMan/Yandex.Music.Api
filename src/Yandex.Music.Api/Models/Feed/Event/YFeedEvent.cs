@@ -34,6 +34,10 @@ namespace Yandex.Music.Api.Models.Feed.Event
                     feedEvent = jObject.ToObject<YFeedEventNotification>();
                     break;
 
+                case YFeedEventType.Promotion:
+                    feedEvent = jObject.ToObject<YFeedEventPromotion>();
+                    break;
+
                 case YFeedEventType.RecentTrackLikeToTracks:
                     feedEvent = jObject.ToObject<YFeedEventLikeTrack>();
                     break;

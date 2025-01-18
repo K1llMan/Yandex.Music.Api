@@ -24,6 +24,8 @@ namespace Yandex.Music.Api.Models.Feed.Event
 
         Notification,
 
+        Promotion,
+
         [EnumMember(Value = "rare-artist")]
         RareArtist,
 
