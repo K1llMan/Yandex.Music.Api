@@ -4,6 +4,8 @@
     {
         public string AlbumIdOptional { get; set; }
 
+        public string CoverUrlOptional { get; set; }
+
         #warning нужен enum
         public string From { get; set; }
         

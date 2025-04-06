@@ -298,6 +298,17 @@ namespace Yandex.Music.Client
         }
 
         /// <summary>
+        /// Получение плейлиста по uuid
+        /// </summary>
+        /// <param name="uuid">uuid</param>
+        /// <returns></returns>
+        public async Task<YPlaylist> GetPlaylist(string uuid)
+        {
+            return (await api.Playlist.GetAsync(storage, uuid))
+                .Result;
+        }
+
+        /// <summary>
         /// Получение списка плейлистов
         /// </summary>
         /// <param name="ids">Список кортежей с пользователем и id плейлиста</param>

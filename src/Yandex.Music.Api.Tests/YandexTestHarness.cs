@@ -35,7 +35,7 @@ namespace Yandex.Music.Api.Tests
 
         public void Dispose()
         {
-            Player.Disconnect();
+            Player?.Disconnect();
         }
 
         #region Вспомогательные функции

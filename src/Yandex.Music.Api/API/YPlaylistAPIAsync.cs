@@ -167,6 +167,19 @@ namespace Yandex.Music.Api.API
         }
 
         /// <summary>
+        /// Получение плейлиста по uuid
+        /// </summary>
+        /// <param name="storage">Хранилище</param>
+        /// <param name="uuid">uuid</param>
+        /// <returns></returns>
+        public Task<YResponse<YPlaylist>> GetAsync(AuthStorage storage, string uuid)
+        {
+            return new YGetPlaylistByUuidBuilder(api, storage)
+                .Build(uuid)
+                .GetResponseAsync();
+        }
+
+        /// <summary>
         /// Получение плейлистов
         /// </summary>
         /// <param name="storage">Хранилище</param>

@@ -70,6 +70,7 @@ YandexMusicApi
 │   └── GetChildrenLanding / Async (AuthStorage storage)
 ├── Playlist
 │   ├── Get / Async (AuthStorage storage, string user, string kinds)
+│   ├── Get / Async (AuthStorage storage, string uuid)
 │   ├── Get / Async (AuthStorage storage, IEnumerable<(string user, string kind)> ids)
 │   ├── GetPersonalPlaylists / Async (AuthStorage storage)
 │   ├── Favorites / Async (AuthStorage storage)

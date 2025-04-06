@@ -11,6 +11,8 @@ namespace Yandex.Music.Api.Models.Account
         [JsonProperty("csrf_token")]
         public string CsrfToken { get; set; }
 
+        public string LocCsrf { get; set; }
+
         [JsonProperty("use_new_suggest_by_phone")]
         public bool UseNewSuggestByPhone { get; set; }
 
@@ -32,6 +34,9 @@ namespace Yandex.Music.Api.Models.Account
         [JsonProperty("can_register")]
         public bool CanRegister { get; set; }
 
+        [JsonProperty("location_id")]
+        public string LocationId { get; set; }
+
         public string Country { get; set; }
 
         [JsonProperty("phone_number")]
@@ -39,5 +44,7 @@ namespace Yandex.Music.Api.Models.Account
 
         [JsonProperty("magic_link_email")]
         public string MagicLinkEmail { get; set; }
+
+        public string TractorTargetLocationHost { get; set; }
     }
 }

@@ -55,6 +55,12 @@ Playlist API
 
 .. code-block:: csharp
 
+   public async Task<YResponse<YPlaylist>> GetAsync(AuthStorage storage, string uuid)
+
+Получение плейлиста по uuid.
+
+.. code-block:: csharp
+
    public Task<YResponse<List<YPlaylist>>> GetAsync(AuthStorage storage, IEnumerable<(string user, string kind)> ids)
 
 Получение списка плейлистов.

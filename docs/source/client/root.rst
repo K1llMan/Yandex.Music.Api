@@ -152,6 +152,12 @@ YandexMusicClient
 
 .. code-block:: csharp
 
+   public YPlaylist GetPlaylist(string uuit)
+
+Получение плейлиста по uuid.
+
+.. code-block:: csharp
+
    public List<YPlaylist> GetPlaylists(IEnumerable<(string user, string id)> ids)
 
 Получение списка плейлистов по пользователю и идентификатору.
