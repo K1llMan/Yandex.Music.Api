@@ -15,6 +15,8 @@ namespace Yandex.Music.Api.Models.Account
         Otp,
         [EnumMember(Value = "social_gg")]
         Social,
-        WebAuthN
+        WebAuthN,
+        [EnumMember(Value = "sms_code")]
+        SmsCode
     }
 }

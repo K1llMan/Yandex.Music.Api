@@ -15,6 +15,8 @@ namespace Yandex.Music.Api.Models.Account
         [EnumMember(Value = "captcha.required")]
         CaptchaRequired,
         [EnumMember(Value = "captcha.not_matched")]
-        CaptchaNotMatched
+        CaptchaNotMatched,
+        [EnumMember(Value = "oauth_token.invalid")]
+        OAuthTokenInvalid
     }
 }
