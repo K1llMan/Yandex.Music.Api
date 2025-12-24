@@ -2,6 +2,6 @@
 {
     public class YYnisonWaveSource
     {
-
+        public YYnisonWaveSourceType SourceType { get; set; }
     }
 }
