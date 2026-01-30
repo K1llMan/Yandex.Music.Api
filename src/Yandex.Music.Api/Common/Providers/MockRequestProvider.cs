@@ -25,6 +25,11 @@ namespace Yandex.Music.Api.Common.Providers
             throw new NotImplementedException();
         }
 
+        public override Task<HttpResponseMessage> GetWebResponseAsync(HttpRequestMessage message, HttpCompletionOption completionOption)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion IRequestProvider
     }
 }

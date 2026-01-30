@@ -12,17 +12,17 @@ namespace Yandex.Music.Api.Common
     {
         private AuthStorage authStorage;
 
-        private async Task<HttpContent> GetResponseContent(string url)
+        private async Task<HttpContent> GetResponseContent(string url, HttpCompletionOption httpCompletionOption = HttpCompletionOption.ResponseContentRead)
         {
             HttpRequestMessage message = new(new HttpMethod(WebRequestMethods.Http.Get), url);
 
-            HttpResponseMessage response = await authStorage.Provider.GetWebResponseAsync(message);
+            HttpResponseMessage response = await authStorage.Provider.GetWebResponseAsync(message, httpCompletionOption);
             return response.Content;
         }
 
-        public async Task<Stream> AsStream(string url)
+        public async Task<Stream> AsStream(string url, HttpCompletionOption httpCompletionOption = HttpCompletionOption.ResponseContentRead)
         {
-            HttpContent content = await GetResponseContent(url);
+            HttpContent content = await GetResponseContent(url, httpCompletionOption);
             return await content.ReadAsStreamAsync();
         }
 
