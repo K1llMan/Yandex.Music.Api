@@ -43,6 +43,11 @@ namespace Yandex.Music.Api
         public YPlaylistAPI Playlist { get; internal set; }
 
         /// <summary>
+        /// API прикреплённых объектов
+        /// </summary>
+        public YPinsAPI Pins { get; internal set; }
+
+        /// <summary>
         /// API радио
         /// </summary>
         public YRadioAPI Radio { get; internal set; }
