@@ -302,7 +302,7 @@ namespace Yandex.Music.Api.API
         public Task<Stream> ExtractStreamAsync(AuthStorage storage, YTrack track,
             HttpCompletionOption httpCompletionOption = HttpCompletionOption.ResponseContentRead)
         {
-            return ExtractStreamAsync(storage, track.GetKey().ToString());
+            return ExtractStreamAsync(storage, track.GetKey().ToString(), httpCompletionOption);
         }
 
         #endregion В поток
