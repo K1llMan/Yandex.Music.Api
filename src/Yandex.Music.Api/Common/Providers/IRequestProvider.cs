@@ -1,4 +1,4 @@
-﻿﻿using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Yandex.Music.Api.Common.Providers
@@ -10,13 +10,6 @@ namespace Yandex.Music.Api.Common.Providers
     {
         /// <summary>
         /// Функция получения ответа
-        /// </summary>
-        /// <param name="message">Запрос</param>
-        /// <returns></returns>
-        Task<HttpResponseMessage> GetWebResponseAsync(HttpRequestMessage message);
-
-        /// <summary>
-        /// Функция получения ответа с опциями завершения
         /// </summary>
         /// <param name="message">Запрос</param>
         /// <param name="completionOption">Опция завершения запроса</param>

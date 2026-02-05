@@ -28,12 +28,7 @@ namespace Yandex.Music.Api.Common.Providers
 
         #region IRequestProvider
 
-        public virtual Task<HttpResponseMessage> GetWebResponseAsync(HttpRequestMessage message)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual Task<HttpResponseMessage> GetWebResponseAsync(HttpRequestMessage message, HttpCompletionOption completionOption)
+        public virtual Task<HttpResponseMessage> GetWebResponseAsync(HttpRequestMessage message, HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead)
         {
             throw new NotImplementedException();
         }
