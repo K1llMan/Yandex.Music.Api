@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
 
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Common;
@@ -227,10 +228,12 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <param name="trackKey">Ключ трека в формате {идентификатор трека:идентификатор альбома}</param>
+        /// <param name="httpCompletionOption">Параметры передачи управления при http запросе</param>
         /// <returns></returns>
-        public Stream ExtractStream(AuthStorage storage, string trackKey)
+        public Stream ExtractStream(AuthStorage storage, string trackKey,
+            HttpCompletionOption httpCompletionOption = HttpCompletionOption.ResponseContentRead)
         {
-            return ExtractStreamAsync(storage, trackKey).GetAwaiter().GetResult();
+            return ExtractStreamAsync(storage, trackKey, httpCompletionOption).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -238,10 +241,12 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <param name="track">Трек</param>
+        /// <param name="httpCompletionOption">Параметры передачи управления при http запросе</param>
         /// <returns></returns>
-        public Stream ExtractStream(AuthStorage storage, YTrack track)
+        public Stream ExtractStream(AuthStorage storage, YTrack track,
+            HttpCompletionOption httpCompletionOption = HttpCompletionOption.ResponseContentRead)
         {
-            return ExtractStreamAsync(storage, track.GetKey().ToString()).GetAwaiter().GetResult();
+            return ExtractStreamAsync(storage, track.GetKey().ToString(), httpCompletionOption).GetAwaiter().GetResult();
         }
 
         #endregion В поток

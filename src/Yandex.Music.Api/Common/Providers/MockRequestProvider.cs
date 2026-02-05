@@ -20,7 +20,8 @@ namespace Yandex.Music.Api.Common.Providers
 
         #region IRequestProvider
 
-        public override Task<HttpResponseMessage> GetWebResponseAsync(HttpRequestMessage message)
+        public override Task<HttpResponseMessage> GetWebResponseAsync(HttpRequestMessage message,
+            HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead)
         {
             throw new NotImplementedException();
         }

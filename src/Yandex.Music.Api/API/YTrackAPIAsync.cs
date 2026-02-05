@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Http;
 
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Common;
@@ -282,11 +283,13 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <param name="trackKey">Ключ трека в формате {идентификатор трека:идентификатор альбома}</param>
+        /// <param name="httpCompletionOption">Параметры передачи управления при http запросе</param>
         /// <returns></returns>
-        public async Task<Stream> ExtractStreamAsync(AuthStorage storage, string trackKey)
+        public async Task<Stream> ExtractStreamAsync(AuthStorage storage, string trackKey,
+            HttpCompletionOption httpCompletionOption = HttpCompletionOption.ResponseContentRead)
         {
             string url = await GetFileLinkAsync(storage, trackKey);
-            return await new DataDownloader(storage).AsStream(url);
+            return await new DataDownloader(storage).AsStream(url, httpCompletionOption);
         }
 
         /// <summary>
@@ -294,10 +297,12 @@ namespace Yandex.Music.Api.API
         /// </summary>
         /// <param name="storage">Хранилище</param>
         /// <param name="track">Трек</param>
+        /// <param name="httpCompletionOption">Параметры передачи управления при http запросе</param>
         /// <returns></returns>
-        public Task<Stream> ExtractStreamAsync(AuthStorage storage, YTrack track)
+        public Task<Stream> ExtractStreamAsync(AuthStorage storage, YTrack track,
+            HttpCompletionOption httpCompletionOption = HttpCompletionOption.ResponseContentRead)
         {
-            return ExtractStreamAsync(storage, track.GetKey().ToString());
+            return ExtractStreamAsync(storage, track.GetKey().ToString(), httpCompletionOption);
         }
 
         #endregion В поток

@@ -49,7 +49,8 @@ namespace Yandex.Music.Api.Common.Providers
 
         #region IRequestProvider
 
-        public override Task<HttpResponseMessage> GetWebResponseAsync(HttpRequestMessage message)
+        public override Task<HttpResponseMessage> GetWebResponseAsync(HttpRequestMessage message,
+            HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead)
         {
             try
             {
@@ -60,7 +61,7 @@ namespace Yandex.Music.Api.Common.Providers
                     CookieContainer = storage.Context.Cookies,
                 });
 
-                return client.SendAsync(message);
+                return client.SendAsync(message, completionOption);
             }
             catch (Exception ex)
             {
