@@ -24,6 +24,7 @@ API переделано под работу с API официального п�
 * [Lauriero](https://github.com/Lauriero)
 * [BloodyBaRGaIn](https://github.com/BloodyBaRGaIn)
 * [Anton Kaplin](https://github.com/tedecti)
+* [cm4ker](https://github.com/cm4ker)
 
 ## LICENCE
 [GNU General Public License v3.0](https://github.com/K1llMan/Yandex.Music.Api/blob/master/LICENSE)

@@ -82,13 +82,13 @@ Track API
 
 .. code-block:: csharp
 
-   public byte[] ExtractStreamAsync(AuthStorage storage, string trackKey)
+   public byte[] ExtractStreamAsync(AuthStorage storage, string trackKey, HttpCompletionOption httpCompletionOption = HttpCompletionOption.ResponseContentRead)
 
 Получение данных в виде потока.
 
 .. code-block:: csharp
 
-   public byte[] ExtractStreamAsync(AuthStorage storage, YTrack track)
+   public byte[] ExtractStreamAsync(AuthStorage storage, YTrack track, HttpCompletionOption httpCompletionOption = HttpCompletionOption.ResponseContentRead)
 
 Получение данных в виде потока.
 

@@ -1,5 +1,8 @@
 # История изменений
 
+## 2.0.6
+* Использование HttpCompletionOption для получения потока [cm4ker](https://github.com/cm4ker)
+* WIP: реализация YPinsAPI.
 ## 2.0.5
 * Актуализированы модели. ([Anton Kaplin](https://github.com/tedecti))
 ## 2.0.4
