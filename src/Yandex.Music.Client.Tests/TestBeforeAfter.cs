@@ -7,7 +7,7 @@ using Xunit.Sdk;
 namespace Yandex.Music.Client.Tests
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public class TestBeforeAfter: BeforeAfterTestAttribute
+    public class TestBeforeAfter : BeforeAfterTestAttribute
     {
         public override void Before(MethodInfo methodUnderTest)
         {

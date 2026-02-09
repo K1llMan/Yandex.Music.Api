@@ -27,7 +27,7 @@ namespace Yandex.Music.Api.API
                 .Build(device)
                 .GetResponseAsync();
         }
-        
+
         /// <summary>
         /// Получение очереди
         /// </summary>

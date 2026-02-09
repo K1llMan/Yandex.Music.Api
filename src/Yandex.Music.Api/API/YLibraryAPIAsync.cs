@@ -39,7 +39,7 @@ namespace Yandex.Music.Api.API
 
         #region Основные функции
 
-        public YLibraryAPI(YandexMusicApi yandex): base(yandex)
+        public YLibraryAPI(YandexMusicApi yandex) : base(yandex)
         {
         }
 
@@ -255,7 +255,7 @@ namespace Yandex.Music.Api.API
         }
 
         #endregion Получение списка "Вы недавно слушали"
-        
+
         #endregion Основные функции
     }
 }

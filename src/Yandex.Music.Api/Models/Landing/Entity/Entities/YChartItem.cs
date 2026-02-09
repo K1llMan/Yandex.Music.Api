@@ -1,4 +1,4 @@
-﻿using Yandex.Music.Api.Models.Common;
+using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Models.Track;
 
 namespace Yandex.Music.Api.Models.Landing.Entity.Entities

@@ -84,7 +84,7 @@ namespace Yandex.Music.Client.Tests.Tests
             };
             int trackCount = 2;
             int contextCount = 5;
-            
+
             List<YRecentlyListened> recentlyListened = Fixture.Client.GetRecentlyListened(types, trackCount, contextCount);
 
             recentlyListened.Should().NotBeNullOrEmpty();

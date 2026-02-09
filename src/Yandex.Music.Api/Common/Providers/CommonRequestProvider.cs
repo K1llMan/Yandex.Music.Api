@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -9,7 +9,7 @@ using Yandex.Music.Api.Models.Common;
 
 namespace Yandex.Music.Api.Common.Providers
 {
-    public class CommonRequestProvider: IRequestProvider
+    public class CommonRequestProvider : IRequestProvider
     {
         #region Поля
 
@@ -45,7 +45,8 @@ namespace Yandex.Music.Api.Common.Providers
 
             try
             {
-                JsonSerializerSettings settings = new() {
+                JsonSerializerSettings settings = new()
+                {
                     Converters = new List<JsonConverter> {
                         new YExecutionContextConverter(api, storage)
                     }

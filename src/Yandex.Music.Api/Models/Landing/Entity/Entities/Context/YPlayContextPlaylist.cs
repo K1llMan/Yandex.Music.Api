@@ -1,4 +1,4 @@
-﻿using Yandex.Music.Api.Models.Playlist;
+using Yandex.Music.Api.Models.Playlist;
 
 namespace Yandex.Music.Api.Models.Landing.Entity.Entities.Context
 {

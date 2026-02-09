@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 
 namespace Yandex.Music.Api.Models.Account
 {
@@ -15,7 +15,7 @@ namespace Yandex.Music.Api.Models.Account
         public string Id { get; set; }
 
         public string State { get; set; }
-        
+
         public YAuthCaptcha Captcha { get; set; }
     }
 }

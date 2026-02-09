@@ -37,7 +37,8 @@ namespace Yandex.Music.Api.Tests.Tests.API
         {
             Fixture.Album.Should().NotBeNull();
 
-            bool added = Fixture.API.Library.AddAlbumLike(Fixture.Storage, new YAlbum {
+            bool added = Fixture.API.Library.AddAlbumLike(Fixture.Storage, new YAlbum
+            {
                 Id = Fixture.Album.Result.Id
             }).Result == "ok";
 
@@ -50,7 +51,8 @@ namespace Yandex.Music.Api.Tests.Tests.API
         {
             Fixture.Artist.Should().NotBeNull();
 
-            bool added = Fixture.API.Library.AddArtistLike(Fixture.Storage, new YArtist {
+            bool added = Fixture.API.Library.AddArtistLike(Fixture.Storage, new YArtist
+            {
                 Id = Fixture.Artist.Result.Artist.Id
             }).Result == "ok";
 
@@ -121,7 +123,8 @@ namespace Yandex.Music.Api.Tests.Tests.API
         {
             Fixture.Album.Should().NotBeNull();
 
-            bool removed = Fixture.API.Library.RemoveAlbumLike(Fixture.Storage, new YAlbum {
+            bool removed = Fixture.API.Library.RemoveAlbumLike(Fixture.Storage, new YAlbum
+            {
                 Id = Fixture.Album.Result.Id
             }).Result == "ok";
 
@@ -134,7 +137,8 @@ namespace Yandex.Music.Api.Tests.Tests.API
         {
             Fixture.Artist.Should().NotBeNull();
 
-            bool removed = Fixture.API.Library.RemoveArtistLike(Fixture.Storage, new YArtist {
+            bool removed = Fixture.API.Library.RemoveArtistLike(Fixture.Storage, new YArtist
+            {
                 Id = Fixture.Artist.Result.Artist.Id
             }).Result == "ok";
 
@@ -181,7 +185,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
             int trackCount = 2;
             int contextCount = 5;
             YRecentlyListenedContext recentlyListened = Fixture.API.Library
-                .GetRecentlyListened(Fixture.Storage, types,trackCount, contextCount).Result;
+                .GetRecentlyListened(Fixture.Storage, types, trackCount, contextCount).Result;
 
             recentlyListened.Should().NotBeNull();
             recentlyListened.Contexts.Should().NotBeNullOrEmpty();

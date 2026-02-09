@@ -1,4 +1,4 @@
-﻿using Yandex.Music.Api.Models.Ynison.Wave;
+using Yandex.Music.Api.Models.Ynison.Wave;
 
 namespace Yandex.Music.Api.Models.Ynison
 {

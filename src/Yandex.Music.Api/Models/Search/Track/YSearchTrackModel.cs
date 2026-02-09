@@ -5,7 +5,7 @@ using Yandex.Music.Api.Models.Track;
 
 namespace Yandex.Music.Api.Models.Search.Track
 {
-    public class YSearchTrackModel: YTrack
+    public class YSearchTrackModel : YTrack
     {
         public new List<YSearchAlbumModel> Albums { get; set; }
         public bool AvailableAsRbt { get; set; }

@@ -26,7 +26,8 @@ namespace Yandex.Music.Api.Tests
 
             IDebugWriter writer = new DefaultDebugWriter("responses", "log.txt");
 
-            Storage = new AuthStorage(new DebugSettings(writer) {
+            Storage = new AuthStorage(new DebugSettings(writer)
+            {
                 ClearDirectory = true
             });
 
@@ -70,10 +71,10 @@ namespace Yandex.Music.Api.Tests
         public YTrack Track { get; set; }
 
         public YPlaylist CreatedPlaylist { get; set; }
-        
+
         public YNewQueue NewQueue { get; set; }
 
-        public YResponse<List<YStation>> Station {get; set; }
+        public YResponse<List<YStation>> Station { get; set; }
 
         public YnisonPlayer Player { get; set; }
 

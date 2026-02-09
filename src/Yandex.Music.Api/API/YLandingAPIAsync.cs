@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Common;
@@ -12,7 +12,7 @@ namespace Yandex.Music.Api.API
     /// <summary>
     /// API для взаимодействия с главной страницей
     /// </summary>
-    public partial class YLandingAPI: YCommonAPI
+    public partial class YLandingAPI : YCommonAPI
     {
         #region Основные функции
 

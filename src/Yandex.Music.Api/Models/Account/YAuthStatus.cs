@@ -1,4 +1,4 @@
-﻿namespace Yandex.Music.Api.Models.Account
+namespace Yandex.Music.Api.Models.Account
 {
     public enum YAuthStatus
     {

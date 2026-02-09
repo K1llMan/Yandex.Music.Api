@@ -17,8 +17,10 @@ namespace Yandex.Music.Client.Tests.Tests
         [Order(0)]
         public void CreateQueue_ValidData_True()
         {
-            Fixture.NewQueue = Fixture.Client.CreateQueue(new YQueue {
-                Context = new YContext {
+            Fixture.NewQueue = Fixture.Client.CreateQueue(new YQueue
+            {
+                Context = new YContext
+                {
                     Description = "Сироп",
                     Id = "track:819992702",
                     Type = "radio"
@@ -34,7 +36,7 @@ namespace Yandex.Music.Client.Tests.Tests
                 From = "desktop_win-radio-radio_track_81999270-default",
                 IsInteractive = true
             });
-            
+
             Fixture.NewQueue.Id.Should().NotBeNullOrWhiteSpace();
         }
 
@@ -46,7 +48,7 @@ namespace Yandex.Music.Client.Tests.Tests
 
             queue.Id.Should().NotBeNullOrWhiteSpace();
         }
-        
+
         [Fact]
         [Order(2)]
         public void QueuesList_ValidData_True()

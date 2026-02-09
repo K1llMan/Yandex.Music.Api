@@ -44,7 +44,8 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(2)]
         public void GetStation_ValidData_True()
         {
-            Fixture.Station = Fixture.API.Radio.GetStation(Fixture.Storage, new YStationId {
+            Fixture.Station = Fixture.API.Radio.GetStation(Fixture.Storage, new YStationId
+            {
                 Type = "genre",
                 Tag = "allrock"
             });
@@ -71,7 +72,8 @@ namespace Yandex.Music.Api.Tests.Tests.API
             Fixture.Station.Should().NotBeNull();
             Fixture.Station.Result.Count.Should().BeGreaterThan(0);
 
-            YResponse<string> response = Fixture.API.Radio.SetStationSettings2(Fixture.Storage, Fixture.Station.Result.First(), new YStationSettings2 {
+            YResponse<string> response = Fixture.API.Radio.SetStationSettings2(Fixture.Storage, Fixture.Station.Result.First(), new YStationSettings2
+            {
                 Language = "any",
                 Diversity = "default",
                 MoodEnergy = "all"

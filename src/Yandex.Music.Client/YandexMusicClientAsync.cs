@@ -546,7 +546,7 @@ namespace Yandex.Music.Client
 
             return recentlyListenedResponse.Result.Contexts;
         }
-        
+
         #endregion Библиотека
 
         #region Радио

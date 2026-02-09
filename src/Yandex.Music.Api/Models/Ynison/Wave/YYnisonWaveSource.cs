@@ -1,4 +1,4 @@
-﻿namespace Yandex.Music.Api.Models.Ynison.Wave
+namespace Yandex.Music.Api.Models.Ynison.Wave
 {
     public class YYnisonWaveSource
     {

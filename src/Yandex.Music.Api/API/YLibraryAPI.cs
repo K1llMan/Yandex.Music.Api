@@ -208,7 +208,7 @@ namespace Yandex.Music.Api.API
         }
 
         #endregion Получение списка "Вы недавно слушали"
-        
+
         #endregion Основные функции
     }
 }

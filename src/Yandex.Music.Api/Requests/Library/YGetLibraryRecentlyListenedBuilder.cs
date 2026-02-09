@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
@@ -20,7 +20,7 @@ namespace Yandex.Music.Api.Requests.Library
         {
         }
 
-        protected override NameValueCollection GetQueryParams((IEnumerable<YPlayContextType> contextTypes, int trackCount, int contextCount ) tuple)
+        protected override NameValueCollection GetQueryParams((IEnumerable<YPlayContextType> contextTypes, int trackCount, int contextCount) tuple)
         {
             return new NameValueCollection {
                 { "trackCount", tuple.trackCount.ToString() },
@@ -29,7 +29,7 @@ namespace Yandex.Music.Api.Requests.Library
             };
         }
 
-        protected override Dictionary<string, string> GetSubstitutions((IEnumerable<YPlayContextType> contextTypes, int trackCount, int contextCount ) tuple)
+        protected override Dictionary<string, string> GetSubstitutions((IEnumerable<YPlayContextType> contextTypes, int trackCount, int contextCount) tuple)
         {
             return new Dictionary<string, string> {
                 { "uid", storage.User.Uid }

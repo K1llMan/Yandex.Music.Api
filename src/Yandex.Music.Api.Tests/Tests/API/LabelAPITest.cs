@@ -18,7 +18,8 @@ namespace Yandex.Music.Api.Tests.Tests.API
     {
         #region Поля
 
-        private YLabel sampleLabel = new() {
+        private YLabel sampleLabel = new()
+        {
             Id = "841322"
         };
 

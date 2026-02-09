@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 
@@ -11,7 +11,7 @@ using Yandex.Music.Api.Requests.Common.Attributes;
 namespace Yandex.Music.Api.Requests.Library
 {
     [YApiRequest(WebRequestMethods.Http.Post, "users/{uid}/{type}/{section}/remove")]
-    public class YLibraryRemoveBuilder<T>: YRequestBuilder<YResponse<T>, (string id, YLibrarySection section, YLibrarySectionType type)>
+    public class YLibraryRemoveBuilder<T> : YRequestBuilder<YResponse<T>, (string id, YLibrarySection section, YLibrarySectionType type)>
     {
         public YLibraryRemoveBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
         {

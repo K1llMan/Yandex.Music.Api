@@ -15,7 +15,8 @@ namespace Yandex.Music.Api.Models.Playlist
 
         public YPlaylistUidPair GetKey()
         {
-            return new YPlaylistUidPair {
+            return new YPlaylistUidPair
+            {
                 Uid = Owner.Uid,
                 Kind = Kind
             };

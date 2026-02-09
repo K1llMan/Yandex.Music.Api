@@ -11,7 +11,7 @@ namespace Yandex.Music.Api.Extensions.API
     {
         public static async Task<YAlbum> WithTracksAsync(this YAlbum album)
         {
-            return album.Volumes != null 
+            return album.Volumes != null
                 ? album
                 : (await album.Context.API.Album.GetAsync(album.Context.Storage, album.Id))
                     .Result;

@@ -45,7 +45,7 @@ namespace Yandex.Music.Api.API
 
         #region Основные функции
 
-        public YTrackAPI(YandexMusicApi yandex): base(yandex)
+        public YTrackAPI(YandexMusicApi yandex) : base(yandex)
         {
         }
 

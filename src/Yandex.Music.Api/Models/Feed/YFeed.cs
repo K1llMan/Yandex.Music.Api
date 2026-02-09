@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 using Yandex.Music.Api.Models.Landing.Entity.Entities;

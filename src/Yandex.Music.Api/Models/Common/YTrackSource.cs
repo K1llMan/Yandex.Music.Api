@@ -7,11 +7,11 @@ namespace Yandex.Music.Api.Models.Common
     {
         [EnumMember(Value = "OWN")]
         Own,
-        
+
         [EnumMember(Value = "UGC")]
         [Description("User Generated Content")]
         UGC,
-        
+
         [EnumMember(Value = "OWN_REPLACED_TO_UGC")]
         OwnReplacedToUGC,
     }

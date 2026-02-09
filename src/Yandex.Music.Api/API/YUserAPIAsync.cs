@@ -34,7 +34,8 @@ namespace Yandex.Music.Api.API
             if (!match.Success || match.Groups.Count < 2)
                 return false;
 
-            storage.AuthToken = new YAuthToken {
+            storage.AuthToken = new YAuthToken
+            {
                 CsfrToken = match.Groups[1].Value
             };
 
@@ -149,7 +150,8 @@ namespace Yandex.Music.Api.API
             if (result.Status != YAuthStatus.Ok)
                 return string.Empty;
 
-            storage.AuthToken = new YAuthToken {
+            storage.AuthToken = new YAuthToken
+            {
                 TrackId = result.TrackId,
                 CsfrToken = result.CsrfToken
             };
@@ -172,8 +174,8 @@ namespace Yandex.Music.Api.API
                 YAuthQRStatus qrStatus = await new YGetAuthLoginQRBuilder(api, storage)
                     .Build(null)
                     .GetResponseAsync();
-                        if (qrStatus.Status != YAuthStatus.Ok)
-                            return qrStatus;
+                if (qrStatus.Status != YAuthStatus.Ok)
+                    return qrStatus;
 
                 bool ok = await LoginByCookiesAsync(storage);
                 if (!ok)

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Net;
 
 using Yandex.Music.Api.Common;
@@ -10,7 +10,7 @@ using Yandex.Music.Api.Requests.Common.Attributes;
 namespace Yandex.Music.Api.Requests.Library
 {
     [YApiRequest(WebRequestMethods.Http.Get, "users/{uid}/{type}/{section}")]
-    public class YGetLibrarySectionBuilder<T>: YRequestBuilder<YResponse<T>, (YLibrarySection section, YLibrarySectionType type)>
+    public class YGetLibrarySectionBuilder<T> : YRequestBuilder<YResponse<T>, (YLibrarySection section, YLibrarySectionType type)>
     {
         public YGetLibrarySectionBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
         {

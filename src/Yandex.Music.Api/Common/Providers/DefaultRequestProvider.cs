@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -13,13 +13,13 @@ namespace Yandex.Music.Api.Common.Providers
     /// <summary>
     /// Стандартный провайдер запросов
     /// </summary>
-    public class DefaultRequestProvider: CommonRequestProvider
+    public class DefaultRequestProvider : CommonRequestProvider
     {
         #region Вспомогательные функции
 
         private Exception ProcessException(Exception ex)
         {
-            if (ex is not WebException webException) 
+            if (ex is not WebException webException)
                 return ex;
 
             if (webException.Response is null)
@@ -31,7 +31,7 @@ namespace Yandex.Music.Api.Common.Providers
 
             using StreamReader sr = new(s);
             string result = sr.ReadToEnd();
-                
+
             YErrorResponse exception = JsonConvert.DeserializeObject<YErrorResponse>(result);
 
             return exception ?? ex;
@@ -41,7 +41,7 @@ namespace Yandex.Music.Api.Common.Providers
 
         #region Основные функции
 
-        public DefaultRequestProvider(AuthStorage authStorage): base(authStorage)
+        public DefaultRequestProvider(AuthStorage authStorage) : base(authStorage)
         {
         }
 
@@ -54,7 +54,8 @@ namespace Yandex.Music.Api.Common.Providers
         {
             try
             {
-                HttpClient client = new(new SocketsHttpHandler {
+                HttpClient client = new(new SocketsHttpHandler
+                {
                     Proxy = storage.Context.WebProxy,
                     AutomaticDecompression = DecompressionMethods.GZip,
                     UseCookies = true,

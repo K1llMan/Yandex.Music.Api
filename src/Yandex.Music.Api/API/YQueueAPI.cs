@@ -30,7 +30,7 @@ namespace Yandex.Music.Api.API
         {
             return GetAsync(storage, queueId).GetAwaiter().GetResult();
         }
-        
+
         /// <summary>
         /// Создание новой очереди треков
         /// </summary>
