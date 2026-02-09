@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -23,7 +23,8 @@ namespace Yandex.Music.Api.Requests.Common
     {
         #region Поля
 
-        private readonly JsonSerializerSettings jsonSettings = new() {
+        private readonly JsonSerializerSettings jsonSettings = new()
+        {
             Converters = new List<JsonConverter> {
                 new StringEnumConverter {
                     NamingStrategy = new CamelCaseNamingStrategy()
@@ -64,7 +65,8 @@ namespace Yandex.Music.Api.Requests.Common
 
             string endpoint = ReplaceSubs(requestInfo.Url);
 
-            UriBuilder builder = new(endpoint) {
+            UriBuilder builder = new(endpoint)
+            {
                 Query = modifiedParams.ToString() ?? string.Empty
             };
 
@@ -74,7 +76,8 @@ namespace Yandex.Music.Api.Requests.Common
 
         private HttpRequestMessage CreateMessage(ParamsTuple tuple)
         {
-            HttpRequestMessage msg = new() {
+            HttpRequestMessage msg = new()
+            {
                 RequestUri = BuildUri(tuple),
                 Method = new HttpMethod(requestInfo.Method),
                 Content = GetContent(tuple)

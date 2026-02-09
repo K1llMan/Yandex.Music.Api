@@ -18,8 +18,10 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(0)]
         public void Create_ValidData_True()
         {
-            YResponse<YNewQueue> newQueue = Fixture.API.Queue.Create(Fixture.Storage, new YQueue {
-                Context = new YContext {
+            YResponse<YNewQueue> newQueue = Fixture.API.Queue.Create(Fixture.Storage, new YQueue
+            {
+                Context = new YContext
+                {
                     Description = "Сироп",
                     Id = "track:819992702",
                     Type = "radio"
@@ -40,7 +42,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
 
             Fixture.NewQueue.Id.Should().NotBeNullOrWhiteSpace();
         }
-        
+
         [Fact, YandexTrait(TraitGroup.QueueAPI)]
         [Order(1)]
         public void Get_ValidData_True()
@@ -49,7 +51,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
 
             queue.Result.Id.Should().NotBeNullOrWhiteSpace();
         }
-        
+
         [Fact, YandexTrait(TraitGroup.QueueAPI)]
         [Order(2)]
         public void List_ValidData_True()
@@ -67,7 +69,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
 
             updatedQueue.Result.Status.Should().Be("ok");
         }
-        
+
         public QueueAPITest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
         {
         }

@@ -1,4 +1,4 @@
-﻿namespace Yandex.Music.Api.Models.Feed.Event
+namespace Yandex.Music.Api.Models.Feed.Event
 {
     public enum YFeedEventTitleType
     {

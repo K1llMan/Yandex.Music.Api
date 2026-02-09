@@ -1,4 +1,4 @@
-﻿namespace Yandex.Music.Api.Models.Ynison.Messages
+namespace Yandex.Music.Api.Models.Ynison.Messages
 {
     /// <summary>
     /// Типы сообщений Ynison

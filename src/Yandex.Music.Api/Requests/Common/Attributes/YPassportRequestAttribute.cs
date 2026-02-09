@@ -1,4 +1,4 @@
-﻿namespace Yandex.Music.Api.Requests.Common.Attributes
+namespace Yandex.Music.Api.Requests.Common.Attributes
 {
     public class YPassportRequestAttribute : YBasePathRequestAttribute
     {

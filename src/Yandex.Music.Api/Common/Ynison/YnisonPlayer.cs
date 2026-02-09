@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 
@@ -20,13 +20,15 @@ namespace Yandex.Music.Api.Common.Ynison
     {
         #region Поля
 
-        private readonly JsonSerializerSettings jsonSettings = new() {
+        private readonly JsonSerializerSettings jsonSettings = new()
+        {
             Converters = new List<JsonConverter> {
                 new StringEnumConverter(new UpperSnakeCaseNamingStrategy())
             },
-            
+
             NullValueHandling = NullValueHandling.Ignore,
-            ContractResolver = new DefaultContractResolver {
+            ContractResolver = new DefaultContractResolver
+            {
                 // Важно! Унисон отдаёт данные в SnakeCase
                 NamingStrategy = new SnakeCaseNamingStrategy()
             }
@@ -116,18 +118,24 @@ namespace Yandex.Music.Api.Common.Ynison
 
         private string DefaultState()
         {
-            YYnisonVersion version = new() {
+            YYnisonVersion version = new()
+            {
                 DeviceId = storage.DeviceId,
                 Version = "0"
             };
 
-            YYnisonUpdateFullStateMessage fullState = new () {
-                UpdateFullState = new() {
-                    Device = new() {
-                        Capabilities = new() {
+            YYnisonUpdateFullStateMessage fullState = new()
+            {
+                UpdateFullState = new()
+                {
+                    Device = new()
+                    {
+                        Capabilities = new()
+                        {
                             CanBePlayer = true
                         },
-                        Info = new() {
+                        Info = new()
+                        {
                             DeviceId = storage.DeviceId,
                             AppName = "Yandex Music API",
                             AppVersion = "0.0.1",
@@ -136,11 +144,14 @@ namespace Yandex.Music.Api.Common.Ynison
                         },
                         IsShadow = true
                     },
-                    PlayerState = new() {
-                        PlayerQueue = new() {
+                    PlayerState = new()
+                    {
+                        PlayerQueue = new()
+                        {
                             Version = version
                         },
-                        Status = new() {
+                        Status = new()
+                        {
                             Version = version
                         }
                     }
@@ -168,15 +179,18 @@ namespace Yandex.Music.Api.Common.Ynison
 
         private void UpdateState()
         {
-            YYnisonUpdatePlayerStateMessage update = new() {
+            YYnisonUpdatePlayerStateMessage update = new()
+            {
                 UpdatePlayerState = State.PlayerState
             };
 
-            update.UpdatePlayerState.Status.Version = new() {
+            update.UpdatePlayerState.Status.Version = new()
+            {
                 DeviceId = storage.DeviceId
             };
 
-            update.UpdatePlayerState.PlayerQueue.Version = new() {
+            update.UpdatePlayerState.PlayerQueue.Version = new()
+            {
                 DeviceId = storage.DeviceId
             };
 
@@ -200,25 +214,30 @@ namespace Yandex.Music.Api.Common.Ynison
         public void Connect()
         {
             redirector.Connect(storage, "wss://ynison.music.yandex.ru/redirector.YnisonRedirectService/GetRedirectToYnison");
-            redirector.OnReceive += (socket, data)=> {
+            redirector.OnReceive += (socket, data) =>
+            {
                 YYnisonRedirect redirectInfo = Deserialize<YYnisonRedirect>(YYnisonMessageType.Redirect, data.Data);
 
                 if (state.IsConnected)
                     return;
 
                 state.Connect(storage, $"wss://{redirectInfo.Host}/ynison_state.YnisonStateService/PutYnisonState", redirectInfo.RedirectTicket);
-                state.OnReceive += (s, d) => {
+                state.OnReceive += (s, d) =>
+                {
                     YYnisonState message = DeserializeMessage<YYnisonState>(YYnisonMessageType.State, d.Data);
 
                     State = message;
 
-                    OnReceive?.Invoke(this, new ReceiveEventArgs {
+                    OnReceive?.Invoke(this, new ReceiveEventArgs
+                    {
                         State = State
                     });
                 };
 
-                state.OnClose += (s, args) => {
-                    OnClose?.Invoke(this, new CloseEventArgs {
+                state.OnClose += (s, args) =>
+                {
+                    OnClose?.Invoke(this, new CloseEventArgs
+                    {
                         Status = args.Status,
                         Description = args.Description
                     });

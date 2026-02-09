@@ -22,7 +22,8 @@ namespace Yandex.Music.Client.Tests
 
             IDebugWriter writer = new DefaultDebugWriter("responses", "log.txt");
 
-            Client = new YandexMusicClient(new DebugSettings(writer) {
+            Client = new YandexMusicClient(new DebugSettings(writer)
+            {
                 ClearDirectory = true
             });
         }
@@ -37,8 +38,10 @@ namespace Yandex.Music.Client.Tests
         {
             string fileSource;
 
-            using (var stream = new FileStream("appsettings.json", FileMode.Open)) {
-                using (var reader = new StreamReader(stream)) {
+            using (var stream = new FileStream("appsettings.json", FileMode.Open))
+            {
+                using (var reader = new StreamReader(stream))
+                {
                     fileSource = reader.ReadToEnd();
                 }
             }
@@ -67,7 +70,7 @@ namespace Yandex.Music.Client.Tests
         public YPlaylist CreatedPlaylist { get; set; }
 
         public YStation Station { get; set; }
-        
+
         public YNewQueue NewQueue { get; set; }
 
         #endregion Поля для сохранения тестовых данных

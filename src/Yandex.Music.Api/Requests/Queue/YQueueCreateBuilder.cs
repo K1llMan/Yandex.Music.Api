@@ -20,12 +20,13 @@ namespace Yandex.Music.Api.Requests.Queue
         public YQueueCreateBuilder(YandexMusicApi yandex, AuthStorage auth, string device = null) : base(yandex, auth)
         {
             if (device != null)
-                this.device = device;   
+                this.device = device;
         }
 
         protected override HttpContent GetContent(YQueue queue)
         {
-            JsonSerializerOptions settings = new() {
+            JsonSerializerOptions settings = new()
+            {
                 Converters = {
                     new JsonStringEnumConverter()
                 },
@@ -35,7 +36,7 @@ namespace Yandex.Music.Api.Requests.Queue
 
             return JsonContent.Create(queue, new MediaTypeHeaderValue("application/json"), settings);
         }
-        
+
         protected override void SetCustomHeaders(HttpRequestHeaders headers)
         {
             headers.Add("X-Yandex-Music-Device", device);

@@ -49,7 +49,7 @@ namespace Yandex.Music.Api.API
         {
             return GetTracksAsync(storage, artistId, page, pageSize).GetAwaiter().GetResult();
         }
-        
+
         /// <summary>
         /// Получение всех треков исполнителя
         /// </summary>

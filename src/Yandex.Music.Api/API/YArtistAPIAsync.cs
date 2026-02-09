@@ -15,7 +15,7 @@ namespace Yandex.Music.Api.API
     {
         #region Основные функции
 
-        public YArtistAPI(YandexMusicApi yandex): base(yandex)
+        public YArtistAPI(YandexMusicApi yandex) : base(yandex)
         {
         }
 

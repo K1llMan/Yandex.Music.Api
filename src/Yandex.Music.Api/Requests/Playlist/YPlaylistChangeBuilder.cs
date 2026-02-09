@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 
@@ -11,7 +11,7 @@ using Yandex.Music.Api.Requests.Common.Attributes;
 namespace Yandex.Music.Api.Requests.Playlist
 {
     [YApiRequest(WebRequestMethods.Http.Post, "users/{uid}/playlists/{kind}/change")]
-    public class YPlaylistChangeBuilder: YRequestBuilder<YResponse<YPlaylist>, (YPlaylist playlist, IEnumerable<YPlaylistChange> changes)>
+    public class YPlaylistChangeBuilder : YRequestBuilder<YResponse<YPlaylist>, (YPlaylist playlist, IEnumerable<YPlaylistChange> changes)>
     {
         public YPlaylistChangeBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
         {

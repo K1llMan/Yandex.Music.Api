@@ -4,7 +4,7 @@ using Yandex.Music.Api.Models.Album;
 
 namespace Yandex.Music.Api.Models.Search.Album
 {
-    public class YSearchAlbumModel: YAlbum
+    public class YSearchAlbumModel : YAlbum
     {
         public List<string> AvailableRegions { get; set; }
         public int OriginalReleaseYear { get; set; }

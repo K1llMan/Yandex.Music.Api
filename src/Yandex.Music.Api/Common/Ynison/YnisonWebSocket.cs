@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 
@@ -11,11 +11,12 @@ using System.Threading.Tasks;
 
 namespace Yandex.Music.Api.Common.Ynison
 {
-    public class YnisonWebSocket: IDisposable
+    public class YnisonWebSocket : IDisposable
     {
         #region Поля
 
-        private readonly JsonSerializerSettings jsonSettings = new() {
+        private readonly JsonSerializerSettings jsonSettings = new()
+        {
             Converters = new List<JsonConverter> {
                 new StringEnumConverter {
                     NamingStrategy = new CamelCaseNamingStrategy()
@@ -137,14 +138,16 @@ namespace Yandex.Music.Api.Common.Ynison
             do
             {
                 string content = await ReadSocketContent();
-                OnReceive?.Invoke(this, new ReceiveEventArgs {
+                OnReceive?.Invoke(this, new ReceiveEventArgs
+                {
                     Data = content
                 });
 
                 data.Clear();
             } while (!cancellation.IsCancellationRequested && socketClient.State == WebSocketState.Open);
 
-            OnClose?.Invoke(this, new CloseEventArgs {
+            OnClose?.Invoke(this, new CloseEventArgs
+            {
                 Status = socketClient.CloseStatus,
                 Description = socketClient.CloseStatusDescription
             });

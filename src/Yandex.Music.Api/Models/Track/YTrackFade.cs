@@ -1,4 +1,4 @@
-﻿namespace Yandex.Music.Api.Models.Track
+namespace Yandex.Music.Api.Models.Track
 {
     public class YTrackFade
     {

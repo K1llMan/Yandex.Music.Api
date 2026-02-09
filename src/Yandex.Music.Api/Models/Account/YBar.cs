@@ -2,7 +2,7 @@ using Yandex.Music.Api.Models.Common;
 
 namespace Yandex.Music.Api.Models.Account
 {
-    public class YBar: YStyle
+    public class YBar : YStyle
     {
         public string AlertId { get; set; }
         public string Text { get; set; }

@@ -109,7 +109,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
             Fixture.CreatedPlaylist.Should().NotBeNull();
             Fixture.Track.Should().NotBeNull();
 
-            Fixture.CreatedPlaylist = Fixture.API.Playlist.InsertTracks(Fixture.Storage, Fixture.CreatedPlaylist, new [] { Fixture.Track }).Result;
+            Fixture.CreatedPlaylist = Fixture.API.Playlist.InsertTracks(Fixture.Storage, Fixture.CreatedPlaylist, new[] { Fixture.Track }).Result;
 
             Fixture.CreatedPlaylist.Should().NotBeNull();
         }
@@ -152,7 +152,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [Order(12)]
         public void GetList_ValidData_True()
         {
-            YResponse<List<YPlaylist>> playlists = Fixture.API.Playlist.Get(Fixture.Storage, new [] { ( "103372440", "2007"), ("103372440", "1878") });
+            YResponse<List<YPlaylist>> playlists = Fixture.API.Playlist.Get(Fixture.Storage, new[] { ("103372440", "2007"), ("103372440", "1878") });
             playlists.Result.Count.Should().Be(2);
         }
 

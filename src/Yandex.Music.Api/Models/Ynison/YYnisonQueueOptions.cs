@@ -1,8 +1,8 @@
-﻿namespace Yandex.Music.Api.Models.Ynison
+namespace Yandex.Music.Api.Models.Ynison
 {
     public class YYnisonQueueOptions
     {
-        #warning нужен enum
+#warning нужен enum
         public string RepeatMode { get; set; } = "NONE";
     }
 }

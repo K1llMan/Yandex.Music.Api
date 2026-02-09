@@ -15,7 +15,8 @@ namespace Yandex.Music.Client.Tests.Tests
     [TestBeforeAfter]
     public class LabelTest : YandexTest
     {
-        private YLabel sampleLabel = new() {
+        private YLabel sampleLabel = new()
+        {
             Id = "841322"
         };
 

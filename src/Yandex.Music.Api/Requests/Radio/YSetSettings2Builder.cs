@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Net;
 using System.Net.Http;
@@ -17,7 +17,7 @@ using Yandex.Music.Api.Requests.Common.Attributes;
 namespace Yandex.Music.Api.Requests.Radio
 {
     [YApiRequest(WebRequestMethods.Http.Post, "rotor/station/{type}:{tag}/settings2")]
-    public class YSetSettings2Builder: YRequestBuilder<YResponse<string>, (YStationDescription station, YStationSettings2 settings2)>
+    public class YSetSettings2Builder : YRequestBuilder<YResponse<string>, (YStationDescription station, YStationSettings2 settings2)>
     {
         public YSetSettings2Builder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
         {
@@ -33,7 +33,8 @@ namespace Yandex.Music.Api.Requests.Radio
 
         protected override HttpContent GetContent((YStationDescription station, YStationSettings2 settings2) tuple)
         {
-            JsonSerializerOptions settings = new() {
+            JsonSerializerOptions settings = new()
+            {
                 Converters = {
                     new JsonStringEnumConverter()
                 },

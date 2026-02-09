@@ -1,4 +1,4 @@
-﻿namespace Yandex.Music.Api.Models.Feed
+namespace Yandex.Music.Api.Models.Feed
 {
     public enum YFeedDayTrackWithAdsType
     {

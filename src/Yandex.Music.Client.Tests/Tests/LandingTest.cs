@@ -30,7 +30,7 @@ namespace Yandex.Music.Client.Tests.Tests
             YFeed feed = Fixture.Client.Feed();
             feed.Should().NotBe(null);
         }
-        
+
         [Fact]
         [Order(2)]
         public void ChildrenLanding_ValidData_True()
@@ -40,7 +40,7 @@ namespace Yandex.Music.Client.Tests.Tests
             landing.Blocks.Should().NotBeNullOrEmpty();
             landing.Blocks.All(x => x.Entities?.Count > 0).Should().BeTrue();
         }
-        
+
         public LandingAPITest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
         {
         }

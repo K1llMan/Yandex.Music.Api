@@ -34,7 +34,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
                 YLandingBlockType.Mixes,
                 YLandingBlockType.PersonalPlaylists,
                 YLandingBlockType.PlayContexts,
-                YLandingBlockType.Playlists, 
+                YLandingBlockType.Playlists,
                 YLandingBlockType.Podcasts,
                 YLandingBlockType.Promotions,
                 YLandingBlockType.NewReleases,
@@ -52,7 +52,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
             YResponse<YChildrenLanding> landing = Fixture.API.Landing.GetChildrenLanding(Fixture.Storage);
             landing.Should().NotBeNull();
             landing.Result.Blocks.Should().NotBeNullOrEmpty();
-            landing.Result.Blocks.All(x=>x.Entities?.Count > 0).Should().BeTrue();
+            landing.Result.Blocks.All(x => x.Entities?.Count > 0).Should().BeTrue();
         }
 
         public LandingAPITest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)

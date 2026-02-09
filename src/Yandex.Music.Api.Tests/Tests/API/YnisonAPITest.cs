@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Threading;
 
@@ -15,14 +15,15 @@ namespace Yandex.Music.Api.Tests.Tests.API
 {
     [Collection("Yandex Test Harness"), Order(12)]
     [TestBeforeAfter]
-    public class YnisonAPITest: YandexTest
+    public class YnisonAPITest : YandexTest
     {
         [Fact, YandexTrait(TraitGroup.YnisonAPI)]
         [Order(0)]
         public void Connect_ValidData_True()
         {
             Fixture.Player = Fixture.API.Ynison.GetPlayer(Fixture.Storage);
-            Fixture.Player.OnClose += (player, args) => {
+            Fixture.Player.OnClose += (player, args) =>
+            {
                 Output.WriteLine($"{args.Status}: {args.Description}.");
             };
 

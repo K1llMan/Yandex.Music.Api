@@ -25,7 +25,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
             YResponse<YPins> pins = Fixture.API.Pins.Get(Fixture.Storage);
             pins.Should().NotBe(null);
         }
-        
+
         public PinsAPITest(YandexTestHarness fixture, ITestOutputHelper output) : base(fixture, output)
         {
         }
