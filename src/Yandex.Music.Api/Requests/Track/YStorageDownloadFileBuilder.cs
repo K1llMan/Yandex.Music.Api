@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
@@ -11,7 +11,7 @@ using Yandex.Music.Api.Requests.Common.Attributes;
 namespace Yandex.Music.Api.Requests.Track
 {
     [YRequest(WebRequestMethods.Http.Get, "{src}")]
-    public class YStorageDownloadFileBuilder: YRequestBuilder<YStorageDownloadFile, string>
+    public class YStorageDownloadFileBuilder : YRequestBuilder<YStorageDownloadFile, string>
     {
         public YStorageDownloadFileBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
         {
@@ -33,7 +33,8 @@ namespace Yandex.Music.Api.Requests.Track
             src.Split('?')[1]
                 .Split('&')
                 .ToList()
-                .ForEach(p => {
+                .ForEach(p =>
+                {
                     string[] param = p.Split('=');
                     query.Add(param[0], param[1]);
                 });

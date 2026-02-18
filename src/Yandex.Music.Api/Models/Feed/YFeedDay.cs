@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 using Newtonsoft.Json;
@@ -6,7 +6,8 @@ using Newtonsoft.Json;
 using Yandex.Music.Api.Models.Feed.Event;
 using Yandex.Music.Api.Models.Track;
 
-namespace Yandex.Music.Api.Models.Feed {
+namespace Yandex.Music.Api.Models.Feed
+{
     public class YFeedDay
     {
         public DateTime Day { get; set; }

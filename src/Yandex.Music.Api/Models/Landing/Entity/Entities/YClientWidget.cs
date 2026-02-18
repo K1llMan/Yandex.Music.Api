@@ -1,6 +1,6 @@
 namespace Yandex.Music.Api.Models.Landing.Entity.Entities
 {
-    public class YClientWidget: YBlockEntity
+    public class YClientWidget : YBlockEntity
     {
         public string ImagePath { get; set; }
         public string Subtitle { get; set; }

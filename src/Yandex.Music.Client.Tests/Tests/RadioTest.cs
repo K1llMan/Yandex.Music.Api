@@ -44,7 +44,8 @@ namespace Yandex.Music.Client.Tests.Tests
         [Order(2)]
         public void GetRadioStation_ValidData_True()
         {
-            Fixture.Station = Fixture.Client.GetRadioStation(new YStationId {
+            Fixture.Station = Fixture.Client.GetRadioStation(new YStationId
+            {
                 Type = "genre",
                 Tag = "allrock"
             });
@@ -68,7 +69,8 @@ namespace Yandex.Music.Client.Tests.Tests
         {
             Fixture.Station.Should().NotBeNull();
 
-            string result = Fixture.Station.SetSettings2(new YStationSettings2 {
+            string result = Fixture.Station.SetSettings2(new YStationSettings2
+            {
                 Language = "any",
                 Diversity = "default",
                 MoodEnergy = "all"

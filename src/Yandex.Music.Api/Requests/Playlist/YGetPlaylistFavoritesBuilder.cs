@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Net;
 
 using Yandex.Music.Api.Common;
@@ -10,7 +10,7 @@ using Yandex.Music.Api.Requests.Common.Attributes;
 namespace Yandex.Music.Api.Requests.Playlist
 {
     [YApiRequest(WebRequestMethods.Http.Get, "users/{uid}/playlists/list")]
-    public class YGetPlaylistFavoritesBuilder: YRequestBuilder<YResponse<List<YPlaylist>>, object>
+    public class YGetPlaylistFavoritesBuilder : YRequestBuilder<YResponse<List<YPlaylist>>, object>
     {
         public YGetPlaylistFavoritesBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
         {

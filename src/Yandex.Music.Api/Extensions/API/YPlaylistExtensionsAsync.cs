@@ -12,7 +12,7 @@ namespace Yandex.Music.Api.Extensions.API
     {
         public static async Task<YPlaylist> WithTracksAsync(this YPlaylist playlist)
         {
-            return playlist.Tracks != null 
+            return playlist.Tracks != null
                 ? playlist
                 : (await playlist.Context.API.Playlist.GetAsync(playlist.Context.Storage, playlist))
                     .Result;

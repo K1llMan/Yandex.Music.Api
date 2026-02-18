@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Net;
 
 using Yandex.Music.Api.Common;
@@ -10,7 +10,7 @@ using Yandex.Music.Api.Requests.Common.Attributes;
 namespace Yandex.Music.Api.Requests.Album
 {
     [YApiRequest(WebRequestMethods.Http.Get, "albums/{albumId}/with-tracks")]
-    public class YGetAlbumBuilder: YRequestBuilder<YResponse<YAlbum>, string>
+    public class YGetAlbumBuilder : YRequestBuilder<YResponse<YAlbum>, string>
     {
         public YGetAlbumBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
         {

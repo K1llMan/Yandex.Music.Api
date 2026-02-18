@@ -1,4 +1,4 @@
-﻿namespace Yandex.Music.Api.Requests.Common.Attributes
+namespace Yandex.Music.Api.Requests.Common.Attributes
 {
     /// <summary>
     /// Атрибут запроса относительно базового адреса

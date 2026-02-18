@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Net;
 
@@ -11,7 +11,7 @@ using Yandex.Music.Api.Requests.Common.Attributes;
 namespace Yandex.Music.Api.Requests.Artist
 {
     [YApiRequest(WebRequestMethods.Http.Get, "artists/{artistId}/tracks")]
-    public class YGetArtistTrackBuilder: YRequestBuilder<YResponse<YTracksPage>, (string id, int page, int pageSize)>
+    public class YGetArtistTrackBuilder : YRequestBuilder<YResponse<YTracksPage>, (string id, int page, int pageSize)>
     {
         public YGetArtistTrackBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth) { }
 

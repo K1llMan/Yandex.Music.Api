@@ -1,6 +1,6 @@
-﻿namespace Yandex.Music.Api.Models.Ynison
+namespace Yandex.Music.Api.Models.Ynison
 {
-    public class YYnisonDeviceFull: YYnisonDevice
+    public class YYnisonDeviceFull : YYnisonDevice
     {
         public YYnisonSession Session { get; set; }
         public decimal Volume { get; set; }

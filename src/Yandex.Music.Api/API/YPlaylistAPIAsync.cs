@@ -55,7 +55,7 @@ namespace Yandex.Music.Api.API
 
         #region Основные функции
 
-        public YPlaylistAPI(YandexMusicApi yandex): base(yandex)
+        public YPlaylistAPI(YandexMusicApi yandex) : base(yandex)
         {
         }
 
@@ -256,14 +256,16 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public async Task<bool> DeleteAsync(AuthStorage storage, string kinds)
         {
-            try {
+            try
+            {
                 await new YPlaylistRemoveBuilder(api, storage)
                     .Build(kinds)
                     .GetResponseAsync();
 
                 return true;
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex);
             }
 
@@ -290,10 +292,10 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public async Task<YResponse<YPlaylist>> InsertTracksAsync(AuthStorage storage, YPlaylist playlist, IEnumerable<YTrack> tracks)
         {
-            YResponse<YPlaylist> change = await ChangePlaylist(storage, playlist, new List<YPlaylistChange> { 
+            YResponse<YPlaylist> change = await ChangePlaylist(storage, playlist, new List<YPlaylistChange> {
                     new() {
-                        Operation = YPlaylistChangeType.Insert, 
-                        At = 0, 
+                        Operation = YPlaylistChangeType.Insert,
+                        At = 0,
                         Tracks = tracks.Select(t => t.GetKey())
                     }
                 });
@@ -313,9 +315,11 @@ namespace Yandex.Music.Api.API
             List<YPlaylistChange> changes = RemoveIdentical(tracks)
                 .Select(t => playlist.Tracks.Select(c => c.Track).ToList().IndexOf(t))
                 .Where(i => i != -1)
-                .Select(i => {
+                .Select(i =>
+                {
                     YTrackContainer t = playlist.Tracks[i];
-                    return new YPlaylistChange {
+                    return new YPlaylistChange
+                    {
                         Operation = YPlaylistChangeType.Delete,
                         From = i,
                         To = i + 1,

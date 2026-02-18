@@ -18,7 +18,7 @@ namespace Yandex.Music.Api.Models.Artist
         [JsonConverter(typeof(YCoverConverter))]
         public YCover Cover { get; set; }
         public List<string> DbAliases { get; set; }
-        #warning Непонятная коллекция с содержимым разных типов
+#warning Непонятная коллекция с содержимым разных типов
         public List<object> Decomposed { get; set; }
         public YDerivedColors DerivedColors { get; set; }
         public YDescription Description { get; set; }

@@ -12,10 +12,10 @@ namespace Yandex.Music.Api.Tests.Traits
 
         public IEnumerable<KeyValuePair<string, string>> GetTraits(IAttributeInfo traitAttribute)
         {
-            List<object> args = (List<object>) traitAttribute.GetConstructorArguments();
-            Array groups = (Array) args[0];
+            List<object> args = (List<object>)traitAttribute.GetConstructorArguments();
+            Array groups = (Array)args[0];
 
-            foreach (object nameGroup in groups) 
+            foreach (object nameGroup in groups)
                 yield return new KeyValuePair<string, string>(Category, nameGroup.ToString());
         }
     }

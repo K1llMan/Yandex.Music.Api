@@ -30,7 +30,8 @@ namespace Yandex.Music.Api.Models.Album
 
             try
             {
-                label = tokenType switch {
+                label = tokenType switch
+                {
                     JTokenType.Object => jArray.ToObject<List<YLabel>>(),
                     _ => jArray.ToObject<List<string>>()
                 };

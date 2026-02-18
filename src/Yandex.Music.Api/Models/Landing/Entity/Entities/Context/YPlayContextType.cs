@@ -1,4 +1,4 @@
-﻿namespace Yandex.Music.Api.Models.Landing.Entity.Entities.Context
+namespace Yandex.Music.Api.Models.Landing.Entity.Entities.Context
 {
     public enum YPlayContextType
     {

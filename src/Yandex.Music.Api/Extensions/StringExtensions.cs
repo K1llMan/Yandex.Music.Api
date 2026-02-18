@@ -40,11 +40,11 @@ namespace Yandex.Music.Api.Extensions
         /// </summary>
         public static string[] GetMatches(this string str, string pattern, RegexOptions options = RegexOptions.IgnoreCase)
         {
-            return str.IsMatch(pattern, options) 
+            return str.IsMatch(pattern, options)
                 ? Regex.Matches(str, pattern, options)
                     .Cast<Match>()
                     .Select(m => m.Value)
-                    .ToArray() 
+                    .ToArray()
                 : new string[] { };
         }
     }

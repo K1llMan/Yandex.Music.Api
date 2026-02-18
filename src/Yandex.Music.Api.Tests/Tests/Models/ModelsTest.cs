@@ -23,7 +23,8 @@ namespace Yandex.Music.Api.Tests.Tests.API
         [YandexTrait(TraitGroup.Models)]
         public void YTrackAlbumPair_ValidData_True()
         {
-            YTrackAlbumPair pair = new() {
+            YTrackAlbumPair pair = new()
+            {
                 Id = "1"
             };
 

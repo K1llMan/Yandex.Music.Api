@@ -27,12 +27,13 @@ namespace Yandex.Music.Api.Models.Track
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
-            return Equals((YTrackAlbumPair) obj);
+            return Equals((YTrackAlbumPair)obj);
         }
 
         public override int GetHashCode()
         {
-            unchecked {
+            unchecked
+            {
                 return ((Id != null ? Id.GetHashCode() : 0) * 397) ^ (AlbumId != null ? AlbumId.GetHashCode() : 0);
             }
         }

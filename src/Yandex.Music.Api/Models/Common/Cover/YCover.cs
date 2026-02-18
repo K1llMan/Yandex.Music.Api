@@ -20,7 +20,8 @@ namespace Yandex.Music.Api.Models.Common.Cover
             JObject jObject = JObject.Load(reader);
             YCover cover;
 
-            try {
+            try
+            {
                 // Фиктивный тип, т.к. у такой обложки нет поля с типом
                 if (jObject["type"] == null)
                     jObject.Add("type", "color");
@@ -29,7 +30,8 @@ namespace Yandex.Music.Api.Models.Common.Cover
                     ? YCoverType.Error
                     : jObject["type"].ToObject<YCoverType>();
 
-                switch (type) {
+                switch (type)
+                {
                     case YCoverType.Error:
                         cover = jObject.ToObject<YCoverError>();
                         break;
@@ -51,7 +53,8 @@ namespace Yandex.Music.Api.Models.Common.Cover
                         break;
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 throw new Exception($"Ошибка десериализации типа \"{objectType.Name}\".", ex);
             }
 

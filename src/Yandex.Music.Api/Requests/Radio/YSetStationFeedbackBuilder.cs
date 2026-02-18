@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Net;
@@ -36,7 +36,8 @@ namespace Yandex.Music.Api.Requests.Radio
         {
             long timestamp = ((DateTimeOffset)DateTime.Now).ToUnixTimeSeconds();
 
-            JsonSerializerOptions settings = new() {
+            JsonSerializerOptions settings = new()
+            {
                 Converters = {
                     new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
                 },

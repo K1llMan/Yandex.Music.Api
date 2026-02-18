@@ -54,7 +54,8 @@ namespace Yandex.Music.Api.Models.Track
 
         public YTrackAlbumPair GetKey()
         {
-            return new YTrackAlbumPair {
+            return new YTrackAlbumPair
+            {
                 Id = Id,
                 AlbumId = Albums?.FirstOrDefault()?.Id
             };
@@ -74,7 +75,7 @@ namespace Yandex.Music.Api.Models.Track
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
-            return Equals((YTrack) obj);
+            return Equals((YTrack)obj);
         }
 
         public override int GetHashCode()

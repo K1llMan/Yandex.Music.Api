@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 
@@ -29,6 +29,6 @@ namespace Yandex.Music.Api.Requests.Ugc
                 { new ByteArrayContent(tuple.fileBytes), "file" }
             };
         }
-        
+
     }
 }

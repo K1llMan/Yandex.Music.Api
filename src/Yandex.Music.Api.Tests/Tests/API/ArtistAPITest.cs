@@ -46,7 +46,7 @@ namespace Yandex.Music.Api.Tests.Tests.API
             YResponse<YTracksPage> tracks = Fixture.API.Artist.GetTracks(Fixture.Storage, artistId, 1, 30);
             tracks.Result.Tracks.Count.Should().Be(30);
         }
-        
+
         [Fact, YandexTrait(TraitGroup.ArtistAPI)]
         [Order(3)]
         public void GetAllTracks_ValidData_True()
