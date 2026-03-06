@@ -2,10 +2,8 @@ using Newtonsoft.Json;
 
 namespace Yandex.Music.Api.Models.Account
 {
-    public class YAccessToken
+    public class YAccessToken : YAuthBase
     {
-        [JsonProperty("status")]
-        public string Status { get; set; }
         [JsonProperty("access_token")] 
         public string AccessToken { get; set; }
         [JsonProperty("expires_in")] 

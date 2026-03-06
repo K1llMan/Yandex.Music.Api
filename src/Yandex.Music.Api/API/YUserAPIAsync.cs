@@ -258,7 +258,7 @@ namespace Yandex.Music.Api.API
             if (storage.AuthToken == null || string.IsNullOrWhiteSpace(storage.AuthToken.CsfrToken))
                 throw new AuthenticationException($"Не найдена сессия входа. Выполните {nameof(CreateAuthSessionAsync)} перед использованием.");
 
-            YAuthBase response = await new YGetAuthAppPasswordBuilder(api, storage)
+            YCommitPassword response = await new YGetAuthAppPasswordBuilder(api, storage)
                 .Build(password)
                 .GetResponseAsync();
 

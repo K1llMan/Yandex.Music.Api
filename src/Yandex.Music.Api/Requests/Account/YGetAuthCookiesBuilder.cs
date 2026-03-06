@@ -21,12 +21,15 @@ namespace Yandex.Music.Api.Requests.Account
 
         protected override void SetCustomHeaders(HttpRequestHeaders headers)
         {
-            CookieCollection cookieCollection = new() {
-                storage.Context.Cookies.GetCookies(new Uri("https://yandex.ru/")),
-                storage.Context.Cookies.GetCookies(new Uri("https://passport.yandex.ru/"))
-            };
-
-            headers.Add("Ya-Client-Cookie", string.Join(";", cookieCollection.Select(c => $"{c.Name}={c.Value}")));
+            var cookies = storage.Context.Cookies.GetAllCookies()
+                .Where(x => x.Domain.EndsWith("yandex.ru"))
+                .Select(x => new
+                {
+                    x.Name,
+                    x.Value
+                });
+            
+            headers.Add("Ya-Client-Cookie", string.Join(";", cookies.Select(c => $"{c.Name}={c.Value}")));
             headers.Add("Ya-Client-Host", "passport.yandex.ru");
         }
 
