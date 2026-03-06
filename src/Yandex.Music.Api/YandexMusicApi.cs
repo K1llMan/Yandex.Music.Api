@@ -81,6 +81,11 @@ namespace Yandex.Music.Api
         /// API Ynison
         /// </summary>
         public YYnisonAPI Ynison { get; internal set; }
+        
+        /// <summary>
+        /// API Passport 
+        /// </summary>
+        public YPassportAPI Passport { get; internal set; }
 
         #endregion Ветки API
 

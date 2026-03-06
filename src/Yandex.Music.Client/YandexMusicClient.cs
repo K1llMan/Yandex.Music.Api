@@ -14,6 +14,7 @@ using Yandex.Music.Api.Models.Feed;
 using Yandex.Music.Api.Models.Landing;
 using Yandex.Music.Api.Models.Landing.Entity.Entities.Context;
 using Yandex.Music.Api.Models.Library;
+using Yandex.Music.Api.Models.Passport;
 using Yandex.Music.Api.Models.Playlist;
 using Yandex.Music.Api.Models.Queue;
 using Yandex.Music.Api.Models.Radio;
@@ -61,6 +62,15 @@ namespace Yandex.Music.Client
         {
             api = new YandexMusicApi();
             storage = new AuthStorage(settings);
+        }
+        
+        public YandexMusicClient(string deviceId, DebugSettings settings = null)
+        {
+            api = new YandexMusicApi();
+            storage = new AuthStorage(settings)
+            {
+                DeviceId = deviceId
+            };
         }
 
         #region Авторизация
@@ -677,6 +687,11 @@ namespace Yandex.Music.Client
 
         #endregion Унисон
 
+        public void CreatePassportTrack()
+        {
+            api.Passport.CreateTrack(storage);
+        }
+        
         #endregion Основные функции
     }
 }
