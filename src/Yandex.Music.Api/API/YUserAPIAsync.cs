@@ -8,6 +8,7 @@ using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Account;
 using Yandex.Music.Api.Models.Common;
 using Yandex.Music.Api.Requests.Account;
+using Yandex.Music.Api.Requests.MobileProxy;
 
 namespace Yandex.Music.Api.API
 {
@@ -46,7 +47,7 @@ namespace Yandex.Music.Api.API
             if (storage.AuthToken == null)
                 throw new AuthenticationException("Невозможно инициализировать сессию входа.");
 
-            YAccessToken accessToken = await new YGetAuthCookiesBuilder(api, storage)
+            YAccessToken accessToken = await new YGetTokenBySessionIdBuilder(api, storage)
                 .Build(null)
                 .GetResponseAsync();
 

@@ -687,11 +687,42 @@ namespace Yandex.Music.Client
 
         #endregion Унисон
 
-        public void CreatePassportTrack()
+        public void InitializePassportAuthorization()
         {
             api.Passport.CreateTrack(storage);
         }
-        
+
+        public YMultistepStart MultistepStart(string login)
+        {
+            return api.Passport.MultistepStart(storage, login);
+        }
+
+        public YPassportUser MultistepPassword(string password)
+        {
+            return api.Passport.MultistepPassword(storage, password);
+        }
+
+        public YPassportUser RfcOtpPassword(string rfcOtp)
+        {
+            return api.Passport.RfcOtpPassword(storage, rfcOtp);
+        }
+
+        public YPassportSession PassportGetSession()
+        {
+            return api.Passport.GetUserSession(storage);
+        }
+
+        public YPassportSessionStatus PassportGetSessionStatus()
+        {
+            return api.Passport.GetSessionState(storage);
+        }
+
+
+        public YAccessToken GetTokenBySession()
+        {
+            return api.MobileProxy.GetTokenBySessionId(storage);
+        }
+
         #endregion Основные функции
     }
 }

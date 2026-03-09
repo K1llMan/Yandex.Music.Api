@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Account;
 using Yandex.Music.Api.Requests.Common;
 using Yandex.Music.Api.Requests.Common.Attributes;
 
-namespace Yandex.Music.Api.Requests.Account
+namespace Yandex.Music.Api.Requests.MobileProxy
 {
     [YMobileProxyRequest(WebRequestMethods.Http.Post, "1/bundle/oauth/token_by_sessionid")]
-    internal class YGetAuthCookiesBuilder : YRequestBuilder<YAccessToken, string>
+    internal class YGetTokenBySessionIdBuilder : YRequestBuilder<YAccessToken, string>
     {
-        public YGetAuthCookiesBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
+        public YGetTokenBySessionIdBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
         {
         }
 
@@ -37,7 +35,8 @@ namespace Yandex.Music.Api.Requests.Account
         {
             return new FormUrlEncodedContent(new Dictionary<string, string> {
                 { "client_id", YConstants.XClientId },
-                { "client_secret", YConstants.XClientSecret }
+                { "client_secret", YConstants.XClientSecret },
+                { "track_id", storage.AuthToken.TrackId }
             });
         }
     }

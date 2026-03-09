@@ -87,6 +87,11 @@ namespace Yandex.Music.Api
         /// </summary>
         public YPassportAPI Passport { get; internal set; }
 
+        /// <summary>
+        /// API Mobile Proxy
+        /// </summary>
+        public YMobileProxyAPI MobileProxy { get; internal set; }
+        
         #endregion Ветки API
 
         #region Основные функции

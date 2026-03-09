@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Passport;
 using Yandex.Music.Api.Requests.Common;
@@ -10,9 +9,9 @@ using Yandex.Music.Api.Requests.Common.Attributes;
 namespace Yandex.Music.Api.Requests.Passport
 {
     [YPassportRequest(WebRequestMethods.Http.Post, "pwl-yandex/api/passport/track/create")]
-    public class YCreateTrackMethodsBuilder : YRequestBuilder<YPassportTrack, string>
+    public class YMultistepStartBuilder : YRequestBuilder<YMultistepStart, string>
     {
-        public YCreateTrackMethodsBuilder(YandexMusicApi yandex, AuthStorage storage) : base(yandex, storage)
+        public YMultistepStartBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
         {
         }
 
@@ -20,23 +19,23 @@ namespace Yandex.Music.Api.Requests.Passport
         {
             Dictionary<string, string> formData = new()
             {
+                { "login", tuple },
+                { "track_id", storage.AuthToken.TrackId },
                 { "display_language", storage.DisplayLanguage },
-                { "language", storage.Language },
-                { "country", storage.Country },
-                { "app_id", "ru.yandex.music" },
-                { "app_version_name", "2026.02.3 #135rur" },
                 { "retpath", string.Empty },
+                { "can_send_push_code", "true" },
+                { "check_for_xtokens_for_pictures", "false" },
+                { "force_check_for_protocols", "true" },
+                { "app_id", "ru.yandex.music" },
+                { "am_version_name", "7.50.2(750024597)" },
+                { "app_platform", "android" },
+                { "app_version_name", "2026.02.3 #135rur" },
                 { "device_id", storage.DeviceId },
-                { "uid", string.Empty },
-                { "device_connection_type", "9" },
+                { "deviceId", storage.DeviceId },
+                { "device_connection_type", "9" }
             };
 
             return new FormUrlEncodedContent(formData);
-        }
-
-        protected override void SetCustomHeaders(HttpRequestHeaders headers)
-        {
-            headers.Add("x-csrf-token", storage.AuthToken.CsfrToken);
         }
     }
 }

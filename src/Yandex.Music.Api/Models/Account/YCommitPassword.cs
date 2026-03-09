@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
-using Yandex.Music.Api.Models.Account;
 
-namespace Yandex.Music.Api.API;
+namespace Yandex.Music.Api.Models.Account;
 
 public class YCommitPassword: YAuthBase
 {

@@ -11,5 +11,6 @@ namespace Yandex.Music.Api.Models.Account
         [JsonProperty("token_type")] 
         public string TokenType { get; set; }
         public string Uid { get; set; }
+        public string Status { get; set; }
     }
 }

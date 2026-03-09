@@ -1,0 +1,27 @@
+﻿using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Models.Passport;
+using Yandex.Music.Api.Requests.Common;
+using Yandex.Music.Api.Requests.Common.Attributes;
+
+namespace Yandex.Music.Api.Requests.Passport;
+
+[YPassportRequest(WebRequestMethods.Http.Post, "pwl-yandex/api/passport/sessions/check_session")]
+public class YCheckSessionBuilder : YPassportRequestBuilder<YPassportSessionStatus, string>
+{
+    public YCheckSessionBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
+    {
+    }
+    
+    protected override HttpContent GetContent(string tuple)
+    {
+        Dictionary<string, string> formData = new()
+        {
+            { "track_id", storage.AuthToken.TrackId }
+        };
+
+        return new FormUrlEncodedContent(formData);
+    }
+}
