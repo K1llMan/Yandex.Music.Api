@@ -17,26 +17,12 @@ namespace Yandex.Music.Api.Requests.Passport
         {
         }
 
-        protected override void SetCustomHeaders(HttpRequestHeaders headers)
-        {
-            if (string.IsNullOrWhiteSpace(storage.AuthToken.CsfrToken))
-                throw new AuthenticationException("Не найдена сессия входа. Выполните {nameof(CreateTrackAsync)} перед использованием.");
-
-            headers.Add("x-csrf-token", storage.AuthToken.CsfrToken);
-        }
-
         protected override HttpContent GetContent(string tuple)
         {
-            // Dictionary<string, string> formData = new()
-            // {
-            //     { "track_id", storage.AuthToken.TrackId },
-            //     { "password", tuple }
-            // };
-
             return GetJsonContent(new
             {
-                storage.AuthToken.TrackId,
-                Password = tuple
+                track_id = storage.AuthToken.TrackId,
+                password = tuple
             });
         }
     }

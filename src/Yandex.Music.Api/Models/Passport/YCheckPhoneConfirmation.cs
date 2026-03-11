@@ -1,9 +1,10 @@
 ﻿using Newtonsoft.Json;
 
-namespace Yandex.Music.Api.Models.Passport;
-
-public class YCheckPhoneConfirmation
+namespace Yandex.Music.Api.Models.Passport
 {
-    [JsonProperty("isPhoneConfirmed")]
-    public bool IsPhoneConfirmed { get; set; }
+    public class YCheckPhoneConfirmation
+    {
+        [JsonProperty("isPhoneConfirmed")]
+        public bool IsPhoneConfirmed { get; set; }
+    }
 }

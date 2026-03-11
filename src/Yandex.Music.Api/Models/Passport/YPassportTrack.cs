@@ -1,8 +1,9 @@
 ﻿using Newtonsoft.Json;
 
-namespace Yandex.Music.Api.Models.Passport;
-
-public class YPassportTrack
+namespace Yandex.Music.Api.Models.Passport
 {
-    public string Id { get; set; }
+    public class YPassportTrack
+    {
+        public string Id { get; set; }
+    }
 }

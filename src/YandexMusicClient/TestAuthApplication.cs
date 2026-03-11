@@ -5,14 +5,6 @@ using YandexMusicClient.Models;
 
 public class TestAuthApplication
 {
-    private enum AuthType
-    {
-        Password,
-        SMS,
-        Email,
-        QR
-    }
-    
     private List<MenuItem> _currentItems;
     private int _selectedIndex;
     private MenuItem? _currentParent;
@@ -35,7 +27,7 @@ public class TestAuthApplication
     {
         _currentItems = rootItems;
         _session = new UserSession();
-        _yandexMusicClient = new Yandex.Music.Client.YandexMusicClient(Guid.NewGuid().ToString(), new DebugSettings(new DefaultDebugWriter("responses", "log.txt")));
+        _yandexMusicClient = new Yandex.Music.Client.YandexMusicClient("d53bbee11acd8f6d6db35c2badb7dd84", new DebugSettings(new DefaultDebugWriter("responses", "log.txt")));
     }
 
     public void Run()
@@ -179,11 +171,12 @@ public class TestAuthApplication
             return isauthorized;
         }));
         twoFactorMenu.SubItems.Add(new MenuItem("📨 Войти по СМС", session =>
-            AuthenticateWith2FA(session, AuthType.SMS)));
-        twoFactorMenu.SubItems.Add(new MenuItem("📧 Войти по Email", session =>
-            AuthenticateWith2FA(session, AuthType.Email)));
-        twoFactorMenu.SubItems.Add(new MenuItem("📱 Войти по QR", session =>
-            AuthenticateWith2FA(session, AuthType.QR)));
+        {
+            var isauthorized = AuthentificateBySms(session);
+            
+            return  isauthorized;
+        }));
+
         twoFactorMenu.SubItems.Add(new MenuItem("◀ Назад"));
 
         foreach (var item in twoFactorMenu.SubItems)
@@ -480,24 +473,15 @@ public class TestAuthApplication
         return true;
     }
 
-    private bool AuthenticateWith2FA(UserSession session, AuthType method)
+    private bool AuthentificateBySms(UserSession session)
+    {
+        return false;
+    }
+    
+    private bool AuthenticateWith2FA(UserSession session)
     {
         Console.Clear();
 
-        if (method == AuthType.SMS)
-        {
-            DrawHeader("Код был отпрален через СМС. Введите его");
-            string inputPassword = PromptInput("Введите пароль", _ => true);
-            _session.Password = inputPassword;
-        }
-
-        if (method == AuthType.Email)
-        {
-            DrawHeader("Код был отпрален через Email. Введите его");
-            string inputPassword = PromptInput("Введите пароль", _ => true);
-            _session.Password = inputPassword;
-        }
-        
         // Имитация отправки кода
         string code = new Random().Next(100000, 999999).ToString();
 
@@ -529,7 +513,7 @@ public class TestAuthApplication
             }
 
             Console.ForegroundColor = _successColor;
-            Console.WriteLine($"\n\n✅ Двухфакторная авторизация через {method} успешна!");
+            Console.WriteLine($"\n\n✅ Двухфакторная авторизация через успешна!");
             Console.WriteLine($"🎉 Добро пожаловать, {session.Login}!");
             Console.ResetColor();
 

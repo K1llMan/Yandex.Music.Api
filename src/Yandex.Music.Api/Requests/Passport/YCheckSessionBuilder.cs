@@ -6,22 +6,24 @@ using Yandex.Music.Api.Models.Passport;
 using Yandex.Music.Api.Requests.Common;
 using Yandex.Music.Api.Requests.Common.Attributes;
 
-namespace Yandex.Music.Api.Requests.Passport;
-
-[YPassportRequest(WebRequestMethods.Http.Post, "pwl-yandex/api/passport/sessions/check_session")]
-public class YCheckSessionBuilder : YPassportRequestBuilder<YPassportSessionStatus, string>
+namespace Yandex.Music.Api.Requests.Passport
 {
-    public YCheckSessionBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
+    [YPassportRequest(WebRequestMethods.Http.Post, "pwl-yandex/api/passport/sessions/check_session")]
+    public class YCheckSessionBuilder : YPassportRequestBuilder<YPassportSessionStatus, string>
     {
-    }
-    
-    protected override HttpContent GetContent(string tuple)
-    {
-        Dictionary<string, string> formData = new()
+        public YCheckSessionBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
         {
-            { "track_id", storage.AuthToken.TrackId }
-        };
+        }
 
-        return new FormUrlEncodedContent(formData);
+        protected override HttpContent GetContent(string tuple)
+        {
+            Dictionary<string, string> formData =
+                new()
+                {
+                    { "track_id", storage.AuthToken.TrackId }
+                };
+
+            return new FormUrlEncodedContent(formData);
+        }
     }
 }

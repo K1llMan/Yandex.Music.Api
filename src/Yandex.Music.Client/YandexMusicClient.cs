@@ -1,7 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
+using System.Net;
 using Yandex.Music.Api;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Common.Debug;
@@ -71,6 +72,11 @@ namespace Yandex.Music.Client
             {
                 DeviceId = deviceId
             };
+            
+            storage.SetProxy(new WebProxy()
+            {
+                Address = new Uri("http://localhost:8866")
+            });
         }
 
         #region Авторизация

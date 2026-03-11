@@ -1,14 +1,16 @@
 ﻿using Newtonsoft.Json;
 
-namespace Yandex.Music.Api.Models.Passport;
-
-public class YPassportUser : PassportResponseBase
+namespace Yandex.Music.Api.Models.Passport
 {
-    [JsonProperty("track_id")]
-    public string TrackId { get; set; }
+    public class YPassportUser : PassportResponseBase
+    {
+        [JsonProperty("track_id")]
+        public string TrackId { get; set; }
 
-    [JsonProperty("state")]
-    public string State { get; set; }
+        [JsonProperty("state")]
+        public string State { get; set; }
 
-    [JsonProperty("account")] public YPassportAccount Account { get; set; }
+        [JsonProperty("account")]
+        public YPassportAccount Account { get; set; }
+    }
 }
