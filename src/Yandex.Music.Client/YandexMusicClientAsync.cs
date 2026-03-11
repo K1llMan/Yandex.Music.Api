@@ -15,6 +15,7 @@ using Yandex.Music.Api.Models.Feed;
 using Yandex.Music.Api.Models.Landing;
 using Yandex.Music.Api.Models.Landing.Entity.Entities.Context;
 using Yandex.Music.Api.Models.Library;
+using Yandex.Music.Api.Models.Passport;
 using Yandex.Music.Api.Models.Playlist;
 using Yandex.Music.Api.Models.Queue;
 using Yandex.Music.Api.Models.Radio;
@@ -717,6 +718,40 @@ namespace Yandex.Music.Client
         }
 
         #endregion Унисон
+        
+        #region Passport
+
+        public Task PassportCreateAuthSessionAsync()
+        {
+            return api.Passport.CreateTrackAsync(storage);
+        }
+
+        public Task<YMultistepStart> PassportAuthByUserAsync(string login)
+        {
+            return api.Passport.MultistepStartAsync(storage, login);
+        }
+
+        public Task<YPassportUser> PassportAuthByPasswordAsync(string password)
+        {
+            return api.Passport.MultistepPasswordAsync(storage, password);
+        }
+
+        public Task<YPassportUser> PasportSendRfcOtpPasswordAsync(string rfcOtp)
+        {
+            return api.Passport.RfcOtpPasswordAsync(storage, rfcOtp);
+        }
+
+        public Task<YPassportSession> PassportGetSession()
+        {
+            return api.Passport.CreateUserSessionAsync(storage);
+        }
+
+        public Task<YPassportSessionStatus> PassportGetSessionStatus()
+        {
+            return api.Passport.GetSessionStateAsync(storage);
+        }
+        
+        #endregion Passport
 
         #endregion Основные функции
     }

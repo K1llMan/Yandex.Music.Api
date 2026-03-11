@@ -1,13 +1,24 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Security.Authentication;
+using Yandex.Music.Api.Common.Debug;
+using Yandex.Music.Api.Common.Debug.Writer;
 using YandexMusicClient.Models;
 
-public class Menu
+public class TestAuthApplication
 {
+    private enum AuthType
+    {
+        Password,
+        SMS,
+        Email,
+        QR
+    }
+    
     private List<MenuItem> _currentItems;
-    private int _selectedIndex = 0;
-    private MenuItem _currentParent = null;
+    private int _selectedIndex;
+    private MenuItem? _currentParent;
     private UserSession _session;
-    private Stack<string> _navigationHistory = new Stack<string>();
+    private Stack<string> _navigationHistory = new();
+    private Yandex.Music.Client.YandexMusicClient _yandexMusicClient;
 
     // Цветовая схема
     private readonly ConsoleColor _backgroundColor = ConsoleColor.Black;
@@ -20,10 +31,11 @@ public class Menu
     private readonly ConsoleColor _inputColor = ConsoleColor.Yellow;
     private readonly ConsoleColor _infoColor = ConsoleColor.DarkGray;
 
-    public Menu(List<MenuItem> rootItems)
+    public TestAuthApplication(List<MenuItem> rootItems)
     {
         _currentItems = rootItems;
         _session = new UserSession();
+        _yandexMusicClient = new Yandex.Music.Client.YandexMusicClient(Guid.NewGuid().ToString(), new DebugSettings(new DefaultDebugWriter("responses", "log.txt")));
     }
 
     public void Run()
@@ -128,46 +140,50 @@ public class Menu
         string login = PromptInput("Введите логин", ValidateLogin);
         _session.Login = login;
 
-        ShowMessage($"✅ Логин принят: {login}", _successColor);
+        try
+        {
+            _yandexMusicClient.PassportCreateAuthSession();
+            var passportUser = _yandexMusicClient.PassportAuthByUser(login);
+
+            if (passportUser is not null)
+            {
+                ShowMessage($"✅ Логин принят: {login}", _successColor);
+                ShowMessage("Пользователь авторизован", _infoColor);
+                ShowMessage($"Доступные методы авторизации: {string.Join(",", passportUser.PreferredAuthMethod)}", _infoColor);
+            }
+        }
+        catch (AuthenticationException e)
+        {
+            ShowMessage($"❌ Ошибка авторизации: {e.Message}", _errorColor);
+        }
+
         ShowContinuePrompt();
 
         // Шаг 2: Ввод пароля
         Console.Clear();
         DrawHeader("🔐 ВХОД В СИСТЕМУ - ШАГ 2/2");
-
-        string password = PromptInput("Введите пароль", ValidatePassword, isPassword: true);
-        _session.Password = password;
-
-        ShowMessage($"✅ Пароль принят", _successColor);
-
-        // Показываем сводку
-        Console.Clear();
-        DrawHeader("📋 ДАННЫЕ ПРИНЯТЫ");
-
-        Console.ForegroundColor = _infoColor;
-        Console.WriteLine("\n" + new string('─', 50));
         Console.ResetColor();
-
-        Console.WriteLine($"👤 Логин: {_session.Login}");
-        Console.WriteLine($"🔑 Пароль: {new string('•', _session.Password.Length)}");
-
-        Console.ForegroundColor = _infoColor;
-        Console.WriteLine(new string('─', 50));
-        Console.ResetColor();
-
-        Console.WriteLine("\n📌 Теперь выберите способ двухфакторной авторизации:");
-        Console.WriteLine("\nНажмите Enter для продолжения...");
-        Console.ReadKey(true);
 
         // Создаем подменю с методами двухфакторной авторизации
         var twoFactorMenu = new MenuItem($"🔐 2FA для {_session.Login}");
+        twoFactorMenu.SubItems.Add(new MenuItem("📨 Войти по Паролю", session =>
+        {
+            var isauthorized = AuthentificateByPassword(session);
 
-        twoFactorMenu.SubItems.Add(new MenuItem("📨 Войти по СМС", (session) =>
-            AuthenticateWith2FA(session, "SMS")));
-        twoFactorMenu.SubItems.Add(new MenuItem("📧 Войти по Email", (session) =>
-            AuthenticateWith2FA(session, "Email")));
-        twoFactorMenu.SubItems.Add(new MenuItem("📱 Войти по QR", (session) =>
-            AuthenticateWith2FA(session, "QR")));
+            if (isauthorized)
+            {
+                CreateAccessToken(session);
+                TestAccessToken(session);
+            }
+            
+            return isauthorized;
+        }));
+        twoFactorMenu.SubItems.Add(new MenuItem("📨 Войти по СМС", session =>
+            AuthenticateWith2FA(session, AuthType.SMS)));
+        twoFactorMenu.SubItems.Add(new MenuItem("📧 Войти по Email", session =>
+            AuthenticateWith2FA(session, AuthType.Email)));
+        twoFactorMenu.SubItems.Add(new MenuItem("📱 Войти по QR", session =>
+            AuthenticateWith2FA(session, AuthType.QR)));
         twoFactorMenu.SubItems.Add(new MenuItem("◀ Назад"));
 
         foreach (var item in twoFactorMenu.SubItems)
@@ -293,9 +309,6 @@ public class Menu
         // Заголовок
         DrawHeader("🔐 СИСТЕМА ДВУХФАКТОРНОЙ АВТОРИЗАЦИИ");
 
-        // Информация о текущем пользователе
-        DrawUserInfo();
-
         // Хлебные крошки
         DrawBreadcrumbs();
         Console.WriteLine();
@@ -351,26 +364,6 @@ public class Menu
         Console.WriteLine($"║  {title}  ║");
         Console.WriteLine($"╚{border}╝");
         Console.ResetColor();
-    }
-
-    private void DrawUserInfo()
-    {
-        if (!string.IsNullOrEmpty(_session.Login))
-        {
-            Console.ForegroundColor = _successColor;
-            Console.WriteLine($"\n👤 Пользователь: {_session.Login}");
-
-            if (_session.IsAuthenticated)
-            {
-                Console.WriteLine($"🔓 Статус: Полная авторизация");
-            }
-            else if (!string.IsNullOrEmpty(_session.Password))
-            {
-                Console.WriteLine($"⏳ Статус: Ожидает 2FA");
-            }
-
-            Console.ResetColor();
-        }
     }
 
     private void DrawBreadcrumbs()
@@ -443,23 +436,74 @@ public class Menu
         Console.ReadKey(true);
     }
 
-    private bool AuthenticateWith2FA(UserSession session, string method)
+    private bool AuthentificateByPassword(UserSession session)
+    {
+        string inputPassword = PromptInput("Введите пароль", _ => true);
+        _session.Password = inputPassword;
+        var passwordResponse = _yandexMusicClient.PassportAuthByPassword(inputPassword);
+
+        if (passwordResponse?.State == "rfc_totp")
+        {
+            ShowMessage($"Необходимо ввести код подтверждения из Я.Ключ для пользователя: {passwordResponse.Account.DisplayLogin}", _infoColor);
+            string otpPassword = PromptInput("Введите код из Я.Ключ", _ => true);
+            _session.Otp = otpPassword;
+
+            passwordResponse = _yandexMusicClient.PasportSendRfcOtpPassword(otpPassword);
+
+            if (passwordResponse.State == string.Empty)
+            {
+                try
+                {
+                    var passportSession = _yandexMusicClient.PassportGetSession();
+                    var sessionState = _yandexMusicClient.PassportGetSessionStatus();
+
+                    if (!sessionState.SessionIsCorrect || !sessionState.SessionHasUsers)
+                    {
+                        ShowMessage($"Ошибка создания сессии для пользователя {_session.Login}", _errorColor);
+                        return false;
+                    }
+
+                    ShowMessage($"Создана сессия '{passportSession.DefaultUid}' для пользователя: {_session.Login}", _infoColor);
+                }
+                catch (Exception e)
+                {
+                    ShowMessage($"Ошибка создания сессии для пользователя {_session.Login}: {e}", _errorColor);
+                    return false;
+                }
+            }
+            else
+            {
+                ShowMessage("Ошибка авторизации по коду", _errorColor);
+            }
+        }
+
+        return true;
+    }
+
+    private bool AuthenticateWith2FA(UserSession session, AuthType method)
     {
         Console.Clear();
 
-        DrawHeader($"📱 2FA: {method}");
+        if (method == AuthType.SMS)
+        {
+            DrawHeader("Код был отпрален через СМС. Введите его");
+            string inputPassword = PromptInput("Введите пароль", _ => true);
+            _session.Password = inputPassword;
+        }
 
-        Console.WriteLine($"\n👤 Пользователь: {session.Login}");
-        Console.WriteLine($"🔑 Пароль: {new string('•', session.Password.Length)}");
-        Console.WriteLine($"📱 Метод: {method}");
-        Console.WriteLine();
-
+        if (method == AuthType.Email)
+        {
+            DrawHeader("Код был отпрален через Email. Введите его");
+            string inputPassword = PromptInput("Введите пароль", _ => true);
+            _session.Password = inputPassword;
+        }
+        
         // Имитация отправки кода
         string code = new Random().Next(100000, 999999).ToString();
 
         Console.ForegroundColor = _inputColor;
         Console.WriteLine($"📨 Код подтверждения отправлен:");
-        Console.WriteLine($"   {GetMockDestination(method)}");
+        //Console.WriteLine($"   {GetMockDestination(method)}");
         Console.ResetColor();
         Console.WriteLine();
 
@@ -503,14 +547,26 @@ public class Menu
         }
     }
 
-    private string GetMockDestination(string method)
+    private void CreateAccessToken(UserSession session)
     {
-        return method switch
+        DrawHeader("ПОЛУЧЕНИЕ AccessToken");
+
+        var authToken = _yandexMusicClient.GetTokenBySession();
+        session.AccessToken = _yandexMusicClient.GetTokenByAccessToken(authToken).AccessToken;
+
+        ShowMessage("AccessToken получен", _infoColor);
+    }
+
+    private void TestAccessToken(UserSession session) 
+    {
+        DrawHeader("ТЕСТИРОВАНИЕ AccessToken");
+        if (_yandexMusicClient.Authorize(session.AccessToken))
         {
-            "SMS" => "+7 *** *** ** " + new Random().Next(10, 99),
-            "Email" => $"{_session.Login?.ToLower()}@***.com",
-            "QR" => "Приложение аутентификатор",
-            _ => "устройство"
-        };
+            ShowMessage("Пользователь авторизирован", _infoColor);
+        }
+        else
+        {
+            ShowMessage("Пользователь не авторизирован", _errorColor);
+        }
     }
 }

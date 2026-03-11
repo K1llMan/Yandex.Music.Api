@@ -9,7 +9,7 @@ using Yandex.Music.Api.Requests.Common.Attributes;
 namespace Yandex.Music.Api.Requests.Passport
 {
     [YPassportRequest(WebRequestMethods.Http.Post, "pwl-yandex/api/passport/track/create")]
-    public class YMultistepStartBuilder : YRequestBuilder<YMultistepStart, string>
+    public class YMultistepStartBuilder : YPassportRequestBuilder<YMultistepStart, string>
     {
         public YMultistepStartBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
         {

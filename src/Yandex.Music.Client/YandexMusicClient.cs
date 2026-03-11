@@ -687,41 +687,88 @@ namespace Yandex.Music.Client
 
         #endregion Унисон
 
-        public void InitializePassportAuthorization()
+        #region Passport
+        
+        /// <summary>
+        /// Создать сессию
+        /// </summary>
+        public void PassportCreateAuthSession()
         {
             api.Passport.CreateTrack(storage);
         }
 
-        public YMultistepStart MultistepStart(string login)
+        /// <summary>
+        /// Авторизация пользователя в passport
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
+        public YMultistepStart PassportAuthByUser(string login)
         {
             return api.Passport.MultistepStart(storage, login);
         }
 
-        public YPassportUser MultistepPassword(string password)
+        /// <summary>
+        /// Авторизация passport сессии по паролю
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public YPassportUser PassportAuthByPassword(string password)
         {
             return api.Passport.MultistepPassword(storage, password);
         }
 
-        public YPassportUser RfcOtpPassword(string rfcOtp)
+        /// <summary>
+        /// Передать OTP токен из приложения Я.Ключ
+        /// </summary>
+        /// <param name="rfcOtp"></param>
+        /// <returns></returns>
+        public YPassportUser PasportSendRfcOtpPassword(string rfcOtp)
         {
             return api.Passport.RfcOtpPassword(storage, rfcOtp);
         }
 
+        /// <summary>
+        /// Получить сессию passport 
+        /// </summary>
+        /// <returns></returns>
         public YPassportSession PassportGetSession()
         {
-            return api.Passport.GetUserSession(storage);
+            return api.Passport.CreateUserSession(storage);
         }
 
+        /// <summary>
+        /// Получить статус passport сессии
+        /// </summary>
+        /// <returns></returns>
         public YPassportSessionStatus PassportGetSessionStatus()
         {
             return api.Passport.GetSessionState(storage);
         }
 
+        #endregion Passport
+        
+        #region MobileProxy
 
+        /// <summary>
+        /// Получить Acecess Token для текущей passport сессии.
+        /// </summary>
+        /// <returns></returns>
         public YAccessToken GetTokenBySession()
         {
             return api.MobileProxy.GetTokenBySessionId(storage);
         }
+
+        /// <summary>
+        /// Получить Access Token по токену passport сессии.
+        /// </summary>
+        /// <param name="accessToken"></param>
+        /// <returns></returns>
+        public YAccessToken GetTokenByAccessToken(YAccessToken accessToken)
+        {
+            return api.MobileProxy.GetTokenByAccessToken(storage, accessToken);
+        }
+
+        #endregion MobileProxy
 
         #endregion Основные функции
     }

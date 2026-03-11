@@ -64,7 +64,7 @@ public partial class YPassportAPI : YCommonAPI
             .GetResponseAsync();
     }
 
-    public Task<YPassportSession> CreateSessionAsync(AuthStorage storage)
+    public Task<YPassportSession> CreateUserSessionAsync(AuthStorage storage)
     {
         return new YGetSessionBuilder(api, storage)
             .Build(null)

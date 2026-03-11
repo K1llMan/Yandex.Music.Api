@@ -9,19 +9,19 @@ using Yandex.Music.Api.Requests.Common.Attributes;
 namespace Yandex.Music.Api.Requests.MobileProxy
 {
     [YMobileProxyRequest(WebRequestMethods.Http.Post, "1/token")]
-    public class YGetAccessTokenBuilder : YRequestBuilder<YAccessToken, string>
+    public class YGetAccessTokenBuilder : YRequestBuilder<YAccessToken, YAccessToken>
     {
         public YGetAccessTokenBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
         {
         }
 
-        protected override HttpContent GetContent(string tuple)
+        protected override HttpContent GetContent(YAccessToken tuple)
         {
             Dictionary<string, string> content = new Dictionary<string, string>
             {
-                { "client_id", YConstants.XClientId2 },
-                { "client_secret", YConstants.XClientSecret2 },
-                { "access_token", tuple },
+                { "client_id", YConstants.XClientId },
+                { "client_secret", YConstants.XClientSecret },
+                { "access_token", tuple.AccessToken },
                 { "grant_type", "x-token" }
             };
 

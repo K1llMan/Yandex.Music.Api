@@ -26,7 +26,11 @@ public partial class YPassportAPI
         Match match = Regex.Match(responseString, @"window\.__CSRF__\s*=\s*""([^""]+)""");
 
         if (!match.Success || match.Groups.Count < 2)
+        {
+            storage.Debug.WriteError(nameof(GetCsrfTokenAsync), "Ошибка запроса");
+            storage.Debug.WriteResponse(nameof(GetCsrfTokenAsync), responseString);
             return false;
+        }
 
         storage.AuthToken = new YAuthToken
         {
@@ -69,9 +73,9 @@ public partial class YPassportAPI
         return RfcOtpPasswordAsync(storage, rfcOtp).GetAwaiter().GetResult();
     }
 
-    public YPassportSession GetUserSession(AuthStorage storage)
+    public YPassportSession CreateUserSession(AuthStorage storage)
     {
-        return CreateSessionAsync(storage).GetAwaiter().GetResult();
+        return CreateUserSessionAsync(storage).GetAwaiter().GetResult();
     }
 
     public YPassportSessionStatus GetSessionState(AuthStorage storage)

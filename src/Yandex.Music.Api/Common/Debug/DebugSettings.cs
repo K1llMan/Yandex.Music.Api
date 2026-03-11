@@ -65,6 +65,23 @@ namespace Yandex.Music.Api.Common.Debug
             return obj;
         }
 
+        public void WriteError(string method, string message)
+        {
+            debugWriter.Error(method, new Dictionary<string, List<string>>()
+            {
+                { method, new List<string>
+                    {
+                        message
+                    }
+                }
+            });
+        }
+
+        public void WriteResponse(string method, string response)
+        {
+            debugWriter.SaveResponse(method, response);
+        }
+        
         public void Clear()
         {
             debugWriter.Clear();
