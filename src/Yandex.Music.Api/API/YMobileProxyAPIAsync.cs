@@ -29,7 +29,7 @@ public partial class YMobileProxyAPI : YCommonAPI
             throw new AuthenticationException($"Не возможно получить код доступа. Выполните процесс логина {nameof(GetTokenBySessionIdAsync)}");
 
         YAccessToken accessToken = await new YGetAccessTokenBuilder(api, storage)
-            .Build(null)
+            .Build(null)    
             .GetResponseAsync();
         
         storage.Token = accessToken.AccessToken;

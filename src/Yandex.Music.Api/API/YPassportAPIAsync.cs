@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Security.Authentication;
 using System.Threading.Tasks;
 using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Common.Exceptions;
 using Yandex.Music.Api.Models.Passport;
 using Yandex.Music.Api.Requests.Passport;
 
@@ -43,18 +43,32 @@ public partial class YPassportAPI : YCommonAPI
         return response.IsPhoneConfirmed;
     }
 
-    public Task<YMultistepStart> MultistepStartAsync(AuthStorage storage, string login)
+    public async Task<YMultistepStart> MultistepStartAsync(AuthStorage storage, string login)
     {
-        return new YMultistepStartBuilder(api, storage)
+        var response = await new YMultistepStartBuilder(api, storage)
             .Build(login)
             .GetResponseAsync();
+
+        if (!string.IsNullOrWhiteSpace(response.Error) || response.Errors is not null)
+        {
+            throw new YApiException($"Ошибка 'multistep_start': {response.Errors}");
+        }
+        
+        return response;
     }
 
-    public Task<YPassportUser> MultistepPasswordAsync(AuthStorage storage, string password)
+    public async Task<YPassportUser> MultistepPasswordAsync(AuthStorage storage, string password)
     {
-        return new YMultiStepPasswordBuilder(api, storage)
+        var response = await new YMultiStepPasswordBuilder(api, storage)
             .Build(password)
             .GetResponseAsync();
+
+        if (!string.IsNullOrWhiteSpace(response.Error) || response.Errors is not null)
+        {
+            throw new YApiException($"Ошибка 'multistep_start': {response.Errors}");
+        }
+
+        return response;
     }
 
     public Task<YPassportUser> RfcOtpPasswordAsync(AuthStorage storage, string rfcOtp)

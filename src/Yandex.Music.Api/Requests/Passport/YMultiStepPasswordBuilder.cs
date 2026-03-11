@@ -27,13 +27,17 @@ namespace Yandex.Music.Api.Requests.Passport
 
         protected override HttpContent GetContent(string tuple)
         {
-            Dictionary<string, string> formData = new()
-            {
-                { "track_id", storage.AuthToken.TrackId },
-                { "password", tuple }
-            };
+            // Dictionary<string, string> formData = new()
+            // {
+            //     { "track_id", storage.AuthToken.TrackId },
+            //     { "password", tuple }
+            // };
 
-            return new FormUrlEncodedContent(formData);
+            return GetJsonContent(new
+            {
+                storage.AuthToken.TrackId,
+                Password = tuple
+            });
         }
     }
 }

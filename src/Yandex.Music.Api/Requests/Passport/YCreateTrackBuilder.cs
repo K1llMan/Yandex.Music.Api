@@ -37,6 +37,7 @@ namespace Yandex.Music.Api.Requests.Passport
         protected override void SetCustomHeaders(HttpRequestHeaders headers)
         {
             headers.Add("x-csrf-token", storage.AuthToken.CsfrToken);
+            headers.Add("process-uuid", "26d53636-13a9-41f4-af99-d404dce90363");
         }
     }
 }
