@@ -33,11 +33,14 @@ namespace Yandex.Music.Api.Requests.MobileProxy
 
         protected override HttpContent GetContent(string tuple)
         {
-            return new FormUrlEncodedContent(new Dictionary<string, string> {
+            Dictionary<string, string> content = new Dictionary<string, string>
+            {
                 { "client_id", YConstants.XClientId },
                 { "client_secret", YConstants.XClientSecret },
                 { "track_id", storage.AuthToken.TrackId }
-            });
+            };
+
+            return new FormUrlEncodedContent(content);
         }
     }
 }

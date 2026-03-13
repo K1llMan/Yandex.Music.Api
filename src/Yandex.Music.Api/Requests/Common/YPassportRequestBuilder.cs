@@ -33,18 +33,4 @@ public class YPassportRequestBuilder<ResponseType, ParamsTuple> : YRequestBuilde
         headers.Add("Origin", "https://passport.yandex.ru");
         headers.Add("User-Agent", "Mozilla/5.0 (Linux; Android 7.1.1; ONEPLUS A3010 Build/NMF26F; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/103.0.5060.129 Safari/537.36 PassportSDK/7.50.2.750024597 ru.yandex.music/2026.02.3 #135gpr");
     }
-
-    protected JsonContent GetJsonContent<RequestData>(RequestData data)
-    {
-        JsonSerializerOptions settings = new() {
-            Converters = {
-                new JsonStringEnumConverter()
-            },
-            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
-        };
-
-        return JsonContent.Create(data, new MediaTypeHeaderValue("application/json"), settings);
-    }
 }

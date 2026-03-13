@@ -1,6 +1,7 @@
 ﻿using System.Security.Authentication;
 using System.Threading.Tasks;
 using Yandex.Music.Api.Common;
+using Yandex.Music.Api.Common.Exceptions;
 using Yandex.Music.Api.Models.Account;
 using Yandex.Music.Api.Requests.MobileProxy;
 
@@ -18,6 +19,11 @@ public partial class YMobileProxyAPI : YCommonAPI
             .Build(null)
             .GetResponseAsync();
 
+        if (accessToken.Status == "error" || accessToken.Errors is not null)
+        {
+            throw new YApiException($"Ошибки получения токена: {string.Join(", ", accessToken.Errors)}");
+        }
+
         storage.Token = accessToken.AccessToken;
 
         return accessToken;
@@ -29,7 +35,7 @@ public partial class YMobileProxyAPI : YCommonAPI
             throw new AuthenticationException($"Не возможно получить код доступа. Выполните процесс логина {nameof(GetTokenBySessionIdAsync)}");
 
         YAccessToken accessToken = await new YGetAccessTokenBuilder(api, storage)
-            .Build(null)    
+            .Build(token)
             .GetResponseAsync();
         
         storage.Token = accessToken.AccessToken;

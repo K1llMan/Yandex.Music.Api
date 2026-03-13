@@ -437,36 +437,16 @@ public class TestAuthApplication
 
         if (passwordResponse?.State == "rfc_totp")
         {
-            ShowMessage($"Необходимо ввести код подтверждения из Я.Ключ для пользователя: {passwordResponse.Account.DisplayLogin}", _infoColor);
-            string otpPassword = PromptInput("Введите код из Я.Ключ", _ => true);
+            ShowMessage($"Необходимо ввести код подтверждения из Яндекс ID для пользователя: {passwordResponse.Account.DisplayLogin}", _infoColor);
+            string otpPassword = PromptInput("Введите код из Яндекс ID", _ => true);
             _session.Otp = otpPassword;
 
             passwordResponse = _yandexMusicClient.PasportSendRfcOtpPassword(otpPassword);
 
-            if (passwordResponse.State == string.Empty)
-            {
-                try
-                {
-                    var passportSession = _yandexMusicClient.PassportGetSession();
-                    var sessionState = _yandexMusicClient.PassportGetSessionStatus();
-
-                    if (!sessionState.SessionIsCorrect || !sessionState.SessionHasUsers)
-                    {
-                        ShowMessage($"Ошибка создания сессии для пользователя {_session.Login}", _errorColor);
-                        return false;
-                    }
-
-                    ShowMessage($"Создана сессия '{passportSession.DefaultUid}' для пользователя: {_session.Login}", _infoColor);
-                }
-                catch (Exception e)
-                {
-                    ShowMessage($"Ошибка создания сессии для пользователя {_session.Login}: {e}", _errorColor);
-                    return false;
-                }
-            }
-            else
+            if (!string.IsNullOrWhiteSpace(passwordResponse.Error))
             {
                 ShowMessage("Ошибка авторизации по коду", _errorColor);
+                return false;
             }
         }
 
@@ -533,6 +513,19 @@ public class TestAuthApplication
 
     private void CreateAccessToken(UserSession session)
     {
+        DrawHeader("ПРОВЕРЯЕМ Сессию");
+        var passportSession = _yandexMusicClient.PassportGetSession();
+        if (string.IsNullOrWhiteSpace(passportSession.DefaultUid))
+        {
+            ShowMessage("Сессия не создана", _errorColor);
+        }
+
+        var sessionStatus = _yandexMusicClient.PassportGetSessionStatus();
+        if (!sessionStatus.SessionHasUsers || !sessionStatus.SessionIsCorrect)
+        {
+            ShowMessage("Сессия не создана", _errorColor);
+        }
+        
         DrawHeader("ПОЛУЧЕНИЕ AccessToken");
 
         var authToken = _yandexMusicClient.GetTokenBySession();
