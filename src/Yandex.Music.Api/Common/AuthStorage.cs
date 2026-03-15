@@ -51,6 +51,12 @@ namespace Yandex.Music.Api.Common
         /// </summary>
         public YAccessToken AccessToken { get; set; }
 
+        public string Language { get; set; } = "ru";
+
+        public string DisplayLanguage { get; set; } = "ru";
+
+        public string Country { get; set; } = "ru";
+
         internal YAuthToken AuthToken { get; set; }
 
         #endregion Свойства

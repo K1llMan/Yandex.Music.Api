@@ -5,8 +5,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Reflection;
 using System.Text;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Web;
 
 using Newtonsoft.Json;
@@ -16,6 +20,7 @@ using Newtonsoft.Json.Serialization;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Extensions;
 using Yandex.Music.Api.Requests.Common.Attributes;
+using JsonConverter = Newtonsoft.Json.JsonConverter;
 
 namespace Yandex.Music.Api.Requests.Common
 {
@@ -83,11 +88,8 @@ namespace Yandex.Music.Api.Requests.Common
             msg.Headers.TryAddWithoutValidation(HttpRequestHeader.AcceptCharset.GetName(), Encoding.UTF8.WebName);
             msg.Headers.TryAddWithoutValidation(HttpRequestHeader.AcceptEncoding.GetName(), "gzip");
 
-            // Добавление заголовка авторизации
-            if (!string.IsNullOrEmpty(storage.Token))
-                msg.Headers.TryAddWithoutValidation(HttpRequestHeader.Authorization.GetName(), $"OAuth {storage.Token}");
-
             SetCustomHeaders(msg.Headers);
+            SetAuthorization(msg.Headers);
 
             return msg;
         }
@@ -116,6 +118,13 @@ namespace Yandex.Music.Api.Requests.Common
             return new NameValueCollection();
         }
 
+        protected virtual void SetAuthorization(HttpRequestHeaders headers)
+        {
+            // Добавление заголовка авторизации
+            if (!string.IsNullOrEmpty(storage.Token))
+                headers.TryAddWithoutValidation(HttpRequestHeader.Authorization.GetName(), $"OAuth {storage.Token}");
+        }
+
         protected virtual HttpContent GetContent(ParamsTuple tuple)
         {
             return null;
@@ -128,6 +137,20 @@ namespace Yandex.Music.Api.Requests.Common
         protected string SerializeJson(object data)
         {
             return JsonConvert.SerializeObject(data, jsonSettings);
+        }
+        
+        protected JsonContent GetJsonContent<RequestData>(RequestData data)
+        {
+            JsonSerializerOptions settings = new() {
+                Converters = {
+                    new JsonStringEnumConverter()
+                },
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            };
+
+            return JsonContent.Create(data, new MediaTypeHeaderValue("application/json"), settings);
         }
 
         #endregion Вспомогательные функции

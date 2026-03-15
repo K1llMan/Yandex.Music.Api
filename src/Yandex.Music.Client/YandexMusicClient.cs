@@ -1,7 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
+using System.Net;
 using Yandex.Music.Api;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Common.Debug;
@@ -14,12 +15,14 @@ using Yandex.Music.Api.Models.Feed;
 using Yandex.Music.Api.Models.Landing;
 using Yandex.Music.Api.Models.Landing.Entity.Entities.Context;
 using Yandex.Music.Api.Models.Library;
+using Yandex.Music.Api.Models.Passport;
 using Yandex.Music.Api.Models.Playlist;
 using Yandex.Music.Api.Models.Queue;
 using Yandex.Music.Api.Models.Radio;
 using Yandex.Music.Api.Models.Search;
 using Yandex.Music.Api.Models.Track;
 using Yandex.Music.Api.Models.Ugc;
+using Yandex.Music.Api.Requests.Passport;
 
 namespace Yandex.Music.Client
 {
@@ -61,6 +64,20 @@ namespace Yandex.Music.Client
         {
             api = new YandexMusicApi();
             storage = new AuthStorage(settings);
+        }
+        
+        public YandexMusicClient(string deviceId, DebugSettings settings = null)
+        {
+            api = new YandexMusicApi();
+            storage = new AuthStorage(settings)
+            {
+                DeviceId = deviceId
+            };
+            
+            storage.SetProxy(new WebProxy()
+            {
+                Address = new Uri("http://localhost:8866")
+            });
         }
 
         #region Авторизация
@@ -676,6 +693,119 @@ namespace Yandex.Music.Client
         }
 
         #endregion Унисон
+
+        #region Passport
+        
+        /// <summary>
+        /// Создать сессию
+        /// </summary>
+        public void PassportCreateAuthSession()
+        {
+            api.Passport.CreateTrack(storage);
+        }
+
+        public YValidatePhoneNumberResult PassportValidatePhoneNumber(string phone)
+        {
+            return api.Passport.ValidatePhoneNumber(storage, phone);
+        }
+
+        public YCheckAvailabilityResult PassportCheckPhoneAvailability(string phone)
+        {
+            return api.Passport.CheckPhoneAvailability(storage, phone);
+        }
+
+        public YSendPushResult PassportSuggestSendPush(string phone)
+        {
+            return api.Passport.SuggestSendPush(storage, phone);
+        }
+
+        public void PassportCheckPushCode(string code)
+        {
+            api.Passport.CheckPushCode(storage, code);
+        }
+
+        /// <summary>
+        /// Авторизация passport сессии по паролю
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public YYPassportUser PassportAuthByPassword(string password)
+        {
+            return api.Passport.MultistepPassword(storage, password);
+        }
+
+        /// <summary>
+        /// Передать OTP токен из приложения Я.Ключ
+        /// </summary>
+        /// <param name="rfcOtp"></param>
+        /// <returns></returns>
+        public YYPassportUser PasportSendRfcOtpPassword(string rfcOtp)
+        {
+            return api.Passport.RfcOtpPassword(storage, rfcOtp);
+        }
+
+        /// <summary>
+        /// Получить сессию passport 
+        /// </summary>
+        /// <returns></returns>
+        public YPassportSession PassportGetSession()
+        {
+            return api.Passport.CreateUserSession(storage);
+        }
+
+        /// <summary>
+        /// Получить статус passport сессии
+        /// </summary>
+        /// <returns></returns>
+        public YPassportSessionStatus PassportGetSessionStatus()
+        {
+            return api.Passport.GetSessionState(storage);
+        }
+
+        public YValidateSquatter PassportValidateSquatter(string phone)
+        {
+            return api.Passport.ValidateSquatter(storage, phone);
+        }
+
+        public YSuggestByPhoneResult PassportSuggestByPhone()
+        {
+            return api.Passport.SuggestByPhone(storage);
+        }
+
+        /// <summary>
+        /// Авторизация пользователя в passport
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
+        public YMultistepStart PassportMultistepStart(string login)
+        {
+            return api.Passport.MultistepStart(storage, login);
+        }
+
+        #endregion Passport
+
+        #region MobileProxy
+
+        /// <summary>
+        /// Получить Acecess Token для текущей passport сессии.
+        /// </summary>
+        /// <returns></returns>
+        public YAccessToken GetTokenBySession()
+        {
+            return api.MobileProxy.GetTokenBySessionId(storage);
+        }
+
+        /// <summary>
+        /// Получить Access Token по токену passport сессии.
+        /// </summary>
+        /// <param name="accessToken"></param>
+        /// <returns></returns>
+        public YAccessToken GetTokenByAccessToken(YAccessToken accessToken)
+        {
+            return api.MobileProxy.GetTokenByAccessToken(storage, accessToken);
+        }
+
+        #endregion MobileProxy
 
         #endregion Основные функции
     }
