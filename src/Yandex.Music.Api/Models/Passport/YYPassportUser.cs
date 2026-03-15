@@ -2,7 +2,7 @@
 
 namespace Yandex.Music.Api.Models.Passport
 {
-    public class YPassportUser : PassportResponseBase
+    public class YYPassportUser : YPassportResponseBase
     {
         [JsonProperty("track_id")]
         public string TrackId { get; set; }

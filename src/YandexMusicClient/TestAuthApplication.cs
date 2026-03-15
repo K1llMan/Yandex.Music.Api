@@ -1,4 +1,5 @@
 ﻿using System.Security.Authentication;
+using System.Text.RegularExpressions;
 using Yandex.Music.Api.Common.Debug;
 using Yandex.Music.Api.Common.Debug.Writer;
 using YandexMusicClient.Models;
@@ -65,6 +66,10 @@ public class TestAuthApplication
                     {
                         HandleLoginProcess();
                     }
+                    else if (selectedItem.Title == "Войти по номеру телефона")
+                    {
+                        HandlePhoneLoginProcess();
+                    }
                     else if (selectedItem.HasSubItems)
                     {
                         // Переход в подменю
@@ -110,6 +115,75 @@ public class TestAuthApplication
         }
     }
 
+    private void HandlePhoneLoginProcess()
+    {
+        Console.Clear();
+        DrawHeader("🔐 ВХОД В СИСТЕМУ - ШАГ 1/2");
+        string login = PromptInput("Введите номер телефона", ValidatePhone);
+        _session.Login = login;
+        try
+        {
+            _yandexMusicClient.PassportCreateAuthSession();
+            var phoneResult = _yandexMusicClient.PassportValidatePhoneNumber(login);
+            if (!phoneResult.IsValid())
+            {
+                ShowMessage($"❌ Ошибка проверки телефона: {string.Join(", ", phoneResult.Errors)}", _errorColor);
+                return;
+            }
+            
+            if (phoneResult is null || phoneResult?.ValidForSms != true)
+            {
+                ShowMessage($"❌ Ошибка авторизации: телефон не найден", _errorColor);
+                return;
+            }
+
+            var phoneAvailability = _yandexMusicClient.PassportCheckPhoneAvailability(phoneResult.PhoneNumber.International);
+            if (!phoneAvailability.CanUsePush)
+            {
+                ShowMessage($"❌ Ошибка авторизации: телефон не поддерживает Push, установите Яндекс ID", _errorColor);
+                return;
+            }
+
+            var sendPushResult = _yandexMusicClient.PassportSuggestSendPush(phoneResult.PhoneNumber.International);
+            if (sendPushResult.AppsForBrightPush is not null && sendPushResult.AppsForBrightPush.Count > 0)
+            {
+                ShowMessage("На телефон отправлен Push с кодом", _infoColor);
+                
+                string pushCode = PromptInput("Введите код", ValidateLogin);
+                _yandexMusicClient.PassportCheckPushCode(pushCode);
+                var validateResult = _yandexMusicClient.PassportValidateSquatter(phoneResult.PhoneNumber.International);
+
+                if (validateResult.SuggestBy == "s")
+                {
+                    var sr = _yandexMusicClient.PassportSuggestByPhone();
+                    var passportUser = _yandexMusicClient.PassportMultistepStart(sr.Accounts.First().Login);
+                    if (passportUser is not null)
+                    {
+                        ShowMessage($"✅ Логин принят: {login}", _successColor);
+                        ShowMessage("Пользователь авторизован", _infoColor);
+                        ShowMessage($"Доступные методы авторизации: {string.Join(",", passportUser.PreferredAuthMethod)}", _infoColor);
+
+                        var isauthorized = AuthentificateByPassword(_session);
+                        
+                        if (isauthorized)
+                        {
+                            CreateAccessToken(_session);
+                            TestAccessToken(_session);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                ShowMessage("Нет возможности отправить Push", _errorColor);
+            }
+        }
+        catch (AuthenticationException e)
+        {
+            ShowMessage($"❌ Ошибка авторизации: {e.Message}", _errorColor);
+        }
+    }
+
     private void HandleBackNavigation()
     {
         if (_currentParent != null)
@@ -135,7 +209,7 @@ public class TestAuthApplication
         try
         {
             _yandexMusicClient.PassportCreateAuthSession();
-            var passportUser = _yandexMusicClient.PassportAuthByUser(login);
+            var passportUser = _yandexMusicClient.PassportMultistepStart(login);
 
             if (passportUser is not null)
             {
@@ -265,6 +339,65 @@ public class TestAuthApplication
         }
 
         return true;
+    }
+
+    private bool ValidatePhone(string phone)
+    {
+        if (string.IsNullOrWhiteSpace(phone))
+        {
+            ShowMessage("❌ Номер телефона не может быть пустым", _errorColor);
+            return false;
+        }
+    
+        // Удаляем все пробелы, дефисы и скобки для проверки
+        string cleanedPhone = Regex.Replace(phone, @"[\s\-\(\)]", "");
+    
+        // Проверка начинается с +7
+        if (!cleanedPhone.StartsWith("+7"))
+        {
+            ShowMessage("❌ Номер телефона должен начинаться с +7", _errorColor);
+            return false;
+        }
+    
+        // Проверка длины (после +7 должно быть 10 цифр = всего 12 символов с +7)
+        if (cleanedPhone.Length != 12)
+        {
+            ShowMessage("❌ Номер телефона должен содержать 10 цифр после +7", _errorColor);
+            return false;
+        }
+    
+        // Проверка, что остальные символы - цифры
+        string digitsAfterCode = cleanedPhone.Substring(2);
+        if (!digitsAfterCode.All(char.IsDigit))
+        {
+            ShowMessage("❌ Номер телефона может содержать только цифры после +7", _errorColor);
+            return false;
+        }
+    
+        // Дополнительная проверка на допустимые форматы ввода
+        if (!IsValidPhoneFormat(phone))
+        {
+            ShowMessage("❌ Неверный формат. Допустимые форматы: +7XXXXXXXXXX, +7 XXX XXX XX XX, +7-XXX-XXX-XX-XX", _errorColor);
+            return false;
+        }
+    
+        return true;
+    }
+    
+    private bool IsValidPhoneFormat(string phone)
+    {
+        // Проверка различных допустимых форматов ввода
+        // Форматы: +71234567890, +7 123 456 78 90, +7-123-456-78-90, +7 (123) 456-78-90
+    
+        // Удаляем пробелы, дефисы, скобки для проверки структуры
+        string testPhone = Regex.Replace(phone, @"[\s\-\(\)]", "");
+    
+        // Базовая проверка: +7 и 10 цифр
+        if (!Regex.IsMatch(testPhone, @"^\+7\d{10}$"))
+            return false;
+    
+        // Проверка, что исходная строка содержит только допустимые символы
+        return Regex.IsMatch(phone, @"^\+7[\s\-\(\)]?\d{3}[\s\-\(\)]?\d{3}[\s\-\(\)]?\d{2}[\s\-\(\)]?\d{2}$");
     }
 
     private bool ValidatePassword(string password)

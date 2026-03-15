@@ -3,7 +3,7 @@ using Yandex.Music.Api.Models.Account;
 
 namespace Yandex.Music.Api.Models.Passport
 {
-    public class YValidatePhoneNumberResult
+    public class YValidatePhoneNumberResult : YPassportResponseBase
     {
         [JsonProperty("phone_number")]
         public YPhoneNumber PhoneNumber { get; set; }

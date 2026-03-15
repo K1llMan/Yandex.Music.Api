@@ -720,38 +720,117 @@ namespace Yandex.Music.Client
         #endregion Унисон
         
         #region Passport
-
-        public Task PassportCreateAuthSessionAsync()
+        
+        /// <summary>
+        /// Создать сессию
+        /// </summary>
+        public Task PassportCreateAuthSession()
         {
             return api.Passport.CreateTrackAsync(storage);
         }
 
-        public Task<YMultistepStart> PassportAuthByUserAsync(string login)
+        public Task<YValidatePhoneNumberResult> PassportValidatePhoneNumber(string phone)
         {
-            return api.Passport.MultistepStartAsync(storage, login);
+            return api.Passport.ValidatePhoneNumberAsync(storage, phone);
         }
 
-        public Task<YPassportUser> PassportAuthByPasswordAsync(string password)
+        public Task<YCheckAvailabilityResult> PassportCheckPhoneAvailability(string phone)
+        {
+            return api.Passport.CheckPhoneAvailabilityAsync(storage, phone);
+        }
+
+        public Task<YSendPushResult> PassportSuggestSendPush(string phone)
+        {
+            return api.Passport.SuggestSendPushAsync(storage, phone);
+        }
+
+        public Task PassportCheckPushCode(string code)
+        {
+            return api.Passport.CheckPushCodeAsync(storage, code);
+        }
+
+        /// <summary>
+        /// Авторизация passport сессии по паролю
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public Task<YYPassportUser> PassportAuthByPasswordAsync(string password)
         {
             return api.Passport.MultistepPasswordAsync(storage, password);
         }
 
-        public Task<YPassportUser> PasportSendRfcOtpPasswordAsync(string rfcOtp)
+        /// <summary>
+        /// Передать OTP токен из приложения Я.Ключ
+        /// </summary>
+        /// <param name="rfcOtp"></param>
+        /// <returns></returns>
+        public YYPassportUser PasportSendRfcOtpPassword(string rfcOtp)
         {
-            return api.Passport.RfcOtpPasswordAsync(storage, rfcOtp);
+            return api.Passport.RfcOtpPassword(storage, rfcOtp);
         }
 
-        public Task<YPassportSession> PassportGetSession()
+        /// <summary>
+        /// Получить сессию passport 
+        /// </summary>
+        /// <returns></returns>
+        public YPassportSession PassportGetSession()
         {
-            return api.Passport.CreateUserSessionAsync(storage);
+            return api.Passport.CreateUserSession(storage);
         }
 
-        public Task<YPassportSessionStatus> PassportGetSessionStatus()
+        /// <summary>
+        /// Получить статус passport сессии
+        /// </summary>
+        /// <returns></returns>
+        public YPassportSessionStatus PassportGetSessionStatus()
         {
-            return api.Passport.GetSessionStateAsync(storage);
+            return api.Passport.GetSessionState(storage);
         }
-        
+
+        public YValidateSquatter PassportValidateSquatter(string phone)
+        {
+            return api.Passport.ValidateSquatter(storage, phone);
+        }
+
+        public YSuggestByPhoneResult PassportSuggestByPhone()
+        {
+            return api.Passport.SuggestByPhone(storage);
+        }
+
+        /// <summary>
+        /// Авторизация пользователя в passport
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
+        public YMultistepStart PassportMultistepStart(string login)
+        {
+            return api.Passport.MultistepStart(storage, login);
+        }
+
         #endregion Passport
+        
+        #region MobileProxy
+
+        /// <summary>
+        /// Получить Acecess Token для текущей passport сессии.
+        /// </summary>
+        /// <returns></returns>
+        public YAccessToken GetTokenBySession()
+        {
+            return api.MobileProxy.GetTokenBySessionId(storage);
+        }
+
+        /// <summary>
+        /// Получить Access Token по токену passport сессии.
+        /// </summary>
+        /// <param name="accessToken"></param>
+        /// <returns></returns>
+        public YAccessToken GetTokenByAccessToken(YAccessToken accessToken)
+        {
+            return api.MobileProxy.GetTokenByAccessToken(storage, accessToken);
+        }
+
+        #endregion MobileProxy
 
         #endregion Основные функции
     }

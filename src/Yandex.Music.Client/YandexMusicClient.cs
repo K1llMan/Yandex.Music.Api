@@ -22,6 +22,7 @@ using Yandex.Music.Api.Models.Radio;
 using Yandex.Music.Api.Models.Search;
 using Yandex.Music.Api.Models.Track;
 using Yandex.Music.Api.Models.Ugc;
+using Yandex.Music.Api.Requests.Passport;
 
 namespace Yandex.Music.Client
 {
@@ -703,14 +704,24 @@ namespace Yandex.Music.Client
             api.Passport.CreateTrack(storage);
         }
 
-        /// <summary>
-        /// Авторизация пользователя в passport
-        /// </summary>
-        /// <param name="login"></param>
-        /// <returns></returns>
-        public YMultistepStart PassportAuthByUser(string login)
+        public YValidatePhoneNumberResult PassportValidatePhoneNumber(string phone)
         {
-            return api.Passport.MultistepStart(storage, login);
+            return api.Passport.ValidatePhoneNumber(storage, phone);
+        }
+
+        public YCheckAvailabilityResult PassportCheckPhoneAvailability(string phone)
+        {
+            return api.Passport.CheckPhoneAvailability(storage, phone);
+        }
+
+        public YSendPushResult PassportSuggestSendPush(string phone)
+        {
+            return api.Passport.SuggestSendPush(storage, phone);
+        }
+
+        public void PassportCheckPushCode(string code)
+        {
+            api.Passport.CheckPushCode(storage, code);
         }
 
         /// <summary>
@@ -718,7 +729,7 @@ namespace Yandex.Music.Client
         /// </summary>
         /// <param name="password"></param>
         /// <returns></returns>
-        public YPassportUser PassportAuthByPassword(string password)
+        public YYPassportUser PassportAuthByPassword(string password)
         {
             return api.Passport.MultistepPassword(storage, password);
         }
@@ -728,7 +739,7 @@ namespace Yandex.Music.Client
         /// </summary>
         /// <param name="rfcOtp"></param>
         /// <returns></returns>
-        public YPassportUser PasportSendRfcOtpPassword(string rfcOtp)
+        public YYPassportUser PasportSendRfcOtpPassword(string rfcOtp)
         {
             return api.Passport.RfcOtpPassword(storage, rfcOtp);
         }
@@ -749,6 +760,26 @@ namespace Yandex.Music.Client
         public YPassportSessionStatus PassportGetSessionStatus()
         {
             return api.Passport.GetSessionState(storage);
+        }
+
+        public YValidateSquatter PassportValidateSquatter(string phone)
+        {
+            return api.Passport.ValidateSquatter(storage, phone);
+        }
+
+        public YSuggestByPhoneResult PassportSuggestByPhone()
+        {
+            return api.Passport.SuggestByPhone(storage);
+        }
+
+        /// <summary>
+        /// Авторизация пользователя в passport
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
+        public YMultistepStart PassportMultistepStart(string login)
+        {
+            return api.Passport.MultistepStart(storage, login);
         }
 
         #endregion Passport

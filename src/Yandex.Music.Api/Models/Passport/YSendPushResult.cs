@@ -24,6 +24,6 @@ namespace Yandex.Music.Api.Models.Passport
         public bool IsPushSilent { get; set; }
 
         [JsonProperty("apps_for_bright_push")]
-        public YPushApp AppsForBrightPush { get; set; }
+        public List<YPushApp> AppsForBrightPush { get; set; }
     }
 }

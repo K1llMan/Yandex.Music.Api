@@ -25,9 +25,12 @@ public static class Program
         var rootMenu = new List<MenuItem>();
             
         // Главный пункт меню - вход по логину
-        var loginMenu = new MenuItem("🔑 Войти по логину");
-        rootMenu.Add(loginMenu);
-            
+        var passwordMenu = new MenuItem("🔑 Войти по логину");
+        rootMenu.Add(passwordMenu);
+
+        var smsMenu = new MenuItem("Войти по номеру телефона");
+        rootMenu.Add(smsMenu);
+
         // Добавляем выход для красоты
         rootMenu.Add(new MenuItem("🚪 Выход", (session) => { Environment.Exit(0); return true; }));
             

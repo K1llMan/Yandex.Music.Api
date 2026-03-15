@@ -3,12 +3,15 @@ using Newtonsoft.Json;
 
 namespace Yandex.Music.Api.Models.Passport
 {
-    public abstract class PassportResponseBase
+    public abstract class YPassportResponseBase
     {
         [JsonProperty("error")]
         public string Error { get; set; }
 
         [JsonProperty("errors")]
         public List<string> Errors { get; set; }
+
+        public bool IsValid() =>
+            string.IsNullOrWhiteSpace(Error) || Errors?.Count == 0;
     }
 }

@@ -7,10 +7,10 @@ using Yandex.Music.Api.Requests.Common.Attributes;
 
 namespace Yandex.Music.Api.Requests.Passport
 {
-    [YPassportRequest(WebRequestMethods.Http.Post, "pwl-yandex/api/passport/validate/phone_number")]
-    public class YValidatePhoneNumberBuilder : YPassportRequestBuilder<YValidatePhoneNumberResult, string>
+    [YPassportRequest(WebRequestMethods.Http.Post, "pwl-yandex/api/passport/suggest/by_phone")]
+    public class YSuggestByPhoneBuilder : YPassportRequestBuilder<YSuggestByPhoneResult, string>
     {
-        public YValidatePhoneNumberBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
+        public YSuggestByPhoneBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
         {
         }
         
@@ -19,8 +19,7 @@ namespace Yandex.Music.Api.Requests.Passport
             return GetJsonContent(new
             {
                 track_id = storage.AuthToken.TrackId,
-                phone_number = tuple,
-                country = storage.Country
+                can_use_anmon = true
             });
         }
     }

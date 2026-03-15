@@ -8,7 +8,7 @@ using Yandex.Music.Api.Requests.Common.Attributes;
 namespace Yandex.Music.Api.Requests.Passport
 {
     [YPassportRequest(WebRequestMethods.Http.Post, "pwl-yandex/api/passport/auth/rfc-otp")]
-    public class YRfcOtpBuilder : YPassportRequestBuilder<YPassportUser, string>
+    public class YRfcOtpBuilder : YPassportRequestBuilder<YYPassportUser, string>
     {
         public YRfcOtpBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
         {

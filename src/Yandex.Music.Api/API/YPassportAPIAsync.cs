@@ -4,6 +4,7 @@ using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Common.Exceptions;
 using Yandex.Music.Api.Models.Passport;
 using Yandex.Music.Api.Requests.Passport;
+using YValidateSquatter = Yandex.Music.Api.Models.Passport.YValidateSquatter;
 
 namespace Yandex.Music.Api.API;
 
@@ -25,9 +26,9 @@ public partial class YPassportAPI : YCommonAPI
         storage.AuthToken.TrackId = passportTrack.Id;
     }
 
-    public async Task<YPassportUser> LoginByPasswordAsync(AuthStorage storage, string password)
+    public async Task<YYPassportUser> LoginByPasswordAsync(AuthStorage storage, string password)
     {
-        YPassportUser response = await new YMultiStepPasswordBuilder(api, storage)
+        YYPassportUser response = await new YMultiStepPasswordBuilder(api, storage)
             .Build(password)
             .GetResponseAsync();
 
@@ -57,7 +58,7 @@ public partial class YPassportAPI : YCommonAPI
         return response;
     }
 
-    public async Task<YPassportUser> MultistepPasswordAsync(AuthStorage storage, string password)
+    public async Task<YYPassportUser> MultistepPasswordAsync(AuthStorage storage, string password)
     {
         var response = await new YMultiStepPasswordBuilder(api, storage)
             .Build(password)
@@ -71,7 +72,7 @@ public partial class YPassportAPI : YCommonAPI
         return response;
     }
 
-    public Task<YPassportUser> RfcOtpPasswordAsync(AuthStorage storage, string rfcOtp)
+    public Task<YYPassportUser> RfcOtpPasswordAsync(AuthStorage storage, string rfcOtp)
     {
         return new YRfcOtpBuilder(api, storage)
             .Build(rfcOtp)
@@ -88,6 +89,67 @@ public partial class YPassportAPI : YCommonAPI
     public Task<YPassportSessionStatus> GetSessionStateAsync(AuthStorage storage)
     {
         return new YCheckSessionBuilder(api, storage)
+            .Build(null)
+            .GetResponseAsync();
+    }
+    
+    public Task<YValidatePhoneNumberResult> ValidatePhoneNumberAsync(AuthStorage storage, string phone)
+    {
+        if (string.IsNullOrWhiteSpace(storage.AuthToken.TrackId))
+            throw new YApiException("На найдена сессия для входа");
+
+        return new YValidatePhoneNumberBuilder(api, storage)
+            .Build(phone)
+            .GetResponseAsync();
+    }
+
+    public Task<YCheckAvailabilityResult> CheckPhoneAvailabilityAsync(AuthStorage storage, string phone)
+    {
+        if (string.IsNullOrWhiteSpace(storage.AuthToken.TrackId))
+            throw new YApiException("На найдена сессия для входа");
+        
+        return new YCheckPhoneAvailabilityBuilder(api, storage)
+            .Build(phone)
+            .GetResponseAsync();
+    }
+
+    public Task<YSendPushResult> SuggestSendPushAsync(AuthStorage storage, string phone)
+    {
+        if (string.IsNullOrWhiteSpace(storage.AuthToken.TrackId))
+            throw new YApiException("На найдена сессия для входа");
+        
+        return new YSendPushBuilder(api, storage)
+            .Build(phone)
+            .GetResponseAsync();
+    }
+
+    public Task CheckPushCodeAsync(AuthStorage storage, string code)
+    {
+        if (string.IsNullOrWhiteSpace(storage.AuthToken.TrackId))
+            throw new YApiException("На найдена сессия для входа");
+
+        return new YCheckPushCode(api, storage)
+            .Build(code)
+            .GetResponseAsync();
+    }
+
+
+    public Task<YValidateSquatter> ValidateSquatterAsync(AuthStorage storage, string phone)
+    {
+        if (string.IsNullOrWhiteSpace(storage.AuthToken.TrackId))
+            throw new YApiException("На найдена сессия для входа");
+
+        return new YValidateSquatterBuilder(api, storage)
+            .Build(phone)
+            .GetResponseAsync();
+    }
+
+    public Task<YSuggestByPhoneResult> SuggestByPhoneAsync(AuthStorage storage)
+    {
+        if (string.IsNullOrWhiteSpace(storage.AuthToken.TrackId))
+            throw new YApiException("На найдена сессия для входа");
+        
+        return new YSuggestByPhoneBuilder(api, storage)
             .Build(null)
             .GetResponseAsync();
     }

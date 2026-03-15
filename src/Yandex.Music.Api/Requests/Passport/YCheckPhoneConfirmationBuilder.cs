@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Passport;
@@ -17,12 +16,10 @@ namespace Yandex.Music.Api.Requests.Passport
 
         protected override HttpContent GetContent(string tuple)
         {
-            Dictionary<string, string> formData = new()
+            return GetJsonContent(new
             {
-                { "track_id", storage.AuthToken.TrackId }
-            };
-
-            return new FormUrlEncodedContent(formData);
+                track_id = storage.AuthToken.TrackId
+            });
         }
     }
 }
