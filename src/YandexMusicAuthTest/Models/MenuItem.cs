@@ -1,4 +1,4 @@
-﻿namespace YandexMusicClient.Models;
+﻿namespace YandexMusicAuthTest.Models;
 
 public class MenuItem
 {

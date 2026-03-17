@@ -2,7 +2,9 @@
 using System.Text.RegularExpressions;
 using Yandex.Music.Api.Common.Debug;
 using Yandex.Music.Api.Common.Debug.Writer;
-using YandexMusicClient.Models;
+using YandexMusicAuthTest.Models;
+
+namespace YandexMusicAuthTest;
 
 public class TestAuthApplication
 {
