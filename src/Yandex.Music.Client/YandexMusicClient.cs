@@ -73,11 +73,6 @@ namespace Yandex.Music.Client
             {
                 DeviceId = deviceId
             };
-            
-            storage.SetProxy(new WebProxy()
-            {
-                Address = new Uri("http://localhost:8866")
-            });
         }
 
         #region Авторизация
