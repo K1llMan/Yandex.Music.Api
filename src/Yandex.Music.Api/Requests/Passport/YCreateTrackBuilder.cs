@@ -20,7 +20,7 @@ namespace Yandex.Music.Api.Requests.Passport
 
         protected override HttpContent GetContent(string tuple)
         {
-            return JsonContent.Create(new
+            return GetJsonContent(new
             {
                 display_language = storage.DisplayLanguage,
                 language = storage.Language,
@@ -31,13 +31,13 @@ namespace Yandex.Music.Api.Requests.Passport
                 device_id = storage.DeviceId,
                 uid = string.Empty,
                 device_connection_type = "9"
-            }, new MediaTypeHeaderValue("application/json"));
+            });
         }
 
         protected override void SetCustomHeaders(HttpRequestHeaders headers)
         {
             headers.Add("x-csrf-token", storage.AuthToken.CsfrToken);
-            headers.Add("process-uuid", "26d53636-13a9-41f4-af99-d404dce90363");
+            headers.Add("process-uuid", storage.ProcessUuid.ToString());
         }
     }
 }

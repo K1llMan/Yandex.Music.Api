@@ -2,23 +2,6 @@
 
 namespace Yandex.Music.Api.Models.Account
 {
-    public class YDisplayName
-    {
-        [JsonProperty("default_avatar")]
-        public string DefaultAvatar { get; set; }
-
-        public string Name { get; set; }
-    }
-
-    public class YPerson
-    {
-        public string Country { get; set; }
-        public string Firstname { get; set; }
-        public int Gender { get; set; }
-        public string Language { get; set; }
-        public string Lastname { get; set; }
-    }
-
     public class YAuthAccount
     {
         [JsonProperty("avatar_url")]

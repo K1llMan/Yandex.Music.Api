@@ -19,7 +19,7 @@ namespace Yandex.Music.Api.Requests.Common
                 headers.Add("x-csrf-token", storage.AuthToken.CsfrToken);
 
             headers.Add("X-Requested-With", "ru.yandex.music");
-            headers.Add("process-uuid", "26d53636-13a9-41f4-af99-d404dce90363");
+            headers.Add("process-uuid", storage.ProcessUuid.ToString());
             headers.Add("Referer", "https://passport.yandex.ru/");
             headers.Add("Sec-Fetch-Dest", "empty");
             headers.Add("Sec-Fetch-Mode", "cors");

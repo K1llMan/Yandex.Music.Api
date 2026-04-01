@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Common.Exceptions;
+using Yandex.Music.Api.Models.Account;
 using Yandex.Music.Api.Models.Passport;
 using Yandex.Music.Api.Requests.Passport;
 using YValidateSquatter = Yandex.Music.Api.Models.Passport.YValidateSquatter;
@@ -27,20 +30,16 @@ namespace Yandex.Music.Api.API
             storage.AuthToken.TrackId = passportTrack.Id;
         }
 
-        public async Task<YYPassportUser> LoginByPasswordAsync(AuthStorage storage, string password)
+        public Task<YPassportUser> LoginByPasswordAsync(AuthStorage storage, string password)
         {
-            YYPassportUser response =
-                await new YMultiStepPasswordBuilder(api, storage)
+            return new YMultiStepPasswordBuilder(api, storage)
                     .Build(password)
                     .GetResponseAsync();
-
-            return response;
         }
 
         public async Task<bool> GetPhoneConfirmationAsync(AuthStorage storage)
         {
-            YCheckPhoneConfirmation response =
-                await new YCheckPhoneConfirmationBuilder(api, storage)
+            YCheckPhoneConfirmation response = await new YCheckPhoneConfirmationBuilder(api, storage)
                     .Build(null)
                     .GetResponseAsync();
 
@@ -49,7 +48,7 @@ namespace Yandex.Music.Api.API
 
         public async Task<YMultistepStart> MultistepStartAsync(AuthStorage storage, string login)
         {
-            var response =
+            YMultistepStart response =
                 await new YMultistepStartBuilder(api, storage)
                     .Build(login)
                     .GetResponseAsync();
@@ -62,9 +61,9 @@ namespace Yandex.Music.Api.API
             return response;
         }
 
-        public async Task<YYPassportUser> MultistepPasswordAsync(AuthStorage storage, string password)
+        public async Task<YPassportUser> MultistepPasswordAsync(AuthStorage storage, string password)
         {
-            var response =
+            YPassportUser response =
                 await new YMultiStepPasswordBuilder(api, storage)
                     .Build(password)
                     .GetResponseAsync();
@@ -77,7 +76,7 @@ namespace Yandex.Music.Api.API
             return response;
         }
 
-        public Task<YYPassportUser> RfcOtpPasswordAsync(AuthStorage storage, string rfcOtp)
+        public Task<YPassportUser> RfcOtpPasswordAsync(AuthStorage storage, string rfcOtp)
         {
             return new YRfcOtpBuilder(api, storage)
                 .Build(rfcOtp)
@@ -157,6 +156,35 @@ namespace Yandex.Music.Api.API
             return new YSuggestByPhoneBuilder(api, storage)
                 .Build(null)
                 .GetResponseAsync();
+        }
+        
+        private async Task<bool> GetCsrfTokenAsync(AuthStorage storage)
+        {
+            using HttpResponseMessage authMethodsResponse =
+                await new YPwlYandexBuilder(api, storage)
+                    .Build(null)
+                    .GetResponseAsync();
+
+            if (!authMethodsResponse.IsSuccessStatusCode)
+                throw new HttpRequestException("Невозможно получить CFRF-токен.");
+
+            string responseString =
+                await authMethodsResponse.Content
+                    .ReadAsStringAsync();
+            Match match = Regex.Match(responseString, @"window\.__CSRF__\s*=\s*""([^""]+)""");
+
+            if (!match.Success || match.Groups.Count < 2)
+            {
+                throw new YApiException("Ошибка получения CFRF токена. Попробуйте позже.");
+            }
+
+            storage.AuthToken =
+                new YAuthToken
+                {
+                    CsfrToken = match.Groups[1].Value
+                };
+
+            return true;
         }
     }
 }

@@ -11,7 +11,7 @@ using Yandex.Music.Api.Requests.Common.Attributes;
 namespace Yandex.Music.Api.Requests.Passport
 {
     [YPassportRequest(WebRequestMethods.Http.Post, "pwl-yandex/api/passport/auth/multistep_password")]
-    public class YMultiStepPasswordBuilder : YPassportRequestBuilder<YYPassportUser, string>
+    public class YMultiStepPasswordBuilder : YPassportRequestBuilder<YPassportUser, string>
     {
         public YMultiStepPasswordBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
         {

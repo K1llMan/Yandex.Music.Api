@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 
 using Yandex.Music.Api.Common.Debug;
@@ -58,6 +59,8 @@ namespace Yandex.Music.Api.Common
         public string Country { get; set; } = "ru";
 
         internal YAuthToken AuthToken { get; set; }
+        
+        internal Guid ProcessUuid { get; }
 
         #endregion Свойства
 
@@ -77,6 +80,8 @@ namespace Yandex.Music.Api.Common
             {
                 Debug.Clear();
             }
+
+            ProcessUuid = Guid.NewGuid();
         }
 
         /// <summary>
@@ -93,6 +98,8 @@ namespace Yandex.Music.Api.Common
             {
                 Debug.Clear();
             }
+
+            ProcessUuid = Guid.NewGuid();
         }
 
         /// <summary>

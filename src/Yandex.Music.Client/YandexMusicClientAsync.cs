@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 using Yandex.Music.Api;
@@ -63,6 +64,15 @@ namespace Yandex.Music.Client
         {
             api = new YandexMusicApi();
             storage = new AuthStorage(settings);
+        }
+
+        public YandexMusicClientAsync(string deviceId, DebugSettings settings = null)
+        {
+            api = new YandexMusicApi();
+            storage = new AuthStorage(settings)
+            {
+                DeviceId = deviceId
+            };
         }
 
         #region Авторизация
@@ -774,7 +784,7 @@ namespace Yandex.Music.Client
         /// </summary>
         /// <param name="password"></param>
         /// <returns></returns>
-        public Task<YYPassportUser> PassportAuthByPasswordAsync(string password)
+        public Task<YPassportUser> PassportAuthByPasswordAsync(string password)
         {
             return api.Passport.MultistepPasswordAsync(storage, password);
         }
@@ -784,7 +794,7 @@ namespace Yandex.Music.Client
         /// </summary>
         /// <param name="rfcOtp"></param>
         /// <returns></returns>
-        public Task<YYPassportUser> PassportSendRfcOtpPasswordAsync(string rfcOtp)
+        public Task<YPassportUser> PassportSendRfcOtpPasswordAsync(string rfcOtp)
         {
             return api.Passport.RfcOtpPasswordAsync(storage, rfcOtp);
         }
@@ -835,9 +845,9 @@ namespace Yandex.Music.Client
         /// Получить Acecess Token для текущей passport сессии.
         /// </summary>
         /// <returns></returns>
-        public YAccessToken GetTokenBySession()
+        public Task<YAccessToken> GetTokenBySession()
         {
-            return api.MobileProxy.GetTokenBySessionId(storage);
+            return api.MobileProxy.GetTokenBySessionIdAsync(storage);
         }
 
         /// <summary>
@@ -845,13 +855,18 @@ namespace Yandex.Music.Client
         /// </summary>
         /// <param name="accessToken"></param>
         /// <returns></returns>
-        public YAccessToken GetTokenByAccessToken(YAccessToken accessToken)
+        public Task<YAccessToken> GetTokenByAccessToken(YAccessToken accessToken)
         {
-            return api.MobileProxy.GetTokenByAccessToken(storage, accessToken);
+            return api.MobileProxy.GetXTokenAsync(storage, accessToken);
         }
 
         #endregion MobileProxy
 
         #endregion Основные функции
+
+        public void SetProxy(WebProxy proxy)
+        {
+            storage.SetProxy(proxy);
+        }
     }
 }

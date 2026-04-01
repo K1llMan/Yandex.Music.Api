@@ -65,7 +65,7 @@ namespace Yandex.Music.Client
             api = new YandexMusicApi();
             storage = new AuthStorage(settings);
         }
-        
+
         public YandexMusicClient(string deviceId, DebugSettings settings = null)
         {
             api = new YandexMusicApi();
@@ -724,7 +724,7 @@ namespace Yandex.Music.Client
         /// </summary>
         /// <param name="password"></param>
         /// <returns></returns>
-        public YYPassportUser PassportAuthByPassword(string password)
+        public YPassportUser PassportAuthByPassword(string password)
         {
             return api.Passport.MultistepPassword(storage, password);
         }
@@ -734,7 +734,7 @@ namespace Yandex.Music.Client
         /// </summary>
         /// <param name="rfcOtp"></param>
         /// <returns></returns>
-        public YYPassportUser PasportSendRfcOtpPassword(string rfcOtp)
+        public YPassportUser PasportSendRfcOtpPassword(string rfcOtp)
         {
             return api.Passport.RfcOtpPassword(storage, rfcOtp);
         }
@@ -803,5 +803,10 @@ namespace Yandex.Music.Client
         #endregion MobileProxy
 
         #endregion Основные функции
+
+        public void SetProxy(WebProxy proxy)
+        {
+            storage.SetProxy(proxy);
+        }
     }
 }
