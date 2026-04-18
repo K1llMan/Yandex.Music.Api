@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 using Yandex.Music.Api;
@@ -15,6 +16,7 @@ using Yandex.Music.Api.Models.Feed;
 using Yandex.Music.Api.Models.Landing;
 using Yandex.Music.Api.Models.Landing.Entity.Entities.Context;
 using Yandex.Music.Api.Models.Library;
+using Yandex.Music.Api.Models.Passport;
 using Yandex.Music.Api.Models.Playlist;
 using Yandex.Music.Api.Models.Queue;
 using Yandex.Music.Api.Models.Radio;
@@ -62,6 +64,15 @@ namespace Yandex.Music.Client
         {
             api = new YandexMusicApi();
             storage = new AuthStorage(settings);
+        }
+
+        public YandexMusicClientAsync(string deviceId, DebugSettings settings = null)
+        {
+            api = new YandexMusicApi();
+            storage = new AuthStorage(settings)
+            {
+                DeviceId = deviceId
+            };
         }
 
         #region Авторизация
@@ -718,6 +729,144 @@ namespace Yandex.Music.Client
 
         #endregion Унисон
 
+        #region Passport
+        
+        /// <summary>
+        /// Создать сессию
+        /// </summary>
+        public Task PassportCreateAuthSessionAsync()
+        {
+            return api.Passport.CreateTrackAsync(storage);
+        }
+
+        /// <summary>
+        /// Проверить номер телефона
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <returns></returns>
+        public Task<YValidatePhoneNumberResult> PassportValidatePhoneNumberAsync(string phone)
+        {
+            return api.Passport.ValidatePhoneNumberAsync(storage, phone);
+        }
+
+        /// <summary>
+        /// Проверить возможность отправки Push уведомлений 
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <returns></returns>
+        public Task<YCheckAvailabilityResult> PassportCheckPhoneAvailabilityAsync(string phone)
+        {
+            return api.Passport.CheckPhoneAvailabilityAsync(storage, phone);
+        }
+
+        /// <summary>
+        /// Запросить Push код
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <returns></returns>
+        public Task<YSendPushResult> PassportSuggestSendPushAsync(string phone)
+        {
+            return api.Passport.SuggestSendPushAsync(storage, phone);
+        }
+
+        /// <summary>
+        /// Проверить полученный Push код
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public Task PassportCheckPushCodeAsync(string code)
+        {
+            return api.Passport.CheckPushCodeAsync(storage, code);
+        }
+
+        /// <summary>
+        /// Авторизация passport сессии по паролю
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public Task<YPassportUser> PassportAuthByPasswordAsync(string password)
+        {
+            return api.Passport.MultistepPasswordAsync(storage, password);
+        }
+
+        /// <summary>
+        /// Передать OTP токен из приложения Я.Ключ
+        /// </summary>
+        /// <param name="rfcOtp"></param>
+        /// <returns></returns>
+        public Task<YPassportUser> PassportSendRfcOtpPasswordAsync(string rfcOtp)
+        {
+            return api.Passport.RfcOtpPasswordAsync(storage, rfcOtp);
+        }
+
+        /// <summary>
+        /// Получить сессию passport 
+        /// </summary>
+        /// <returns></returns>
+        public Task<YPassportSession> PassportGetSessionAsync()
+        {
+            return api.Passport.CreateUserSessionAsync(storage);
+        }
+
+        /// <summary>
+        /// Получить статус passport сессии
+        /// </summary>
+        /// <returns></returns>
+        public Task<YPassportSessionStatus> PassportGetSessionStatusAsync()
+        {
+            return api.Passport.GetSessionStateAsync(storage);
+        }
+
+        public Task<YValidateSquatter> PassportValidateSquatterAsync(string phone)
+        {
+            return api.Passport.ValidateSquatterAsync(storage, phone);
+        }
+
+        public Task<YSuggestByPhoneResult> PassportSuggestByPhoneAsync()
+        {
+            return api.Passport.SuggestByPhoneAsync(storage);
+        }
+
+        /// <summary>
+        /// Авторизация пользователя в passport
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
+        public Task<YMultistepStart> PassportMultistepStartAsync(string login)
+        {
+            return api.Passport.MultistepStartAsync(storage, login);
+        }
+
+        #endregion Passport
+
+        #region MobileProxy
+
+        /// <summary>
+        /// Получить Acecess Token для текущей passport сессии.
+        /// </summary>
+        /// <returns></returns>
+        public Task<YAccessToken> GetTokenBySession()
+        {
+            return api.MobileProxy.GetTokenBySessionIdAsync(storage);
+        }
+
+        /// <summary>
+        /// Получить Access Token по токену passport сессии.
+        /// </summary>
+        /// <param name="accessToken"></param>
+        /// <returns></returns>
+        public Task<YAccessToken> GetTokenByAccessToken(YAccessToken accessToken)
+        {
+            return api.MobileProxy.GetXTokenAsync(storage, accessToken);
+        }
+
+        #endregion MobileProxy
+
         #endregion Основные функции
+
+        public void SetProxy(WebProxy proxy)
+        {
+            storage.SetProxy(proxy);
+        }
     }
 }

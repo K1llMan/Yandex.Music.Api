@@ -32,6 +32,9 @@ namespace Yandex.Music.Api.Models.Account
 
         [JsonProperty("x_token_issued_at")]
         public int XTokenIssuedAt { get; set; }
+        
+        [JsonProperty("is_xtoken_trusted")]
+        public bool IsXtokenTrusted { get; set; }
 
         [JsonProperty("display_login")]
         public string DisplayLogin { get; set; }
@@ -80,5 +83,32 @@ namespace Yandex.Music.Api.Models.Account
 
         [JsonProperty("x_token_need_reset")]
         public bool XTokenNeedReset { get; set; }
+
+        [JsonProperty("is_rfc_2fa_enabled")]
+        public bool IsRfc2faEnabled { get; set; }
+
+        [JsonProperty("master_uid")]
+        public int MasterUid { get; set; }
+
+        [JsonProperty("is_browser_account")]
+        public bool IsBrowserAccount { get; set; }
+
+        [JsonProperty("master")]
+        public List<object> Members { get; set; }
+        
+        [JsonProperty("master_members")]
+        public List<YMasterMember> MasterMembers { get; set; }
+
+        [JsonProperty("is_complete")]
+        public bool IsComplete { get; set; }
+
+        [JsonProperty("is_completion_available")]
+        public bool IsCompletionAvailable { get; set; }
+
+        [JsonProperty("is_completion_recommended")]
+        public bool IsCompletionRecommended { get; set; }
+
+        [JsonProperty("is_completion_required")]
+        public bool IsCompletionRequired { get; set; }
     }
 }

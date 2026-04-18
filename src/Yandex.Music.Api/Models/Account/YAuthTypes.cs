@@ -7,6 +7,18 @@ namespace Yandex.Music.Api.Models.Account
     {
         [JsonProperty("primary_alias_type")]
         public string PrimaryAliasType { get; set; }
+        
+        [JsonProperty("account_type")]
+        public string AccountType { get; set; }
+        
+        [JsonProperty("allowed_account_types")]
+        public IEnumerable<string> AllowedAccountTypes { get; set; }
+        
+        [JsonProperty("login")]
+        public string Login { get; set; }
+        
+        [JsonProperty("looks_like_yandex_email")]
+        public string LooksLikeYandexEmail { get; set; }
 
         [JsonProperty("csrf_token")]
         public string CsrfToken { get; set; }
@@ -44,7 +56,13 @@ namespace Yandex.Music.Api.Models.Account
 
         [JsonProperty("magic_link_email")]
         public string MagicLinkEmail { get; set; }
+        
+        [JsonProperty("secure_phone_number")]
+        public YSecurePhoneNumber SecurePhoneNumber { get; set; }
 
         public string TractorTargetLocationHost { get; set; }
+        
+        [JsonProperty("avatarId")]
+        public string AvatarId { get; set; }
     }
 }

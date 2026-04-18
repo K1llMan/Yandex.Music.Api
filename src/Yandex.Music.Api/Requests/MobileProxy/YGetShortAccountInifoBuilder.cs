@@ -1,15 +1,14 @@
 ﻿using System.Collections.Specialized;
 using System.Net;
 using System.Net.Http.Headers;
-
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Account;
 using Yandex.Music.Api.Requests.Common;
 using Yandex.Music.Api.Requests.Common.Attributes;
 
-namespace Yandex.Music.Api.Requests.Account
+namespace Yandex.Music.Api.Requests.MobileProxy
 {
-    [YMobileProxyRequest(WebRequestMethods.Http.Get, "/1/bundle/account/short_info/")]
+    [YMobileProxyRequest(WebRequestMethods.Http.Get, "1/bundle/account/short_info/")]
     internal class YGetShortAccountInifoBuilder : YRequestBuilder<YShortAccountInfo, object>
     {
         public YGetShortAccountInifoBuilder(YandexMusicApi yandex, AuthStorage auth) : base(yandex, auth)
@@ -25,7 +24,7 @@ namespace Yandex.Music.Api.Requests.Account
 
         protected override void SetCustomHeaders(HttpRequestHeaders headers)
         {
-            headers.Add("Ya-Consumer-Authorization", $"OAuth {storage.AccessToken.AccessToken}");
+            headers.Add("Authorization", $"OAuth {storage.AccessToken.AccessToken}");
         }
     }
 }
