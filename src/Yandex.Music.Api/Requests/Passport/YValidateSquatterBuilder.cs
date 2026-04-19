@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Net.Http;
+
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Passport;
 using Yandex.Music.Api.Requests.Common;
@@ -16,8 +17,7 @@ namespace Yandex.Music.Api.Requests.Passport
         
         protected override HttpContent GetContent(string tuple)
         {
-            return GetJsonContent(new
-            {
+            return GetJsonContent(new {
                 track_id = storage.AuthToken.TrackId,
                 phone_number = tuple,
                 scenario = "auth",

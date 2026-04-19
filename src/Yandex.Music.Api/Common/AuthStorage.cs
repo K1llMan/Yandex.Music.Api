@@ -20,7 +20,10 @@ namespace Yandex.Music.Api.Common
         /// </summary>
         public HttpContext Context { get; }
 
-        public DebugSettings Debug { get; set; }
+        /// <summary>
+        /// Параметры отладки
+        /// </summary>
+        public DebugSettings Debug { get; }
 
         /// <summary>
         /// Флаг авторизации
@@ -52,10 +55,19 @@ namespace Yandex.Music.Api.Common
         /// </summary>
         public YAccessToken AccessToken { get; set; }
 
+        /// <summary>
+        /// Язык
+        /// </summary>
         public string Language { get; set; } = "ru";
 
+        /// <summary>
+        /// Отображаемый язык
+        /// </summary>
         public string DisplayLanguage { get; set; } = "ru";
 
+        /// <summary>
+        /// Страна
+        /// </summary>
         public string Country { get; set; } = "ru";
 
         internal YAuthToken AuthToken { get; set; }

@@ -1,4 +1,5 @@
 ﻿using System.Security.Authentication;
+
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Passport;
 
@@ -10,7 +11,7 @@ namespace Yandex.Music.Api.API
         {
             CreateTrackAsync(storage).GetAwaiter().GetResult();
 
-            if (string.IsNullOrWhiteSpace(storage.AuthToken.TrackId))
+            if (string.IsNullOrEmpty(storage.AuthToken.TrackId))
                 throw new AuthenticationException("Не удалось инициализировать процесс аутентификации");
         }
 

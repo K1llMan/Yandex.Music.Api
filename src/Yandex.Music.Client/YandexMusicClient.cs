@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+
 using Yandex.Music.Api;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Common.Debug;
@@ -22,7 +22,6 @@ using Yandex.Music.Api.Models.Radio;
 using Yandex.Music.Api.Models.Search;
 using Yandex.Music.Api.Models.Track;
 using Yandex.Music.Api.Models.Ugc;
-using Yandex.Music.Api.Requests.Passport;
 
 namespace Yandex.Music.Client
 {
@@ -720,38 +719,34 @@ namespace Yandex.Music.Client
         }
 
         /// <summary>
-        /// Авторизация passport сессии по паролю
+        /// Авторизация Passport-сессии по паролю
         /// </summary>
-        /// <param name="password"></param>
-        /// <returns></returns>
+        /// <param name="password">Пароль</param>
         public YPassportUser PassportAuthByPassword(string password)
         {
             return api.Passport.MultistepPassword(storage, password);
         }
 
         /// <summary>
-        /// Передать OTP токен из приложения Я.Ключ
+        /// Передать OTP-токен из приложения Я.Ключ
         /// </summary>
-        /// <param name="rfcOtp"></param>
-        /// <returns></returns>
+        /// <param name="rfcOtp">OTP-токен</param>
         public YPassportUser PasportSendRfcOtpPassword(string rfcOtp)
         {
             return api.Passport.RfcOtpPassword(storage, rfcOtp);
         }
 
         /// <summary>
-        /// Получить сессию passport 
+        /// Получить сессию Passport 
         /// </summary>
-        /// <returns></returns>
         public YPassportSession PassportGetSession()
         {
             return api.Passport.CreateUserSession(storage);
         }
 
         /// <summary>
-        /// Получить статус passport сессии
+        /// Получить статус Passport-сессии
         /// </summary>
-        /// <returns></returns>
         public YPassportSessionStatus PassportGetSessionStatus()
         {
             return api.Passport.GetSessionState(storage);
@@ -768,10 +763,9 @@ namespace Yandex.Music.Client
         }
 
         /// <summary>
-        /// Авторизация пользователя в passport
+        /// Авторизация пользователя в Passport
         /// </summary>
-        /// <param name="login"></param>
-        /// <returns></returns>
+        /// <param name="login">Логин</param>
         public YMultistepStart PassportMultistepStart(string login)
         {
             return api.Passport.MultistepStart(storage, login);
@@ -782,19 +776,17 @@ namespace Yandex.Music.Client
         #region MobileProxy
 
         /// <summary>
-        /// Получить Acecess Token для текущей passport сессии.
+        /// Получить Acecess Token для текущей Passport-сессии
         /// </summary>
-        /// <returns></returns>
         public YAccessToken GetTokenBySession()
         {
             return api.MobileProxy.GetTokenBySessionId(storage);
         }
 
         /// <summary>
-        /// Получить Access Token по токену passport сессии.
+        /// Получить Access Token по токену Passport-сессии
         /// </summary>
-        /// <param name="accessToken"></param>
-        /// <returns></returns>
+        /// <param name="accessToken">Access Token</param>
         public YAccessToken GetTokenByAccessToken(YAccessToken accessToken)
         {
             return api.MobileProxy.GetTokenByAccessToken(storage, accessToken);

@@ -37,16 +37,13 @@ namespace Yandex.Music.Api.Models.Passport
         [JsonProperty("is_yandexoid")]
         public bool IsYandexoid { get; set; }
 
-        [JsonProperty("login")]
         public bool Login { get; set; }
 
-        [JsonProperty("person")]
         public YPassportPerson Person { get; set; }
 
         [JsonProperty("secure_phone_id")]
         public int SecurePhoneId { get; set; }
 
-        [JsonProperty("uid")]
         public int Uid { get; set; }
     }
 }

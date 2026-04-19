@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Account;
 using Yandex.Music.Api.Requests.Common;
@@ -18,8 +19,7 @@ namespace Yandex.Music.Api.Requests.MobileProxy
 
         protected override HttpContent GetContent(YAccessToken tuple)
         {
-            Dictionary<string, string> content = new Dictionary<string, string>
-            {
+            Dictionary<string, string> content = new() {
                 { "client_id", YConstants.ClientId },
                 { "client_secret", YConstants.ClientSecret },
                 { "access_token", tuple.AccessToken },

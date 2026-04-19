@@ -5,12 +5,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using System.Reflection;
 using System.Text;
-using System.Text.Encodings.Web;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Web;
 
 using Newtonsoft.Json;
@@ -20,7 +16,6 @@ using Newtonsoft.Json.Serialization;
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Extensions;
 using Yandex.Music.Api.Requests.Common.Attributes;
-using JsonConverter = Newtonsoft.Json.JsonConverter;
 
 namespace Yandex.Music.Api.Requests.Common
 {
@@ -139,18 +134,9 @@ namespace Yandex.Music.Api.Requests.Common
             return JsonConvert.SerializeObject(data, jsonSettings);
         }
         
-        protected JsonContent GetJsonContent<RequestData>(RequestData data)
+        protected StringContent GetJsonContent<RequestData>(RequestData data)
         {
-            JsonSerializerOptions settings = new() {
-                Converters = {
-                    new JsonStringEnumConverter()
-                },
-                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
-            };
-
-            return JsonContent.Create(data, new MediaTypeHeaderValue("application/json"), settings);
+            return new StringContent(SerializeJson(data), Encoding.UTF8, "application/json");
         }
 
         #endregion Вспомогательные функции

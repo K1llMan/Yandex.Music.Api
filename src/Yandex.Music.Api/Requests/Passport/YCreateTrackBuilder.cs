@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using System.Text.Json.Serialization;
+
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Passport;
 using Yandex.Music.Api.Requests.Common;
@@ -20,8 +18,7 @@ namespace Yandex.Music.Api.Requests.Passport
 
         protected override HttpContent GetContent(string tuple)
         {
-            return GetJsonContent(new
-            {
+            return GetJsonContent(new {
                 display_language = storage.DisplayLanguage,
                 language = storage.Language,
                 country = storage.Country,

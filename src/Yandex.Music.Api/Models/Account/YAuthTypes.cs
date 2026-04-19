@@ -14,7 +14,6 @@ namespace Yandex.Music.Api.Models.Account
         [JsonProperty("allowed_account_types")]
         public IEnumerable<string> AllowedAccountTypes { get; set; }
         
-        [JsonProperty("login")]
         public string Login { get; set; }
         
         [JsonProperty("looks_like_yandex_email")]

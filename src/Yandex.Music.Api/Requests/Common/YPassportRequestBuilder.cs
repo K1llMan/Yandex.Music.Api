@@ -1,8 +1,5 @@
 ﻿using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using System.Text.Encodings.Web;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+
 using Yandex.Music.Api.Common;
 
 namespace Yandex.Music.Api.Requests.Common
@@ -31,7 +28,7 @@ namespace Yandex.Music.Api.Requests.Common
             headers.Add("c11n", "yandex_music");
             headers.Add("Connection", "keep-alive");
             headers.Add("Origin", "https://passport.yandex.ru");
-            headers.Add("User-Agent", "Mozilla/5.0 (Linux; Android 7.1.1; ONEPLUS A3010 Build/NMF26F; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/103.0.5060.129 Safari/537.36 PassportSDK/7.50.2.750024597 ru.yandex.music/2026.02.3 #135gpr");
+            headers.Add("User-Agent", YConstants.UserAgent);
         }
     }
 }

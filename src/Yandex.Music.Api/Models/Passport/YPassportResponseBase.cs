@@ -12,6 +12,6 @@ namespace Yandex.Music.Api.Models.Passport
         public List<string> Errors { get; set; }
 
         public bool IsValid() =>
-            string.IsNullOrWhiteSpace(Error) || Errors?.Count == 0;
+            string.IsNullOrEmpty(Error) || Errors?.Count == 0;
     }
 }

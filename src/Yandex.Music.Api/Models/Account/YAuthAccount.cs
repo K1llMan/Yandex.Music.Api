@@ -34,7 +34,6 @@ namespace Yandex.Music.Api.Models.Account
         [JsonProperty("is_yandexoid")]
         public bool IsYandexoid { get; set; }
 
-        [JsonProperty("login")]
         public bool Login { get; set; }
 
         public YPerson Person { get; set; }

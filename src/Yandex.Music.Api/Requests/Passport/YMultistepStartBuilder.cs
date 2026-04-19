@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http;
 using System.Text.Json.Serialization;
+
 using Yandex.Music.Api.Common;
 using Yandex.Music.Api.Models.Passport;
 using Yandex.Music.Api.Requests.Common;
@@ -49,8 +50,7 @@ namespace Yandex.Music.Api.Requests.Passport
 
         protected override HttpContent GetContent(string tuple)
         {
-            var jsonData = new RequestData
-            {
+            return GetJsonContent(new RequestData {
                 Login = tuple,
                 TrackId = storage.AuthToken.TrackId,
                 DisplayLanguage = storage.DisplayLanguage,
@@ -65,9 +65,7 @@ namespace Yandex.Music.Api.Requests.Passport
                 DeviceId = storage.DeviceId,
                 Device_Id = storage.DeviceId,
                 DeviceConnectionType = "9"
-            };
-
-            return GetJsonContent(jsonData);
+            });
         }
     }
 }

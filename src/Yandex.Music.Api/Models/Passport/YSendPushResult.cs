@@ -1,17 +1,9 @@
 ﻿using System.Collections.Generic;
+
 using Newtonsoft.Json;
 
 namespace Yandex.Music.Api.Models.Passport
 {
-    public class YPushApp
-    {
-        [JsonProperty("App")]
-        public string App { get; set; }
-
-        [JsonProperty("Platform")]
-        public string Platform { get; set; }
-    }
-    
     public class YSendPushResult
     {
         [JsonProperty("pushes_devices_list")]

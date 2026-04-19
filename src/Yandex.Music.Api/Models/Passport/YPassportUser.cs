@@ -7,10 +7,8 @@ namespace Yandex.Music.Api.Models.Passport
         [JsonProperty("track_id")]
         public string TrackId { get; set; }
 
-        [JsonProperty("state")]
         public string State { get; set; }
 
-        [JsonProperty("account")]
         public YPassportAccount Account { get; set; }
     }
 }
